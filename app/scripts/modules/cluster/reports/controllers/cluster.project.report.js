@@ -138,7 +138,8 @@ angular.module('ngmReportHub')
 								config: {
 									style: $scope.report.ngm.style,
 									project: $scope.report.project,
-									report: $scope.report.definition
+									report: $scope.report.definition,
+									info: "To report DROUGHT activities, Please select from Beneficiary drop down beneficiary types Drought Affected Displaced or Drought Affected Non Displaced"
 								}
 							}]
 						}]

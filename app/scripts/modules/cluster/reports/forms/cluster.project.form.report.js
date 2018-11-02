@@ -87,7 +87,7 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
         updatedAt: moment( config.report.updatedAt ).format( 'DD MMMM, YYYY @ h:mm:ss a' ),
         monthlyTitleFormat: moment.utc( [ config.report.report_year, config.report.report_month, 1 ] ).format('MMMM, YYYY'),
         monthNameFormat: moment.utc( [ config.report.report_year, config.report.report_month, 1 ] ).format('MMM'),
-
+				info: config.info,
         // lists ( project, mpc transfers )
         lists: ngmClusterLists.setLists( config.project, 10 ),
 
@@ -426,10 +426,23 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
             Materialize.toast( 'Error!', 6000, 'error' );
           });;
 
-        }
+        },
 
-      }
-
+				//Info Modal
+				infoModal:function(){
+										
+					if (!document.cookie.replace(/(?:(?:^|.*;\s*)doInfoModalOnce\s*\=\s*([^;]*).*$)|^.*$/, "$1") && $scope.project.report.admin0pcode === 'AF'){						
+						// set expired cookie 
+						document.cookie = "doInfoModalOnce=true; expires=Thu, 29 Nov 2018 23:59:59 GMT"
+					}					
+					if (config.info && document.cookie.replace(/(?:(?:^|.*;\s*)doInfoModalOnce\s*\=\s*([^;]*).*$)|^.*$/, "$1") === "true") {
+						$('#info-modal').openModal();			
+					} 
+				}
+			}
+			
+			$scope.project.infoModal()
+			
   }
 
 ]);
