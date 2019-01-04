@@ -167,6 +167,11 @@ angular.module('ngmReportHub')
 							end_date: $scope.dashboard.endDate
 						}
 					}
+					if ($scope.dashboard.user.organization_tag === 'usaid') {
+						request.data.usaid_as_donor= "usaid";
+						// console.log("XX",request.data);
+						
+					}
 
 					request.data = angular.merge(request.data, obj);
 

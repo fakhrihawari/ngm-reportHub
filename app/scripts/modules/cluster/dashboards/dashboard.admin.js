@@ -153,6 +153,11 @@ angular.module('ngmReportHub')
 						start_date: $scope.dashboard.startDateReport,
 						end_date: $scope.dashboard.endDateReport
 					}
+					if ($scope.dashboard.user.organization_tag === 'usaid') {
+						request.usaid_as_donor = "usaid";
+						// console.log("XY", request);
+
+					}
 
 					return request;
 
