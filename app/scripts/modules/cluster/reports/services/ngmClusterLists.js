@@ -775,7 +775,8 @@ angular.module( 'ngmReportHub' )
         var currencies = [{
           admin0pcode: 'AF',
           currency_id: 'afn',
-          currency_name: 'AFN'
+					currency_name: 'AFN',
+					main_currency: true
         },{
           admin0pcode: admin0pcode,
           currency_id: 'aud',
@@ -795,7 +796,8 @@ angular.module( 'ngmReportHub' )
         },{
           admin0pcode: 'ET',
           currency_id: 'etb',
-          currency_name: 'ETB'
+					currency_name: 'ETB',
+					main_currency: true
         },{
           admin0pcode: admin0pcode,
           currency_id: 'eur',
@@ -807,15 +809,18 @@ angular.module( 'ngmReportHub' )
         },{
           admin0pcode: 'IQ',
           currency_id: 'iqd',
-          currency_name: 'IQD'
+					currency_name: 'IQD',
+					main_currency: true
         },{
           admin0pcode: 'KE',
           currency_id: 'kes',
-          currency_name: 'KES'
+					currency_name: 'KES',
+					main_currency: true
         },{
           admin0pcode: 'NG',
           currency_id: 'ngn',
-          currency_name: 'NGN'
+					currency_name: 'NGN',
+					main_currency: true
         },{
           admin0pcode: admin0pcode,
           currency_id: 'nok',
@@ -827,12 +832,14 @@ angular.module( 'ngmReportHub' )
         },{
           admin0pcode: 'SO',
           currency_id: 'sos',
-          currency_name: 'SOS'
+					currency_name: 'SOS',
+					main_currency: true
         },{
           // default is USD
           admin0pcode: admin0pcode,
           currency_id: 'usd',
-          currency_name: 'USD'
+					currency_name: 'USD',
+					main_currency: true
         }];
 
         // filter currency options list by admin0pcode
@@ -1344,10 +1351,10 @@ angular.module( 'ngmReportHub' )
 
         // unit type list
         var currencies=[];
-        // add each currency
+				// add each currency
         angular.forEach( this.getCurrencies( admin0pcode ), function( d, i ){
-					if(d.currency_id === 'afn'|| d.currency_id === 'usd'){
-						currencies.push({ unit_type_id: d.currency_id, unit_type_name: d.currency_name, mpc_delivery_type_id:'cash' });
+					if(d.main_currency){
+						currencies.push({ unit_type_id: d.currency_id, unit_type_name: d.currency_name, main_currency: d.main_currency });
 					}else{
 						currencies.push({ unit_type_id: d.currency_id, unit_type_name: d.currency_name });
 					}

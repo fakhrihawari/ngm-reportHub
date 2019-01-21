@@ -338,7 +338,15 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 				},
 				// show delivery fiels
 				showDeliveryfield:function($beneficiary){					
-					return ngmClusterBeneficiaries.showDeliveryfield($beneficiary, 'esnfi', $scope.project.lists.mpc_delivery_types);
+					return ngmClusterBeneficiaries.showDeliveryfield($beneficiary, 'esnfi', $scope.project.lists.mpc_delivery_types, $scope.project.definition.admin0pcode);
+				},
+				// to nullified mpc_delivery_type_id
+				nullifiedDelivery:function($beneficiary,deliveryFieldActive){					
+					if (!deliveryFieldActive){
+						$beneficiary.mpc_delivery_type_id = null;
+						$beneficiary.mpc_delivery_type_name = null;						
+					}
+					return $beneficiary
 				},
 				// disable mechanism option
 				showMechanismOption:function($activityDescription){
@@ -367,7 +375,12 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
         // unit type
         showUnitTypes: function( $data, $beneficiary ){
           return ngmClusterBeneficiaries.showUnitTypes( $scope.project.lists, $data, $beneficiary );
-        },
+				},
+				
+				// unit jus for cash
+				showCashUnit: function($beneficiary){
+					return ngmClusterBeneficiaries.showCashUnit($beneficiary, $scope.project.definition.admin0pcode);
+				},
 
         // transfer type
         showTransferTypes: function( $data, $beneficiary ){

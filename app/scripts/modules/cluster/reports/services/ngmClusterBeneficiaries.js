@@ -382,7 +382,7 @@ angular.module( 'ngmReportHub' )
 			},
 			
 			// Show delivery field   
-			showDeliveryfield:function($beneficiary,cluster, list){				
+			showDeliveryfield:function($beneficiary,cluster, list,admin0pcode){				
 				var countclusterId=0
 				//check if in the $beneficiary have cluster_id match with cluster parameter   
 				for(var i=0; i<$beneficiary.length;i++){
@@ -391,7 +391,7 @@ angular.module( 'ngmReportHub' )
 					}
 				}
 				// if the countclusterId>0 set true
-				if(countclusterId>0){				
+				if(countclusterId>0 && admin0pcode === 'AF'){				
 					return true;
 				}else{				
 					return false
@@ -584,7 +584,26 @@ angular.module( 'ngmReportHub' )
           });
         }
         return display;
-      },
+			},
+			
+			// show unit just for cash
+			showCashUnit: function (beneficiary, admin0pcode){
+				var unitCash = false;
+				if (beneficiary.activity_description_id && admin0pcode == 'AF'){
+					if (beneficiary.activity_description_id.indexOf('cash') !== -1 || beneficiary.activity_description_id.indexOf('package') !== -1){
+						if (beneficiary.mpc_delivery_type_id ){
+							if (beneficiary.mpc_delivery_type_id === 'cash'){
+								unitCash = true;
+							} else{
+								unitCash = false;
+							}
+						} else{
+							unitCash = true;
+						}
+					}
+				}
+				return unitCash
+			},
 
       // unit types
       showUnitTypes: function( lists, $data, $beneficiary ){

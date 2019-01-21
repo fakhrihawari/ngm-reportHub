@@ -34,7 +34,7 @@
 							      <td>Activity</td>
 							      <td>Description</td>
 							      <td ng-if="project.definition.admin0pcode === 'NG'">Details</td>
-										<td ng-if="project.showCash() && project.showDeliveryfield() && project.definition.admin0pcode === 'AF'">Delivery</td>
+										<td ng-if="project.showCash() && project.showDeliveryfield()">Delivery</td>
 										<td ng-if="project.showCash()">Mechanism</td>
 										<td ng-if="project.showPackage()">Package</td>
 							      <td ng-if="project.definition.admin0pcode === 'AF' && project.categoryShow2017()">Category</td>
@@ -71,7 +71,8 @@
 							      <td>
 							        <span e-form="rowform"
 							        			e-name="activity_description_id"
-							        			editable-select="beneficiary.activity_description_id"
+														editable-select="beneficiary.activity_description_id"
+														 e-ng-change="project.nullifiedDelivery(beneficiary,project.showDeliveryfield())"
 							        			e-placeholder="Select..."
 							        			e-ng-options="a_d.activity_description_id as a_d.activity_description_name for a_d in project.lists.activity_descriptions | filter: { cluster_id: beneficiary.cluster_id, activity_type_id: beneficiary.activity_type_id }"
 							        			e-ng-disabled="!beneficiary.activity_type_id">
@@ -202,7 +203,7 @@
 							        			e-name="unit_type_id"
 							        			editable-select="beneficiary.unit_type_id"
 														e-placeholder="Select..."
-							        			e-ng-options="a.unit_type_id as a.unit_type_name for a in project.lists.units"
+							        			e-ng-options="a.unit_type_id as a.unit_type_name for a in project.lists.units |filter: project.showCashUnit(beneficiary)?{main_currency:true}:''"
 														e-ng-disabled="
 															!project.showUnits() ||
 															!beneficiary.activity_description_id ||
