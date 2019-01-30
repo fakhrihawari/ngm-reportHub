@@ -11,6 +11,7 @@
 	border-radius: 0% 3px 3px 0%;
 }
 </style>
+<!-- MODAL-START -->
 <div id="addTypeActivity-modal" class="modal">
 	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
 		<ul class="collection with-header" style="margin-top:0">
@@ -48,6 +49,49 @@
 		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="list.saveNewOrg(list.newDataOrg);">Save</div>
 	</div>
 </div>
+<div id="active-modal" class="modal">
+	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+		<!-- <div class="modal-content"> -->
+			<h4 style="color: #009688 ; font-weight:100; padding-top: 20px;margin-bottom: 10px">
+				<i class="material-icons medium left">notifications</i>Activate Activity
+			</h4>
+			<p style="padding-left: 76px;">Activate this Activity?</p>
+
+	</div>
+	<div class="modal-footer">
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
+		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="list.saveNewOrg(list.newDataOrg);">Set</div>
+	</div>
+</div>
+<div id="deactive-modal" class="modal">
+	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+		<!-- <div class="modal-content"> -->
+		<h4 style="color: #bdbdbd ; font-weight:100; padding-top: 20px;margin-bottom: 10px">
+			<i class="material-icons medium left">notifications_off</i>Deactivate Activity
+		</h4>
+		<p style="padding-left: 76px;">Deactivate this Activity?</p>
+
+	</div>
+	<div class="modal-footer">
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
+		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="list.saveNewOrg(list.newDataOrg);">Set</div>
+	</div>
+</div>
+<div id="remove-modal" class="modal">
+	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+		<!-- <div class="modal-content"> -->
+		<h4 style="color: #E57373 ; font-weight:100; padding-top: 20px;margin-bottom: 10px">
+			<i class="material-icons medium left">delete</i>Delete Activity
+		</h4>
+		<p style="padding-left: 76px;">Delete this Activity?</p>
+
+	</div>
+	<div class="modal-footer">
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
+		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="list.saveNewOrg(list.newDataOrg);">Set</div>
+	</div>
+</div>
+<!-- MODAL-END -->
 <div class="card z-depth-1" style="padding:5% 50px 0% 50px !important;" ng-repeat="cluster in master.clusters"  ng-init="$clusterIndex=$index">
 				
 	<!-- btn as title! -->
@@ -68,22 +112,22 @@
 							<p class="title truncate">{{description.activity_description_name}}</p>
 						</div>
 						<div class="col s12 m4" >
-							<button class="btn-floating waves-effect" style="margin-top: 15px">
+							<button class="btn-floating waves-effect" style="margin-top: 15px" ng-click="master.openModal('addTypeActivity-modal')">
 								<i class="material-icons">
 									edit
 								</i>
 							</button>
-							<button class="btn-floating waves-effect  " style="margin-top: 15px"  ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)!==-1">
+							<button class="btn-floating waves-effect tooltipped " ng-click="master.openModal('deactive-modal')" data-position="bottom" data-tooltip="Active" style="margin-top: 15px"  ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)!==-1">
 									<i class="material-icons ">
 										notifications
 									</i>
 							</button>
-							<button class="btn-floating waves-effect  grey lighten-1" style="margin-top: 15px" ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)==-1">
+							<button class="btn-floating waves-effect  grey lighten-1 tooltipped" ng-click="master.openModal('active-modal')" data-position="bottom" data-tooltip="Not-active" style="margin-top: 15px" ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)==-1">
 								<i class="material-icons" >
 									notifications_off
 								</i>
 							</button>
-							<button class="btn-floating waves-effect" style="margin-top: 15px" ng-if="master.role ==='super'">
+							<button class="btn-floating waves-effect red" style="margin-top: 15px" ng-if="master.role ==='super'" ng-click="master.openModal('remove-modal')">
 									<i class="material-icons" >
 										clear
 									</i>
@@ -142,6 +186,7 @@
 </div>
 <script>
 		setTimeout(function () {
+			$('.tooltipped').tooltip();
 
 			$(".tbtn").click(function () {
 					$('input[name=add_activity_type').val('');
