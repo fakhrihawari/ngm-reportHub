@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('MasterActivitiyListCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterLists', 'ngmMasterListHelper', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterLists, ngmMasterListHelper) {
+	.controller('MasterActivitiyListCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterLists', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterLists) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
