@@ -376,6 +376,37 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/lists',{
+				templateUrl: '/views/app/dashboard.html',
+				controller:'MasterListAdminCtrl',
+				resolve:{
+					access:['ngmAuth',function(ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
+			.when('/cluster/admin/lists/organizations', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterOrganizationListCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
+			.when('/cluster/admin/lists/activities', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterActivitiyListCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
+
 			// hct dashboard 2017
 			.when( '/cluster/health/hct', {
 				redirectTo: '/cluster/health/hct/all'

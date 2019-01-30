@@ -31,6 +31,7 @@ angular
 		'ngm.widget.project.report',
 		'ngm.widget.organization.stocks.list',
 		'ngm.widget.organization.stock',
+		'ngm.widget.master.activity',
 		// modules
 		'ngmCluster',
 		'ngmEthiopia',

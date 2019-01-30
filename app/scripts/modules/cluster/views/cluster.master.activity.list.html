@@ -1,0 +1,157 @@
+<!-- <h1 ng-repeat="cluster in master.clusters">
+	{{cluster.cluster}}
+</h1> -->
+<style>
+	.z-depth-0 {
+  -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0);
+}
+.border-radius-0{
+	border-radius: 0% 3px 3px 0%;
+}
+</style>
+<div id="addTypeActivity-modal" class="modal">
+	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+		<ul class="collection with-header" style="margin-top:0">
+			<li class="collection-header teal lighten-1" style="border-bottom: 0">
+				<h5 style="color: #ffffff;font-weight:300;">
+					<i class="material-icons left" style="font-size: 25px">{{ list.icon }}</i>
+					Add New Organization
+				</h5>
+			</li>
+		</ul>
+
+		<div class="row" style="margin: 20px 50px 10px 50px;">
+			<div class="input-field col s12 m4">
+				<input id="ngm-project_code" placeholder="Put Your Full Name Organization" type="text" name="organization_add" class="validate"
+				 ng-model="list.newDataOrg.organization_name">
+				<label class="active" for="ngm-project_code"> Organization Name *</label>
+			</div>
+			<div class="input-field col s12 m4">
+				<input id="ngm-project_code" placeholder="Your Organization abbreviation" type="text" name="organization_add" class="validate"
+				 ng-model="list.newDataOrg.organization">
+				<label class="active" for="ngm-project_code"> Organization </label>
+			</div>
+			<div class="input-field col s12 m4">
+				<select class="validate" id="ngm-new-data-org" ng-model="list.newDataOrg.organization_type" ng-options="org.type_name as org.type_name for org in list.organizationTypeOption">
+					<option value="" disable selected>Select status organization</option>
+				</select>
+				<label for="ngm-new-data-org"> Organization Type *</label>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="modal-footer">
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
+		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="list.saveNewOrg(list.newDataOrg);">Save</div>
+	</div>
+</div>
+<div class="card z-depth-1" style="padding:5% 50px 0% 50px !important;" ng-repeat="cluster in master.clusters"  ng-init="$clusterIndex=$index">
+				
+	<!-- btn as title! -->
+		<a class="btn border-radius-0 z-depth-0 blue" style="left:-1px;top:10px;position:absolute;pointer-events:none;font-size: 16px">{{cluster.cluster}}</a>
+		<div style="margin-top: 20px" 
+			ng-repeat=" act in master.activity_type "
+			 ng-init="$typeIndex=$index"
+			ng-if="cluster.cluster_id === act.cluster_id">
+
+				<h5 class="type-title" style="color: teal; font-weight: 400">
+					<i class="material-icons left" >book</i>
+					{{act.activity_type_name}}
+				</h5>
+				
+				<div style="margin-left: 40px; margin-bottom: 10px" ng-repeat=" description in master.activities | filter:{ cluster_id:cluster.cluster_id,activity_type_name:act.activity_type_name}">
+					<div class="row" ng-if="description.activity_description_name !=='' ">
+						<div class="col s12 m8">
+							<p class="title truncate">{{description.activity_description_name}}</p>
+						</div>
+						<div class="col s12 m4" >
+							<button class="btn-floating waves-effect" style="margin-top: 15px">
+								<i class="material-icons">
+									edit
+								</i>
+							</button>
+							<button class="btn-floating waves-effect  " style="margin-top: 15px"  ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)!==-1">
+									<i class="material-icons ">
+										notifications
+									</i>
+							</button>
+							<button class="btn-floating waves-effect  grey lighten-1" style="margin-top: 15px" ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)==-1">
+								<i class="material-icons" >
+									notifications_off
+								</i>
+							</button>
+							<button class="btn-floating waves-effect" style="margin-top: 15px" ng-if="master.role ==='super'">
+									<i class="material-icons" >
+										clear
+									</i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+						<!-- ADD NEW DESCRIPTION OF TYPE ACTIVITY-->
+							<div  ng-if="activeNewDescForm[$typeIndex]"class="card" style="padding: 20px">
+								<div class="row">
+									<div class="input-field col s12 m10">
+										<input id="ngm-act-desc" placeholder="New Decription Activity" ng-model="master.originType.activity_description_name" type="text"
+										 name="add_description" class="validate">
+										<label class="active" for="ngm-project_code"> Description *</label>
+									</div>
+									<div class="input-field col s12 m2">
+										<div style="margin-top: 10px">
+											<button class="btn waves-effect dbtn" ng-click="master.addNewDescOfTypeActivity(act);ofOffD($typeIndex)">
+												<i class="material-icons">add</i>
+											</button>
+											<button class="btn blue waves-effect dbtn" ng-click="ofOffD($typeIndex)">
+												<i class="material-icons">clear</i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+					<button class="btn blue" style="margin:20px 40px;" ng-click="onOffD($typeIndex)">
+						<i class="material-icons left">add</i>Add description
+					</button>
+		</div>
+		<!-- ADD NEW TYPE ACTIVITY -->
+		<div ng-if="activeNewTypeForm[$clusterIndex]" class="card" style="padding: 20px">
+			<div class="row" >
+				<div class="input-field col s12 m10">
+					<input id="ngm-act-type" placeholder="New Activity Type" ng-model="master.originType.activity_type_name" type="text" name="add_activity_type" class="validate">
+					<label class="active" for="ngm-project_code"> Activity Type Name *</label>
+				</div>
+				<div class="input-field col s12 m2">
+					<div style="margin-top: 10px">
+						<button class="btn waves-effect tbtn" ng-click="master.addNewTypeActivity(cluster.cluster_id,cluster.cluster,$clusterIndex);ofOff($clusterIndex)" >
+							<i class="material-icons">add</i>
+						</button>
+						<button class="btn blue waves-effect tbtn" ng-click="ofOff($clusterIndex)">
+							<i class="material-icons">clear</i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<button class="btn" style="margin:20px 0px;" ng-click="onOff($clusterIndex)">
+					<i class="material-icons left">add</i>Add Type
+		</button>
+</div>
+<script>
+		setTimeout(function () {
+
+			$(".tbtn").click(function () {
+					$('input[name=add_activity_type').val('');
+					console.log("A")
+			})
+	
+			$(".dbtn").click(function () {
+					$('input[name=add_description').val('');
+					console.log("B");
+				})
+		},400)
+
+</script>
