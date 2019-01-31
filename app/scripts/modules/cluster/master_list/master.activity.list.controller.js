@@ -106,9 +106,12 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 				},
 				addNewDescOfTypeActivity:function(a){
 					var x = angular.copy(a);
+					delete x.id;
 					x.activity_description_name = $scope.master.originType.activity_description_name;
 					x.activity_description_id = $scope.master.originType.activity_description_name.toLowerCase().replace(/ /g, "_")
+					x.admin0pcode = $scope.master.user.admin0pcode;
 					$scope.master.activities.push(x);
+					$scope.master.temp.push(x);
 					// after push
 					$scope.master.originType.activity_description_name = '';
 
@@ -240,6 +243,32 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					})
 				},
 
+				//edit,remove,activate
+				modifRecord:function(record){
+					var index = $scope.master.activities.findIndex(function (x) { return x.activity_description_id == record.activity_description_id} );
+					$scope.editedId = index;
+				},
+
+				activatedActInCluster:function(){
+					$scope.master.activities[$scope.editedId].admin0pcode = $scope.master.activities[$scope.editedId].admin0pcode + ', ' + $scope.master.user.admin0pcode;
+				},
+
+				deactivatedActInCluster:function () {
+					var change = new RegExp($scope.master.user.admin0pcode,"g")
+					$scope.master.activities[$scope.editedId].admin0pcode=$scope.master.activities[$scope.editedId].admin0pcode.replace(change, ' ')
+					var clean = new RegExp(' ,',"g");
+					$scope.master.activities[$scope.editedId].admin0pcode = $scope.master.activities[$scope.editedId].admin0pcode.replace(clean, '')
+
+				},
+
+				editAct:function(){
+					// var id =$scope.master.activities[$scope.editedId].activity_description_name.toLowerCase().replace(/[()]/g, "").replace(/ /g,"_")
+					console.log("belumbisa");
+				},
+
+				removeAct:function(){
+					$scope.master.activities.splice($scope.editedId,1);
+				},
 				// active deactivate copy previoust month
 				activePrevReportButton: function () {
 
@@ -265,74 +294,52 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 
 				// save
 				save: function (complete, display_modal) {
-
+					console.log($scope.master.temp);
 					// if textarea
-					$('textarea[name="notes"]').removeClass('ng-untouched').addClass('ng-touched');
-					$('textarea[name="notes"]').removeClass('invalid').addClass('valid');
+					// $('textarea[name="notes"]').removeClass('ng-untouched').addClass('ng-touched');
+					// $('textarea[name="notes"]').removeClass('invalid').addClass('valid');
 
 					// report
 					// $scope.project.report.submit = true;
-					$scope.project.report.report_status = complete ? 'complete' : 'todo';
-					$scope.project.report.report_submitted = moment().format();
+					// $scope.project.report.report_status = complete ? 'complete' : 'todo';
+					// $scope.project.report.report_submitted = moment().format();
 
 					// update project details of report + locations + beneficiaries
-					$scope.project.report =
-						ngmClusterHelper.getCleanReport($scope.project.definition, $scope.project.report);
+					// $scope.project.report =
+					// 	ngmClusterHelper.getCleanReport($scope.project.definition, $scope.project.report);
 
 					// msg
-					Materialize.toast('Processing Report...', 3000, 'note');
+					Materialize.toast('Processing...', 3000, 'note');
 
 					// setReportRequest
 					var setReportRequest = {
 						method: 'POST',
-						url: ngmAuth.LOCATION + '/api/cluster/report/setReport',
-						data: { report: $scope.project.report }
+						url: ngmAuth.LOCATION + '/api/cluster/list/setActivities',
+						data: { activities: $scope.master.temp }
 					}
 
 					// set report
-					$http(setReportRequest).success(function (report) {
+					// $http(setReportRequest).success(function (activies) {
 
-						if (report.err) {
-							// update
-							Materialize.toast('Error! Please correct the ROW and try again', 6000, 'error');
-						}
+					// 	if (activies.err) {
+					// 		// update
+					// 		Materialize.toast('Error! Please correct the ROW and try again', 6000, 'error');
+					// 	}
 
-						if (!report.err) {
+					// 	if (!activies.err) {
 
-							// updated report
-							$scope.project.report = report;
-							$scope.project.report.submit = false;
 
-							// user msg
-							var msg = 'Project Report for  ' + moment.utc($scope.project.report.reporting_period).format('MMMM, YYYY') + ' ';
-							msg += complete ? 'Submitted!' : 'Saved!';
+					// 		// msg
+					// 		$timeout(function () { Materialize.toast("sukses", 3000, 'success'); }, 600);
 
-							// msg
-							$timeout(function () { Materialize.toast(msg, 3000, 'success'); }, 600);
+					// 		// set trigger
+					// 		$('.modal-trigger').leanModal();
 
-							// set trigger
-							$('.modal-trigger').leanModal();
-
-							// Re-direct to summary
-							if ($scope.project.report.report_status !== 'complete') {
-
-								// notification modal
-								if (display_modal) {
-									$timeout(function () {
-										$location.path('/cluster/projects/report/' + $scope.project.definition.id);
-									}, 400);
-								}
-
-							} else {
-								$timeout(function () {
-									$location.path('/cluster/projects/report/' + $scope.project.definition.id);
-								}, 400);
-							}
-						}
-					}).error(function (err) {
-						// update
-						Materialize.toast('Error!', 6000, 'error');
-					});;
+					// 	}
+					// }).error(function (err) {
+					// 	// update
+					// 	Materialize.toast('Error!', 6000, 'error');
+					// });
 
 				}
 
@@ -347,7 +354,7 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 			};
 
 			$http(getActivities).success(function (act) {
-				$scope.master.activities = act;
+				$scope.master.activities = act
 				$scope.master.activity_type= ngmClusterLists.filterDuplicates(act, 'activity_type_name')
 				$scope.master.originType = {
 					cluster:'',
@@ -357,6 +364,7 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					activity_type_id:'',
 					activity_type_name: '',
 				};
+				$scope.master.temp=[];
 				$scope.master.init();
 				console.log($scope.master.user.roles);
 				

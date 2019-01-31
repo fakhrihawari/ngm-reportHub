@@ -122,7 +122,41 @@ angular.module( 'ngmReportHub' )
 
       });
     };
-  })
+	})
+	.filter('filterDuplicate',function(){
+		return function(items,filterOn){
+			// vars
+			var hashCheck = {},
+				newItems = [];
+
+			// comparison fn
+			var extractValueToCompare = function (item) {
+				if (angular.isObject(item) && angular.isString(filterOn)) {
+					return item[filterOn];
+				} else {
+					return item;
+				}
+			};
+
+			// filter unique
+			angular.forEach(items, function (item) {
+				var valueToCheck, isDuplicate = false;
+
+				for (var i = 0; i < newItems.length; i++) {
+					if (angular.equals(extractValueToCompare(newItems[i]), extractValueToCompare(item))) {
+						isDuplicate = true;
+						break;
+					}
+				}
+				if (!isDuplicate) {
+					newItems.push(item);
+				}
+			});
+
+			// duplicates filtered
+			return newItems;
+		}
+	})
 
   // checks 2 passwords are identical 
   .directive( 'pwCheck', [ function () {
