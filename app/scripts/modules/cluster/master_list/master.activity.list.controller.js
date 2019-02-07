@@ -294,7 +294,7 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 
 				// save
 				save: function (complete, display_modal) {
-					console.log($scope.master.temp);
+					// console.log($scope.master.temp);
 					// if textarea
 					// $('textarea[name="notes"]').removeClass('ng-untouched').addClass('ng-touched');
 					// $('textarea[name="notes"]').removeClass('invalid').addClass('valid');
@@ -365,16 +365,21 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					activity_type_name: '',
 				};
 				$scope.master.temp=[];
-				$scope.master.init();
-				console.log($scope.master.user.roles);
+				$scope.master.init();				
 				
 				if ($scope.master.user.roles.indexOf('SUPERADMIN')>-1){
-					$scope.master.role='super';
-					console.log($scope.master.role, $scope.master.activities)
+					$scope.master.role='super';					
 				}
 				// INPUT NEW DATA
+				$scope.clusterCard = Array($scope.master.clusters.length).fill(false);
 				$scope.activeNewTypeForm = Array($scope.master.clusters.length).fill(false);
 				$scope.activeNewDescForm = Array($scope.master.activity_type).fill(false);
+				$scope.openCluster= function(index){
+					$scope.clusterCard[index] = true;
+				};
+				$scope.closeCluster = function (index) {
+					$scope.clusterCard[index] = false;
+				}
 				$scope.onOff = function (index) {
 					$scope.activeNewTypeForm[index] = true;
 				}

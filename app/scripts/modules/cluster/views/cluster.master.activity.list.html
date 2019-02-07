@@ -10,6 +10,15 @@
 .border-radius-0{
 	border-radius: 0% 3px 3px 0%;
 }
+.animate-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.animate-show-hide.ng-hide-add,
+.animate-show-hide.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+.ng-cloak { display: none !important; }
 </style>
 <!-- MODAL-START -->
 <div id="addTypeActivity-modal" class="modal">
@@ -81,14 +90,23 @@
 	</div>
 </div>
 <!-- MODAL-END -->
-<div class="card z-depth-1" style="padding:5% 50px 0% 50px !important;" ng-repeat="cluster in master.clusters"  ng-init="$clusterIndex=$index">
+<div class="card z-depth-1" style="padding:5% 50px 0% 50px !important;" ng-repeat="cluster in master.clusters"  ng-init="$clusterIndex=$index" >
 				
 	<!-- btn as title! -->
 		<a class="btn border-radius-0 z-depth-0 blue" style="left:-1px;top:10px;position:absolute;pointer-events:none;font-size: 16px">{{cluster.cluster}}</a>
-		<div style="margin-top: 20px" 
-			ng-repeat=" act in master.activity_type "
+		<a class="" style="right:20px;top:15px;position:absolute;font-size: 30px;cursor: pointer;" >
+			<i ng-if="!clusterCard[$clusterIndex]" class="material-icons" ng-click="openCluster($clusterIndex)" style="font-size: 35px">
+			keyboard_arrow_down
+			</i>
+			<i ng-if="clusterCard[$clusterIndex]" class="material-icons" ng-click="closeCluster($clusterIndex)" style="font-size: 35px">
+				keyboard_arrow_up
+			</i>
+		</a>
+		<div  class="animate-show-hide" style="margin-top: 20px" 
+		ng-repeat=" act in master.activity_type"
+		ng-if="cluster.cluster_id === act.cluster_id"
 			 ng-init="$typeIndex=$index"
-			ng-if="cluster.cluster_id === act.cluster_id">
+			 ng-show="clusterCard[$clusterIndex]">
 
 				<h5 class="type-title" style="color: teal; font-weight: 400">
 					<i class="material-icons left" >book</i>
@@ -182,7 +200,7 @@
 			</div>
 		</div>
 
-		<button class="btn" style="margin:20px 0px;" ng-click="onOff($clusterIndex)">
+		<button ng-show ="clusterCard[$clusterIndex]" class="btn animate-show-hide" style="margin:20px 0px;" ng-click="onOff($clusterIndex)">
 					<i class="material-icons left">add</i>Add Type
 		</button>
 </div>
