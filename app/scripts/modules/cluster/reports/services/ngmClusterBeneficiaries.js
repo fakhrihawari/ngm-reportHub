@@ -347,7 +347,7 @@ angular.module( 'ngmReportHub' )
       },
 
       // show descipriton (generic)
-      displayDescription: function( lists, $data, $beneficiary, row ){
+      displayDescription: function( lists, $data, $beneficiary, row,location_index,index ){
         var selected = [];
         $beneficiary.activity_description_id = $data;
         if( $beneficiary.activity_description_id ) {
@@ -365,7 +365,13 @@ angular.module( 'ngmReportHub' )
               $beneficiary.indicator_name = selected[0].indicator_name;
             }
 
-          }
+					}
+					
+					if (ngmClusterBeneficiaries.form.active[location_index].rows[index] && ngmClusterBeneficiaries.form.active[location_index].rows[index].length<2){
+						$beneficiary.mpc_delivery_type_id = row['mpc_delivery_type_id'][0].mpc_delivery_type_id;
+						$beneficiary.mpc_delivery_type_name = row['mpc_delivery_type_id'][0].mpc_delivery_type_name;
+					};
+
         }
         return selected.length ? selected[0].activity_description_name : '-';
       },
@@ -540,7 +546,23 @@ angular.module( 'ngmReportHub' )
           $beneficiary.transfer_type_value = 0;
         }
         return selected.length ? selected[0].transfer_type_value : 0;
-      },
+			},
+			
+			// hide mpc_delivery_type_id
+			showCashDelivery:function($locationIndex){
+					var countDeliveryTrue=0
+					ngmClusterBeneficiaries.form.active[$locationIndex].rows.forEach(function (d) {
+						if (d.mpc_delivery_type_id.length >1) {
+							countDeliveryTrue +=1
+						}
+					});
+				if (countDeliveryTrue>0){
+					return true;
+				}else{
+					return false;
+				};
+				
+			},
 
       
       /* SHOW AND HIDE TARGETS */
