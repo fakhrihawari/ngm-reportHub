@@ -38,8 +38,103 @@
 										 name="add_description" class="validate">
 										<label class="active" for="ngm-project_code"> Description *</label>
 									</div>
+									
+									
+								</div>
+		<div class="row" style="margin: 20px 50px 10px 50px;">
+			<p style="color:#26a69a;font-weight: 400; padding-left: 10px">Field Active*</p>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].detail}} value={{master.activities[editedId].detail}}
+				 ng-checked="master.activities[editedId].detail != 0" />
+				<label for="detail" style="color: #000000; font-weight: 500;">Detail</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].indicator}} value={{master.activities[editedId].indicator}}
+				 ng-checked="master.activities[editedId].indicator != 0" />
+				<label for="indicator" style="color: #000000; font-weight: 500;">Indicator</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].category_type_id}} value={{master.activities[editedId].category_type_id}}
+				 ng-checked="master.activities[editedId].category_type_id != 0" />
+				<label for="category_type_id" style="color: #000000; font-weight: 500;">Category</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].delivery_type_id}} value={{master.activities[editedId].delivery_type_id}}
+				 ng-checked="master.activities[editedId].delivery_type_id != 0" />
+				<label for="delivery_type_id" style="color: #000000; font-weight: 500;">Delivery</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].mpc_delivery_type_id}} value={{master.activities[editedId].mpc_delivery_type_id}}
+				 ng-checked="master.activities[editedId].mpc_delivery_type_id != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">MPC Delivery</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].mpc_mechanism_type_id}} value={{master.activities[editedId].mpc_mechanism_type_id}}
+				 ng-checked="master.activities[editedId].mpc_mechanism_type_id != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Mechanism</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].package_type_id}} value={{master.activities[editedId].package_type_id}}
+				 ng-checked="master.activities[editedId].package_type_id != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Package</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].units}} value={{master.activities[editedId].units}}
+				 ng-checked="master.activities[editedId].units != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Units</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].unit_type_id}} value={{master.activities[editedId].unit_type_id}}
+				 ng-checked="master.activities[editedId].unit_type_id != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Unit Type</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].transfer_type_id}} value={{master.activities[editedId].transfer_type_id}}
+				 ng-checked="master.activities[editedId].transfer_type_id != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Transfer</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].households}} value={{master.activities[editedId].households}}
+				 ng-checked="master.activities[editedId].households != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">HH</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].families}} value={{master.activities[editedId].families}}
+				 ng-checked="master.activities[editedId].families != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Families</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].boys}} value={{master.activities[editedId].boys}}
+				 ng-checked="master.activities[editedId].boys != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Boys</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].girls}} value={{master.activities[editedId].girls}}
+				 ng-checked="master.activities[editedId].girls != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Girls</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].men}} value={{master.activities[editedId].men}}
+				 ng-checked="master.activities[editedId].men != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Men</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].women}} value={{master.activities[editedId].women}}
+				 ng-checked="master.activities[editedId].women != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Women</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].elderly_men}} value={{master.activities[editedId].elderly_men}}
+				 ng-checked="master.activities[editedId].elderly_men != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Elderly Men</label>
+			</div>
+			<div class="col s3">
+				<input type="checkbox" class="filled-in" id={{master.activities[editedId].elderly_women}} value={{master.activities[editedId].elderly_women}}
+				 ng-checked="master.activities[editedId].elderly_women != 0" />
+				<label for="unit" style="color: #000000; font-weight: 500;">Elderly Women</label>
+			</div>
 		</div>
-
+								
 
 	</div>
 	<div class="modal-footer">
@@ -104,7 +199,7 @@
 		</a>
 		<div  class="animate-show-hide" style="margin-top: 20px" 
 		ng-repeat=" act in master.activity_type"
-		ng-if="cluster.cluster_id === act.cluster_id"
+		ng-if="cluster.cluster_id === act.cluster_id && clusterCard[$clusterIndex]"
 			 ng-init="$typeIndex=$index"
 			 ng-show="clusterCard[$clusterIndex]">
 
