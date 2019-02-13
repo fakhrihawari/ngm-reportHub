@@ -367,10 +367,16 @@ angular.module( 'ngmReportHub' )
 
 					}
 					
-					if (ngmClusterBeneficiaries.form.active[location_index].rows[index] && ngmClusterBeneficiaries.form.active[location_index].rows[index].length<2){
-						$beneficiary.mpc_delivery_type_id = row['mpc_delivery_type_id'][0].mpc_delivery_type_id;
-						$beneficiary.mpc_delivery_type_name = row['mpc_delivery_type_id'][0].mpc_delivery_type_name;
+					if (ngmClusterBeneficiaries.form.active[location_index].rows[index] && 
+							ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id'].length<2){
+						$beneficiary.mpc_delivery_type_id = ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id'][0].mpc_delivery_type_id;
+						$beneficiary.mpc_delivery_type_name = ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id'][0].mpc_delivery_type_name;
 					};
+
+					if (ngmClusterBeneficiaries.form.active[location_index].rows[index] && !ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id']){
+						$beneficiary.mpc_delivery_type_id= null;
+						$beneficiary.mpc_delivery_type_name=null;
+					}
 
         }
         return selected.length ? selected[0].activity_description_name : '-';
