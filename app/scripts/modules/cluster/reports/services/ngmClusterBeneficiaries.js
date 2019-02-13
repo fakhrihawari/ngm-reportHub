@@ -367,7 +367,7 @@ angular.module( 'ngmReportHub' )
 
 					}
 					
-					if (ngmClusterBeneficiaries.form.active[location_index].rows[index] && 
+					if (ngmClusterBeneficiaries.form.active[location_index].rows[index] && ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id'] && 
 							ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id'].length<2){
 						$beneficiary.mpc_delivery_type_id = ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id'][0].mpc_delivery_type_id;
 						$beneficiary.mpc_delivery_type_name = ngmClusterBeneficiaries.form.active[location_index].rows[index]['mpc_delivery_type_id'][0].mpc_delivery_type_name;
@@ -558,7 +558,7 @@ angular.module( 'ngmReportHub' )
 			showCashDelivery:function($locationIndex){
 					var countDeliveryTrue=0
 					ngmClusterBeneficiaries.form.active[$locationIndex].rows.forEach(function (d) {
-						if (d.mpc_delivery_type_id.length >1) {
+						if (d.mpc_delivery_type_id && d.mpc_delivery_type_id.length >1) {
 							countDeliveryTrue +=1
 						}
 					});
@@ -625,7 +625,10 @@ angular.module( 'ngmReportHub' )
               // for each row
               ngmClusterBeneficiaries.setColumnsRows( location_index, row, row_index );
             });
-
+						// hide mpc_delivery if in beneficiaries;
+						if (!ngmClusterBeneficiaries.showCashDelivery(location_index)){							
+							ngmClusterBeneficiaries.form.active[location_index].columns['mpc_delivery_type_id'] = false;
+						}
             // by activity_detail_id
             if ( beneficiary.activity_detail_id ) {
               search.list_activity_details = $filter('filter')( search.list_activity_details, { activity_detail_id: beneficiary.activity_detail_id }, true )

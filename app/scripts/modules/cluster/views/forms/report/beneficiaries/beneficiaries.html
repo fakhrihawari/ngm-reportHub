@@ -23,7 +23,7 @@
       <td ng-if="ngmClusterBeneficiaries.form.active[ $locationIndex ].columns[ 'indicator' ]">Indicator</td>
 
       <!-- cash -->
-      <td ng-if="ngmClusterBeneficiaries.form.active[ $locationIndex ].columns[ 'mpc_delivery_type_id' ] && ngmClusterBeneficiaries.showCashDelivery($locationIndex)">Delivery</td>
+      <td ng-if="ngmClusterBeneficiaries.form.active[ $locationIndex ].columns[ 'mpc_delivery_type_id' ]">Delivery</td>
       <td ng-if="ngmClusterBeneficiaries.form.active[ $locationIndex ].columns[ 'mpc_mechanism_type_id' ]">Mechanism</td>
       <td ng-if="ngmClusterBeneficiaries.form.active[ $locationIndex ].columns[ 'package_type_id' ]">Package</td>
 
@@ -170,12 +170,12 @@
       
       <!-- mpc_delivery_type_id  -->
       <td ng-if="ngmClusterBeneficiaries.form.active[ $locationIndex ].columns[ 'mpc_delivery_type_id' ] &&
-                  !ngmClusterBeneficiaries.form.active[ $locationIndex ].rows[ $index ][ 'mpc_delivery_type_id' ] && ngmClusterBeneficiaries.showCashDelivery($locationIndex)">
+                  !ngmClusterBeneficiaries.form.active[ $locationIndex ].rows[ $index ][ 'mpc_delivery_type_id' ]">
         -
       </td>
       <td ng-if="ngmClusterBeneficiaries.form.active[ $locationIndex ].columns[ 'mpc_delivery_type_id' ] &&
 									ngmClusterBeneficiaries.form.active[ $locationIndex ].rows[ $index ][ 'mpc_delivery_type_id' ]
-									 && ngmClusterBeneficiaries.showCashDelivery($locationIndex)">
+									">
         <span e-form="rowform"
               e-name="mpc_delivery_type_id"
               editable-select="beneficiary.mpc_delivery_type_id"
