@@ -18,6 +18,10 @@
 .animate-show-hide.ng-hide-remove {
   transition: all linear 0.5s;
 }
+.btn-show-hide.ng-hide-add,
+.btn-show-hide.ng-hide-remove {
+  transition: all linear 10ms;
+}
 .ng-cloak { display: none !important; }
 </style>
 <!-- MODAL-START -->
@@ -197,83 +201,84 @@
 				keyboard_arrow_up
 			</i>
 		</a>
-		<div  class="animate-show-hide" style="margin-top: 20px" 
-		ng-repeat=" act in master.activity_type"
-		ng-if="cluster.cluster_id === act.cluster_id && clusterCard[$clusterIndex]"
-			 ng-init="$typeIndex=$index"
-			 ng-show="clusterCard[$clusterIndex]">
+		<div ng-repeat=" act in master.activity_type" ng-show="clusterCard[$clusterIndex]" class="animate-show-hide">
+			<div   style="margin-top: 20px"			
+			ng-if="cluster.cluster_id === act.cluster_id && clusterCard[$clusterIndex]"
+				ng-init="$typeIndex=$index"
+				>
 
-				<h5 class="type-title" style="color: teal; font-weight: 400">
-					<i class="material-icons left" >book</i>
-					{{act.activity_type_name}}
-				</h5>
-				
-				<div style="margin-left: 40px; margin-bottom: 10px" ng-repeat=" description in master.activities | filter:{ cluster_id:cluster.cluster_id,activity_type_name:act.activity_type_name}| filterDuplicate:'activity_description_name' track by $index" ng-init="$descIndex=$index">
-					<div class="row" ng-if="description.activity_description_name !=='' ">
-						<div class="col s12 m8">
-							<p class="title truncate " style="font-weight: 600">{{description.activity_description_name}}</p>
-						</div>
-						<div class="col s12 m4" style="margin-top: 5px">
-							<button class="btn-floating waves-effect"  
-								ng-click="master.openModal('addTypeActivity-modal');master.modifRecord(description)">
-								<i class="material-icons">
-									edit
-								</i>
-							</button>
-							<button class="btn-floating waves-effect tooltipped " 
-								ng-click="master.openModal('deactive-modal');master.modifRecord(description)"
-								data-position="bottom" data-tooltip="Active" 
-								style="margin-top: 5px"  
-								ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)!==-1">
-									<i class="material-icons ">
-										notifications
+					<h5 class="type-title" style="color: teal; font-weight: 400">
+						<i class="material-icons left" >book</i>
+						{{act.activity_type_name}}
+					</h5>
+					
+					<div style="margin-left: 40px; margin-bottom: 10px" ng-repeat=" description in master.activities | filter:{ cluster_id:cluster.cluster_id,activity_type_name:act.activity_type_name}| filterDuplicate:'activity_description_name' track by $index" ng-init="$descIndex=$index">
+						<div class="row" ng-if="description.activity_description_name !=='' ">
+							<div class="col s12 m8">
+								<p class="title truncate " style="font-weight: 600">{{description.activity_description_name}}</p>
+							</div>
+							<div class="col s12 m4" style="margin-top: 5px">
+								<button class="btn-floating waves-effect"  
+									ng-click="master.openModal('addTypeActivity-modal');master.modifRecord(description)">
+									<i class="material-icons">
+										edit
 									</i>
-							</button>
-							<button class="btn-floating waves-effect  grey lighten-1 tooltipped" 
-								ng-click="master.openModal('active-modal');master.modifRecord(description)" 
-								data-position="bottom" 
-								data-tooltip="Not-active" 
-								style="margin-top: 5px" 
-								ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)==-1">
-								<i class="material-icons" >
-									notifications_off
-								</i>
-							</button>
-							<button class="btn-floating waves-effect red" 
-								style="margin-top: 5px" 
-								ng-if="master.role ==='super'" 
-								ng-click="master.openModal('remove-modal');master.modifRecord(description)">
+								</button>
+								<button class="btn-floating waves-effect tooltipped " 
+									ng-click="master.openModal('deactive-modal');master.modifRecord(description)"
+									data-position="bottom" data-tooltip="Active" 
+									style="margin-top: 5px"  
+									ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)!==-1">
+										<i class="material-icons ">
+											notifications
+										</i>
+								</button>
+								<button class="btn-floating waves-effect  grey lighten-1 tooltipped" 
+									ng-click="master.openModal('active-modal');master.modifRecord(description)" 
+									data-position="bottom" 
+									data-tooltip="Not-active" 
+									style="margin-top: 5px" 
+									ng-if="description.admin0pcode.indexOf(master.user.admin0pcode)==-1">
 									<i class="material-icons" >
-										clear
+										notifications_off
 									</i>
-							</button>
+								</button>
+								<button class="btn-floating waves-effect red" 
+									style="margin-top: 5px" 
+									ng-if="master.role ==='super'" 
+									ng-click="master.openModal('remove-modal');master.modifRecord(description)">
+										<i class="material-icons" >
+											clear
+										</i>
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
 
-						<!-- ADD NEW DESCRIPTION OF TYPE ACTIVITY-->
-							<div  ng-if="activeNewDescForm[$typeIndex]"class="card" style="padding: 20px">
-								<div class="row">
-									<div class="input-field col s12 m10">
-										<input id="ngm-act-desc" placeholder="New Decription Activity" ng-model="master.originType.activity_description_name" type="text"
-										 name="add_description" class="validate">
-										<label class="active" for="ngm-project_code"> Description *</label>
-									</div>
-									<div class="input-field col s12 m2">
-										<div style="margin-top: 10px">
-											<button class="btn waves-effect dbtn" ng-click="master.addNewDescOfTypeActivity(act);ofOffD($typeIndex)">
-												<i class="material-icons">add</i>
-											</button>
-											<button class="btn blue waves-effect dbtn" ng-click="ofOffD($typeIndex)">
-												<i class="material-icons">clear</i>
-											</button>
+							<!-- ADD NEW DESCRIPTION OF TYPE ACTIVITY-->
+					<div  ng-if="activeNewDescForm[$typeIndex]"class="card" style="padding: 20px">
+									<div class="row">
+										<div class="input-field col s12 m10">
+											<input id="ngm-act-desc" placeholder="New Decription Activity" ng-model="master.originType.activity_description_name" type="text"
+											name="add_description" class="validate">
+											<label class="active" for="ngm-project_code"> Description *</label>
+										</div>
+										<div class="input-field col s12 m2">
+											<div style="margin-top: 10px">
+												<button class="btn waves-effect dbtn" ng-click="master.addNewDescOfTypeActivity(act);ofOffD($typeIndex)">
+													<i class="material-icons">add</i>
+												</button>
+												<button class="btn blue waves-effect dbtn" ng-click="ofOffD($typeIndex)">
+													<i class="material-icons">clear</i>
+												</button>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
+					</div>
 					<button class="btn blue" style="margin:20px 40px;" ng-click="onOffD($typeIndex)">
 						<i class="material-icons left">add</i>Add description
 					</button>
+			</div>
 		</div>
 		<!-- ADD NEW TYPE ACTIVITY -->
 		<div ng-if="activeNewTypeForm[$clusterIndex]" class="card" style="padding: 20px">
@@ -295,7 +300,7 @@
 			</div>
 		</div>
 
-		<button ng-show ="clusterCard[$clusterIndex]" class="btn animate-show-hide" style="margin:20px 0px;" ng-click="onOff($clusterIndex)">
+		<button ng-show ="clusterCard[$clusterIndex]" class="btn btn-show-hide" style="margin:20px 0px;" ng-click="onOff($clusterIndex)">
 					<i class="material-icons left">add</i>Add Type
 		</button>
 </div>

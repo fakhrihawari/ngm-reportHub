@@ -51,6 +51,18 @@ angular.module('ngmReportHub')
 						columns: [{
 							styleClass: 's12 m12 l12',
 							widgets: [{
+								type: 'html',
+								card: 'white grey-text text-darken-2',
+								style: 'padding: 20px;padding-left: 0px;padding-bottom: 10px;',
+								config: {
+									html: '<a class="btn-flat waves-effect waves-teal hide-on-small-only" href="#/cluster/admin/lists"><i class="material-icons left">keyboard_return</i>Back to Master List</a>'
+								}
+							}]
+						}]
+					},{
+						columns: [{
+							styleClass: 's12 m12 l12',
+							widgets: [{
 								type: 'master.activity',
 								config: {
 									style: $scope.master.ngm.style,

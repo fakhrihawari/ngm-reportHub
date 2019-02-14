@@ -6,7 +6,11 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('MasterListAdminCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmMasterListHelper', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmMasterListHelper) {
+	.controller('MasterListAdminCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 
+	// 'ngmMasterListHelper', 
+	function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, 
+		// ngmMasterListHelper
+	) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -69,19 +73,19 @@ angular.module('ngmReportHub')
 					}]
 				}
 				$scope.model.menu=[];
-				$scope.master.setMenu();
+				// $scope.master.setMenu();
 				// assign to ngm app scope
 				$scope.master.ngm.dashboard.model = $scope.model;
 			},
-			setMenu:function(){
-				if ($scope.master.user.roles.indexOf('SUPERADMIN')>-1){
-					$scope.model.menu.push(ngmMasterListHelper.getCountry());
+			// setMenu:function(){
+			// 	if ($scope.master.user.roles.indexOf('SUPERADMIN')>-1){
+			// 		$scope.model.menu.push(ngmMasterListHelper.getCountry());
 					
-				}
-				if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1 || $scope.master.user.roles.indexOf('COUNTRY') > -1){
-					$scope.model.menu.push(ngmMasterListHelper.getClusterRows($scope.master.user.admin0pcode));
-				}
-			}
+			// 	}
+			// 	if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1 || $scope.master.user.roles.indexOf('COUNTRY') > -1){
+			// 		$scope.model.menu.push(ngmMasterListHelper.getClusterRows($scope.master.user.admin0pcode));
+			// 	}
+			// }
 
 		}
 
