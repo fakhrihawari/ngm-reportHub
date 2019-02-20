@@ -40,7 +40,7 @@ angular.module('ngmReportHub')
 						title: {
 							'class': 'col s12 m12 l12 report-title truncate',
 							style: 'font-size: 3.4rem; color: ' + $scope.master.ngm.style.defaultPrimaryColor,
-							title: ' ORG ' + '| LISTS '
+							title: ' ACTIVITIES ' + '| LISTS '
 						},
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
