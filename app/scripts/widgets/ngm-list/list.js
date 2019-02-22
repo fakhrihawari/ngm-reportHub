@@ -47,8 +47,7 @@ angular.module('ngm.widget.list', ['ngm.provider'])
     'ngmAuth',
     'data', 
     'config',
-    'ngmData',
-    function($scope, $rootScope, $sce, $element, $location, $timeout, ngmAuth, data, config, ngmData){
+    function($scope, $sce, $element, $location, $timeout, ngmAuth, data, config){
     
       // statistics widget default config
       $scope.list = {
@@ -125,16 +124,7 @@ angular.module('ngm.widget.list', ['ngm.provider'])
           $scope.list.data[i].reporting_period_title = $scope.list.monthlyTitleFormat( d.reporting_period );
         });
       }
-      // set event listener to update data
-      if ($scope.list.refreshEvent) {
-        $scope.$on($scope.list.refreshEvent, function(){
-          ngmData.get(config.request).then( function( data ){
-            $scope.list.data = data ? data : false;
-          });
-          // reloads entire widget
-          // $scope.$emit('widgetReload');
-        })
-      }
+
   }
 ]);
 

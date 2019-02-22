@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ClusterProjectDocumentCtrl', ['$scope', '$rootScope', '$route', '$location', '$anchorScroll', '$timeout','$sce','$http', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', function ($scope, $rootScope, $route, $location, $anchorScroll, $timeout,$sce,$http, ngmAuth, ngmData, ngmUser, ngmClusterHelper) {
+	.controller('ClusterProjectDocumentCtrl', ['$scope', '$route', '$location', '$anchorScroll', '$timeout','$sce','$http', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', function ($scope, $route, $location, $anchorScroll, $timeout,$sce,$http, ngmAuth, ngmData, ngmUser, ngmClusterHelper) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -158,7 +158,6 @@ angular.module('ngmReportHub')
 							widgets: [{
 								type: 'dropzone',
 								config:{
-									params: { project_id: $scope.report.project.id, username: $scope.report.user.username, organization_tag: $scope.report.user.organization_tag, admin0pcode: $scope.report.user.admin0pcode },
 									templateUrl: '/scripts/widgets/ngm-dropzone/template/upload.html',
 									openModal: function (modal) {
 										$('#' + modal).openModal({ dismissible: false });
@@ -178,7 +177,7 @@ angular.module('ngmReportHub')
 																			<div data-dz-remove class=" remove-upload btn-floating red" style="margin-left:35%; "><i class="material-icons">clear</i></div> 
 																		</div>`,
 									completeMessage: '<i class="medium material-icons" style="color:#009688;">cloud_done</i><br/><h5 style="font-weight:300;">Complete!</h5><br/><h5 style="font-weight:100;"><div id="add_doc" class="btn"><i class="small material-icons">add_circle</i></div></h5></div>',
-									url: ngmAuth.LOCATION + '/api/uploadGDrive',
+									url: ngmAuth.LOCATION + '/api/upload-file',
 									acceptedFiles: 'image/*,application/pdf',
 									maxFiles: 3,
 									accept:function(file,done){
@@ -188,7 +187,7 @@ angular.module('ngmReportHub')
 									},
 									addRemoveLinks: false,
 									autoProcessQueue:false,
-									headers: { 'Authorization': 'Bearer ' + $scope.report.user.token },
+									headers: { 'Authorization': 'Bearer ' + ngmUser.get().token },
 									successMessage: false,
 									dictDefaultMessage: 
 										`<i class="medium material-icons" style="color:#009688;">cloud_upload</i> <br/>Drag files here or click button to upload `,
@@ -253,7 +252,6 @@ angular.module('ngmReportHub')
 											if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
 												myDropzone.removeAllFiles(true); 
 											}
-											$rootScope.$broadcast('refresh:doclist');
 
 											
 											
@@ -275,7 +273,6 @@ angular.module('ngmReportHub')
 									type: 'list',
 									card: 'white grey-text text-darken-2',
 									config: {
-										refreshEvent: 'refresh:doclist',
 										titleIcon: 'alarm_on',
 										color: 'blue lighten-4',
 										itemsPerPage: 6,
@@ -318,8 +315,8 @@ angular.module('ngmReportHub')
 											Materialize.toast("Deleting...", 2000, 'note'); 
 											$http({
 												method: 'DELETE',
-												url: ngmAuth.LOCATION + '/api/deleteGDriveFile/' + $scope.fileId,
-												headers: { 'Authorization': 'Bearer ' + $scope.report.user.token },
+												url: ngmAuth.LOCATION + '/api/deleteGDriveFile?fileid='+$scope.fileId,
+												// data: { fileid: $scope.fileId }
 											})
 											.success(function (result){
 														$timeout(function () {															
@@ -349,16 +346,16 @@ angular.module('ngmReportHub')
 										},
 										setThumbnailfromGdrive:function(id,file_type){
 											// "https://drive.google.com/uc?export=view&id=0B5f9FCicz5ZIYV9OLVhVa2pMNEk"
-											// file_type = file_type.toLowerCase().replace(/\./g, '')
-											// if(file_type == 'pdf' || file_type == 'doc'){
-											// 	pdf = "images/cluster/details-1.jpg"
-											// 	return pdf
-											// }else if(file_type== 'png'|| file_type=='jpg'){
-												img = "https://drive.google.com/thumbnail?authuser=0&id="+id;
+											file_type = file_type.toLowerCase().replace(/\./g, '')
+											if(file_type == 'pdf' || file_type == 'doc'){
+												pdf = "images/cluster/details-1.jpg"
+												return pdf
+											}else if(file_type== 'png'|| file_type=='jpg'){
+												img = "https://drive.google.com/uc?export=view&id"+id;
 												return img
-											// } else{
-											// 	return "images/cluster/details-1.jpg"
-											// }
+											} else{
+												return "images/cluster/details-1.jpg"
+											}
 										},
 										// textColor: 'white-text',
 										title: 'Upload',
@@ -374,7 +371,8 @@ angular.module('ngmReportHub')
 
 										request: {
 											method: 'GET',
-											url: ngmAuth.LOCATION + '/api/listProjectDocuments/' + $route.current.params.project
+											url: ngmAuth.LOCATION + '/api/listProjectDocuments?project_id=' + $route.current.params.project
+											// data: { project_id: $route.current.params.project}
 										}
 										// data: $scope.uploads										
 									}
