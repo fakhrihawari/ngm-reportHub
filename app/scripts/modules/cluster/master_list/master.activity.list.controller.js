@@ -84,7 +84,7 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					// 		return false
 					// 	}
 					// },400)
-					console.log(a);
+					// console.log(a);
 				},
 				addNewTypeActivity:function(a,b,c){
 					var temp = {};
@@ -135,27 +135,29 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					var x = angular.copy(a);
 					var copyTemplate = angular.copy()
 					delete x.id;
-					x.activity_description_name = $scope.master.originType[index].activity_description_name;
-					x.activity_description_id = $scope.master.originType[index].activity_description_name.toLowerCase().replace(/ /g, "_")
+					// console.log($scope.master.originType.activity_description_name);
+					// console.log(x);
+					x.activity_description_name = $scope.master.originType.activity_description_name;
+					x.activity_description_id = $scope.master.originType.activity_description_name.toLowerCase().replace(/ /g, "_")
 					x.admin0pcode = $scope.master.user.admin0pcode;
-					x.detail = $scope.master.originType[index].detail;
-					x.indicator = $scope.master.originType[index].indicator;
-					x.category_type_id = $scope.master.originType[index].category_type_id,
-					x.delivery_type_id = $scope.master.originType[index].delivery_type_id,
-					x.mpc_delivery_type_id = $scope.master.originType[index].mpc_delivery_type_id,
-					x.mpc_mechanism_type_id = $scope.master.originType[index].mpc_mechanism_type_id,
-					x.package_type_id = $scope.master.originType[index].package_type_id,
-					x.units = $scope.master.originType[index].units,
-					x.unit_type_id = $scope.master.originType[index].unit_type_id,
-					x.transfer_type_id = $scope.master.originType[index].transfer_type_id,
-					x.households = $scope.master.originType[index].households,
-					x.families = $scope.master.originType[index].families,
-					x.boys = $scope.master.originType[index].boys,
-					x.girls = $scope.master.originType[index].girls,
-					x.men = $scope.master.originType[index].men,
-					x.women = $scope.master.originType[index].women,
-					x.elderly_men = $scope.master.originType[index].elderly_men,
-					x.elderly_women = $scope.master.originType[index].elderly_women, 
+					// x.detail = $scope.master.originType[index].detail;
+					// x.indicator = $scope.master.originType[index].indicator;
+					// x.category_type_id = $scope.master.originType[index].category_type_id,
+					// x.delivery_type_id = $scope.master.originType[index].delivery_type_id,
+					// x.mpc_delivery_type_id = $scope.master.originType[index].mpc_delivery_type_id,
+					// x.mpc_mechanism_type_id = $scope.master.originType[index].mpc_mechanism_type_id,
+					// x.package_type_id = $scope.master.originType[index].package_type_id,
+					// x.units = $scope.master.originType[index].units,
+					// x.unit_type_id = $scope.master.originType[index].unit_type_id,
+					// x.transfer_type_id = $scope.master.originType[index].transfer_type_id,
+					// x.households = $scope.master.originType[index].households,
+					// x.families = $scope.master.originType[index].families,
+					// x.boys = $scope.master.originType[index].boys,
+					// x.girls = $scope.master.originType[index].girls,
+					// x.men = $scope.master.originType[index].men,
+					// x.women = $scope.master.originType[index].women,
+					// x.elderly_men = $scope.master.originType[index].elderly_men,
+					// x.elderly_women = $scope.master.originType[index].elderly_women, 
 					$scope.master.activities.push(x);
 					$scope.master.temp.push(x);
 					// after push
@@ -309,7 +311,7 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 
 				editAct:function(){
 					// var id =$scope.master.activities[$scope.editedId].activity_description_name.toLowerCase().replace(/[()]/g, "").replace(/ /g,"_")
-					console.log("belumbisa");
+					console.log("belumbisa",$scope.editedId);
 				},
 
 				removeAct:function(){
