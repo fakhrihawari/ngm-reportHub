@@ -25,7 +25,7 @@
 .ng-cloak { display: none !important; }
 </style>
 <!-- MODAL-START -->
-<div id="addTypeActivity-modal" class="modal">
+<div id="editDescTypeActivity-modal" class="modal">
 	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
 		<ul class="collection with-header" style="margin-top:0">
 			<li class="collection-header teal lighten-1" style="border-bottom: 0">
@@ -47,12 +47,17 @@
 								</div>
 		<div class="row" style="margin: 20px 50px 10px 50px;">
 			<p style="color:#26a69a;font-weight: 400; padding-left: 10px">Field Active*</p>
-			<div class="col s3">
+			<div class="col s3" ng-repeat="(key,value) in fields">
+				<input type="checkbox" class="filled-in" id={{key}} value={{master.activities[editedId][key]}}
+				 ng-checked="master.activities[editedId][key] != 0" ng-click="cek(editedId,key)"/>
+				<label for="{{key}}" style="color: #000000; font-weight: 500;">{{value}}</label>
+			</div>
+			<!-- <div class="col s3">
 				<input type="checkbox" class="filled-in" id={{master.activities[editedId].detail}} value={{master.activities[editedId].detail}}
 				 ng-checked="master.activities[editedId].detail != 0" />
 				<label for="detail" style="color: #000000; font-weight: 500;">Detail</label>
-			</div>
-			<div class="col s3">
+			</div> -->
+			<!-- <div class="col s3">
 				<input type="checkbox" class="filled-in" id={{master.activities[editedId].indicator}} value={{master.activities[editedId].indicator}}
 				 ng-checked="master.activities[editedId].indicator != 0" />
 				<label for="indicator" style="color: #000000; font-weight: 500;">Indicator</label>
@@ -136,7 +141,7 @@
 				<input type="checkbox" class="filled-in" id={{master.activities[editedId].elderly_women}} value={{master.activities[editedId].elderly_women}}
 				 ng-checked="master.activities[editedId].elderly_women != 0" />
 				<label for="unit" style="color: #000000; font-weight: 500;">Elderly Women</label>
-			</div>
+			</div> -->
 		</div>
 								
 
@@ -144,6 +149,68 @@
 	<div class="modal-footer">
 		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
 		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="master.editAct()">Save</div>
+	</div>
+</div>
+<div id="addDescTypeActivity-modal" class="modal">
+	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+		<ul class="collection with-header" style="margin-top:0">
+			<li class="collection-header teal lighten-1" style="border-bottom: 0">
+				<h5 style="color: #ffffff;font-weight:300;">
+					<i class="material-icons left" style="font-size: 25px">{{ list.icon }}</i>
+					Edit Activity Description
+				</h5>
+			</li>
+		</ul>
+
+		<div class="row" style="margin: 20px 50px 10px 50px;">
+			<div class="input-field col s12 m12">
+				<input id="ngm-act-desc" placeholder="New Decription Activity" ng-model="master.originType[addId].activity_description_name"
+				 type="text" name="add_description" class="validate">
+				<label class="active" for="ngm-project_code"> Description *</label>
+			</div>
+
+
+		</div>
+		<div class="row" style="margin: 20px 50px 10px 50px;">
+			<p style="color:#26a69a;font-weight: 400; padding-left: 10px">Field Active*</p>
+			<div class="col s3" ng-repeat="(key,value) in fields">
+				<input type="checkbox" class="filled-in" id="{{key}}-add" value={{master.originType[addId][key]}} ng-checked="master.originType[addId][key] != 0"
+				 ng-click="master.setFieldDescModal(addId,key)" />
+				<label for="{{key}}-add" style="color: #000000; font-weight: 500;">{{value}}</label>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="modal-footer">
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
+		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="master.addNewDescOfTypeActivityModal('a',addId)">Save</div>
+	</div>
+</div>
+<div id="addTypeActivity-modal" class="modal">
+	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+		<ul class="collection with-header" style="margin-top:0">
+			<li class="collection-header teal lighten-1" style="border-bottom: 0">
+				<h5 style="color: #ffffff;font-weight:300;">
+					<i class="material-icons left" style="font-size: 25px">{{ list.icon }}</i>
+					Add Activity Type
+				</h5>
+			</li>
+		</ul>
+
+		<div class="row" style="margin: 20px 50px 10px 50px;">
+			<div class="input-field col s12 m12">
+				<input id="ngm-act-desc" placeholder="New Type Activity" ng-model="master.templateAddType.activity_type_name"
+				 type="text" name="add_type" class="validate">
+				<label class="active" for="ngm-project_code"> Activity Type Name *</label>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="modal-footer">
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
+		<div class="modal-action modal-close wave-effects wave-green btn sbtn" ng-click="master.addNewTypeActivityModal()">Save</div>
 	</div>
 </div>
 <div id="active-modal" class="modal">
@@ -219,7 +286,7 @@
 							</div>
 							<div class="col s12 m4" style="margin-top: 5px">
 								<button class="btn-floating waves-effect"  
-									ng-click="master.openModal('addTypeActivity-modal');master.modifRecord(description)">
+									ng-click="master.openModal('editDescTypeActivity-modal');master.modifRecord(description)">
 									<i class="material-icons">
 										edit
 									</i>
@@ -259,13 +326,13 @@
 					<div  ng-if="activeNewDescForm[$typeIndex]"class="card" style="padding: 20px">
 									<div class="row">
 										<div class="input-field col s12 m10">
-											<input id="ngm-act-desc" placeholder="New Decription Activity" ng-model="master.originType.activity_description_name" type="text"
+											<input id="ngm-act-desc-{{$typeIndex}}" placeholder="New Decription Activity" ng-model="master.originType[$typeIndex].activity_description_name" type="text"
 											name="add_description" class="validate">
 											<label class="active" for="ngm-project_code"> Description *</label>
 										</div>
 										<div class="input-field col s12 m2">
 											<div style="margin-top: 10px">
-												<button class="btn waves-effect dbtn" ng-click="master.addNewDescOfTypeActivity(act);ofOffD($typeIndex)">
+												<button class="btn waves-effect dbtn" ng-click="master.addNewDescOfTypeActivity(act,$typeIndex);ofOffD($typeIndex)">
 													<i class="material-icons">add</i>
 												</button>
 												<button class="btn blue waves-effect dbtn" ng-click="ofOffD($typeIndex)">
@@ -273,9 +340,18 @@
 												</button>
 											</div>
 										</div>
+										<div class="col m10">
+											<p style="color:#26a69a;font-weight: 400; padding-left: 10px">Field Active*</p>
+											<div class="col s3" ng-repeat="(key,value) in fields">
+												<input type="checkbox" class="filled-in" id="{{key}}-desc-{{$typeIndex}}" value={{master.originType[$typeIndex][key]}} ng-checked="master.originType[$typeIndex][key] != 0"
+												 ng-click="master.setFieldDesc(key)" />
+												<label for="{{key}}-desc-{{$typeIndex}}" style="color: #000000; font-weight: 500;">{{value}}</label>
+											</div>
+										</div>
 									</div>
 					</div>
-					<button class="btn blue" style="margin:20px 40px;" ng-click="onOffD($typeIndex);$scope.master.reset($typeIndex)">
+					<button class="btn blue" style="margin:20px 40px;" ng-click="master.openModal('addDescTypeActivity-modal');master.reset($typeIndex);master.setAdd($typeIndex)">
+					<!-- <button class="btn blue" style="margin:20px 40px;" ng-click="onOffD($typeIndex);master.reset($typeIndex);master.setAdd($typeIndex)"> -->
 						<i class="material-icons left">add</i>Add description
 					</button>
 			</div>
@@ -284,7 +360,7 @@
 		<div ng-if="activeNewTypeForm[$clusterIndex]" class="card" style="padding: 20px">
 			<div class="row" >
 				<div class="input-field col s12 m10">
-					<input id="ngm-act-type" placeholder="New Activity Type" ng-model="master.originType.activity_type_name" type="text" name="add_activity_type" class="validate">
+					<input id="ngm-act-type" placeholder="New Activity Type" ng-model="master.templateAddType.activity_type_name" type="text" name="add_activity_type" class="validate">
 					<label class="active" for="ngm-project_code"> Activity Type Name *</label>
 				</div>
 				<div class="input-field col s12 m2">
@@ -300,7 +376,7 @@
 			</div>
 		</div>
 
-		<button ng-show ="clusterCard[$clusterIndex]" class="btn btn-show-hide" style="margin:20px 0px;" ng-click="onOff($clusterIndex)">
+		<button ng-show ="clusterCard[$clusterIndex]" class="btn btn-show-hide" style="margin:20px 0px;" ng-click="master.openModal('addTypeActivity-modal');master.setClusterType(cluste.cluster,cluster.cluster_id)">
 					<i class="material-icons left">add</i>Add Type
 		</button>
 </div>
