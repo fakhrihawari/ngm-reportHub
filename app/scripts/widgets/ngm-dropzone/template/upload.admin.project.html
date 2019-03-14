@@ -1,0 +1,95 @@
+<style>
+	.dropzone {
+		border: 2px dashed #5c6bc0;
+		margin: 0 20px 0 20px;
+
+	}
+
+	#upload-file .modal {
+		max-height: unset;
+	}
+
+	.modal .modal-footer {
+		/* border-radius: 0 0 2px 2px; */
+		background-color: #ffffff;
+		height: 20px;
+	}
+	#upload-file-project.modal{
+		width: 55% !important;
+	}
+	.close-button {
+		margin-top: 4px;
+		color: #a0a4a6;
+	}
+
+	.remove-upload.btn-floating {
+		position: absolute;
+		top: -14px;
+		right: -12px;
+		z-index: 20;
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+		cursor: pointer !important;
+	}
+
+	.remove-upload.btn-floating i {
+		font-size: 20px;
+		line-height: 30px;
+	}
+
+	.dropzone .dz-preview .dz-details {
+		padding: 3em 1em;
+		color: #000000;
+		background: rgba(255, 255, 255, 0.2) !important;
+	}
+
+	.percent-upload {
+		display: none;
+	}
+	.close-uplod-btn{
+		background-color: red;
+    color: #fff;
+    font-size: 30px;
+	}
+</style>
+<div id="upload-file-project" class="modal">
+	<div class="modal-footer" style=" padding-top: 1px; padding-right: 1px; ">
+		<a class=" modal-action waves-effect waves-green right close-button" style="margin-top:0px" ng-click="dropzoneConfig.closeModal()">
+			<i class="material-icons close-uplod-btn">clear</i>
+		</a>
+	</div>
+	<div class="modal-content">
+		<ul class="collection with-header" style="margin-top:0;margin-left: 7px;margin-right: 7px;">
+			<li class="collection-header teal lighten-1" style="border-bottom: 0">
+				<h5 style="color: #ffffff;font-weight:300;">
+					<i class="material-icons left" style="font-size: 25px">publish</i>
+					Upload Report Document
+				</h5>
+			</li>
+		</ul>
+
+		<div class="row">
+			<div id="dropzone">
+				<form ng-dropzone dropzone="dropzone" dropzone-config="dropzoneConfig" enctype="multipart/form-data" class="dropzone needsclick dz-clickable">
+					<div class="fallback">
+						<input name="file" type="file" multiple />
+					</div>
+					<div id="dropzone-message" class="center"></div>
+					<div class="percent-upload">
+						<div class=" percentage center" style="font-weight: 400;font-size: 48px; margin-top:30px;">
+						</div>
+						<div class="dz-progress progress">
+							<div class="indeterminate dz-upload" data-dz-uploadprogress>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="center" style="margin-top: 10px">
+				<button id="upload_doc_pro" class="btn">Submit</button>
+				<div id="delete_doc_pro" class="btn red">Cancel</div>
+			</div>
+		</div>
+	</div>
+</div>

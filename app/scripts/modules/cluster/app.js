@@ -535,6 +535,19 @@ angular
 					}],
 				}
 			})
+			// UPLOAD
+			.when('/cluster/admin/upload/',{
+				redirectTo: '/cluster/admin/upload/all/all/all/all/all/all/all/all/all'
+			})
+			.when('/cluster/admin/upload/:project_id?/:report_id?/:organization_tag?/:cluster_id?/:admin0pcode?/:adminRpcode?/:start_date?/:end_date?/:type?',{
+				templateUrl:'views/app/dashboard.html',
+				controller: 'DashboardClusterUploadCtrl',
+				resolve: {
+					access: [ 'ngmAuth', function(ngmAuth){
+						return ngmAuth.grantPublicAccess();
+					}]
+				}
+			})
 			// FORBIDDEN
 			.when( '/cluster/forbidden', {
 				templateUrl: '/views/app/dashboard.html',
