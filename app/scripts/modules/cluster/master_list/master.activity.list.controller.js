@@ -62,7 +62,6 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 
 				// init lists
 				init: function (data) {
-					console.log(data);
 					$scope.master.activities = data;
 					$scope.master.activity_type = ngmClusterLists.filterDuplicates(data, 'activity_type_name');
 					$scope.master.originType = Array($scope.master.activity_type.length).fill({
@@ -188,7 +187,6 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					temp.elderly_women=0
 					$scope.master.activities.push(temp);
 					$scope.master.activity_type.push(temp);
-					console.log(temp);
 					// after push
 					$scope.master.reset();
 				},
@@ -225,7 +223,6 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					temp.elderly_women=0
 					$scope.master.activities.push(temp);
 					$scope.master.activity_type.push(temp);
-					console.log(temp);
 					// after push
 					$scope.master.reset();
 				},
@@ -239,24 +236,33 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 				},
 				setFieldDesc:function(field){
 					var idEl= field+'-desc-'+$scope.addId;
-					console.log(idEl)
 					if (document.getElementById(idEl).checked) {
 						$scope.master.originType[$scope.addId][field] = 1;
-						console.log(1)
+
 					} else {
 						$scope.master.originType[$scope.addId][field] = 0;
-						console.log(0)
+						
 					}
 				},
-				setFieldDescModal: function (id,field) {
+				setFieldDescModal: function (field) {
 					var idEl = field + '-add';
-					console.log(idEl)
+					
 					if (document.getElementById(idEl).checked) {
 						$scope.master.originType[$scope.addId][field] = 1;
-						console.log(1)
+						
 					} else {
 						$scope.master.originType[$scope.addId][field] = 0;
-						console.log(0)
+						
+					}
+				},
+				editFieldDescModal: function (field) {
+					var idEl = field + '-edit';
+					if (document.getElementById(idEl).checked) {
+						$scope.master.activities[$scope.editedId][field] = 1;
+
+					} else {
+						$scope.master.activities[$scope.editedId][field] = 0;
+
 					}
 				},
 				setClusterType:function(cluster,clusterId){
@@ -264,7 +270,7 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					$scope.addClusterId= clusterId;
 				},
 				addNewDescOfTypeActivity:function(a,index){
-					var x = angular.copy(a); master.activity_type
+					var x = angular.copy(a);
 					delete x.id;
 					x.activity_description_name = $scope.master.originType[index].activity_description_name;
 					x.activity_description_id = $scope.master.originType[index].activity_description_name.toLowerCase().replace(/ /g, "_")
@@ -293,7 +299,8 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 					$scope.master.reset(index);
 
 				},
-				addNewDescOfTypeActivityModal: function (a, index) {
+				addNewDescOfTypeActivityModal: function () {
+					var index = $scope.addId;
 					var x = angular.copy($scope.master.activity_type[index]);
 					delete x.id;
 					x.activity_description_name = $scope.master.originType[index].activity_description_name;
@@ -469,8 +476,7 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 				},
 
 				editAct:function(){
-					// var id =$scope.master.activities[$scope.editedId].activity_description_name.toLowerCase().replace(/[()]/g, "").replace(/ /g,"_")
-					console.log("belumbisa",$scope.editedId);
+					var id =$scope.master.activities[$scope.editedId]//.activity_description_name//.toLowerCase().replace(/[()]/g, "").replace(/ /g,"_")
 				},
 
 				removeAct:function(){
