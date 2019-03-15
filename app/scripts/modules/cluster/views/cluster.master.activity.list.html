@@ -74,7 +74,7 @@
 
 		<div class="row" style="margin: 20px 50px 10px 50px;">
 			<div class="input-field col s12 m12">
-				<input id="ngm-act-desc" placeholder="New Decription Activity" ng-model="master.originType[addId].activity_description_name"
+				<input id="ngm-act-desc" placeholder="New Decription Activity" ng-model="master.templateAddDescription.activity_description_name"
 				 type="text" name="add_description" class="validate">
 				<label class="active" for="ngm-project_code"> Description *</label>
 			</div>
@@ -84,7 +84,7 @@
 		<div class="row" style="margin: 20px 50px 10px 50px;">
 			<p style="color:#26a69a;font-weight: 400; padding-left: 10px">Field Active*</p>
 			<div class="col s3" ng-repeat="(key,value) in fields">
-				<input type="checkbox" class="filled-in" id="{{key}}-add" value={{master.originType[addId][key]}} ng-checked="master.originType[addId][key] != 0"
+				<input type="checkbox" class="filled-in" id="{{key}}-add" value={{master.templateAddDescription[key]}} ng-checked="master.templateAddDescription[key] != 0"
 				 ng-click="master.setFieldDescModal(key)" />
 				<label for="{{key}}-add" style="color: #000000; font-weight: 500;">{{value}}</label>
 			</div>
