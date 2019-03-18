@@ -92,6 +92,5 @@ angular.module('ngmReportHub')
 		// set page
 		$scope.master.init();
 		// $scope.master.setMenu();
-		console.log($scope.master.user);
 
 	}]);

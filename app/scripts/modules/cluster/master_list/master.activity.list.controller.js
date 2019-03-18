@@ -62,6 +62,13 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 
 				// init lists
 				init: function (data) {
+					if ($scope.master.user.roles.indexOf('SUPERADMIN')>-1){
+						$scope.fullAccess = true;
+					}else{
+						$scope.fullAccess = false;
+					}
+
+					
 					$scope.master.activities = data;
 					$scope.master.activity_type = ngmClusterLists.filterDuplicates(data, 'activity_type_name');
 					$scope.master.originType = Array($scope.master.activity_type.length).fill({
@@ -142,6 +149,13 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 						elderly_women:'Elderly Women'
 					}
 					$scope.master.resetOrigin = angular.copy($scope.master.originType[0])
+					$scope.clusterCard = Array($scope.master.clusters.length).fill(false);
+					$scope.openCluster = function (index) {
+						$scope.clusterCard[index] = true;
+					};
+					$scope.closeCluster = function (index) {
+						$scope.clusterCard[index] = false;
+					}
 				},
 				check:function(a){
 					// $timeout(function () {
@@ -637,19 +651,19 @@ angular.module('ngm.widget.master.activity', ['ngm.provider'])
 				$scope.master.temp=[];
 				$scope.master.init(act);				
 				
-				if ($scope.master.user.roles.indexOf('SUPERADMIN')>-1){
-					$scope.master.role='super';					
-				}
+				// if ($scope.master.user.roles.indexOf('SUPERADMIN')>-1){
+				// 	$scope.master.role='super';					
+				// }
 				// INPUT NEW DATA
-				$scope.clusterCard = Array($scope.master.clusters.length).fill(false);
-				$scope.activeNewTypeForm = Array($scope.master.clusters.length).fill(false);
+				// $scope.clusterCard = Array($scope.master.clusters.length).fill(false);
+				// $scope.activeNewTypeForm = Array($scope.master.clusters.length).fill(false);
 				// $scope.activeNewDescForm = Array($scope.master.activity_type.length).fill(false);
-				$scope.openCluster= function(index){
-					$scope.clusterCard[index] = true;
-				};
-				$scope.closeCluster = function (index) {
-					$scope.clusterCard[index] = false;
-				}
+				// $scope.openCluster= function(index){
+				// 	$scope.clusterCard[index] = true;
+				// };
+				// $scope.closeCluster = function (index) {
+				// 	$scope.clusterCard[index] = false;
+				// }
 				// $scope.onOff = function (index) {
 				// 	$scope.activeNewTypeForm[index] = true;
 				// }
