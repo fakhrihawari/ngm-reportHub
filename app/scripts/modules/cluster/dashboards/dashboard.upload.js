@@ -98,13 +98,13 @@ angular.module('ngmReportHub')
 						$scope.model.menu.push(ngmUploadHelper.getMonthRows());
 					}
 					if ($route.current.params.type === 'project') {
-						console.log("P")
+						// console.log("P") for project
 					}
 					if ($route.current.params.type === 'weekly') {
-						console.log("W")
+						$scope.model.menu.push(ngmUploadHelper.getWeekRows())
 					}
 					if ($route.current.params.type === 'custom') {
-						console.log("C")
+						// console.log("C") for custom
 					}
 					$scope.model.menu.push({
 						'id': 'search-country',
@@ -124,6 +124,20 @@ angular.module('ngmReportHub')
 				$scope.model.menu.push(ngmUploadHelper.getClusterRows('all'));
 				
 				// getMonthRows()
+			},
+			getPath: function (start,end) {
+
+				var path = '/cluster/admin/upload/' 
+				+$route.current.params.project_id+'/'
+				+$route.current.params.report_id+'/'
+				+$route.current.params.organization_tag+'/'
+				+$route.current.params.cluster_id+'/'
+				+$route.current.params.admin0pcode+'/'
+				+$route.current.params.adminRpcode
+				+'/'+start+'/'+end
+				+'/all'
+
+				return path;
 			},
 
 			// set project details
@@ -167,10 +181,55 @@ angular.module('ngmReportHub')
 							style: 'font-size: 3.4rem; color: ' + $scope.report.ngm.style.defaultPrimaryColor,
 							title: ngmUploadHelper.getTitle()+' | Documents'
 						},
-						// subtitle: {
-						// 	'class': 'col s12 m12 l12 report-subtitle truncate hide-on-small-only',
-						// 	'title': $scope.report.subtitle
-						// },
+						subtitle: {
+							'class': 'col hide-on-small-only m8 l9 report-subtitle truncate hide-on-small-only',
+							'title': $scope.report.subtitle
+						},
+						datePicker: {
+							'class': 'col s12 m4 l3',
+							dates: [{
+								style: 'float:left;',
+								label: 'from',
+								format: 'd mmm, yyyy',
+								min: '2017-01-01',
+								max: $route.current.params.end_date,
+								currentTime: $route.current.params.start_date,
+								onClose: function () {
+									// set date
+									var date = moment(new Date(this.currentTime)).format('YYYY-MM-DD');
+									if (date !== $route.current.params.start_date) {
+										// set new date
+										// $scope.dashboard.startDate = date;
+										// URL
+										var path = $scope.report.getPath(date,$route.current.params.end_date);
+										console.log(path);
+										// update new date
+										$location.path(path);
+
+									}
+								}
+							}, {
+								style: 'float:right',
+								label: 'to',
+								format: 'd mmm, yyyy',
+								min: $route.current.params.start_date,
+								currentTime: $route.current.params.end_date,
+								onClose: function () {
+									// set date
+									var date = moment.utc(new Date(this.currentTime)).format('YYYY-MM-DD')
+									if (date !== $route.current.params.end_date) {
+										// set new date
+										var path = $scope.report.getPath($route.current.params.start_date,date);
+										console.log(path);
+										//$scope.dashboard.endDate = date;
+										// URL
+										// var path = $scope.dashboard.getPath($route.current.params.cluster_id, $scope.dashboard.activity_type_id, $route.current.params.report_type, $route.current.params.organization_tag);
+										// update new date
+										$location.path(path);	
+									}
+								}
+							}]
+						},
 						download: {
 							'class': 'col s12 m3 l3',
 							downloads: [{

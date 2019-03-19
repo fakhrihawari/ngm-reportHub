@@ -427,10 +427,10 @@ angular.module('ngmReportHub')
 				// rows
 				var rows = [{
 					'title': 'All',
-					'param': 'month',
-					'active': 'all',
+					'param': 'start_date',
+					'active': '2019-01-01',
 					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/2019-01-01/' + moment().format('YYYY-MM-DD') + '/' + dashboard.adminRpcode + '/' + start_date + '/' + end_date + '/monthly',
+					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.adminRpcode  + '/2019-01-01/' + moment().format('YYYY-MM-DD') + '/monthly',
 				}];
 
 				// for each month
@@ -441,13 +441,13 @@ angular.module('ngmReportHub')
 					rows.push({
 						'title': monthName,
 						'param': 'start_date',
-						'active': i,
+						'active': start_date,
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
 						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/' + start_date + '/' + end_date + '/monthly',
 					});
 				}
 				return {
-					'id': 'drought-admin-month',
+					'id': 'upload-admin-month',
 					'icon': 'date_range',
 					'title': 'Report Monthly',
 					'class': 'teal lighten-1 white-text',
@@ -455,7 +455,43 @@ angular.module('ngmReportHub')
 				};
 
 			},
+			getWeekRows: function () {
+				// rows
+				var rows = [{
+					'title': 'All',
+					'param': 'week',
+					'active': 'all',
+					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/2019-01-01/'+ moment().format('YYYY - MM - DD') + '/weekly',
+				}];
 
+				// for each week
+				for (i = 1; i < 54; i++) {
+
+					// set dates to week
+					var week = i < 10 ? 'W0' + i : 'W' + i;
+					var start_date_week = moment().year(2019).week(i).format('YYYY-MM-DD');
+					var end_date_week = moment().year(2019).week(i).subtract(1, 'd').add(1, 'w').format('YYYY-MM-DD');;
+
+					rows.push({
+						'title': week,
+						'param': 'start_date',
+						'active': start_date_week,
+						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/' + start_date_week + '/' + end_date_week + '/weekly',
+					});
+				}
+
+				// push to menu
+				return {
+					'id': 'upload-admin-week',
+					'icon': 'date_range',
+					'title': 'Report Week',
+					'class': 'teal lighten-1 white-text',
+					'rows': rows
+				};
+
+			},
 			getClusterRows: function (admin0pcode) {
 				// rows
 				var clusters = ngmClusterLists.getClusters(admin0pcode);
@@ -465,7 +501,7 @@ angular.module('ngmReportHub')
 					'param': 'cluster_id',
 					'active': 'all',
 					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-					'href': dashboard.url + 'all/all/all/all/all/all/all/all/all' 
+					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + 'all' + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type, 
 				}];
 
 				for (i = 0; i < clusters.length; i++) {
@@ -536,94 +572,6 @@ angular.module('ngmReportHub')
 				};
 
 			},
-			// getPlanRows: function (response) {
-			// 	var all = [
-			// 		{
-			// 			'title': 'All',
-			// 			'param': 'status_plan',
-			// 			'active': 'all',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/all/all' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 		{
-			// 			'title': 'Displaced',
-			// 			'param': 'status_plan',
-			// 			'active': 'drought_affected_displaced',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/all/drought_affected_displaced' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 		{
-			// 			'title': 'Non-Displaced',
-			// 			'param': 'status_plan',
-			// 			'active': 'drought_affected_non_displaced',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/all/drought_affected_non_displaced' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 		{
-			// 			'title': 'Natural Disaster',
-			// 			'param': 'status_plan',
-			// 			'active': 'natural_disaster_affected_drought',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/all/natural_disaster_affected_drought' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 	];
-			// 	var emergency = [
-			// 		{
-			// 			'title': 'All',
-			// 			'param': 'status_plan',
-			// 			'active': 'all',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/emergency/all' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 		{
-			// 			'title': 'Displaced',
-			// 			'param': 'status_plan',
-			// 			'active': 'drought_affected_displaced',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/emergency/drought_affected_displaced' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 		{
-			// 			'title': 'Non-Displaced',
-			// 			'param': 'status_plan',
-			// 			'active': 'drought_affected_non_displaced',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/emergency/drought_affected_non_displaced' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 	];
-			// 	var non_emergency = [
-			// 		{
-			// 			'title': 'All',
-			// 			'param': 'status_plan',
-			// 			'active': 'all',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/non_emergency/all' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 		{
-			// 			'title': 'Natural Disaster',
-			// 			'param': 'status_plan',
-			// 			'active': 'natural_disaster_affected_drought',
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': '#/response/afghanistan/drought/dashboard/non_emergency/natural_disaster_affected_drought' + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		},
-			// 	];
-
-			// 	if (response == 'all') {
-			// 		rows = all;
-			// 	} else if (response == 'emergency') {
-			// 		rows = emergency;
-			// 	} else {
-			// 		rows = non_emergency;
-			// 	}
-
-			// 	return {
-			// 		'id': 'drought-plan',
-			// 		'icon': 'recent_actors',
-			// 		'title': 'Population Type',
-			// 		'class': 'teal lighten-1 white-text',
-			// 		'rows': rows
-			// 	};
-
-			// },
 			getTitle: function () {
 				var title="";
 				if(dashboard.adminRpcode === 'all' && dashboard.admin0pcode === 'all'){
