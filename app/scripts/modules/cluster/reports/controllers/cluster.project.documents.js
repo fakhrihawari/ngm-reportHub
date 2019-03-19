@@ -71,6 +71,7 @@ angular.module('ngmReportHub')
 					organization_tag: $scope.report.project.organization_tag, 
 					admin0pcode: $scope.report.project.admin0pcode,
 					adminRpcode: $scope.report.project.adminRpcode,
+					cluster_id: $scope.report.project.cluster_id,
 					project_start_date: $scope.report.project.project_start_date,
 					project_end_date: $scope.report.project.project_end_date,
 				}

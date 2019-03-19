@@ -572,6 +572,7 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 						organization_tag: config.report.organization_tag,
 						admin0pcode: config.report.admin0pcode,
 						adminRpcode: config.report.adminRpcode,
+						cluster_id: config.report.cluster_id,
 						reporting_period: config.report.reporting_period,
 						project_start_date: config.project.project_start_date,
 						project_end_date: config.project.project_end_date

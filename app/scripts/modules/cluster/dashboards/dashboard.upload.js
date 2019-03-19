@@ -20,11 +20,26 @@ angular.module('ngmReportHub')
 		$scope.getRequest = function (param) {
 			// param is object
 			var string = "";
-			for (x in param) {
-				temp = x + '=' + param[x] + '&';
-				string += temp;
-			}
-			string = string.slice(0, -1);
+			// for (x in param) {
+			// 	temp = x + '=' + param[x] + '&';
+			// 	string += temp;
+			// }
+			// string = string.slice(0, -1);
+			// var param = {
+			// 	adminRpcode: $route.current.params.adminRpcode,
+			// 	admin0pcode: $route.current.params.admin0pcode,
+			// 	cluster_id: $route.current.params.cluster_id,
+			// 	organization_tag: $route.current.params.organization_tag,
+			// 	start_date: $route.current.params.start,
+			// 	end_date: $route.current.params.end,
+			// 	type: 'monthly'
+			// }
+			// request_query = $.param(param)
+			// return request_query
+			// console.log(string);
+			// string = {type:$route.current.params};
+			string = $.param({type:$route.current.params.type});
+			string = $.param($route.current.params)
 			return string
 		};
 		// empty Project
@@ -67,30 +82,47 @@ angular.module('ngmReportHub')
 					organization_tag: $route.current.params.organization_tag,
 					project_id: $route.current.params.project_id,
 					report_id: $route.current.params.report_id,
-					startDate: $scope.report.startDate,
-					endDate: $scope.report.endDate,
-					type: $route.current.params.type
+					startDate: $route.current.params.start_date,
+					endDate: $route.current.params.end_date,
+					type: $route.current.params.type,
+					user: ngmUser.get()
 				});
 			},
 
 			// setFilter
 			setFilter:function(){
+				ngmData.get(ngmUploadHelper.getRequest()).then(function(organization){
+					$scope.model.menu.push(ngmUploadHelper.getOrganizationRows(organization));
+					$scope.model.menu.push(ngmUploadHelper.getTypeRows());
+					if ($route.current.params.type === 'monthly') {
+						$scope.model.menu.push(ngmUploadHelper.getMonthRows());
+					}
+					if ($route.current.params.type === 'project') {
+						console.log("P")
+					}
+					if ($route.current.params.type === 'weekly') {
+						console.log("W")
+					}
+					if ($route.current.params.type === 'custom') {
+						console.log("C")
+					}
+					$scope.model.menu.push({
+						'id': 'search-country',
+						'icon': 'refresh',
+						'title': 'Reset',
+						'class': 'teal lighten-1 white-text',
+						'rows': [{
+						'title': 'Reset',
+						'param': 'admin0pcode',
+						'active': 'reset',
+						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+						'href': '#/cluster/admin/upload/all/all/all/all/all/all/2019-01-01/' + moment().format('YYYY-MM-DD') +'/all',
+					}]})
+				})
 				$scope.model.menu.push(ngmUploadHelper.getRegion());
 				$scope.model.menu.push(ngmUploadHelper.getCountry());
 				$scope.model.menu.push(ngmUploadHelper.getClusterRows('all'));
-				$scope.model.menu.push(ngmUploadHelper.getTypeRows());
-				if($route.current.params.type === 'monthly'){
-					$scope.model.menu.push(ngmUploadHelper.getMonthRows());
-				}
-				if($route.current.params.type === 'project'){
-					console.log("P")
-				}
-				if($route.current.params.type === 'weekly'){
-					console.log("W")
-				}
-				if ($route.current.params.type === 'custom') {
-					console.log("C")
-				}
+				
 				// getMonthRows()
 			},
 
@@ -133,7 +165,7 @@ angular.module('ngmReportHub')
 						title: {
 							'class': 'col s12 m9 l9 report-title truncate',
 							style: 'font-size: 3.4rem; color: ' + $scope.report.ngm.style.defaultPrimaryColor,
-							title: 'All | Documents'
+							title: ngmUploadHelper.getTitle()+' | Documents'
 						},
 						// subtitle: {
 						// 	'class': 'col s12 m12 l12 report-subtitle truncate hide-on-small-only',
@@ -784,7 +816,6 @@ angular.module('ngmReportHub')
 						}]
 					}]
 				}
-				$scope.report.setParams();
 				$scope.report.setFilter();
 				// assign to ngm app scope
 				$scope.report.ngm.dashboard.model = $scope.model;
@@ -794,8 +825,10 @@ angular.module('ngmReportHub')
 		}
 
 		// Run page
+		$scope.report.setParams();
 		$scope.report.setUpload();
-		console.log(ngmUploadHelper.getClusterRows('all'));
+		// console.log(ngmUploadHelper.getClusterRows('all'));
 		console.log($scope.report.user, $scope.report.type);
+		console.log(ngmUploadHelper.getRequest());
 
 	}]);

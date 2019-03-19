@@ -537,7 +537,7 @@ angular
 			})
 			// UPLOAD
 			.when('/cluster/admin/upload/',{
-				redirectTo: '/cluster/admin/upload/all/all/all/all/all/all/all/all/all'
+				redirectTo: '/cluster/admin/upload/all/all/all/all/all/all/2019-01-01/'+moment().format('YYYY-MM-DD')+'/all'
 			})
 			.when('/cluster/admin/upload/:project_id?/:report_id?/:organization_tag?/:cluster_id?/:admin0pcode?/:adminRpcode?/:start_date?/:end_date?/:type?',{
 				templateUrl:'views/app/dashboard.html',
