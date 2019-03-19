@@ -531,7 +531,7 @@ angular.module('ngmReportHub')
 						'param': 'type',
 						'active': 'all',
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + 'all/all/all/all/all/all/all/all/all'
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/all'
 					},
 					{
 						'title': 'Monthly',
