@@ -97,11 +97,11 @@ angular.module('ngmReportHub')
 					if ($route.current.params.type === 'monthly') {
 						$scope.model.menu.push(ngmUploadHelper.getMonthRows());
 					}
-					if ($route.current.params.type === 'project') {
-						// console.log("P") for project
-					}
 					if ($route.current.params.type === 'weekly') {
 						$scope.model.menu.push(ngmUploadHelper.getWeekRows())
+					}
+					if ($route.current.params.type === 'project') {
+						// console.log("P") for project
 					}
 					if ($route.current.params.type === 'custom') {
 						// console.log("C") for custom
@@ -284,7 +284,7 @@ angular.module('ngmReportHub')
 							widgets: [{
 								type: 'dropzone',
 								config: {
-									params: { project_id: 'all', username: $scope.report.user.username, organization_tag: $scope.report.user.organization_tag, admin0pcode: $scope.report.user.admin0pcode },
+									params: ngmUploadHelper.setUploadParam($route.current.params,'project'),//{ project_id: 'all', username: $scope.report.user.username, organization_tag: $scope.report.user.organization_tag, admin0pcode: $scope.report.user.admin0pcode },
 									templateUrl: '/scripts/widgets/ngm-dropzone/template/upload.admin.project.html',
 									openModal: function (modal) {
 										$('#' + modal).openModal({ dismissible: false });
@@ -312,6 +312,7 @@ angular.module('ngmReportHub')
 									url: ngmAuth.LOCATION + '/api/uploadGDrive',
 									acceptedFiles: 'image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/zip,.zip,text/plain,text/csv,video/mp4,application/mp4',
 									maxFiles: 3,
+									parallelUploads: 3,
 									accept: function (file, done) {
 										var ext = file.name.split('.').pop();
 										if (file.type.indexOf('image') < 0
@@ -326,7 +327,16 @@ angular.module('ngmReportHub')
 											&& ext !== 'csv'
 										) {
 											this.removeFile(file);
-											$('#not-support-file').openModal({ dismissible: false });
+											if (this.getQueuedFiles().length > 0) {
+												$('.dz-default.dz-message').show();
+												$timeout(function () {
+													$('.dz-default.dz-message').hide();
+												}, 2000)
+											}
+											$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br/>Not supported file type !');
+											$timeout(function () {
+												$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">cloud_upload</i> <br/>Drag files here or click button to upload');
+											}, 2000)
 										} else {
 											done();
 										}
@@ -393,6 +403,8 @@ angular.module('ngmReportHub')
 
 											// chek filesize if more than 15MB
 											if (file.size > 15000000) {
+												$('.dz-default.dz-message').show();
+												$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br />File too large, Please remove the file');
 												$("#upload_doc_pro").attr("disabled", true);
 												document.getElementById("upload_doc_pro").style.pointerEvents = "none";
 												$("#delete_doc_pro").attr("disabled", true);
@@ -405,8 +417,10 @@ angular.module('ngmReportHub')
 										});
 
 										this.on("maxfilesexceeded", function (file) {
-											document.querySelector(".dz-default.dz-message").style.display = 'none';
-											$('#exceed-file').openModal({ dismissible: false });
+											$('.dz-default.dz-message').hide();
+											$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br/>Exceed file upload, Please remove one of your file');
+											$('.dz-default.dz-message').show();
+											Materialize.toast("Too many file to upload", 3000, "error")
 											$("#upload_doc_pro").attr("disabled", true);
 											document.getElementById("upload_doc_pro").style.pointerEvents = "none";
 											$("#delete_doc_pro").attr("disabled", true);
@@ -418,11 +432,13 @@ angular.module('ngmReportHub')
 											if (myDropzone.files.length < 1) {
 												$("#upload_doc_pro").attr("disabled", true);
 												$("#delete_doc_pro").attr("disabled", true);
-												bigFile = 0;
-												document.querySelector(".dz-default.dz-message").style.display = 'block';
+												$('.dz-default.dz-message').show();
+												$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">cloud_upload</i> <br/>Drag files here or click button to upload');
 											}
 
 											if (myDropzone.files.length <= 3 && myDropzone.files.length > 0) {
+												$('.dz-default.dz-message').hide();
+												$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">cloud_upload</i> <br/>Drag files here or click button to upload');
 												myDropzone.files.forEach((i) => {
 													if (i.size > 15000000) {
 														bigFile += 1
@@ -432,7 +448,8 @@ angular.module('ngmReportHub')
 												if (bigFile > 0) {
 													$("#upload_doc_pro").attr("disabled", true);
 													$("#delete_doc_pro").attr("disabled", true);
-													$('#too-large-file').openModal({ dismissible: false });
+													$('.dz-default.dz-message').show();
+													$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br/>File too large, Please remove the file');
 												} else {
 													document.getElementById("upload_doc_pro").style.pointerEvents = 'auto';
 													document.getElementById("delete_doc_pro").style.pointerEvents = 'auto';
@@ -456,8 +473,8 @@ angular.module('ngmReportHub')
 												preview.style.display = 'none';
 											})
 
-											document.querySelector(".dz-default.dz-message").style.display = 'none';
-											document.querySelector(".percent-upload").style.display = 'block';
+											$('.dz-default.dz-message').hide();
+											$('.percent-upload').show()
 											$(".percentage").html('<div style="font-size:32px;">Uploading....! </div>');
 											// uncomment  this code below, if the write to server and gdrive is work well 
 											// progress = Math.round(progress)
@@ -493,14 +510,15 @@ angular.module('ngmReportHub')
 											typ = 'success';
 											Materialize.toast(msg, 2000, typ);
 
-											document.querySelector(".percent-upload").style.display = 'none';
-											document.querySelector(".dz-default.dz-message").style.display = 'block';
+											$('.percent-upload').hide();
+											$('.dz-default.dz-message').show();
+											$('#upload-file-project').closeModal({ dismissible: true });
 											$rootScope.$broadcast('refresh:doclist');
 										}
 									},
 									error: function (file, response) {
-										document.querySelector(".percent-upload").style.display = 'none';
-										document.querySelector(".dz-default.dz-message").style.display = 'block';
+										$('.percent-upload').hide();
+										$('.dz-default.dz-message').show();
 
 										if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
 											myDropzone.removeAllFiles(true);
@@ -523,7 +541,7 @@ angular.module('ngmReportHub')
 								widgets: [{
 									type: 'dropzone',
 									config: {
-										params: { report_id: 'all', username: $scope.report.user.username, organization_tag: $scope.report.user.organization_tag, admin0pcode: $scope.report.user.admin0pcode },
+										params: ngmUploadHelper.setUploadParam($route.current.params, 'report'),//{ report_id: 'all', username: $scope.report.user.username, organization_tag: $scope.report.user.organization_tag, admin0pcode: $scope.report.user.admin0pcode },
 										templateUrl: '/scripts/widgets/ngm-dropzone/template/upload.admin.report.html',
 										openModal: function (modal) {
 											$('#' + modal).openModal({ dismissible: false });
@@ -551,6 +569,7 @@ angular.module('ngmReportHub')
 										url: ngmAuth.LOCATION + '/api/uploadGDrive',
 										acceptedFiles: 'image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/zip,.zip,text/plain,text/csv,video/mp4,application/mp4',
 										maxFiles: 3,
+										parallelUploads:3,
 										accept: function (file, done) {
 											var ext = file.name.split('.').pop();
 											if (file.type.indexOf('image') < 0
@@ -565,7 +584,16 @@ angular.module('ngmReportHub')
 												&& ext !== 'csv'
 											) {
 												this.removeFile(file);
-												$('#not-support-file').openModal({ dismissible: false });
+												if (this.getQueuedFiles().length > 0) {
+													$('.dz-default.dz-message').show();
+													$timeout(function () {
+														$('.dz-default.dz-message').hide();
+													}, 2000)
+												}
+												$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br/>Not supported file type !');
+												$timeout(function () {
+													$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">cloud_upload</i> <br/>Drag files here or click button to upload');
+												}, 2000)
 											} else {
 												done();
 											}
@@ -597,8 +625,8 @@ angular.module('ngmReportHub')
 												myDropzone.removeAllFiles(true);
 											});
 
-											this.on("addedfile", function (file) {
-												document.querySelector(".dz-default.dz-message").style.display = 'none';
+											myDropzone.on("addedfile", function (file) {
+												$('.dz-default.dz-message').hide();
 												var ext = file.name.split('.').pop();
 												if (ext == 'pdf') {
 													$(file.previewElement).find(".dz-image img").attr("src", "images/pdfm.png");
@@ -632,11 +660,13 @@ angular.module('ngmReportHub')
 
 												// chek filesize if more than 15MB
 												if (file.size > 15000000) {
+													$('.dz-default.dz-message').show();
+													$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br />File too large, Please remove the file');
 													$("#upload_doc_repo").attr("disabled", true);
 													document.getElementById("upload_doc_repo").style.pointerEvents = "none";
 													$("#delete_doc_repo").attr("disabled", true);
 													document.getElementById("delete_doc_repo").style.pointerEvents = "none";
-													$('#too-large-file').openModal({ dismissible: false });
+													// $('#too-large-file').openModal({ dismissible: false });
 												} else {
 													$("#upload_doc_repo").attr("disabled", false);
 													$("#delete_doc_repo").attr("disabled", false);
@@ -644,8 +674,10 @@ angular.module('ngmReportHub')
 											});
 
 											this.on("maxfilesexceeded", function (file) {
-												document.querySelector(".dz-default.dz-message").style.display = 'none';
-												$('#exceed-file').openModal({ dismissible: false });
+												$('.dz-default.dz-message').hide();
+												$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br/>Exceed file upload, Please remove one of your file');
+												$('.dz-default.dz-message').show();
+												Materialize.toast("Too many file to upload", 3000, "error")
 												$("#upload_doc_repo").attr("disabled", true);
 												document.getElementById("upload_doc_repo").style.pointerEvents = "none";
 												$("#delete_doc_repo").attr("disabled", true);
@@ -658,10 +690,13 @@ angular.module('ngmReportHub')
 													$("#upload_doc_repo").attr("disabled", true);
 													$("#delete_doc_repo").attr("disabled", true);
 													bigFile = 0;
-													document.querySelector(".dz-default.dz-message").style.display = 'block';
+													$('.dz-default.dz-message').show();
+													$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">cloud_upload</i> <br/>Drag files here or click button to upload');
 												}
 
 												if (myDropzone.files.length <= 3 && myDropzone.files.length > 0) {
+													$('.dz-default.dz-message').hide();
+													$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">cloud_upload</i> <br/>Drag files here or click button to upload');
 													myDropzone.files.forEach((i) => {
 														if (i.size > 15000000) {
 															bigFile += 1
@@ -671,7 +706,8 @@ angular.module('ngmReportHub')
 													if (bigFile > 0) {
 														$("#upload_doc_repo").attr("disabled", true);
 														$("#delete_doc_repo").attr("disabled", true);
-														$('#too-large-file').openModal({ dismissible: false });
+														$('.dz-default.dz-message').show();
+														$('.dz-default.dz-message').html('<i class="medium material-icons" style="color:#009688;">error_outline</i> <br/>File too large, Please remove the file');
 													} else {
 														document.getElementById("upload_doc_repo").style.pointerEvents = 'auto';
 														document.getElementById("delete_doc_repo").style.pointerEvents = 'auto';
@@ -695,19 +731,9 @@ angular.module('ngmReportHub')
 													preview.style.display = 'none';
 												})
 
-												document.querySelector(".dz-default.dz-message").style.display = 'none';
-												document.querySelector(".percent-upload").style.display = 'block';
+												$('.dz-default.dz-message').hide();
+												$('.percent-upload').show()
 												$(".percentage").html('<div style="font-size:32px;">Uploading....! </div>');
-												// uncomment  this code below, if the write to server and gdrive is work well 
-												// progress = Math.round(progress)
-												// $(".percentage").text(progress + '%');											
-
-												// if(progress== 100){												
-												// 	$timeout(function () {
-												// 		$(".percentage").html('<i class="medium material-icons" style="color:#009688;margin-left: 38%;">check_circle_outline</i><div style="font-size:32px;">Upload Success ! </div>');
-												// 		$(".progress").hide()
-												// 	},1000)
-												// }
 											})
 
 											myDropzone.on('sending', function (file) {
@@ -715,7 +741,6 @@ angular.module('ngmReportHub')
 													Materialize.toast('Uploading...', 3000, 'note');
 												}
 												$("#upload_doc_repo").attr("disabled", true);
-												// $("#delete_doc_repo").attr("disabled", true);
 											})
 
 
@@ -732,15 +757,15 @@ angular.module('ngmReportHub')
 												typ = 'success';
 												Materialize.toast(msg, 2000, typ);
 
-												document.querySelector(".percent-upload").style.display = 'none';
-												document.querySelector(".dz-default.dz-message").style.display = 'block';
+												$('.percent-upload').hide();
+												$('.dz-default.dz-message').show();
+												$('#upload-file-report').closeModal({ dismissible: true });
 												$rootScope.$broadcast('refresh:doclist');
 											}
 										},
 										error: function (file, response) {
-											document.querySelector(".percent-upload").style.display = 'none';
-											document.querySelector(".dz-default.dz-message").style.display = 'block';
-
+											$('.percent-upload').hide();
+											$('.dz-default.dz-message').show();
 											if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
 												myDropzone.removeAllFiles(true);
 												$timeout(function () {
@@ -887,7 +912,8 @@ angular.module('ngmReportHub')
 		$scope.report.setParams();
 		$scope.report.setUpload();
 		// console.log(ngmUploadHelper.getClusterRows('all'));
-		console.log($scope.report.user, $scope.report.type);
-		console.log(ngmUploadHelper.getRequest());
+		// console.log($scope.report.user, $scope.report.type);
+		// console.log(ngmUploadHelper.getRequest());
+		// console.log(ngmUploadHelper.setUploadParam($route.current.params, 'report'), ngmUploadHelper.setUploadParam($route.current.params, 'project'));
 
 	}]);

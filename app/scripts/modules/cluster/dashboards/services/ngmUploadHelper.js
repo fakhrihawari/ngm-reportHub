@@ -32,14 +32,14 @@ angular.module('ngmReportHub')
 					data: {
 						indicator: 'organizations',
 						list: true,
-						adminRpcode: dashboard.adminRpcode,
-						admin0pcode: dashboard.admin0pcode,
+						adminRpcode: 'all',
+						admin0pcode: 'all',
 						report_type: 'activity',
 						activity_type_id: 'all',
-						cluster_id: dashboard.cluster_id,
-						organization_tag: dashboard.organization_tag,
-						start_date: dashboard.startDate,
-						end_date: dashboard.endDate,
+						cluster_id: 'all',
+						organization_tag: 'all',
+						start_date: '2019-01-01',
+						end_date: moment().format('YYYY-MM-DD')
 					}
 				}
 			},
@@ -106,31 +106,31 @@ angular.module('ngmReportHub')
 					'param': 'adminRpcode',
 					'active': 'all',
 					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/all' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/all' + '/all' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 				}, {
 					'title': 'AFRO',
 					'param': 'adminRpcode',
 					'active': 'afro',
 					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/afro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/all' + '/afro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 				}, {
 					'title': 'AMER',
 					'param': 'adminRpcode',
 					'active': 'amer',
 					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/amer' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/all' + '/amer' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 				}, {
 					'title': 'EMRO',
 					'param': 'adminRpcode',
 					'active': 'emro',
 					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/emro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/all' + '/emro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 				}, {
 					'title': 'SEARO',
 					'param': 'adminRpcode',
 					'active': 'searo',
 					'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + dashboard.admin0pcode + '/searo' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+					'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/all' + '/searo' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 				}];
 				return {
 					'id': 'search-region',
@@ -149,167 +149,167 @@ angular.module('ngmReportHub')
 						'param': 'admin0pcode',
 						'active': 'all',
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/all'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 					},{
 						'title': 'Democratic Republic of Congo',
 						'param': 'admin0pcode',
 						'active': 'cd',
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cd' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cd' + '/afro' +'/'+ dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 					}, {
 							'title': 'Ethiopia',
 							'param': 'admin0pcode',
 							'active': 'et',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'et' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'et' + '/afro'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Nigeria',
 							'param': 'admin0pcode',
 							'active': 'ng',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ng' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ng' + '/afro'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'South Sudan',
 							'param': 'admin0pcode',
 							'active': 'ss',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ss' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ss' + '/afro'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Afghanistan',
 							'param': 'admin0pcode',
 							'active': 'af',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'af' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'af' + '/emro'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Somalia',
 							'param': 'admin0pcode',
 							'active': 'so',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'so' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'so' + '/emro'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Syria',
 							'param': 'admin0pcode',
 							'active': 'sy',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'sy' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'sy' + '/emro'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Yemen',
 							'param': 'admin0pcode',
 							'active': 'ye',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ye' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ye' + '/emro'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Bangladesh',
 							'param': 'admin0pcode',
 							'active': 'bd',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'bd' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'bd' + '/searo'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Cox Bazar',
 							'param': 'admin0pcode',
 							'active': 'cb',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cb' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cb' + '/searo'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Colombia',
 							'param': 'admin0pcode',
 							'active': 'col',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'col' + '/'+dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'col' + '/amer'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}],
 					'afro': [{
 						'title': 'All',
 						'param': 'admin0pcode',
 						'active': 'all',
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/afro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 					}, {
 							'title': 'Democratic Republic of Congo',
 							'param': 'admin0pcode',
 							'active': 'cd',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cd' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cd' + '/afro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Ethiopia',
 							'param': 'admin0pcode',
 							'active': 'et',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'et' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'et' + '/afro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Nigeria',
 							'param': 'admin0pcode',
 							'active': 'ng',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ng' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ng' + '/afro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'South Sudan',
 							'param': 'admin0pcode',
 							'active': 'ss',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ss' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ss' + '/afro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}],
 					'emro': [{
 						'title': 'All',
 						'param': 'admin0pcode',
 						'active': 'all',
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/emro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 					}, {
 							'title': 'Afghanistan',
 							'param': 'admin0pcode',
 							'active': 'af',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'af' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'af' + '/emro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Somalia',
 							'param': 'admin0pcode',
 							'active': 'so',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'so' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'so' + '/emro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Syria',
 							'param': 'admin0pcode',
 							'active': 'sy',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'sy' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'sy' + '/emro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Yemen',
 							'param': 'admin0pcode',
 							'active': 'ye',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ye' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ye' + '/emro' + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}],
 					'searo': [{
 						'title': 'All',
 						'param': 'admin0pcode',
 						'active': 'all',
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/searo'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 					}, {
 							'title': 'Bangladesh',
 							'param': 'admin0pcode',
 							'active': 'bd',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'bd' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'bd' + '/searo'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}, {
 							'title': 'Cox Bazar',
 							'param': 'admin0pcode',
 							'active': 'cb',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cb' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cb' + '/searo'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}],
 					'amer': [{
 						'title': 'All',
 						'param': 'admin0pcode',
 						'active': 'all',
 						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+						'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'all' + '/amer'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 					}, {
 							'title': 'Colombia',
 							'param': 'admin0pcode',
 							'active': 'col',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'col' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+							'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'col' + '/amer'+ '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						}]
 				}
 
@@ -322,77 +322,7 @@ angular.module('ngmReportHub')
 				
 			},
 
-			// province rows
-			// getProvinceRows: function () {
-
-			// 	// rows
-			// 	var rows = [{
-			// 		'title': 'All',
-			// 		'param': 'province',
-			// 		'active': 'all',
-			// 		'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 		'href': dashboard.url + '/' + dashboard.statusPlan + '/' + dashboard.year + '/' + dashboard.cluster + '/' + 'all' + '/' + 'all' + '/' + 'all' + '/' + dashboard.month + '/2018-01-01/' + moment().format('YYYY-MM-DD')
-			// 	}];
-
-			// 	angular.forEach(dashboard.admin1, function (d, i) {
-
-			// 		rows.push({
-			// 			'title': d.admin1name,
-			// 			'param': 'province',
-			// 			'active': d.admin1pcode,
-			// 			'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 			'href': dashboard.url + '/' + dashboard.statusPlan + '/' + dashboard.year + '/' + dashboard.cluster + '/' + d.admin1pcode + '/' + dashboard.district + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 		});
-			// 	});
-
-			// 	// push to menu
-			// 	return {
-			// 		'id': 'drought-admin-province',
-			// 		'icon': 'location_on',
-			// 		'title': 'Province',
-			// 		'class': 'teal lighten-1 white-text',
-			// 		'rows': rows
-			// 	};
-
-			// },
-
-			// // province rows
-			// getDistrictRows: function () {
-
-			// 	// rows
-			// 	var rows = [{
-			// 		'title': 'All',
-			// 		'param': 'district',
-			// 		'active': 'all',
-			// 		'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 		'href': dashboard.url + '/' + dashboard.statusPlan + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + 'all' + '/' + 'all' + '/' + dashboard.month + '/2018-01-01/' + moment().format('YYYY-MM-DD')
-			// 	}];
-
-			// 	angular.forEach(dashboard.admin2, function (d, i) {
-
-			// 		if (dashboard.province !== 'all' && d.admin1pcode === dashboard.province) {
-
-			// 			rows.push({
-			// 				'title': d.admin2name,
-			// 				'param': 'district',
-			// 				'active': d.admin2pcode,
-			// 				'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-			// 				'href': dashboard.url + '/' + dashboard.statusPlan + '/' + dashboard.year + '/' + dashboard.cluster + '/' + dashboard.province + '/' + d.admin2pcode + '/' + dashboard.organization + '/' + dashboard.month + '/' + dashboard.startDate + '/' + dashboard.endDate
-			// 			});
-			// 		}
-			// 	});
-
-			// 	// push to menu
-			// 	return {
-			// 		'id': 'drought-province',
-			// 		'icon': 'location_on',
-			// 		'title': 'District',
-			// 		'class': 'teal lighten-1 white-text',
-			// 		'rows': rows
-			// 	};
-
-			// },
-
+			// organization rows
 			getOrganizationRows: function (organizations) {
 
 				var orgRows = [];
@@ -422,7 +352,7 @@ angular.module('ngmReportHub')
 				}
 			},
 
-
+			// month rows
 			getMonthRows: function () {
 				// rows
 				var rows = [{
@@ -455,6 +385,8 @@ angular.module('ngmReportHub')
 				};
 
 			},
+
+			// week rows
 			getWeekRows: function () {
 				// rows
 				var rows = [{
@@ -492,6 +424,8 @@ angular.module('ngmReportHub')
 				};
 
 			},
+
+			// cluster rows
 			getClusterRows: function (admin0pcode) {
 				// rows
 				var clusters = ngmClusterLists.getClusters(admin0pcode);
@@ -524,6 +458,8 @@ angular.module('ngmReportHub')
 				};
 
 			},
+
+			// type rows
 			getTypeRows: function () {
 				var rows = [
 					{
@@ -572,6 +508,8 @@ angular.module('ngmReportHub')
 				};
 
 			},
+
+			// set title
 			getTitle: function () {
 				var title="";
 				if(dashboard.adminRpcode === 'all' && dashboard.admin0pcode === 'all'){
@@ -590,6 +528,24 @@ angular.module('ngmReportHub')
 				}
 				return title;
 			},
+
+			// set upload param
+			setUploadParam: function(param,type_upload){
+				console.log(type_upload);
+				selected_param ={
+					adminRpcode: param.adminRpcode,
+					admin0pcode: param.admin0pcode,
+					username: dashboard.user.username,
+					cluster_id: param.cluster_id
+				}
+				if(type_upload ==='report'){
+					selected_param.report_id = param.report_id;
+				}
+				if(type_upload ==='project'){
+					selected_param.project_id = param.project_id;
+				}
+				return selected_param;
+			}
 
 		}
 
