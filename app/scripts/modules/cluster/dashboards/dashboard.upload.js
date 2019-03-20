@@ -92,7 +92,16 @@ angular.module('ngmReportHub')
 			// setFilter
 			setFilter:function(){
 				ngmData.get(ngmUploadHelper.getRequest()).then(function(organization){
-					$scope.model.menu.push(ngmUploadHelper.getOrganizationRows(organization));
+					if ($scope.report.user.roles.indexOf('SUPERADMIN') > -1
+						|| $scope.report.user.roles.indexOf('HQ') > -1
+						|| $scope.report.user.roles.indexOf('HQ_ORG') > -1
+						|| $scope.report.user.roles.indexOf('REGION') > -1
+						|| $scope.report.user.roles.indexOf('REGION_ORG') > -1
+						|| $scope.report.user.roles.indexOf('COUNTRY_ADMIN') > -1
+						|| $scope.report.user.roles.indexOf('COUNTRY') > -1
+						|| $scope.report.user.roles.indexOf('CLUSTER') > -1) {
+							$scope.model.menu.push(ngmUploadHelper.getOrganizationRows(organization));
+						}
 					$scope.model.menu.push(ngmUploadHelper.getTypeRows());
 					if ($route.current.params.type === 'monthly') {
 						$scope.model.menu.push(ngmUploadHelper.getMonthRows());
@@ -119,9 +128,30 @@ angular.module('ngmReportHub')
 						'href': '#/cluster/admin/upload/all/all/all/all/all/all/2019-01-01/' + moment().format('YYYY-MM-DD') +'/all',
 					}]})
 				})
-				$scope.model.menu.push(ngmUploadHelper.getRegion());
-				$scope.model.menu.push(ngmUploadHelper.getCountry());
-				$scope.model.menu.push(ngmUploadHelper.getClusterRows('all'));
+				if ($scope.report.user.roles.indexOf('SUPERADMIN')>-1 
+				|| $scope.report.user.roles.indexOf('HQ')>-1 
+				|| $scope.report.user.roles.indexOf('HQ_ORG')>-1)
+				{
+					$scope.model.menu.push(ngmUploadHelper.getRegion());
+				}
+				if ($scope.report.user.roles.indexOf('SUPERADMIN') > -1
+					|| $scope.report.user.roles.indexOf('HQ') > -1
+					|| $scope.report.user.roles.indexOf('HQ_ORG') > -1
+					|| $scope.report.user.roles.indexOf('REGION') > -1
+					|| $scope.report.user.roles.indexOf('REGION_ORG') > -1){
+						$scope.model.menu.push(ngmUploadHelper.getCountry());
+					}
+				if ($scope.report.user.roles.indexOf('SUPERADMIN') > -1
+					|| $scope.report.user.roles.indexOf('HQ') > -1
+					|| $scope.report.user.roles.indexOf('HQ_ORG') > -1
+					|| $scope.report.user.roles.indexOf('REGION') > -1
+					|| $scope.report.user.roles.indexOf('REGION_ORG') > -1
+					|| $scope.report.user.roles.indexOf('COUNTRY_ADMIN') > -1
+					|| $scope.report.user.roles.indexOf('COUNTRY') > -1
+					|| $scope.report.user.roles.indexOf('ORG') > -1){
+
+						$scope.model.menu.push(ngmUploadHelper.getClusterRows('all'));
+					}
 				
 				// getMonthRows()
 			},
@@ -142,32 +172,6 @@ angular.module('ngmReportHub')
 
 			// set project details
 			setUpload: function () {
-				// org id
-				// $scope.report.organization_id =
-				// 	$route.current.params.organization_id ? $route.current.params.organization_id : ngmUser.get().organization_id;
-
-				// // org tag
-				// $scope.report.organization_tag =
-				// 	$route.current.params.organization_tag ? $route.current.params.organization_tag : ngmUser.get().organization_tag;
-				// $scope.model.header.title.title = 'All | Documents'
-				// get data
-				// ngmData
-				// 	.get($scope.report.getOrganization($scope.report.organization_id))
-				// 	.then(function (organization) {
-				// 		console.log(organization);
-				// 		// set model titles
-				// 		$scope.model.header.title.title = 'All | Documents'//organization.admin0name.toUpperCase().substring(0, 3) + ' | ' + organization.cluster.toUpperCase() + ' | ' + organization.organization + ' | Documents';
-				// 		// $scope.model.header.subtitle.title = organization.cluster + ' projects for ' + organization.organization + ' ' + organization.admin0name;
-
-				// 	});
-
-				// assign data
-				// $scope.report.project = data;
-
-				// add project code to subtitle?
-
-				// $scope.report.subtitle = $scope.report.project.project_title + '- Documents';
-
 				// report dashboard model
 				$scope.model = {
 					name: 'cluster_admin_documents',
@@ -199,10 +203,7 @@ angular.module('ngmReportHub')
 									var date = moment(new Date(this.currentTime)).format('YYYY-MM-DD');
 									if (date !== $route.current.params.start_date) {
 										// set new date
-										// $scope.dashboard.startDate = date;
-										// URL
 										var path = $scope.report.getPath(date,$route.current.params.end_date);
-										console.log(path);
 										// update new date
 										$location.path(path);
 
@@ -219,11 +220,7 @@ angular.module('ngmReportHub')
 									var date = moment.utc(new Date(this.currentTime)).format('YYYY-MM-DD')
 									if (date !== $route.current.params.end_date) {
 										// set new date
-										var path = $scope.report.getPath($route.current.params.start_date,date);
-										console.log(path);
-										//$scope.dashboard.endDate = date;
-										// URL
-										// var path = $scope.dashboard.getPath($route.current.params.cluster_id, $scope.dashboard.activity_type_id, $route.current.params.report_type, $route.current.params.organization_tag);
+										var path = $scope.report.getPath($route.current.params.start_date,date);										
 										// update new date
 										$location.path(path);	
 									}
@@ -912,7 +909,7 @@ angular.module('ngmReportHub')
 		$scope.report.setParams();
 		$scope.report.setUpload();
 		// console.log(ngmUploadHelper.getClusterRows('all'));
-		// console.log($scope.report.user, $scope.report.type);
+		console.log($scope.report.user);
 		// console.log(ngmUploadHelper.getRequest());
 		// console.log(ngmUploadHelper.setUploadParam($route.current.params, 'report'), ngmUploadHelper.setUploadParam($route.current.params, 'project'));
 
