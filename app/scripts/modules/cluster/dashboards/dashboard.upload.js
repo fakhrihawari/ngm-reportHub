@@ -258,22 +258,24 @@ angular.module('ngmReportHub')
 					rows: [{
 						columns: [{
 							styleClass: 's12 m12 l12',
-							widgets: [{
-								type: 'html',
-								card: 'white grey-text text-darken-2',
-								style: 'margin:15px; padding-bottom:30px;',
-								config: {
-									uploadDocProject:function(){
-										$('#upload-file-project').openModal({ dismissible: false });
-										$scope.params= 'a';
-									},
-									uploadDocReport: function () {
-										$('#upload-file-report').openModal({ dismissible: false });
-										$scope.params='b';
-									},
-									templateUrl: '/scripts/widgets/ngm-html/template/cluster.admin.upload.html'
-								}
-							}]
+							widgets: [
+							// 	{
+							// 	type: 'html',
+							// 	card: 'white grey-text text-darken-2',
+							// 	style: 'margin:15px; padding-bottom:30px;',
+							// 	config: {
+							// 		uploadDocProject:function(){
+							// 			$('#upload-file-project').openModal({ dismissible: false });
+							// 			$scope.params= 'a';
+							// 		},
+							// 		uploadDocReport: function () {
+							// 			$('#upload-file-report').openModal({ dismissible: false });
+							// 			$scope.params='b';
+							// 		},
+							// 		templateUrl: '/scripts/widgets/ngm-html/template/cluster.admin.upload.html'
+							// 	}
+							// }
+						]
 						}]
 					},{
 						columns: [{
