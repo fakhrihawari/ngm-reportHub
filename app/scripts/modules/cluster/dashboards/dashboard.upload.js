@@ -73,11 +73,11 @@ angular.module('ngmReportHub')
 			// 	}
 			// },
 			setParams:function(){
-				ngmUploadHelper.setParams({
+				set_param = {
 
 					url: '#/cluster/admin/upload/',
-					admin0pcode:$route.current.params.admin0pcode,
-					adminRpcode:$route.current.params.adminRpcode,
+					admin0pcode: $route.current.params.admin0pcode,
+					adminRpcode: $route.current.params.adminRpcode,
 					cluster_id: $route.current.params.cluster_id,
 					organization_tag: $route.current.params.organization_tag,
 					project_id: $route.current.params.project_id,
@@ -85,8 +85,56 @@ angular.module('ngmReportHub')
 					startDate: $route.current.params.start_date,
 					endDate: $route.current.params.end_date,
 					type: $route.current.params.type,
-					user: ngmUser.get()
-				});
+					user: ngmUser.get()};
+				// if($scope.access ==='public'){
+				// 	set_param
+				// }
+				if ($scope.access === 'user' || $scope.access === 'org'){
+					// version admin_menu
+					set_param.adminRpcode = $scope.report.user.adminRpcode;
+					set_param.admin0pcode = $scope.report.user.admin0pcode;
+					set_param.organization_tag = $scope.report.user.organization_tag;
+				}
+				// if($scope.access === 'org'){}
+				if ($scope.access === 'country' || $scope.access === 'country_admin'){
+					// version admin_menu
+					set_param.adminRpcode = $scope.report.user.adminRpcode;
+					set_param.admin0pcode = $scope.report.user.admin0pcode;
+				}
+				// if($scope.access === 'country_admin'){}
+				if($scope.access === 'region_org'){
+					// version admin_menu
+					set_param.adminRpcode = $scope.report.user.adminRpcode;
+					set_param.organization_tag = $scope.report.user.organization_tag
+				}
+				if($scope.access === 'region'){
+					// version admin_menu
+					set_param.adminRpcode = $scope.report.user.adminRpcode;
+				}
+				if($scope.access === 'hq_org'){
+					// version admin menu
+					// version dashboard_menu
+					set_param.organization_tag = $scope.report.user.organization_tag
+
+				}
+				// if($scope.access === 'hq'){}
+				// if($scope.access === 'superadmin'){}
+				// ngmUploadHelper.setParams({
+
+				// 	url: '#/cluster/admin/upload/',
+				// 	admin0pcode:$route.current.params.admin0pcode,
+				// 	adminRpcode:$route.current.params.adminRpcode,
+				// 	cluster_id: $route.current.params.cluster_id,
+				// 	organization_tag: $route.current.params.organization_tag,
+				// 	project_id: $route.current.params.project_id,
+				// 	report_id: $route.current.params.report_id,
+				// 	startDate: $route.current.params.start_date,
+				// 	endDate: $route.current.params.end_date,
+				// 	type: $route.current.params.type,
+				// 	user: ngmUser.get()
+				// });
+				console.log(set_param);
+				ngmUploadHelper.setParams(set_param)
 			},
 
 			// setFilter
@@ -94,12 +142,14 @@ angular.module('ngmReportHub')
 				ngmData.get(ngmUploadHelper.getRequest()).then(function(organization){
 					if ($scope.report.user.roles.indexOf('SUPERADMIN') > -1
 						|| $scope.report.user.roles.indexOf('HQ') > -1
-						|| $scope.report.user.roles.indexOf('HQ_ORG') > -1
-						|| $scope.report.user.roles.indexOf('REGION') > -1
-						|| $scope.report.user.roles.indexOf('REGION_ORG') > -1
+						|| $scope.report.user.roles.indexOf('REGION') > -1						
 						|| $scope.report.user.roles.indexOf('COUNTRY_ADMIN') > -1
 						|| $scope.report.user.roles.indexOf('COUNTRY') > -1
-						|| $scope.report.user.roles.indexOf('CLUSTER') > -1) {
+						|| $scope.report.user.roles.indexOf('CLUSTER') > -1
+						// version dashboard_menu addthis
+						// || $scope.report.user.roles.indexOf('PUBLIC') > -1
+						) 
+						{
 							$scope.model.menu.push(ngmUploadHelper.getOrganizationRows(organization));
 						}
 					$scope.model.menu.push(ngmUploadHelper.getTypeRows());
@@ -130,7 +180,10 @@ angular.module('ngmReportHub')
 				})
 				if ($scope.report.user.roles.indexOf('SUPERADMIN')>-1 
 				|| $scope.report.user.roles.indexOf('HQ')>-1 
-				|| $scope.report.user.roles.indexOf('HQ_ORG')>-1)
+				|| $scope.report.user.roles.indexOf('HQ_ORG')>-1
+				// version dashboard_menu addthis
+				// $scope.report.user.roles.indexOf('PUBLIC') > -1
+				)
 				{
 					$scope.model.menu.push(ngmUploadHelper.getRegion());
 				}
@@ -138,7 +191,10 @@ angular.module('ngmReportHub')
 					|| $scope.report.user.roles.indexOf('HQ') > -1
 					|| $scope.report.user.roles.indexOf('HQ_ORG') > -1
 					|| $scope.report.user.roles.indexOf('REGION') > -1
-					|| $scope.report.user.roles.indexOf('REGION_ORG') > -1){
+					|| $scope.report.user.roles.indexOf('REGION_ORG') > -1
+					// version dashboard_menu addthis
+					// $scope.report.user.roles.indexOf('PUBLIC') > -1
+					){
 						$scope.model.menu.push(ngmUploadHelper.getCountry());
 					}
 				if ($scope.report.user.roles.indexOf('SUPERADMIN') > -1
@@ -148,7 +204,9 @@ angular.module('ngmReportHub')
 					|| $scope.report.user.roles.indexOf('REGION_ORG') > -1
 					|| $scope.report.user.roles.indexOf('COUNTRY_ADMIN') > -1
 					|| $scope.report.user.roles.indexOf('COUNTRY') > -1
-					|| $scope.report.user.roles.indexOf('ORG') > -1){
+					|| $scope.report.user.roles.indexOf('ORG') > -1
+					|| $scope.report.user.roles.indexOf('USER') > -1
+					|| $scope.report.user.roles.indexOf('PUBLIC') > -1){
 
 						$scope.model.menu.push(ngmUploadHelper.getClusterRows('all'));
 					}
@@ -908,11 +966,48 @@ angular.module('ngmReportHub')
 		}
 
 		// Run page
+		if ($scope.report.user.roles.indexOf('PUBLIC') > -1) {
+			$scope.access = 'public'
+		}
+		if ($scope.report.user.roles.indexOf('USER') > -1) {
+			$scope.access = 'user'
+		}
+		if ($scope.report.user.roles.indexOf('ORG') > -1) {
+			$scope.access = 'org'
+		}
+		if ($scope.report.user.roles.indexOf('CLUSTER') > -1) {
+			$scope.access = 'org'
+		}
+		if ($scope.report.user.roles.indexOf('COUNTRY') > -1) {
+			$scope.access = 'country'
+		}
+		if ($scope.report.user.roles.indexOf('COUNTRY_ADMIN') > -1) {
+			$scope.access = 'country_admin'
+		}
+		if ($scope.report.user.roles.indexOf('REGION_ORG') > -1) {
+			$scope.access = 'region_org'
+		}
+		if ($scope.report.user.roles.indexOf('REGION') > -1) {
+			$scope.access = 'region'
+		}
+		if ($scope.report.user.roles.indexOf('HQ_ORG') > -1) {
+			$scope.access = 'hq_org'
+		}
+		if ($scope.report.user.roles.indexOf('HQ') > -1) {
+			$scope.access = 'hq'
+		}
+		if ($scope.report.user.roles.indexOf('SUPERADMIN') > -1) {
+			$scope.access = 'superadmin'
+		}
+
+		console.log($scope.access);
 		$scope.report.setParams();
 		$scope.report.setUpload();
 		// console.log(ngmUploadHelper.getClusterRows('all'));
-		console.log($scope.report.user);
+		// console.log($scope.report.user);
 		// console.log(ngmUploadHelper.getRequest());
 		// console.log(ngmUploadHelper.setUploadParam($route.current.params, 'report'), ngmUploadHelper.setUploadParam($route.current.params, 'project'));
+		//  $scope.access='';
+		
 
 	}]);
