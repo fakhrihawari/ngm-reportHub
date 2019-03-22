@@ -168,6 +168,7 @@ angular.module('ngmReportHub')
 							'param': 'cluster_id',
 							'active': clusterId,
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+							'href': '#/cluster/admin/lists/activities' + '/' + $scope.master.user.admin0pcode + '/' + clusterId
 							// 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + clusterId + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						});
 					};
@@ -266,6 +267,7 @@ angular.module('ngmReportHub')
 							'param': 'cluster_id',
 							'active': clusterId,
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+							'href': '#/cluster/admin/lists' + ($route.current.params.admin0pcode ?('/'+ $route.current.params.admin0pcode +'/'+clusterId):('?cluster_id='+clusterId)),
 							// 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + clusterId + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
 						});
 					};
@@ -279,16 +281,21 @@ angular.module('ngmReportHub')
 					});
 					
 				}
-				// if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1 || $scope.master.user.roles.indexOf('COUNTRY') > -1){
-				// 	$scope.model.menu.push(ngmMasterListHelper.getClusterRows($scope.master.user.admin0pcode));
-				// }
 			},
 			setResponseListUrl:function(){
 				if ($scope.master.user.roles.indexOf('CLUSTER') > -1){
-					string = '/' + $route.current.params.admin0pcode +'/'+$scope.master.user.cluster_id;
+					if ($route.current.params.admin0pcode) {
+						string = '/' + $route.current.params.admin0pcode +'/'+$scope.master.user.cluster_id;
+					}else{
+						string = '/' + $scope.master.user.admin0pcode + '/' + $scope.master.user.cluster_id;
+					}
 				}
 				if ($scope.master.user.roles.indexOf('COUNTRY') > -1) {
-					string = '/' + $scope.master.user.admin0pcode + '/' + $route.current.params.cluster_id;
+					if ($route.current.params.cluster_id){
+						string = '/' + $scope.master.user.admin0pcode + '/' + $route.current.params.cluster_id;
+					}else{
+						string = '/' + $scope.master.user.admin0pcode + '/' + $scope.master.user.cluster_id;
+					}
 				}
 				if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1){
 					if ($route.current.params.admin0pcode && $route.current.params.cluster_id ){
@@ -299,6 +306,9 @@ angular.module('ngmReportHub')
 					}
 					if (!$route.current.params.admin0pcode && $route.current.params.cluster_id) {
 						string = '?cluster_id=' + $route.current.params.cluster_id
+					}
+					if (!$route.current.params.admin0pcode && !$route.current.params.cluster_id) {
+						string = '/' + $scope.master.user.admin0pcode + '/' + $scope.master.user.cluster_id;
 					}
 				}
 				return string
@@ -316,5 +326,6 @@ angular.module('ngmReportHub')
 		$scope.master.init();
 		$scope.master.setMenu();
 		$scope.master.setResponseListUrl()
+		console.log($route.current.params.admin0pcode);
 
 	}]);
