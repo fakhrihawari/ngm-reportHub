@@ -376,7 +376,7 @@ angular
 				}
 			})
 
-			.when('/cluster/admin/lists',{
+			.when('/cluster/admin/lists/:admin0pcode?/:cluster_id?',{
 				templateUrl: '/views/app/dashboard.html',
 				controller:'MasterListAdminCtrl',
 				resolve:{
