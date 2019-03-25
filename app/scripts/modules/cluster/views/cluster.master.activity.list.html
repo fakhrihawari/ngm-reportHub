@@ -166,7 +166,7 @@
 	</div>
 </div>
 <!-- MODAL-END -->
-<div class="card z-depth-1" style="padding:5% 50px 0% 50px !important;" ng-repeat="cluster in master.clusters"  ng-init="$clusterIndex=$index" >
+<div class="card z-depth-1" style="padding:5% 50px 1% 50px !important;" ng-repeat="cluster in master.clusters"  ng-init="$clusterIndex=$index" >
 				
 	<!-- btn as title! -->
 		<a class="btn border-radius-0 z-depth-0 blue" style="left:-1px;top:10px;position:absolute;pointer-events:none;font-size: 16px">{{cluster.cluster}}</a>
@@ -179,7 +179,7 @@
 			</i>
 		</a>
 		<div ng-repeat=" act in master.activity_type" ng-show="clusterCard[$clusterIndex]" class="animate-show-hide">
-			<div   style="margin-top: 20px"			
+			<div   style="margin-top: 20px;"			
 			ng-if="cluster.cluster_id === act.cluster_id && clusterCard[$clusterIndex]"
 				ng-init="$typeIndex=$index"
 				>
@@ -197,7 +197,7 @@
 							</div>
 							<div class="col s12 m4 center" style="margin-top: 5px">
 								<button class="btn-floating waves-effect"
-									ng-disabled="!fullAccess"
+									ng-if="fullAccess"
 									ng-click="master.openModal('editDescTypeActivity-modal');master.modifRecord(description)">
 									<i class="material-icons">
 										edit

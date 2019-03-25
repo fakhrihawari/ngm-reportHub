@@ -55,6 +55,7 @@ angular.module('ngmReportHub')
 								style: 'padding: 0px;',
 								config: {
 									urlForResponseList:function(){return $scope.master.setResponseListUrl()},
+									setTitleResponse: function(){return $scope.master.setTitleResponse()},
 									showMasterlist: function(){return $scope.master.showMasterlist()},
 									templateUrl: '/scripts/modules/cluster/views/cluster.master.list.html',
 								}
@@ -285,33 +286,65 @@ angular.module('ngmReportHub')
 			setResponseListUrl:function(){
 				if ($scope.master.user.roles.indexOf('CLUSTER') > -1){
 					if ($route.current.params.admin0pcode) {
-						string = '/' + $route.current.params.admin0pcode +'/'+$scope.master.user.cluster_id;
+						string = '/' + $route.current.params.admin0pcode //+'/'+$scope.master.user.cluster_id;
 					}else{
-						string = '/' + $scope.master.user.admin0pcode + '/' + $scope.master.user.cluster_id;
+						string = '/' + $scope.master.user.admin0pcode //+ '/' + $scope.master.user.cluster_id;
 					}
 				}
 				if ($scope.master.user.roles.indexOf('COUNTRY') > -1) {
 					if ($route.current.params.cluster_id){
-						string = '/' + $scope.master.user.admin0pcode + '/' + $route.current.params.cluster_id;
+						string = '/' + $scope.master.user.admin0pcode //+ '/' + $route.current.params.cluster_id;
 					}else{
-						string = '/' + $scope.master.user.admin0pcode + '/' + $scope.master.user.cluster_id;
+						string = '/' + $scope.master.user.admin0pcode //+ '/' + $scope.master.user.cluster_id;
 					}
 				}
 				if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1){
 					if ($route.current.params.admin0pcode && $route.current.params.cluster_id ){
-						string = '/' + $route.current.params.admin0pcode + '/' + $route.current.params.cluster_id;
+						string = '/' + $route.current.params.admin0pcode //+ '/' + $route.current.params.cluster_id;
 					}
 					if ($route.current.params.admin0pcode && !$route.current.params.cluster_id){
 						string = '?admin0pcode=' + $route.current.params.admin0pcode
 					}
 					if (!$route.current.params.admin0pcode && $route.current.params.cluster_id) {
-						string = '?cluster_id=' + $route.current.params.cluster_id
+						// string = '?cluster_id=' + $route.current.params.cluster_id
+						string = '?admin0pcode=' + $scope.master.user.admin0pcode
 					}
 					if (!$route.current.params.admin0pcode && !$route.current.params.cluster_id) {
-						string = '/' + $scope.master.user.admin0pcode + '/' + $scope.master.user.cluster_id;
+						string = '/' + $scope.master.user.admin0pcode //+ '/' + $scope.master.user.cluster_id;
 					}
 				}
 				return string
+			},
+			setTitleResponse:function(){
+				if ($scope.master.user.roles.indexOf('CLUSTER') > -1) {
+					if ($route.current.params.admin0pcode) {
+						title =  ': '+$route.current.params.admin0pcode + ' CLUSTER: ' + $scope.master.user.cluster_id;
+					} else {
+						title = ': ' + $scope.master.user.admin0pcode + ' CLUSTER: ' + $scope.master.user.cluster_id;
+					}
+				}
+				if ($scope.master.user.roles.indexOf('COUNTRY') > -1) {
+					if ($route.current.params.cluster_id) {
+						title = ': ' + $scope.master.user.admin0pcode + ' CLUSTER: ' + $route.current.params.cluster_id;
+					} else {
+						title = ': ' + $scope.master.user.admin0pcode + ' CLUSTER: ' + $scope.master.user.cluster_id;
+					}
+				}
+				if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1) {
+					if ($route.current.params.admin0pcode && $route.current.params.cluster_id) {
+						title = ': ' + $route.current.params.admin0pcode + ' CLUSTER: ' + $route.current.params.cluster_id;
+					}
+					if ($route.current.params.admin0pcode && !$route.current.params.cluster_id) {
+						title = ': ' + $route.current.params.admin0pcode
+					}
+					if (!$route.current.params.admin0pcode && $route.current.params.cluster_id) {
+						title = 'CLUSTER: ' + $route.current.params.cluster_id
+					}
+					if (!$route.current.params.admin0pcode && !$route.current.params.cluster_id) {
+						title = ': ' + $scope.master.user.admin0pcode + ' CLUSTER: ' + $scope.master.user.cluster_id;
+					}
+				}
+				return title
 			},
 			showMasterlist:function(){
 				if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1) {

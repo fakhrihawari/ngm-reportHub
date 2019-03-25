@@ -396,7 +396,7 @@ angular
 				}
 			})
 
-			.when('/cluster/admin/lists/activities', {
+			.when('/cluster/admin/list/activities/:admin0pcode?', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'MasterActivitiyListCtrl',
 				resolve: {

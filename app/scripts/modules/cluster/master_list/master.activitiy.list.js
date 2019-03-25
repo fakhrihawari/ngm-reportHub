@@ -40,7 +40,7 @@ angular.module('ngmReportHub')
 						title: {
 							'class': 'col s12 m12 l12 report-title truncate',
 							style: 'font-size: 3.4rem; color: ' + $scope.master.ngm.style.defaultPrimaryColor,
-							title: ' ACTIVITIES ' + '| LISTS '
+							title: $route.current.params.admin0pcode ? $route.current.params.admin0pcode + ' | ACTIVITIES ' + '| LISTS ' : 'MASTER | '+' ACTIVITIES ' + '| LISTS '
 						},
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
@@ -88,4 +88,5 @@ angular.module('ngmReportHub')
 			},
 		}
 		$scope.master.init();
+		console.log($route.current.params);
 	}]);
