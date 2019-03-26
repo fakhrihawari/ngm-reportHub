@@ -406,6 +406,16 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/activities/:admin0pcode?', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterActivitiyCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
 
 			// hct dashboard 2017
 			.when( '/cluster/health/hct', {

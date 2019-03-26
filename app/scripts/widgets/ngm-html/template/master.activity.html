@@ -1,0 +1,27 @@
+<style>
+	.modal {
+  width: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+.modal .modal-footer .btn{
+	float: none;
+}
+</style>
+<div id="not-support-file" class="modal">
+	<div class="modal-content">
+		<div class="center">
+			<i class="medium material-icons" style="color:#009688">error_outline</i>
+		</div>
+	</div>
+	<div class="modal-footer center">
+		<div id="upload_doc" class="modal-action modal-close waves-effect btn"><i class="material-icons left">add</i>add</div>
+		<div id="delete_doc" class="modal-action modal-close waves-effect btn red"><i class="material-icons left">clear</i>cancel</div>
+	</div>
+
+</div>
+<a class="btn-flat waves-effect waves-teal hide-on-small-only" href="#/cluster/admin/lists">
+	<i class="material-icons left">keyboard_return</i>Back to List</a>
+<a class="waves-effect waves-light btn-floating right" ng-click="panel.modal('not-support-file')">
+	<i class="material-icons">add</i>
+</a>
