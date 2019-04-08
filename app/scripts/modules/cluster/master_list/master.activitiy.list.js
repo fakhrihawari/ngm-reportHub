@@ -92,5 +92,4 @@ angular.module('ngmReportHub')
 			},
 		}
 		$scope.master.init();
-		console.log($scope.master.addList());
 	}]);
