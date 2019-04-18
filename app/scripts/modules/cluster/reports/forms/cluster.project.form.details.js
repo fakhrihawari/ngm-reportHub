@@ -921,7 +921,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 
 
           // inform
-          Materialize.toast( $filter('translate')('processing'), 60000, 'note' );
+          Materialize.toast( $filter('translate')('processing'), 6000, 'note' );
 
           // details update
           $http({
@@ -942,8 +942,6 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
               // add id to client json
               $scope.project.definition = angular.merge( $scope.project.definition, project );
               $scope.project.definition.update_dates = false;
-
-              $('.toast').remove();
 
               // save
               if( save_msg ){ Materialize.toast( save_msg , 6000, 'success' ); }
