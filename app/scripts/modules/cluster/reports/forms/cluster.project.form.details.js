@@ -391,11 +391,6 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 
         },
 
-        // location edit
-        // locationEdit: function( $index ) {
-        //   $scope.project.definition.target_locations[ $index ].update_location = true;
-        // },
-
         // save location
         saveLocation: function() {
           $scope.project.save( false, $filter('translate')('project_location_saved') );
@@ -891,6 +886,11 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 
           // disable btn
           $scope.project.submit = false;
+
+          // project_status
+          if ( $scope.project.definition.project_status === 'new' ) {
+            $scope.project.definition.project_status = 'active';
+          }
 
           // parse budget
           $scope.project.definition.project_budget += '';
