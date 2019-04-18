@@ -195,13 +195,10 @@ angular.module('ngmReportHub')
 
 		// taost for user
 
-		$timeout( function() { Materialize.toast( $filter('translate')('loading_monhtly_progress_report'), 120000, 'success' ); }, 400 );
+		$timeout( function() { Materialize.toast( $filter('translate')('loading_monhtly_progress_report'), 6000, 'success' ); }, 400 );
 
 		// send request
 		$q.all([ $scope.report.getProject, $scope.report.getReport ]).then( function( results ){
-
-			// remove toast
-			$('.toast').remove();
 
 			// assign
 			$scope.report.setProjectDetails( results );
