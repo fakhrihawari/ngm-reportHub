@@ -46,8 +46,8 @@ angular.module( 'ngmReportHub' )
           position: project.position,
           phone: project.phone,
           email: project.email,
-          username: project.username
-        }
+					username: project.username					
+				}
 
         // add site select if admin0pcode !== 'CB'
         if ( project.admin0pcode !== 'CB' ) {
@@ -71,7 +71,10 @@ angular.module( 'ngmReportHub' )
             l.site_lng = null;
           }
           inserted = angular.merge( inserted, l );
-        }
+				}
+				if (project.implementing_partners_array.length > 0 && length<1) {
+					inserted.partners = angular.copy(project.implementing_partners_array)
+				}
         // set targets
         return inserted;
       },

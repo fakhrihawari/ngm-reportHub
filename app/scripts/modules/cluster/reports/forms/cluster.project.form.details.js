@@ -97,21 +97,21 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
           return el.project_donor_name.toLowerCase().indexOf(query.toLowerCase()) > -1;
         });
        },
-
+			 
 				searchImplementingPartner: function (query) {
-					console.log(query)
-					if (!$scope.project.definition.implementing_partners){
-						$scope.project.definition.implementing_partners =[];
+					
+					if (!$scope.project.definition.implementing_partners_array){
+						$scope.project.definition.implementing_partners_array =[];
 					}					
 					return $scope.project.organizationList.filter(function (el) {
 						return el.organization.toLowerCase().indexOf(query.toLowerCase()) > -1;
 					});
 				},
-				initPartners: function (id) {
-					if (!$scope.project.definition.target_locations[id].partners) {
-						$scope.project.definition.target_locations[id].partners = $scope.project.definition.implementing_partners
-					}
-				},
+				// initPartners: function (id) {
+				// 	if (!$scope.project.definition.target_locations[id].partners) {
+				// 		$scope.project.definition.target_locations[id].partners = $scope.project.definition.implementing_partners
+				// 	}
+				// },
 				// addNewImplementingPartner: function () {
 				// 	var partnerLength = $scope.project.definition.implementing_partners.length;
 				// 	console.log(partnerLength);
@@ -154,13 +154,13 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				},
        stringfyImplementingPartner:function(){				
 				 var string = [];
-				 if ($scope.project.definition.implementing_partners){
-					 array = $scope.project.definition.implementing_partners;
+				 if ($scope.project.definition.implementing_partners_array){
+					 array = $scope.project.definition.implementing_partners_array;
 					 array.forEach(function(el){
 						// string += el.organization
 						string.push(el.organization)
 					 })
-					 $scope.project.definition.implementing_partners_string = string.join(', ')			
+					 $scope.project.definition.implementing_partners = string.join(', ')			
 				 }
 			 },
         // cluster
@@ -234,7 +234,34 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
           // set form on page load
           ngmClusterHelper.setForm( $scope.project.definition, $scope.project.lists );          
           // set columns / rows (lists, location_index, beneficiaries )
-          ngmClusterBeneficiaries.setBeneficiariesForm( $scope.project.lists, 0, $scope.project.definition.target_beneficiaries );
+					ngmClusterBeneficiaries.setBeneficiariesForm( $scope.project.lists, 0, $scope.project.definition.target_beneficiaries );
+
+					if ($scope.project.definition.implementing_partners_checked && !$scope.project.definition.implementing_partners_array){
+						$scope.project.definition.implementing_partners_array =[]
+						// $scope.project.definition.implementing_partners='AOAD, AYSO, ALSO';
+						temp_array = $scope.project.definition.implementing_partners.split(', ');
+						temp_array.forEach(function(org){
+							query = org;
+							var obj_org = $scope.project.organizationList.filter(function (el) {
+								return el.organization.toLowerCase().indexOf(query.toLowerCase()) > -1;
+							})
+							
+							$scope.project.definition.implementing_partners_array.push(obj_org[0])
+							if ($scope.project.definition.target_locations.length>0){
+								$scope.project.definition.target_locations.forEach(function (el) {
+									if (!el.partners) {
+										el.partners = [];
+										el.partners.push(obj_org[0]);
+									} else {
+										el.partners.push(obj_org[0]);
+									}
+	
+								})
+							}
+						});
+						
+						
+					}
         },
 
         // cofirm exit if changes

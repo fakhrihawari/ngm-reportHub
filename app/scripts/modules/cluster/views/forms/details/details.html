@@ -364,11 +364,11 @@
 									    </md-contact-chips>
 									</div> -->
 									<md-chips 
-											ng-model="project.definition.implementing_partners" 
+											ng-model="project.definition.implementing_partners_array" 
 											md-autocomplete-snap="" 
 											md-transform-chip="transformChip($chip)" 
 											md-require-match="true"
-									 input-aria-label="Favorite Vegetables"
+									 input-aria-label="Partners"
 									 md-on-add="project.addNewImplementingPartner($chip)"
 									 md-on-remove="project.removeImplementingPartner($chip)">
 										<md-autocomplete md-selected-item="null" md-search-text="project.searchPartner" md-items="item in project.searchImplementingPartner(project.searchPartner)"
