@@ -80,6 +80,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
         definition: config.project,
         updatedAt: moment( config.project.updatedAt ).format('DD MMMM, YYYY @ h:mm:ss a'),
         canEdit: ngmAuth.canDo( 'EDIT', { adminRpcode: config.project.adminRpcode, admin0pcode:config.project.admin0pcode, cluster_id: config.project.cluster_id, organization_tag:config.project.organization_tag } ),
+				organizationList: localStorage.getObject('organizations'),
 
 
        afterSelectItem : function(item){
@@ -97,7 +98,71 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
         });
        },
 
-       
+				searchImplementingPartner: function (query) {
+					console.log(query)
+					if (!$scope.project.definition.implementing_partners){
+						$scope.project.definition.implementing_partners =[];
+					}					
+					return $scope.project.organizationList.filter(function (el) {
+						return el.organization.toLowerCase().indexOf(query.toLowerCase()) > -1;
+					});
+				},
+				initPartners: function (id) {
+					if (!$scope.project.definition.target_locations[id].partners) {
+						$scope.project.definition.target_locations[id].partners = $scope.project.definition.implementing_partners
+					}
+				},
+				// addNewImplementingPartner: function () {
+				// 	var partnerLength = $scope.project.definition.implementing_partners.length;
+				// 	console.log(partnerLength);
+				// 	$scope.project.definition.target_locations.forEach(function (el) {
+				// 		if (!el.partners) {
+				// 			el.partners = [];
+				// 			el.partners.push($scope.project.definition.implementing_partners[partnerLength - 1]);
+				// 		} else {
+				// 			el.partners.push($scope.project.definition.implementing_partners[partnerLength - 1]);
+				// 		}
+
+				// 	})
+				// },
+				searchPartner:null,
+				addNewImplementingPartner: function (chip) {
+					$scope.project.definition.target_locations.forEach(function (el) {
+						if (!el.partners) {
+							el.partners = [];
+							el.partners.push(chip);
+						} else {
+							el.partners.push(chip);
+						}
+						
+					})
+					$scope.project.stringfyImplementingPartner()					
+				},
+				removeImplementingPartner: function (chip) {
+					$scope.project.definition.target_locations.forEach(function (el) {
+
+						index = el.partners.indexOf(chip);
+						el.partners.splice(index, 1);
+						
+						if (el.partners.length < 1) {
+							delete el.partners;
+						}
+						
+					})
+					$scope.project.stringfyImplementingPartner()
+					
+				},
+       stringfyImplementingPartner:function(){				
+				 var string = [];
+				 if ($scope.project.definition.implementing_partners){
+					 array = $scope.project.definition.implementing_partners;
+					 array.forEach(function(el){
+						// string += el.organization
+						string.push(el.organization)
+					 })
+					 $scope.project.definition.implementing_partners_string = string.join(', ')			
+				 }
+			 },
         // cluster
         displayIndicatorCluster: {
           'AF': [ 'agriculture', 'cvwg', 'eiewg', 'education', 'esnfi', 'fsac', 'health', 'nutrition', 'protection', 'gbv', 'rnr_chapter', 'wash' ],
@@ -992,6 +1057,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
       // init project
 			$scope.project.init();
 			$scope.project.getDocument();
+
   }
 
 ]);

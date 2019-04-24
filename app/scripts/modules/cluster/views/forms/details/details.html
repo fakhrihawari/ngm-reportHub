@@ -20,7 +20,19 @@
 	    margin-top: 1rem;
 	}
 
+	input.md-input{
+		margin-bottom: 0px;
+		outline: none;
+	}
 
+	input.md-input:not([type]):focus:not([readonly]){
+		border-bottom: none;
+		box-shadow: none;
+	}
+	md-chips md-chip {
+    background: #26a69a;
+    color: #fff;
+}
 </style>
 
 <!-- bind html -->
@@ -317,7 +329,7 @@
 						        </div>
 						        
 
-						        <div style="padding-top:25px;">
+						        <!-- <div style="padding-top:25px;">
 							        <div class="input-field col s12 m6"
 							        		ng-class="{ 'has-error' : healthProjectForm.implementing_partners_list.$error.pattern }"
 							        		ng-show="project.definition.implementing_partners_checked">
@@ -329,7 +341,49 @@
 														ng-model="project.definition.implementing_partners">
 							          <label for="ngm-project-implementing_partners">{{'list_project_partners' | translate}}</label>
 							        </div>
-							    </div>
+									</div> -->
+									
+									<!-- Using chips -->
+									<div class="input-field col s12 m6" ng-class="{ 'has-error' : healthProjectForm.implementing_partners_list.$error.pattern }"
+									 ng-show="project.definition.implementing_partners_checked">
+									<label for="ngm-project-implementing_partners">{{'list_project_partners' | translate}}</label>
+									<div style="padding-top:35px;"></div>
+
+										
+										<!-- <md-contact-chips
+													class="ngm-project_donor_select"
+													ng-model="project.definition.implementing_partners"
+													ng-change= "project.addNewImplementingPartner()"
+									        md-require-match="true"
+									        md-contacts="project.searchImplementingPartner($query)"
+									        md-contact-name="organization"
+									        md-require-match="true"
+									        placeholder="type partner..."
+									        secondary-placeholder="Add another partner"
+									        input-aria-label="Add Partners">
+									    </md-contact-chips>
+									</div> -->
+									<md-chips 
+											ng-model="project.definition.implementing_partners" 
+											md-autocomplete-snap="" 
+											md-transform-chip="transformChip($chip)" 
+											md-require-match="true"
+									 input-aria-label="Favorite Vegetables"
+									 md-on-add="project.addNewImplementingPartner($chip)"
+									 md-on-remove="project.removeImplementingPartner($chip)">
+										<md-autocomplete md-selected-item="null" md-search-text="project.searchPartner" md-items="item in project.searchImplementingPartner(project.searchPartner)"
+										 md-item-text="item.organization" input-aria-describedby="autocompleteTitle" placeholder="Add new partner" >
+											<span md-highlight-text="searchText">{{item.organization}} </span>
+											<md-not-found>
+												Cannot add,not on the list
+											</md-not-found>
+										</md-autocomplete>
+										<md-chip-template>
+											<span>
+												<strong>{{$chip.organization}}</strong>									
+											</span>
+										</md-chip-template>
+									</md-chips>
 
 					     	</div>
 

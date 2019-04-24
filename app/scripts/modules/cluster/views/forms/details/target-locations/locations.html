@@ -1,4 +1,37 @@
+<style>
+	md-select[disabled] .md-select-value {
+		color: #000;
+		background-image: none;
+	}
+	md-select[disabled] .md-select-value .md-select-icon:after{
+		display: none;
+	}
+	md-input-container { margin:0 0}
+	.md-checkbox-enabled[selected] .md-icon {
+    background-color: rgb(38, 166, 154);
+}
+md-select-menu md-content md-option[selected],md-select-menu md-content md-option[selected]:focus {
+    color: #000;
+}
+.md-text{
+	font-size: 13.5px;
+}
+md-select{
+	    margin: 0px 0 0px 0;
+}
+.md-select-value > span:not(.md-select-icon) {    
+    padding-bottom: 10px;
+    padding-top: 9px;
+}
+md-select.md-default-theme .md-select-value, md-select .md-select-value {
+    border-bottom-color: rgba(0,0,0,0.40);
+}
+md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
+    border-bottom-color: #26a69a;
+    color: rgba(0,0,0,0.87);
+}
 
+</style>
 <!-- bind html -->
 <div class="row">
 	<div class="col s12 m12 l12">
@@ -35,10 +68,11 @@
 							      <td ng-if="project.lists.admin5.length">{{ project.lists.admin5[0].admin5type_name }}</td>
 										<td>{{'type' | translate}}</td>
 										<td ng-if="project.definition.admin0pcode !== 'AF'">{{'from_list'|translate}}?</td>
-							      <td>{{'site_name'|translate}} *</td>
+										<td>{{'site_name'|translate}} *</td>
+										<td ng-if="project.definition.implementing_partners">Partner</td>
 							      <td ng-show="project.definition.project_status !== 'complete'">{{'edit'|translate}}</td>
 							    </tr>
-							    <tr ng-repeat="location in project.definition.target_locations track by $index">
+							    <tr ng-repeat-start="location in project.definition.target_locations track by $index">
 							    	<td>
 							    		<i class="material-icons" style="color: teal;">person_pin</i>
 							    	</td>
@@ -207,7 +241,43 @@
 							        	{{ project.showSiteName( $data, location ) }}
 							        </span>
 							      </td>
-
+										<td ng-if="project.definition.implementing_partners">
+											<!-- <span e-placeholder="{{'select'|translate}}"
+														editable-select="type_donor.type_donor_id"
+							        			e-name="type_donor"
+							        			e-form="locationform"
+														e-ng-options="item.type_donor_id as item.type_donor_name for item in dummy"
+														e-ng-change="test($data)"
+							        			>
+												{{showText($data)}}
+											</span> -->
+											<!-- <md-input-container>												
+												<md-select ng-model="location.donors" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader"
+												 multiple="true" 
+												 ng-disabled="!locationform.$visible"
+												 ng-change="testSelect()">	
+													<md-optgroup label="donors">
+														<md-option ng-value="donor" ng-repeat="donor in project.definition.project_donor">{{donor.project_donor_name}}</md-option>
+													</md-optgroup>
+												</md-select>
+											</md-input-container>
+																						<md-input-container>
+																							<md-select ng-model="selectedVegetables.name" md-on-close="clearSearchTerm()" data-md-container-class="selectdemoSelectHeader" multiple="true"
+																							 ng-disabled="!locationform.$visible" ng-change="testSelect()">
+																								<md-optgroup label="vegeteble">
+																									<md-option ng-value="vegetable" ng-repeat="vegetable in vegetables |
+																									              filter:searchTerm">{{vegetable.name}}</md-option>
+																								</md-optgroup>
+																							</md-select>
+																						</md-input-container> -->
+																						<md-select ng-model="location.partners" multiple 
+																						ng-model-options="{trackBy: '$value.id'}" 
+																						ng-disabled="!locationform.$visible"																						
+																					
+																						 placeholder="Not Set">																						
+																							<md-option ng-value="partner" ng-repeat="partner in project.definition.implementing_partners">{{ partner.organization }}</md-option>
+																						</md-select>
+										</td>
 							      <td style="white-space: nowrap" ng-show="project.definition.project_status !== 'complete'" >
 							        <!-- form -->
 							        <form editable-form name="locationform" ng-show="locationform.$visible" onbeforesave="project.saveLocation()" class="form-buttons form-inline" shown="inserted == location">
@@ -250,7 +320,20 @@
 							          </button>
 							        </div>  
 							      </td>
-							    </tr>
+									</tr>
+									<tr ng-if="type_donor.type_donor_id ==='certain'"ng-repeat-end>
+										<td colspan="100" style="padding-left: 20px">
+											<div>
+												<h5> Specific Donor</h5>
+												<p ng-repeat="donor in project.definition.project_donor">
+													<input type="checkbox" class="filled-in" id="specific_donor_{{ donor.project_donor_id }}" ng-checked="checkedSpecifictDonor(donor.project_donor_id)"
+													 ng-disabled="project.definition.project_status === 'complete'" ng-click="setSpecificDonor(donor.project_donor_id)" />
+													<label class="checkbox-label" for="specific_donor_{{ donor.project_donor_id }}">{{ donor.project_donor_name }}</label>
+												</p>
+											</div>
+
+										</td>
+									</tr>
 							  </table>							      
 
 							  <button class="btn" ng-show="project.definition.project_status !== 'complete'" ng-click="project.addLocation()" style="margin:20px 0px;">
