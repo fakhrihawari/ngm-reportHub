@@ -145,7 +145,9 @@ angular.module( 'ngmReportHub' )
 				return request;
 
 			},
-
+			setDownloadQuery: function(){
+				return ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions());
+			},
 			// init
 			init: function() {
 
@@ -191,7 +193,7 @@ angular.module( 'ngmReportHub' )
 									data: {
 										details: 'projects',
 										report: $scope.report.report_title +'_projects-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ),
-										query: { organization_id: $scope.report.organization_id },
+										query: $scope.report.setDownloadQuery(),//{ organization_id: $scope.report.organization_id },
 										csv:true
 									}
 								},

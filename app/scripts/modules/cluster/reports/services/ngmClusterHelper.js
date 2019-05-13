@@ -457,7 +457,29 @@ angular.module( 'ngmReportHub' )
         });
 
         return report;
-      }
+			},
+			setQueryDownload:function(user_access){
+				query = {};
+				user_access = ngmAuth.userPermissions();
+				if (user_access.length >= 2) {
+				find_top_access = user_access.map((role) => {
+						return role.LEVEL
+					});
+					index_role = find_top_access.indexOf(Math.max(...find_top_access));
+					restricted = user_access[index_role].DASHBOARD_DOWNLOAD_RESTRICTED;
+				} else {
+					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;
+				}
+
+				if (restricted.length < 1) {
+					return query
+				} else {
+					restricted.forEach((v, i) => {
+						query[v] = ngmUser.get()[v];
+					})
+					return query
+				}
+			}
 
 		};
 
