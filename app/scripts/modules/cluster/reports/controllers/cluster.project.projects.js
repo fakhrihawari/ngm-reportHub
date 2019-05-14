@@ -146,7 +146,7 @@ angular.module( 'ngmReportHub' )
 
 			},
 			setDownloadQuery: function(){
-				return ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions());
+				return ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(), ngmUser.get());
 			},
 			// init
 			init: function() {

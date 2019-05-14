@@ -458,7 +458,7 @@ angular.module( 'ngmReportHub' )
 
         return report;
 			},
-			setQueryDownload:function(user_access){
+			setQueryDownload:function(user_access,user_information){
 				query = {};
 				user_access = ngmAuth.userPermissions();
 				if (user_access.length >= 2) {
@@ -475,7 +475,7 @@ angular.module( 'ngmReportHub' )
 					return query
 				} else {
 					restricted.forEach((v, i) => {
-						query[v] = ngmUser.get()[v];
+						query[v] = user_information[v];
 					})
 					return query
 				}

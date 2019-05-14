@@ -17,8 +17,9 @@ angular.module('ngmReportHub')
 			'ngmAuth',
 			'ngmData',
 			'ngmUser',
+			'ngmClusterHelper',
 			'$translate', '$filter',
-	function ( $scope, $route, $q, $http, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser, $translate ,$filter) {
+		function ($scope, $route, $q, $http, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser, ngmClusterHelper, $translate ,$filter) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -97,7 +98,8 @@ angular.module('ngmReportHub')
 									url: ngmAuth.LOCATION + '/api/cluster/project/getFinancialDetails',
 									data: {
 										report: $scope.report.project.project_title + '_financials_details_extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ),
-										project_id: $scope.report.project.id
+										project_id: $scope.report.project.id,
+										// query: ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(),ngmUser.get())
 									}
 								},
 								metrics: {
