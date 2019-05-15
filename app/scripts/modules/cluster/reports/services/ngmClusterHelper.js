@@ -466,7 +466,7 @@ angular.module( 'ngmReportHub' )
 						return role.LEVEL
 					});
 					maxLevel = Math.max(...find_top_access);
-					user_accesss = user_access.filter((obj) => { return obj.LEVEL === maxLevel })
+					user_access = user_access.filter((obj) => { return obj.LEVEL === maxLevel })
 					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;
 				} else {
 					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;

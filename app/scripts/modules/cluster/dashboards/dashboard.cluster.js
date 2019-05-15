@@ -181,6 +181,32 @@ angular.module('ngmReportHub')
 					return request;
 				},
 
+				// request download restricted by role
+				getRequestRestricted: function (obj) {
+					var request = {
+						method: 'POST',
+						url: ngmAuth.LOCATION + '/api/cluster/indicator',
+						data: {
+							adminRpcode: $scope.dashboard.adminRpcode,
+							admin0pcode: $scope.dashboard.admin0pcode,
+							admin1pcode: $scope.dashboard.admin1pcode,
+							admin2pcode: $scope.dashboard.admin2pcode,
+							cluster_id: $scope.dashboard.cluster_id,
+							activity_type_id: $scope.dashboard.activity_type_id,
+							organization_tag: $scope.dashboard.organization_tag,
+							beneficiaries: $scope.dashboard.beneficiaries,
+							start_date: $scope.dashboard.startDate,
+							end_date: $scope.dashboard.endDate
+						}
+					}
+
+					restricted_by_role = ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(), ngmUser.get())
+					request.data = angular.merge({}, request.data, restricted_by_role);
+					request.data = angular.merge(request.data, obj);
+					return request;
+
+				},
+
 				// metrics
 				getMetrics: function( theme, format ){
 					return {
@@ -225,21 +251,21 @@ angular.module('ngmReportHub')
 						color: 'blue lighten-2',
 						icon: 'call',
 						hover: $filter('translate')('download_cluster_contact_list_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'contacts', report: $scope.dashboard.cluster_id_filename + '_contacts_list-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'contacts', report: $scope.dashboard.cluster_id_filename + '_contacts_list-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'cluster_contact_list', 'csv' )
 					},{
 						type: 'csv',
 						color: 'blue lighten-2',
 						icon: 'assignment_turned_in',
 						hover: $filter('translate')('download_ocha_hrp_report_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'ocha_report', report: $scope.dashboard.cluster_id_filename + '_ocha_hrp_report-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'ocha_report', report: $scope.dashboard.cluster_id_filename + '_ocha_hrp_report-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'cluster_ocha_report', 'csv' )
 					},{
 						type: 'csv',
 						color: 'blue lighten-2',
 						icon: 'attach_money',
 						hover: $filter('translate')('download_ocha_financial_report_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'financial_report', report: $scope.dashboard.cluster_id_filename + '_ocha_financial_report-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'financial_report', report: $scope.dashboard.cluster_id_filename + '_ocha_financial_report-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'cluster_financial_report', 'csv' )
 					},{
 						id: 'training_participants',
@@ -247,21 +273,21 @@ angular.module('ngmReportHub')
 						color: 'blue lighten-2',
 						icon: 'wc',
 						hover: $filter('translate')('download_training_participants_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'training_participants', report: $scope.dashboard.cluster_id_filename + '_training_participants_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'training_participants', report: $scope.dashboard.cluster_id_filename + '_training_participants_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'training_participants', 'csv' )
 					},{
 						type: 'csv',
 						color: 'blue lighten-2',
 						icon: 'group',
 						hover: $filter('translate')('download_beneficiary_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'beneficiaries', report: $scope.dashboard.activity_filename + $scope.dashboard.cluster_id_filename + '_beneficiary_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'beneficiaries', report: $scope.dashboard.activity_filename + $scope.dashboard.cluster_id_filename + '_beneficiary_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'beneficiary_data', 'csv' )
 					},{
 						type: 'csv',
 						color: 'blue lighten-2',
 						icon: 'show_chart',
 						hover: $filter('translate')('download_stock_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'stocks', report: $scope.dashboard.cluster_id_filename + '_stock_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'stocks', report: $scope.dashboard.cluster_id_filename + '_stock_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'stocks', 'csv' )
 					}];
 
@@ -271,42 +297,42 @@ angular.module('ngmReportHub')
 						color: 'teal lighten-3',
 						icon: 'compare_arrows',
 						hover: $filter('translate')('download_accountability_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'accountability', report: $scope.dashboard.activity_filename + $scope.dashboard.cluster_id_filename + '_accountability_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'accountability', report: $scope.dashboard.activity_filename + $scope.dashboard.cluster_id_filename + '_accountability_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'accountability_data', 'csv' )
 					},{
 						type: 'csv',
 						color: 'teal lighten-3',
 						icon: 'radio_button_checked',
 						hover: $filter('translate')('download_borehol_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'boreholes', report: $scope.dashboard.cluster_id_filename + '_boreholes_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'boreholes', report: $scope.dashboard.cluster_id_filename + '_boreholes_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'borehole_data', 'csv' )
 					},{
 						type: 'csv',
 						color: 'teal lighten-3',
 						icon: 'local_activity',
 						hover: $filter('translate')('download_cash_programming_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'cash', report: $scope.dashboard.cluster_id_filename + '_cash_programming-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'cash', report: $scope.dashboard.cluster_id_filename + '_cash_programming-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'cash_programming', 'csv' )
 					},{
 						type: 'csv',
 						color: 'teal lighten-3',
 						icon: 'spa',
 						hover: $filter('translate')('download_hygiene_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'hygiene', report: $scope.dashboard.cluster_id_filename + '_hygiene_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'hygiene', report: $scope.dashboard.cluster_id_filename + '_hygiene_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'hygiene_data', 'csv' )
 					},{
 						type: 'csv',
 						color: 'teal lighten-3',
 						icon: 'wc',
 						hover: $filter('translate')('download_sanitarian_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'sanitation', report: $scope.dashboard.cluster_id_filename + '_sanitation_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'sanitation', report: $scope.dashboard.cluster_id_filename + '_sanitation_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'sanitation_data', 'csv' )
 					},{
 						type: 'csv',
 						color: 'teal lighten-3',
 						icon: 'local_drink',
 						hover: $filter('translate')('download_water_data_as_csv'),
-						request: $scope.dashboard.getRequest( { csv: true, indicator: 'water', report: $scope.dashboard.cluster_id_filename + '_water_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
+						request: $scope.dashboard.getRequestRestricted( { csv: true, indicator: 'water', report: $scope.dashboard.cluster_id_filename + '_water_data-extracted-from-' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ) } ),
 						metrics: $scope.dashboard.getMetrics( 'water_data', 'csv' )
 					}];
 
