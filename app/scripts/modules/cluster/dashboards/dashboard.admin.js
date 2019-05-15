@@ -253,7 +253,6 @@ angular.module('ngmReportHub')
 
 					// query depenging on role
 					var restricted_by_role = ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(), ngmUser.get())
-					console.log(restricted_by_role, request.query, angular.merge({},request.query,restricted_by_role))
 					request.query = angular.merge({}, restricted_by_role, request.query)
 					// switch ($scope.dashboard.role){
 					// 	case 'ADMIN':
