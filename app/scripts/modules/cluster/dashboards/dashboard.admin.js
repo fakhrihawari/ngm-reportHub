@@ -180,6 +180,27 @@ angular.module('ngmReportHub')
 				},
 
 				// request
+				getRequestRestricted: function(indicator,list){
+					var request = {
+						list: list,
+						indicator: indicator,
+						cluster_id: $scope.dashboard.cluster_id,
+						organization_tag: $scope.dashboard.organization_tag,
+						adminRpcode: $scope.dashboard.adminRpcode,
+						admin0pcode: $scope.dashboard.admin0pcode,
+						report_type: $scope.dashboard.report_type,
+						activity_type_id: $scope.dashboard.activity_type_id,
+						start_date: $scope.dashboard.startDateReport,
+						end_date: $scope.dashboard.endDateReport
+					}
+
+					restricted_by_role = ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(), ngmUser.get())
+					request = angular.merge({}, request, restricted_by_role);
+					return request;
+
+				},
+
+				// request
 				getCsvRequest: function( obj ){
 					var request = {
 						method: 'POST',
@@ -197,7 +218,9 @@ angular.module('ngmReportHub')
 							end_date: $scope.dashboard.endDateReport
 						}
 					}
-
+					// restrict download by user role
+					var restricted_by_role = ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(), ngmUser.get());
+					request.data = angular.merge({},request.data, restricted_by_role);
 					request.data = angular.merge( request.data, obj );
 
 					return request;
@@ -230,6 +253,7 @@ angular.module('ngmReportHub')
 
 					// query depenging on role
 					var restricted_by_role = ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(), ngmUser.get())
+					console.log(restricted_by_role, request.query, angular.merge({},request.query,restricted_by_role))
 					request.query = angular.merge({}, restricted_by_role, request.query)
 					// switch ($scope.dashboard.role){
 					// 	case 'ADMIN':
@@ -323,7 +347,7 @@ angular.module('ngmReportHub')
 						request: {
 							method: 'POST',
 							url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-							data: angular.merge( $scope.dashboard.getRequest( 'reports_due', true ), { report: $scope.dashboard.cluster_id_filename + '_' + $scope.dashboard.report_type +'_reports_due_' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ), csv: true } )
+							data: angular.merge($scope.dashboard.getRequestRestricted( 'reports_due', true ), { report: $scope.dashboard.cluster_id_filename + '_' + $scope.dashboard.report_type +'_reports_due_' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ), csv: true } )
 						},
 						metrics: $scope.dashboard.getMetrics( 'reports_due', 'csv' )
 					},{
@@ -334,7 +358,7 @@ angular.module('ngmReportHub')
 						request: {
 							method: 'POST',
 							url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-							data: angular.merge( $scope.dashboard.getRequest( 'reports_complete', true ), { report: $scope.dashboard.cluster_id_filename + '_' + $scope.dashboard.report_type + '_reports_complete_' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ), csv: true } )
+							data: angular.merge($scope.dashboard.getRequestRestricted( 'reports_complete', true ), { report: $scope.dashboard.cluster_id_filename + '_' + $scope.dashboard.report_type + '_reports_complete_' + $scope.dashboard.startDate + '-to-' + $scope.dashboard.endDate + '-extracted-' + moment().format( 'YYYY-MM-DDTHHmm' ), csv: true } )
 						},
 						metrics: $scope.dashboard.getMetrics( 'reports_complete', 'csv' )
 					},{
