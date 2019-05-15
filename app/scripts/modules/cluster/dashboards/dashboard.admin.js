@@ -20,8 +20,9 @@ angular.module('ngmReportHub')
 			'ngmUser',
 			'ngmAuth',
 			'ngmData',
+			'ngmClusterHelper',
 			'ngmClusterLists','$translate',
-		function ( $scope, $q, $http, $location, $route, $rootScope, $window, $timeout, $filter, $sce, ngmUser, ngmAuth, ngmData, ngmClusterLists,$translate ) {
+		function ($scope, $q, $http, $location, $route, $rootScope, $window, $timeout, $filter, $sce, ngmUser, ngmAuth, ngmData, ngmClusterHelper,ngmClusterLists,$translate ) {
 
 			this.awesomeThings = [
 				'HTML5 Boilerplate',
@@ -228,13 +229,18 @@ angular.module('ngmReportHub')
 					}
 
 					// query depenging on role
-					switch ($scope.dashboard.role){
-						case 'ADMIN':
-							request.query.cluster_id = $scope.dashboard.cluster_id;
-							break;
-						case 'USER':
-							request.query.organization_tag = $scope.dashboard.organization_tag;
-					}
+					var restricted_by_role = ngmClusterHelper.setQueryDownload(ngmAuth.userPermissions(), ngmUser.get())
+					request.query = angular.merge({}, restricted_by_role, request.query)
+					// switch ($scope.dashboard.role){
+					// 	case 'ADMIN':
+					// 		request.query.cluster_id = $scope.dashboard.cluster_id;
+					// 		break;
+					// 	case 'USER':
+					// 		request.query.organization_tag = $scope.dashboard.organization_tag;
+					// 	case 'SUPERADMIN':
+					// 		request.query.cluster_id = $scope.dashboard.cluster_id;
+					// 		request.query.organization_tag = $scope.dashboard.organization_tag;
+					// }
 
 					request = angular.merge(request, obj);
 

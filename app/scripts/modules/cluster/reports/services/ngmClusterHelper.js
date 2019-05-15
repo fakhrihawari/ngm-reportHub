@@ -460,13 +460,14 @@ angular.module( 'ngmReportHub' )
 			},
 			setQueryDownload:function(user_access,user_information){
 				query = {};
-				user_access = ngmAuth.userPermissions();
+
 				if (user_access.length >= 2) {
 				find_top_access = user_access.map((role) => {
 						return role.LEVEL
 					});
-					index_role = find_top_access.indexOf(Math.max(...find_top_access));
-					restricted = user_access[index_role].DASHBOARD_DOWNLOAD_RESTRICTED;
+					maxLevel = Math.max(...find_top_access);
+					user_access = user_access.filter((obj) => { return obj.LEVEL === maxLevel })
+					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;
 				} else {
 					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;
 				}
