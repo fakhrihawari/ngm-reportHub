@@ -768,6 +768,10 @@ angular.module('ngmReportHub')
 					// TODO refactor/update cvwg
 					$scope.dashboard.cluster_id_filename = $scope.dashboard.cluster_id !== 'cvwg' ? $scope.dashboard.cluster_id : 'mpc'
 
+					restrict_filename = ngmClusterHelper.setFileName(ngmAuth.userPermissions());
+					if (restrict_filename.cluster_id) {
+						$scope.dashboard.cluster_id_filename = restrict_filename.cluster_id;
+					}
 					if ($route.current.params.activity_type_id!=='all'){
 						$scope.dashboard.activity_filename = $route.current.params.activity_type_id + '_';
 					}
