@@ -471,6 +471,17 @@ angular.module( 'ngmReportHub' )
 				} else {
 					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;
 				}
+				
+				// for role that do not have download restricted property
+				if(!restricted){					
+					setTimeout(()=>{
+						if(!restricted){
+							$('#ngm-report-download').css({ pointerEvents: "none", })
+							$('#ngm-report-download .fixed-action-btn .btn-floating').css({ "background-color": "#bdbdbd"})
+						}
+					},1000);
+					return query;
+				}
 
 				if (restricted.length < 1) {
 					return query
