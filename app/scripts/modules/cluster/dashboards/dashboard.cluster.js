@@ -344,15 +344,15 @@ angular.module('ngmReportHub')
 					}
 
 					// example of blocking download
-					// const canDownload = ngmAuth.canDo( 'DASHBOARD_DOWNLOAD', { 
-					// 										adminRpcode: $scope.dashboard.adminRpcode.toUpperCase(), 
-					// 										admin0pcode: $scope.dashboard.admin0pcode.toUpperCase(), 
-					// 										cluster_id: $scope.dashboard.cluster_id, 
-					// 										organization_tag: $scope.dashboard.organization_tag } )
+					const canDownload = ngmAuth.canDo( 'DASHBOARD_DOWNLOAD', { 
+															adminRpcode: $scope.dashboard.adminRpcode.toUpperCase(), 
+															admin0pcode: $scope.dashboard.admin0pcode.toUpperCase(), 
+															cluster_id: $scope.dashboard.cluster_id, 
+															organization_tag: $scope.dashboard.organization_tag } )
 					// filter downloads list
-					// if (!canDownload){
-					// 	downloads = downloads.filter(x => x.id === 'cluster_dashboard_pdf')
-					// }
+					if (!canDownload){
+						downloads = downloads.filter(x => x.id === 'cluster_dashboard_pdf')
+					}
 					return downloads;
 				},
 

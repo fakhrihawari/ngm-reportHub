@@ -476,8 +476,7 @@ angular.module( 'ngmReportHub' )
 				if(!restricted){					
 					setTimeout(()=>{
 						if(!restricted){
-							$('#ngm-report-download').css({ pointerEvents: "none", })
-							$('#ngm-report-download .fixed-action-btn .btn-floating').css({ "background-color": "#bdbdbd"})
+							$('#ngm-report-download').css({ display: "none", })
 						}
 					},1000);
 					return query;
@@ -491,8 +490,28 @@ angular.module( 'ngmReportHub' )
 					})
 					return query
 				}
-			}
+			},
 
+			setFileName: function (user_access) {
+				filename={};
+				if (user_access.length >= 2) {
+					find_top_access = user_access.map((role) => {
+						return role.LEVEL
+					});
+					maxLevel = Math.max(...find_top_access);
+					user_access = user_access.filter((obj) => { return obj.LEVEL === maxLevel })
+					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;
+				} else {
+					restricted = user_access[0].DASHBOARD_DOWNLOAD_RESTRICTED;
+				}
+
+				if(restricted.length>0){
+					restricted.forEach((v)=>{
+						filename[v]= restricted[v]
+					})
+				}
+				return filename;
+			}
 		};
 
     return ngmClusterHelper;
