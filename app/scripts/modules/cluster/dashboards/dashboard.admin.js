@@ -1402,6 +1402,22 @@ angular.module('ngmReportHub')
 								}]
 
 							},{
+							columns:[{
+								styleClass: 's12 m12 l12',
+								widgets: [{
+									type: 'list',
+									card: 'white grey-text text-darken-2',
+									style:'padding:0px',
+									config: {
+										title: 'Upload',
+										hoverTitle: 'Update',
+										icon: 'edit',
+										rightIcon: 'watch_later',
+										templateUrl: 'scripts/widgets/ngm-list/template/mo_implementing.html',
+									}
+								}]
+							}]
+							},{
 							columns: [{
 								styleClass: 's12 m12 l12',
 								widgets: [{
