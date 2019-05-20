@@ -1,3 +1,14 @@
+<style>
+	.language-rtl {
+		direction: rtl;
+		text-align: right;
+	}
+
+	.language-rtl .input-field.col label {
+		left: 0;
+		right: 0.75rem;
+	}
+</style>
 
 <script>
 
@@ -13,7 +24,7 @@
 	<div class="col s12 m12 l12">
 		<div class="card">
 
-			<ul class="collection with-header">
+			<ul class="collection with-header" ng-class="{'language-rtl':rtlClass}">
 				<li class="collection-header indigo lighten-1">
 					<h5 class="report-panel-title white-text">
 						<!-- December 2018 -->
@@ -26,7 +37,7 @@
 						</div>
 						<!-- 2019 onwards -->
 						<div ng-if="project.report.admin0pcode !== 'SO'">
-							<i class="material-icons left">location_on</i>{{'notes_for'|translate}} {{ project.monthlyTitleFormat }}
+							<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">location_on</i>{{'notes_for'|translate}} {{ project.monthlyTitleFormat }}
 						</div>
 					</h5>
 				</li>

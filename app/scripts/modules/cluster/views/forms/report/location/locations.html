@@ -5,13 +5,21 @@
 		position:absolute; right:20px; top:20px;
 	}
 
+	.language-rtl{
+		direction: rtl;
+		text-align: right;
+	}
+	.language-rtl .edit-report-btn{
+		left: 20px;
+		right:0px;
+	}
 </style>
 
 <!-- bind html -->
 <div class="row">
 	<div class="col s12 m12 l12">
 		<div class="card">
-			<ul class="collection with-header">
+			<ul class="collection with-header" ng-class="{'language-rtl':rtlClass}">
 				<li class="collection-header indigo lighten-1">
 					<h5 class="report-panel-title white-text">
 						<!-- December 2018 -->
@@ -24,11 +32,11 @@
 						</div>
 						<!-- 2019 onwards -->
 						<div ng-if="project.report.admin0pcode !== 'SO'">
-							<i class="material-icons left">group</i>{{ project.monthlyTitleFormat }}
+							<i class="material-icons "  ng-class="{'right':rtlClass,'left':!rtlClass}">group</i>{{ project.monthlyTitleFormat }}
 						</div>
 					</h5>
 				</li>
-				<li class="collection-item avatar">
+				<li class="collection-item avatar" ng-class="{'language-rtl':rtlClass}">
 						<div ng-if="project.report.admin0pcode === 'AF'">
 							<p style="color: #e57373;padding-top: 10px">
 								<b>{{'note'|translate}}:</b> {{'to_report' | translate}}
@@ -70,12 +78,12 @@
 
 							<div class="row">
 								<!-- location title -->
-								<div class="col s12 m9 left">
+								<div class="col s12 m9 " ng-class="{'right':rtlClass,'left':!rtlClass}">
 
 							  	<!-- location title -->
 							  	<h5 class="report-location-title" 
-							  				ng-if="project.definition.cluster_id !== 'eiewg'">
-												<i class="material-icons left" style="color: teal;">location_on</i>
+							  				ng-if="project.definition.cluster_id !== 'eiewg'" ng-class="{'language-rtl':rtlClass}">
+												<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}" style="color: teal;">location_on</i>
 												{{ project.getReportTitle( location ) }}
 									</h5>
 
@@ -101,7 +109,7 @@
 								<!-- location totals -->
 								<div class="col s12 m3 hide-on-med-and-down" 
 											ng-if="project.definition.admin0pcode !== 'NG' ">
-									<div class="beneficiary-count right">
+									<div class="beneficiary-count " ng-class="{'right':!rtlClass,'left':rtlClass}">
 										<span style="font-size:1.2rem;">
 											<i class="material-icons" style="padding-right:10px;">group</i></span>
 												<!-- filter in app/services/ngmHelper.js -->

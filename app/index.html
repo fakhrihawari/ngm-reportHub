@@ -122,11 +122,18 @@
 							<!-- profile menu dropdown list -->
 							<ul class="ngm-profile-menu-content dropdown-content z-depth-2">
 
-									<li align="center" class="teal z-depth-2" 
+									<!-- <li align="center" class="teal z-depth-2" 
 											ng-init="open = false;ngm.setLanguage('col')"
 
 											ng-show="ngm.getUsername() === 'welcome' || (ngm.translate_version )">
 										<a class="white-text right" ng-click="open= !open;"> 
+											<i class="material-icons smedium right">translate</i>{{'language'|translate}}</a>
+										</a>										
+									</li> -->
+									<li align="center" class="teal z-depth-2" 
+											ng-init="open = false;ngm.setLanguage(ngm.getUser().admin0pcode)"
+											ng-show="ngm.getUsername() !== 'welcome' && ngm.translate_version ">
+										<a class="white-text right" ng-click="open= !open;ngm.setLanguage(ngm.getUser().admin0pcode)"> 
 											<i class="material-icons smedium right">translate</i>{{'language'|translate}}</a>
 										</a>										
 									</li>
@@ -426,7 +433,8 @@
 		<script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
 		<script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
 		<script src="bower_components/materialize/bin/materialize.js"></script>
-		<script src="bower_components/moment/moment.js"></script>
+		<!-- <script src="bower_components/moment/moment.js"></script> -->
+		<script src="bower_components/moment/min/moment-with-locales.js"></script>
 		<script src="bower_components/ngm-dashboard-framework/dist/ngm-dashboard-framework.js"></script>
 		<script src="bower_components/ngm-leaflet-control-geocoder/Control.Geocoder.js"></script>
 		<script src="bower_components/ngm-leaflet-fullscreen/dist/leaflet.fullscreen.min.js"></script>

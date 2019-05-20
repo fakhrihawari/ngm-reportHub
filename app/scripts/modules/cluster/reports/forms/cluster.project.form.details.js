@@ -381,7 +381,12 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 								}
 							})
 						}
-					}		
+					}
+					// RTL
+					$scope.rtlClass = false;
+					if ($translate.use() === 'afg') {
+						$scope.rtlClass = true;
+					}
         },
 
         // cofirm exit if changes
@@ -891,6 +896,14 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 			// update list  if there are upload file or remove file
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();				
+			})
+			// RTL
+			$scope.$on('rtl', function (event, ready) {
+				if (ready) {
+					$scope.rtlClass = true;
+				} else {
+					$scope.rtlClass = false;
+				}
 			})
   }
 

@@ -247,6 +247,7 @@ angular.module( 'ngmReportHub' )
 								card: 'white grey-text text-darken-2',
 								config: {
 									titleIcon: 'alarm_on',
+									rtlEvent: 'rtl',
 									// color: 'teal lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
@@ -264,6 +265,7 @@ angular.module( 'ngmReportHub' )
 								card: 'white grey-text text-darken-2',
 								config: {
 									titleIcon: 'done_all',
+									rtlEvent: 'rtl',
 									// color: 'lime lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',

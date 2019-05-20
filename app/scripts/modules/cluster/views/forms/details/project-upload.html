@@ -179,6 +179,10 @@ font-size: 18px;
     width: 30px;
     height: 30px;
 }
+	.language-rtl{
+		direction: rtl;
+		text-align: right;
+	}
 </style>
 
 <!-- START-MODAL -->
@@ -244,21 +248,21 @@ font-size: 18px;
 		<div class="card">
 
 			<ul class="collection with-header">
-				<li class="collection-header blue lighten-1">
-					<h5 class="report-work-title white-text">
-						<i class="material-icons left">attach_file</i>
+				<li class="collection-header blue lighten-1" ng-class="{'language-rtl':rtlClass}">
+					<h5 class="report-work-title white-text" ng-class="{'language-rtl':rtlClass}">
+						<i class="material-icons" ng-class="{'right':rtlClass,'left':!rtlClass}">attach_file</i>
 						<span class="beneficiary-count">{{listUpload.length| number}}</span> {{'documents' |translate}}
 					</h5>
 				</li>
 
-				<li class="collection-item avatar " style=" border-bottom-width: 0px;min-height: 60px; ">
+				<li class="collection-item avatar " style=" border-bottom-width: 0px;min-height: 60px; " ng-class="{'language-rtl':rtlClass}">
 					<div class="left" >
 						<p style="font-weight: 300;margin-top:5px;color: #000">{{'click_upload_document_to_upload_document_of_your_project'|translate}} </p>
 					</div>
 					<div class="right">
 						<button class=" btn waves-effect waves-light tooltipped-report-upload" data-position="bottom" data-tooltip="{{'upload_document'|translate}}"
 						 ng-click="project.uploadDocument.openModal('upload-file')">
-							<i class="material-icons left">publish</i>
+							<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">publish</i>
 							{{'upload_document'|translate}}
 						</button>
 

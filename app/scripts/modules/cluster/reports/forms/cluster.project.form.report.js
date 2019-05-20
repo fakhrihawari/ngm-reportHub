@@ -144,6 +144,12 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
           // set columns / rows
 					ngmClusterBeneficiaries.setLocationsForm( $scope.project.lists, $scope.project.report.locations );
 					$scope.project.setTokenUpload();
+					if ($translate.use() === 'afg') {
+						$scope.rtlClass = true;
+					} else {
+						$scope.rtlClass = false;
+					}
+
         },
         
         // beneficairies template
@@ -809,6 +815,28 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();
 			})
+			// RTL
+			$scope.$on('rtl', function (event, ready) {
+
+
+				if (ready) {
+					$scope.rtlClass = true;
+					console.log("tn")
+					moment.locale('ar-tn');
+					// console.log(moment.locale())
+					$scope.project.monthlyTitleFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMMM, YYYY')
+					$scope.project.monthNameFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMM')
+					$scope.project.previousMonth = moment.utc([config.report.report_year, config.report.report_month, 1]).subtract(1, 'month').format("MMMM, YYYY")
+				} else {
+					$scope.rtlClass = false;
+					console.log("en")
+					moment.locale('en');
+					// console.log(moment.locale())
+					$scope.project.monthlyTitleFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMMM, YYYY')
+					$scope.project.monthNameFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMM')
+					$scope.project.previousMonth = moment.utc([config.report.report_year, config.report.report_month, 1]).subtract(1, 'month').format("MMMM, YYYY")
+				}
+			});
   }
 
 ]);

@@ -1,4 +1,16 @@
+<style>
+	/* .rotate_counter_wise{
+		transform: rotate(180deg)
+	} */
 
+	.btn-rtl {
+		direction: rtl;
+	}
+
+	.btn-rtl i.left {
+		transform: rotate(180deg)
+	}
+</style>
 <!-- save modal -->
 <div id="save-modal" class="modal">
 	<div class="modal-content">
@@ -269,7 +281,7 @@
 				<div class="widget card-panel white grey-text text-darken-2">			
 					
 					<!-- submission !== NG -->
-					<div align="center" ng-if="project.definition.admin0pcode !== 'NG'">
+					<div align="center" ng-if="project.definition.admin0pcode !== 'NG'" ng-class="{'btn-rtl':rtlClass}">
 						
 						<!-- validation -->
 						<button class="waves-effect waves-light btn"
@@ -277,7 +289,7 @@
 											ng-disabled="!ngmClusterBeneficiaries.beneficiaryFormComplete( project.definition, project.report.locations ) ||
 																		!ngmClusterTrainings.trainingFormComplete( project.report.locations )"
 											ng-cloak>
-										<i class="material-icons right">send</i>{{'save_mayus'|translate}}
+										<i class="material-icons " ng-class="{'right':!rtlClass,'left':rtlClass}">send</i>{{'save_mayus'|translate}}
 						</button>
 
 						<!-- cancel new  -->
@@ -325,7 +337,7 @@
 											ng-click="project.validateWashNgBeneficiariesForm( true, false )"
 											ng-disabled="!ngmClusterBeneficiaries.beneficiaryFormComplete( project.definition, project.report.locations )"
 											ng-cloak>
-							<i class="material-icons left">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
+							<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
 
 						</button>
 

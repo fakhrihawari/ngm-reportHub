@@ -4,12 +4,18 @@
   .collection.with-header .collection-item.avatar{
     padding-left: 51 !important;
   }
+	.tableRtl{
+		direction: rtl;
+	}
+	.tableRtl td{
+		text-align: right
+	}
 
 </style>
 
 <div style="padding-left: 20px;">
   <table class="bordered responsive-table" style="margin-bottom:10px;"
-          ng-show="project.report.locations[ $locationIndex ].beneficiaries.length">
+          ng-show="project.report.locations[ $locationIndex ].beneficiaries.length" ng-class="{'tableRtl':rtlClass}">
     <tr style="font-weight: 400">
       <td></td>
       <td>{{'activity' | translate}}</td>
@@ -611,7 +617,7 @@
             ng-show="project.report.report_status !== 'complete'" 
 						ng-click="project.addBeneficiary( $locationIndex ); project.activePrevReportButton()"
 						ng-disabled="addBeneficiaryDisable">
-    <i class="material-icons left">add</i>{{'add_beneficiaries' | translate}}
+    <i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">add</i>{{'add_beneficiaries' | translate}}
 
   </button>  
 

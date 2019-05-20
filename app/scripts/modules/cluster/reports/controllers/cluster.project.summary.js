@@ -104,6 +104,7 @@ angular.module('ngmReportHub')
 								config: {
 									project: $scope.report.project,
 									user: $scope.report.user,
+									rtlEvent: 'rtl',
 									report_date: moment().subtract( 1, 'M').endOf( 'M' ).format('YYYY-MM-DD'),
 									templateUrl: '/scripts/modules/cluster/views/cluster.project.summary.html',
 

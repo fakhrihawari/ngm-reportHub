@@ -213,7 +213,7 @@ angular
 		});
 
 	}])
-	.controller('ngmReportHubCrtl', ['$scope', '$route', '$location', '$http', '$timeout', 'ngmAuth', 'ngmUser','$window','$translate','$filter', function ($scope, $route, $location, $http, $timeout, ngmAuth, ngmUser,$window,$translate,$filter) {
+	.controller('ngmReportHubCrtl', ['$scope', '$route', '$location', '$http', '$timeout', 'ngmAuth', 'ngmUser', '$window', '$translate', '$filter', '$rootScope', function ($scope, $route, $location, $http, $timeout, ngmAuth, ngmUser, $window, $translate, $filter,$rootScope) {
 	     
 
          var var4plusrhafter;
@@ -263,7 +263,14 @@ angular
 
 			// change language
 			changeFunction : function ($key) {
-			   $translate.use($key);
+				 $translate.use($key);
+				if ($key !== 'en') {
+					$rootScope.$broadcast('rtl', true);
+					moment.locale('ar-tn');
+				} else {
+					moment.locale('en');
+					$rootScope.$broadcast('rtl', false);
+				}
 			 },
 
 			// paint application
@@ -439,11 +446,24 @@ angular
 
 			// language
 			setLanguage:function(country){
+				if (!country) {
+					country = 'default';
+				} else { country = country.toLowerCase() }
+				// var set_language = {
+				// 	col:[{ language_id: 'en', language_name: 'English', flag:'en.png'},
+				// 			{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }]					
+				// 	}
 				var set_language = {
-					col:[{ language_id: 'en', language_name: 'English', flag:'en.png'},
-							{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }]					
-					}
-				$scope.ngm.getLanguage = set_language[country] ? set_language[country]:[];
+					default: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
+					{ language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' },
+					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
+					col: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
+					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
+					af: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
+					{ language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' }]
+				}
+				// $scope.ngm.getLanguage = set_language[country] ? set_language[country]:[];
+				$scope.ngm.getLanguage = set_language[country] ? set_language[country] : set_language['default'];
 				if ($scope.ngm.getLanguage.length>0){
 					$scope.ngm.translate_version = true;
 				}else{
