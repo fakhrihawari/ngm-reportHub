@@ -35,7 +35,10 @@
 	.pagination li.active {
 	  background-color: #009688;
 	}
-	
+	.language-rtl-left{
+		direction: rtl;
+		text-align: left;
+	}
 </style>
 
 <!-- bind html -->
@@ -87,10 +90,10 @@
 					<br/>
 
 					<!-- updated / submiteed -->
-					<div ng-if="list.title.indexOf('Active') !== -1" style="font-weight:400">
+					<div ng-if="list.title.indexOf('Active') !== -1" style="font-weight:400" ng-class="{'language-rtl-left':rtlClass}">
 						{{'updated'|translate}}: {{ list.updatedAt( item.updatedAt ) }}
 					</div>
-					<div ng-if="list.title.indexOf('Complete') !== -1" style="font-weight:400">
+					<div ng-if="list.title.indexOf('Complete') !== -1" style="font-weight:400" ng-class="{'language-rtl-left':rtlClass}">
 						{{'submitted'|translate}}: {{ list.updatedAt( item.updatedAt ) }}
 					</div>
 						

@@ -84,7 +84,7 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 			$scope.ngmClusterHelperNgWashValidation = ngmClusterHelperNgWashValidation;
       $scope.ngmClusterHelperCol = ngmClusterHelperCol;
 			$scope.deactivedCopybutton = false;
-
+		
       // project
       $scope.project = {
 
@@ -95,7 +95,7 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
         // canEdit: ngmAuth.canDoPlain('EDIT', config.project.adminRpcode, config.project.admin0pcode, config.project.cluster_id, config.project.organization_tag),
         // canEdit: ngmAuth.canDo('EDIT',  config.report),
         canEdit: ngmAuth.canDo( 'EDIT', { adminRpcode: config.project.adminRpcode, admin0pcode:config.project.admin0pcode, cluster_id: config.project.cluster_id, organization_tag:config.project.organization_tag } ),
-        report: config.report,
+				report: config.report,
         updatedAt: moment( config.report.updatedAt ).format( 'DD MMMM, YYYY @ h:mm:ss a' ),
         monthlyTitleFormat: moment.utc( [ config.report.report_year, config.report.report_month, 1 ] ).format('MMMM, YYYY'),
 				monthNameFormat: moment.utc( [ config.report.report_year, config.report.report_month, 1 ] ).format('MMM'),
@@ -135,7 +135,14 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
           // set form on page load
           ngmClusterHelper.setForm( $scope.project.definition, $scope.project.lists );
           // set columns / rows
-          ngmClusterBeneficiaries.setLocationsForm( $scope.project.lists, $scope.project.report.locations );
+					ngmClusterBeneficiaries.setLocationsForm( $scope.project.lists, $scope.project.report.locations );
+					if ($translate.use() === 'afg') {
+						console.log($translate.use())
+						$scope.rtlClass = true;
+					} else {
+						console.log($translate.use())
+						$scope.rtlClass = false;
+					}
         },
         
         // beneficairies template
@@ -1031,6 +1038,33 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 			$scope.project.init();
 			$scope.project.activePrevReportButton();
 			$scope.project.getDocument();
+			// $scope.rtlClass = false;
+			$scope.$on('rtl', function (event, ready) {
+				
+				
+				if(ready){
+					$scope.rtlClass = true;
+					console.log("tn")
+					moment.locale('ar-tn');
+					// console.log(moment.locale())
+					$scope.project.monthlyTitleFormat= moment.utc( [ config.report.report_year, config.report.report_month, 1 ] ).format('MMMM, YYYY')
+					$scope.project.monthNameFormat= moment.utc( [ config.report.report_year, config.report.report_month, 1 ] ).format('MMM')
+					$scope.project.previousMonth= moment.utc([config.report.report_year, config.report.report_month, 1]).subtract(1,'month').format("MMMM, YYYY")
+				}else{
+					$scope.rtlClass = false;
+					console.log("en")
+					moment.locale('en');
+					// console.log(moment.locale())
+					$scope.project.monthlyTitleFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMMM, YYYY')
+					$scope.project.monthNameFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMM')
+					$scope.project.previousMonth = moment.utc([config.report.report_year, config.report.report_month, 1]).subtract(1, 'month').format("MMMM, YYYY")
+				}
+			});
+			
+			
+			
+			
+
   }
 
 ]);

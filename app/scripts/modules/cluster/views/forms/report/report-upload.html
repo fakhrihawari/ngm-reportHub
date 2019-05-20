@@ -138,6 +138,10 @@ li .collection-item .avatar .coll .list-upload{
     color: #fff;
     font-size: 30px;
 	}
+	.language-rtl{
+		direction: rtl;
+		text-align: right;
+	}
 
 </style>
 
@@ -204,19 +208,19 @@ li .collection-item .avatar .coll .list-upload{
 		<div class="card">
 
 			<ul class="collection with-header">
-				<li class="collection-header indigo lighten-1">
+				<li class="collection-header indigo lighten-1"  ng-class="{'language-rtl':rtlClass}">
 					<h5 class="report-panel-title white-text">
 						<div>
-							<i class="material-icons left">attachment</i>Upload Documents for {{ project.monthlyTitleFormat }}
+							<i class="material-icons" ng-class="{'right':rtlClass,'left':!rtlClass}">attachment</i>{{rtlClass?'د پورته کولو لپاره لاسوندونه':'Upload Documents for'}} {{ project.monthlyTitleFormat }}
 						</div>
 					</h5>
 				</li>
 
-				<li class="collection-item avatar " style=" border-bottom-width: 0px;min-height: 60px; ">
+				<li class="collection-item avatar " style=" border-bottom-width: 0px;min-height: 60px; " ng-class="{'language-rtl':rtlClass}">
 					<div class="right">
 						<button class=" btn waves-effect waves-light tooltipped-report-upload" data-position="bottom" data-tooltip="Upload Document" ng-click="project.uploadDocument.openModal('upload-file')">
-							<i class="material-icons left">cloud_upload</i>
-							Upload Document
+							<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">cloud_upload</i>
+							{{rtlClass?'پورته کولو سند':'Upload Document'}}
 						</button>
 							
 						<div class="btn wave-effect space tooltipped-report-upload" data-position="bottom" data-tooltip="Grid View" ng-click="grid=true"

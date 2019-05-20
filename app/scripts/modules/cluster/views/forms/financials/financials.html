@@ -1,17 +1,29 @@
+<style>
+		.language-rtl{
+		direction: rtl;
+		text-align: right;
+	}
+	.tableRtl{
+		direction: rtl;
+	}
+	.tableRtl td{
+		text-align: right
+	}
+</style>
 <div class="row">
   <div class="col s12 m12 l12">
     <div class="card">
       <ul class="collection with-header">
         
-        <li class="collection-header teal lighten-4">
+        <li class="collection-header teal lighten-4" ng-class="{'language-rtl':rtlClass}">
           <h5 class="report-work-title">
-            <i class="material-icons left">attach_money</i>{{'project_budget_progress' | translate}}
+            <i class="material-icons" ng-class="{'right':rtlClass,'left':!rtlClass}">attach_money</i>{{'project_budget_progress' | translate}}
           </h5>
         </li>
 
-        <li class="collection-item avatar">
+        <li class="collection-item avatar" ng-class="{'language-rtl':rtlClass}" >
 
-          <p style="padding:10px;">
+          <p style="padding:10px;" >
             {{'add_new_row_of_financial_details_to_your_project_for_each_payment_recieved' | translate}};
           </p>
 
@@ -19,7 +31,7 @@
             <div class="col s12 card">
               <div style="padding-top: 10px; padding-left: 40px;">
 
-                <table class="bordered responsive-table" ng-show="project.definition.project_budget_progress.length">
+                <table class="bordered responsive-table" ng-show="project.definition.project_budget_progress.length" ng-class="{'tableRtl':rtlClass}">
                   <tr style="font-weight: 400">
                     <td>{{'donor'|translate}}*</td>
                     <td>{{'activity' | translate}}*</td>
@@ -190,7 +202,7 @@
                                              ( !budget.project_budget_date_recieved )">
                           <i class="material-icons">save</i>
                         </button>
-                        <div type="button" ng-if="rowform.$visible" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel(); project.cancelEdit( $index )" " class="btn btn-small blue lighten-1 waves-effect waves-light" title="Cancel Edit">
+                        <div type="button" ng-if="rowform.$visible" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel(); project.cancelEdit( $index )"  class="btn btn-small blue lighten-1 waves-effect waves-light" title="Cancel Edit">
                           <i class="material-icons">clear</i>
                         </div>
                       </form>
@@ -213,7 +225,7 @@
                 </table>
 
                 <button class="btn" ng-show="project.definition.project_status !== 'complete'" ng-click="project.addBudgetItem()" style="margin:20px 0px;">
-                  <i class="material-icons left">add</i>{{'add_row' | translate}}
+                  <i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">add</i>{{'add_row' | translate}}
                 </button>
 
               </div>

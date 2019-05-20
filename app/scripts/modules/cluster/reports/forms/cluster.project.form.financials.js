@@ -349,7 +349,22 @@ angular.module( 'ngm.widget.project.financials', [ 'ngm.provider' ])
           activity_type_name: $filter('translate')('all_activities')
         });
 
-      }, 0 );
+			}, 0 );
+			$scope.rtlClass = false;
+			if ($translate.use() === 'afg') {
+				$scope.rtlClass = true;
+			}
+			$scope.$on('rtl', function (event, ready) {
+
+				
+				if (ready) {
+					$scope.rtlClass = true;
+					
+				} else {
+					$scope.rtlClass = false;
+					
+				}
+			});
 
   }
 

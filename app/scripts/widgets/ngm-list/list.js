@@ -140,6 +140,21 @@ angular.module('ngm.widget.list', ['ngm.provider'])
 					// $scope.$emit('widgetReload');
 				})
 			}
+			if($scope.list.rtlEvent){
+				$scope.rtlClass = false;
+				if ($translate.use()==='afg'){
+					$scope.rtlClass = true;
+				}
+				$scope.$on('rtl', function (event, ready) {
+					if (ready) {
+						$scope.rtlClass = true;
+												
+					} else {
+						$scope.rtlClass = false;
+					}
+				});
+
+			}
 
   }
 ]);

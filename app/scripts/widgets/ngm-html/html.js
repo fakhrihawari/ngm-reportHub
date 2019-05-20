@@ -43,11 +43,12 @@ angular.module('ngm.widget.html', ['ngm.provider'])
     '$sce',
     '$element',
     '$location',
-    '$timeout',
+		'$timeout',
+		'$translate',
     'ngmAuth',
     'data', 
     'config',
-    function($scope, $sce, $element, $location, $timeout, ngmAuth, data, config){
+		function ($scope, $sce, $element, $location, $timeout, $translate, ngmAuth, data, config){
     
       // statistics widget default config
       $scope.panel = {
@@ -89,7 +90,22 @@ angular.module('ngm.widget.html', ['ngm.provider'])
       // if updatedAt
       if ( $scope.panel.data && $scope.panel.data.updatedAt ) {
         $scope.panel.data.updatedAt = moment( data.updatedAt ).format('DD MMMM, YYYY @ h:mm:ss a');
-      }
+			}
+			
+			if ($scope.panel.rtlEvent) {
+				$scope.rtlClass = false;
+				if ($translate.use() === 'afg') {
+					$scope.rtlClass = true;
+				}
+				$scope.$on('rtl', function (event, ready) {
+					if (ready) {
+						$scope.rtlClass = true;
+					} else {
+						$scope.rtlClass = false;
+					}
+				});
+
+			}
 
       // init tabs
       if ($scope.panel.tabs) {

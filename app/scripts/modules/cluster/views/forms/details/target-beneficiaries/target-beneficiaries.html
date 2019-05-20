@@ -1,11 +1,19 @@
+<style>
+	.tableRtl {
+		direction: rtl;
+	}
 
+	.tableRtl td {
+		text-align: right
+	}
+</style>
 <div class="row">
 	<div class="col s12 m12 l12">
 		<div class="card">
-			<ul class="collection with-header">
+			<ul class="collection with-header" ng-class="{'language-rtl':rtlClass}">
 				<li class="collection-header blue lighten-1">
 					<h5 class="report-work-title white-text">
-						<i class="material-icons left">group</i> {{'target_population' | translate}}
+						<i class="material-icons" ng-class="{'right':rtlClass,'left':!rtlClass}">group</i> {{'target_population' | translate}}
 
 					</h5>
 				</li>
@@ -13,7 +21,7 @@
 				<li class="collection-item avatar">
 					<div class="row">
 						<div>
-							<div class="col s12 m9 l9 left">
+							<div class="col s12 m9 l9" ng-class="{'right':rtlClass,'left':!rtlClass}">
 								<p id="ngm-target_beneficiaries" style="padding:10px;">
 									{{'enter_the_target_beneficiaries_of_your_project_in_the_form_below' | translate}};
 								</p>
@@ -32,7 +40,7 @@
 								</div>
 							</div>
 							<div class="col s12 m3 l3 beneficiary-count">
-								<div class="right">
+								<div ng-class="{'right':!rtlClass,'left':rtlClass}">
 									<span style="font-size:1.2rem;"><i class="material-icons" style="padding-right:10px;">group</i></span>
 									<!-- filter in app/services/ngmHelper.js -->
 									{{ project.definition | sumArrayByKeys:'target_beneficiaries':project.lists.indicators:project.lists.skip | number }}
@@ -41,7 +49,7 @@
 						</div>				
 						<div class="col s12 card">
 							<div style="padding-top: 10px; padding-left: 40px;">
-							  <table class="bordered responsive-table" ng-show="project.definition.target_beneficiaries.length">
+							  <table class="bordered responsive-table" ng-show="project.definition.target_beneficiaries.length" ng-class="{'tableRtl':rtlClass}">
 							    <tr style="font-weight: 400">
 							    	<td></td>
 							      <td>{{'activity' | translate}}</td>

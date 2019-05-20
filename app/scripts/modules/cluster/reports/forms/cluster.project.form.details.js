@@ -152,7 +152,11 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
           // set form on page load
           ngmClusterHelper.setForm( $scope.project.definition, $scope.project.lists );          
           // set columns / rows (lists, location_index, beneficiaries )
-          ngmClusterBeneficiaries.setBeneficiariesForm( $scope.project.lists, 0, $scope.project.definition.target_beneficiaries );
+					ngmClusterBeneficiaries.setBeneficiariesForm( $scope.project.lists, 0, $scope.project.definition.target_beneficiaries );
+					$scope.rtlClass = false;
+					if ($translate.use() === 'afg') {
+						$scope.rtlClass = true;
+					}
         },
 
         // cofirm exit if changes
@@ -948,6 +952,27 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
       // init project
 			$scope.project.init();
 			$scope.project.getDocument();
+			$scope.$on('rtl', function (event, ready) {
+
+
+				if (ready) {
+					$scope.rtlClass = true;
+					// console.log("tn")
+					// moment.locale('ar-tn');
+					// // console.log(moment.locale())
+					// $scope.project.monthlyTitleFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMMM, YYYY')
+					// $scope.project.monthNameFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMM')
+					// $scope.project.previousMonth = moment.utc([config.report.report_year, config.report.report_month, 1]).subtract(1, 'month').format("MMMM, YYYY")
+				} else {
+					$scope.rtlClass = false;
+					// console.log("en")
+					// moment.locale('en');
+					// // console.log(moment.locale())
+					// $scope.project.monthlyTitleFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMMM, YYYY')
+					// $scope.project.monthNameFormat = moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMM')
+					// $scope.project.previousMonth = moment.utc([config.report.report_year, config.report.report_month, 1]).subtract(1, 'month').format("MMMM, YYYY")
+				}
+			});
   }
 
 ]);
