@@ -36,9 +36,9 @@
 		<div class="card">
 			<ul id="project_details_form" class="collection with-header">
 				
-				<li class="collection-header blue lighten-1">
-					<h5 class="report-work-title white-text">
-						<i class="material-icons left">border_color</i>{{'project_plan'|translate}}
+				<li class="collection-header blue lighten-1" ng-class="{'language-rtl':rtlClass}">
+					<h5 class="report-work-title white-text" ng-class="{'language-rtl':rtlClass}">
+						<i class="material-icons" ng-class="{'right':rtlClass,'left':!rtlClass}">border_color</i>{{'project_plan'|translate}}
 
 					</h5>
 				</li>
