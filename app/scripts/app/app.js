@@ -296,9 +296,9 @@ angular
 						$scope.ngm.style = {
 							logo: 'logo-immap.png',
 							home: '#/immap',
-							darkPrimaryColor: '#DE696E',
-							defaultPrimaryColor: '#EE6E73',
-							lightPrimaryColor: '#EF9A9A'
+							darkPrimaryColor: '#A72824',
+							defaultPrimaryColor: '#A72824',
+							lightPrimaryColor: '#A72824'
 						}
 						break;
           case 'epr':

@@ -34,11 +34,12 @@ angular.module( 'ngmReportHub' )
 						},
 						title: {
 							'class': 'col s12 m12 l12 report-title truncate',
-							style: 'font-size: 3.4rem; color: ' + $scope.report.ngm.style.defaultPrimaryColor,
+							style: 'font-size: 3.4rem;font-weight:600; color: ' + $scope.report.ngm.style.defaultPrimaryColor,
 							title: 'iMMAP | ' + $scope.report.user.admin0name
 						},
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
+							style:'font-weight:500; font-size:20px',
 							title: $filter('translate')('please_select_from_the_options_below')
 						}
 					},

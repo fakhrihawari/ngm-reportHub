@@ -86,11 +86,11 @@
 				<div class="ngm-brand z-depth-2">
 					
 					<div style="background: {{ ngm.style.darkPrimaryColor }}; height:20px;"></div>
-					<div style="background: {{ ngm.style.defaultPrimaryColor }}; height:140px;">
+					<div style="background: {{ ngm.style.home === '#/immap'?'#fff':ngm.style.defaultPrimaryColor }}; height:140px;">
 		
 						<!-- logo -->
 						<!-- add logic here for homepage -->
-						<div class="right">
+						<div ng-class="{'left':ngm.style.home === '#/immap','right':ngm.style.home !== '#/immap'}">
 							<a href="{{ ngm.style.home }}" title="HOME">
 								<img class="ngm-logo" ng-src="images/{{ ngm.style.logo }}" height="97" align="right"></img>
 							</a>
@@ -115,8 +115,8 @@
 								</a>
 							</div>
 							<!-- profile menu dropdown -->
-							<a class="ngm-profile white-text right"
-								ng-onclick="ngm.setNavMenu()">
+							<a class="ngm-profile right"
+								ng-onclick="ngm.setNavMenu()" ng-class="{'grey-text':ngm.style.home === '#/immap','white-text':ngm.style.home !== '#/immap'}">
 								{{ ngm.getUserName() }}
 							</a>
 							<!-- profile menu dropdown list -->
@@ -308,23 +308,23 @@
 
 							</ul>
 
-							<ul class="ngm-profile-menu-content dropdown-content z-depth-1" ng-if="ngm.style.home === '#/immap'">							
+							<ul class="ngm-profile-menu-content dropdown-content " ng-if="ngm.style.home === '#/immap'" style="margin-left: 6px;margin-top: 8px;">
 								<!-- iMMAP HOME -->
-								<li align="center" class="white z-depth-1" ng-show="ngm.getUserName() !== 'welcome' && ngm.getUser().organization === 'iMMAP'">
+								<li align="center" class="white " ng-show="ngm.getUserName() !== 'welcome' && ngm.getUser().organization === 'iMMAP'" style="margin-bottom: 2px;box-shadow: 0 2px 0px 0 rgba(0, 0, 0, -0.84), 0 2px 4px 0 rgba(0, 0, 0, 0.12)">
 									<a class="black-text left" href="#/immap" ng-click="ngm.toggleNavigationMenu();">
 										<!-- <i class="material-icons smedium right">important_devices</i> -->
 										Home
 									</a>
 								</li>
 							  <!-- PROFILE -->
-								<li align="center" class="white z-depth-1" ng-show="ngm.getUserName() !== 'welcome'">
+								<li align="center" class="white " ng-show="ngm.getUserName() !== 'welcome'" style="margin-bottom: 2px;box-shadow: 0 2px 0px 0 rgba(0, 0, 0, -0.84), 0 2px 4px 0 rgba(0, 0, 0, 0.12)">
 									<a class="black-text left" href="#/profile/{{ ngm.getUserName() }}" ng-click="ngm.toggleNavigationMenu();">
 										<!-- <i class="material-icons smedium right">person_pin</i> -->
-										{{'my_profile' | translate}}
+										My Profile
 									</a>
 								</li>
 								<!-- ADMIN -->
-								<li align="center" class="white z-depth-1" ng-show="ngm.getUserName() !== 'welcome'">
+								<li align="center" class="white " ng-show="ngm.getUserName() !== 'welcome'" style="margin-bottom: 2px;box-shadow: 0 2px 0px 0 rgba(0, 0, 0, -0.84), 0 2px 4px 0 rgba(0, 0, 0, 0.12)">
 									<a class="black-text left" href="#/cluster/admin/{{ ngm.getUser().adminRpcode | lowercase }}/{{ ngm.getUser().admin0pcode | lowercase }}"
 									 ng-click="ngm.toggleNavigationMenu();">
 										<!-- <i class="material-icons smedium right">move_to_inbox</i> -->
@@ -333,7 +333,7 @@
 								</li>
 							
 								<!-- TEAM -->
-								<li align="center" class="white z-depth-1" ng-show="ngm.getUserName() !== 'welcome'">
+								<li align="center" class="white " ng-show="ngm.getUserName() !== 'welcome'" style="margin-bottom: 2px;box-shadow: 0 2px 0px 0 rgba(0, 0, 0, -0.84), 0 2px 4px 0 rgba(0, 0, 0, 0.12)">
 									<a class="black-text left" href="#/team" ng-click="ngm.toggleNavigationMenu();">
 										<!-- <i class="material-icons smedium right">group</i> -->
 										iMMAP Team
@@ -341,14 +341,14 @@
 								</li>
 					
 								<!-- user login -->
-								<li align="right" class="white z-depth-1" ng-show="ngm.getUserName() === 'welcome' && ngm.style.home === '#/immap'">
+								<li align="right" class="white " ng-show="ngm.getUserName() === 'welcome' && ngm.style.home === '#/immap'" style="margin-bottom: 2px;box-shadow: 0 2px 0px 0 rgba(0, 0, 0, -0.84), 0 2px 4px 0 rgba(0, 0, 0, 0.12)">
 									<a class="black-text left" href="#/immap/login" ng-click="ngm.toggleNavigationMenu();">
 										<!-- <i class="material-icons smedium right">lock_outline</i> -->
 										Login
 									</a>
 								</li>
 								<!-- user logout -->
-								<li class="white z-depth-1" ng-show="ngm.getUserName() !== 'welcome'">
+								<li class="white " ng-show="ngm.getUserName() !== 'welcome'" style="margin-bottom: 2px;box-shadow: 0 2px 0px 0 rgba(0, 0, 0, -0.84), 0 2px 4px 0 rgba(0, 0, 0, 0.12)">
 									<a class="black-text left" ng-click="ngm.logout();">
 										<!-- <i class="material-icons smedium right">lock_open</i> -->
 										Logout
