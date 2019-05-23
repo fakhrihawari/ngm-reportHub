@@ -51,6 +51,33 @@ angular
 					}],
 				}
 			})
+			.when('/immap/immap-team',{
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImmapTeamCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.when('/immap/immap-profile', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImmapProfileCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.when('/immap/immap-profile/:username', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImmapProfileCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
 			.when( '/immap/profile', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'DashboardProfileCtrl',

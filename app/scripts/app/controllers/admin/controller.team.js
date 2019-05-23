@@ -96,6 +96,18 @@ angular.module('ngmReportHub')
 
 			// request
 			getRequest: function( indicator, status ){
+				console.log({
+					method: 'POST',
+					url: ngmAuth.LOCATION + '/api/getOrganizationIndicator',
+					data: {
+						indicator: indicator,
+						status: status,
+						admin0pcode: $scope.dashboard.admin0pcode,
+						organization_tag: $scope.dashboard.organization_tag,
+						project: $scope.dashboard.project,
+						cluster_id: $scope.dashboard.cluster_id
+					}
+				})
 				return {
 						method: 'POST',
 						url: ngmAuth.LOCATION + '/api/getOrganizationIndicator',
@@ -351,7 +363,7 @@ angular.module('ngmReportHub')
 										$scope.dashboard.user.roles.indexOf( 'ORG' ) > -1 ) {
 					stats = stats.concat( stats_org_level );					
 				}
-				
+				console.log(stats);
 				return stats;
 
 			},
