@@ -44,6 +44,7 @@ angular
 		'ngmiMMAP',
 		'ngmNutrition',
 		'ngmDrought',
+		'ngmIMO',
 		// utils
 		'angularUtils.directives.dirPagination',
 		// widgets
