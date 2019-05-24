@@ -426,7 +426,7 @@ angular.module( 'ngmReportHub' )
 							url: ngmAuth.LOCATION + '/api/cluster/project/getProjectsList',
 							data: { filter: filter }
 						}
-
+						console.log(request);
 				// return
 				return request;
 

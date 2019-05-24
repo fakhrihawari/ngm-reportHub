@@ -19,6 +19,15 @@ angular
 		// app routes with access rights
 		$routeProvider
 			// iMMAP
+			.when('/immap/reporting', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoHomeCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
 			.when('/immap/reporting/login', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'DashboardLoginCtrl',
@@ -46,16 +55,43 @@ angular
 					}],
 				}
 			})
-			// project list
-			.when('/immap/reporting', {
+			.when('/immap/reporting/license', {
 				templateUrl: '/views/app/dashboard.html',
-				controller: 'ImoHomeCtrl',
+				controller: 'ImoTeamLicenseCtrl',
 				resolve: {
 					access: ['ngmAuth', function (ngmAuth) {
 						return ngmAuth.isAuthenticated();
 					}],
 				}
 			})
+			.when('/immap/reporting/team/license', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoTeamLicenseCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.when('/immap/reporting/license/:username', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoLicenseCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.when('/immap/reporting/report', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoReportListCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// project list
 			.when('/immap/reporting/dashboard-team', {
 				redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/2018-01-01/' + moment().format('YYYY-MM-DD')
 			})

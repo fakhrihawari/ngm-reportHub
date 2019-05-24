@@ -1,0 +1,69 @@
+<style>
+	.count,
+	.label {
+		z-index: 1 !important;
+	}
+
+	.ng-table th.sortable .sort-indicator {
+		color: #2196F3;
+		font-weight: 400;
+	}
+
+	.pagination li.active {
+		background-color: #009688;
+	}
+
+	.modal-content .ng-table-pager {
+		display: none;
+	}
+</style>
+
+<!-- ngTable -->
+<div class="row" ng-if="data.length">
+	<div class="col s12 m12 l12">
+		<div class="card">
+			<ul class="collection with-header">
+				<li class="{{ table.headerClass }}" style="{{ table.headerStyle }}">
+					<h5 class="report-work-title {{ table.headerText }}">
+						<i class="material-icons left">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5>
+				</li>
+				<li class="collection-item avatar" style="padding:10px;">
+
+					<!-- if data -->
+					<div ng-if="data.length">
+						<table class="centered highlight responsive-table" ng-table="table.tableParams">
+							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
+								<td data-title="'country_mayus'|translate" sortable="'admin0name'">
+									{{ row.admin0name }}
+								</td>
+								<td data-title="'organization' | translate" sortable="'organization'">
+									{{ row.organization }}
+								</td>
+								<td data-title="'name_mayus' | translate" sortable="'name'">
+									{{ row.name }}
+								</td>
+								<td data-title="'position'|translate" sortable="'position'">
+
+									{{ row.position }}
+								</td>
+								<td data-title="'Sector'" sortable="'cluster'">
+									{{ row.cluster }}
+								</td>
+								<td data-title="'username'|translate" sortable="'username'">
+									{{ row.username }}
+								</td>
+								<td data-title="'phone'|translate" sortable="'phone'">
+									{{ row.phone }}
+								</td>
+								<td data-title="'updated'|translate" sortable="'updatedAt'">
+									{{ row.updatedAt | date:'medium' }}
+								</td>
+							</tr>
+						</table>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
