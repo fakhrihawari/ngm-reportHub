@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ImoProfileCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, $translate, $filter) {
+	.controller('ImoDashboardCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, $translate, $filter) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -73,12 +73,12 @@ angular.module('ngmReportHub')
 						title: {
 							'class': 'col s12 m12 l12 report-title truncate',
 							style: 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
-							title: 'iMMAP | ' + user.admin0name + ' | My Profile'
+							title: 'iMMAP | ' + user.admin0name + ' | My Dashboard'
 						},
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
 							style: 'font-size:20px',
-							title: 'iMMAP | ' + user.admin0name
+							title: 'Check Your Details & Stats'
 						}
 					},
 					rows: [{

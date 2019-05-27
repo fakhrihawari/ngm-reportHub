@@ -52,7 +52,7 @@ angular.module('ngmReportHub')
 								card: 'white grey-text text-darken-2',
 								style: 'padding: 20px;',
 								config: {
-									html: '<a class="btn-flat waves-effect waves-teal left hide-on-small-only" href="#/immap/reporting"><i class="material-icons left">keyboard_return</i>' + $filter('translate')('back_to_organization') + '</a><a class="waves-effect waves-light btn right" href="' + $scope.report.newProjectUrl + '"><i class="material-icons left">add_circle_outline</i>' + $filter('translate')('add_new_project') + '</a>'
+									html: '<a class="btn-flat waves-effect waves-teal left hide-on-small-only" href="#/immap/reporting"><i class="material-icons left">keyboard_return</i>' + $filter('translate')('back_to_organization') + '</a><a class="waves-effect waves-light btn right" href="' + $scope.report.newProjectUrl + '"><i class="material-icons left">add_circle_outline</i>' + 'ADD NEW REPORT' + '</a>'
 								}
 							}]
 						}]

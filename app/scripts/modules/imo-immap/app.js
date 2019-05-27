@@ -37,6 +37,27 @@ angular
 					}],
 				}
 			})
+			// MY DASHBOARD
+			.when('/immap/reporting/dashboard', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoDashboardCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// MY DASHBOARD other user
+			.when('/immap/reporting/dashboard/:username', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoDashboardCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// MY PROFILE
 			.when('/immap/reporting/profile', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoProfileCtrl',
@@ -46,6 +67,7 @@ angular
 					}],
 				}
 			})
+			// MY PROFILE other user
 			.when('/immap/reporting/profile/:username', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoProfileCtrl',
@@ -85,6 +107,15 @@ angular
 			.when('/immap/reporting/report', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoReportListCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.when('/immap/reporting/report/try', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoReportCtrl',
 				resolve: {
 					access: ['ngmAuth', function (ngmAuth) {
 						return ngmAuth.isAuthenticated();

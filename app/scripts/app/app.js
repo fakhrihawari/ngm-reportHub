@@ -34,6 +34,7 @@ angular
 		'ngm.widget.project.report',
 		'ngm.widget.organization.stocks.list',
 		'ngm.widget.organization.stock',
+		'ngm.widget.imo.report',
 		// modules
 		'ngmCluster',
 		'ngmEthiopia',
@@ -290,6 +291,15 @@ angular
 							darkPrimaryColor: '#DE696E',
 							defaultPrimaryColor: '#EE6E73',
 							lightPrimaryColor: '#EF9A9A'
+						}
+						if ($location.$$path.split('/')[2] === 'reporting'){
+							$scope.ngm.style = {
+								logo: 'logo-immap.png',
+								home: '#/immap/reporting',
+								darkPrimaryColor: '#be2126',
+								defaultPrimaryColor: '#be2126',
+								lightPrimaryColor: '#be2126'
+							}
 						}
 						break;
           case 'epr':
