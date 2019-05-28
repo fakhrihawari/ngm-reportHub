@@ -97,7 +97,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				// defaults
 				user: ngmUser.get(),
 				style: config.style,
-				support_partner:[],
+				imo_report: { support_partner: [], planed_activity: [], rate: {}},
 				definition: config.project,
 				report: config.report,
 				location_group: config.location_group,
@@ -118,6 +118,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				templatesUrl:'/scripts/modules/imo-immap/reports/views/',
 				// templates
 				partnerUrl:'partner.html',
+				plannedUrl:'planned_activity.html',
 				locationsUrl: 'location/locations.html',
 				addLocationUrl: 'location/add.location.html',
 				beneficiariesTrainingUrl: 'beneficiaries/2016/beneficiaries-training.html',
@@ -804,18 +805,113 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				// ################################STARt HERe
 
 				areaActivity: [{ id: '01', name: 'Information Management' }, { id: '02', name: 'Coordination' }, { id: '03',name: 'DRR' }],
+				narativeActivity: [{ id: '01', name: 'Information Management Narative' }, { id: '02', name: 'Coordination Narative' }, { id: '03', name: 'DRR Narative' }],
 				products: [{ id: '01', name: 'Infographic' }, { id: '02', name: 'Map' }, { id: '03', name: 'other' }],
 				collab: [{ id: '01', name: 'YY' }, { id: '02', name: 'CC' }, { id: '03', name: 'AA' }],
+				rating:[1,2,3,4,5],
 
 				// display
-				displayAreaActivity:function(){},
+				displayAreaActivity:function(project,$data, $partner){
+					var selected = [];
+					$partner.area_activity_id = $data;					
+					selected = $filter('filter')(project.areaActivity, { id: $partner.area_activity_id }, true);
+					if (selected && selected.length) {
+						$partner.area_activity_name = selected.length?selected[0].name:'-';
+					}
+					return selected.length ? selected[0].name : '-';
+				},
+				displayNarativeActivity: function (project, $data, $partner) {
+					var selected = [];
+					$partner.narative_activity_id = $data;
+					selected = $filter('filter')(project.narativeActivity, { id: $partner.narative_activity_id }, true);
+					if (selected && selected.length) {
+						$partner.narative_activity_name = selected.length ? selected[0].name : '-';
+					}
+					return selected.length ? selected[0].name : '-';
+				},
+				displayProducts: function (project, $data, $partner) {
+					var selected = [];
+					$partner.product_id = $data;
+					selected = $filter('filter')(project.products, { id: $partner.product_id }, true);
+					if (selected && selected.length) {
+						$partner.product_name = selected.length ? selected[0].name : '-';
+					}
+					return selected.length ? selected[0].name : '-';
+				},
+				displayCollab: function (project, $data, $partner) {
+					var selected = [];
+					$partner.collab_id = $data;
+					selected = $filter('filter')(project.collab, { id: $partner.collab_id }, true);
+					if (selected && selected.length) {
+						$partner.collab_name = selected.length ? selected[0].name : '-';
+					}
+					return selected.length ? selected[0].name : '-';
+				},
+				displayPlannedAreaActivity: function (project, $data, $planned) {
+					var selected = [];
+					$planned.area_activity_id = $data;
+					selected = $filter('filter')(project.areaActivity, { id: $planned.area_activity_id }, true);
+					if (selected && selected.length) {
+						$planned.area_activity_name = selected.length ? selected[0].name : '-';
+					}
+					return selected.length ? selected[0].name : '-';
+				},
+				displayPlannedNarativeActivity: function (project, $data, $planned) {
+					var selected = [];
+					$planned.narative_activity_id = $data;
+					selected = $filter('filter')(project.narativeActivity, { id: $planned.narative_activity_id }, true);
+					if (selected && selected.length) {
+						$planned.narative_activity_name = selected.length ? selected[0].name : '-';
+					}
+					return selected.length ? selected[0].name : '-';
+				},
+				displayPlannedProducts: function (project, $data, $planned) {
+					var selected = [];
+					$planned.product_id = $data;
+					selected = $filter('filter')(project.products, { id: $planned.product_id }, true);
+					if (selected && selected.length) {
+						$planned.product_name = selected.length ? selected[0].name : '-';
+					}
+					return selected.length ? selected[0].name : '-';
+				},
+				updateInputProduct:function($data,$partner){
+					$partner.number_products= $data;
+				},
+				updatePlannedInputProduct: function ($data, $partner) {
+					$partner.number_products = $data;
+				},
+				
 				// add beneficiary
 				addPartner: function () {
-					$scope.inserted = {};
-					$scope.project.report.locations[$parent].beneficiaries.push($scope.inserted);
-					// set columns / rows display
-					ngmClusterBeneficiaries.setBeneficiariesFormTargets($scope.project.lists, $parent, $scope.inserted, $scope.project.report.locations[$parent].beneficiaries.length - 1);
+					$scope.inserted = {
+						area_activity_id:'',
+						narative_activity_id:'',
+						product_id:'',
+						collab_id:'',
+						number_products:0};
+					$scope.project.imo_report.support_partner.push($scope.inserted);
 				},
+				addPlanned: function () {
+					$scope.inserted = {
+						area_activity_id: '',
+						narative_activity_id: '',
+						product_id: '',
+						number_products: 0 };
+					$scope.project.imo_report.planed_activity.push($scope.inserted);
+				},
+				setRate:function(value){
+					$scope.project.imo_report.rating = value;
+				},
+				// datepicker
+				datepicker: {
+					maxDate: moment().format('YYYY-MM-DD'),
+					onClose: function ($imo) {
+						// format date on selection
+						$imo.month =
+							moment(new Date($imo.month)).format('YYYY-MM-DD');
+						$scope.open = false;
+					}
+				}				
 			}
 
 			// init project
@@ -826,6 +922,13 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();
 			})
+			$scope.cek= function(a){
+				console.log(a)
+				console.log($scope.project.imo_report)
+			}
+			$scope.kos;
+			$scope.kos2=function(){};
+			// $scope.project.imo_report.month= moment(new Date('2016-05-27')).format('MMM');
 		}
 
 	]);

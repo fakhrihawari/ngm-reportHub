@@ -2,95 +2,64 @@
 	.collection.with-header .collection-item.avatar {
 		padding-left: 51 !important;
 	}
-	.editable-wrap{
+
+	.editable-wrap {
 		width: 100%;
 	}
 </style>
 
 <div style="padding-left: 20px;">
-	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="project.imo_report.support_partner.length">
+	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="project.imo_report.planed_activity.length">
 		<tr style="font-weight: 600">
 			<td>Partner Category</td>
 			<td>Partner</td>
 			<td>Area of Activity</td>
 			<td>Narative of Activity</td>
 			<td>Products</td>
-			<td>Colaboration With</td>
 			<td>Number of Products</td>
 			<td ng-if="project.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
-		<tr ng-repeat-start="partner in project.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index">
+		<tr ng-repeat-start="planned in project.imo_report.planed_activity track by $index" ng-init="$plannedIndex=$index">
 			<!-- Start here -->
+			<td></td>
+			<td></td>
 			<td>
-
-			</td>
-			<td>
-
-			</td>
-			<td>
-				<span e-form="imoform" 
-				e-name="area_activity_id" 
-				editable-select="partner.area_activity_id" 
-				e-placeholder="{{'select'|translate}}"
-				e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity"
-				>
-				{{project.displayAreaActivity(project,$data,partner)}}
+				<span e-form="imoform" e-name="area_activity_id" editable-select="planned.area_activity_id" e-placeholder="{{'select'|translate}}"
+				 e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity">
+					{{project.displayPlannedAreaActivity(project,$data,planned)}}
 				</span>
 
 			</td>
 			<td>
-				<span e-form="imoform" 
-					e-name="narative_activity_id" 
-					editable-select="partner.narative_activity_id" 
-					e-placeholder="{{'select'|translate}}"
-				 	e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity" 
-					e-ng-disabled="!partner.area_activity_id">
-							 {{project.displayNarativeActivity(project,$data,partner)}}
-				</span>				
-			</td>
-			<td>
-				<span e-form="imoform" 
-					e-name="product_id" 
-					editable-select="partner.product_id" 
-					e-placeholder="{{'select'|translate}}"
-				 	e-ng-options="a_t.id as a_t.name for a_t in project.products" 
-					e-ng-disabled="!partner.narative_activity_id">
-													 {{project.displayProducts(project,$data,partner)}}
+				<span e-form="imoform" e-name="narative_activity_id" editable-select="planned.narative_activity_id" e-placeholder="{{'select'|translate}}"
+				 e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity" e-ng-disabled="!planned.area_activity_id">
+					{{project.displayPlannedNarativeActivity(project,$data,planned)}}
 				</span>
-				
 			</td>
 			<td>
-				<span e-form="imoform" 
-					e-name="collab_id" 
-					editable-select="partner.collab_id" 
-					e-placeholder="{{'select'|translate}}"
-					e-ng-options="a_t.id as a_t.name for a_t in project.collab"
-					e-ng-disabled="!partner.product_id">
-													 {{project.displayCollab(project,$data,partner)}}
+				<span e-form="imoform" e-name="product_id" editable-select="planned.product_id" e-placeholder="{{'select'|translate}}" e-ng-options="a_t.id as a_t.name for a_t in project.products"
+				 e-ng-disabled="!planned.narative_activity_id">
+					{{project.displayPlannedProducts(project,$data,planned)}}
 				</span>
-				
+
 			</td>
 			<td>
-				<span e-form="imoform" 
-					e-name="number_products" 
-					editable-number="partner.number_products" 
-					e-min="0" 
-					e-ng-change="project.updateInputProduct($data,partner);cek($data,$index); ngmCbBeneficiaries.setSadd( beneficiary );">
-					{{ partner.number_products }}
+				<span e-form="imoform" e-name="number_products" editable-number="planned.number_products" e-min="0" e-ng-change="project.updateInputProduct($data,planned);cek($data,$index); ngmCbBeneficiaries.setSadd( beneficiary );">
+					{{ planned.number_products }}
 				</span>
 			</td>
 			<!-- End here -->
 			<td style="white-space: nowrap" ng-show="project.report.report_status !== 'complete'">
 				<!-- form -->
 				<form editable-form name="imoform" onshow="project.keydownSaveForm()" ng-show="imoform.$visible" onbeforesave="project.validateBeneficiariesDetailsForm( imoform, false, false )"
-				 class="form-buttons form-inline" shown="inserted == partner">
+				 class="form-buttons form-inline" shown="inserted == planned">
 					<button type="submit" ng-if="imoform.$visible" ng-disabled="!ngmClusterBeneficiaries.beneficiaryFormComplete( project.definition, project.report.locations ) || 
                                   !ngmClusterTrainings.trainingFormComplete( project.report.locations ) || fsac_assessment_disabled"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
 					<div type="button" ng-if="imoform.$visible" ng-disabled="imoform.$waiting" ng-click="imoform.$cancel(); project.cancelEdit( $locationIndex, $beneficiaryIndex );project.activePrevReportButton()"
-					 class="btn btn-small  lighten-1 waves-effect waves-light" title="Cancel Edit"  style="background-color: #be2126">
+					 class="btn btn-small lighten-1 waves-effect waves-light" title="Cancel Edit" style="background-color: #be2126">
 						<i class="material-icons">clear</i>
 					</div>
 				</form>
@@ -111,8 +80,9 @@
 	</table>
 
 	<!-- default -->
-	<button  style="background-color: #be2126" class="btn" ng-if="project.definition.admin0pcode !== 'ET' || project.definition.cluster_id !== 'esnfi'" ng-show="project.definition.project_status !== 'complete' && project.report.report_status !== 'complete'"
-	 ng-click="project.addPartner(); project.activePrevReportButton()" ng-disabled="addBeneficiaryDisable">
+	<button style="background-color: #be2126" class="btn" ng-if="project.definition.admin0pcode !== 'ET' || project.definition.cluster_id !== 'esnfi'"
+	 ng-show="project.definition.project_status !== 'complete' && project.report.report_status !== 'complete'" ng-click="project.addPlanned(); project.activePrevReportButton()"
+	 ng-disabled="addBeneficiaryDisable">
 		<i class="material-icons left">add</i>Add Partner
 
 	</button>
