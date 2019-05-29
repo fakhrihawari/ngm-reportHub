@@ -163,6 +163,7 @@ angular.module('ngmReportHub')
 										style: $scope.report.ngm.style,
 										project: $scope.report.project,
 										report: $scope.report.definition,
+										imo_report: $scope.data,
 										location_group: $scope.report.location_group
 									}
 								}]
@@ -202,6 +203,47 @@ angular.module('ngmReportHub')
 
 			// assign to ngm app scope
 			$scope.report.ngm.dashboard.model = $scope.model;
+			if($route.current.params.report_id !==  'new'){
+				console.log($route.current.params);
+				$scope.data = {
+					support_partner: [{
+						area_activity_id: "01",
+						area_activity_name: "Information Management",
+						category_id: "01",
+						category_name: " Management",
+						collab_id: "02",
+						collab_name: "CC",
+						narative_activity_id: "01",
+						narative_activity_name: "Information Management Narative",
+						number_products: 10,
+						partner: " ORGA",
+						partner_id: "02",
+						product_id: "01",
+						product_name: "Infographic"
+					}], planed_activity: [{
+						area_activity_id: "01",
+						area_activity_name: "Information Management",
+						category_id: "01",
+						category_name: " Management",
+						narative_activity_id: "01",
+						narative_activity_name: "Information Management Narative",
+						number_products: 10,
+						partner: " ORGA",
+						partner_id: "02",
+						product_id: "01",
+						product_name: "Infographic"
+					}],
+					rating:5,
+					notes:'SWAG',
+					month_date:'2019-06-21',
+					month:'1'
+				}
+			}else{
+				$scope.data = {
+					support_partner: [], planed_activity: []
+					
+				};
+			}
 
 			// taost for user
 

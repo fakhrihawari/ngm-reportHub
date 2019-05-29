@@ -113,7 +113,7 @@ angular
 					}],
 				}
 			})
-			.when('/immap/reporting/report/try', {
+			.when('/immap/reporting/report/:report_id', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoReportCtrl',
 				resolve: {

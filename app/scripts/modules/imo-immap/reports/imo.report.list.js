@@ -23,7 +23,7 @@ angular.module('ngmReportHub')
 
 			// user
 			user: ngmUser.get(),
-
+			newProjectUrl:'#/immap/reporting/report/new',
 			init: function () {
 
 				// report dashboard model
@@ -52,7 +52,7 @@ angular.module('ngmReportHub')
 								card: 'white grey-text text-darken-2',
 								style: 'padding: 20px;',
 								config: {
-									html: '<a class="btn-flat waves-effect waves-teal left hide-on-small-only" href="#/immap/reporting"><i class="material-icons left">keyboard_return</i>' + $filter('translate')('back_to_organization') + '</a><a class="waves-effect waves-light btn right" href="' + $scope.report.newProjectUrl + '"><i class="material-icons left">add_circle_outline</i>' + 'ADD NEW REPORT' + '</a>'
+									html: '<a class="btn-flat waves-effect waves-teal left hide-on-small-only" href="#/immap/reporting"><i class="material-icons left">keyboard_return</i>' + $filter('translate')('back_to_organization') + '</a><a class="waves-effect waves-light btn right" href="' + $scope.report.newProjectUrl + '" style="background-color: #be2126"><i class="material-icons left">add_circle_outline</i>' + 'ADD NEW REPORT' + '</a>'
 								}
 							}]
 						}]
@@ -67,8 +67,9 @@ angular.module('ngmReportHub')
 									// color: 'teal lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('active_projects'),
+									title: 'To Do',
 									icon: 'edit',
+									templateUrl:'/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
 										url: 'http://192.168.33.16:80/api/cluster/project/getProjectsList',
@@ -93,8 +94,9 @@ angular.module('ngmReportHub')
 									// color: 'lime lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('completed_projects'),
+									title:'Complete',
 									icon: 'done',
+									templateUrl: '/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
 										url: 'http://192.168.33.16:80/api/cluster/project/getProjectsList',

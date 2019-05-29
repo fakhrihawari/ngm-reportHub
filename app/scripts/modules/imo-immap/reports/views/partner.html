@@ -22,10 +22,25 @@
 		<tr ng-repeat-start="partner in project.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index">
 			<!-- Start here -->
 			<td>
-
+				<span e-form="imoform" 
+					e-name="category_id" 
+					editable-select="partner.category_id" 
+					e-placeholder="{{'select'|translate}}"
+					e-ng-options="a_t.id as a_t.name for a_t in project.partnerCategory"
+					>
+					{{project.displayPartnerCategory(project,$data,partner)}}
+				</span>
 			</td>
 			<td>
-
+				<span e-form="imoform" 
+					e-name="partner_id" 
+					editable-select="partner.partner_id" 
+					e-placeholder="{{'select'|translate}}"
+					e-ng-options="a_t.id as a_t.name for a_t in project.partner  | filter: {category_id:partner.category_id}"
+					e-ng-disabled="!partner.category_id"
+					>
+					{{project.displayPartner(project,$data,partner)}}
+				</span>
 			</td>
 			<td>
 				<span e-form="imoform" 
@@ -33,6 +48,7 @@
 				editable-select="partner.area_activity_id" 
 				e-placeholder="{{'select'|translate}}"
 				e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity"
+				e-ng-disabled="!partner.partner_id"
 				>
 				{{project.displayAreaActivity(project,$data,partner)}}
 				</span>
@@ -84,12 +100,11 @@
 				<!-- form -->
 				<form editable-form name="imoform" onshow="project.keydownSaveForm()" ng-show="imoform.$visible" onbeforesave="project.validateBeneficiariesDetailsForm( imoform, false, false )"
 				 class="form-buttons form-inline" shown="inserted == partner">
-					<button type="submit" ng-if="imoform.$visible" ng-disabled="!ngmClusterBeneficiaries.beneficiaryFormComplete( project.definition, project.report.locations ) || 
-                                  !ngmClusterTrainings.trainingFormComplete( project.report.locations ) || fsac_assessment_disabled"
+					<button type="submit" ng-if="imoform.$visible" ng-disabled="!project.supportPartnerFormComplete( project.imo_report.support_partner )"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
-					<div type="button" ng-if="imoform.$visible" ng-disabled="imoform.$waiting" ng-click="imoform.$cancel(); project.cancelEdit( $locationIndex, $beneficiaryIndex );project.activePrevReportButton()"
+					<div type="button" ng-if="imoform.$visible" ng-disabled="imoform.$waiting" ng-click="imoform.$cancel(); project.cancelEdit( 'support_partner',$partnerIndex );project.activePrevReportButton()"
 					 class="btn btn-small  lighten-1 waves-effect waves-light" title="Cancel Edit"  style="background-color: #be2126">
 						<i class="material-icons">clear</i>
 					</div>
@@ -99,9 +114,9 @@
 					 title="Edit">
 						<i class="material-icons">create</i>
 					</button>
-					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="project.removeBeneficiaryModal( $locationIndex, $beneficiaryIndex );project.activePrevReportButton()"
+					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="project.removeSupport( $partnerIndex );project.activePrevReportButton()"
 					 title="Remove" ng-disabled="!ngmClusterBeneficiaries.beneficiaryFormComplete( project.definition, project.report.locations ) || 
-                              !ngmClusterTrainings.trainingFormComplete( project.report.locations  )">
+                              !ngmClusterTrainings.trainingFormComplete( project.report.locations  )" style="background-color: #be2126">
 						<i class="material-icons">delete</i>
 					</button>
 				</div>

@@ -29,16 +29,33 @@
 .imo-report{
 	margin-top:20px;
 }
+#put-date{
+	display: none;
+}
 </style>
+<div class="row" ng-if="project.definition.project_status !== 'new'">
+	<div class="col s12 m12 l12">
+		<div style="padding:20px 20px 20px 0;">
+
+			<!--  -->
+			<a class="waves-effect waves-light btn" ng-href="#/immap/reporting/report/">
+				<i class="material-icons left">keyboard_return</i> Back to Report
+			</a>
+
+			<!-- <span class="right" style="padding-top:8px;">{{'last_updated' | translate}}: {{ project.updatedAt }}</span> -->
+
+		</div>
+	</div>
+</div>
 <div class="imo-report">
 	<div class="row">
 		<div class="col s3">
-			<div style=" position: relative;" ng-init="open= false">
-				<button class="btn-floating " ng-click="open = !open" style="background-color: #A72824" >
-					<i class=" material-icons right"> date_range</i>
-				</button>
+			<div style=" position: relative;">
+				<label class="btn-floating" style="background-color: #A72824;border-radius:10%" for="put-date"><i class=" material-icons right"> date_range</i></label>
+				<input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="project.imo_report.month" format="dd mmm, yyyy"
+				 select-years="15" min="{{ project.datepicker.maxDate }}" on-close="project.datepicker.onClose( project.imo_report )" />
 				<a ng-if="project.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
-					Report for {{project.imo_report.month| date:'MMMM'}}
+					Report for {{project.imo_report.month_date| date:'MMMM'}}
 				</a>
 				<a ng-if="!project.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
 						Please Select Month
@@ -46,12 +63,6 @@
 			</div>								
 		</div>
 		</div>
-		<div class="row">
-			<div ng-if="open" class="input-field col s3" style="margin-top:20px;">
-				<label style="margin-top:10px; color: #be2126" for="ngm-end-date">*Set Month</label>
-				<input ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="project.imo_report.month" format="dd mmm, yyyy"
-				 select-years="15" min="{{ project.datepicker.maxDate }}" on-close="project.datepicker.onClose( project.imo_report )" />
-			</div>
 		</div>
 	</div>
 </div>
@@ -142,11 +153,18 @@
 		<i class="material-icons left">done_all</i>SUBMIT
 	</button>
 </div>
-<!-- <div class="row">
-	<div class="col s12">
-
-		<input ngm-date type="text" style="color:rgba(0, 0, 0, 0.87);margin-bottom:0px;border-bottom:0px;" ng-model="project.imo_report.month"
-		 format="dd mmm, yyyy" select-years="15" max="{{ project.datepicker.maxDate }}" on-close="project.datepicker.onClose( project.imo_report )"
-		/>
+<!-- <div align="center">
+		<div class="row" style="margin-bottom: 10px;">
+			<button class="btn teal" style="background-color: #be2126" ng-click="project.saveImoReport(true)">
+				<i class="material-icons right">send</i>Save
+			</button>
+			<button class="waves-effect waves-light btn grey modal-trigger" style="background-color: #be2126" ng-click="project.saveImoReport(true)">
+				<i class="material-icons left"></i>Cancel
+			</button>
+		</div>
+	<div class="row">
+		<button class="btn" style="background-color: #be2126" ng-click="project.saveImoReport(true)">
+			<i class="material-icons left">done_all</i>SUBMIT
+		</button>
 	</div>
 </div> -->
