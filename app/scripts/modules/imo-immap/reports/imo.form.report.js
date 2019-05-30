@@ -265,6 +265,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				// add beneficiary
 				addPartner: function () {
 					$scope.inserted = {
+						file:[],
 						category_id: '',
 						partner_id: '',
 						area_activity_id:'',
@@ -351,7 +352,17 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					
 					if (row_type === 'partner') {
 						
-						if ($data.fileid && $data.category_id &&
+						// if ($data.fileid && $data.category_id &&
+						// 	$data.partner_id &&
+						// 	$data.area_activity_id &&
+						// 	$data.narative_activity_id &&
+						// 	$data.collab_id &&
+						// 	$data.product_id &&
+						// 	$data.number_products >= 0) {
+						// 	disabled = false;
+						// 	console.log(false);
+						// }
+						if ($data.file.length && $data.category_id &&
 							$data.partner_id &&
 							$data.area_activity_id &&
 							$data.narative_activity_id &&
@@ -453,23 +464,14 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						$scope.dummy = data;
 						console.log(data, $scope.setRowFile,l);
 						// set one row one file
-						if ($scope.setRowFile){
-							$scope.project.imo_report.support_partner[$scope.setRowFile].fileid = data[l-1].fileid
-							$scope.project.imo_report.support_partner[$scope.setRowFile].filename = data[l-1].filename
-							$scope.project.imo_report.support_partner[$scope.setRowFile].filename_extension = data[l-1].filename_extension;
+						if ($scope.setRowFile>=0){
+							// $scope.project.imo_report.support_partner[$scope.setRowFile].fileid = data[l-1].fileid
+							// $scope.project.imo_report.support_partner[$scope.setRowFile].filename = data[l-1].filename
+							// $scope.project.imo_report.support_partner[$scope.setRowFile].filename_extension = data[l-1].filename_extension;
+							f = data[l - 1];
+							$scope.project.imo_report.support_partner[$scope.setRowFile].file.push(f)
+							console.log($scope.project.imo_report.support_partner[$scope.setRowFile])
 						}
-						// data.forEach(function (a,i) {
-							// console.log(a,i)
-							// l=$scope.project.imo_report.support_partner.length
-							// for(x=0;x<l;x++){
-							// 	if(x === i){
-							// 		$scope.project.imo_report.support_partner[i].fileid = a.fileid
-							// 		$scope.project.imo_report.support_partner[i].fileid = a.filename
-							// 		$scope.project.imo_report.support_partner[i].filename_extension = a.filename_extension;
-							// 	}
-							// }				
-							
-						// })
 						
 					});
 				},

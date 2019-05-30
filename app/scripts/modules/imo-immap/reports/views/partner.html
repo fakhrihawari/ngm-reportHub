@@ -69,7 +69,7 @@
 
 		<tr ng-repeat-start="partner in project.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index">
 			<!-- Start here -->
-			<td>
+			<!-- <td>
 				<span ng-if="!partner.fileid">
 					<button class="btn" ng-click="project.uploadDocument.openModal('upload-file');project.setRowFileId($index)"> UPLOAD</button>
 				</span>
@@ -80,6 +80,11 @@
 						<i class="small material-icons">compare</i>
 					</button>
 				</span>
+			</td> -->
+			<td>
+				<span>
+					<button class="btn" ng-click="project.uploadDocument.openModal('upload-file');project.setRowFileId($index)"> UPLOAD</button>
+				</span>
 			</td>
 			<td>
 				<span e-form="imoform" 
@@ -87,7 +92,7 @@
 					editable-select="partner.category_id" 
 					e-placeholder="{{'select'|translate}}"
 					e-ng-options="a_t.id as a_t.name for a_t in project.partnerCategory"
-					 e-ng-disabled="!partner.fileid"
+					 e-ng-disabled="!partner.file.length"
 					>
 					{{project.displayPartnerCategory(project,$data,partner)}}
 				</span>
@@ -184,7 +189,7 @@
 			</td>
 		</tr>
 		<tr ng-repeat-end>
-			<td colspan="100">
+			<!-- <td colspan="100">
 				<div class="row">
 					<div class="col s12 m2" dir-paginate="item in dummy  | itemsPerPage: 6" pagination-id="listUpload.id">
 						<div class="card border-radius">
@@ -203,9 +208,47 @@
 								<div class=" card-title grey-text text-darken-4">
 									<i class="material-icons right" style="font-size: 18px; color: #e2e2e2;margin-top: 5px;margin-right: 5px;">close</i>
 								</div>
+								<div class="line">			
+									
+									<button class="btn-floating  wave-effect blue tooltipped-report-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
+									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv'">
+										<i class="small material-icons">compare</i>
+									</button>
+									<a class="btn-floating  wave-effect space tooltipped-report-upload" data-position="bottom" data-tooltip="{{'download'|translate}}"
+									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
+										<i class="small material-icons">cloud_download</i>
+									</a>
+									<button class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
+									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid)">
+										<i class="small material-icons">delete</i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td> -->
+			<td colspan="100" ng-if="partner.file.length">
+				<div class="row">
+					<div class="col s12 m2" dir-paginate="item in partner.file  | itemsPerPage: 6" pagination-id="listUpload.id">
+						<div class="card border-radius">
+							<div class="card-image waves-effect waves-block waves-light">
+								<img class="activator" ng-src={{ngmClusterDocument.setThumbnailfromGdrive(item.fileid)}}>
+							</div>
+							<div class="card-content">
+								<i class="material-icons left" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};margin-right: 5px;">
+									{{ngmClusterDocument.extentionIcon(item.filename_extension)}}
+								</i>
+								<span class="grey-text activator text-darken-4 " style="font-size: 12px; font-weight: 400">{{item.filename| limitTo: 12}}{{item.filenamelength
+									< 12 ? '' : '...'}} <i class="material-icons right" style="cursor: pointer; margin-left: 5px;">more_vert</i>
+								</span>
+							</div>
+							<div class="card-reveal">
+								<div class=" card-title grey-text text-darken-4">
+									<i class="material-icons right" style="font-size: 18px; color: #e2e2e2;margin-top: 5px;margin-right: 5px;">close</i>
+								</div>
 								<div class="line">
-				
-									<!-- use gdrive id file -->
+			
 									<button class="btn-floating  wave-effect blue tooltipped-report-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
 									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv'">
 										<i class="small material-icons">compare</i>
@@ -224,7 +267,6 @@
 					</div>
 				</div>
 			</td>
-			
 		</tr>
 	</table>
 
