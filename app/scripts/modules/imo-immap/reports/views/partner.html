@@ -5,11 +5,58 @@
 	.editable-wrap{
 		width: 100%;
 	}
-</style>
+		.border-radius {
+		border-radius: 6px;
+		border: 1px solid #dadce0;
+		box-shadow: none;
+	}
+	.card .border-radius {
+		min-height: 200px;
+	}
 
+	.card .card-image {
+		height: 150px;
+	}
+
+	.card .card-image img {
+		/* height: 100%;
+		width: auto; */
+		width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+	}
+
+	.card .card-reveal {
+		padding: 0;
+	}
+
+	.card .card-content {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.line {
+		display: inline-block;
+	}
+.card-reveal	.line {
+		display: inline-block;
+		padding-left: 21%;
+		margin-top: 15%;
+	}
+</style>
+<div id="close-preview-file" class="modal ">
+	<div class="modal-content">
+		<div>
+			<iframe ng-src={{ngmClusterDocument.setLink()}} style="width:600px; height:500px;" frameborder="0"></iframe>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class=" modal-action modal-close waves-effect waves-green btn-flat">{{'close_mayus1'|translate}}</a>
+	</div>
+</div>
 <div style="padding-left: 20px;">
 	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="project.imo_report.support_partner.length">
 		<tr style="font-weight: 600">
+			<td>File</td>
 			<td>Partner Category</td>
 			<td>Partner</td>
 			<td>Area of Activity</td>
@@ -19,14 +66,28 @@
 			<td>Number of Products</td>
 			<td ng-if="project.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
+
 		<tr ng-repeat-start="partner in project.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index">
 			<!-- Start here -->
+			<td>
+				<span ng-if="!partner.fileid">
+					<button class="btn" ng-click="project.uploadDocument.openModal('upload-file');project.setRowFileId($index)"> UPLOAD</button>
+				</span>
+				<span ng-if="partner.fileid">
+					<div ng-bind="partner.fileid"></div>
+					<button class="btn-floating  wave-effect blue tooltipped-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
+					 ng-disabled="item.filename_extension === '.csv'" ng-click="ngmClusterDocument.openPreview('close-preview-file',partner.fileid)">
+						<i class="small material-icons">compare</i>
+					</button>
+				</span>
+			</td>
 			<td>
 				<span e-form="imoform" 
 					e-name="category_id" 
 					editable-select="partner.category_id" 
 					e-placeholder="{{'select'|translate}}"
 					e-ng-options="a_t.id as a_t.name for a_t in project.partnerCategory"
+					 e-ng-disabled="!partner.fileid"
 					>
 					{{project.displayPartnerCategory(project,$data,partner)}}
 				</span>
@@ -122,7 +183,49 @@
 				</div>
 			</td>
 		</tr>
-		<tr ng-repeat-end></tr>
+		<tr ng-repeat-end>
+			<td colspan="100">
+				<div class="row">
+					<div class="col s12 m2" dir-paginate="item in dummy  | itemsPerPage: 6" pagination-id="listUpload.id">
+						<div class="card border-radius">
+							<div class="card-image waves-effect waves-block waves-light">
+								<img class="activator" ng-src={{ngmClusterDocument.setThumbnailfromGdrive(item.fileid)}}>
+							</div>
+							<div class="card-content">
+								<i class="material-icons left" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};margin-right: 5px;">
+									{{ngmClusterDocument.extentionIcon(item.filename_extension)}}
+								</i>
+								<span class="grey-text activator text-darken-4 " style="font-size: 12px; font-weight: 400">{{item.filename| limitTo: 12}}{{item.filenamelength
+									< 12 ? '' : '...'}} <i class="material-icons right" style="cursor: pointer; margin-left: 5px;">more_vert</i>
+								</span>
+							</div>
+							<div class="card-reveal">
+								<div class=" card-title grey-text text-darken-4">
+									<i class="material-icons right" style="font-size: 18px; color: #e2e2e2;margin-top: 5px;margin-right: 5px;">close</i>
+								</div>
+								<div class="line">
+				
+									<!-- use gdrive id file -->
+									<button class="btn-floating  wave-effect blue tooltipped-report-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
+									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv'">
+										<i class="small material-icons">compare</i>
+									</button>
+									<a class="btn-floating  wave-effect space tooltipped-report-upload" data-position="bottom" data-tooltip="{{'download'|translate}}"
+									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
+										<i class="small material-icons">cloud_download</i>
+									</a>
+									<button class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
+									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid)">
+										<i class="small material-icons">delete</i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</td>
+			
+		</tr>
 	</table>
 
 	<!-- default -->
