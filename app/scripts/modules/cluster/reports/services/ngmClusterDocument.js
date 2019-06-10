@@ -353,7 +353,8 @@ angular.module('ngmReportHub')
 									document.querySelector(".percent-upload").style.display = 'none';
 									document.querySelector(".dz-default.dz-message").style.display = 'block';
 									$('#upload-file').closeModal({ dismissible: true });
-									$rootScope.$broadcast('refresh:listUpload');									
+									var file_upload = this.getAcceptedFiles().length;
+									$rootScope.$broadcast('refresh:listUpload',{uploaded_file:file_upload});									
 								}
 							},
 							error: function (file, response) {

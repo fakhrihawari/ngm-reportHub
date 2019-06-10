@@ -16,8 +16,8 @@ angular.module('ngmReportHub')
 		'$timeout',
 		'ngmAuth',
 		'ngmData',
-		'ngmUser', '$translate', '$filter',
-		function ($scope, $route, $q, $http, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter) {
+		'ngmUser', '$translate', '$filter', 'imoReportHelper',
+		function ($scope, $route, $q, $http, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter, imoReportHelper) {
 			this.awesomeThings = [
 				'HTML5 Boilerplate',
 				'AngularJS',
@@ -219,7 +219,25 @@ angular.module('ngmReportHub')
 						partner: " ORGA",
 						partner_id: "02",
 						product_id: "01",
-						product_name: "Infographic"
+						product_name: "Infographic",
+						file: [{admin0pcode: "AF",
+									adminRpcode: "EMRO",
+									cluster_id: "health",
+									createdAt: "2019-06-10T02:41:58.702Z",
+									fileid: "1fIpwiNVX-HbRV2Q62Hb3Mo_KM_3T4uuV",
+									fileid_local: "1fd73000-4568-4050-a89d-00ed87a1a554.PNG",
+									filename: "leave-balance.2PNG.PNG",
+									filename_extension: ".PNG",
+									fileowner: "fakhrihawari",
+									id: "5cfdc376ee6ec8d107a11755",
+									mime_type: "image/png",
+									organization_tag: "immap",
+									project_end_date: "2018-12-31T00:00:00.000Z",
+									project_id: "pln123lstrk456coba78",
+									project_start_date: "2018-01-01T00:00:00.000Z",
+									report_id: "fkhrhwrrfn123test021",
+									reporting_period: "2018-12-01T00:00:00.000Z",
+									updatedAt: "2019-06-10T02:41:58.702Z"}]
 					}], planed_activity: [{
 						area_activity_id: "01",
 						area_activity_name: "Information Management",
@@ -236,13 +254,15 @@ angular.module('ngmReportHub')
 					rating:5,
 					notes:'SWAG',
 					month_date:'2019-06-21',
-					month:'1'
+					month:'6'
 				}
 			}else{
-				$scope.data = {
-					support_partner: [], planed_activity: []
+				// $scope.data = {
+				// 	support_partner: [], planed_activity: []
 					
-				};
+				// };
+				$scope.data = imoReportHelper.getNewForm(ngmUser.get());
+				console.log($scope.data)
 			}
 
 			// taost for user

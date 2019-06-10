@@ -53,6 +53,20 @@
 		<a class=" modal-action modal-close waves-effect waves-green btn-flat">{{'close_mayus1'|translate}}</a>
 	</div>
 </div>
+<div id="remove-modal" class="modal">
+	<div class="modal-content">
+		<div class="center">
+			<i class="medium material-icons" style="color:#f44336">delete</i>
+			<h5 style="font-weight:300;"> {{'remove_this_file'|translate}}</h5>
+		</div>
+
+	</div>
+	<div class="modal-footer">
+		<a class=" modal-action modal-close waves-effect waves-green btn-flat">{{'close_mayus1'|translate}}</a>
+		<!-- <a ng-click="ngmClusterDocument.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a> -->
+		<a ng-click="ngmClusterDocument.removeFile();project.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a>
+	</div>
+</div>
 <div style="padding-left: 20px;">
 	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="project.imo_report.support_partner.length">
 		<tr style="font-weight: 600">
@@ -258,7 +272,7 @@
 										<i class="small material-icons">cloud_download</i>
 									</a>
 									<button class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
-									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid)">
+									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);project.setRemoveRowFile($partnerIndex,item.fileid)">
 										<i class="small material-icons">delete</i>
 									</button>
 								</div>

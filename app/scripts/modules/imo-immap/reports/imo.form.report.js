@@ -165,11 +165,27 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 
 				// ################################STARt HERe
 				// dummy-date
-				partnerCategory: [{ id: '01', name: ' Management' }, { id: '02', name: 'Coordination' }, { id: '03', name: 'data' }],
-				partner: [{ id: '02', category_id: '01', name: ' ORGA' }, { id: '02', category_id: '02', name: 'ORGB' }, { id: '03', category_id: '03', name: 'ORGC' }],
-				areaActivity: [{ id: '01', name: 'Information Management' }, { id: '02', name: 'Coordination' }, { id: '03',name: 'DRR' }],
+				// partnerCategory: [{ id: '01', name: ' Management' }, { id: '02', name: 'Coordination' }, { id: '03', name: 'data' }],
+				partnerCategory:[
+					{ id: 'humanitarian_partner', name: 'Humanitarian Partner'},
+					{ id: 'development_partner', name: 'Development Partner' },
+					{ id: 'united_nations_agency', name: 'United Nations Agency' },
+					{ id: 'government_institution', name: 'Government Institution' },
+					{ id: 'humanitarian_partner', name: 'Cluster, Sub-Cluster or Working Group' },
+					{ id: 'other', name: 'Other' },
+				],
+				partner: [{ id: '02', category_id: 'development_partner', name: ' ORGA' }, { id: '02', category_id: 'humanitarian_partner', name: 'ORGB' }, { id: '03', category_id: 'united_nations_agency', name: 'ORGC' }],
+				// areaActivity: [{ id: '01', name: 'Information Management' }, { id: '02', name: 'Coordination' }, { id: '03',name: 'DRR' }],
+				areaActivity: [{ id: 'information_management_coordination', name:'Information Management and Coordination Support'},
+											 {id:'drr',name:'DRR'}],
 				narativeActivity: [{ id: '01', name: 'Information Management Narative' }, { id: '02', name: 'Coordination Narative' }, { id: '03', name: 'DRR Narative' }],
-				products: [{ id: '01', name: 'Infographic' }, { id: '02', name: 'Map' }, { id: '03', name: 'other' }],
+				// products: [{ id: '01', name: 'Infographic' }, { id: '02', name: 'Map' }, { id: '03', name: 'other' }],
+				products:[{id:'static_infographic',name:'Static Infographic'},
+									{id:'dynamic_infographic',name:'Dynamic Infographic'},
+									{id:'training',name:'Training'},
+									{id:'map',name:'Map'},
+									{id:'printed_product',name:'Printed Product'},
+									{id:'meeting',name:'Meeting'}],
 				collab: [{ id: '01', name: 'YY' }, { id: '02', name: 'CC' }, { id: '03', name: 'AA' }],
 				rating:[1,2,3,4,5],
 
@@ -443,9 +459,13 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				setTokenUpload: function () {
 					ngmClusterDocument.setParam($scope.project.user.token);
 				},
+				setRemoveRowFile: function ($index, id) {
+					$scope.removeFileRow = $index;
+					$scope.removeFileId = id;
+				},
 				uploadDocument: ngmClusterDocument.uploadDocument({
 					project_id: 'pln123lstrk456coba78',
-					report_id: 'fkhrhwrrfn123test02',
+					report_id: 'fkhrhwrrfn123test021',
 					username: ngmUser.get().username,
 					organization_tag: config.report.organization_tag,
 					cluster_id: config.report.cluster_id,
@@ -458,30 +478,33 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				getDocument: function () {
 					ngmData.get({
 						method: 'GET',
-						url: ngmAuth.LOCATION + '/api/listReportDocuments/fkhrhwrrfn123test02'
+						url: ngmAuth.LOCATION + '/api/listReportDocuments/fkhrhwrrfn123test021'
 					}).then(function (data) {
 						l=data.length
 						$scope.dummy = data;
-						console.log(data, $scope.setRowFile,l);
-						// set one row one file
-						if ($scope.setRowFile>=0){
-							// $scope.project.imo_report.support_partner[$scope.setRowFile].fileid = data[l-1].fileid
-							// $scope.project.imo_report.support_partner[$scope.setRowFile].filename = data[l-1].filename
-							// $scope.project.imo_report.support_partner[$scope.setRowFile].filename_extension = data[l-1].filename_extension;
-							f = data[l - 1];
-							$scope.project.imo_report.support_partner[$scope.setRowFile].file.push(f)
-							console.log($scope.project.imo_report.support_partner[$scope.setRowFile])
-						}
+						data = data.slice($scope.file_uploaded);
+						data.forEach(element => {
+							$scope.project.imo_report.support_partner[$scope.setRowFile].file.push(element)
+						});
 						
 					});
 				},
+				removeFile:function(){
+					$scope.project.imo_report.support_partner[$scope.removeFileRow].file.forEach((el,i)=>{
+						if (el.fileid=== $scope.removeFileId){
+							$scope.project.imo_report.support_partner[$scope.removeFileRow].file.splice(i,1);
+						}
+					})
+				}
 			}
 
 			// init project
 			$scope.project.init();
-			$scope.project.getDocument()
-			$scope.$on('refresh:listUpload', function () {
+			// $scope.project.getDocument()
+			$scope.$on('refresh:listUpload', function (event, args) {
 				$scope.project.getDocument();
+				$scope.file_uploaded = -Math.abs(args.uploaded_file);
+				console.log(args.uploaded_file);
 			})
 		}
 
