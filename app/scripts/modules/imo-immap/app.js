@@ -77,6 +77,15 @@ angular
 					}],
 				}
 			})
+			.when('/immap/reporting/team',{
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoTeamCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
 			.when('/immap/reporting/team/license', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamLicenseCtrl',

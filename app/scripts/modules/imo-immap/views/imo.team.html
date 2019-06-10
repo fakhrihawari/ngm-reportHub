@@ -1,0 +1,116 @@
+<style>
+	.count,
+	.label {
+		z-index: 1 !important;
+	}
+
+	.ng-table th.sortable .sort-indicator {
+		color: #2196F3;
+		font-weight: 400;
+	}
+
+	.pagination li.active {
+		background-color: #009688;
+	}
+
+	.modal-content .ng-table-pager {
+		display: none;
+	}
+</style>
+<div id="manage-modal" class="modal" style="width:80%">
+	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+		<ul class="collection with-header" style="margin-top:0">
+			<li class="collection-header teal lighten-1" style="border-bottom: 0">
+				<h5 style="color: #ffffff;font-weight:300;">
+					<i class="material-icons left" style="font-size: 25px">account_circle</i>
+					Manage User Access for {{editedUser.name? editedUser.name: editedUser.username}}
+				</h5>
+			</li>
+		</ul>
+
+		<div class="row" style="margin-left: 10px;margin-right:10px;">
+			<div class="col s4" ng-repeat="role in table.editableRole">
+				<input type="checkbox" class="filled-in" id={{role}} value={{role}} ng-checked="editedUser.roles.indexOf(role) > -1" ng-disabled="role === 'USER'"
+				 ng-click="table.manageUser(role,editedUser)" />
+				<label for="{{role}}" style="color: #000000; font-weight: 500;">{{role}}</label>
+				<div class="teal-text" style="margin-left: 35px">{{ table.getUserRoleDescriptions( role ) }}</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
+		<div class="modal-action modal-close wave-effects wave-green btn" ng-click="table.saveEditAccess(editedUser)">Save</div>
+	</div>
+</div>
+
+
+<!-- ngTable -->
+<div class="row" ng-if="data.length">
+	<div class="col s12 m12 l12">
+		<div class="card">
+			<ul class="collection with-header">
+				<li class="{{ table.headerClass }}" style="{{ table.headerStyle }}">
+					<h5 class="report-work-title {{ table.headerText }}">
+						<i class="material-icons left">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5>
+				</li>
+				<li class="collection-item avatar" style="padding:10px;">
+
+					<!-- if data -->
+					<div ng-if="data.length">
+						<table class="centered highlight responsive-table" ng-table="table.tableParams">
+							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
+								<td data-title="'country_mayus'|translate" sortable="'admin0name'" ng-click="table.onClick(row)">
+									{{ row.admin0name }}
+								</td>
+								<td data-title="'organization' | translate" sortable="'organization'" ng-click="table.onClick(row)">
+									{{ row.organization }}
+								</td>
+								<td data-title="'name_mayus' | translate" sortable="'name'" ng-click="table.onClick(row)">
+									{{ row.name }}
+								</td>
+								<td data-title="'position'|translate" sortable="'position'" ng-click="table.onClick(row)">
+
+									{{ row.position }}
+								</td>
+								<td data-title="'Sector'" sortable="'cluster'" ng-click="table.onClick(row)">
+									{{ row.cluster }}
+								</td>
+								<td data-title="'username'|translate" sortable="'username'" ng-click="table.onClick(row)">
+									{{ row.username }}
+								</td>
+								<td data-title="'phone'|translate" sortable="'phone'" ng-click="table.onClick(row)">
+									{{ row.phone }}
+								</td>
+								<td data-title="'updated'|translate" sortable="'updatedAt'" ng-click="table.onClick(row)">
+									{{ row.updatedAt | date:'medium' }}
+								</td>
+								<td data-title="'edit'|translate" sortable="'name'" ng-if="false">
+									<div title="'delete'|translate">
+										<i class="material-icons">delete</i>
+									</div>
+								</td>
+								<td data-title="'role'|translate" sortable="'roles'" ng-if="!table.formDisabled && table.editableRole">
+									<p>
+										<span ng-repeat="shift in row.roles track by $index ">
+											{{shift}}{{$last ? '' : ', '}}
+										</span>
+									</p>
+								</td>
+								<td data-title="'edit_role'|translate" sortable="'name'" ng-if="!table.formDisabled && table.editableRole">
+									<button class="btn waves-effect waves-teal" style="font-size: 12px;height: 30px; line-height: 30px" ng-click="table.openModal('manage-modal');table.getUser(row)"
+									 ng-disabled="table.btnDisabled()">
+										{{'manage_user'|translate}}
+									</button>
+									<!-- <div title="Edit Role">
+										<i class="material-icons">edit</i>
+									</div> -->
+								</td>
+							</tr>
+						</table>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
