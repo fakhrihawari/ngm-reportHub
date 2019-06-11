@@ -14,12 +14,12 @@
 			<td>Partner Category</td>
 			<td>Partner</td>
 			<td>Area of Activity</td>
-			<td>Narative of Activity</td>
+			<!-- <td>Narative of Activity</td> -->
 			<td>Products</td>
 			<td>Number of Products</td>
 			<td ng-if="project.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
-		<tr ng-repeat-start="planned in project.imo_report.planed_activity track by $index" ng-init="$plannedIndex=$index">
+		<tr ng-repeat-start="planned in project.imo_report.planed_activity track by $index" ng-init="$plannedIndex=$index" style="border: 0px">
 			<!-- Start here -->
 			<td>
 				<span e-form="imoform" 
@@ -49,12 +49,12 @@
 				</span>
 
 			</td>
-			<td>
+			<!-- <td>
 				<span e-form="imoform" e-name="narative_activity_id" editable-select="planned.narative_activity_id" e-placeholder="{{'select'|translate}}"
 				 e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity" e-ng-disabled="!planned.area_activity_id">
 					{{project.displayPlannedNarativeActivity(project,$data,planned)}}
 				</span>
-			</td>
+			</td> -->
 			<td>
 				<span e-form="imoform" e-name="product_id" editable-select="planned.product_id" e-placeholder="{{'select'|translate}}" e-ng-options="a_t.id as a_t.name for a_t in project.products"
 				 e-ng-disabled="!planned.narative_activity_id">
@@ -92,6 +92,14 @@
 						<i class="material-icons">delete</i>
 					</button>
 				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="100" class=" card" style="padding: 20px">
+				<h6 style="font-weight: 600;">Narative *</h6>
+				<span editable-text="planned.narative_activity_id" e-name="narative" e-form="imoform">
+					{{project.displayPlannedNarativeActivityText($data,planned)}}
+				</span>
 			</td>
 		</tr>
 		<tr ng-repeat-end></tr>

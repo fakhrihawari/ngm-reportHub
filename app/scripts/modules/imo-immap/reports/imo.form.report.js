@@ -226,6 +226,10 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					}
 					return selected.length ? selected[0].name : '-';
 				},
+				displayNarativeActivityText: function ($data, $planned) {
+					if ($data) { $planned.narative_activity_id = $data; }
+					return $planned.narative_activity_id ? $planned.narative_activity_id : '';
+				},
 				displayProducts: function (project, $data, $partner) {
 					var selected = [];
 					$partner.product_id = $data;
@@ -261,6 +265,10 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						$planned.narative_activity_name = selected.length ? selected[0].name : '-';
 					}
 					return selected.length ? selected[0].name : '-';
+				},
+				displayPlannedNarativeActivityText: function ($data, $planned) {
+					if ($data) { $planned.narative_activity_id = $data; }
+					return $planned.narative_activity_id ? $planned.narative_activity_id : '';
 				},
 				displayPlannedProducts: function (project, $data, $planned) {
 					var selected = [];

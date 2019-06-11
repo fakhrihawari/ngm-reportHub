@@ -35,8 +35,12 @@ angular.module('ngmReportHub')
 					}
 				}
 			},
+			openModal: function (modal) {
+				$('#' + modal).openModal({ dismissible: false });
+				console.log("MODAL")
+			},
 			// init()
-			init: function (user) {
+			init: function (user,license) {
 
 				// report dashboard model
 				$scope.model = {
@@ -59,28 +63,42 @@ angular.module('ngmReportHub')
 					},
 					rows: [{
 						columns: [{
-							styleClass: 's12',
+							styleClass: 's12 m12 l12',
 							widgets: [{
-								type: 'table',
-								card: 'panel',
-								style: 'padding:0px; height: ' + $scope.dashboard.ngm.style.height + 'px;',
+								type: 'license.form',
 								config: {
 									style: $scope.dashboard.ngm.style,
-									headerClass: 'collection-header lighten-2',
-									headerStyle: 'background-color:' + $scope.dashboard.ngm.style.defaultPrimaryColor,
-									headerText: 'white-text',
-									headerIcon: 'group',
-									headerTitle: 'List License',
-									templateUrl: '/scripts/modules/imo-immap/views/imo.license.html',
-									tableOptions: {
-										count: 10,
-										sorting: { updatedAt: "desc" }
-									},
-									request: $scope.dashboard.getLicenseRequest(),
+									license: license
 								}
 							}]
 						}]
-					}, {
+					},
+					// 	{
+					// 	columns: [{
+					// 		styleClass: 's12',
+					// 		widgets: [{
+					// 			type: 'table',
+					// 			card: 'panel',
+					// 			style: 'padding:0px; height: ' + $scope.dashboard.ngm.style.height + 'px;',
+					// 			config: {
+					// 				style: $scope.dashboard.ngm.style,
+					// 				headerClass: 'collection-header lighten-2',
+					// 				headerStyle: 'background-color:' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+					// 				headerText: 'white-text',
+					// 				headerIcon: 'group',
+					// 				headerTitle: 'List License',
+					// 				openModal: function(modal){$scope.dashboard.openModal(modal)},
+					// 				templateUrl: '/scripts/modules/imo-immap/views/imo.license.html',
+					// 				tableOptions: {
+					// 					count: 10,
+					// 					sorting: { updatedAt: "desc" }
+					// 				},
+					// 				request: $scope.dashboard.getLicenseRequest(),
+					// 			}
+					// 		}]
+					// 	}]
+					// }, 
+					{
 						columns: [{
 							styleClass: 's12 m12 l12',
 							widgets: [{
@@ -108,13 +126,17 @@ angular.module('ngmReportHub')
 			ngmData
 				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/getUserByUsername?username=' + $scope.dashboard.username })
 				.then(function (user) {
+					// should get from api
+					var license = []
 					// load with user profile
-					$scope.dashboard.init(user);
+					$scope.dashboard.init(user, license);
 				});
 
 		} else {
 			// load with current user profile
-			$scope.dashboard.init($scope.dashboard.user);
+			// should get from api
+			var license=[]
+			$scope.dashboard.init($scope.dashboard.user,license);
 
 		}
 

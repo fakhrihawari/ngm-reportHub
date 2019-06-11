@@ -69,19 +69,19 @@
 </div>
 <div style="padding-left: 20px;">
 	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="project.imo_report.support_partner.length">
-		<tr style="font-weight: 600">
+		<tr style="font-weight: 600;">
 			<td>File</td>
 			<td>Partner Category</td>
 			<td>Partner</td>
 			<td>Area of Activity</td>
-			<td>Narative of Activity</td>
+			<!-- <td>Narative of Activity</td> -->
 			<td>Products</td>
 			<td>Colaboration With</td>
 			<td>Number of Products</td>
 			<td ng-if="project.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
 
-		<tr ng-repeat-start="partner in project.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index">
+		<tr ng-repeat-start="partner in project.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index" style="border: 0px">
 			<!-- Start here -->
 			<!-- <td>
 				<span ng-if="!partner.fileid">
@@ -134,7 +134,7 @@
 				</span>
 
 			</td>
-			<td>
+			<!-- <td>
 				<span e-form="imoform" 
 					e-name="narative_activity_id" 
 					editable-select="partner.narative_activity_id" 
@@ -143,7 +143,7 @@
 					e-ng-disabled="!partner.area_activity_id">
 							 {{project.displayNarativeActivity(project,$data,partner)}}
 				</span>				
-			</td>
+			</td> -->
 			<td>
 				<span e-form="imoform" 
 					e-name="product_id" 
@@ -201,6 +201,20 @@
 					</button>
 				</div>
 			</td>
+		</tr>
+		<!-- <tr>
+			<span e-form="imoform" e-name="narative_activity_id" editable-text="partner.narative_activity_id" e-placeholder="{{'select'|translate}}"
+			 e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity" e-ng-disabled="!partner.area_activity_id">
+				{{project.displayNarativeActivity(project,$data,partner)}}
+			</span>
+		</tr> -->
+		<tr style="border: 0px">
+				<td colspan="100" class=" card" style="padding: 20px">
+					<h6 style="font-weight: 600;">Narative *</h6>
+					<span editable-text="partner.narative_activity_id" e-name="narative" e-form="imoform">
+						 {{project.displayNarativeActivityText($data,partner)}}
+					</span>
+				</td>
 		</tr>
 		<tr ng-repeat-end>
 			<!-- <td colspan="100">

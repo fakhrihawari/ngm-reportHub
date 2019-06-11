@@ -35,6 +35,7 @@ angular
 		'ngm.widget.organization.stocks.list',
 		'ngm.widget.organization.stock',
 		'ngm.widget.imo.report',
+		'ngm.widget.license.form',
 		// modules
 		'ngmCluster',
 		'ngmEthiopia',

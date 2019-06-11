@@ -1,0 +1,113 @@
+<div class="row">
+	<div class="col s12 m12 l12">
+		<div class="card">
+			<ul class="collection with-header">
+
+				<li class="collection-header " style="background-color: #be2126">
+					<h5 class="report-work-title" style="color: #fff">
+						<i class="material-icons left">attach_money</i> License
+					</h5>
+				</li>
+
+				<li class="collection-item avatar">
+
+					<p style="padding:10px;">
+						Add a New ROW of License you got
+					</p>
+
+					<div class="row">
+						<div class="col s12 card">
+							<div style="padding-top: 10px; padding-left: 40px;">
+
+								<table class="bordered responsive-table" ng-show="project.license.length" >
+									<tr>
+										<td>License</td>
+										<td>Star Date</td>
+										<td>Expired Date</td>
+										<td>Status</td>
+										<td>Edit</td>
+									</tr>
+									<tr ng-repeat="l in project.license track by $index">
+										<td>
+											<!-- project_donor_id -->
+											<span e-form="licenseform" 
+												e-name="category_id" 
+												editable-select="l.license_id" 
+												e-placeholder="{{'select'|translate}}"
+												e-ng-options="a_t.id as a_t.name for a_t in project.license_list">
+												{{ project.displayLicense( project,$data, l ) }}
+											</span>
+										</td>
+										<td>
+											<!-- project_donor_id -->
+											<input ngm-date
+                          type="text"
+                          style="color:rgba(0, 0, 0, 0.87);margin-bottom:0px;border-bottom:0px;"
+                          ng-model="l.start_date"
+                          format="dd mmm, yyyy"
+                          select-years="15"
+                          ng-disabled="!licenseform.$visible"
+                          on-close="project.datepicker.onClose(l,'start')"/>
+										</td>
+										<td>
+											<!-- project_donor_id -->
+												<input ngm-date
+                          type="text"
+                          style="color:rgba(0, 0, 0, 0.87);margin-bottom:0px;border-bottom:0px;"
+                          ng-model="l.expired_date"
+                          format="dd mmm, yyyy"
+                          select-years="15"
+                          min="{{l.start_date }}"
+                          ng-disabled="!licenseform.$visible"
+                          on-close="project.datepicker.onClose(l,'exp')"/>
+										</td>
+										<td>
+											<!-- project_donor_id -->
+											<span e-form="licenseform" 
+												e-name="category_id" 
+												editable-select="l.status" 
+												e-placeholder="{{'select'|translate}}"
+												e-ng-options=" o as o for o in project.status">
+												{{ project.displayStatus( project,$data, l ) }}
+											</span>
+										</td>
+										<td style="white-space: nowrap" ng-show="project.definition.project_status !== 'complete'">
+											<!-- form -->
+											<form editable-form name="licenseform" onshow="project.keydownSaveForm()" ng-show="licenseform.$visible" onbeforesave="project.save()"
+											 class="form-buttons form-inline" shown="inserted === l">
+												<button type="submit" ng-if="licenseform.$visible" class="btn btn-small waves-effect waves-light save" title="Save" ng-disabled="(!l.license_id) || (!l.start_date) ||(!l.expired_date) ||(!l.status)">
+													<i class="material-icons">save</i>
+												</button>
+												<div type="button" ng-if="licenseform.$visible" ng-disabled="licenseform.$waiting" ng-click="licenseform.$cancel(); project.cancelEdit( $index )"
+												  class="btn btn-small blue lighten-1 waves-effect waves-light " title="Cancel Edit ">
+										                          <i class="material-icons ">clear</i>
+										                        </div>
+										                      </form>
+										                      <div class="buttons " ng-if="!licenseform.$visible ">
+										                        <div class="btn btn-small waves-effect waves-light " ng-click="licenseform.$show() " title="Edit ">
+										                          <i class="material-icons ">create</i>
+										                        </div>
+										                        <div class="btn btn-small red lighten-2 waves-effect waves-light " title="Remove "
+																								 ng-disabled="!l.license_id">
+										                          <i class="material-icons ">delete</i>
+										                        </div>
+										                      </div>  
+										                    </td>
+
+									</tr>
+								</table>
+
+								<button class="btn" style="margin:20px 0px;" ng-click="project.addLicense()">
+									<i class="material-icons left">add</i>{{'add_row' | translate}}
+								</button>
+
+							</div>
+						</div>
+					</div>
+
+				</li>
+
+			</ul>
+		</div>
+	</div>
+</div>
