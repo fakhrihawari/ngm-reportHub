@@ -5,7 +5,7 @@
 
 				<li class="collection-header " style="background-color: #be2126">
 					<h5 class="report-work-title" style="color: #fff">
-						<i class="material-icons left">attach_money</i> License
+						<i class="material-icons left">view_list</i> License
 					</h5>
 				</li>
 
@@ -21,6 +21,7 @@
 
 								<table class="bordered responsive-table" ng-show="project.license.length" >
 									<tr>
+										<td></td>
 										<td>License</td>
 										<td>Star Date</td>
 										<td>Expired Date</td>
@@ -28,6 +29,7 @@
 										<td>Edit</td>
 									</tr>
 									<tr ng-repeat="l in project.license track by $index">
+										<td><span><i class="material-icons" style="color: #be2126">insert_drive_file</i></span></td>
 										<td>
 											<!-- project_donor_id -->
 											<span e-form="licenseform" 

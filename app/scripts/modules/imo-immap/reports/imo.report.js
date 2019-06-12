@@ -207,6 +207,7 @@ angular.module('ngmReportHub')
 				console.log($route.current.params);
 				$scope.data = {
 					support_partner: [{
+						id:'1s2w3erhshsh',
 						area_activity_id: "01",
 						area_activity_name: "Information Management",
 						category_id: "01",
@@ -239,6 +240,7 @@ angular.module('ngmReportHub')
 									reporting_period: "2018-12-01T00:00:00.000Z",
 									updatedAt: "2019-06-10T02:41:58.702Z"}]
 					}], planed_activity: [{
+						id:'qw@#$1234mn',
 						area_activity_id: "01",
 						area_activity_name: "Information Management",
 						category_id: "01",

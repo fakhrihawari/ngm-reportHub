@@ -97,7 +97,7 @@
 			</td> -->
 			<td>
 				<span>
-					<button class="btn" ng-click="project.uploadDocument.openModal('upload-file');project.setRowFileId($index)"> UPLOAD</button>
+					<button class="btn" ng-click="project.uploadDocument.openModal('upload-file');project.setRowFileId($index)" ng-disabled="!imoform.$visible"> UPLOAD</button>
 				</span>
 			</td>
 			<td>
@@ -211,7 +211,7 @@
 		<tr style="border: 0px">
 				<td colspan="100" class=" card" style="padding: 20px">
 					<h6 style="font-weight: 600;">Narative *</h6>
-					<span editable-text="partner.narative_activity_id" e-name="narative" e-form="imoform">
+					<span editable-text="partner.narative_activity_id" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_activity_id">
 						 {{project.displayNarativeActivityText($data,partner)}}
 					</span>
 				</td>
@@ -285,7 +285,7 @@
 									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
 										<i class="small material-icons">cloud_download</i>
 									</a>
-									<button class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
+									<button ng-disabled="!imoform.$visible" class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
 									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);project.setRemoveRowFile($partnerIndex,item.fileid)">
 										<i class="small material-icons">delete</i>
 									</button>
