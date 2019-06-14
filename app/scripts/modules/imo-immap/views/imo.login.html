@@ -75,35 +75,9 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<i class="material-icons prefix country">person_pin</i>
-						<select id="ngm-country" ng-options="location.admin0pcode as location.admin0name for location in panel.adminRegion | orderBy:'admin0name'"
-						 ng-model="panel.user.admin0pcode" ng-change="panel.clusterByCountry()">{{'select_country' | translate}}
-							<option value="">{{'select_country' | translate}}</option>
-				
-						</select>
-						<label for="ngm-country">{{'country' | translate}}</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
 						<i class="material-icons prefix">supervisor_account</i>
-						<input id="ngm-position" type="text" class="validate" ng-model="panel.user.user" ng-disabled="panel.formDisabled" required>
-						<label for="ngm-position">Full Name</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<i class="material-icons prefix">supervisor_account</i>
-						<input id="ngm-position" type="text" class="validate" ng-model="panel.user.username" ng-disabled="panel.formDisabled"
-						 required>
+						<input id="ngm-position" type="text" class="validate" ng-model="panel.user.username" ng-disabled="panel.formDisabled" required>
 						<label for="ngm-position">username</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<i class="material-icons prefix">email</i>
-						<input id="ngm-email" type="email" class="validate" ng-model="panel.user.email" ng-disabled="panel.formDisabled" required>
-						<label for="ngm-email">{{'email' | translate}}</label>
 					</div>
 				</div>
 				<div class="row">
@@ -116,10 +90,10 @@
 
 				<div class="action center">
 					<div class="action center">
-						<button type="submit" id="login-register"  class="btn btn-large waves-effect waves-teal"
-						 ng-disabled="imoLoginForm.$invalid" ng-click="panel.register()">
+						<button type="submit" id="login-register" class="btn btn-large waves-effect waves-teal" ng-disabled="imoLoginForm.$invalid"
+						 ng-click="panel.login(imoLoginForm)">
 							<i class="material-icons right">keyboard_arrow_right</i>
-							{{'register' | translate}}!
+							{{'login' | translate}}!1
 						</button>
 					</div>
 				</div>
@@ -132,7 +106,7 @@
 </div>
 <script>
 	setTimeout(function () {
-			$('select').material_select();
-			// $('.carousel.carousel-slider').carousel({ full_width: true });
-		}, 100);
+		$('select').material_select();
+		// $('.carousel.carousel-slider').carousel({ full_width: true });
+	}, 100);
 </script>

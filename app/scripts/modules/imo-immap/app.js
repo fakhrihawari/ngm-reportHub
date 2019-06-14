@@ -28,12 +28,30 @@ angular
 					}],
 				}
 			})
+			.when('/immap/reporting/register', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoRegisterCtrl',
+				resolve: {
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAnonymous();
+					}],
+				}
+			})
 			.when('/immap/reporting/login', {
 				templateUrl: '/views/app/dashboard.html',
-				controller: 'DashboardLoginCtrl',
+				controller: 'ImoLoginCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAnonymous();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAnonymous();
+					}],
+				}
+			})
+			.when('/immap/reporting/activation', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoActivationCtrl',
+				resolve: {
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAnonymous();
 					}],
 				}
 			})
