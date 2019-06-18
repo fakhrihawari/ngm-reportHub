@@ -44,7 +44,7 @@ angular.module('ngmReportHub')
 				subtitle: {
 					'class': 'col s12 m12 l12 report-subtitle',
 					html: true,
-					title: $filter('translate')('please register to continue') + '</span>',
+					title: 'Please Register to Continue',
 				}
 			},
 			rows: [{

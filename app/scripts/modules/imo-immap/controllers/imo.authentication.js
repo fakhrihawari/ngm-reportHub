@@ -295,8 +295,7 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 								// go to default org page
 								$location.path('/immap/reporting/activation')
 								$timeout(function () {
-
-									Materialize.toast($filter('translate')('welcome') + ' ' + result.username + ', ' + $filter('translate')('time_to_create_a_project'), 6000, 'success');
+									Materialize.toast('Register Success !', 6000, 'success');
 								}, 2000);
 							}
 
@@ -441,33 +440,33 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 						}
 
 						//Colombia Clusters
-						if (var4wplusrh === "4wPlus") {
+						// if (var4wplusrh === "4wPlus") {
 
-							$scope.panel.cluster = {
-								'cvwg': { cluster: 'MPC' },
-								//'agriculture': { cluster: 'Agricultura' },
-								'albergues': { cluster: 'Albergues' },
-								//'cwcwg': { cluster: 'CwCWG' },
-								//'coordination': { cluster: 'Coordinación' },
-								'education': { cluster: 'Educación en Emergencias (EeE)' },
-								//'eiewg': { cluster: 'EiEWG' },
-								//'emergency_telecommunications': { cluster: 'Emergencia de Telecomunicaciones' },
-								//'esnfi': { cluster: 'ESNFI' },
-								//'fsac': { cluster: 'FSAC' },
-								'san': { cluster: 'Seguridad Alimentaria y Nutrición (SAN)' },
-								'health': { cluster: 'Salud' },
-								//'logistics': { cluster: 'Logísticas' },
-								//'smsd': { cluster: 'Sitio de Administración y Sitio de Desarrollo' },
-								//'nutrition': { cluster: 'Nutrición' },
-								'protection': { cluster: 'Protección' },
-								//'rnr_chapter': { cluster: 'R&R Chapter' },
-								'wash': { cluster: 'WASH' },
-								'recuperacion_temprana': { cluster: 'Recuperación Temprana' },
-								'undaf': { cluster: 'UNDAF' }
+						// 	$scope.panel.cluster = {
+						// 		'cvwg': { cluster: 'MPC' },
+						// 		//'agriculture': { cluster: 'Agricultura' },
+						// 		'albergues': { cluster: 'Albergues' },
+						// 		//'cwcwg': { cluster: 'CwCWG' },
+						// 		//'coordination': { cluster: 'Coordinación' },
+						// 		'education': { cluster: 'Educación en Emergencias (EeE)' },
+						// 		//'eiewg': { cluster: 'EiEWG' },
+						// 		//'emergency_telecommunications': { cluster: 'Emergencia de Telecomunicaciones' },
+						// 		//'esnfi': { cluster: 'ESNFI' },
+						// 		//'fsac': { cluster: 'FSAC' },
+						// 		'san': { cluster: 'Seguridad Alimentaria y Nutrición (SAN)' },
+						// 		'health': { cluster: 'Salud' },
+						// 		//'logistics': { cluster: 'Logísticas' },
+						// 		//'smsd': { cluster: 'Sitio de Administración y Sitio de Desarrollo' },
+						// 		//'nutrition': { cluster: 'Nutrición' },
+						// 		'protection': { cluster: 'Protección' },
+						// 		//'rnr_chapter': { cluster: 'R&R Chapter' },
+						// 		'wash': { cluster: 'WASH' },
+						// 		'recuperacion_temprana': { cluster: 'Recuperación Temprana' },
+						// 		'undaf': { cluster: 'UNDAF' }
 
-							}
+						// 	}
 
-						}
+						// }
 
 					}
 
@@ -562,7 +561,6 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 
 			// merge defaults with config
 			$scope.panel = angular.merge({}, $scope.panel, config);
-			console.log($scope.panel.adminRegion)
 			// get organizations
 			// if ( !localStorage.getObject( 'organizations') ){
 
@@ -572,14 +570,14 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 				$scope.panel.organizations = organizations.data;
 
 
-				if (var4wplusrh === "4wPlus") {
+				// if (var4wplusrh === "4wPlus") {
 
-					$scope.panel.organizations = $filter('filter')($scope.panel.organizations,
-						{ admin0pcode: 'COL' }, true);
+				// 	$scope.panel.organizations = $filter('filter')($scope.panel.organizations,
+				// 		{ admin0pcode: 'COL' }, true);
 
 
 
-				};
+				// };
 
 				$timeout(function () {
 					$('select').material_select();

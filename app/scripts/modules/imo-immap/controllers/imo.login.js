@@ -55,7 +55,7 @@ angular.module('ngmReportHub')
 				subtitle: {
 					'class': 'col s12 m12 l12 report-subtitle',
 					html: true,
-					title: '<span class="hide-on-med-and-down">, ' + $filter('translate')('please_login_or_register_to_continue') + '</span>'
+					title: '<span class="hide-on-med-and-down"> Please LOGIN or REGISTER to continue</span>'
 				}
 			},
 			rows: [{

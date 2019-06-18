@@ -69,15 +69,15 @@
 
 				<div class="icon center">
 					<div class="card">
-						<img title="Profile" src="images/registration.png" width="110%" style="margin-left:-20px;" />
+						<img title="Profile" src="images/registration.png" width="110%" style="margin-left:-9px;" />
 					</div>
-					<h5 class="title">Register</h5>
+					<h5 class="title">Login</h5>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">supervisor_account</i>
-						<input id="ngm-position" type="text" class="validate" ng-model="panel.user.username" ng-disabled="panel.formDisabled" required>
-						<label for="ngm-position">username</label>
+						<input id="ngm-username" type="text" class="validate" ng-model="panel.user.username" ng-disabled="panel.formDisabled" required>
+						<label for="ngm-username">Username</label>
 					</div>
 				</div>
 				<div class="row">
@@ -87,16 +87,19 @@
 						<label for="ngm-password">{{'password' | translate}}</label>
 					</div>
 				</div>
-
-				<div class="action center">
+					<p class="helpers left" style="margin-top:10px">
+						<a style="color: #ffab40;" id="forgot"> {{'forgot_password' | translate}}?</a>
+					</p>
+					<p class="helpers right" style="margin-top:10px">
+						<a style="color: #be2126;" href="#/immap/reporting/register">{{'register_mayus' | translate}} </a>
+					</p>
 					<div class="action center">
 						<button type="submit" id="login-register" class="btn btn-large waves-effect waves-teal" ng-disabled="imoLoginForm.$invalid"
 						 ng-click="panel.login(imoLoginForm)">
 							<i class="material-icons right">keyboard_arrow_right</i>
-							{{'login' | translate}}!1
+							{{'login' | translate}}!
 						</button>
 					</div>
-				</div>
 
 			</div>
 
