@@ -80,6 +80,7 @@ angular
 
 		// extend localstorage to get an object
 		Storage.prototype.getObject = function( key ) {
+			// 
 			var value = this.getItem( key );
 			return value && JSON.parse( value );
 		}
