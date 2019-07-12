@@ -141,6 +141,13 @@
 
 		<!-- Project Document -->
 		<div ng-if="!project.newProject" class="slide-animate" ng-include="project.templatesUrl + project.uploadUrl"></div>
+		<div class="row" ng-if="project.definition.report_due_date">
+			<div class=" col s12 m12 l12">
+				<div class="widget card-panel white red-text text-darken-2 center">
+					<h6> *The Deadline for the monthly report for this project is the {{project.definition.report_due_date}}<sup>th</sup> for every month</h6>
+				</div>
+			</div>
+		</div>
 		<div class="row remove" ng-if="false">
 			<div class="col s12 m12 l12">
 				<div class="widget card-panel white grey-text text-darken-2" style="padding-top: 0;padding-left: 0;padding-right: 0">
