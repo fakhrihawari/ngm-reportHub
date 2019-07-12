@@ -693,7 +693,25 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					$scope.project.save( false, $filter('translate')('people_in_need_saved') );
 
 				},
-
+				showDeadline:function(){
+					var show = false;
+					if (!config.project.report_due_date && (config.project.admin0pcode === 'AF' || config.project.admin0pcode === 'CB' || config.project.admin0pcode === 'ET')){
+						show = true;
+					}
+					return show
+				},
+				setDeadline: function(){
+					var deadline = {
+						'AF': { report_due_date: 5 },
+						'CB': { report_due_date: 7 },
+						'ET': { report_due_date: 7 },
+					};
+					// set project report due date
+					$scope.project.definition.report_due_date = deadline[$scope.project.definition.admin0pcode].report_due_date ;
+					var th ='th'
+					// toast
+					Materialize.toast("Set the deadline for the monthly report is the " + $scope.project.definition.report_due_date+ th.sup() +"  of every month "  , 4000, 'note');
+				},
 				/**** SAVE ****/
 				
 				// save project

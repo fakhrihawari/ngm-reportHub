@@ -174,7 +174,11 @@
 		<div class="row remove" ng-if="project.definition.project_status !== 'complete'">
 			<div class="col s12 m12 l12">
 				<div class="widget card-panel white grey-text text-darken-2">
-
+					<div align="center" style="margin: 0 0 10px 0" ng-if="project.showDeadline() ">
+						<button data-target="save-modal" class="waves-effect waves-light btn red darken-3" ng-click="project.setDeadline()" ng-disabled="!project.submit"
+						 ng-cloak>
+							<i class="material-icons right">date_range</i>Set Deadline Date</button>
+					</div>
 					<!-- submission -->
 					<div align="center">
 						<button data-target="save-modal" class="waves-effect waves-light btn" ng-click="project.validate()" ng-disabled="!project.submit"
