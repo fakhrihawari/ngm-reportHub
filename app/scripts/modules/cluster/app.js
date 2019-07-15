@@ -172,33 +172,62 @@ angular
 			})
 
 			// project list
-			.when( '/cluster/projects', {
-				redirectTo: '/cluster/projects/all'
-			})
-			// project list
-			.when( '/cluster/projects/:cluster_id', {
+			// .when( '/cluster/projects', {
+			// 	redirectTo: '/cluster/projects/all'
+			// })
+			// // project list
+			// .when( '/cluster/projects/:cluster_id', {
+			// 	templateUrl: '/views/app/dashboard.html',
+			// 	controller: 'ClusterProjectProjectsCtrl',
+			// 	resolve: {
+			// 		access: [ 'ngmAuth', function(ngmAuth) { 
+			// 			return ngmAuth.isAuthenticated();
+			// 		}],
+			// 	}
+			// })
+			// // project organization
+			// .when( '/cluster/projects/organization/:organization_id', {
+			// 	redirectTo: '/cluster/projects/organization/:organization_id/all'
+			// })
+			// // project organization
+			// .when( '/cluster/projects/organization/:organization_id/:cluster_id', {				
+			// 	templateUrl: '/views/app/dashboard.html',
+			// 	controller: 'ClusterProjectProjectsCtrl',
+			// 	resolve: {
+			// 		access: [ 'ngmAuth', function( ngmAuth ) {
+			// 			return ngmAuth.isAuthenticated();
+			// 		}],
+			// 	}
+			// })
+			// // project country
+			// .when('/cluster/projects/country/:adminRpcode/:admin0pcode', {
+			// 	redirectTo: '/cluster/projects/country/:adminRpcode/:admin0pcode/all/all'
+			// })
+			// // project organization
+			// .when('/cluster/projects/country/:adminRpcode/:admin0pcode/:organization_id/:cluster_id', {
+			// 	templateUrl: '/views/app/dashboard.html',
+			// 	controller: 'ClusterProjectProjectsCtrl',
+			// 	resolve: {
+			// 		access: ['ngmAuth', function (ngmAuth) {
+			// 			return ngmAuth.isAuthenticated();
+			// 		}],
+			// 	}
+			// })
+			// // // project country
+			// // .when('/cluster/projects/country/:adminRpcode/:admin0pcode', {
+			// // 	redirectTo: '/cluster/projects/country/:adminRpcode/:admin0pcode/all/all'
+			// // })
+			// // project organization
+			.when('/cluster/projects/:adminRpcode/:admin0pcode/:organization_id/:cluster_id', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ClusterProjectProjectsCtrl',
 				resolve: {
-					access: [ 'ngmAuth', function(ngmAuth) { 
+					access: ['ngmAuth', function (ngmAuth) {
 						return ngmAuth.isAuthenticated();
 					}],
 				}
 			})
-			// project organization
-			.when( '/cluster/projects/organization/:organization_id', {
-				redirectTo: '/cluster/projects/organization/:organization_id/all'
-			})
-			// project organization
-			.when( '/cluster/projects/organization/:organization_id/:cluster_id', {				
-				templateUrl: '/views/app/dashboard.html',
-				controller: 'ClusterProjectProjectsCtrl',
-				resolve: {
-					access: [ 'ngmAuth', function( ngmAuth ) {
-						return ngmAuth.isAuthenticated();
-					}],
-				}
-			})
+			
 			// project summary
 			.when( '/cluster/projects/summary/:project', {
 				templateUrl: '/views/app/dashboard.html',

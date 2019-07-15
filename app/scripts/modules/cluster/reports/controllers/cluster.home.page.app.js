@@ -191,7 +191,19 @@ angular.module( 'ngmReportHub' )
 									// get project href
 									getProjectsHref: function() {
 										var href = '#/cluster/projects';
-										if ( $route.current.params.organization_id ) { href += '/' + $route.current.params.organization_id }
+										// if ( $route.current.params.organization_id ) { href += '/' + $route.current.params.organization_id }
+										var roles = ngmAuth.userPermissions().reduce(function (max, role) { return role.LEVEL > max.LEVEL ? role : max })['ROLE'];
+										organization_id = $scope.report.user.organization_id;
+										cluster_id = $scope.report.user.cluster_id;
+										admin0pcode = $scope.report.user.admin0pcode.toLowerCase();
+										adminRpcode = $scope.report.user.adminRpcode.toLowerCase();
+										if (roles !== 'CLUSTER') {
+											href = href + '/'+adminRpcode+'/'+admin0pcode+'/'+organization_id+'/all';
+										}
+										if (roles === 'CLUSTER') {
+											href = href + '/'+adminRpcode+'/'+admin0pcode+'/'+organization_id+'/'+cluster_id;
+										}
+										
 										return href;
 									},
 									// get project href
