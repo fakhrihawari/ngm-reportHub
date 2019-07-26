@@ -23,8 +23,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoHomeCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -60,8 +60,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoDashboardCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -70,8 +70,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoDashboardCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -80,8 +80,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoProfileCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -90,8 +90,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoProfileCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -99,8 +99,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -108,8 +108,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamLicenseCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -117,8 +117,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoLicenseCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -126,8 +126,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoLicenseCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -135,8 +135,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoReportListCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -144,8 +144,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoReportCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})
@@ -158,8 +158,8 @@ angular
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamDashboardCtrl',
 				resolve: {
-					access: ['ngmAuth', function (ngmAuth) {
-						return ngmAuth.isAuthenticated();
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
 					}],
 				}
 			})

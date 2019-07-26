@@ -67,7 +67,7 @@ angular.module('ngmReportHub')
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle',
 							html: true,
-							title: user.admin0name.toUpperCase().substring(0, 3) + ' | ' + user.cluster.toUpperCase() + ' | ' + user.organization + ' | ' + user.username,
+							title: user.admin0name.toUpperCase().substring(0, 3) + ' | ' + user.username,
 						}
 					},
 					rows: [{
@@ -142,6 +142,7 @@ angular.module('ngmReportHub')
 				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/getUserByUsername?username=' + $scope.dashboard.username })
 				.then(function (user) {
 					// load with user profile
+					console.log(user);
 					$scope.dashboard.init(user);
 				});
 

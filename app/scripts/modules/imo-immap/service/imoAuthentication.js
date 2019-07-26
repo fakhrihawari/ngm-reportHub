@@ -269,11 +269,11 @@ angular.module('ngmReportHub')
 				var deferred = $q.defer();
 
 				if (ngmUser.get() && !ngmUser.get().guest) {
-					deferred.resolve(ngmAuth.OK);
+					deferred.resolve(ngmImoAuth.OK);
 				} else {
-					deferred.reject(ngmAuth.UNAUTHORIZED);
+					deferred.reject(ngmImoAuth.UNAUTHORIZED);
 				}
-
+				
 				return deferred.promise;
 			},
 

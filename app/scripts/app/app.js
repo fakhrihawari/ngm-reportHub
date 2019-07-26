@@ -210,6 +210,7 @@ angular
 
 			// get app
 			var app = current.$$route.originalPath.split('/')[1];
+			app = current.$$route.originalPath.split('/')[2] && current.$$route.originalPath.split('/')[2] === 'reporting'?app+'/reporting':app;
 			if ( rejection === ngmAuth.UNAUTHORIZED ) {
 				$location.path( '/' + app + '/login' );
 			} else if ( rejection === ngmAuth.FORBIDDEN ) {
