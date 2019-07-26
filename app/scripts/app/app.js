@@ -218,9 +218,16 @@ angular
 			}
 
 		});
+		$rootScope.reporting_menu = false;
+		$rootScope.$on('$routeChangeSuccess', function (current,next) {
+			// ... you could trigger something here ...
+			if(next.$$route.originalPath.split('/')[1] === 'immap' && next.$$route.originalPath.split('/')[2]==='reporting'){
+				$rootScope.reporting_menu = true;
+			}
+		});
 
 	}])
-	.controller('ngmReportHubCrtl', ['$scope', '$route', '$location', '$http', '$timeout', 'ngmAuth', 'ngmUser','$window','$translate','$filter', function ($scope, $route, $location, $http, $timeout, ngmAuth, ngmUser,$window,$translate,$filter) {
+	.controller('ngmReportHubCrtl', ['$scope', '$route', '$location', '$http', '$timeout', 'ngmAuth', 'ngmUser', '$window', '$translate', '$filter', 'ngmImoAuth', function ($scope, $route, $location, $http, $timeout, ngmAuth, ngmUser, $window, $translate, $filter, ngmImoAuth) {
 	     
 
          
@@ -459,6 +466,9 @@ angular
 			// app functions
 			logout: function() {
 				ngmAuth.logout();
+			},
+			imoLogout: function () {
+				ngmImoAuth.logout();
 			},
 
 			// open contact modal

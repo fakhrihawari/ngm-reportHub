@@ -168,8 +168,8 @@ angular.module('ngmReportHub')
 				$('.ngm-profile-menu-content').slideToggle();
 
 				// unset token, backend dosnt care about logouts 
-				ngmUser.unset();
-				$location.path('/login');
+				ngmUser.unset();				
+				$location.path('/immap/reporting/login');
 				// $location.path( '/' + $location.$$path.split('/')[1] + '/login' );
 
 			},
