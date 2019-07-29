@@ -52,11 +52,26 @@
 								<td data-title="'username'|translate" sortable="'username'">
 									{{ row.username }}
 								</td>
-								<td data-title="'phone'|translate" sortable="'phone'">
+								<!-- <td data-title="'phone'|translate" sortable="'phone'">
 									{{ row.phone }}
 								</td>
 								<td data-title="'updated'|translate" sortable="'updatedAt'">
 									{{ row.updatedAt | date:'medium' }}
+								</td> -->
+								<td data-title="'license'" ng-if="($index %5) === 0">
+									 Adobe Reader
+								</td>
+								<td data-title="'license'" ng-if="($index %5) === 1">
+									 Adobe Photoshop
+								</td>
+								<td data-title="'license'" ng-if="($index %5) === 2">
+									 Adobe Indesign
+								</td>
+								<td data-title="'license'" ng-if="($index %5) === 3">
+									Adobe XD
+								</td>
+								<td data-title="'license'" ng-if="($index %5) === 4">
+									Microsoft Word
 								</td>
 							</tr>
 						</table>

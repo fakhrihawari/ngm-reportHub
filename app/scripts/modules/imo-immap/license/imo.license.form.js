@@ -85,14 +85,14 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 
 				// },
 				license_list: [
-					{ id: 'humanitarian_partner', name: 'Humanitarian Partner' },
-					{ id: 'development_partner', name: 'Development Partner' },
-					{ id: 'united_nations_agency', name: 'United Nations Agency' },
-					{ id: 'government_institution', name: 'Government Institution' },
-					{ id: 'cluster_sub_working_group', name: 'Cluster, Sub-Cluster or Working Group' },
-					{ id: 'other', name: 'Other' },
+					{ id: 'adobe_reader', name: 'Adobe Reader' },
+					{ id: 'adobe_photoshop', name: 'Adobe Photoshop' },
+					{ id: 'adobe_indesign', name: 'Adobe Indesign' },
+					{ id: 'adobe_xd', name: 'Adobe XD' },
+					{ id: 'microsoft_word', name: 'Microsoft Word' },
+					
 				],
-				status: ['active','propose','expired'],
+				status: ['ACTIVE','REQUESTED','TERMINATED'],
 				// datepicker
 				datepicker: {
 					maxDate: moment().format('YYYY-MM-DD'),

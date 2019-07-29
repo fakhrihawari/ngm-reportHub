@@ -68,8 +68,8 @@ angular.module('ngmReportHub')
 									headerClass: 'collection-header lighten-2',
 									headerStyle: 'background-color:' + $scope.dashboard.ngm.style.defaultPrimaryColor,
 									headerText: 'white-text',
-									headerIcon: 'group',
-									headerTitle: 'List License',
+									headerIcon: 'done_all',
+									headerTitle: 'Active List License',
 									templateUrl: '/scripts/modules/imo-immap/views/imo.license-team.html',
 									tableOptions: {
 										count: 10,
@@ -79,7 +79,53 @@ angular.module('ngmReportHub')
 								}
 							}]
 						}]
-					}, {
+					},{
+							columns: [{
+								styleClass: 's12',
+								widgets: [{
+									type: 'table',
+									card: 'panel',
+									style: 'padding:0px; height: ' + $scope.dashboard.ngm.style.height + 'px;',
+									config: {
+										style: $scope.dashboard.ngm.style,
+										headerClass: 'collection-header lighten-2',
+										headerStyle: 'background-color:#f0ad4e',
+										headerText: 'white-text',
+										headerIcon: 'help_outline',
+										headerTitle: 'Propose List License',
+										templateUrl: '/scripts/modules/imo-immap/views/imo.license-team.html',
+										tableOptions: {
+											count: 10,
+											sorting: { updatedAt: "desc" }
+										},
+										request: $scope.dashboard.getLicenseRequest(),
+									}
+								}]
+							}]
+						},{
+							columns: [{
+								styleClass: 's12',
+								widgets: [{
+									type: 'table',
+									card: 'panel',
+									style: 'padding:0px; height: ' + $scope.dashboard.ngm.style.height + 'px;',
+									config: {
+										style: $scope.dashboard.ngm.style,
+										headerClass: 'collection-header lighten-2',
+										headerStyle: 'background-color:#d6d6d6',
+										headerText: 'white-text',
+										headerIcon: 'highlight_off',
+										headerTitle: 'Expired List License',
+										templateUrl: '/scripts/modules/imo-immap/views/imo.license-team.html',
+										tableOptions: {
+											count: 10,
+											sorting: { updatedAt: "desc" }
+										},
+										request: $scope.dashboard.getLicenseRequest(),
+									}
+								}]
+							}]
+						}, {
 						columns: [{
 							styleClass: 's12 m12 l12',
 							widgets: [{

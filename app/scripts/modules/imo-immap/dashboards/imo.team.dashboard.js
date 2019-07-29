@@ -192,7 +192,7 @@ angular.module('ngmReportHub')
 										});
 								},
 								request: { method: 'GET', url: ngmAuth.LOCATION + '/api/immap/products/latestUpdate' },
-								templateUrl: '/scripts/widgets/ngm-html/template/immap/products/immap.product.controls.html'
+								templateUrl: '/scripts/widgets/ngm-html/template/imo/imo.product.control.html'
 							}
 						}]
 					}]

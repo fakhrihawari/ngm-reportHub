@@ -30,16 +30,16 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 		'ngmData',
 		'ngmClusterHelper',
 		'ngmClusterLists',
-		'ngmClusterLocations',
-		'ngmClusterBeneficiaries',
-		'ngmClusterTrainings',
-		'ngmClusterValidation',
-		'ngmClusterHelperAf',
-		'ngmClusterHelperNgWash',
-		'ngmClusterHelperNgWashLists',
-		'ngmClusterHelperNgWashValidation',
-		'ngmClusterHelperCol',
-		'ngmCbBeneficiaries',
+		// 'ngmClusterLocations',
+		// 'ngmClusterBeneficiaries',
+		// 'ngmClusterTrainings',
+		// 'ngmClusterValidation',
+		// 'ngmClusterHelperAf',
+		// 'ngmClusterHelperNgWash',
+		// 'ngmClusterHelperNgWashLists',
+		// 'ngmClusterHelperNgWashValidation',
+		// 'ngmClusterHelperCol',
+		// 'ngmCbBeneficiaries',
 		'ngmClusterDocument',
 		// 'NgTableParams',
 		'config', '$translate', '$filter',
@@ -58,16 +58,16 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 			ngmData,
 			ngmClusterHelper,
 			ngmClusterLists,
-			ngmClusterLocations,
-			ngmClusterBeneficiaries,
-			ngmClusterTrainings,
-			ngmClusterValidation,
-			ngmClusterHelperAf,
-			ngmClusterHelperNgWash,
-			ngmClusterHelperNgWashLists,
-			ngmClusterHelperNgWashValidation,
-			ngmClusterHelperCol,
-			ngmCbBeneficiaries,
+			// ngmClusterLocations,
+			// ngmClusterBeneficiaries,
+			// ngmClusterTrainings,
+			// ngmClusterValidation,
+			// ngmClusterHelperAf,
+			// ngmClusterHelperNgWash,
+			// ngmClusterHelperNgWashLists,
+			// ngmClusterHelperNgWashValidation,
+			// ngmClusterHelperCol,
+			// ngmCbBeneficiaries,
 			ngmClusterDocument,
 			// NgTableParams,
 			config, $translate, $filter) {
@@ -79,15 +79,15 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 			// this should be a directive - sorry Steve Jobs!
 			$scope.scope = $scope;
 			$scope.ngmClusterLists = ngmClusterLists;
-			$scope.ngmClusterLocations = ngmClusterLocations;
-			$scope.ngmClusterBeneficiaries = ngmClusterBeneficiaries;
-			$scope.ngmClusterTrainings = ngmClusterTrainings;
-			$scope.ngmClusterValidation = ngmClusterValidation;
-			$scope.ngmClusterHelperNgWash = ngmClusterHelperNgWash;
-			$scope.ngmClusterHelperNgWashLists = ngmClusterHelperNgWashLists;
-			$scope.ngmClusterHelperNgWashValidation = ngmClusterHelperNgWashValidation;
-			$scope.ngmClusterHelperCol = ngmClusterHelperCol;
-			$scope.ngmCbBeneficiaries = ngmCbBeneficiaries;
+			// $scope.ngmClusterLocations = ngmClusterLocations;
+			// $scope.ngmClusterBeneficiaries = ngmClusterBeneficiaries;
+			// $scope.ngmClusterTrainings = ngmClusterTrainings;
+			// $scope.ngmClusterValidation = ngmClusterValidation;
+			// $scope.ngmClusterHelperNgWash = ngmClusterHelperNgWash;
+			// $scope.ngmClusterHelperNgWashLists = ngmClusterHelperNgWashLists;
+			// $scope.ngmClusterHelperNgWashValidation = ngmClusterHelperNgWashValidation;
+			// $scope.ngmClusterHelperCol = ngmClusterHelperCol;
+			// $scope.ngmCbBeneficiaries = ngmCbBeneficiaries;
 			$scope.ngmClusterDocument = ngmClusterDocument;
 			$scope.deactivedCopybutton = false;
 
@@ -124,17 +124,17 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				// init lists
 				init: function () {
 					// usd default currency
-					if (!$scope.project.definition.project_budget_currency) {
-						$scope.project.definition.project_budget_currency = 'usd';
-					}
+					// if (!$scope.project.definition.project_budget_currency) {
+					// 	$scope.project.definition.project_budget_currency = 'usd';
+					// }
 					// sort locations
-					$scope.project.report.locations = $filter('orderBy')($scope.project.report.locations, ['site_type_name', 'admin1name', 'admin2name', 'admin3name', 'site_name']);
+					// $scope.project.report.locations = $filter('orderBy')($scope.project.report.locations, ['site_type_name', 'admin1name', 'admin2name', 'admin3name', 'site_name']);
 					// set org users
-					ngmClusterLists.setOrganizationUsersList($scope.project.lists, config.project);
+					// ngmClusterLists.setOrganizationUsersList($scope.project.lists, config.project);
 					// set form on page load
-					ngmClusterHelper.setForm($scope.project.definition, $scope.project.lists);
+					// ngmClusterHelper.setForm($scope.project.definition, $scope.project.lists);
 					// set columns / rows
-					ngmClusterBeneficiaries.setLocationsForm($scope.project.lists, $scope.project.report.locations);
+					// ngmClusterBeneficiaries.setLocationsForm($scope.project.lists, $scope.project.report.locations);
 					// $scope.project.setTokenUpload();
 				},
 

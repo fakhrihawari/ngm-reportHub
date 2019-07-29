@@ -506,6 +506,7 @@ angular
 			},
 			openHome:false,
 			openDashboard:false,
+			openTeam:false,
 
 
 		};
