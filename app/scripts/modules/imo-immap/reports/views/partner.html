@@ -64,11 +64,11 @@
 	<div class="modal-footer">
 		<a class=" modal-action modal-close waves-effect waves-green btn-flat">{{'close_mayus1'|translate}}</a>
 		<!-- <a ng-click="ngmClusterDocument.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a> -->
-		<a ng-click="ngmClusterDocument.removeFile();project.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a>
+		<a ng-click="ngmClusterDocument.removeFile();report.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a>
 	</div>
 </div>
 <div style="padding-left: 20px;">
-	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="project.imo_report.support_partner.length">
+	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.imo_report.support_partner.length">
 		<tr style="font-weight: 600;">
 			<td>File</td>
 			<td>Partner Category</td>
@@ -78,14 +78,14 @@
 			<td>Products</td>
 			<td>Colaboration With</td>
 			<td>Number of Products</td>
-			<td ng-if="project.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
+			<td ng-if="report.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
 
-		<tr ng-repeat-start="partner in project.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index" style="border: 0px">
+		<tr ng-repeat-start="partner in report.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index" style="border: 0px">
 			<!-- Start here -->
 			<!-- <td>
 				<span ng-if="!partner.fileid">
-					<button class="btn" ng-click="project.uploadDocument.openModal('upload-file');project.setRowFileId($index)"> UPLOAD</button>
+					<button class="btn" ng-click="report.uploadDocument.openModal('upload-file');report.setRowFileId($index)"> UPLOAD</button>
 				</span>
 				<span ng-if="partner.fileid">
 					<div ng-bind="partner.fileid"></div>
@@ -97,7 +97,7 @@
 			</td> -->
 			<td>
 				<span>
-					<button class="btn" ng-click="project.uploadDocument.openModal('upload-file');project.setRowFileId($index)" ng-disabled="!imoform.$visible"> UPLOAD</button>
+					<button class="btn" ng-click="report.uploadDocument.openModal('upload-file');report.setRowFileId($index)" ng-disabled="!imoform.$visible"> UPLOAD</button>
 				</span>
 			</td>
 			<td>
@@ -105,10 +105,10 @@
 					e-name="category_id" 
 					editable-select="partner.category_id" 
 					e-placeholder="{{'select'|translate}}"
-					e-ng-options="a_t.id as a_t.name for a_t in project.partnerCategory"
+					e-ng-options="a_t.id as a_t.name for a_t in report.partnerCategory"
 					 e-ng-disabled="!partner.file.length"
 					>
-					{{project.displayPartnerCategory(project,$data,partner)}}
+					{{report.displayPartnerCategory(report,$data,partner)}}
 				</span>
 			</td>
 			<td>
@@ -116,10 +116,10 @@
 					e-name="partner_id" 
 					editable-select="partner.partner_id" 
 					e-placeholder="{{'select'|translate}}"
-					e-ng-options="a_t.id as a_t.name for a_t in project.partner  | filter: {category_id:partner.category_id}"
+					e-ng-options="a_t.id as a_t.name for a_t in report.partner  | filter: {category_id:partner.category_id}"
 					e-ng-disabled="!partner.category_id"
 					>
-					{{project.displayPartner(project,$data,partner)}}
+					{{report.displayPartner(report,$data,partner)}}
 				</span>
 			</td>
 			<td>
@@ -127,10 +127,10 @@
 				e-name="area_activity_id" 
 				editable-select="partner.area_activity_id" 
 				e-placeholder="{{'select'|translate}}"
-				e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity"
+				e-ng-options="a_t.id as a_t.name for a_t in report.areaActivity"
 				e-ng-disabled="!partner.partner_id"
 				>
-				{{project.displayAreaActivity(project,$data,partner)}}
+				{{report.displayAreaActivity(report,$data,partner)}}
 				</span>
 
 			</td>
@@ -139,9 +139,9 @@
 					e-name="narative_activity_id" 
 					editable-select="partner.narative_activity_id" 
 					e-placeholder="{{'select'|translate}}"
-				 	e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity" 
+				 	e-ng-options="a_t.id as a_t.name for a_t in report.areaActivity" 
 					e-ng-disabled="!partner.area_activity_id">
-							 {{project.displayNarativeActivity(project,$data,partner)}}
+							 {{report.displayNarativeActivity(report,$data,partner)}}
 				</span>				
 			</td> -->
 			<td>
@@ -149,9 +149,9 @@
 					e-name="product_id" 
 					editable-select="partner.product_id" 
 					e-placeholder="{{'select'|translate}}"
-				 	e-ng-options="a_t.id as a_t.name for a_t in project.products" 
+				 	e-ng-options="a_t.id as a_t.name for a_t in report.products" 
 					e-ng-disabled="!partner.narative_activity_id">
-													 {{project.displayProducts(project,$data,partner)}}
+													 {{report.displayProducts(report,$data,partner)}}
 				</span>
 				
 			</td>
@@ -160,9 +160,9 @@
 					e-name="collab_id" 
 					editable-select="partner.collab_id" 
 					e-placeholder="{{'select'|translate}}"
-					e-ng-options="a_t.id as a_t.name for a_t in project.collab"
+					e-ng-options="a_t.id as a_t.name for a_t in report.collab"
 					e-ng-disabled="!partner.product_id">
-													 {{project.displayCollab(project,$data,partner)}}
+													 {{report.displayCollab(report,$data,partner)}}
 				</span>
 				
 			</td>
@@ -171,20 +171,20 @@
 					e-name="number_products" 
 					editable-number="partner.number_products" 
 					e-min="0" 
-					e-ng-change="project.updateInputProduct($data,partner);cek($data,$index); ngmCbBeneficiaries.setSadd( beneficiary );">
+					e-ng-change="report.updateInputProduct($data,partner);cek($data,$index); ngmCbBeneficiaries.setSadd( beneficiary );">
 					{{ partner.number_products }}
 				</span>
 			</td>
 			<!-- End here -->
-			<td style="white-space: nowrap" ng-show="project.report.report_status !== 'complete'">
+			<td style="white-space: nowrap" ng-show="report.report.report_status !== 'complete'">
 				<!-- form -->
-				<form editable-form name="imoform" onshow="project.keydownSaveForm()" ng-show="imoform.$visible" onbeforesave="project.validateBeneficiariesDetailsForm( imoform, false, false )"
+				<form editable-form name="imoform" onshow="report.keydownSaveForm()" ng-show="imoform.$visible"
 				 class="form-buttons form-inline" shown="inserted == partner">
-					<button type="submit" ng-if="imoform.$visible" ng-disabled="!project.supportPartnerFormComplete( project.imo_report.support_partner )"
+					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner )"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
-					<div type="button" ng-if="imoform.$visible" ng-disabled="imoform.$waiting" ng-click="imoform.$cancel(); project.cancelEdit( 'support_partner',$partnerIndex );project.activePrevReportButton()"
+					<div type="button" ng-if="imoform.$visible" ng-disabled="imoform.$waiting" ng-click="imoform.$cancel(); report.cancelEdit( 'support_partner',$partnerIndex );"
 					 class="btn btn-small  lighten-1 waves-effect waves-light" title="Cancel Edit"  style="background-color: #be2126">
 						<i class="material-icons">clear</i>
 					</div>
@@ -194,9 +194,8 @@
 					 title="Edit">
 						<i class="material-icons">create</i>
 					</button>
-					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="project.removeSupport( $partnerIndex );project.activePrevReportButton()"
-					 title="Remove" ng-disabled="!ngmClusterBeneficiaries.beneficiaryFormComplete( project.definition, project.report.locations ) || 
-                              !ngmClusterTrainings.trainingFormComplete( project.report.locations  )" style="background-color: #be2126">
+					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="report.removeSupport( $partnerIndex );"
+					 title="Remove" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner )" style="background-color: #be2126">
 						<i class="material-icons">delete</i>
 					</button>
 				</div>
@@ -204,15 +203,15 @@
 		</tr>
 		<!-- <tr>
 			<span e-form="imoform" e-name="narative_activity_id" editable-text="partner.narative_activity_id" e-placeholder="{{'select'|translate}}"
-			 e-ng-options="a_t.id as a_t.name for a_t in project.areaActivity" e-ng-disabled="!partner.area_activity_id">
-				{{project.displayNarativeActivity(project,$data,partner)}}
+			 e-ng-options="a_t.id as a_t.name for a_t in report.areaActivity" e-ng-disabled="!partner.area_activity_id">
+				{{report.displayNarativeActivity(report,$data,partner)}}
 			</span>
 		</tr> -->
 		<tr style="border: 0px">
 				<td colspan="100" class=" card" style="padding: 20px">
 					<h6 style="font-weight: 600;">Narative *</h6>
 					<span editable-text="partner.narative_activity_id" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_activity_id">
-						 {{project.displayNarativeActivityText($data,partner)}}
+						 {{report.displayNarativeActivityText($data,partner)}}
 					</span>
 				</td>
 		</tr>
@@ -286,7 +285,7 @@
 										<i class="small material-icons">cloud_download</i>
 									</a>
 									<button ng-disabled="!imoform.$visible" class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
-									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);project.setRemoveRowFile($partnerIndex,item.fileid)">
+									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)">
 										<i class="small material-icons">delete</i>
 									</button>
 								</div>
@@ -299,8 +298,8 @@
 	</table>
 
 	<!-- default -->
-	<button  style="background-color: #be2126" class="btn" ng-if="project.definition.admin0pcode !== 'ET' || project.definition.cluster_id !== 'esnfi'" ng-show="project.definition.project_status !== 'complete' && project.report.report_status !== 'complete'"
-	 ng-click="project.addPartner(); project.activePrevReportButton()" ng-disabled="addBeneficiaryDisable">
+	<button  style="background-color: #be2126" class="btn"
+	 ng-click="report.addPartner();" ng-disabled="addBeneficiaryDisable">
 		<i class="material-icons left">add</i>Add Partner
 
 	</button>

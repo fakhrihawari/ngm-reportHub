@@ -256,7 +256,9 @@ angular.module('ngmReportHub')
 					rating:5,
 					notes:'SWAG',
 					month_date:'2019-06-21',
-					month:'6'
+					month:'6',
+					report_status:'todo',
+					report_submit:false
 				}
 			}else{
 				// $scope.data = {
@@ -264,7 +266,7 @@ angular.module('ngmReportHub')
 					
 				// };
 				$scope.data = imoReportHelper.getNewForm(ngmUser.get());
-				console.log($scope.data)
+				
 			}
 
 			// taost for user
