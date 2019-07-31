@@ -40,7 +40,7 @@ angular.module('ngmReportHub')
 				console.log("MODAL")
 			},
 			// init()
-			init: function (user,license) {
+			init: function (user) {
 
 				// report dashboard model
 				$scope.model = {
@@ -68,7 +68,8 @@ angular.module('ngmReportHub')
 								type: 'license.form',
 								config: {
 									style: $scope.dashboard.ngm.style,
-									license: license
+									request: {method: 'POST',
+															url: ngmAuth.LOCATION + '/api/immap/report/getLicenseDummyList'}
 								}
 							}]
 						}]
@@ -129,14 +130,12 @@ angular.module('ngmReportHub')
 					// should get from api
 					var license = []
 					// load with user profile
-					$scope.dashboard.init(user, license);
+					$scope.dashboard.init(user);
 				});
 
-		} else {
-			// load with current user profile
-			// should get from api
-			var license=[]
-			$scope.dashboard.init($scope.dashboard.user,license);
+		} else {			
+			$scope.dashboard.init($scope.dashboard.user);
+			
 
 		}
 

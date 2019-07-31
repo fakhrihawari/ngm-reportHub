@@ -13,7 +13,12 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 				title: 'Imo License Form',
 				description: 'Imo License Form',
 				controller: 'ImoLicenseFormCtrl',
-				templateUrl: '/scripts/modules/imo-immap/license/license.form.html'
+				templateUrl: '/scripts/modules/imo-immap/license/license.form.html',
+				resolve: {
+					data: function (ngmData, config) {						
+						return ngmData.get(config.request);
+					}
+				}
 			});
 	})
 	.controller('ImoLicenseFormCtrl', [
@@ -23,6 +28,7 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 		'$filter',
 		'$q',
 		'$http',
+		'data',
 		'$route',
 		'ngmUser',
 		'ngmAuth',
@@ -31,7 +37,7 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 		'ngmClusterLists',
 		'config',
 		'$translate',
-		function ($scope, $location, $timeout, $filter, $q, $http, $route, ngmUser, ngmAuth, ngmData, ngmClusterHelper, ngmClusterLists, config, $translate) {
+		function ($scope, $location, $timeout, $filter, $q, $http, data, $route, ngmUser, ngmAuth, ngmData, ngmClusterHelper, ngmClusterLists, config, $translate) {
 
 			// project
 
@@ -49,7 +55,7 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 
 				// project
 				definition: config.project,
-				license: config.license,
+				license: data?data:[],
 
 				// last update
 				// updatedAt: moment(config.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a'),
@@ -126,6 +132,18 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 					};
 					length = $scope.project.license.length
 					if (length<1){
+						user = angular.copy($scope.project.user);
+						user_info = { admin0name :user.admin0name,
+													admin0pcode: user.admin0pcode,
+													adminRpcode: user.adminRpcode,
+													email: user.email,
+													name: user.name,
+													username: user.username,
+													organization: user.organization,
+													organization_tag: user.organization_tag													
+												};
+						$scope.inserted=angular.merge({},user_info,$scope.inserted);
+						// console.log(x,user_info);
 						$scope.project.license.push($scope.inserted);
 					}else{
 						_copy=angular.copy($scope.project.license[length-1])
@@ -175,6 +193,7 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 
 
 				save: function () {
+					console.log($scope.project.license);
 					// Update License
 					
 					// ngmData.get({
