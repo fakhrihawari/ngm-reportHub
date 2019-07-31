@@ -72,12 +72,9 @@ angular.module('ngmReportHub')
 									templateUrl:'/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
-										url: 'http://192.168.33.16:80/api/cluster/project/getProjectsList',
+										url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
 										data: {
-											filter: {
-												organization_id: '56cd8cde0765b9215e67acb7',
-												project_status: 'active'
-											}
+											status:'todo'
 										}
 									}
 								}
@@ -99,12 +96,9 @@ angular.module('ngmReportHub')
 									templateUrl: '/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
-										url: 'http://192.168.33.16:80/api/cluster/project/getProjectsList',
+										url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
 										data: { 
-											filter:{
-												organization_id: '56cd8cde0765b9215e67acb7',
-												project_status: 'complete' 
-											}
+											status:'complete'
 										}
 									}
 								}

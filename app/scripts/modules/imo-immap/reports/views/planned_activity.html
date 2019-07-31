@@ -72,7 +72,7 @@
 				<!-- form -->
 				<form editable-form name="imoform" onshow="report.keydownSaveForm()" ng-show="imoform.$visible"
 				 class="form-buttons form-inline" shown="inserted == planned">
-					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.plannedFormComplete(report.imo_report.planed_activity)"
+					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.plannedFormComplete(report.imo_report.planed_activity) || report.imo_report.report_submit"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
@@ -83,11 +83,11 @@
 				</form>
 				<div class="buttons" ng-if="!imoform.$visible">
 					<button class="btn btn-small waves-effect waves-light" ng-click="imoform.$show();"
-					 title="Edit">
+					 title="Edit" ng-disabled="report.imo_report.report_submit">
 						<i class="material-icons">create</i>
 					</button>
 					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="report.removePlanned( $plannedIndex );"
-					 title="Remove" ng-disabled="!report.plannedFormComplete(report.imo_report.planed_activity)">
+					 title="Remove" ng-disabled="!report.plannedFormComplete(report.imo_report.planed_activity) || report.imo_report.report_submit">
 						<i class="material-icons">delete</i>
 					</button>
 				</div>
@@ -107,7 +107,7 @@
 	<!-- default -->
 	<button style="background-color: #be2126" class="btn"
 	 ng-click="report.addPlanned()"
-	 ng-disabled="addBeneficiaryDisable">
+	 ng-disabled="addBeneficiaryDisable || report.imo_report.report_submit">
 		<i class="material-icons left">add</i>Add Planned Activity
 
 	</button>

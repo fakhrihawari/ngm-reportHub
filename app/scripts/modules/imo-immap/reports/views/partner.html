@@ -180,7 +180,7 @@
 				<!-- form -->
 				<form editable-form name="imoform" onshow="report.keydownSaveForm()" ng-show="imoform.$visible"
 				 class="form-buttons form-inline" shown="inserted == partner">
-					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner )"
+					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner ) || report.imo_report.report_submit"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
@@ -191,11 +191,12 @@
 				</form>
 				<div class="buttons" ng-if="!imoform.$visible">
 					<button class="btn btn-small waves-effect waves-light" ng-click="imoform.$show();ngmClusterHelperNgWash.init_material_select();"
+					ng-disabled="report.imo_report.report_submit"
 					 title="Edit">
 						<i class="material-icons">create</i>
 					</button>
 					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="report.removeSupport( $partnerIndex );"
-					 title="Remove" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner )" style="background-color: #be2126">
+					 title="Remove" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner ) || report.imo_report.report_submit" style="background-color: #be2126">
 						<i class="material-icons">delete</i>
 					</button>
 				</div>
@@ -277,11 +278,11 @@
 								<div class="line">
 			
 									<button class="btn-floating  wave-effect blue tooltipped-report-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
-									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv'">
+									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv' || report.imo_report.report_submit">
 										<i class="small material-icons">compare</i>
 									</button>
 									<a class="btn-floating  wave-effect space tooltipped-report-upload" data-position="bottom" data-tooltip="{{'download'|translate}}"
-									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
+									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}" ng-disabled="report.imo_report.report_submit">
 										<i class="small material-icons">cloud_download</i>
 									</a>
 									<button ng-disabled="!imoform.$visible" class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
@@ -299,7 +300,7 @@
 
 	<!-- default -->
 	<button  style="background-color: #be2126" class="btn"
-	 ng-click="report.addPartner();" ng-disabled="addBeneficiaryDisable">
+	 ng-click="report.addPartner();" ng-disabled="addBeneficiaryDisable || report.imo_report.report_submit">
 		<i class="material-icons left">add</i>Add Partner
 
 	</button>

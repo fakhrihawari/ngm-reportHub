@@ -68,16 +68,16 @@
 			<!-- pagination ctrl -->
 			<li class="collection-item avatar" dir-paginate="item in list.data | filter: list.search.filter | orderBy: list.orderBy : true | itemsPerPage: list.itemsPerPage"
 			 pagination-id="list.id" style="padding-top:20px;">
-					<a href="#/immap/reporting/report/01" title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
+					<a href="#/immap/reporting/report/{{item.id}}" title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
 						<i class="material-icons circle white teal-text">edit</i>
-						<span class="title">May, 2019</span>
-						<span class="right" style="padding-top:20px; padding-right:40px; color:#616161;">Report Created at: 1 May, 2019</span>
+						<span class="title">{{list.monthlyTitleFormat(item.month_date)}}</span>
+						<span class="right" style="padding-top:20px; padding-right:40px; color:#616161;">Report Created at: {{list.dueFormat(item.month_date)}}</span>
 						<p align="justify" style="padding:10px 0px 10px 0px;">
-							Monthly Progress for May, 2019
+							Monthly Progress for {{list.monthlyTitleFormat(item.month_date)}}
 						</p>
-						<a href="#/immap/reporting/report/01" title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report"
+						<a href="#/immap/reporting/report/{{item.id}}" title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report"
 						 class="secondary-content">
-							<i class="material-icons right" style="padding-top:20px; padding-right:40px; color: teal">alarm_on</i>
+							<i class="material-icons right" style="padding-top:20px; padding-right:40px; color: teal">{{item.icon}}</i>
 						</a>
 					</a>
 			</li>

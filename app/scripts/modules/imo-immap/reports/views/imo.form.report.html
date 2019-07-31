@@ -241,7 +241,7 @@
 			value="{{rate}}"
 			ng-checked="report.imo_report.rating === rate"  
 			ng-click="report.setRate(rate)"
-			ng-disabled=""/>
+			ng-disabled="report.imo_report.report_submit"/>
 			<label for="{{rate}}" style="color: #000000; font-weight: 500;">{{rate}}</label>	
 		</div>
 	</div>
@@ -258,6 +258,7 @@
 											class="validate materialize-textarea"
 											name="notes"
 											ng-model="report.imo_report.notes"
+											ng-disabled="report.imo_report.report_submit"
 											>
 										</textarea>
 										<label for="ngm-project-notes"></label>
@@ -280,7 +281,7 @@
 	</button>
 </div>
 <div align="center">	
-	<button class="btn" ng-click="report.saveImoReport(true)" style="background-color: #be2126" ng-disabled="report.reportFormComplete(report.imo_report)">
+	<button ng-if="!report.imo_report.report_submit" class="btn" ng-click="report.saveImoReport(true)" style="background-color: #be2126" ng-disabled="report.reportFormComplete(report.imo_report)">
 		<i class="material-icons left">done_all</i>SUBMIT
 	</button>
 </div>
