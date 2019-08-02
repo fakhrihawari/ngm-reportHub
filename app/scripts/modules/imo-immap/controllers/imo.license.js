@@ -65,6 +65,26 @@ angular.module('ngmReportHub')
 						columns: [{
 							styleClass: 's12 m12 l12',
 							widgets: [{
+								type: 'html',
+								card: 'white grey-text text-darken-2',
+								style: 'padding: 20px;',
+								config: {
+									html: '<div class="row hide-on-small-only">'
+					+ '<div class="col s12 m12 l12">'
+					+ '<div>'
+					+ '<a class="btn-flat waves-effect waves-teal" href="#/immap/reporting/">'
+					+ '<i class="material-icons left">keyboard_return</i> BACK HOME'
+					+ '</a>'
+					+ '</div>'
+					+ '</div>'
+					+ '</div>'
+								}
+							}]
+						}]
+					},{
+						columns: [{
+							styleClass: 's12 m12 l12',
+							widgets: [{
 								type: 'license.form',
 								config: {
 									style: $scope.dashboard.ngm.style,

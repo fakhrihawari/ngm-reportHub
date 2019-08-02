@@ -46,32 +46,23 @@
 
 									{{ row.position }}
 								</td>
-								<td data-title="'Sector'" sortable="'cluster'">
+								<!-- <td data-title="'Sector'" sortable="'cluster'">
 									{{ row.cluster }}
-								</td>
-								<td data-title="'username'|translate" sortable="'username'">
-									{{ row.username }}
-								</td>
-								<!-- <td data-title="'phone'|translate" sortable="'phone'">
-									{{ row.phone }}
-								</td>
-								<td data-title="'updated'|translate" sortable="'updatedAt'">
-									{{ row.updatedAt | date:'medium' }}
 								</td> -->
-								<td data-title="'license'" ng-if="($index %5) === 0">
-									 Adobe Reader
+								<td data-title="'Active'" sortable="'start_date'">
+									<div class="btn">
+										{{ row.start_date }}
+									</div>
 								</td>
-								<td data-title="'license'" ng-if="($index %5) === 1">
-									 Adobe Photoshop
+								<td data-title="'Expired'" sortable="'expired_date'">
+									<div  class="btn" style="background-color: #b71c1c;">{{ row.expired_date }}</div>
+									
 								</td>
-								<td data-title="'license'" ng-if="($index %5) === 2">
-									 Adobe Indesign
-								</td>
-								<td data-title="'license'" ng-if="($index %5) === 3">
-									Adobe XD
-								</td>
-								<td data-title="'license'" ng-if="($index %5) === 4">
-									Microsoft Word
+								<!-- <td data-title="'username'|translate" sortable="'username'">
+									{{ row.username }}
+								</td> -->
+								<td data-title="'License'" sortable="'license_name'">
+									{{row.license_name}}
 								</td>
 							</tr>
 						</table>

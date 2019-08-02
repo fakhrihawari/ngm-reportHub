@@ -20,17 +20,17 @@ angular.module('ngmReportHub')
 
 			// current user
 			user: ngmUser.get(),
-			getLicenseRequest: function () {
+			getLicenseRequest: function (status) {
 				return {
 					method: 'POST',
-					url: ngmAuth.LOCATION + '/api/getOrganizationIndicator',
+					url: ngmAuth.LOCATION + '/api/immap/report/getTeamLicenseDummyList',
 					data: {
-						indicator: 'list',
-						status: 'active',
-						admin0pcode: 'all',
-						organization_tag: 'immap',
-						project: 'all',
-						cluster_id: 'all'
+						// indicator: 'list',
+						status: status,
+						// admin0pcode: 'all',
+						// organization_tag: 'immap',
+						// project: 'all',
+						// cluster_id: 'all'
 					}
 				}
 			},
@@ -58,6 +58,26 @@ angular.module('ngmReportHub')
 					},
 					rows: [{
 						columns: [{
+							styleClass: 's12 m12 l12',
+							widgets: [{
+								type: 'html',
+								card: 'white grey-text text-darken-2',
+								style: 'padding: 20px;',
+								config: {
+									html: '<div class="row hide-on-small-only">'
+										+ '<div class="col s12 m12 l12">'
+										+ '<div>'
+										+ '<a class="btn-flat waves-effect waves-teal" href="#/immap/reporting/">'
+										+ '<i class="material-icons left">keyboard_return</i> BACK HOME'
+										+ '</a>'
+										+ '</div>'
+										+ '</div>'
+										+ '</div>'
+								}
+							}]
+						}]
+					},{
+						columns: [{
 							styleClass: 's12',
 							widgets: [{
 								type: 'table',
@@ -75,7 +95,7 @@ angular.module('ngmReportHub')
 										count: 10,
 										sorting: { updatedAt: "desc" }
 									},
-									request: $scope.dashboard.getLicenseRequest(),
+									request: $scope.dashboard.getLicenseRequest('active'),
 								}
 							}]
 						}]
@@ -98,7 +118,7 @@ angular.module('ngmReportHub')
 											count: 10,
 											sorting: { updatedAt: "desc" }
 										},
-										request: $scope.dashboard.getLicenseRequest(),
+										request: $scope.dashboard.getLicenseRequest('request'),
 									}
 								}]
 							}]
@@ -121,7 +141,7 @@ angular.module('ngmReportHub')
 											count: 10,
 											sorting: { updatedAt: "desc" }
 										},
-										request: $scope.dashboard.getLicenseRequest(),
+										request: $scope.dashboard.getLicenseRequest('terminated'),
 									}
 								}]
 							}]
