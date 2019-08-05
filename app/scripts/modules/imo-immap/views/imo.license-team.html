@@ -51,11 +51,11 @@
 								</td> -->
 								<td data-title="'Active'" sortable="'start_date'">
 									<div class="btn">
-										{{ row.start_date }}
+										{{ row.start_date  | date:'mediumDate' }}
 									</div>
 								</td>
 								<td data-title="'Expired'" sortable="'expired_date'">
-									<div  class="btn" style="background-color: #b71c1c;">{{ row.expired_date }}</div>
+									<div  class="btn" style="background-color: #b71c1c;">{{ row.expired_date  | date:'mediumDate' }}</div>
 									
 								</td>
 								<!-- <td data-title="'username'|translate" sortable="'username'">
