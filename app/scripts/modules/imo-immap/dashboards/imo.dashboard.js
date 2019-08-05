@@ -185,7 +185,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel chart-stats-card white grey-text text-darken-2',
 								config: {
 									title: {
-										text: 'World Healt Organization',
+										text: 'World Health Organization',
 									},
 									display: {
 										label: true,

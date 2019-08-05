@@ -99,7 +99,15 @@ angular.module('ngmReportHub')
 					}
 				}
 			},
-
+			getRequestDummy:function(indicator){
+				return {
+					method: 'POST',
+					url: ngmAuth.LOCATION + '/api/immap/report/getProductDummyIndicator',
+					data: {
+						indicator: indicator,
+					}
+				}
+			},
 			// metrics
 			getMetrics: function (theme, format) {
 				return {
@@ -300,7 +308,7 @@ angular.module('ngmReportHub')
 									series: [{
 										name: 'Product(s)',
 										data: [],
-										request: $scope.report.getRequest('products_chart'),
+										request: $scope.report.getRequestDummy('type_chart'),
 										size: '120%',
 										innerSize: '60%',
 										showInLegend: true,
@@ -356,7 +364,7 @@ angular.module('ngmReportHub')
 									series: [{
 										name: 'Product(s)',
 										data: [],
-										request: $scope.report.getRequest('sectors_chart'),
+										request: $scope.report.getRequestDummy('sector_chart'),
 										size: '120%',
 										innerSize: '60%',
 										showInLegend: true,
@@ -437,17 +445,17 @@ angular.module('ngmReportHub')
 				}];
 
 				// if USER
-				if ($scope.report.user.roles.indexOf('ORG') === -1 ||
-					$scope.report.user.roles.indexOf('ADMIN') === -1) {
-					// calendar heatmap
-					rows.push(heatmap);
+				// if ($scope.report.user.roles.indexOf('ORG') === -1 ||
+				// 	$scope.report.user.roles.indexOf('ADMIN') === -1) {
+				// 	// calendar heatmap
+				// 	rows.push(heatmap);
+					
+				// } else {
+				// 	// push admin widgets
+				// 	rows.push(adminWidgets[0], adminWidgets[1]);
 
-				} else {
-					// push admin widgets
-					rows.push(adminWidgets[0], adminWidgets[1]);
-
-				}
-
+				// }
+				rows.push(adminWidgets[0], adminWidgets[1]);
 				// push default widgets
 				rows.push(defaultWidgets[0], defaultWidgets[1], defaultWidgets[2]);
 
@@ -541,5 +549,6 @@ angular.module('ngmReportHub')
 		$scope.report.setPath($scope.report.getPath());
 		$scope.report.setMenu();
 		$scope.report.init();
+		console.log($scope.report.getRows())
 
 	}]);
