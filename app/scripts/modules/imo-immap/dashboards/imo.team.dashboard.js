@@ -236,7 +236,7 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: $filter('translate')('total_products'),
-								request: $scope.report.getRequest('products')
+								request: $scope.report.getRequestDummy('products')
 							}
 						}]
 					}, {
@@ -247,7 +247,7 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: $filter('translate')('total_sectors'),
-								request: $scope.report.getRequest('sectors')
+								request: $scope.report.getRequestDummy('sectors')
 							}
 						}]
 					}, {
@@ -258,7 +258,7 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: $filter('translate')('team_contributors'),
-								request: $scope.report.getRequest('team')
+								request: $scope.report.getRequestDummy('contributors')
 							}
 						}]
 					}]
@@ -391,8 +391,84 @@ angular.module('ngmReportHub')
 							}
 						}]
 					}]
+					}];
+				var barchart = [{
+					columns: [{
+						styleClass: 's12 m12 l12',
+						widgets: [{
+							type: 'highchart',
+							style: 'height: 310px;',
+							card: 'card-panel stats-card white grey-text text-darken-2',
+							config: {
+								title: {
+									text: 'Product At Flood Risk by Land Type'
+								},
+								chartConfig: {
+									options: {
+										chart: {
+											type: 'bar',
+											height: 260,
+										},
+										tooltip: {
+											pointFormat: '<b>{point.y:,.0f}</b>'
+										},
+										legend: {
+											enabled: false
+										}
+									},
+									title: {
+										text: ''
+									},
+									xAxis: {
+										categories: [
+											'Parner A',
+											'Parner AB',
+											'Parner AC',
+											'Parner AD',
+											'Parner AE',
+											'Parner AF',
+											'Parner AG',
+											'Parner AH',
+											'Parner AI',
+											'Parner AJ',
+											'Parner AK'
+										],
+										labels: {
+											rotation: 0,
+											style: {
+												fontSize: '12px',
+												fontFamily: 'Roboto, sans-serif'
+											}
+										}
+									},
+									yAxis: {
+										min: 0,
+										title: {
+											text: 'Population'
+										}
+									},
+									series: [{
+										name: 'Product',
+										color: '#7cb5ec',
+										data: [
+											10,
+											19,
+											11,
+											12,
+											15,
+											21,
+											5,
+											25,
+											40,
+											31,
+											8
+										]
+									}]
+								}
+							}
+						}]
+					}]
 				}];
-
 				// default widgets
 				var defaultWidgets = [{
 					columns: [{
@@ -457,6 +533,7 @@ angular.module('ngmReportHub')
 				// }
 				rows.push(adminWidgets[0], adminWidgets[1]);
 				// push default widgets
+				rows.push(barchart[0]);
 				rows.push(defaultWidgets[0], defaultWidgets[1], defaultWidgets[2]);
 
 

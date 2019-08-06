@@ -117,13 +117,11 @@ angular.module('ngm.widget.highchart', ['ngm.provider'])
 
               // make request
               ngmData.get(series.request).then(function(data) {
-								var x = [{
-									color: "#f48fb1", label: 1407, name: "Female", y: 54.29992892679459
-								}, {color: "#90caf9",label: 1407,name: "Male",y: 45.7000710732054}]
+
                 // set data with options.foo to enable animation
-                $scope.highchart.chartConfig.series[key].data = data.data.length ? data.data:x;
+								$scope.highchart.chartConfig.series[key].data = data.data;
                 $scope.highchart.chartConfig.options.foo = Math.random();
-								console.log('APDATE')
+								
                 // set labels
                 $scope.highchart.label = angular.merge({}, $scope.highchart.label, data.label);
 
