@@ -401,7 +401,7 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: {
-									text: 'Product At Flood Risk by Land Type'
+									text: 'Product, Partners, Type'
 								},
 								chartConfig: {
 									options: {
@@ -412,8 +412,19 @@ angular.module('ngmReportHub')
 										tooltip: {
 											pointFormat: '<b>{point.y:,.0f}</b>'
 										},
+										// legend: {
+										// 	enabled: false
+										// }
 										legend: {
-											enabled: false
+											layout: 'vertical',
+											align: 'right',
+											verticalAlign: 'top',
+											x: -40,
+											y: 0,
+											floating: true,
+											borderWidth: 1,
+											backgroundColor: '#FFFFFF',
+											shadow: true
 										}
 									},
 									title: {
@@ -444,26 +455,38 @@ angular.module('ngmReportHub')
 									yAxis: {
 										min: 0,
 										title: {
-											text: 'Population'
+											text: 'Products'
 										}
 									},
-									series: [{
-										name: 'Product',
-										color: '#7cb5ec',
-										data: [
-											10,
-											19,
-											11,
-											12,
-											15,
-											21,
-											5,
-											25,
-											40,
-											31,
-											8
-										]
-									}]
+									// series: [{
+									// 	name: 'Product',
+									// 	color: '#7cb5ec',
+									// 	data: [
+									// 		10,
+									// 		19,
+									// 		11,
+									// 		12,
+									// 		15,
+									// 		21,
+									// 		5,
+									// 		25,
+									// 		40,
+									// 		31,
+									// 		8
+									// 	]
+									// }]
+									series:[
+										{
+											name:'Map',
+											color: '#7cb5ec',
+											data: [10,19,11,12,15,21,5,25,40,31,8]
+										},
+										{
+											name: 'Dashboard',
+											color: '#be2126',
+											data: [5, 10, 4, 6, 7, 10, 2, 12, 20, 15, 4]
+										}
+									]
 								}
 							}
 						}]
@@ -484,11 +507,11 @@ angular.module('ngmReportHub')
 								headerText: 'white-text',
 								headerIcon: 'crop_original',
 								headerTitle: $filter('translate')('products_list'),
-								templateUrl: '/scripts/widgets/ngm-table/templates/immap/products/immap.products.table.html',
+								templateUrl: '/scripts/widgets/ngm-table/templates/imo/imo.products.html',
 								tableOptions: {
 									count: 4
 								},
-								request: $scope.report.getRequest('list')
+								request: $scope.report.getRequestDummy('lists')
 							}
 						}]
 					}]
