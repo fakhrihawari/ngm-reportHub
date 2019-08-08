@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ImoTeamDashboardCtrl', ['$scope', '$location', '$route', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $location, $route, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter) {
+	.controller('ImoTeamDashboardCtrl', ['$scope', '$location', '$route', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', '$sce', function ($scope, $location, $route, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter, $sce) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -508,6 +508,20 @@ angular.module('ngmReportHub')
 								headerIcon: 'crop_original',
 								headerTitle: $filter('translate')('products_list'),
 								templateUrl: '/scripts/widgets/ngm-table/templates/imo/imo.products.html',
+								openModal: function (modal, link) {
+									$('#' + modal).openModal({ dismissible: false });
+									if (link !== '') {
+										if (modal === 'close-preview-modal') {
+											$scope.linkPreview = link;
+										} else {
+											// if its from google drive; link in here is id of google drive  file
+											$scope.linkPreview = "https://drive.google.com/file/d/" + link + "/preview"
+										}
+									}
+								},
+								setLink: function () {
+									return $sce.trustAsResourceUrl($scope.linkPreview);
+								},
 								tableOptions: {
 									count: 4
 								},

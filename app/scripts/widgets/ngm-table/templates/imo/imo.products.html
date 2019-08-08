@@ -12,9 +12,43 @@
 	.pagination li.active {
 		background-color: #009688;
 	}
+	.icon i{
+		/* width: 2rem; */
+    font-size: 1.6rem;
+    line-height: 20px;
+    display: block;
+    float: left;
+    /* text-align: center; */
+    margin-right: 10px;
+	}
+	.inline-img {
+  display: inline;
+  /* margin: 2em 0.125em; */
+	margin-bottom: 10px;
+  padding: 0;
+  vertical-align: baseline;
+}
+th{
+	text-align: left !important;
+}
+.modal {
+		width: auto !important;
+		right: auto !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+	}
 </style>
 
-
+<div id="close-preview-file" class="modal ">
+	<div class="modal-content">
+		<div>
+			<iframe ng-src={{table.setLink()}} style="width:600px; height:500px;" frameborder="0"></iframe>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a class=" modal-action modal-close waves-effect waves-green btn-flat">{{'close_mayus1'|translate}}</a>
+	</div>
+</div>
 <!-- ngTable -->
 <div class="row" ng-if="data.length">
 	<div class="col s12 m12 l12">
@@ -30,17 +64,20 @@
 
 					<!-- if data -->
 					<div ng-if="data.length">
-						<table class="centered highlight responsive-table" ng-table="table.tableParams">
+						<table class="highlight responsive-table" ng-table="table.tableParams">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
 								<!-- columns -->
+								<td data-title="'File Name'" sortable="'product_month'">
+											<div class="icon">
+
+												<i class="material-icons" style="color:#be2126;text-align: center">picture_as_pdf</i> File ku sangat panjang sekali									
+											</div>										
+								</td>
 								<td data-title="'Partner Category'|translate" sortable="'category_name'">
 									{{ row.category_name }}
 								</td>
 								<td data-title="'Partner'" sortable="'partner'">
 									{{ row.project }}
-								</td>
-								<td data-title="'Sector'" sortable="'product_sector'">
-									{{ row.product_sector }}
 								</td>
 								<td data-title="'product_type'|translate" sortable="'product_type'">
 									{{ row.product_type }}
@@ -56,20 +93,12 @@
 								<td data-title="'product_month'|translate" sortable="'product_month'">
 									{{ row.product_month + ' ' + row.product_year }}
 								</td>
-								<td data-title="'File'" sortable="'product_month'">
-									<i class="material-icons" style="color:#be2126">picture_as_pdf</i>
-									<span class="title text-darken-2" style="font-weight: 400;">File_Saya</span>
+								<td data-title="'Preview'" sortable="'product_month'">
+									<button class="btn-floating  wave-effect blue tooltipped-project-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
+									 ng-click="table.openModal('close-preview-file','1fIpwiNVX-HbRV2Q62Hb3Mo_KM_3T4uuV')" ng-disabled="item.filename_extension === '.csv'">
+										<i class="small material-icons">compare</i>
+									</button>
 								</td>
-								<!-- <td data-title="'view'|translate" sortable="'product_month'">
-
-									<a target="_blank" href="{{ row.form_url }}" title="{{'view_product_from_registration'|translate}}">
-										<i class="material-icons center">edit</i>
-									</a>
-									<a target="_blank" href="{{ row.product_upload }}" title="{{'view_product'|translate}}">
-										<i class="material-icons center">open_in_new</i>
-									</a>
-
-								</td> -->
 
 							</tr>
 						</table>
