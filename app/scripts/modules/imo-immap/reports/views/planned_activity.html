@@ -21,10 +21,20 @@
 		</tr>
 		<tr ng-repeat-start="planned in report.imo_report.planed_activity track by $index" ng-init="$plannedIndex=$index" style="border: 0px">
 			<!-- Start here -->
-			<td>
+			<!-- <td>
 				<span e-form="imoform" 
 					e-name="category_id" 
 					editable-select="planned.category_id" 
+					e-placeholder="{{'select'|translate}}"
+					e-ng-options="a_t.id as a_t.name for a_t in report.partnerCategory"
+					>
+					{{report.displayPartnerCategory(report,$data,planned)}}
+				</span>
+			</td> -->
+			<td>
+				<span e-form="imoform" 
+					e-name="category_id" 
+					editable-select="planned.partner_category_id" 
 					e-placeholder="{{'select'|translate}}"
 					e-ng-options="a_t.id as a_t.name for a_t in report.partnerCategory"
 					>
@@ -43,7 +53,7 @@
 				</span>
 			</td>
 			<td>
-				<span e-form="imoform" e-name="area_activity_id" editable-select="planned.area_activity_id" e-placeholder="{{'select'|translate}}"
+				<span e-form="imoform" e-name="area_activity_id" editable-select="planned.area_id" e-placeholder="{{'select'|translate}}"
 				 e-ng-options="a_t.id as a_t.name for a_t in report.areaActivity" e-ng-disabled="!planned.partner_id">
 					{{report.displayPlannedAreaActivity(report,$data,planned)}}
 				</span>

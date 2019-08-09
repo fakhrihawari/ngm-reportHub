@@ -100,10 +100,21 @@
 					<button class="btn" ng-click="report.uploadDocument.openModal('upload-file');report.setRowFileId($index)" ng-disabled="!imoform.$visible"> UPLOAD</button>
 				</span>
 			</td>
-			<td>
+			<!-- <td>
 				<span e-form="imoform" 
 					e-name="category_id" 
 					editable-select="partner.category_id" 
+					e-placeholder="{{'select'|translate}}"
+					e-ng-options="a_t.id as a_t.name for a_t in report.partnerCategory"
+					 e-ng-disabled="!partner.file.length"
+					>
+					{{report.displayPartnerCategory(report,$data,partner)}}
+				</span>
+			</td> -->
+			<td>
+				<span e-form="imoform" 
+					e-name="category_id" 
+					editable-select="partner.partner_category_id" 
 					e-placeholder="{{'select'|translate}}"
 					e-ng-options="a_t.id as a_t.name for a_t in report.partnerCategory"
 					 e-ng-disabled="!partner.file.length"
@@ -122,10 +133,22 @@
 					{{report.displayPartner(report,$data,partner)}}
 				</span>
 			</td>
-			<td>
+			<!-- <td>
 				<span e-form="imoform" 
 				e-name="area_activity_id" 
 				editable-select="partner.area_activity_id" 
+				e-placeholder="{{'select'|translate}}"
+				e-ng-options="a_t.id as a_t.name for a_t in report.areaActivity"
+				e-ng-disabled="!partner.partner_id"
+				>
+				{{report.displayAreaActivity(report,$data,partner)}}
+				</span>
+
+			</td> -->
+			<td>
+				<span e-form="imoform" 
+				e-name="area_id" 
+				editable-select="partner.area_id" 
 				e-placeholder="{{'select'|translate}}"
 				e-ng-options="a_t.id as a_t.name for a_t in report.areaActivity"
 				e-ng-disabled="!partner.partner_id"
@@ -208,13 +231,21 @@
 				{{report.displayNarativeActivity(report,$data,partner)}}
 			</span>
 		</tr> -->
-		<tr style="border: 0px">
+		<!-- <tr style="border: 0px">
 				<td colspan="100" class=" card" style="padding: 20px">
 					<h6 style="font-weight: 600;">Narative *</h6>
 					<span editable-text="partner.narative_activity_id" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_activity_id">
 						 {{report.displayNarativeActivityText($data,partner)}}
 					</span>
 				</td>
+		</tr> -->
+		<tr style="border: 0px">
+			<td colspan="100" class=" card" style="padding: 20px">
+				<h6 style="font-weight: 600;">Narative *</h6>
+				<span editable-text="partner.narative" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_activity_id">
+					{{partner.narative}}
+				</span>
+			</td>
 		</tr>
 		<tr ng-repeat-end>
 			<!-- <td colspan="100">

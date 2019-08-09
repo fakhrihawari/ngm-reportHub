@@ -133,8 +133,13 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				// display
 				displayPartnerCategory: function (report, $data, $partner) {
 					var selected = [];
-					$partner.category_id = $data;
-					selected = $filter('filter')(report.partnerCategory, { id: $partner.category_id }, true);
+					// $partner.category_id = $data;
+					// selected = $filter('filter')(report.partnerCategory, { id: $partner.category_id }, true);
+					// if (selected && selected.length) {
+					// 	$partner.category_name = selected.length ? selected[0].name : '-';
+					// }
+					$partner.partner_category_id = $data;
+					selected = $filter('filter')(report.partnerCategory, { id: $partner.partner_category_id }, true);
 					if (selected && selected.length) {
 						$partner.category_name = selected.length ? selected[0].name : '-';
 					}
@@ -151,10 +156,16 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				},
 				displayAreaActivity:function(report,$data, $partner){
 					var selected = [];
-					$partner.area_activity_id = $data;					
-					selected = $filter('filter')(report.areaActivity, { id: $partner.area_activity_id }, true);
+					// $partner.area_activity_id = $data;					
+					// selected = $filter('filter')(report.areaActivity, { id: $partner.area_activity_id }, true);
+					// if (selected && selected.length) {
+					// 	$partner.area_activity_name = selected.length?selected[0].name:'-';
+					// }
+					$partner.area_id = $data;
+					selected = $filter('filter')(report.areaActivity, { id: $partner.area_id }, true);
 					if (selected && selected.length) {
-						$partner.area_activity_name = selected.length?selected[0].name:'-';
+						$partner.area_name = selected.length ? selected[0].name : '-';
+						console.log($partner.area_name);
 					}
 					return selected.length ? selected[0].name : '-';
 				},
@@ -191,10 +202,15 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				},
 				displayPlannedAreaActivity: function (report, $data, $planned) {
 					var selected = [];
-					$planned.area_activity_id = $data;
+					// $planned.area_activity_id = $data;
+					// selected = $filter('filter')(report.areaActivity, { id: $planned.area_activity_id }, true);
+					// if (selected && selected.length) {
+					// 	$planned.area_activity_name = selected.length ? selected[0].name : '-';
+					// }
+					$planned.area_id = $data;
 					selected = $filter('filter')(report.areaActivity, { id: $planned.area_activity_id }, true);
 					if (selected && selected.length) {
-						$planned.area_activity_name = selected.length ? selected[0].name : '-';
+						$planned.area_name = selected.length ? selected[0].name : '-';
 					}
 					return selected.length ? selected[0].name : '-';
 				},
