@@ -28,7 +28,7 @@
   padding: 0;
   vertical-align: baseline;
 }
-th{
+.product th{
 	text-align: left !important;
 }
 .modal {
@@ -64,7 +64,7 @@ th{
 
 					<!-- if data -->
 					<div ng-if="data.length">
-						<table class="highlight responsive-table" ng-table="table.tableParams">
+						<table class="highlight responsive-table product" ng-table="table.tableParams">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
 								<!-- columns -->
 								<td data-title="'File Name'" sortable="'product_month'">
@@ -90,12 +90,12 @@ th{
 									{{ row.collab_name }}
 									User
 								</td>
-								<td data-title="'product_month'|translate" sortable="'product_month'">
+								<td data-title="'Report Month'" sortable="'product_month'">
 									{{ row.product_month + ' ' + row.product_year }}
 								</td>
 								<td data-title="'Preview'" sortable="'product_month'">
 									<button class="btn-floating  wave-effect blue tooltipped-project-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
-									 ng-click="table.openModal('close-preview-file','1fIpwiNVX-HbRV2Q62Hb3Mo_KM_3T4uuV')" ng-disabled="item.filename_extension === '.csv'">
+									 ng-click="table.openModal('close-preview-file','1KB2pUffgVZU5L7M5AZjuYzJTYPWQriSy')" ng-disabled="item.filename_extension === '.csv'">
 										<i class="small material-icons">compare</i>
 									</button>
 								</td>

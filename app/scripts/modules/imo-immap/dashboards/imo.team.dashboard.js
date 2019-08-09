@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ImoTeamDashboardCtrl', ['$scope', '$location', '$route', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', '$sce', function ($scope, $location, $route, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter, $sce) {
+	.controller('ImoTeamDashboardCtrl', ['$scope', '$location', '$route', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', '$sce', 'dashboardImoStatHelper', function ($scope, $location, $route, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter, $sce, dashboardImoStatHelper) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -45,6 +45,16 @@ angular.module('ngmReportHub')
 
 			// downlaod filename
 			report_filename: 'iMMAP_products_list_',
+			// sector
+			sector:$route.current.params.sector,
+			// area
+			area:$route.current.params.area,
+			// type:
+			type:$route.current.params.type,
+			// user
+			person_user:$route.current.params.person_user,
+			// partner
+			partner:$route.current.params.partner,
 
 			// set path based on user
 			getPath: function () {
@@ -59,13 +69,38 @@ angular.module('ngmReportHub')
 				}
 
 				// go with URL
-				var path = '/immap/reporting/dashboard-team/' + $scope.report.admin0pcode +
-					'/' + $scope.report.project +
-					'/' + $scope.report.product_sector_id +
-					'/' + $scope.report.product_type_id +
+				// var path = '/immap/reporting/dashboard-team/' + $scope.report.admin0pcode +
+				// 	'/' + $scope.report.project +
+				// 	'/' + $scope.report.product_sector_id +
+				// 	'/' + $scope.report.product_type_id +
+				// 	'/' + $scope.report.email +
+				// 	'/' + $scope.report.start_date +
+				// 	'/' + $scope.report.end_date;
+				var path = '/immap/reporting/dashboard-team/' + $scope.report.sector +
+					'/' + $scope.report.area +
+					'/' + $scope.report.type +
+					'/' + $scope.report.partner +
+					'/' + $scope.report.person_user +
 					'/' + $scope.report.email +
 					'/' + $scope.report.start_date +
 					'/' + $scope.report.end_date;
+					
+					console.log(path);
+					var param={
+						sector: $scope.report.sector,
+						area: $scope.report.area,
+						partner: $scope.report.partner,
+						person_user: $scope.report.person_user,
+						email: $scope.report.email,
+						start_date: $scope.report.start_date,
+						end_date: $scope.report.end_date,
+						type: $scope.report.type
+					};
+				if ($route.current.params.sub_area) {
+					path = path + '/' + $route.current.params.sub_area;
+					param.sub_area =$route.current.params.sub_area;
+				}
+					dashboardImoStatHelper.setParam(param);
 				// return path
 				return path;
 
@@ -75,30 +110,31 @@ angular.module('ngmReportHub')
 			setPath: function (path) {
 				// if current location is not equal to path
 				if (path !== $location.$$path) {
+					console.log(path);
 					$location.path(path);
 				}
 
 			},
 
 			// request
-			getRequest: function (indicator) {
-				return {
-					method: 'POST',
-					url: ngmAuth.LOCATION + '/api/immap/products/indicator',
-					data: {
-						indicator: indicator,
-						admin0pcode: $scope.report.admin0pcode,
-						project: $scope.report.project,
-						email: $scope.report.email,
-						product_sector_id: $scope.report.product_sector_id,
-						product_type_id: $scope.report.product_type_id,
-						start_date: $scope.report.start_date,
-						end_date: $scope.report.end_date,
-						// for filename downloads
-						report: $scope.report.report_filename
-					}
-				}
-			},
+			// getRequest: function (indicator) {
+			// 	return {
+			// 		method: 'POST',
+			// 		url: ngmAuth.LOCATION + '/api/immap/products/indicator',
+			// 		data: {
+			// 			indicator: indicator,
+			// 			admin0pcode: $scope.report.admin0pcode,
+			// 			project: $scope.report.project,
+			// 			email: $scope.report.email,
+			// 			product_sector_id: $scope.report.product_sector_id,
+			// 			product_type_id: $scope.report.product_type_id,
+			// 			start_date: $scope.report.start_date,
+			// 			end_date: $scope.report.end_date,
+			// 			// for filename downloads
+			// 			report: $scope.report.report_filename
+			// 		}
+			// 	}
+			// },
 			getRequestDummy:function(indicator){
 				return {
 					method: 'POST',
@@ -131,34 +167,61 @@ angular.module('ngmReportHub')
 				// menu
 				var menu_items = []
 
-				// if USER
-				if ($scope.report.user.roles.indexOf('ORG') === -1 ||
-					$scope.report.user.roles.indexOf('ADMIN') === -1) {
-					menu_items = ['admin0pcode', 'project', 'product_sector_id', 'product_type_id'];
-				} else {
-					menu_items = ['admin0pcode', 'project', 'product_sector_id', 'product_type_id', 'email'];
-				}
-
+				// // if USER
+				// if ($scope.report.user.roles.indexOf('ORG') === -1 ||
+				// 	$scope.report.user.roles.indexOf('ADMIN') === -1) {
+				// 	menu_items = ['admin0pcode', 'project', 'product_sector_id', 'product_type_id'];
+				// } else {
+				// 	menu_items = ['admin0pcode', 'project', 'product_sector_id', 'product_type_id', 'email'];
+				// }
+				menu_items = ['product_sector_id','area', 'product_type_id','partner','user'];
 				// ngmData
-				ngmData
-					.get(angular.merge($scope.report.getRequest('menu_items'),
-						{ data: { menu_items: menu_items }, url: ngmAuth.LOCATION + '/api/immap/products/getProductsMenu' }))
-					.then(function (menu) {
-						// set menu
-						$scope.report.ngm.dashboard.model.menu = menu;
-					});
-
+				// ngmData
+				// 	.get(angular.merge($scope.report.getRequestDummy('menu_items'),
+				// 		{ data: { menu_items: menu_items }, url: ngmAuth.LOCATION + '/api/immap/report/getDummyMenu' }))
+				// 	.then(function (menu) {
+				// 		// set menu
+				// 		// $scope.report.ngm.dashboard.model.menu = menu;
+				// 	});
+				console.log($scope.report.ngm.dashboard.model.menu);
+				// $scope.report.ngm.dashboard.model.menu =
+				type = [{ product_id: 'static_infoghraphic', product_name:'Static infographic'},
+					{ product_id: 'dynamic_infoghraphic', product_name: 'Dynamic infographic' },
+					{ product_id: 'training', product_name: 'Training' },
+					{ product_id: 'map', product_name: 'Map' },
+					{ product_id: 'printed_product', product_name: 'Printed Product' },
+					{ product_id: 'Meeting', product_name: 'Meeting' }]
+				area=[{area_id:'information_management_coordination_support',area_name:'Information Management and Coordination Support',subarea_id:'sub_a',subarea_name:'Sub A'},
+							{area_id:'information_management_coordination_support',area_name:'Information Management and Coordination Support',subarea_id:'sub_b',subarea_name:'Sub B'},
+							{area_id:'drr',area_name:'DRR',subarea_id:'sub_c',subarea_name:'Sub C'},
+							{area_id:'drr',area_name:'DRR',subarea_id:'sub_d',subarea_name:'Sub D'}]
+				$scope.report.ngm.dashboard.model.menu.push(dashboardImoStatHelper.getSectorMenu('#/immap/reporting/dashboard-team'));
+				$scope.report.ngm.dashboard.model.menu.push(dashboardImoStatHelper.getAreaMenu('#/immap/reporting/dashboard-team',area));
+				var subArea = dashboardImoStatHelper.getSubAreaMenu('#/immap/reporting/dashboard-team', area);
+				console.log("ADA SUB",subArea.rows.length)
+				if (subArea.rows.length>0 && $scope.report.area !=='all'){
+					$scope.report.ngm.dashboard.model.menu.push(subArea);
+				};
+				$scope.report.ngm.dashboard.model.menu.push(dashboardImoStatHelper.getTypeMenu('#/immap/reporting/dashboard-team',type));
+				$scope.report.ngm.dashboard.model.menu.push(dashboardImoStatHelper.getPartnerMenu('#/immap/reporting/dashboard-team'));
+				$scope.report.ngm.dashboard.model.menu.push(dashboardImoStatHelper.getUserMenu('#/immap/reporting/dashboard-team'));
+				
 			},
 
 			// format subtitle
 			getSubTitle: function () {
 				// all params
-				var subtitle = $scope.report.admin0pcode.toUpperCase() + ' | ' +
-					$scope.report.project.toUpperCase() + ' | ' +
-					$scope.report.email.toUpperCase() + ' | ' +
-					$scope.report.product_sector_id.toUpperCase() + ' | ' +
-					$scope.report.product_type_id.toUpperCase() + ' type(s)'; //+
+				// var subtitle = 
+				// 	$scope.report.project.toUpperCase() + ' | ' +
+				// 	$scope.report.email.toUpperCase() + ' | ' +
+				// 	$scope.report.product_sector_id.toUpperCase() + ' | ' +
+				// 	$scope.report.product_type_id.toUpperCase() + ' type(s)'; //+
 				// '- hit <span style="font-weight:400;">REFRESH LIST</span> to fetch the latest submissions!'
+				var subtitle =
+					$scope.report.sector.toUpperCase() + ' | ' +
+					$scope.report.area.toUpperCase() + ' | ' +
+					$scope.report.partner.toUpperCase() + ' | ' +
+					$scope.report.type.toUpperCase() + ' type(s)';
 				return subtitle;
 
 			},
@@ -220,7 +283,7 @@ angular.module('ngmReportHub')
 									name: $filter('translate')('product_submissions')
 								},
 								options: { itemName: 'Product', start: new Date($scope.report.start_date) },
-								request: $scope.report.getRequest('calendar')
+								// request: $scope.report.getRequest('calendar')
 							}
 						}]
 					}]
@@ -387,7 +450,7 @@ angular.module('ngmReportHub')
 									name: $filter('translate')('product_submissions')
 								},
 								options: { itemName: $filter('translate')('products_mayus1'), start: new Date($scope.report.start_date) },
-								request: $scope.report.getRequest('calendar')
+								// request: $scope.report.getRequest('calendar')
 							}
 						}]
 					}]
@@ -505,6 +568,28 @@ angular.module('ngmReportHub')
 								headerClass: 'collection-header lighten-2',
 								headerStyle: 'background-color:' + $scope.report.ngm.style.defaultPrimaryColor,
 								headerText: 'white-text',
+								headerIcon: 'insert_drive_file',
+								headerTitle: 'Report',
+								templateUrl: '/scripts/widgets/ngm-table/templates/imo/imo.report.html',								
+								tableOptions: {
+									count: 4
+								},
+								request: $scope.report.getRequestDummy('lists')
+							}
+						}]
+					}]
+				},{
+					columns: [{
+						styleClass: 's12',
+						widgets: [{
+							type: 'table',
+							card: 'panel',
+							style: 'padding:0px; height: ' + $scope.report.ngm.style.height + 'px;',
+							config: {
+								style: $scope.report.ngm.style,
+								headerClass: 'collection-header lighten-2',
+								headerStyle: 'background-color:' + $scope.report.ngm.style.defaultPrimaryColor,
+								headerText: 'white-text',
 								headerIcon: 'crop_original',
 								headerTitle: $filter('translate')('products_list'),
 								templateUrl: '/scripts/widgets/ngm-table/templates/imo/imo.products.html',
@@ -538,12 +623,12 @@ angular.module('ngmReportHub')
 							style: 'padding-top: 20px;padding-bottom: 46px;',
 							config: {
 								style: $scope.report.ngm.style,
-								request: $scope.report.getRequest('list'),
-								templateUrl: '/scripts/widgets/ngm-html/template/immap/products/immap.products.list.html'
+								request: $scope.report.getRequestDummy('lists'),
+								templateUrl: '/scripts/widgets/ngm-html/template/imo/imo.product.list.html'
 							}
 						}]
 					}]
-				}, {
+					}, {
 					columns: [{
 						styleClass: 's12 m12 l12',
 						widgets: [{
@@ -596,7 +681,7 @@ angular.module('ngmReportHub')
 						title: {
 							'class': 'col s12 m8 l8 report-title truncate',
 							style: 'font-size: 3.4rem; color: ' + $scope.report.ngm.style.defaultPrimaryColor,
-							title: 'iMMAP | ' + $scope.report.admin0pcode.toUpperCase() + ' | ' + $filter('translate')('products_mayus1')
+							title: 'iMMAP |' + $filter('translate')('products_mayus1')
 						},
 						subtitle: {
 							'class': 'col hide-on-small-only m8 l9 report-subtitle truncate',
@@ -644,7 +729,7 @@ angular.module('ngmReportHub')
 								color: 'blue lighten-2',
 								icon: 'assignment_turned_in',
 								hover: $filter('translate')('download_products_list_as_csv'),
-								request: $scope.report.getRequest('csv'),
+								// request: $scope.report.getRequest('csv'),
 								metrics: $scope.report.getMetrics('immap_products_list', 'csv')
 							}]
 						}
@@ -661,8 +746,8 @@ angular.module('ngmReportHub')
 
 		// set path, menu and init
 		$scope.report.setPath($scope.report.getPath());
-		$scope.report.setMenu();
 		$scope.report.init();
+		$scope.report.setMenu();
 		console.log($scope.report.getRows())
 
 	}]);

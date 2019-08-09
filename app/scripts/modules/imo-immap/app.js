@@ -151,9 +151,21 @@ angular
 			})
 			// project list
 			.when('/immap/reporting/dashboard-team', {
-				redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/2018-01-01/' + moment().format('YYYY-MM-DD')
+				// redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/2018-01-01/' + moment().format('YYYY-MM-DD')
+				redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/all/2018-01-01/' + moment().format('YYYY-MM-DD')
 			})
-			.when('/immap/reporting/dashboard-team/:admin0pcode/:project/:product_sector_id/:product_type_id/:email/:start_date/:end_date', {
+			// .when('/immap/reporting/dashboard-team/:admin0pcode/:project/:product_sector_id/:product_type_id/:email/:start_date/:end_date', {
+			.when('/immap/reporting/dashboard-team/:sector/:area/:type/:partner/:person_user/:email/:start_date/:end_date', {
+				reloadOnSearch: false,
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoTeamDashboardCtrl',
+				resolve: {
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAuthenticated();
+					}],
+				}
+			})
+			.when('/immap/reporting/dashboard-team/:sector/:area/:type/:partner/:person_user/:email/:start_date/:end_date/:sub_area', {
 				reloadOnSearch: false,
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamDashboardCtrl',
