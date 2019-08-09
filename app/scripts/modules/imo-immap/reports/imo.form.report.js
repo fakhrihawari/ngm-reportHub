@@ -68,17 +68,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				style: config.style,
 				imo_report:config.imo_report,
 				newProject: $route.current.params.id === 'new' ? true : false,
-				definition: config.project,
-				report: config.report,
-				location_group: config.location_group,
-				canEdit: ngmAuth.canDo('EDIT', { adminRpcode: config.project.adminRpcode, admin0pcode: config.project.admin0pcode, cluster_id: config.project.cluster_id, organization_tag: config.project.organization_tag }),
-				updatedAt: moment(config.report.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a'),
-				monthlyTitleFormat: moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMMM, YYYY'),
-				monthNameFormat: moment.utc([config.report.report_year, config.report.report_month, 1]).format('MMM'),
-				previousMonth: moment.utc([config.report.report_year, config.report.report_month, 1]).subtract(1, 'month').format("MMMM, YYYY"),
-
-				// lists ( project, mpc transfers )
-				lists: ngmClusterLists.setLists(config.project, 10),
+				
 
 
 				/**** TEMPLATES ****/
