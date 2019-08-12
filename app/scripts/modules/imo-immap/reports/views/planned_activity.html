@@ -67,7 +67,7 @@
 			</td> -->
 			<td>
 				<span e-form="imoform" e-name="product_id" editable-select="planned.product_id" e-placeholder="{{'select'|translate}}" e-ng-options="a_t.id as a_t.name for a_t in report.products"
-				 e-ng-disabled="!planned.narative_activity_id">
+				 e-ng-disabled="!planned.narative">
 					{{report.displayPlannedProducts(report,$data,planned)}}
 				</span>
 
@@ -106,8 +106,9 @@
 		<tr>
 			<td colspan="100" class=" card" style="padding: 20px">
 				<h6 style="font-weight: 600;">Narative *</h6>
-				<span editable-text="planned.narative_activity_id" e-name="narative" e-form="imoform">
-					{{report.displayPlannedNarativeActivityText($data,planned)}}
+				<span editable-text="planned.narative" e-name="narative" e-form="imoform">
+					<!-- {{report.displayPlannedNarativeActivityText($data,planned)}} -->
+					 {{planned.narative}}
 				</span>
 			</td>
 		</tr>

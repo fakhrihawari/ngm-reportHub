@@ -172,10 +172,7 @@ angular.module('ngmReportHub')
 									type: 'imo.report',
 									config: {
 										style: $scope.report.ngm.style,
-										project: $scope.report.project,
-										report: $scope.report.definition,
 										imo_report: $scope.report.imo,
-										location_group: $scope.report.location_group
 									}
 								}]
 							}]
@@ -217,6 +214,15 @@ angular.module('ngmReportHub')
 			if($route.current.params.report_id ===  'new'){		
 				
 				$scope.data = imoReportHelper.getNewForm(ngmUser.get());
+					// set uplod id for new report
+					var m = moment(new Date()).format('M')
+					var y = moment(new Date()).format('YYYY')
+					var idUpload = (Math.floor((Math.random(m) * 25)) + 10).toString(36) + "for";
+					idUpload += (new Date()).getTime().toString(36);
+					idUpload += (m + y);
+					$scope.data.upload_id= idUpload;
+				
+				
 				$scope.report.setProjectDetails($scope.data);
 			}else{
 				$scope.report.getReportDummy.success(function (result) {

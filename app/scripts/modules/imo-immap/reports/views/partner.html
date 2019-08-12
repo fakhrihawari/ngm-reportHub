@@ -127,8 +127,8 @@
 					e-name="partner_id" 
 					editable-select="partner.partner_id" 
 					e-placeholder="{{'select'|translate}}"
-					e-ng-options="a_t.id as a_t.name for a_t in report.partner  | filter: {category_id:partner.category_id}"
-					e-ng-disabled="!partner.category_id"
+					e-ng-options="a_t.id as a_t.name for a_t in report.partner  | filter: {category_id:partner.partner_category_id}"
+					e-ng-disabled="!partner.partner_category_id"
 					>
 					{{report.displayPartner(report,$data,partner)}}
 				</span>
@@ -173,7 +173,7 @@
 					editable-select="partner.product_id" 
 					e-placeholder="{{'select'|translate}}"
 				 	e-ng-options="a_t.id as a_t.name for a_t in report.products" 
-					e-ng-disabled="!partner.narative_activity_id">
+					e-ng-disabled="!partner.narative">
 													 {{report.displayProducts(report,$data,partner)}}
 				</span>
 				
@@ -203,7 +203,9 @@
 				<!-- form -->
 				<form editable-form name="imoform" onshow="report.keydownSaveForm()" ng-show="imoform.$visible"
 				 class="form-buttons form-inline" shown="inserted == partner">
-					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner ) || report.imo_report.report_submit"
+					<button type="submit" ng-if="imoform.$visible"
+						ng-click="report.saveImoReport(false)" 
+						ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner ) || report.imo_report.report_submit"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
@@ -242,7 +244,7 @@
 		<tr style="border: 0px">
 			<td colspan="100" class=" card" style="padding: 20px">
 				<h6 style="font-weight: 600;">Narative *</h6>
-				<span editable-text="partner.narative" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_activity_id">
+				<span editable-text="partner.narative" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_id">
 					{{partner.narative}}
 				</span>
 			</td>

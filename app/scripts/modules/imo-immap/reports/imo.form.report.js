@@ -67,7 +67,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				user: ngmUser.get(),
 				style: config.style,
 				imo_report:config.imo_report,
-				newProject: $route.current.params.id === 'new' ? true : false,
+				newProject: $route.current.params.report_id === 'new' ? true : false,
 				
 
 
@@ -346,26 +346,43 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					
 					if (row_type === 'partner') {
 												
-						if ($data.file.length && $data.category_id &&
+						// if ($data.file.length && $data.category_id &&
+						// 	$data.partner_id &&
+						// 	$data.area_activity_id &&
+						// 	$data.narative_activity_id &&
+						// 	$data.collab_id &&
+						// 	$data.product_id &&
+						// 	$data.number_products >= 0) {
+						// 	disabled = false;
+						// }
+						if ($data.file.length && $data.partner_category_id &&
 							$data.partner_id &&
-							$data.area_activity_id &&
-							$data.narative_activity_id &&
+							$data.area_id &&
+							$data.narative &&
 							$data.collab_id &&
 							$data.product_id &&
 							$data.number_products >= 0) {
 							disabled = false;
 						}
 					}	
-						if(row_type ==='planned'){
-								if ($data.category_id &&
-										$data.partner_id &&
-										$data.area_activity_id &&
-										$data.narative_activity_id &&
-										$data.product_id &&
-										$data.number_products >= 0) {
-											disabled =false;
-									}
-							}								
+					if(row_type ==='planned'){
+							// if ($data.category_id &&
+							// 		$data.partner_id &&
+							// 		$data.area_activity_id &&
+							// 		$data.narative_activity_id &&
+							// 		$data.product_id &&
+							// 		$data.number_products >= 0) {
+							// 				disabled =false;
+							// 		}
+						if ($data.partner_category_id &&
+							$data.partner_id &&
+							$data.area_id &&
+							$data.narative_id &&
+							$data.product_id &&
+							$data.number_products >= 0) {
+							disabled = false;
+						}
+				}								
 				return disabled
 							
 				},
@@ -431,30 +448,26 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					$scope.removeFileId = id;
 				},
 				uploadDocument: ngmClusterDocument.uploadDocument({
-					project_id: 'pln123lstrk456coba78',
-					report_id: 'fkhrhwrrfn123test021',
+					report_id: config.imo_report.upload_id,
 					username: ngmUser.get().username,
-					organization_tag: config.report.organization_tag,
-					cluster_id: config.report.cluster_id,
-					admin0pcode: config.report.admin0pcode,
-					adminRpcode: config.report.adminRpcode,
-					reporting_period: config.report.reporting_period,
-					project_start_date: config.project.project_start_date,
-					project_end_date: config.project.project_end_date
 				}),
 				getDocument: function () {
-					ngmData.get({
-						method: 'GET',
-						url: ngmAuth.LOCATION + '/api/listReportDocuments/fkhrhwrrfn123test021'
-					}).then(function (data) {
-						l=data.length
-						$scope.dummy = data;
-						data = data.slice($scope.file_uploaded);
-						data.forEach(element => {
-							$scope.report.imo_report.support_partner[$scope.setRowFile].file.push(element)
+					$timeout(function (params) {
+						ngmData.get({
+							method: 'GET',
+							// url: ngmAuth.LOCATION + '/api/listReportDocuments/fkhrhwrrfn123test021'
+							url: ngmAuth.LOCATION + '/api/listReportDocuments/' + config.imo_report.upload_id
+						}).then(function (data) {
+							l = data.length
+							$scope.dummy = data;
+							data = data.slice($scope.file_uploaded);
+							data.forEach(element => {
+								$scope.report.imo_report.support_partner[$scope.setRowFile].file.push(element)
+							});
+
 						});
-						
-					});
+					},50)
+					
 				},
 				removeFile:function(){
 					$scope.report.imo_report.support_partner[$scope.removeFileRow].file.forEach((el,i)=>{
