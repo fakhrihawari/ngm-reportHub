@@ -42,6 +42,36 @@
 		padding-left: 21%;
 		margin-top: 15%;
 	}
+	.collection .collection-item.avatar {
+		min-height: 0;
+	}
+		.collection .collection-item.avatar i.circle {
+		line-height: 30px;
+		width: 30px;
+		height: 30px;
+		margin-top: 0px;
+	}
+	.collection .collection-item.avatar .secondary-content.file-upload{
+		top: 6px;
+	}
+	.btn-floating.watch-detail{
+		width: 30px;
+    height: 30px;
+	}
+	.btn-floating.watch-detail i{
+		font-size: 1.3rem;
+    line-height: 30px;
+	}
+		.icon i{
+		/* width: 2rem; */
+    font-size: 1.6rem;
+    line-height: 20px;
+    display: block;
+    float: left;
+    /* text-align: center; */
+    margin-right: 10px;
+	}
+
 </style>
 <div id="close-preview-file" class="modal ">
 	<div class="modal-content">
@@ -249,46 +279,7 @@
 				</span>
 			</td>
 		</tr>
-		<tr ng-repeat-end>
-			<!-- <td colspan="100">
-				<div class="row">
-					<div class="col s12 m2" dir-paginate="item in dummy  | itemsPerPage: 6" pagination-id="listUpload.id">
-						<div class="card border-radius">
-							<div class="card-image waves-effect waves-block waves-light">
-								<img class="activator" ng-src={{ngmClusterDocument.setThumbnailfromGdrive(item.fileid)}}>
-							</div>
-							<div class="card-content">
-								<i class="material-icons left" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};margin-right: 5px;">
-									{{ngmClusterDocument.extentionIcon(item.filename_extension)}}
-								</i>
-								<span class="grey-text activator text-darken-4 " style="font-size: 12px; font-weight: 400">{{item.filename| limitTo: 12}}{{item.filenamelength
-									< 12 ? '' : '...'}} <i class="material-icons right" style="cursor: pointer; margin-left: 5px;">more_vert</i>
-								</span>
-							</div>
-							<div class="card-reveal">
-								<div class=" card-title grey-text text-darken-4">
-									<i class="material-icons right" style="font-size: 18px; color: #e2e2e2;margin-top: 5px;margin-right: 5px;">close</i>
-								</div>
-								<div class="line">			
-									
-									<button class="btn-floating  wave-effect blue tooltipped-report-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
-									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv'">
-										<i class="small material-icons">compare</i>
-									</button>
-									<a class="btn-floating  wave-effect space tooltipped-report-upload" data-position="bottom" data-tooltip="{{'download'|translate}}"
-									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
-										<i class="small material-icons">cloud_download</i>
-									</a>
-									<button class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
-									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid)">
-										<i class="small material-icons">delete</i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</td> -->
+		<tr ng-repeat-end>			
 			<td colspan="100" ng-if="partner.file.length">
 				<div class="row">
 					<div class="col s12 m2" dir-paginate="item in partner.file  | itemsPerPage: 6" pagination-id="listUpload.id">
@@ -325,6 +316,50 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div ng-if="partner.file.length > 0">
+						<ul class="collection with-header card">
+							<li class="collection-header teal" style="height:80px;">
+								<div class="col s12 m10">
+									<h4 style="font-size:1.1rem; color: #ffffff">
+										<i class="material-icons left" style="">perm_media</i>{{'project_documents'|translate}}
+									</h4>
+								</div>
+							</li>
+							<li class="collection-item avatar" dir-paginate="item in partner.file | itemsPerPage: 6" pagination-id="listUpload.id" style="padding-left: 16px">
+								<div class="icon">							
+									<i class="material-icons" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};text-align: center">
+									{{ngmClusterDocument.extentionIcon(item.filename_extension)}}</i> {{item.filename| limitTo: 50}}{{item.filenamelength< 50 ? '' : '...'}}
+									<div style="display: inline;padding-left: 220px">{{item.fileowner}}</div>
+									<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
+									<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
+									<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
+								</div>
+								<div class="secondary-content file-upload">											
+									<button data-position="bottom" data-tooltip="{{'preview'|translate}}" class="btn-floating  wave-effect blue watch-detail"
+									ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv' || report.imo_report.report_submit">
+										<i class="small material-icons">compare</i>
+									</button>
+									<a class="btn-floating  wave-effect watch-detail" data-position="bottom" data-tooltip="{{'download'|translate}}"
+									ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
+										<i class="small material-icons">cloud_download</i>
+									</a>
+									<button class="btn-floating  wave-effect red watch-detail" data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
+									ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)">
+										<i class="small material-icons">delete</i>
+									</button>
+								</div>
+							</li>
+						
+							<li class="collection-item avatar" ng-if="!partner.file.length">
+								<p style="font-size: 17px; padding:10px 0px 10px 0px;">{{'you_have_no_project_documents_yet'| translate}}</p>
+							</li>
+							<li class="collection-item avatar" ng-if="partner.file.length > 6" style="padding:25px 10px 20px 10px;">
+								<dir-pagination-controls pagination-id="listUpload.id"></dir-pagination-controls>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</td>

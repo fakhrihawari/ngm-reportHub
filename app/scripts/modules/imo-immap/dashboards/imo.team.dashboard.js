@@ -262,6 +262,24 @@ angular.module('ngmReportHub')
 											}, 600);
 										});
 								},
+								getPreviousMonth: function () {
+									// get dates
+									var start_date = moment(new Date($scope.report.start_date)).utc().subtract(1, 'M').startOf('M').format('YYYY-MM-DD');
+									var end_date = moment(new Date($scope.report.end_date)).utc().subtract(1, 'M').endOf('M').format('YYYY-MM-DD');
+									// set dates
+									$scope.report.start_date = start_date;
+									$scope.report.end_date = end_date;
+									$scope.report.setPath($scope.report.getPath());
+								},
+								getCurrentMonth: function () {
+									// get dates
+									var start_date = moment().utc().startOf('M').format('YYYY-MM-DD');
+									var end_date = moment().utc().endOf('M').format('YYYY-MM-DD');
+									// set dates
+									$scope.report.start_date = start_date;
+									$scope.report.end_date = end_date;
+									$scope.report.setPath($scope.report.getPath());
+								},
 								request: { method: 'GET', url: ngmAuth.LOCATION + '/api/immap/products/latestUpdate' },
 								templateUrl: '/scripts/widgets/ngm-html/template/imo/imo.product.control.html'
 							}
