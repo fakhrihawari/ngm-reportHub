@@ -80,6 +80,29 @@ angular.module('ngmReportHub')
 								}, 2000);
 							})
 					},
+					removeFileWithoutBroadcast: function () {
+
+						Materialize.toast($filter('translate')('deleting'), 6000, 'note');
+						$http({
+							method: 'DELETE',
+							url: ngmAuth.LOCATION + '/api/deleteGDriveFile/' + this.removeFileId,
+							headers: { 'Authorization': 'Bearer ' + upload.token },
+						})
+							.success(function (result) {
+								$timeout(function () {
+									msg = $filter('translate')('file_deleted');
+									typ = 'success';
+									Materialize.toast(msg, 6000, typ);
+								}, 2000);
+							})
+							.error(function (err) {
+								$timeout(function () {
+									msg = $filter('translate')('error_file_not_deleted');
+									typ = 'error';
+									Materialize.toast(msg, 6000, typ);
+								}, 2000);
+							})
+					},
 					// to show icon based on extention like PNG,PDF etc
 					extentionIcon: function (text) {
 						text = text.toLowerCase().replace(/\./g, '')

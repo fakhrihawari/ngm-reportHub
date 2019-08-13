@@ -94,7 +94,7 @@
 	<div class="modal-footer">
 		<a class=" modal-action modal-close waves-effect waves-green btn-flat">{{'close_mayus1'|translate}}</a>
 		<!-- <a ng-click="ngmClusterDocument.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a> -->
-		<a ng-click="ngmClusterDocument.removeFile();report.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a>
+		<a ng-click="ngmClusterDocument.removeFileWithoutBroadcast();report.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a>
 	</div>
 </div>
 <div style="padding-left: 20px;">
@@ -279,6 +279,95 @@
 				</span>
 			</td>
 		</tr>
+		<tr>
+			<td colspan="100">
+				<!-- <div class="row">
+									<div ng-if="partner.file.length > 0">
+										<ul class="collection with-header card">
+											<li class="collection-header teal" style="height:80px;">
+												<div class="col s12 m10">
+													<h4 style="font-size:1.1rem; color: #ffffff">
+														<i class="material-icons left" style="">perm_media</i>{{'project_documents'|translate}}
+													</h4>
+												</div>
+											</li>
+											<li class="collection-item avatar" dir-paginate="item in partner.file | itemsPerPage: 6" pagination-id="listUpload.id" style="padding-left: 16px">
+												<div class="icon">							
+													<i class="material-icons" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};text-align: center">
+													{{ngmClusterDocument.extentionIcon(item.filename_extension)}}</i> {{item.filename| limitTo: 50}}{{item.filenamelength< 50 ? '' : '...'}}
+													<div style="display: inline;padding-left: 220px">{{item.fileowner}}</div>
+													<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
+													<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
+													<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
+												</div>
+												<div class="secondary-content file-upload">											
+													<button data-position="bottom" data-tooltip="{{'preview'|translate}}" class="btn-floating  wave-effect blue watch-detail"
+													ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv' || report.imo_report.report_submit">
+														<i class="small material-icons">compare</i>
+													</button>
+													<a class="btn-floating  wave-effect watch-detail" data-position="bottom" data-tooltip="{{'download'|translate}}"
+													ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
+														<i class="small material-icons">cloud_download</i>
+													</a>
+													<button class="btn-floating  wave-effect red watch-detail" data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
+													ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)">
+														<i class="small material-icons">delete</i>
+													</button>
+												</div>
+											</li>
+										
+											<li class="collection-item avatar" ng-if="!partner.file.length">
+												<p style="font-size: 17px; padding:10px 0px 10px 0px;">{{'you_have_no_project_documents_yet'| translate}}</p>
+											</li>
+											<li class="collection-item avatar" ng-if="partner.file.length > 0" style="padding:25px 10px 20px 10px;">
+												<dir-pagination-controls pagination-id="listUpload.id"></dir-pagination-controls>
+											</li>
+										</ul>
+									</div>
+								</div> -->
+					<table class="responsive-table">
+						<thead>
+							<tr>
+								<th>File</th>
+								<th>Owner</th>
+								<th>Owner</th>
+								<th>Owner</th>
+								<th>View</th>
+							</tr>
+						</thead>
+					
+						<tbody>
+							<tr dir-paginate="item in partner.file | itemsPerPage: 6" pagination-id="tableUpload">
+								<td><div class="icon">
+									<i class="material-icons" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};text-align: center">
+										{{ngmClusterDocument.extentionIcon(item.filename_extension)}}</i> {{item.filename| limitTo: 50}}{{item.filenamelength<
+									 50 ? '' : '...'}}</td>
+								<td>{{item.filename}}</td>
+								<td>{{item.filename}}</td>
+								<td>{{item.filename}}</td>
+								<td>
+									<button data-position="bottom" data-tooltip="{{'preview'|translate}}" class="btn-floating  wave-effect blue watch-detail"
+									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv' || report.imo_report.report_submit">
+										<i class="small material-icons">compare</i>
+									</button>
+									<a class="btn-floating  wave-effect watch-detail" data-position="bottom" data-tooltip="{{'download'|translate}}" ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
+										<i class="small material-icons">cloud_download</i>
+									</a>
+									<button class="btn-floating  wave-effect red watch-detail" data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
+									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)">
+										<i class="small material-icons">delete</i>
+									</button>
+								</td>
+							</tr>
+							<tr ng-if="partner.file.length > 6">
+								<td>
+									<dir-pagination-controls pagination-id="tableUpload"></dir-pagination-controls>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</td>
+		</tr>
 		<tr ng-repeat-end>			
 			<td colspan="100" ng-if="partner.file.length">
 				<div class="row">
@@ -316,52 +405,13 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>					
 				</div>
 				<div class="row">
-					<div ng-if="partner.file.length > 0">
-						<ul class="collection with-header card">
-							<li class="collection-header teal" style="height:80px;">
-								<div class="col s12 m10">
-									<h4 style="font-size:1.1rem; color: #ffffff">
-										<i class="material-icons left" style="">perm_media</i>{{'project_documents'|translate}}
-									</h4>
-								</div>
-							</li>
-							<li class="collection-item avatar" dir-paginate="item in partner.file | itemsPerPage: 6" pagination-id="listUpload.id" style="padding-left: 16px">
-								<div class="icon">							
-									<i class="material-icons" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};text-align: center">
-									{{ngmClusterDocument.extentionIcon(item.filename_extension)}}</i> {{item.filename| limitTo: 50}}{{item.filenamelength< 50 ? '' : '...'}}
-									<div style="display: inline;padding-left: 220px">{{item.fileowner}}</div>
-									<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
-									<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
-									<div style="display: inline;padding-left: 50px">{{item.fileowner}}</div>
-								</div>
-								<div class="secondary-content file-upload">											
-									<button data-position="bottom" data-tooltip="{{'preview'|translate}}" class="btn-floating  wave-effect blue watch-detail"
-									ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv' || report.imo_report.report_submit">
-										<i class="small material-icons">compare</i>
-									</button>
-									<a class="btn-floating  wave-effect watch-detail" data-position="bottom" data-tooltip="{{'download'|translate}}"
-									ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
-										<i class="small material-icons">cloud_download</i>
-									</a>
-									<button class="btn-floating  wave-effect red watch-detail" data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
-									ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)">
-										<i class="small material-icons">delete</i>
-									</button>
-								</div>
-							</li>
-						
-							<li class="collection-item avatar" ng-if="!partner.file.length">
-								<p style="font-size: 17px; padding:10px 0px 10px 0px;">{{'you_have_no_project_documents_yet'| translate}}</p>
-							</li>
-							<li class="collection-item avatar" ng-if="partner.file.length > 6" style="padding:25px 10px 20px 10px;">
-								<dir-pagination-controls pagination-id="listUpload.id"></dir-pagination-controls>
-							</li>
-						</ul>
+					<div class="col s12 m2" ng-if="partner.file.length > 6">
+						<dir-pagination-controls pagination-id="listUpload.id"></dir-pagination-controls>
 					</div>
-				</div>
+				</div>				
 			</td>
 		</tr>
 	</table>
