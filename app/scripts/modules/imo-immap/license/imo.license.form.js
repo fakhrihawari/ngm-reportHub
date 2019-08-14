@@ -179,7 +179,7 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 						$scope.project.license.splice($index, 1);
 					}
 				},
-				removeLicense:function(){
+				removeLicense: function ($index){
 					if (!$scope.project.license[$index].id) {
 						$scope.project.license.splice($index, 1);
 					}else{

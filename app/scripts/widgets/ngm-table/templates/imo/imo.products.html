@@ -39,7 +39,7 @@
 	}
 </style>
 
-<div id="close-preview-file" class="modal ">
+<div id="dashboard-preview-file" class="modal ">
 	<div class="modal-content">
 		<div>
 			<iframe ng-src={{table.setLink()}} style="width:600px; height:500px;" frameborder="0"></iframe>
@@ -95,7 +95,7 @@
 								</td>
 								<td data-title="'Preview'" sortable="'product_month'">
 									<button class="btn-floating  wave-effect blue tooltipped-project-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
-									 ng-click="table.openModal('close-preview-file','1KB2pUffgVZU5L7M5AZjuYzJTYPWQriSy')" ng-disabled="item.filename_extension === '.csv'">
+									 ng-click="table.openModal('dashboard-preview-file','1KB2pUffgVZU5L7M5AZjuYzJTYPWQriSy')" ng-disabled="item.filename_extension === '.csv'">
 										<i class="small material-icons">compare</i>
 									</button>
 								</td>

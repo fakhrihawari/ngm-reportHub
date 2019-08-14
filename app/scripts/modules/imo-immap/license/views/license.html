@@ -77,24 +77,25 @@
 											<!-- form -->
 											<form editable-form name="licenseform" onshow="project.keydownSaveForm()" ng-show="licenseform.$visible" onbeforesave="project.save()"
 											 class="form-buttons form-inline" shown="inserted == l">
-												<button type="submit" ng-if="licenseform.$visible" class="btn btn-small waves-effect waves-light save" title="Save" ng-disabled="(!l.license_id) || (!l.start_date) ||(!l.expired_date) ||(!l.status)">
+												<button type="submit" ng-if="licenseform.$visible" class="btn btn-small waves-effect waves-light save" title="Save" 
+												ng-disabled="(!l.license_id) || (!l.start_date) ||(!l.expired_date) ||(!l.status)" ng-click="project.save()">
 													<i class="material-icons">save</i>
 												</button>
 												<div type="button" ng-if="licenseform.$visible" ng-disabled="licenseform.$waiting" ng-click="licenseform.$cancel(); project.cancelEdit( $index )"
 												  class="btn btn-small blue lighten-1 waves-effect waves-light " title="Cancel Edit ">
-										                          <i class="material-icons ">clear</i>
-										                        </div>
-										                      </form>
-										                      <div class="buttons " ng-if="!licenseform.$visible ">
-										                        <div class="btn btn-small waves-effect waves-light " ng-click="licenseform.$show() " title="Edit ">
-										                          <i class="material-icons ">create</i>
-										                        </div>
-										                        <div class="btn btn-small red lighten-2 waves-effect waves-light " title="Remove "
-																								 ng-disabled="!l.license_id">
-										                          <i class="material-icons ">delete</i>
-										                        </div>
-										                      </div>  
-										                    </td>
+										            <i class="material-icons ">clear</i>
+										    </div>
+										  </form>
+										  <div class="buttons " ng-if="!licenseform.$visible ">
+										    <div class="btn btn-small waves-effect waves-light " ng-click="licenseform.$show() " title="Edit ">
+										        <i class="material-icons ">create</i>
+										    </div>
+										    <div class="btn btn-small red lighten-2 waves-effect waves-light " title="Remove "
+											  	ng-disabled="!l.license_id" ng-click="project.removeLicense($index)">
+										      <i class="material-icons ">delete</i>
+										    </div>
+										  </div>  
+										</td>
 
 									</tr>
 								</table>

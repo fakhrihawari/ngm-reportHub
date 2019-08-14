@@ -274,13 +274,14 @@
 		<tr style="border: 0px">
 			<td colspan="100" class=" card" style="padding: 20px">
 				<h6 style="font-weight: 600;">Narative *</h6>
-				<span editable-text="partner.narative" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_id">
-					{{partner.narative}}
+				<span editable-text="partner.narative" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_id" ng-model="partner.narative">
+					{{report.displayNarativeText($data,partner)}}
 				</span>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="100">
+		<tr style="height: 15px;"></tr>
+		<tr ng-if="partner.file.length">
+			<td colspan="100" style="padding-left: 15px;padding-right: 15px;margin-top:10px" class="card">
 				<!-- <div class="row">
 									<div ng-if="partner.file.length > 0">
 										<ul class="collection with-header card">

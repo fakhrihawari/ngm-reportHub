@@ -217,11 +217,32 @@ angular.module('ngmReportHub')
 				// 	$scope.report.product_sector_id.toUpperCase() + ' | ' +
 				// 	$scope.report.product_type_id.toUpperCase() + ' type(s)'; //+
 				// '- hit <span style="font-weight:400;">REFRESH LIST</span> to fetch the latest submissions!'
-				var subtitle =
-					$scope.report.sector.toUpperCase() + ' | ' +
-					$scope.report.area.toUpperCase() + ' | ' +
-					$scope.report.partner.toUpperCase() + ' | ' +
-					$scope.report.type.toUpperCase() + ' type(s)';
+				// var subtitle =
+				// 	$scope.report.sector.toUpperCase() + ' | ' +
+				// 	$scope.report.area.toUpperCase() + ' | ' +
+				// 	$scope.report.partner.toUpperCase() + ' | ' +
+				// 	$scope.report.type.toUpperCase() + ' type(s)';
+				var subtitle= 'This is for';
+				if ($scope.report.sector !== 'all'){
+					subtitle = 'Sector '+ $scope.report.sector;
+				}else{
+					subtitle = 'All Sector';
+				}
+				if ($scope.report.area !== 'all'){
+					subtitle += ', Area '+ $scope.report.area;
+				}else{
+					subtitle += ', All Area';
+				}
+				if ($scope.report.partner !== 'all'){
+					subtitle += ', Partner ' + $scope.report.partner;
+				}else{
+					subtitle += ', All Partner'
+				}
+				if ($scope.report.type !== 'all'){
+					subtitle += ', ' + $scope.report.type + ' type(s)';
+				}else {
+					subtitle +=', All type(s)'
+				}
 				return subtitle;
 
 			},

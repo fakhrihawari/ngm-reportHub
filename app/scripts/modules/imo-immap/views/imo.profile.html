@@ -120,7 +120,7 @@
 				<div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">supervisor_account</i>
-						<input id="ngm-position" type="text" class="validate" ng-model="panel.user.organization" ng-disabled="panel.formDisabled"
+						<input id="ngm-position" type="text" class="validate" ng-model="panel.user.organization" ng-disabled="true"
 						 required>
 						<label for="ngm-position">Organization</label>
 					</div>
@@ -192,7 +192,7 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<!-- <div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix country">person_pin</i>
 						<select id="ngm-country" ng-options="location.admin0pcode as location.admin0name for location in panel.adminRegion" ng-model="panel.user.admin0pcode"
@@ -202,9 +202,9 @@
 						</select>
 						<label for="ngm-country">{{'country' | translate}}</label>
 					</div>
-				</div>
+				</div> -->
 
-				<div class="row">
+				<!-- <div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix cluster">location_on</i>
 						<select id="ngm-duty-station" ng-options="list.site_name as list.site_name for list in panel.dutyStations | filter: { admin0pcode: panel.user.admin0pcode } | orderBy:'site_name'"
@@ -214,7 +214,7 @@
 						</select>
 						<label for="ngm-duty-station">{{'duty_station' | translate}}</label>
 					</div>
-				</div>
+				</div> -->
 
 				<!-- profile -->
 				<div class="row">
@@ -263,7 +263,7 @@
 				<div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">email</i>
-						<input id="ngm-email" type="email" class="validate" ng-model="panel.user.email" ng-disabled="panel.formDisabled" required>
+						<input id="ngm-email" type="email" class="validate" ng-model="panel.user.email" ng-disabled="true" required>
 						<label for="ngm-email">{{'email' | translate}}</label>
 					</div>
 				</div>

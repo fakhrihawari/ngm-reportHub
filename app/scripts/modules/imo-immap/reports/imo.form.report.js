@@ -165,7 +165,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					selected = $filter('filter')(report.areaActivity, { id: $partner.area_id }, true);
 					if (selected && selected.length) {
 						$partner.area_name = selected.length ? selected[0].name : '-';
-						console.log($partner.area_name);
+						
 					}
 					return selected.length ? selected[0].name : '-';
 				},
@@ -178,9 +178,13 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					}
 					return selected.length ? selected[0].name : '-';
 				},
-				displayNarativeActivityText: function ($data, $planned) {
+				displayNarativeActivityText: function ($data, $partner) {
 					if ($data) { $planned.narative_activity_id = $data; }
 					return $planned.narative_activity_id ? $planned.narative_activity_id : '';
+				},
+				displayNarativeText: function ($data, $partner) {
+					if ($data) { $partner.narative = $data }
+					return $partner.narative ? $partner.narative : '';
 				},
 				displayProducts: function (report, $data, $partner) {
 					var selected = [];
@@ -226,6 +230,10 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				displayPlannedNarativeActivityText: function ($data, $planned) {
 					if ($data) { $planned.narative_activity_id = $data; }
 					return $planned.narative_activity_id ? $planned.narative_activity_id : '';
+				},
+				displayPlannedNarativeText:function($data, $planned){
+					if ($data) { $planned.narative = $data; }
+					return $planned.narative ? $planned.narative : '';
 				},
 				displayPlannedProducts: function (report, $data, $planned) {
 					var selected = [];
@@ -316,6 +324,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 							}
 						});
 						// return
+						
 						if (rowComplete >= partners) {  return true; } else {  return false; }
 					}else{
 						return false
@@ -377,7 +386,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						if ($data.partner_category_id &&
 							$data.partner_id &&
 							$data.area_id &&
-							$data.narative_id &&
+							$data.narative &&
 							$data.product_id &&
 							$data.number_products >= 0) {
 							disabled = false;

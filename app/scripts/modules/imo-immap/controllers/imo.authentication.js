@@ -223,9 +223,9 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 					$scope.panel.btnDisabled = true;
 
 					// merge adminRegion
-					$scope.panel.user = angular.merge({}, $scope.panel.user,
-						$filter('filter')($scope.panel.adminRegion, { admin0pcode: $scope.panel.user.admin0pcode }, true)[0],
-						$filter('filter')($scope.panel.programme, { programme_id: $scope.panel.user.programme_id }, true)[0]);
+					// $scope.panel.user = angular.merge({}, $scope.panel.user,
+					// 	$filter('filter')($scope.panel.adminRegion, { admin0pcode: $scope.panel.user.admin0pcode }, true)[0],
+					// 	$filter('filter')($scope.panel.programme, { programme_id: $scope.panel.user.programme_id }, true)[0]);
 
 					// if immap and ET || CD
 					if ($scope.panel.user.site_name) {
@@ -234,43 +234,44 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 						// merge duty station
 						$scope.panel.user = angular.merge({}, $scope.panel.user, dutyStation);
 					}
+					console.log($scope.panel.user);
 
 					// register
-					ngmAuth
-						.updateProfile({ user: $scope.panel.user }).success(function (result) {
+					// ngmAuth
+					// 	.updateProfile({ user: $scope.panel.user }).success(function (result) {
 
-							// db error!
-							if (result.err || result.summary) {
-								var msg = result.msg ? result.msg : 'error!';
-								Materialize.toast(msg, 6000, msg);
-							}
+					// 		// db error!
+					// 		if (result.err || result.summary) {
+					// 			var msg = result.msg ? result.msg : 'error!';
+					// 			Materialize.toast(msg, 6000, msg);
+					// 		}
 
-							// success
-							if (result.success) {
-								// set user and localStorage (if updating own profile)
-								if ($scope.panel.user.username === ngmUser.get().username) {
-									$scope.panel.user = angular.merge({}, $scope.panel.user, result.user);
-									ngmUser.set($scope.panel.user);
-								}
-								// success message
+					// 		// success
+					// 		if (result.success) {
+					// 			// set user and localStorage (if updating own profile)
+					// 			if ($scope.panel.user.username === ngmUser.get().username) {
+					// 				$scope.panel.user = angular.merge({}, $scope.panel.user, result.user);
+					// 				ngmUser.set($scope.panel.user);
+					// 			}
+					// 			// success message
 
-								$timeout(function () {
+					// 			$timeout(function () {
 
-									// 
-									Materialize.toast($filter('translate')('success') + ' ' + $filter('translate')('profile_updated'), 6000, 'success');
+					// 				// 
+					// 				Materialize.toast($filter('translate')('success') + ' ' + $filter('translate')('profile_updated'), 6000, 'success');
 
-									// activate btn
-									$scope.panel.btnDisabled = false;
+					// 				// activate btn
+					// 				$scope.panel.btnDisabled = false;
 
-									// redirect to team view and page refresh
-									if (reload) {
-										var path = (ngmUser.get().organization === 'iMMAP' && (ngmUser.get().admin0pcode === 'CD' || ngmUser.get().admin0pcode === 'ET')) ? '/immap/team' : '/team';
-										$location.path(path);
-									}
-								}, 200);
-							}
+					// 				// redirect to team view and page refresh
+					// 				if (reload) {
+					// 					var path = (ngmUser.get().organization === 'iMMAP' && (ngmUser.get().admin0pcode === 'CD' || ngmUser.get().admin0pcode === 'ET')) ? '/immap/team' : '/team';
+					// 					$location.path(path);
+					// 				}
+					// 			}, 200);
+					// 		}
 
-						});
+					// 	});
 				},
 
 				// register fn

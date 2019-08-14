@@ -123,7 +123,10 @@ angular
 					}],
 				}
 			})
-			.when('/immap/reporting/team/license', {
+			.when('/immap/reporting/team/license/',{
+				redirectTo: '/immap/reporting/team/license/requested'
+			})
+			.when('/immap/reporting/team/license/:status', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamLicenseCtrl',
 				resolve: {

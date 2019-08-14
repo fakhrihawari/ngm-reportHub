@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ImoProfileCtrl', ['$scope', '$route', 'ngmData', 'ngmAuth', '$translate', '$filter', function ($scope, $route, ngmData, ngmAuth, $translate, $filter) {
+	.controller('ImoProfileCtrl', ['$scope', '$route', 'ngmData', 'ngmAuth', 'ngmImoAuth', '$translate', '$filter', function ($scope, $route, ngmData, ngmAuth, ngmImoAuth,$translate, $filter) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -26,7 +26,7 @@ angular.module('ngmReportHub')
 			user: $scope.$parent.ngm.getUser(),
 
 			// profile username to load
-			username: $route.current.params.username,
+			username: $route.current.params.username ? $route.current.params.username : $scope.$parent.ngm.getUser().username,
 
 			// the header navigation settings
 			getHeaderHtml: function () {
@@ -86,7 +86,7 @@ angular.module('ngmReportHub')
 						columns: [{
 							styleClass: 's12',
 							widgets: [{
-								type: 'form.authentication',
+								type: 'imo.authentication',
 								config: {
 									style: $scope.dashboard.ngm.style,
 									user: user,
@@ -94,10 +94,9 @@ angular.module('ngmReportHub')
 										var disabled = true;
 										if (user.status === 'active' &&
 											($scope.dashboard.username === $scope.dashboard.user.username ||
-												(ngmAuth.canDo('EDIT_USER', {
+												(ngmImoAuth.canDo('EDIT_USER', {
 													adminRpcode: user.adminRpcode,
 													admin0pcode: user.admin0pcode,
-													cluster_id: user.cluster_id,
 													organization_tag: user.organization_tag
 												})))) {
 											disabled = false;
@@ -110,7 +109,6 @@ angular.module('ngmReportHub')
 											(ngmAuth.canDo('EDIT_USER', {
 												adminRpcode: user.adminRpcode,
 												admin0pcode: user.admin0pcode,
-												cluster_id: user.cluster_id,
 												organization_tag: user.organization_tag
 											}))) {
 											visible = true;
@@ -142,14 +140,13 @@ angular.module('ngmReportHub')
 				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/getUserByUsername?username=' + $scope.dashboard.username })
 				.then(function (user) {
 					// load with user profile
-					console.log(user);
 					$scope.dashboard.init(user);
 				});
-
+			
 		} else {
 			// load with current user profile
 			$scope.dashboard.init($scope.dashboard.user);
-
+			
 		}
 
 	}]);

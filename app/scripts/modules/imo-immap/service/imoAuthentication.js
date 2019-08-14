@@ -19,7 +19,7 @@ angular.module('ngmReportHub')
 			UNAUTHORIZED: 401,
 			FORBIDDEN: 403,
 			LOCATION: $location.protocol() + '://' + $location.host() + ':' + $location.port(),
-			APP: $location.path().split('/')[1],
+			APP: $location.path().split('/')[1] + '/' + $location.path().split('/')[2],
 
 			// guest
 			// GUEST: {
@@ -53,11 +53,11 @@ angular.module('ngmReportHub')
 
 					if (!result.err && !result.summary) {
 						// unset guest
-						// ngmUser.unset();
+						ngmUser.unset();
 						// set localStorage
-						// ngmUser.set(result);
+						ngmUser.set(result);
 						// manage session
-						// ngmImoAuth.setSessionTimeout(result);
+						ngmImoAuth.setSessionTimeout(result);
 					}
 
 				}).error(function (err) {
@@ -208,11 +208,11 @@ angular.module('ngmReportHub')
 				// if no user exists
 				if (!ngmUser.get()) {
 					// set guest to localStorage
-					ngmUser.set(ngmAuth.GUEST);
+					ngmUser.set(ngmImoAuth.GUEST);
 				}
 
 				// resolve ok
-				deferred.resolve(ngmAuth.OK);
+				deferred.resolve(ngmImoAuth.OK);
 
 				return deferred.promise;
 			},
@@ -223,11 +223,11 @@ angular.module('ngmReportHub')
 				var deferred = $q.defer();
 
 				if (ngmUser.hasRole(role)) {
-					deferred.resolve(ngmAuth.OK);
+					deferred.resolve(ngmImoAuth.OK);
 				} else if (ngmUser.get().guest) {
-					deferred.reject(ngmAuth.UNAUTHORIZED);
+					deferred.reject(ngmImoAuth.UNAUTHORIZED);
 				} else {
-					deferred.reject(ngmAuth.FORBIDDEN);
+					deferred.reject(ngmImoAuth.FORBIDDEN);
 				}
 
 				return deferred.promise;
@@ -239,11 +239,11 @@ angular.module('ngmReportHub')
 				var deferred = $q.defer();
 
 				if (ngmUser.hasAnyRole(roles)) {
-					deferred.resolve(ngmAuth.OK);
+					deferred.resolve(ngmImoAuth.OK);
 				} else if (ngmUser.get().guest) {
-					deferred.reject(ngmAuth.UNAUTHORIZED);
+					deferred.reject(ngmImoAuth.UNAUTHORIZED);
 				} else {
-					deferred.reject(ngmAuth.FORBIDDEN);
+					deferred.reject(ngmImoAuth.FORBIDDEN);
 				}
 
 				return deferred.promise;
@@ -306,14 +306,14 @@ angular.module('ngmReportHub')
 			 * @returns {boolean} User can/cannot edit for input view zones.
 			 */
 			canDo: function (permission, zones) {
-
+				
 				// check params
 				if (!permission || !zones || typeof zones !== 'object' || typeof permission !== 'string') return false
 
 				// get user obj
 				const user = ngmUser.get();
 
-				const USER_PERMISSIONS = ngmAuth.userPermissions();
+				const USER_PERMISSIONS = ngmImoAuth.userPermissions();
 
 				// _RESTRICTED prop on permissions conf with user restricted zones
 				const permission_restricted = permission + '_RESTRICTED';
@@ -397,7 +397,7 @@ angular.module('ngmReportHub')
 		return ngmImoAuth;
 
 	}])
-	.factory('ngmAuthInterceptor', ['$q', '$injector', function ($q, $injector) {
+	.factory('ngmImoAuthInterceptor', ['$q', '$injector', function ($q, $injector) {
 
 		// get user
 		var ngmUser = $injector.get('ngmUser');
@@ -421,5 +421,5 @@ angular.module('ngmReportHub')
 
 	}])
 	.config(function ($httpProvider) {
-		$httpProvider.interceptors.push('ngmAuthInterceptor');
+		$httpProvider.interceptors.push('ngmImoAuthInterceptor');
 	});
