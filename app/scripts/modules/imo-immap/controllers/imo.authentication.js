@@ -193,7 +193,7 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 					// return project
 					ngmData.get({
 						method: 'POST',
-						url: ngmAuth.LOCATION + '/api/delete',
+						url: ngmImoAuth.LOCATION + '/api/immap/delete',
 						data: {
 							user: $scope.panel.user
 						}
@@ -237,41 +237,41 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 					console.log($scope.panel.user);
 
 					// register
-					// ngmAuth
-					// 	.updateProfile({ user: $scope.panel.user }).success(function (result) {
+					ngmImoAuth
+						.updateProfile({ user: $scope.panel.user }).success(function (result) {
 
-					// 		// db error!
-					// 		if (result.err || result.summary) {
-					// 			var msg = result.msg ? result.msg : 'error!';
-					// 			Materialize.toast(msg, 6000, msg);
-					// 		}
+							// db error!
+							if (result.err || result.summary) {
+								var msg = result.msg ? result.msg : 'error!';
+								Materialize.toast(msg, 6000, msg);
+							}
 
-					// 		// success
-					// 		if (result.success) {
-					// 			// set user and localStorage (if updating own profile)
-					// 			if ($scope.panel.user.username === ngmUser.get().username) {
-					// 				$scope.panel.user = angular.merge({}, $scope.panel.user, result.user);
-					// 				ngmUser.set($scope.panel.user);
-					// 			}
-					// 			// success message
+							// success
+							if (result.success) {
+								// set user and localStorage (if updating own profile)
+								if ($scope.panel.user.username === ngmUser.get().username) {
+									$scope.panel.user = angular.merge({}, $scope.panel.user, result.user);
+									ngmUser.set($scope.panel.user);
+								}
+								// success message
 
-					// 			$timeout(function () {
+								$timeout(function () {
 
-					// 				// 
-					// 				Materialize.toast($filter('translate')('success') + ' ' + $filter('translate')('profile_updated'), 6000, 'success');
+									// 
+									Materialize.toast($filter('translate')('success') + ' ' + $filter('translate')('profile_updated'), 6000, 'success');
 
-					// 				// activate btn
-					// 				$scope.panel.btnDisabled = false;
+									// activate btn
+									$scope.panel.btnDisabled = false;
 
-					// 				// redirect to team view and page refresh
-					// 				if (reload) {
-					// 					var path = (ngmUser.get().organization === 'iMMAP' && (ngmUser.get().admin0pcode === 'CD' || ngmUser.get().admin0pcode === 'ET')) ? '/immap/team' : '/team';
-					// 					$location.path(path);
-					// 				}
-					// 			}, 200);
-					// 		}
+									// redirect to team view and page refresh
+									if (reload) {
+										var path = (ngmUser.get().organization === 'iMMAP' && (ngmUser.get().admin0pcode === 'CD' || ngmUser.get().admin0pcode === 'ET')) ? '/immap/team' : '/team';
+										$location.path(path);
+									}
+								}, 200);
+							}
 
-					// 	});
+						});
 				},
 
 				// register fn
@@ -320,13 +320,13 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 						}, 400);
 
 						// resend password email
-						ngmAuth.passwordResetSend({
+						ngmImoAuth.passwordResetSend({
 							user: $scope.panel.user,
-							url: ngmAuth.LOCATION + '/desk/#/cluster/find/'
+							url: ngmImoAuth.LOCATION + '/desk/#/cluster/find/'
 						}).success(function (result) {
 
 							// go to password reset page
-							$('.carousel').carousel('prev');
+							$('.carousel').carousel('next');
 
 							// user toast msg
 							$timeout(function () {
@@ -349,20 +349,20 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 				},
 
 				// register fn
-				passwordReset: function (ngmResetPasswordForm, token) {
+				passwordReset: function (imoResetPasswordForm, token) {
 
 					// if $invalid
-					if (ngmResetPasswordForm.$invalid) {
+					if (imoResetPasswordForm.$invalid) {
 						// set submitted for validation
-						ngmResetPasswordForm.$setSubmitted();
+						imoResetPasswordForm.$setSubmitted();
 					} else {
-
+						console.log(token, imoResetPasswordForm, "as",$scope.panel.user)
 						// register
-						ngmAuth.passwordReset({ reset: $scope.panel.user, token: token })
+						ngmImoAuth.passwordReset({ reset: $scope.panel.user, token: token })
 							.success(function (result) {
-
+								
 								// go to default org page
-								$location.path('/' + result.app_home);
+								$location.path('/immap/reporting');
 
 								// user toast msg
 								$timeout(function () {

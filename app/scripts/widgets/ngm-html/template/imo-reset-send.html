@@ -1,0 +1,182 @@
+<style>
+	.carousel {
+		min-height: 520px;
+	}
+
+	.icon {
+		padding-top: 10px;
+	}
+
+	.icon .card {
+		width: 150px;
+		height: 150px;
+		padding: 30px 0px 30px 20px;
+		border-radius: 50% !important;
+		margin: 10px auto;
+	}
+
+	.title {
+		margin: 20px 0px 10px;
+		font-weight: 100;
+	}
+
+	form {
+		padding: 0px 20% !important;
+	}
+
+	li {
+		padding-bottom: 10px;
+	}
+
+	.input-field .prefix {
+		padding-top: 8px;
+		color: #616161;
+	}
+
+	.helpers {
+		font-size: 1.3rem !important;
+		margin-top: 0px;
+		padding-bottom: 4px;
+		cursor: pointer;
+	}
+
+	.action {
+		padding-top: 50px;
+	}
+</style>
+
+
+<div class="carousel carousel-slider card">
+
+	<!-- reset password -->
+	<div class="carousel-item one" href="#one!">
+
+		<div class="one" style="display: none;">
+
+			<div class="icon center">
+				<!-- make it a circle -->
+				<div class="card">
+					<img title="{{'please_check_your'|translate}} {{panel.var4wplusrh}} {{'email_account_to_reset_your_password' | translate}}"
+					 src="images/invite-sent.png" />
+				</div>
+				<h5 class="title">{{'reminder_sent' | translate}}!</h5>
+			</div>
+
+			<div class="col s10 offset-s2 grey-text text-darken-2">
+				<div class="row" style="padding-top:20px;">
+					<div class="col s1">
+						<i class="material-icons" style="color: teal">send</i>
+					</div>
+					<div class="col s9">
+						{{'please_check_your'|translate}} {{panel.var4wplusrh}} {{'email_account_to_reset_your_password' | translate}}!
+					</div>
+				</div>
+				<div class="row" style="padding-top:20px;">
+					<div class="col s1">
+						<i class="material-icons" style="color: teal">send</i>
+					</div>
+					<div class="col s9">
+						{{'the_email_will_contain_a_secure_link_to_reset_your_password_so_you_can_close_this_window.' | translate}}
+					</div>
+				</div>
+				<p>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- reset email -->
+	<div class="carousel-item two" href="#two!">
+
+		<div class="two" style="display: none;">
+
+			<div class="icon center">
+				<!-- make it a circle -->
+				<div class="card">
+					<img title="{{'please_check_your'|translate}} {{panel.var4wplusrh}} {{'email_account_to_reset_your_password' | translate}}"
+					 src="images/find-account.png" />
+				</div>
+				<h5 class="title">{{'reset_password' | translate}}</h5>
+			</div>
+
+			<p class="center" style="font-weight:300;" ng-if="panel.err">
+				{{'having_trouble_finding_your_account' | translate}}?
+				<br/> {{'contact_mayus' | translate}}
+				<a ng-if="panel.var4wplusrh === 'ReportHub'" href="mailto:ngmreporthub@gmail.com">ngmReportHub@gmail.com</a>
+				<a ng-if="panel.var4wplusrh === '4wPlus'" href="mailto:contacto@immap.org">contacto@immap.org</a>
+			</p>
+
+			<form name="ngmResetForm" class="col s12" novalidate>
+
+				<div class="row">
+					<div class="input-field">
+						<i class="material-icons prefix">email</i>
+						<input id="ngm-reset-email" type="email" class="validate" autofocus="" ng-model="panel.user.email" required>
+						<label for="ngm-reset-email" class="left">{{'email_mayus' | translate}}</label>
+					</div>
+				</div>
+				<div class="action center">
+					<a class="btn waves-effect waves-teal " href="#/immap/reporting/login">
+						back to LOGIN
+						<i class="material-icons left">
+							keyboard_arrow_left
+						</i>
+					</a>
+					<button class="btn waves-effect waves-teal" type="submit" ng-disabled="!panel.user.email || ngmResetForm.$invalid"
+					 ng-click="panel.passwordResetSend( ngmResetForm )">
+						{{'send_me_a_reminder' | translate}}!
+					</button>
+				</div>
+
+			</form>
+
+		</div>
+
+	</div>
+</div>
+
+<div>
+	<!-- footer -->
+	<div style="background: {{ panel.style.lightPrimaryColor }}; height:20px;"></div>
+	<div style="background: {{ panel.style.defaultPrimaryColor }}; height:60px;">
+		<p class="ngm-menu-footer-body">Supported by
+			<a class="grey-text" href="http://immap.org">
+				<b>iMMAP</b>
+			</a>
+		</p>
+	</div>
+</div>
+
+<script>
+
+	// init
+	setTimeout(function () {
+		$('select').material_select();
+		$('.carousel.carousel-slider').carousel({ full_width: true });
+		// goTo login page
+		$('.carousel').carousel('set', 1);
+		// focus
+		$('#ngm-password').focus();
+	}, 100);
+
+	// hidden to start
+	setTimeout(function () {
+		$('.one').css({ display: 'block' });
+		$('.two').css({ display: 'block' });
+		// focus
+		$('#ngm-username').focus();
+	}, 400);
+
+	// goto login
+	$('#login').click(function () {
+		// set login page
+		$('.carousel').carousel('next');
+	});
+
+	// goto forgot password
+	$('#forgot').click(function () {
+		// set login page
+		$('.carousel').carousel('prev');
+	}); 
+</script>

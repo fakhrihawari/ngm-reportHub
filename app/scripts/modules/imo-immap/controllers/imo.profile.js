@@ -106,7 +106,7 @@ angular.module('ngmReportHub')
 									activateUpdateVisible: (function () {
 										var visible = false;
 										if ($scope.dashboard.user.username !== $scope.dashboard.username &&
-											(ngmAuth.canDo('EDIT_USER', {
+											(ngmImoAuth.canDo('EDIT_USER', {
 												adminRpcode: user.adminRpcode,
 												admin0pcode: user.admin0pcode,
 												organization_tag: user.organization_tag
@@ -137,7 +137,7 @@ angular.module('ngmReportHub')
 
 			// get use
 			ngmData
-				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/getUserByUsername?username=' + $scope.dashboard.username })
+				.get({ method: 'GET', url: ngmImoAuth.LOCATION + '/api/immap/getUserByUsername?username=' + $scope.dashboard.username })
 				.then(function (user) {
 					// load with user profile
 					$scope.dashboard.init(user);

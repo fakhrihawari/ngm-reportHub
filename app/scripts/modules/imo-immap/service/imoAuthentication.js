@@ -74,7 +74,7 @@ angular.module('ngmReportHub')
 				// set the $http object
 				var update = $http({
 					method: 'POST',
-					url: this.LOCATION + '/api/profile/update',
+					url: this.LOCATION + '/api/immap/profile/update',
 					data: user
 				});
 
@@ -124,7 +124,7 @@ angular.module('ngmReportHub')
 
 				var reset = $http({
 					method: 'POST',
-					url: this.LOCATION + '/api/send-email',
+					url: this.LOCATION + '/api/immap/send-email',
 					data: user
 				});
 
@@ -136,7 +136,7 @@ angular.module('ngmReportHub')
 				// set the $http object
 				var reset = $http({
 					method: 'POST',
-					url: this.LOCATION + '/api/password-reset',
+					url: this.LOCATION + '/api/immap/password-reset',
 					data: user
 				});
 

@@ -74,6 +74,24 @@ angular
 					}],
 				}
 			})
+			.when('/immap/reporting/reset-send', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoResetSendEmailCtrl',
+				resolve: {
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAnonymous();
+					}],
+				}
+			})
+			.when('/immap/reporting/reset-password/:token', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ImoResetCtrl',
+				resolve: {
+					access: ['ngmImoAuth', function (ngmImoAuth) {
+						return ngmImoAuth.isAnonymous();
+					}],
+				}
+			})
 			// MY DASHBOARD
 			.when('/immap/reporting/dashboard', {
 				templateUrl: '/views/app/dashboard.html',

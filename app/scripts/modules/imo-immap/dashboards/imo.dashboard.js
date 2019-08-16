@@ -45,6 +45,15 @@ angular.module('ngmReportHub')
 
 				return request;
 			},
+			getRequestDummy: function (indicator) {
+				return {
+					method: 'POST',
+					url: ngmAuth.LOCATION + '/api/immap/report/getProductDummyIndicator',
+					data: {
+						indicator: indicator,
+					}
+				}
+			},
 			getRequestT: function () {
 				return {
 					method: 'POST',
@@ -193,38 +202,82 @@ angular.module('ngmReportHub')
 										subLabelfractionSize: 0,
 										postfix: '%'
 									},
-									templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
+									// templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
 									style: '"text-align:center; width: 100%; height: 100%; position: absolute; top: 40px; left: 0;"',
+									// chartConfig: {
+									// 	options: {
+									// 		chart: {
+									// 			type: 'pie',
+									// 			height: 140,
+									// 			margin: [0, 0, 0, 0],
+									// 			spacing: [0, 0, 0, 0]
+									// 		},
+									// 		tooltip: {
+									// 			enabled: false
+									// 		}
+									// 	},
+									// 	title: {
+									// 		text: '',
+									// 		margin: 0
+									// 	},
+									// 	plotOptions: {
+									// 		pie: {
+									// 			shadow: false
+									// 		}
+									// 	},
+									// 	series: [{
+									// 		name: $filter('translate')('children'),
+									// 		size: '100%',
+									// 		innerSize: '80%',
+									// 		showInLegend: false,
+									// 		dataLabels: {
+									// 			enabled: false
+									// 		},
+									// 		request: $scope.dashboard.getRequestDummy('type_chart')
+									// 	}]
+									// }
 									chartConfig: {
 										options: {
 											chart: {
 												type: 'pie',
 												height: 140,
-												margin: [0, 0, 0, 0],
-												spacing: [0, 0, 0, 0]
+												spacing: [0, 0, 20, 0]
 											},
 											tooltip: {
+												pointFormat: '<b>{point.y:,.0f} {series.name}</b>'
+											},
+											legend: {
 												enabled: false
 											}
 										},
 										title: {
-											text: '',
-											margin: 0
+											text: null
+										},
+										yAxis: {
+											title: {
+												text: null
+											}
 										},
 										plotOptions: {
 											pie: {
 												shadow: false
 											}
 										},
+										tooltip: {
+											formatter: function () {
+												return '<b>' + this.point.name + '</b>: ' + this.y + ' %';
+											}
+										},
 										series: [{
-											name: $filter('translate')('children'),
-											size: '100%',
-											innerSize: '80%',
-											showInLegend: false,
+											name: 'Product(s)',
+											data: [],
+											request: $scope.dashboard.getRequestDummy('type_chart'),
+											size: '120%',
+											innerSize: '60%',
+											showInLegend: true,
 											dataLabels: {
 												enabled: false
-											},
-											request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'children' })
+											}
 										}]
 									}
 								}
@@ -245,38 +298,82 @@ angular.module('ngmReportHub')
 										subLabelfractionSize: 0,
 										postfix: '%'
 									},
-									templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
+									// templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
 									style: '"text-align:center; width: 100%; height: 100%; position: absolute; top: 40px; left: 0;"',
+									// chartConfig: {
+									// 	options: {
+									// 		chart: {
+									// 			type: 'pie',
+									// 			height: 140,
+									// 			margin: [0, 0, 0, 0],
+									// 			spacing: [0, 0, 0, 0]
+									// 		},
+									// 		tooltip: {
+									// 			enabled: false
+									// 		}
+									// 	},
+									// 	title: {
+									// 		text: '',
+									// 		margin: 0
+									// 	},
+									// 	plotOptions: {
+									// 		pie: {
+									// 			shadow: false
+									// 		}
+									// 	},
+									// 	series: [{
+									// 		name: $filter('translate')('adult'),
+									// 		size: '100%',
+									// 		innerSize: '80%',
+									// 		showInLegend: false,
+									// 		dataLabels: {
+									// 			enabled: false
+									// 		},
+									// 		request: $scope.dashboard.getRequestDummy('type_chart')
+									// 	}]
+									// }
 									chartConfig: {
 										options: {
 											chart: {
 												type: 'pie',
 												height: 140,
-												margin: [0, 0, 0, 0],
-												spacing: [0, 0, 0, 0]
+												spacing: [0, 0, 20, 0]
 											},
 											tooltip: {
+												pointFormat: '<b>{point.y:,.0f} {series.name}</b>'
+											},
+											legend: {
 												enabled: false
 											}
 										},
 										title: {
-											text: '',
-											margin: 0
+											text: null
+										},
+										yAxis: {
+											title: {
+												text: null
+											}
 										},
 										plotOptions: {
 											pie: {
 												shadow: false
 											}
 										},
+										tooltip: {
+											formatter: function () {
+												return '<b>' + this.point.name + '</b>: ' + this.y + ' %';
+											}
+										},
 										series: [{
-											name: $filter('translate')('adult'),
-											size: '100%',
-											innerSize: '80%',
-											showInLegend: false,
+											name: 'Product(s)',
+											data: [],
+											request: $scope.dashboard.getRequestDummy('type_chart'),
+											size: '120%',
+											innerSize: '60%',
+											showInLegend: true,
 											dataLabels: {
 												enabled: false
-											},
-											request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'adult' })
+											}
 										}]
 									}
 								}
@@ -297,38 +394,82 @@ angular.module('ngmReportHub')
 										subLabelfractionSize: 0,
 										postfix: '%'
 									},
-									templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
+									// templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
 									style: '"text-align:center; width: 100%; height: 100%; position: absolute; top: 40px; left: 0;"',
+									// chartConfig: {
+									// 	options: {
+									// 		chart: {
+									// 			type: 'pie',
+									// 			height: 140,
+									// 			margin: [0, 0, 0, 0],
+									// 			spacing: [0, 0, 0, 0]
+									// 		},
+									// 		tooltip: {
+									// 			enabled: false
+									// 		}
+									// 	},
+									// 	title: {
+									// 		text: '',
+									// 		margin: 0
+									// 	},
+									// 	plotOptions: {
+									// 		pie: {
+									// 			shadow: false
+									// 		}
+									// 	},
+									// 	series: [{
+									// 		name: $filter('translate')('elderly'),
+									// 		size: '100%',
+									// 		innerSize: '80%',
+									// 		showInLegend: false,
+									// 		dataLabels: {
+									// 			enabled: false
+									// 		},
+									// 		request: $scope.dashboard.getRequestDummy('type_chart')
+									// 	}]
+									// }
 									chartConfig: {
 										options: {
 											chart: {
 												type: 'pie',
 												height: 140,
-												margin: [0, 0, 0, 0],
-												spacing: [0, 0, 0, 0]
+												spacing: [0, 0, 20, 0]
 											},
 											tooltip: {
+												pointFormat: '<b>{point.y:,.0f} {series.name}</b>'
+											},
+											legend: {
 												enabled: false
 											}
 										},
 										title: {
-											text: '',
-											margin: 0
+											text: null
+										},
+										yAxis: {
+											title: {
+												text: null
+											}
 										},
 										plotOptions: {
 											pie: {
 												shadow: false
 											}
 										},
+										tooltip: {
+											formatter: function () {
+												return '<b>' + this.point.name + '</b>: ' + this.y + ' %';
+											}
+										},
 										series: [{
-											name: $filter('translate')('elderly'),
-											size: '100%',
-											innerSize: '80%',
-											showInLegend: false,
+											name: 'Product(s)',
+											data: [],
+											request: $scope.dashboard.getRequestDummy('type_chart'),
+											size: '120%',
+											innerSize: '60%',
+											showInLegend: true,
 											dataLabels: {
 												enabled: false
-											},
-											request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'elderly' })
+											}
 										}]
 									}
 								}
@@ -422,38 +563,82 @@ angular.module('ngmReportHub')
 										subLabelfractionSize: 0,
 										postfix: '%'
 									},
-									templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
+									// templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
 									style: '"text-align:center; width: 100%; height: 100%; position: absolute; top: 40px; left: 0;"',
+									// chartConfig: {
+									// 	options: {
+									// 		chart: {
+									// 			type: 'pie',
+									// 			height: 140,
+									// 			margin: [0, 0, 0, 0],
+									// 			spacing: [0, 0, 0, 0]
+									// 		},
+									// 		tooltip: {
+									// 			enabled: false
+									// 		}
+									// 	},
+									// 	title: {
+									// 		text: '',
+									// 		margin: 0
+									// 	},
+									// 	plotOptions: {
+									// 		pie: {
+									// 			shadow: false
+									// 		}
+									// 	},
+									// 	series: [{
+									// 		name: $filter('translate')('children'),
+									// 		size: '100%',
+									// 		innerSize: '80%',
+									// 		showInLegend: false,
+									// 		dataLabels: {
+									// 			enabled: false
+									// 		},
+									// 		request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'children' })
+									// 	}]
+									// }
 									chartConfig: {
 										options: {
 											chart: {
 												type: 'pie',
 												height: 140,
-												margin: [0, 0, 0, 0],
-												spacing: [0, 0, 0, 0]
+												spacing: [0, 0, 20, 0]
 											},
 											tooltip: {
+												pointFormat: '<b>{point.y:,.0f} {series.name}</b>'
+											},
+											legend: {
 												enabled: false
 											}
 										},
 										title: {
-											text: '',
-											margin: 0
+											text: null
+										},
+										yAxis: {
+											title: {
+												text: null
+											}
 										},
 										plotOptions: {
 											pie: {
 												shadow: false
 											}
 										},
+										tooltip: {
+											formatter: function () {
+												return '<b>' + this.point.name + '</b>: ' + this.y + ' %';
+											}
+										},
 										series: [{
-											name: $filter('translate')('children'),
-											size: '100%',
-											innerSize: '80%',
-											showInLegend: false,
+											name: 'Product(s)',
+											data: [],
+											request: $scope.dashboard.getRequestDummy('type_chart'),
+											size: '120%',
+											innerSize: '60%',
+											showInLegend: true,
 											dataLabels: {
 												enabled: false
-											},
-											request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'children' })
+											}
 										}]
 									}
 								}
@@ -474,38 +659,82 @@ angular.module('ngmReportHub')
 										subLabelfractionSize: 0,
 										postfix: '%'
 									},
-									templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
+									// templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
 									style: '"text-align:center; width: 100%; height: 100%; position: absolute; top: 40px; left: 0;"',
+									// chartConfig: {
+									// 	options: {
+									// 		chart: {
+									// 			type: 'pie',
+									// 			height: 140,
+									// 			margin: [0, 0, 0, 0],
+									// 			spacing: [0, 0, 0, 0]
+									// 		},
+									// 		tooltip: {
+									// 			enabled: false
+									// 		}
+									// 	},
+									// 	title: {
+									// 		text: '',
+									// 		margin: 0
+									// 	},
+									// 	plotOptions: {
+									// 		pie: {
+									// 			shadow: false
+									// 		}
+									// 	},
+									// 	series: [{
+									// 		name: $filter('translate')('adult'),
+									// 		size: '100%',
+									// 		innerSize: '80%',
+									// 		showInLegend: false,
+									// 		dataLabels: {
+									// 			enabled: false
+									// 		},
+									// 		request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'adult' })
+									// 	}]
+									// }
 									chartConfig: {
 										options: {
 											chart: {
 												type: 'pie',
 												height: 140,
-												margin: [0, 0, 0, 0],
-												spacing: [0, 0, 0, 0]
+												spacing: [0, 0, 20, 0]
 											},
 											tooltip: {
+												pointFormat: '<b>{point.y:,.0f} {series.name}</b>'
+											},
+											legend: {
 												enabled: false
 											}
 										},
 										title: {
-											text: '',
-											margin: 0
+											text: null
+										},
+										yAxis: {
+											title: {
+												text: null
+											}
 										},
 										plotOptions: {
 											pie: {
 												shadow: false
 											}
 										},
+										tooltip: {
+											formatter: function () {
+												return '<b>' + this.point.name + '</b>: ' + this.y + ' %';
+											}
+										},
 										series: [{
-											name: $filter('translate')('adult'),
-											size: '100%',
-											innerSize: '80%',
-											showInLegend: false,
+											name: 'Product(s)',
+											data: [],
+											request: $scope.dashboard.getRequestDummy('type_chart'),
+											size: '120%',
+											innerSize: '60%',
+											showInLegend: true,
 											dataLabels: {
 												enabled: false
-											},
-											request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'adult' })
+											}
 										}]
 									}
 								}
@@ -526,38 +755,82 @@ angular.module('ngmReportHub')
 										subLabelfractionSize: 0,
 										postfix: '%'
 									},
-									templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
+									// templateUrl: '/scripts/widgets/ngm-highchart/template/promo.html',
 									style: '"text-align:center; width: 100%; height: 100%; position: absolute; top: 40px; left: 0;"',
+									// chartConfig: {
+									// 	options: {
+									// 		chart: {
+									// 			type: 'pie',
+									// 			height: 140,
+									// 			margin: [0, 0, 0, 0],
+									// 			spacing: [0, 0, 0, 0]
+									// 		},
+									// 		tooltip: {
+									// 			enabled: false
+									// 		}
+									// 	},
+									// 	title: {
+									// 		text: '',
+									// 		margin: 0
+									// 	},
+									// 	plotOptions: {
+									// 		pie: {
+									// 			shadow: false
+									// 		}
+									// 	},
+									// 	series: [{
+									// 		name: $filter('translate')('elderly'),
+									// 		size: '100%',
+									// 		innerSize: '80%',
+									// 		showInLegend: false,
+									// 		dataLabels: {
+									// 			enabled: false
+									// 		},
+									// 		request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'elderly' })
+									// 	}]
+									// }
 									chartConfig: {
 										options: {
 											chart: {
 												type: 'pie',
 												height: 140,
-												margin: [0, 0, 0, 0],
-												spacing: [0, 0, 0, 0]
+												spacing: [0, 0, 20, 0]
 											},
 											tooltip: {
+												pointFormat: '<b>{point.y:,.0f} {series.name}</b>'
+											},
+											legend: {
 												enabled: false
 											}
 										},
 										title: {
-											text: '',
-											margin: 0
+											text: null
+										},
+										yAxis: {
+											title: {
+												text: null
+											}
 										},
 										plotOptions: {
 											pie: {
 												shadow: false
 											}
 										},
+										tooltip: {
+											formatter: function () {
+												return '<b>' + this.point.name + '</b>: ' + this.y + ' %';
+											}
+										},
 										series: [{
-											name: $filter('translate')('elderly'),
-											size: '100%',
-											innerSize: '80%',
-											showInLegend: false,
+											name: 'Product(s)',
+											data: [],
+											request: $scope.dashboard.getRequestDummy('type_chart'),
+											size: '120%',
+											innerSize: '60%',
+											showInLegend: true,
 											dataLabels: {
 												enabled: false
-											},
-											request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'elderly' })
+											}
 										}]
 									}
 								}
