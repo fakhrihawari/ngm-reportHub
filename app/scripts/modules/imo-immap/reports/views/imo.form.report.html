@@ -169,12 +169,20 @@
 		<div class="col s3">
 			<div style=" position: relative;">
 				<label class="btn-floating" style="background-color: #A72824;border-radius:10%" for="put-date"><i class=" material-icons right"> date_range</i></label>
-				<input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="report.imo_report.month" format="dd mmm, yyyy"
+				<!-- <input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="report.imo_report.month" format="dd mmm, yyyy"
+				 select-years="15" min="{{ report.datepicker.maxDate }}" on-close="report.datepicker.onClose( report.imo_report )" /> -->
+				<input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="report.imo_report.report_month" format="dd mmm, yyyy"
 				 select-years="15" min="{{ report.datepicker.maxDate }}" on-close="report.datepicker.onClose( report.imo_report )" />
-				<a ng-if="report.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
+				<!-- <a ng-if="report.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
 					Report for {{report.imo_report.month_date| date:'MMMM'}}
+				</a> -->
+				<a ng-if="report.imo_report.report_month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
+					Report for {{report.imo_report.report_date| date:'MMMM'}}
 				</a>
-				<a ng-if="!report.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
+				<!-- <a ng-if="!report.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
+						Please Select Month
+				</a> -->
+				<a ng-if="!report.imo_report.report_month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
 						Please Select Month
 				</a>
 			</div>								
@@ -183,6 +191,8 @@
 		</div>
 	</div>
 </div>
+<fieldset ng-if="openFormReport">
+
 <div class="imo-report">
 	<div>
 		<h2 class="col s12 report-title" style="margin-top: 20px; margin-bottom:40px; padding-bottom: 20px; font-size: 3.0rem; font-weight:300; color: #959595; border-bottom: 3px #A72824 solid;padding-left: 0px;">
@@ -265,7 +275,7 @@
 </div>
 <!-- submit button -->
 <div align="center" style="margin-bottom: 10px;" ng-if="!report.imo_report.report_submit">
-	<button ng-if="$scope.report.imo_report.report_status !== 'complete'"
+	<button ng-if="report.imo_report.report_status !== 'complete'"
 		ng-disabled="report.reportFormComplete(report.imo_report)"
 		data-target="save-modal" 
 		class="waves-effect waves-light btn modal-trigger btn" >
@@ -283,6 +293,7 @@
 		<i class="material-icons left">done_all</i>SUBMIT
 	</button>
 </div>
+</fieldset>
 <script type="text/javascript">
 
 	// modals

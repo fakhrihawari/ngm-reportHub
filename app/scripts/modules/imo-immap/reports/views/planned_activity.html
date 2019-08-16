@@ -47,7 +47,7 @@
 					editable-select="planned.partner_id" 
 					e-placeholder="{{'select'|translate}}"
 					e-ng-options="a_t.id as a_t.name for a_t in report.partner  | filter: {category_id:planned.category_id}"
-					e-ng-disabled="!planned.category_id"
+					e-ng-disabled="!planned.partner_category_id"
 					>
 					{{report.displayPartner(report,$data,planned)}}
 				</span>
@@ -106,7 +106,7 @@
 		<tr>
 			<td colspan="100" class=" card" style="padding: 20px">
 				<h6 style="font-weight: 600;">Narative *</h6>
-				<span editable-text="planned.narative" e-name="narative" e-form="imoform">
+				<span editable-text="planned.narative" e-name="narative" e-form="imoform" e-ng-disabled="!planned.area_id">
 					{{report.displayPlannedNarativeText($data,planned)}}
 				</span>
 			</td>

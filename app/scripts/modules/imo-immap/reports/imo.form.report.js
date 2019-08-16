@@ -82,6 +82,39 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 
 				// init lists
 				init: function () {
+					$scope.reportMonth =[];					
+					var todo = $http({
+						method: 'POST',
+						url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
+						data: {
+							status: 'todo'}
+					});
+					var complete = $http({
+						method: 'POST',
+						url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
+						data: {
+							status: 'complete'
+						}
+					});
+					function pushToArray(arrayOrigin, property1,property2,arrayToPut) {
+						angular.forEach(arrayOrigin, function (element) {
+							var year = moment(new Date(element[property2])).format('YYYY');
+							var month = element[property1];
+							arrayToPut.push(year+month)
+						})
+					}
+					// to check the new report has different month than report in report list
+					if($scope.report.newProject){
+						$q.all([todo, complete]).then(function (results) {
+							angular.forEach(results, function (report) {							
+								pushToArray(report.data,'report_month','report_date',$scope.reportMonth)
+							});
+							
+						});
+					}else{
+						$scope.openFormReport = true;
+					};
+
 				},
 
 				// beneficairies template
@@ -141,7 +174,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					$partner.partner_category_id = $data;
 					selected = $filter('filter')(report.partnerCategory, { id: $partner.partner_category_id }, true);
 					if (selected && selected.length) {
-						$partner.category_name = selected.length ? selected[0].name : '-';
+						$partner.partner_category_name = selected.length ? selected[0].name : '-';
 					}
 					return selected.length ? selected[0].name : '-';
 				},
@@ -150,7 +183,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					$partner.partner_id = $data;
 					selected = $filter('filter')(report.partner, { id: $partner.partner_id }, true);
 					if (selected && selected.length) {
-						$partner.partner = selected.length ? selected[0].name : '-';
+						$partner.partner_name = selected.length ? selected[0].name : '-';
 					}
 					return selected.length ? selected[0].name : '-';
 				},
@@ -255,13 +288,16 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				addPartner: function () {
 					$scope.inserted = {
 						file:[],
-						category_id: '',
+						// category_id: '',
+						partner_category_id:'',
 						partner_id: '',
-						area_activity_id:'',
-						narative_activity_id:'',
+						narative:'',
+						// area_activity_id:'',
+						// narative_activity_id:'',
 						product_id:'',
 						collab_id:'',
-						number_products:0};
+						number_products:0
+					};
 					var length = $scope.report.imo_report.support_partner.length;
 					if(length<1){
 						$scope.report.imo_report.support_partner.push($scope.inserted);
@@ -279,10 +315,12 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				},
 				addPlanned: function () {
 					$scope.inserted = {
-						category_id:'',
+						// category_id:'',
+						partner_category_id: '',
 						partner_id:'',
-						area_activity_id: '',
-						narative_activity_id: '',
+						narative: '',
+						// area_activity_id: '',
+						// narative_activity_id: '',
 						product_id: '',
 						number_products: 0 };
 					var length = $scope.report.imo_report.planed_activity.length;
@@ -308,8 +346,11 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					maxDate: moment().format('YYYY-MM-DD'),
 					onClose: function ($imo) {
 						// format date on selection
-						$imo.month_date = moment(new Date($imo.month)).format('YYYY-MM-DD');
-						$imo.month = moment(new Date($imo.month)).format('M');
+						// $imo.month_date = moment(new Date($imo.month)).format('YYYY-MM-DD');
+						// $imo.month = moment(new Date($imo.month)).format('M');
+						$imo.report_date = moment(new Date($imo.report_month)).format('YYYY-MM-DD');
+						$imo.report_month = moment(new Date($imo.report_month)).format('M');
+						$scope.report.openReport($imo.report_month,$imo.report_date);
 					}
 				},
 
@@ -484,6 +525,23 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 							$scope.report.imo_report.support_partner[$scope.removeFileRow].file.splice(i,1);
 						}
 					})
+				},
+				// cek report exist or not
+				openReport:function(reportMonth,reportDate){			
+					report =$scope.reportMonth.filter(function(el){
+						el.report_month
+						var year = moment(new Date(reportDate)).format('YYYY');
+						return year+reportMonth  === el})
+					if(report.length<1){
+						$scope.openFormReport = true;
+					}else{
+						$scope.openFormReport = false;
+						var msg = 'Report For ' + moment(new Date($scope.report.imo_report.report_date)).format('MMMM,YYYY')+' Exist!';
+						delete $scope.report.imo_report.report_date;
+						delete $scope.report.imo_report.report_month;
+						Materialize.toast(msg, 4000, 'error')
+						Materialize.toast('Please Select Another Month', 4000, 'note')
+					}
 				}
 			}
 

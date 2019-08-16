@@ -279,8 +279,6 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 					$scope.panel.user = angular.merge({}, $scope.panel.user,
 						$filter('filter')($scope.panel.adminRegion, { admin0pcode: $scope.panel.user.admin0pcode }, true)[0],						
 						);
-					console.log($scope.panel.user);
-					// $location.path('/immap/reporting/activation')
 					// register
 					ngmImoAuth
 						.register({ user: $scope.panel.user }).success(function (result) {
