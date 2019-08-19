@@ -348,7 +348,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('total_sectors'),
+								title: 'Total Partner',//$filter('translate')('total_sectors'),
 								request: $scope.report.getRequestDummy('sectors')
 							}
 						}]
@@ -429,7 +429,7 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: {
-									text: $filter('translate')('by_sector')
+									text: 'by Area'//$filter('translate')('by_sector')
 								},
 								chartConfig: {
 									options: {
@@ -503,7 +503,7 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: {
-									text: 'Product, Partners, Type'
+									text: 'Partners, Type'
 								},
 								chartConfig: {
 									options: {
@@ -593,7 +593,106 @@ angular.module('ngmReportHub')
 							}
 						}]
 					}]
-				}];
+				}, {
+						columns: [{
+							styleClass: 's12 m12 l12',
+							widgets: [{
+								type: 'highchart',
+								style: 'height: 310px;',
+								card: 'card-panel stats-card white grey-text text-darken-2',
+								config: {
+									title: {
+										text: 'User, Type'
+									},
+									chartConfig: {
+										options: {
+											chart: {
+												type: 'bar',
+												height: 260,
+											},
+											tooltip: {
+												pointFormat: '<b>{point.y:,.0f}</b>'
+											},
+											// legend: {
+											// 	enabled: false
+											// }
+											legend: {
+												layout: 'vertical',
+												align: 'right',
+												verticalAlign: 'top',
+												x: -40,
+												y: 0,
+												floating: true,
+												borderWidth: 1,
+												backgroundColor: '#FFFFFF',
+												shadow: true
+											}
+										},
+										title: {
+											text: ''
+										},
+										xAxis: {
+											categories: [
+												'User A',
+												'User AB',
+												'User AC',
+												'User AD',
+												'User AE',
+												'User AF',
+												'User AG',
+												'User AH',
+												'User AI',
+												'User AJ',
+												'User AK'
+											],
+											labels: {
+												rotation: 0,
+												style: {
+													fontSize: '12px',
+													fontFamily: 'Roboto, sans-serif'
+												}
+											}
+										},
+										yAxis: {
+											min: 0,
+											title: {
+												text: 'Products'
+											}
+										},
+										// series: [{
+										// 	name: 'Product',
+										// 	color: '#7cb5ec',
+										// 	data: [
+										// 		10,
+										// 		19,
+										// 		11,
+										// 		12,
+										// 		15,
+										// 		21,
+										// 		5,
+										// 		25,
+										// 		40,
+										// 		31,
+										// 		8
+										// 	]
+										// }]
+										series: [
+											{
+												name: 'Map',
+												color: '#7cb5ec',
+												data: [10, 19, 11, 12, 15, 21, 5, 25, 40, 31, 8]
+											},
+											{
+												name: 'Dashboard',
+												color: '#be2126',
+												data: [5, 10, 4, 6, 7, 10, 2, 12, 20, 15, 4]
+											}
+										]
+									}
+								}
+							}]
+						}]
+					}];
 				// default widgets
 				var defaultWidgets = [{
 					columns: [{
@@ -694,7 +793,7 @@ angular.module('ngmReportHub')
 				// }
 				rows.push(adminWidgets[0], adminWidgets[1]);
 				// push default widgets
-				rows.push(barchart[0]);
+				rows.push(barchart[0],barchart[1]);
 				rows.push(defaultWidgets[0], defaultWidgets[1], defaultWidgets[2]);
 
 

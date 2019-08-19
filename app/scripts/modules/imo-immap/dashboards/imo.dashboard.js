@@ -271,7 +271,8 @@ angular.module('ngmReportHub')
 										series: [{
 											name: 'Product(s)',
 											data: [],
-											request: $scope.dashboard.getRequestDummy('type_chart'),
+											// request: $scope.dashboard.getRequestDummy('type_chart'),
+											request: $scope.dashboard.getRequestDummy('prod_chart'),
 											size: '120%',
 											innerSize: '60%',
 											showInLegend: true,
@@ -367,7 +368,8 @@ angular.module('ngmReportHub')
 										series: [{
 											name: 'Product(s)',
 											data: [],
-											request: $scope.dashboard.getRequestDummy('type_chart'),
+											// request: $scope.dashboard.getRequestDummy('type_chart'),
+											request: $scope.dashboard.getRequestDummy('prod_chart'),
 											size: '120%',
 											innerSize: '60%',
 											showInLegend: true,
@@ -463,7 +465,8 @@ angular.module('ngmReportHub')
 										series: [{
 											name: 'Product(s)',
 											data: [],
-											request: $scope.dashboard.getRequestDummy('type_chart'),
+											// request: $scope.dashboard.getRequestDummy('type_chart'),
+											request: $scope.dashboard.getRequestDummy('prod_chart'),
 											size: '120%',
 											innerSize: '60%',
 											showInLegend: true,
@@ -632,7 +635,8 @@ angular.module('ngmReportHub')
 										series: [{
 											name: 'Product(s)',
 											data: [],
-											request: $scope.dashboard.getRequestDummy('type_chart'),
+											// request: $scope.dashboard.getRequestDummy('type_chart'), 
+											request: $scope.dashboard.getRequestDummy('prod_chart'),
 											size: '120%',
 											innerSize: '60%',
 											showInLegend: true,
@@ -728,7 +732,8 @@ angular.module('ngmReportHub')
 										series: [{
 											name: 'Product(s)',
 											data: [],
-											request: $scope.dashboard.getRequestDummy('type_chart'),
+											// request: $scope.dashboard.getRequestDummy('type_chart'),
+											request: $scope.dashboard.getRequestDummy('prod_chart'),
 											size: '120%',
 											innerSize: '60%',
 											showInLegend: true,
@@ -824,7 +829,8 @@ angular.module('ngmReportHub')
 										series: [{
 											name: 'Product(s)',
 											data: [],
-											request: $scope.dashboard.getRequestDummy('type_chart'),
+											// request: $scope.dashboard.getRequestDummy('type_chart'),
+											request: $scope.dashboard.getRequestDummy('prod_chart'),
 											size: '120%',
 											innerSize: '60%',
 											showInLegend: true,
