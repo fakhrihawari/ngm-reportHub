@@ -59,7 +59,7 @@ angular.module('ngmReportHub')
 						config: {
 							token: $scope.dashboard.token,
 							style: $scope.dashboard.ngm.style,
-							templateUrl: '/scripts/app/views/authentication/reset.html'
+							templateUrl: '/scripts/widgets/ngm-html/template/imo.reset.password.html'
 						}
 					}]
 				}]

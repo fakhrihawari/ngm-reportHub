@@ -73,11 +73,19 @@
 					</div>
 					<h5 class="title">Login</h5>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">supervisor_account</i>
 						<input id="ngm-username" type="text" class="validate" ng-model="panel.user.username" ng-disabled="panel.formDisabled" required>
 						<label for="ngm-username">Username</label>
+					</div>
+				</div> -->
+				<div class="row">
+					
+					<div class="input-field col s12">
+						<i class="material-icons prefix">email</i>
+						<input id="ngm-email" type="email" class="validate" ng-model="panel.user.email" ng-disabled="panel.formDisabled" required>						
+						<label for="ngm-email">{{'email' | translate}}</label>
 					</div>
 				</div>
 				<div class="row">
