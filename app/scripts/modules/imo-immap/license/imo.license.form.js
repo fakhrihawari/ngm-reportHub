@@ -152,6 +152,7 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 						$scope.inserted.start_date = _copy.start_date
 						$scope.inserted.expired_date= _copy.expired_date
 						$scope.inserted.status = _copy.status
+						$scope.inserted.status = 'REQUESTED';
 						console.log($scope.inserted);
 						$scope.project.license.push($scope.inserted)
 					}
@@ -178,6 +179,10 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 					if (!$scope.project.license[$index].id) {
 						$scope.project.license.splice($index, 1);
 					}
+				},
+				removeLicenseModal:function ($index) {
+					$('#remove-license').openModal({ dismissible: false });
+					$scope.removeLicenseIndex= $index;
 				},
 				removeLicense: function ($index){
 					if (!$scope.project.license[$index].id) {

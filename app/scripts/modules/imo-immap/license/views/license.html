@@ -1,3 +1,24 @@
+<style>
+.modal{width: auto !important;
+		right: auto !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+	}
+</style>
+<div id="remove-license" class="modal">
+	<div class="modal-content">
+		<div class="center">
+			<i class="medium material-icons" style="color:#f44336">delete</i>
+			<h5 style="font-weight:300;"> Remove this License?</h5>
+		</div>
+
+	</div>
+	<div class="modal-footer">
+		<a class=" modal-action modal-close waves-effect waves-green btn-flat">{{'close_mayus1'|translate}}</a>
+		<!-- <a ng-click="ngmClusterDocument.removeFile()" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a> -->
+		<a ng-click="project.removeLicense(removeLicenseIndex)" class="modal-action modal-close waves-effect waves-green btn-flat">{{'yes_remove_this_file'|translate}}</a>
+	</div>
+</div>
 <div class="row">
 	<div class="col s12 m12 l12">
 		<div class="card">
@@ -91,7 +112,7 @@
 										        <i class="material-icons ">create</i>
 										    </div>
 										    <div class="btn btn-small red lighten-2 waves-effect waves-light " title="Remove "
-											  	ng-disabled="!l.license_id" ng-click="project.removeLicense($index)">
+											  	ng-disabled="!l.license_id" ng-click="project.removeLicenseModal($index)">
 										      <i class="material-icons ">delete</i>
 										    </div>
 										  </div>  

@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ImoLicenseCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, $translate, $filter) {
+	.controller('ImoLicenseCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', 'ngmImoAuth', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, $translate, $filter, ngmImoAuth) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -51,7 +51,7 @@ angular.module('ngmReportHub')
 							style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 						},
 						title: {
-							'class': 'col s12 m12 l12 report-title truncate',
+							'class': 'col s12 m9 l9 report-title truncate',
 							style: 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
 							title: 'iMMAP | ' + user.username + ' | License'
 						},
@@ -59,6 +59,31 @@ angular.module('ngmReportHub')
 							'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
 							style: 'font-size:20px',
 							title: 'License list '
+						},
+						download: {
+								'class': 'col s12 m3 l3 hide-on-small-only',
+								downloads: [{
+									type: 'zip',
+									color: 'blue lighten-2',
+									icon: 'folder',
+									hover: 'Download License',
+									request: {
+										method: 'GET',
+										// url: ngmAuth.LOCATION + '/api/getReportDocuments/' + $scope.report.definition.id,
+									},
+									metrics: {
+										method: 'POST',
+										url: ngmImoAuth.LOCATION + '/api/metrics/set',
+										data: {
+											username: $scope.dashboard.user.username,
+											email: $scope.dashboard.user.email,
+											dashboard: 'license',
+											theme: 'cluster_report_documents',
+											format: 'zip',
+											url: $location.$$path
+										}
+									}
+							}]
 						}
 					},
 					rows: [{
@@ -89,7 +114,7 @@ angular.module('ngmReportHub')
 								config: {
 									style: $scope.dashboard.ngm.style,
 									request: {method: 'POST',
-															url: ngmAuth.LOCATION + '/api/immap/report/getLicenseDummyList'}
+														url: ngmImoAuth.LOCATION + '/api/immap/report/getLicenseDummyList'}
 								}
 							}]
 						}]
