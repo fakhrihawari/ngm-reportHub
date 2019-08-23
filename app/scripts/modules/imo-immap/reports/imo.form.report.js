@@ -59,7 +59,6 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 			$scope.ngmClusterLists = ngmClusterLists;
 			$scope.ngmClusterDocument = ngmClusterDocument;
 			$scope.deactivedCopybutton = false;
-
 			// project
 			$scope.report = {
 
@@ -114,6 +113,9 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					}else{
 						$scope.openFormReport = true;
 					};
+					$scope.report.imo_report.support_partner.forEach(function (x) {
+						x.collabArray=[]
+					});
 
 				},
 
@@ -236,6 +238,26 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						$partner.collab_name = selected.length ? selected[0].name : '-';
 					}
 					return selected.length ? selected[0].name : '-';
+				},
+				displayCollabArray: function($partner){
+					collab = $partner.collabArray;
+					collabText =""
+					if(collab.length>0){
+						collab.forEach(function(c,i){
+							collabText += c.name
+							if(i !== (collab.length-1)){
+								collabText += ',' 
+							}
+						})
+					}
+					return collab.length ? collabText:"-";
+				},
+				pushCollab:function($partner,$data){
+					var selected = [];					
+					selected = $filter('filter')($scope.report.collab, { id: $data}, true);
+					if(!$partner.collabArray.some(collab => collab.id === selected[0].id)){
+						$partner.collabArray.push(selected[0]);
+					}					
 				},
 				displayPlannedAreaActivity: function (report, $data, $planned) {
 					var selected = [];
@@ -484,13 +506,13 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 
 					if(complete){
 						$scope.report.imo_report.report_submit = true;
+						var msg = $scope.report.imo_report.report_status === 'new' ? "Report Created" : "Report Updated";
+						Materialize.toast('Processing...', 400, 'note');
+						$timeout(function () {
+							$location.path('/immap/reporting/report/');
+							Materialize.toast(msg, 4000, 'note');
+						}, 400);
 					}
-					var msg = $scope.report.imo_report.report_status === 'new' ? "Report Created" : "Report Updated";
-					Materialize.toast('Processing...', 400, 'note');
-					$timeout(function () {
-						$location.path('/immap/reporting/report/');
-						Materialize.toast(msg, 4000, 'note');
-					}, 400);
 					console.log("SHOW",$scope.report.imo_report);
 				},
 				setRowFileId:function(id){

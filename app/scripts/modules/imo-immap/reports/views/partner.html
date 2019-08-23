@@ -107,6 +107,8 @@
 			<!-- <td>Narative of Activity</td> -->
 			<td>Products</td>
 			<td>Colaboration With</td>
+			<td>CollaborationWith Array</td>
+			<td></td>
 			<td>Number of Products</td>
 			<td ng-if="report.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
@@ -219,6 +221,22 @@
 				</span>
 				
 			</td>
+			<td>
+				<span ng-if="partner.collabArray.length">{{report.displayCollabArray(partner)}}</span>
+			</td>
+			<td>
+				<span e-form="imoform" 
+					e-name="collab_array" 
+					editable-select="partner.collabArray" 
+					e-placeholder="{{'select'|translate}}"
+					e-ng-change="report.pushCollab(partner,$data)"
+					e-ng-options="a_t.id as a_t.name for a_t in report.collab"
+					>										
+				</span>
+				
+			</td>
+			
+			
 			<td>
 				<span e-form="imoform" 
 					e-name="number_products" 
