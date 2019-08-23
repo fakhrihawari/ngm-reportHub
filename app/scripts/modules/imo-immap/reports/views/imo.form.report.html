@@ -172,7 +172,7 @@
 				<!-- <input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="report.imo_report.month" format="dd mmm, yyyy"
 				 select-years="15" min="{{ report.datepicker.maxDate }}" on-close="report.datepicker.onClose( report.imo_report )" /> -->
 				<input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="report.imo_report.report_month" format="dd mmm, yyyy"
-				 select-years="15" min="{{ report.datepicker.maxDate }}" on-close="report.datepicker.onClose( report.imo_report )" />
+				 select-years="15" max="{{ report.datepicker.maxDate }}" on-close="report.datepicker.onClose( report.imo_report )" />
 				<!-- <a ng-if="report.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
 					Report for {{report.imo_report.month_date| date:'MMMM'}}
 				</a> -->
