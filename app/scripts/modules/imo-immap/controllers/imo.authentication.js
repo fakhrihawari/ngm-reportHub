@@ -136,13 +136,11 @@ angular.module('ngm.widget.imo.authentication', ['ngm.provider'])
 
 				// login fn
 				login: function (ngmLoginForm) {
-					console.log(ngmLoginForm, $scope.panel.user)
 					// if invalid
 					if (ngmLoginForm.$invalid) {
 						// set submitted for validation
 						ngmLoginForm.$setSubmitted();
 					} else {
-						console.log(ngmLoginForm, $scope.panel.user)
 						// login
 						ngmImoAuth
 							.login({ user: $scope.panel.user }).success(function (result) {
