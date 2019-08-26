@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ImoTeamLicenseCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, $translate, $filter) {
+	.controller('ImoTeamLicenseCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmImoAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $location, $route, ngmAuth, ngmImoAuth, ngmData, ngmUser, $translate, $filter) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -188,6 +188,78 @@ angular.module('ngmReportHub')
 				string = string.charAt(0).toUpperCase() + string.slice(1);
 				return string
 			},
+			getMetrics: function(status){
+				var request = {
+					method: 'POST',
+					url: ngmImoAuth.LOCATION + '/api/metrics/set',
+					data: {
+						organization: $scope.dashboard.user.organization,
+						username: $scope.dashboard.user.username,
+						email: $scope.dashboard.user.email,
+						dashboard: 'license_' + status,
+						theme: 'license_' + status ,
+						format: 'csv',
+						url: $location.$$path
+					}
+				}
+				return request;
+			},
+			getDownloads:function(){
+				var all_download =[
+					{
+						type: 'zip',
+						color: 'blue lighten-2',
+						icon: 'keyboard_return',
+						hover: 'Download License Requested',
+						request: {
+							method: 'GET',
+							// url: ngmAuth.LOCATION + '/api/getReportDocuments/' + $scope.report.definition.id,
+						},
+						metrics: $scope.dashboard.getMetrics('request')
+					},
+					{
+						type: 'zip',
+						color: 'blue lighten-2',
+						icon: 'autorenew',
+						hover: 'Download License Active',
+						request: {
+							method: 'GET',
+							// url: ngmAuth.LOCATION + '/api/getReportDocuments/' + $scope.report.definition.id,
+						},
+						metrics: $scope.dashboard.getMetrics('active')
+					},
+					{
+						type: 'zip',
+						color: 'blue lighten-2',
+						icon: 'folder',
+						hover: 'Download License Terminated',
+						request: {
+							method: 'GET',
+							// url: ngmAuth.LOCATION + '/api/getReportDocuments/' + $scope.report.definition.id,
+						},
+						metrics: $scope.dashboard.getMetrics('terminated')
+					},
+					
+				];
+				var downloads =[]
+				if ($route.current.params.status === 'all') {
+					return all_download;
+				}
+				if ($route.current.params.status === 'active') {
+					downloads.push(all_download[1])
+				}
+				if ($route.current.params.status === 'requested') {
+					downloads.push(all_download[0]);
+				}
+				if ($route.current.params.status === 'current') {
+					downloads.push(all_download[0],all_download[1])
+				}
+				if ($route.current.params.status === 'terminated') {
+					downloads.push(all_download[2])
+				}
+
+				return downloads
+			},
 			// init()
 			init: function () {
 
@@ -200,7 +272,7 @@ angular.module('ngmReportHub')
 							style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 						},
 						title: {
-							'class': 'col s12 m12 l12 report-title truncate',
+							'class': 'col s12 m9 l9 report-title truncate',
 							style: 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
 							title: 'iMMAP | Team | License'
 						},
@@ -208,6 +280,10 @@ angular.module('ngmReportHub')
 							'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
 							style: 'font-size:20px',
 							title: $scope.dashboard.getSubtitle() +' License of The Team'
+						},
+						download: {
+							'class': 'col s12 m3 l3 hide-on-small-only',
+							downloads: $scope.dashboard.getDownloads()
 						}
 					},
 					menu:[],
