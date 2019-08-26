@@ -762,7 +762,21 @@ angular.module('ngmReportHub')
 							config: {
 								style: $scope.report.ngm.style,
 								request: $scope.report.getRequestDummy('lists'),
-								templateUrl: '/scripts/widgets/ngm-html/template/imo/imo.product.list.html'
+								templateUrl: '/scripts/widgets/ngm-html/template/imo/imo.product.list.html',
+								openModal: function (modal, link) {
+									$('#' + modal).openModal({ dismissible: false });
+									if (link !== '') {
+										if (modal === 'close-preview-modal') {
+											$scope.linkPreview = link;
+										} else {
+											// if its from google drive; link in here is id of google drive  file
+											$scope.linkPreview = "https://drive.google.com/file/d/" + link + "/preview"
+										}
+									}
+								},
+								setLink: function () {
+									return $sce.trustAsResourceUrl($scope.linkPreview);
+								},
 							}
 						}]
 					}]
