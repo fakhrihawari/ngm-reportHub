@@ -53,23 +53,33 @@
 						<table class="centered highlight responsive-table" ng-table="table.tableParams">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
 								<!-- columns -->
-								<td data-title="'Sector'" sortable="'product_sector'">
-									{{ row.product_sector }}
+								<td data-title="'Month'" sortable="'report_date'">
+									{{ row.report_date | date:'MMMM,yyyy' }}
 								</td>
-								<td data-title="'User'" sortable="">
-									<!-- {{ row.product_type }} -->
-									User
+								<td data-title="'User'" sortable="'name'">
+									{{ row.name }}
 								</td>
 								<td data-title="'Contact'" sortable="'email'">
 									{{ row.email }}
 								</td>
 								
-								<td data-title="'Project'" sortable="'project'">
-									{{ row.project }}
+								<td data-title="'Rating'" sortable="'rating'">
+									<!-- {{ row.rating }} -->
+									<span  ng-repeat="x in [].constructor(row.rating) track by $index">
+										<i class="material-icons" style="color: #57b2f8">
+											thumb_up
+										</i>
+									</span>
 								</td>							
 								
-								<td data-title="'product_month'|translate" sortable="'product_month'">
-									{{ row.product_month + ' ' + row.product_year }}
+								<td data-title="'Suport partner'" sortable="">
+									{{ row.support_partner.length }}
+								</td>
+								<td data-title="'Go to Report'" sortable="'id'">
+									<a href="#/immap/reporting/report/{{row.id}}" target="_blank">
+										<i class="material-icons center" style="color:#616161; margin-left:-80px;"> ic_launch</i>
+									</a>
+									
 								</td>
 
 							</tr>

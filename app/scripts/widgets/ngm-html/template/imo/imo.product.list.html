@@ -73,15 +73,15 @@
 
 	</div>
 </div> -->
-<div ng-repeat="row in panel.data track by $index">
+<!-- <div ng-repeat="row in panel.data track by $index"> -->
 	<div class="row">
-		<div class="col s12 m3" dir-paginate="item in row.product_id  | itemsPerPage: 4" pagination-id="listUpload.id">
+		<div class="col s12 m3" dir-paginate="item in panel.data  | itemsPerPage: 4" pagination-id="listUpload.id">
 			<div class="card border-radius">
 				<div class="card-image waves-effect waves-block waves-light">
-					<img class="activator" ng-src="https://drive.google.com/thumbnail?authuser=0&sz=w320&id={{item}}">
+					<img class="activator" ng-src="https://drive.google.com/thumbnail?authuser=0&sz=w320&id={{item.fileid}}">
 				</div>
 				<div class="card-content">
-					<span class="grey-text activator text-darken-4 " style="font-size: 12px; font-weight: 400">{{row.product_type| limitTo: 12}}<i class="material-icons right" style="cursor: pointer; margin-left: 5px;">more_vert</i>
+					<span class="grey-text activator text-darken-4 " style="font-size: 12px; font-weight: 400">{{item.filename| limitTo: 12}}<i class="material-icons right" style="cursor: pointer; margin-left: 5px;">more_vert</i>
 					</span>
 				</div>
 				<div class="card-reveal">
@@ -91,7 +91,7 @@
 					<div align="center" style="margin-top: 25%">
 	
 						<button class="btn-floating  wave-effect blue tooltipped-report-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
-						 ng-click="panel.openModal('dashboard-preview-thumnail-file',item)">
+						 ng-click="panel.openModal('dashboard-preview-thumnail-file',item.fileid)">
 							<i class="small material-icons">compare</i>
 						</button>
 						<!-- <a class="btn-floating  wave-effect space tooltipped-report-upload" data-position="bottom" data-tooltip="{{'download'|translate}}"
@@ -112,4 +112,4 @@
 			<dir-pagination-controls pagination-id="listUpload.id"></dir-pagination-controls>
 		</div>
 	</div>
-</div>
+<!-- </div> -->

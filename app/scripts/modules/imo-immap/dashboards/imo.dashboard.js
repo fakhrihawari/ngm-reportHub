@@ -194,7 +194,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel chart-stats-card white grey-text text-darken-2',
 								config: {
 									title: {
-										text: 'World Health Organization',
+										text: 'Humanitarian Partner',
 									},
 									display: {
 										label: true,
@@ -291,7 +291,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel chart-stats-card white grey-text text-darken-2',
 								config: {
 									title: {
-										text: 'Health Cluster'
+										text: 'Development Partner'
 									},
 									display: {
 										label: true,
@@ -388,7 +388,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel chart-stats-card white grey-text text-darken-2',
 								config: {
 									title: {
-										text: 'OCHA'
+										text: 'United Nations Agency'
 									},
 									display: {
 										label: true,
@@ -558,7 +558,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel chart-stats-card white grey-text text-darken-2',
 								config: {
 									title: {
-										text: 'World Healt Organization',
+										text: 'Humanitarian Partner',
 									},
 									display: {
 										label: true,
@@ -655,7 +655,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel chart-stats-card white grey-text text-darken-2',
 								config: {
 									title: {
-										text: 'Health Cluster'
+										text: 'Development Partner'
 									},
 									display: {
 										label: true,
@@ -752,7 +752,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel chart-stats-card white grey-text text-darken-2',
 								config: {
 									title: {
-										text: 'OCHA'
+										text: 'United Nations Agency'
 									},
 									display: {
 										label: true,

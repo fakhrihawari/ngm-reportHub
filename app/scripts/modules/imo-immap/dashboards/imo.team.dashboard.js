@@ -707,7 +707,7 @@ angular.module('ngmReportHub')
 								headerStyle: 'background-color:' + $scope.report.ngm.style.defaultPrimaryColor,
 								headerText: 'white-text',
 								headerIcon: 'insert_drive_file',
-								headerTitle: 'Report',
+								headerTitle: 'Report To Do',
 								templateUrl: '/scripts/widgets/ngm-table/templates/imo/imo.report.html',								
 								tableOptions: {
 									count: 4
@@ -716,7 +716,29 @@ angular.module('ngmReportHub')
 							}
 						}]
 					}]
-				},{
+				}, {
+						columns: [{
+							styleClass: 's12',
+							widgets: [{
+								type: 'table',
+								card: 'panel',
+								style: 'padding:0px; height: ' + $scope.report.ngm.style.height + 'px;',
+								config: {
+									style: $scope.report.ngm.style,
+									headerClass: 'collection-header lighten-2',
+									headerStyle: 'background-color:' + $scope.report.ngm.style.defaultPrimaryColor,
+									headerText: 'white-text',
+									headerIcon: 'insert_drive_file',
+									headerTitle: 'Report Complete',
+									templateUrl: '/scripts/widgets/ngm-table/templates/imo/imo.report.html',
+									tableOptions: {
+										count: 4
+									},
+									request: $scope.report.getRequestDummy('lists')
+								}
+							}]
+						}]
+					},{
 					columns: [{
 						styleClass: 's12',
 						widgets: [{
@@ -748,7 +770,7 @@ angular.module('ngmReportHub')
 								tableOptions: {
 									count: 4
 								},
-								request: $scope.report.getRequestDummy('lists')
+								request: $scope.report.getRequestDummy('list_product')
 							}
 						}]
 					}]
@@ -761,7 +783,7 @@ angular.module('ngmReportHub')
 							style: 'padding-top: 20px;padding-bottom: 46px;',
 							config: {
 								style: $scope.report.ngm.style,
-								request: $scope.report.getRequestDummy('lists'),
+								request: $scope.report.getRequestDummy('list_product'),
 								templateUrl: '/scripts/widgets/ngm-html/template/imo/imo.product.list.html',
 								openModal: function (modal, link) {
 									$('#' + modal).openModal({ dismissible: false });
@@ -808,7 +830,7 @@ angular.module('ngmReportHub')
 				rows.push(adminWidgets[0], adminWidgets[1]);
 				// push default widgets
 				rows.push(barchart[0],barchart[1]);
-				rows.push(defaultWidgets[0], defaultWidgets[1], defaultWidgets[2]);
+				rows.push(defaultWidgets[0], defaultWidgets[1], defaultWidgets[2], defaultWidgets[3], defaultWidgets[4]);
 
 
 				// return rows

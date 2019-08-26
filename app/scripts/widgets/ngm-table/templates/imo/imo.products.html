@@ -67,7 +67,7 @@
 						<table class="highlight responsive-table product" ng-table="table.tableParams">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
 								<!-- columns -->
-								<td data-title="'File Name'" sortable="'product_month'">
+								<!-- <td data-title="'File Name'" sortable="'product_month'">
 											<div class="icon">
 
 												<i class="material-icons" style="color:#be2126;text-align: center">picture_as_pdf</i> File ku sangat panjang sekali									
@@ -83,7 +83,6 @@
 									{{ row.product_type }}
 								</td>
 								<td data-title="'User'" sortable="">
-									<!-- {{ row.product_type }} -->
 									User
 								</td>
 								<td data-title="'Collaboration'" sortable="'collab_name'">
@@ -92,10 +91,29 @@
 								</td>
 								<td data-title="'Report Month'" sortable="'product_month'">
 									{{ row.product_month + ' ' + row.product_year }}
+								</td> -->
+								<td data-title="'File Name'" sortable="'filename'">
+									<div class="icon">
+									
+										<i class="material-icons" style="color:#be2126;text-align: center">picture_as_pdf</i>  {{row.filename}}
+									</div>
+								
+								</td>
+								<td data-title="'Contributor'" sortable="'fileowner'">
+									{{row.fileowner}}
+								</td>
+								<td data-title="'Partner Category'|translate" sortable="'category_name'">
+									Humanitarian partner
+								</td>
+								<td data-title="'product_type'|translate" sortable="'product_type'">
+									Map
+								</td>
+								<td data-title="'Area Activity'">
+									 Information Management and Coordination Support
 								</td>
 								<td data-title="'Preview'" sortable="'product_month'">
 									<button class="btn-floating  wave-effect blue tooltipped-project-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
-									 ng-click="table.openModal('dashboard-preview-file','1KB2pUffgVZU5L7M5AZjuYzJTYPWQriSy')" ng-disabled="item.filename_extension === '.csv'">
+									 ng-click="table.openModal('dashboard-preview-file',row.fileid)" ng-disabled="item.filename_extension === '.csv'">
 										<i class="small material-icons">compare</i>
 									</button>
 								</td>
