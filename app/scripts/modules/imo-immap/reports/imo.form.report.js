@@ -113,9 +113,9 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					}else{
 						$scope.openFormReport = true;
 					};
-					$scope.report.imo_report.support_partner.forEach(function (x) {
-						x.collabArray=[]
-					});
+					// $scope.report.imo_report.support_partner.forEach(function (x) {
+					// 	x.collabArray=[]
+					// });
 
 				},
 
@@ -162,6 +162,10 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 									{id:'map',name:'Map'},
 									{id:'printed_product',name:'Printed Product'},
 									{id:'meeting',name:'Meeting'}],
+				product_detail:[{ id:'a3', name:'A3'},
+												{ id:'a4', name:'A4'},
+												{ id:'soft_file', name:'soft file'},
+												{id:'no', name:'nothing'}],
 				collab: [{ id: '01', name: 'YY' }, { id: '02', name: 'CC' }, { id: '03', name: 'AA' }],
 				rating:[1,2,3,4,5],
 
@@ -255,9 +259,21 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				pushCollab:function($partner,$data){
 					var selected = [];					
 					selected = $filter('filter')($scope.report.collab, { id: $data}, true);
+					if(!$partner.collabArray){
+						$partner.collabArray =[];
+					};
 					if(!$partner.collabArray.some(collab => collab.id === selected[0].id)){
 						$partner.collabArray.push(selected[0]);
 					}					
+				},
+				displayProductDetails:function(report, $data, $partner){
+					var selected =[];
+					$partner.product_detail_id = $data;
+					selected = $filter('filter')(report.product_detail,{id:$partner.product_detail_id},true);
+					if (selected && selected.length) {
+						$partner.product_detail_name = selected.length ? selected[0].name : '-';
+					}
+					return selected.length ? selected[0].name : '-';
 				},
 				displayPlannedAreaActivity: function (report, $data, $planned) {
 					var selected = [];
@@ -575,6 +591,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 
 			// init project
 			$scope.report.init();
+			console.log($scope.report.imo_report.support_partner[0]);
 			// $scope.report.getDocument()
 			$scope.$on('refresh:listUpload', function (event, args) {
 				$scope.report.getDocument();

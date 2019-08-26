@@ -29,9 +29,9 @@
 .imo-report{
 	margin-top:20px;
 }
-#put-date{
+/* #put-date{
 	display: none;
-}
+} */
 	.dropzone {
 	border: 2px dashed #5c6bc0;
 	margin: 0 20px 0 20px;
@@ -171,7 +171,7 @@
 				<label class="btn-floating" style="background-color: #A72824;border-radius:10%" for="put-date"><i class=" material-icons right"> date_range</i></label>
 				<!-- <input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="report.imo_report.month" format="dd mmm, yyyy"
 				 select-years="15" min="{{ report.datepicker.maxDate }}" on-close="report.datepicker.onClose( report.imo_report )" /> -->
-				<input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid" ng-model="report.imo_report.report_month" format="dd mmm, yyyy"
+				<input id="put-date" ngm-date type="text" style="border-bottom: 1px #be2126 solid; display: none" ng-model="report.imo_report.report_month" format="dd mmm, yyyy"
 				 select-years="15" max="{{ report.datepicker.maxDate }}" on-close="report.datepicker.onClose( report.imo_report )" />
 				<!-- <a ng-if="report.imo_report.month" class="btn" style="left:40px;position:absolute;pointer-events:none;background-color: #A72824">
 					Report for {{report.imo_report.month_date| date:'MMMM'}}

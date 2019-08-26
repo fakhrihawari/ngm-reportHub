@@ -106,6 +106,7 @@
 			<td>Area of Activity</td>
 			<!-- <td>Narative of Activity</td> -->
 			<td>Products</td>
+			<td>Detail Product</td>
 			<td>Colaboration With</td>
 			<td>CollaborationWith Array</td>
 			<td></td>
@@ -212,6 +213,17 @@
 			</td>
 			<td>
 				<span e-form="imoform" 
+					e-name="product_detail_id" 
+					editable-select="partner.product_detail_id" 
+					e-placeholder="{{'select'|translate}}"
+				 	e-ng-options="a_t.id as a_t.name for a_t in report.product_detail" 
+					e-ng-disabled="false">
+													 {{report.displayProductDetails(report,$data,partner)}}
+				</span>
+				
+			</td>
+			<td>
+				<span e-form="imoform" 
 					e-name="collab_id" 
 					editable-select="partner.collab_id" 
 					e-placeholder="{{'select'|translate}}"
@@ -292,9 +304,20 @@
 		<tr style="border: 0px">
 			<td colspan="100" class=" card" style="padding: 20px">
 				<h6 style="font-weight: 600;">Narative *</h6>
-				<span editable-text="partner.narative" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_id" ng-model="partner.narative">
+				<!-- <span editable-text="partner.narative" e-name="narative" e-form="imoform" e-ng-disabled="!partner.area_id" ng-model="partner.narative">
 					{{report.displayNarativeText($data,partner)}}
-				</span>
+				</span> -->
+										<textarea 
+											id="ngm-support_parnert-narative-{{$partnerIndex}}" 
+											type="text" 
+											class="validate materialize-textarea"
+											name="narative"
+											ng-model="partner.narative"
+											ng-disabled="!imoform.$visible"
+											e-form="imoform"
+											>
+										</textarea>
+										<label for="ngm-support_parnert-narative-{{$partnerIndex}}"></label>
 			</td>
 		</tr>
 		<tr style="height: 15px;"></tr>
