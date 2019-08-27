@@ -102,6 +102,19 @@ angular.module('ngmReportHub')
 										count: 10,
 										sorting: { updatedAt: "desc" }
 									},
+									openModal: function (modal) {
+										$('#' + modal).openModal({ dismissible: false });
+									},
+									datepicker: {
+										maxDate: moment().format('YYYY-MM-DD'),
+										onClose: function (data, property) {
+											data[property] = moment(new Date(data[property])).format('YYYY-MM-DD');
+										}
+									},
+									updateLicense: function (license) {
+										$scope.dashboard.saveUpdateLicense(license);
+									},
+									dummyListStatus: ['ACTIVE', 'REQUESTED', 'TERMINATED'],
 									request: $scope.dashboard.getLicenseRequest('active'),
 								}
 							}]
@@ -125,6 +138,19 @@ angular.module('ngmReportHub')
 										count: 10,
 										sorting: { updatedAt: "desc" }
 									},
+									openModal: function (modal) {
+										$('#' + modal).openModal({ dismissible: false });
+									},
+									datepicker: {
+										maxDate: moment().format('YYYY-MM-DD'),
+										onClose:function(data,property){
+										data[property]=moment(new Date(data[property])).format('YYYY-MM-DD');
+										}										
+									},
+									updateLicense:function(license){
+										$scope.dashboard.saveUpdateLicense(license);
+									},
+									dummyListStatus:['ACTIVE', 'REQUESTED', 'TERMINATED'],									
 									request: $scope.dashboard.getLicenseRequest('request'),
 								}
 							}]
@@ -148,6 +174,19 @@ angular.module('ngmReportHub')
 										count: 10,
 										sorting: { updatedAt: "desc" }
 									},
+									openModal: function (modal) {
+										$('#' + modal).openModal({ dismissible: false });
+									},
+									datepicker: {
+										maxDate: moment().format('YYYY-MM-DD'),
+										onClose: function (data, property) {
+											data[property] = moment(new Date(data[property])).format('YYYY-MM-DD');
+										}
+									},
+									updateLicense: function (license) {
+										$scope.dashboard.saveUpdateLicense(license);
+									},
+									dummyListStatus: ['ACTIVE', 'REQUESTED', 'TERMINATED'],
 									request: $scope.dashboard.getLicenseRequest('terminated'),
 								}
 							}]
@@ -294,6 +333,21 @@ angular.module('ngmReportHub')
 				$scope.dashboard.ngm.dashboard.model = $scope.model;
 				$scope.dashboard.ngm.dashboard.model.rows = $scope.dashboard.getRow();
 				$scope.dashboard.ngm.dashboard.model.menu.push($scope.dashboard.getMenu());
+			},
+			saveUpdateLicense:function(license){
+				// var update = $http({
+				// 	method: 'POST',
+				// 	url: this.LOCATION + '/api/immap/reporting license',
+				// 	data: license
+				// });
+				// update.success(function (result) {
+				// 	//  success handles in controller.authentication.js
+				// }).error(function (err) {
+				// 	// update
+				// 	Materialize.toast('Error!', 6000, 'error');
+				// });
+				console.log(license);
+				Materialize.toast('Success!', 6000, 'success');
 			}
 
 		}
