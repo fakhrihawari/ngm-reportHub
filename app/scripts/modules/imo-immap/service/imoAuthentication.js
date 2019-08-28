@@ -193,7 +193,7 @@ angular.module('ngmReportHub')
 						ngmUser.unset();
 
 						// redirect to login
-						$location.path('/' + ngmImoAuth.APP + '/login');
+						$location.path('/immap/reporting/login');
 
 					}
 				}

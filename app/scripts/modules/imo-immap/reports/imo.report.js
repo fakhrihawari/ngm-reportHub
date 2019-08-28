@@ -220,7 +220,7 @@ angular.module('ngmReportHub')
 					var idUpload = (Math.floor((Math.random(m) * 25)) + 10).toString(36) + "for";
 					idUpload += (new Date()).getTime().toString(36);
 					idUpload += (m + y);
-					$scope.data.upload_id= idUpload;
+					$scope.data.upload_id= idUpload+ngmUser.get().username;
 				
 				
 				$scope.report.setProjectDetails($scope.data);

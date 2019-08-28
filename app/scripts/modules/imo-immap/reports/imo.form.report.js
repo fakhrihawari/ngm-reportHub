@@ -149,7 +149,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					{ id: 'development_partner', name: 'Development Partner' },
 					{ id: 'united_nations_agency', name: 'United Nations Agency' },
 					{ id: 'government_institution', name: 'Government Institution' },
-					{ id: 'humanitarian_partner', name: 'Cluster, Sub-Cluster or Working Group' },
+					{ id: 'cluster_subcluster', name: 'Cluster, Sub-Cluster or Working Group' },
 					{ id: 'other', name: 'Other' },
 				],
 				partner: [{ id: '02', category_id: 'development_partner', name: ' ORGA' }, { id: '02', category_id: 'humanitarian_partner', name: 'ORGB' }, { id: '03', category_id: 'united_nations_agency', name: 'ORGC' }],
@@ -443,11 +443,20 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						// 	$data.number_products >= 0) {
 						// 	disabled = false;
 						// }
+						// if ($data.file.length && $data.partner_category_id &&
+						// 	$data.partner_id &&
+						// 	$data.area_id &&
+						// 	$data.narative &&
+						// 	$data.collab_id &&
+						// 	$data.product_id &&
+						// 	$data.number_products >= 0) {
+						// 	disabled = false;
+						// }
 						if ($data.file.length && $data.partner_category_id &&
 							$data.partner_id &&
 							$data.area_id &&
 							$data.narative &&
-							$data.collab_id &&
+							$data.collabArray.length &&
 							$data.product_id &&
 							$data.number_products >= 0) {
 							disabled = false;
@@ -586,6 +595,22 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						Materialize.toast(msg, 4000, 'error')
 						Materialize.toast('Please Select Another Month', 4000, 'note')
 					}
+				},
+				// chips
+				searchCollab:null,
+				searchCollabList: function (query,$index) {
+					if (!$scope.report.imo_report.support_partner.collabArray) {
+						$scope.report.imo_report.support_partner[$index].collabArray = [];
+					}
+					return $scope.report.collab.filter(function (el) {
+						return el.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+					});
+				},
+				addNewCollab: function (chip,a) {
+					console.log(chip,a)
+				},
+				removeCollab:function(chip,a){
+					console.log(chip,a)
 				}
 			}
 

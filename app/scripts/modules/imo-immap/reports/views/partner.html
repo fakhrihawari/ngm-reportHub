@@ -71,7 +71,28 @@
     /* text-align: center; */
     margin-right: 10px;
 	}
+	input.md-input{
+		margin-bottom: 0px;
+		outline: none;
+	}
 
+	input.md-input:not([type]):focus:not([readonly]){
+		border-bottom: none;
+		box-shadow: none;
+	}
+	md-chips md-chip {
+    background: #26a69a;
+    color: #fff;
+	}
+	md-chips md-chip md-icon{
+		color:#fff;
+	}
+	md-chips .md-chips.md-focused{
+		box-shadow: 0 2px  rgb(38,166,154)
+	}
+	md-chips .md-chips .md-chip-input-container input:disabled{
+		display: none;
+	} 
 </style>
 <div id="close-preview-file" class="modal ">
 	<div class="modal-content">
@@ -107,9 +128,9 @@
 			<!-- <td>Narative of Activity</td> -->
 			<td>Products</td>
 			<td>Detail Product</td>
-			<td>Colaboration With</td>
-			<td>CollaborationWith Array</td>
-			<td></td>
+			<!-- <td>Colaboration With</td> -->
+			<!-- <td>CollaborationWith Array</td> -->
+			<!-- <td></td> -->
 			<td>Number of Products</td>
 			<td ng-if="report.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
@@ -206,7 +227,7 @@
 					editable-select="partner.product_id" 
 					e-placeholder="{{'select'|translate}}"
 				 	e-ng-options="a_t.id as a_t.name for a_t in report.products" 
-					e-ng-disabled="!partner.narative">
+					e-ng-disabled="!partner.area_id">
 													 {{report.displayProducts(report,$data,partner)}}
 				</span>
 				
@@ -217,12 +238,12 @@
 					editable-select="partner.product_detail_id" 
 					e-placeholder="{{'select'|translate}}"
 				 	e-ng-options="a_t.id as a_t.name for a_t in report.product_detail" 
-					e-ng-disabled="false">
+					e-ng-disabled="!partner.product_id">
 													 {{report.displayProductDetails(report,$data,partner)}}
 				</span>
 				
 			</td>
-			<td>
+			<!-- <td>
 				<span e-form="imoform" 
 					e-name="collab_id" 
 					editable-select="partner.collab_id" 
@@ -235,8 +256,27 @@
 			</td>
 			<td>
 				<span ng-if="partner.collabArray.length">{{report.displayCollabArray(partner)}}</span>
-			</td>
-			<td>
+			</td> -->
+			<!-- <td>
+				<div class="input-field">
+					<md-chips ng-model="partner.collabArray" md-autocomplete-snap="width" md-require-match="true" input-aria-label="Collab"
+					 md-on-add="report.addNewCollab($chip,partner)" md-on-remove="report.removeCollab($chip,partner)">
+						<md-autocomplete ng-hide="true" md-selected-item="null" md-search-text="" md-items="item in report.collab"
+						 md-item-text="item.id" input-aria-describedby="autocompleteTitle" placeholder="Add new collab" ng-disabled="true">
+							<span md-highlight-text="searchText">{{item.name}} </span>
+							<md-not-found>
+								Cannot add,not on the list
+							</md-not-found>
+						</md-autocomplete>
+						<md-chip-template>
+							<span>
+								<strong>{{$chip.name}}</strong>
+							</span>
+						</md-chip-template>
+					</md-chips>
+				</div>
+			</td> -->
+			<!-- <td>
 				<span e-form="imoform" 
 					e-name="collab_array" 
 					editable-select="partner.collabArray" 
@@ -246,7 +286,7 @@
 					>										
 				</span>
 				
-			</td>
+			</td> -->
 			
 			
 			<td>
@@ -254,7 +294,8 @@
 					e-name="number_products" 
 					editable-number="partner.number_products" 
 					e-min="0" 
-					e-ng-change="report.updateInputProduct($data,partner);cek($data,$index); ngmCbBeneficiaries.setSadd( beneficiary );">
+					e-ng-change="report.updateInputProduct($data,partner);"
+					e-ng-disabled="!partner.product_detail_id">
 					{{ partner.number_products }}
 				</span>
 			</td>
@@ -277,6 +318,7 @@
 				<div class="buttons" ng-if="!imoform.$visible">
 					<button class="btn btn-small waves-effect waves-light" ng-click="imoform.$show();ngmClusterHelperNgWash.init_material_select();"
 					ng-disabled="report.imo_report.report_submit"
+					 
 					 title="Edit">
 						<i class="material-icons">create</i>
 					</button>
@@ -301,6 +343,40 @@
 					</span>
 				</td>
 		</tr> -->
+		<tr style="border: 0px">
+			<td colspan="100" class=" card" style="padding: 20px">
+				<h6 style="font-weight: 600;">Collaboration With *</h6>
+				<div class="input-field">
+					<md-chips 
+					 ng-model="partner.collabArray" 
+					 md-autocomplete-snap="width" 
+					 md-require-match="true" 
+					 input-aria-label="Collab" 
+					 md-on-add="report.addNewCollab($chip,partner)"
+					 md-on-remove="report.removeCollab($chip,partner)" readonly="!imoform.$visible">
+						<md-autocomplete 
+						 md-selected-item="null" 
+						 md-search-text="report.searchCollab" 
+						 md-items="item in report.searchCollabList(report.searchCollab,$partnerIndex)" 
+						 md-item-text="item.name"
+						 input-aria-describedby="autocompleteTitle" 
+						 placeholder="Add new collab" 
+						 ng-disabled="!imoform.$visible ">
+							<span md-highlight-text="searchText">{{item.name}} </span>
+							<md-not-found>
+								Cannot add,not on the list
+							</md-not-found>
+						</md-autocomplete>
+						<md-chip-template>
+							<span>
+								<strong>{{$chip.name}}</strong>
+							</span>
+						</md-chip-template>
+					</md-chips>
+				</div>
+			</td>
+		</tr>
+		<tr style="height: 15px;"></tr>
 		<tr style="border: 0px">
 			<td colspan="100" class=" card" style="padding: 20px">
 				<h6 style="font-weight: 600;">Narative *</h6>
