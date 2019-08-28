@@ -27,6 +27,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 		'$sce',
 		'ngmUser',
 		'ngmAuth',
+		'ngmImoAuth',
 		'ngmData',
 		'ngmClusterHelper',
 		'ngmClusterLists',
@@ -44,6 +45,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 			$sce,
 			ngmUser,
 			ngmAuth,
+			ngmImoAuth,
 			ngmData,
 			ngmClusterHelper,
 			ngmClusterLists,
@@ -524,20 +526,40 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				},
 				saveImoReport: function (complete){
 					$scope.report.imo_report.report_status = complete ? 'complete' : 'todo';
-					$scope.report.imo_report.report_submit = false;
+					$scope.report.imo_report.report_submit = complete ? true:false;
 					if ($scope.report.imo_report.created){
 						$scope.report.imo_report.created = moment().format();
 					}
+					Materialize.toast($filter('translate')('processing_report'), 6000, 'note');
 
-					if(complete){
-						$scope.report.imo_report.report_submit = true;
-						var msg = $scope.report.imo_report.report_status === 'new' ? "Report Created" : "Report Updated";
-						Materialize.toast('Processing...', 400, 'note');
-						$timeout(function () {
-							$location.path('/immap/reporting/report/');
-							Materialize.toast(msg, 4000, 'note');
-						}, 400);
+					// setReportRequest
+					var setReportRequest = {
+						method: 'POST',
+						url: ngmImoAuth.LOCATION + '/api/immap/report/setDummyReport',
+						data: { report: $scope.report.imo_report }
 					}
+					$http(setReportRequest).success(function (report) {
+						if (report.err) {
+							// update
+							Materialize.toast('Error! ', 6000, 'error');
+						}
+						if (!report.err) {
+							$scope.report.imo_report = report
+							var msg = $scope.report.imo_report.report_submit ? 'Report Submitted':"Report Saved";
+							$timeout(function () { Materialize.toast(msg, 6000, 'success'); }, 400);
+						}
+					})
+
+
+					// if(complete){
+					// 	$scope.report.imo_report.report_submit = true;
+					// 	var msg = $scope.report.imo_report.report_status === 'new' ? "Report Created" : "Report Updated";
+					// 	Materialize.toast('Processing...', 400, 'note');
+					// 	$timeout(function () {
+					// 		$location.path('/immap/reporting/report/');
+					// 		Materialize.toast(msg, 4000, 'note');
+					// 	}, 400);
+					// }
 					console.log("SHOW",$scope.report.imo_report);
 				},
 				setRowFileId:function(id){
@@ -559,7 +581,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						ngmData.get({
 							method: 'GET',
 							// url: ngmAuth.LOCATION + '/api/listReportDocuments/fkhrhwrrfn123test021'
-							url: ngmAuth.LOCATION + '/api/listReportDocuments/' + config.imo_report.upload_id
+							url: ngmImoAuth.LOCATION + '/api/listReportDocuments/' + config.imo_report.upload_id
 						}).then(function (data) {
 							l = data.length
 							$scope.dummy = data;
@@ -607,16 +629,16 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					});
 				},
 				addNewCollab: function (chip,a) {
-					console.log(chip,a)
+					// console.log(chip,a)
 				},
 				removeCollab:function(chip,a){
-					console.log(chip,a)
+					// console.log(chip,a)
 				}
 			}
 
 			// init project
 			$scope.report.init();
-			console.log($scope.report.imo_report.support_partner[0]);
+			// console.log($scope.report.imo_report.support_partner[0]);
 			// $scope.report.getDocument()
 			$scope.$on('refresh:listUpload', function (event, args) {
 				$scope.report.getDocument();

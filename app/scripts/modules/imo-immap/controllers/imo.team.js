@@ -60,6 +60,16 @@ angular.module('ngmReportHub')
 					}
 				}
 			},
+			getTeamRequest:function(indicator){
+				console.log(indicator)
+				return{
+					method: 'POST',
+					url: ngmAuth.LOCATION + '/api/immap/getTeamReporting',
+					data:{
+						indicator:indicator
+					}
+				}
+			},
 			// init()
 			init: function (user) {
 				user.emailHash = $scope.dashboard.MD5(user.email.trim().toLowerCase());
@@ -102,7 +112,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Active Teammate',
-									request: $scope.dashboard.getRequestT('total', 'active')
+									request: $scope.dashboard.getTeamRequest('total_active')//$scope.dashboard.getRequestT('total', 'active')
 								}
 							}]
 						}]
@@ -125,7 +135,7 @@ angular.module('ngmReportHub')
 											count: 10,
 											sorting: { updatedAt: "desc" }
 										},
-										request: $scope.dashboard.getRequestT('list', 'active'),
+										request: $scope.dashboard.getTeamRequest('active'),//$scope.dashboard.getRequestT('list', 'active'),
 										onClick: function (user) {
 											// go to profile
 											$location.path($scope.dashboard.profileHref + '/' + user.username);
@@ -185,7 +195,7 @@ angular.module('ngmReportHub')
 											count: 10,
 											sorting: { updatedAt: "desc" }
 										},
-										request: $scope.dashboard.getRequestT('list', 'deactivated'),
+										request: $scope.dashboard.getTeamRequest('deactivate'),//$scope.dashboard.getRequestT('list', 'deactivated'),
 										onClick: function (user) {
 											// go to profile
 											$location.path($scope.dashboard.profileHref + '/' + user.username);
@@ -220,7 +230,7 @@ angular.module('ngmReportHub')
 
 			// get use
 			ngmData
-				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/getUserByUsername?username=' + $scope.dashboard.username })
+				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/immap/getUserByUsername?username=' + $scope.dashboard.username })
 				.then(function (user) {
 					// load with user profile
 					$scope.dashboard.init(user);

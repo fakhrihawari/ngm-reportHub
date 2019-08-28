@@ -170,7 +170,7 @@ angular.module('ngmReportHub')
 
 			// get use
 			ngmData
-				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/getUserByUsername?username=' + $scope.dashboard.username })
+				.get({ method: 'GET', url: ngmAuth.LOCATION + '/api/immap/getUserByUsername?username=' + $scope.dashboard.username })
 				.then(function (user) {
 					// should get from api
 					var license = []

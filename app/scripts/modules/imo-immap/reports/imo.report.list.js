@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ImoReportListCtrl', ['$scope', '$route', '$location', '$anchorScroll', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $route, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter) {
+	.controller('ImoReportListCtrl', ['$scope', '$route', '$location', '$anchorScroll', '$timeout', 'ngmAuth', 'ngmImoAuth', 'ngmData', 'ngmUser', '$translate', '$filter', function ($scope, $route, $location, $anchorScroll, $timeout, ngmAuth, ngmImoAuth, ngmData, ngmUser, $translate, $filter) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -72,7 +72,7 @@ angular.module('ngmReportHub')
 									templateUrl:'/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
-										url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
+										url: ngmImoAuth.LOCATION+'/api/immap/report/getReportsList',
 										data: {
 											status:'todo'
 										}
@@ -96,7 +96,7 @@ angular.module('ngmReportHub')
 									templateUrl: '/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
-										url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
+										url: ngmImoAuth.LOCATION+'/api/immap/report/getReportsList',
 										data: { 
 											status:'complete'
 										}

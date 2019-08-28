@@ -110,7 +110,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Product',
-									request: $scope.dashboard.getRequestT('total', 'active')
+									request: $scope.dashboard.getRequestDummy('total_product')//$scope.dashboard.getRequestT('total', 'active')
 								}
 							}]
 						}]
@@ -135,7 +135,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Area of Activity',
-									request: $scope.dashboard.getRequest({ indicator: 'organizations' })
+									request: $scope.dashboard.getRequestDummy('area')//$scope.dashboard.getRequest({ indicator: 'organizations' })
 								}
 							}]
 						}, {
@@ -146,7 +146,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Supported Partner',
-									request: $scope.dashboard.getRequest({ indicator: 'projects' })
+									request: $scope.dashboard.getRequestDummy('partner')//$scope.dashboard.getRequest({ indicator: 'projects' })
 								}
 							}]
 						}]
@@ -159,7 +159,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Infographics',
-									request: $scope.dashboard.getRequest({ indicator: 'households_population' })
+									request: $scope.dashboard.getRequestDummy('infographics')//$scope.dashboard.getRequest({ indicator: 'households_population' })
 								}
 							}]
 						}, {
@@ -170,7 +170,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Dashboard Map',
-									request: $scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
+									request: $scope.dashboard.getRequestDummy('dashboard_map')//$scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
 								}
 							}]
 						}, {
@@ -181,7 +181,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Maps',
-									request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
+									request: $scope.dashboard.getRequestDummy('map')//$scope.dashboard.getRequest({ indicator: 'beneficiaries' })
 								}
 							}]
 						}]
@@ -499,7 +499,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Area of Activity',
-									request: $scope.dashboard.getRequest({ indicator: 'organizations' })
+									request: $scope.dashboard.getRequestDummy('area')//$scope.dashboard.getRequest({ indicator: 'organizations' })
 								}
 							}]
 						}, {
@@ -510,7 +510,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Supported Partner',
-									request: $scope.dashboard.getRequest({ indicator: 'projects' })
+									request: $scope.dashboard.getRequestDummy('partner')//$scope.dashboard.getRequest({ indicator: 'projects' })
 								}
 							}]
 						}]
@@ -523,7 +523,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Infographics',
-									request: $scope.dashboard.getRequest({ indicator: 'households_population' })
+									request: $scope.dashboard.getRequestDummy('infographics')//$scope.dashboard.getRequest({ indicator: 'households_population' })
 								}
 							}]
 						}, {
@@ -534,7 +534,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Dashboard Map',
-									request: $scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
+									request: $scope.dashboard.getRequestDummy('dashboard_map')//$scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
 								}
 							}]
 						}, {
@@ -545,7 +545,7 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: 'Maps',
-									request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
+									request: $scope.dashboard.getRequestDummy('map')//$scope.dashboard.getRequest({ indicator: 'beneficiaries' })
 								}
 							}]
 						}]
