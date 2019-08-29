@@ -9,7 +9,8 @@
 </style>
 
 <div style="padding-left: 20px;">
-	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.imo_report.planed_activity.length">
+	<!-- <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.imo_report.planed_activity.length"> -->
+	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.imo_report.planned_products.length">
 		<tr style="font-weight: 600">
 			<td>Partner Category</td>
 			<td>Partner</td>
@@ -19,7 +20,8 @@
 			<td>Number of Products</td>
 			<td ng-if="report.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
-		<tr ng-repeat-start="planned in report.imo_report.planed_activity track by $index" ng-init="$plannedIndex=$index" style="border: 0px">
+		<!-- <tr ng-repeat-start="planned in report.imo_report.planed_activity track by $index" ng-init="$plannedIndex=$index" style="border: 0px"> -->
+		<tr ng-repeat-start="planned in report.imo_report.planned_products track by $index" ng-init="$plannedIndex=$index" style="border: 0px"></tr>
 			<!-- Start here -->
 			<!-- <td>
 				<span e-form="imoform" 
@@ -97,7 +99,7 @@
 				<!-- form -->
 				<form editable-form name="imoform" onshow="report.keydownSaveForm()" ng-show="imoform.$visible"
 				 class="form-buttons form-inline" shown="inserted == planned">
-					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.plannedFormComplete(report.imo_report.planed_activity) || report.imo_report.report_submit"
+					<button type="submit" ng-if="imoform.$visible" ng-disabled="!report.plannedFormComplete(report.imo_report.planned_products) || report.imo_report.report_submit"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
@@ -112,7 +114,7 @@
 						<i class="material-icons">create</i>
 					</button>
 					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="report.removePlanned( $plannedIndex );"
-					 title="Remove" ng-disabled="!report.plannedFormComplete(report.imo_report.planed_activity) || report.imo_report.report_submit">
+					 title="Remove" ng-disabled="!report.plannedFormComplete(report.imo_report.planned_products) || report.imo_report.report_submit">
 						<i class="material-icons">delete</i>
 					</button>
 				</div>
@@ -129,7 +131,7 @@
 											type="text" 
 											class="validate materialize-textarea"
 											name="narative"
-											ng-model="planned.narative"
+											ng-model="planned.narrative"
 											ng-disabled="!imoform.$visible"
 											e-form="imoform"
 											>

@@ -119,15 +119,16 @@
 	</div>
 </div>
 <div style="padding-left: 20px;">
-	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.imo_report.support_partner.length">
+	<!-- <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.imo_report.support_partner.length"> -->
+	<table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.imo_report.products.length">
 		<tr style="font-weight: 600;">
 			<td>File</td>
-			<td>Partner Category</td>
-			<td>Partner</td>
-			<td>Area of Activity</td>
+			<td>Partner Category*</td>
+			<td>Partner*</td>
+			<td>Area of Activity*</td>
 			<!-- <td>Narative of Activity</td> -->
-			<td>Products</td>
-			<td>Detail Product</td>
+			<td>Products*</td>
+			<td>Detail Product*</td>
 			<!-- <td>Colaboration With</td> -->
 			<!-- <td>CollaborationWith Array</td> -->
 			<!-- <td></td> -->
@@ -135,7 +136,8 @@
 			<td ng-if="report.definition.project_status !== 'complete'">{{'edit' | translate}}</td>
 		</tr>
 
-		<tr ng-repeat-start="partner in report.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index" style="border: 0px">
+		<!-- <tr ng-repeat-start="partner in report.imo_report.support_partner track by $index" ng-init="$partnerIndex=$index" style="border: 0px"> -->
+		<tr ng-repeat-start="partner in report.imo_report.products track by $index" ng-init="$partnerIndex=$index" style="border: 0px">
 			<!-- Start here -->
 			<!-- <td>
 				<span ng-if="!partner.fileid">
@@ -171,7 +173,7 @@
 					editable-select="partner.partner_category_id" 
 					e-placeholder="{{'select'|translate}}"
 					e-ng-options="a_t.id as a_t.name for a_t in report.partnerCategory"
-					 e-ng-disabled="!partner.file.length"
+					
 					>
 					{{report.displayPartnerCategory(report,$data,partner)}}
 				</span>
@@ -306,7 +308,7 @@
 				 class="form-buttons form-inline" shown="inserted == partner">
 					<button type="submit" ng-if="imoform.$visible"
 						ng-click="report.saveImoReport(false)" 
-						ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner ) || report.imo_report.report_submit"
+						ng-disabled="!report.supportPartnerFormComplete( report.imo_report.products ) || report.imo_report.report_submit"
 					 class="btn btn-small waves-effect waves-light save" title="Save">
 						<i class="material-icons">save</i>
 					</button>
@@ -323,7 +325,7 @@
 						<i class="material-icons">create</i>
 					</button>
 					<button class="btn btn-small red lighten-2 waves-effect waves-light" ng-click="report.removeSupport( $partnerIndex );"
-					 title="Remove" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.support_partner ) || report.imo_report.report_submit" style="background-color: #be2126">
+					 title="Remove" ng-disabled="!report.supportPartnerFormComplete( report.imo_report.products ) || report.imo_report.report_submit" style="background-color: #be2126">
 						<i class="material-icons">delete</i>
 					</button>
 				</div>
@@ -343,12 +345,45 @@
 					</span>
 				</td>
 		</tr> -->
-		<tr style="border: 0px">
+		<!-- <tr style="border: 0px">
 			<td colspan="100" class=" card" style="padding: 20px">
 				<h6 style="font-weight: 600;">Collaboration With *</h6>
 				<div class="input-field">
 					<md-chips 
 					 ng-model="partner.collabArray" 
+					 md-autocomplete-snap="width" 
+					 md-require-match="true" 
+					 input-aria-label="Collab" 
+					 md-on-add="report.addNewCollab($chip,partner)"
+					 md-on-remove="report.removeCollab($chip,partner)" readonly="!imoform.$visible">
+						<md-autocomplete 
+						 md-selected-item="null" 
+						 md-search-text="report.searchCollab" 
+						 md-items="item in report.searchCollabList(report.searchCollab,$partnerIndex)" 
+						 md-item-text="item.name"
+						 input-aria-describedby="autocompleteTitle" 
+						 placeholder="Add new collab" 
+						 ng-disabled="!imoform.$visible ">
+							<span md-highlight-text="searchText">{{item.name}} </span>
+							<md-not-found>
+								Cannot add,not on the list
+							</md-not-found>
+						</md-autocomplete>
+						<md-chip-template>
+							<span>
+								<strong>{{$chip.name}}</strong>
+							</span>
+						</md-chip-template>
+					</md-chips>
+				</div>
+			</td>
+		</tr> -->
+		<tr style="border: 0px">
+			<td colspan="100" class=" card" style="padding: 20px">
+				<h6 style="font-weight: 600;">Collaboration With </h6>
+				<div class="input-field">
+					<md-chips 
+					 ng-model="partner.collaborators" 
 					 md-autocomplete-snap="width" 
 					 md-require-match="true" 
 					 input-aria-label="Collab" 
@@ -388,7 +423,7 @@
 											type="text" 
 											class="validate materialize-textarea"
 											name="narative"
-											ng-model="partner.narative"
+											ng-model="partner.narrative"
 											ng-disabled="!imoform.$visible"
 											e-form="imoform"
 											>
@@ -397,7 +432,8 @@
 			</td>
 		</tr>
 		<tr style="height: 15px;"></tr>
-		<tr ng-if="partner.file.length">
+		<!-- <tr ng-if="partner.file.length"> -->
+		<tr ng-if="partner.files.length">
 			<td colspan="100" style="padding-left: 15px;padding-right: 15px;margin-top:10px" class="card">
 				<!-- <div class="row">
 									<div ng-if="partner.file.length > 0">
@@ -455,7 +491,8 @@
 						</thead>
 					
 						<tbody>
-							<tr dir-paginate="item in partner.file | itemsPerPage: 6" pagination-id="tableUpload">
+							<!-- <tr dir-paginate="item in partner.file | itemsPerPage: 6" pagination-id="tableUpload"> -->
+							<tr dir-paginate="item in partner.files | itemsPerPage: 6" pagination-id="tableUpload">
 								<td><div class="icon">
 									<i class="material-icons" style="color: {{ngmClusterDocument.extentionColor(item.filename_extension)}};text-align: center">
 										{{ngmClusterDocument.extentionIcon(item.filename_extension)}}</i> {{item.filename| limitTo: 50}}{{item.filenamelength<
@@ -477,7 +514,8 @@
 									</button>
 								</td>
 							</tr>
-							<tr ng-if="partner.file.length > 6">
+							<!-- <tr ng-if="partner.file.length > 6"> -->
+							<tr ng-if="partner.files.length > 6">
 								<td>
 									<dir-pagination-controls pagination-id="tableUpload"></dir-pagination-controls>
 								</td>
@@ -487,9 +525,11 @@
 			</td>
 		</tr>
 		<tr ng-repeat-end>			
-			<td colspan="100" ng-if="partner.file.length">
+			<!-- <td colspan="100" ng-if="partner.file.length"> -->
+				<td colspan="100" ng-if="partner.files.length">
 				<div class="row">
-					<div class="col s12 m2" dir-paginate="item in partner.file  | itemsPerPage: 6" pagination-id="listUpload.id">
+					<!-- <div class="col s12 m2" dir-paginate="item in partner.file  | itemsPerPage: 6" pagination-id="listUpload.id"> -->
+					<div class="col s12 m2" dir-paginate="item in partner.files  | itemsPerPage: 6" pagination-id="listUpload.id">
 						<div class="card border-radius">
 							<div class="card-image waves-effect waves-block waves-light">
 								<img class="activator" ng-src={{ngmClusterDocument.setThumbnailfromGdrive(item.fileid)}}>
@@ -526,7 +566,8 @@
 					</div>					
 				</div>
 				<div class="row">
-					<div class="col s12 m2" ng-if="partner.file.length > 6">
+					<!-- <div class="col s12 m2" ng-if="partner.file.length > 6"> -->
+					<div class="col s12 m2" ng-if="partner.files.length > 6">
 						<dir-pagination-controls pagination-id="listUpload.id"></dir-pagination-controls>
 					</div>
 				</div>				

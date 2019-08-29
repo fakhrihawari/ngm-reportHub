@@ -67,7 +67,7 @@ angular.module('ngmReportHub')
 									// color: 'teal lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title: 'To Do',
+									title: 'Report To Do',
 									icon: 'edit',
 									templateUrl:'/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
@@ -91,7 +91,7 @@ angular.module('ngmReportHub')
 									// color: 'lime lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title:'Complete',
+									title:'Report Completed',
 									icon: 'done',
 									templateUrl: '/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {

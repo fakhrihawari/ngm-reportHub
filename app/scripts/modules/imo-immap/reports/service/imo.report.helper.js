@@ -39,7 +39,8 @@ angular.module('ngmReportHub')
 							position:u.position,
 						}
 
-						var report = { support_partner: [], planed_activity: [], report_status: 'new', report_submit:false}
+						// var report = { support_partner: [], planed_activity: [], report_status: 'new', report_submit:false}
+						var report = { products: [], planned_products: [], report_status: 'new', report_submited: false }
 						report = angular.merge({},user,report);
 
 						// return

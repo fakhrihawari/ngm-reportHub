@@ -224,8 +224,10 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					return $planned.narative_activity_id ? $planned.narative_activity_id : '';
 				},
 				displayNarativeText: function ($data, $partner) {
-					if ($data) { $partner.narative = $data }
-					return $partner.narative ? $partner.narative : '';
+					// if ($data) { $partner.narative = $data }
+					// return $partner.narative ? $partner.narative : '';
+					if ($data) { $partner.narrative = $data }
+					return $partner.narrative ? $partner.narrative : '';
 				},
 				displayProducts: function (report, $data, $partner) {
 					var selected = [];
@@ -305,8 +307,10 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					return $planned.narative_activity_id ? $planned.narative_activity_id : '';
 				},
 				displayPlannedNarativeText:function($data, $planned){
-					if ($data) { $planned.narative = $data; }
-					return $planned.narative ? $planned.narative : '';
+					// if ($data) { $planned.narative = $data; }
+					// return $planned.narative ? $planned.narative : '';
+					if ($data) { $planned.narrative = $data; }
+					return $planned.narrative ? $planned.narrative : '';
 				},
 				displayPlannedProducts: function (report, $data, $planned) {
 					var selected = [];
@@ -326,55 +330,104 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				
 				// add beneficiary
 				addPartner: function () {
+					// $scope.inserted = {
+					// 	file:[],
+					// 	// category_id: '',
+					// 	partner_category_id:'',
+					// 	partner_id: '',
+					// 	narative:'',
+					// 	// area_activity_id:'',
+					// 	// narative_activity_id:'',
+					// 	product_id:'',
+					// 	collab_id:'',
+					// 	number_products:0
+					// };
+					// var length = $scope.report.imo_report.support_partner.length;
+					// if(length<1){
+					// 	$scope.report.imo_report.support_partner.push($scope.inserted);
+					// }else{
+					// 	_copy = angular.copy($scope.report.imo_report.support_partner[length - 1]);
+					// 	$scope.inserted.category_id = _copy.category_id;
+					// 	$scope.inserted.partner_id = _copy.partner_id;
+					// 	$scope.inserted.area_activity_id = _copy.area_activity_id;
+					// 	$scope.inserted.narative_activity_id = _copy.narative_activity_id;
+					// 	$scope.inserted.product_id = _copy.product_id;
+					// 	$scope.inserted.number_products = _copy.number_products;
+					// 	$scope.inserted.collab_id = _copy.collab_id;
+					// 	$scope.report.imo_report.support_partner.push($scope.inserted);
+					// }
 					$scope.inserted = {
-						file:[],
+						files: [],
 						// category_id: '',
-						partner_category_id:'',
+						partner_category_id: '',
 						partner_id: '',
-						narative:'',
+						narrative: '',
 						// area_activity_id:'',
 						// narative_activity_id:'',
-						product_id:'',
-						collab_id:'',
-						number_products:0
+						product_id: '',
+						collab_id: '',
+						number_products: 0
 					};
-					var length = $scope.report.imo_report.support_partner.length;
-					if(length<1){
-						$scope.report.imo_report.support_partner.push($scope.inserted);
-					}else{
-						_copy = angular.copy($scope.report.imo_report.support_partner[length - 1]);
+					var length = $scope.report.imo_report.products.length;
+					if (length < 1) {
+						$scope.report.imo_report.products.push($scope.inserted);
+					} else {
+						_copy = angular.copy($scope.report.imo_report.products[length - 1]);
+						$scope.inserted.category_id = _copy.category_id;
+						$scope.inserted.partner_id = _copy.partner_id;
+						$scope.inserted.area_activity_id = _copy.area_activity_id;
+						$scope.inserted.narrative_activity_id = _copy.narrative_activity_id;
+						$scope.inserted.product_id = _copy.product_id;
+						$scope.inserted.number_products = _copy.number_products;
+						$scope.inserted.collab_id = _copy.collab_id;
+						$scope.report.imo_report.products.push($scope.inserted);
+					}
+				},
+				addPlanned: function () {
+					// $scope.inserted = {
+					// 	// category_id:'',
+					// 	partner_category_id: '',
+					// 	partner_id:'',
+					// 	narative: '',
+					// 	// area_activity_id: '',
+					// 	// narative_activity_id: '',
+					// 	product_id: '',
+					// 	number_products: 0 };
+					// var length = $scope.report.imo_report.planed_activity.length;
+					// if (length < 1) {
+					// 	$scope.report.imo_report.planed_activity.push($scope.inserted);
+					// } else {
+					// 	_copy=angular.copy($scope.report.imo_report.planed_activity[length - 1]);
+					// 	$scope.inserted.category_id= _copy.category_id;
+					// 	$scope.inserted.partner_id= 						_copy.partner_id;
+					// 	$scope.inserted.area_activity_id= _copy.area_activity_id;
+					// 	$scope.inserted.narative_activity_id= _copy.narative_activity_id;
+					// 	$scope.inserted.product_id= _copy.product_id;
+					// 	$scope.inserted.number_products= _copy.number_products;
+					// 	$scope.report.imo_report.planed_activity.push($scope.inserted);
+					// }
+					$scope.inserted = {
+						// category_id:'',
+						partner_category_id: '',
+						partner_id: '',
+						narrative: '',
+						// area_activity_id: '',
+						// narative_activity_id: '',
+						product_id: '',
+						number_products: 0
+					};
+					var length = $scope.report.imo_report.planned_products.length;
+					if (length < 1) {
+						$scope.report.imo_report.planned_products.push($scope.inserted);
+					} else {
+						_copy = angular.copy($scope.report.imo_report.planned_products[length - 1]);
 						$scope.inserted.category_id = _copy.category_id;
 						$scope.inserted.partner_id = _copy.partner_id;
 						$scope.inserted.area_activity_id = _copy.area_activity_id;
 						$scope.inserted.narative_activity_id = _copy.narative_activity_id;
 						$scope.inserted.product_id = _copy.product_id;
 						$scope.inserted.number_products = _copy.number_products;
-						$scope.inserted.collab_id = _copy.collab_id;
-						$scope.report.imo_report.support_partner.push($scope.inserted);
-					}
-				},
-				addPlanned: function () {
-					$scope.inserted = {
-						// category_id:'',
-						partner_category_id: '',
-						partner_id:'',
-						narative: '',
-						// area_activity_id: '',
-						// narative_activity_id: '',
-						product_id: '',
-						number_products: 0 };
-					var length = $scope.report.imo_report.planed_activity.length;
-					if (length < 1) {
-						$scope.report.imo_report.planed_activity.push($scope.inserted);
-					} else {
-						_copy=angular.copy($scope.report.imo_report.planed_activity[length - 1]);
-						$scope.inserted.category_id= _copy.category_id;
-						$scope.inserted.partner_id= 						_copy.partner_id;
-						$scope.inserted.area_activity_id= _copy.area_activity_id;
-						$scope.inserted.narative_activity_id= _copy.narative_activity_id;
-						$scope.inserted.product_id= _copy.product_id;
-						$scope.inserted.number_products= _copy.number_products;
-						$scope.report.imo_report.planed_activity.push($scope.inserted);
+						$scope.report.imo_report.planned_products.push($scope.inserted);
 					}
 				},
 
@@ -424,10 +477,13 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				},
 				reportFormComplete:function(imo){
 					var disabled = true
-					if ($scope.report.supportPartnerFormComplete(imo.support_partner) && $scope.report.plannedFormComplete(imo.planed_activity) && imo.rating){						
-						disabled= false
-					}
+					// if ($scope.report.supportPartnerFormComplete(imo.support_partner) && $scope.report.plannedFormComplete(imo.planed_activity) && imo.rating){						
+					// 	disabled= false
+					// }
 					
+					if ($scope.report.supportPartnerFormComplete(imo.products) && $scope.report.plannedFormComplete(imo.planned_products) && imo.rating) {
+						disabled = false
+					}
 					return disabled;
 
 				},
@@ -454,11 +510,19 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						// 	$data.number_products >= 0) {
 						// 	disabled = false;
 						// }
-						if ($data.file.length && $data.partner_category_id &&
+						// if ($data.file.length && $data.partner_category_id &&
+						// 	$data.partner_id &&
+						// 	$data.area_id &&
+						// 	$data.narative &&
+						// 	$data.collabArray.length &&
+						// 	$data.product_id &&
+						// 	$data.number_products >= 0) {
+						// 	disabled = false;
+						// }
+						if ( $data.partner_category_id &&
 							$data.partner_id &&
 							$data.area_id &&
-							$data.narative &&
-							$data.collabArray.length &&
+							$data.narrative &&
 							$data.product_id &&
 							$data.number_products >= 0) {
 							disabled = false;
@@ -476,7 +540,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						if ($data.partner_category_id &&
 							$data.partner_id &&
 							$data.area_id &&
-							$data.narative &&
+							$data.narrative &&
 							$data.product_id &&
 							$data.number_products >= 0) {
 							disabled = false;
@@ -491,10 +555,25 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					}
 				},
 				removeSupport: function ($index){
-					if (!$scope.report.imo_report.support_partner[$index].id) {
-						$scope.report.imo_report.support_partner.splice($index, 1);
-					}else{
-						var id = $scope.report.imo_report.support_partner[$index].id;
+					// if (!$scope.report.imo_report.support_partner[$index].id) {
+					// 	$scope.report.imo_report.support_partner.splice($index, 1);
+					// }else{
+					// 	var id = $scope.report.imo_report.support_partner[$index].id;
+					// 	// $http({
+					// 	// 	method: 'POST',
+					// 	// 	url: ngmAuth.LOCATION + '/api/cluster/report/removeBeneficiary',
+					// 	// 	data: { id: id }
+					// 	// }).success(function (result) {
+					// 	// 	if (result.err) { Materialize.toast('Error! Please correct the ROW and try again', 6000, 'error'); }
+					// 	// 	if (!result.err) { $scope.report.saveImoReport(false); }
+					// 	// }).error(function (err) {
+					// 	// 	Materialize.toast('Error!', 6000, 'error');
+					// 	// });
+					// }
+					if (!$scope.report.imo_report.products[$index].id) {
+						$scope.report.imo_report.products.splice($index, 1);
+					} else {
+						var id = $scope.report.imo_report.products[$index].id;
 						// $http({
 						// 	method: 'POST',
 						// 	url: ngmAuth.LOCATION + '/api/cluster/report/removeBeneficiary',
@@ -508,10 +587,25 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					}
 				},
 				removePlanned: function ($index) {
-					if (!$scope.report.imo_report.planed_activity[$index].id) {
-						$scope.report.imo_report.planed_activity.splice($index, 1);
+					// if (!$scope.report.imo_report.planed_activity[$index].id) {
+					// 	$scope.report.imo_report.planed_activity.splice($index, 1);
+					// } else {
+					// 	var id = $scope.report.imo_report.planed_activity[$index].id;
+					// 	// $http({
+					// 	// 	method: 'POST',
+					// 	// 	url: ngmAuth.LOCATION + '/api/cluster/report/removeBeneficiary',
+					// 	// 	data: { id: id }
+					// 	// }).success(function (result) {
+					// 	// 	if (result.err) { Materialize.toast('Error! Please correct the ROW and try again', 6000, 'error'); }
+					// 	// 	if (!result.err) { $scope.report.saveImoReport(false); }
+					// 	// }).error(function (err) {
+					// 	// 	Materialize.toast('Error!', 6000, 'error');
+					// 	// });
+					// }
+					if (!$scope.report.imo_report.planned_products[$index].id) {
+						$scope.report.imo_report.planned_products.splice($index, 1);
 					} else {
-						var id = $scope.report.imo_report.planed_activity[$index].id;
+						var id = $scope.report.imo_report.planned_products[$index].id;
 						// $http({
 						// 	method: 'POST',
 						// 	url: ngmAuth.LOCATION + '/api/cluster/report/removeBeneficiary',
@@ -587,7 +681,8 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 							$scope.dummy = data;
 							data = data.slice($scope.file_uploaded);
 							data.forEach(element => {
-								$scope.report.imo_report.support_partner[$scope.setRowFile].file.push(element)
+								// $scope.report.imo_report.support_partner[$scope.setRowFile].file.push(element)
+								$scope.report.imo_report.products[$scope.setRowFile].files.push(element)
 							});
 
 						});
@@ -595,9 +690,14 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					
 				},
 				removeFile:function(){
-					$scope.report.imo_report.support_partner[$scope.removeFileRow].file.forEach((el,i)=>{
-						if (el.fileid=== $scope.removeFileId){
-							$scope.report.imo_report.support_partner[$scope.removeFileRow].file.splice(i,1);
+					// $scope.report.imo_report.support_partner[$scope.removeFileRow].file.forEach((el,i)=>{
+					// 	if (el.fileid=== $scope.removeFileId){
+					// 		$scope.report.imo_report.support_partner[$scope.removeFileRow].file.splice(i,1);
+					// 	}
+					// })
+					$scope.report.imo_report.products[$scope.removeFileRow].files.forEach((el, i) => {
+						if (el.fileid === $scope.removeFileId) {
+							$scope.report.imo_report.products[$scope.removeFileRow].files.splice(i, 1);
 						}
 					})
 				},
@@ -621,23 +721,30 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				// chips
 				searchCollab:null,
 				searchCollabList: function (query,$index) {
-					if (!$scope.report.imo_report.support_partner.collabArray) {
-						$scope.report.imo_report.support_partner[$index].collabArray = [];
+					// if (!$scope.report.imo_report.support_partner.collabArray) {
+					// 	$scope.report.imo_report.support_partner[$index].collabArray = [];
+					// }
+					// return $scope.report.collab.filter(function (el) {
+					// 	return el.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+					// });
+					if (!$scope.report.imo_report.products[$index].collaborators) {
+						$scope.report.imo_report.products[$index].collaborators = [];
 					}
 					return $scope.report.collab.filter(function (el) {
 						return el.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
 					});
 				},
 				addNewCollab: function (chip,a) {
-					// console.log(chip,a)
+					console.log(chip,a)
 				},
 				removeCollab:function(chip,a){
-					// console.log(chip,a)
+					console.log(chip,a)
 				}
 			}
 
 			// init project
 			$scope.report.init();
+			console.log($scope.report.imo_report);
 			// console.log($scope.report.imo_report.support_partner[0]);
 			// $scope.report.getDocument()
 			$scope.$on('refresh:listUpload', function (event, args) {
