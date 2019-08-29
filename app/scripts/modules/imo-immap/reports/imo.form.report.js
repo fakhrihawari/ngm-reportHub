@@ -441,7 +441,9 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 						// format date on selection
 						// $imo.month_date = moment(new Date($imo.month)).format('YYYY-MM-DD');
 						// $imo.month = moment(new Date($imo.month)).format('M');
+						$imo.reporting_period = moment($imo.report_month).startOf('month').format('YYYY-MM-DD');
 						$imo.report_date = moment(new Date($imo.report_month)).format('YYYY-MM-DD');
+						$imo.report_year = moment(new Date($imo.report_month)).format('YYYY');
 						$imo.report_month = moment(new Date($imo.report_month)).format('M');
 						$scope.report.openReport($imo.report_month,$imo.report_date);
 					}

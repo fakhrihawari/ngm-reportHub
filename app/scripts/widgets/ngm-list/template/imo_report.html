@@ -70,10 +70,10 @@
 			 pagination-id="list.id" style="padding-top:20px;">
 					<a href="#/immap/reporting/report/{{item.id}}" title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
 						<i class="material-icons circle white teal-text">edit</i>
-						<span class="title">{{list.monthlyTitleFormat(item.month_date)}}</span>
-						<span class="right" style="padding-top:20px; padding-right:40px; color:#616161;">Report Created at: {{list.dueFormat(item.month_date)}}</span>
+						<span class="title">{{list.monthlyTitleFormat(item.reporting_period)}}</span>
+						<span class="right" style="padding-top:20px; padding-right:40px; color:#616161;">Report Created at: {{list.dueFormat(item.reporting_period)}}</span>
 						<p align="justify" style="padding:10px 0px 10px 0px;">
-							Monthly Progress for {{list.monthlyTitleFormat(item.month_date)}}
+							Monthly Progress for {{list.monthlyTitleFormat(item.reporting_period)}}
 						</p>
 						<a href="#/immap/reporting/report/{{item.id}}" title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report"
 						 class="secondary-content">

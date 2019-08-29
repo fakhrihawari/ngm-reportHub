@@ -141,6 +141,14 @@ angular.module('ngmReportHub')
 					url: ngmAuth.LOCATION + '/api/immap/report/getProductDummyIndicator',
 					data: {
 						indicator: indicator,
+						sector: $scope.report.sector,
+						area: $scope.report.area,
+						partner: $scope.report.partner,
+						person_user: $scope.report.person_user,
+						email: $scope.report.email,
+						start_date: $scope.report.start_date,
+						end_date: $scope.report.end_date,
+						type: $scope.report.type
 					}
 				}
 			},
