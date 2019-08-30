@@ -120,6 +120,10 @@ angular.module('ngm.widget.highchart', ['ngm.provider'])
 
                 // set data with options.foo to enable animation
 								$scope.highchart.chartConfig.series[key].data = data.data;
+								if ($scope.highchart.chartConfig.options.chart.type === 'bar'){
+									$scope.highchart.chartConfig.series = data.data;
+									$scope.highchart.chartConfig.xAxis.categories = data.categories ? data.categories:[];
+								}
                 $scope.highchart.chartConfig.options.foo = Math.random();
 								
                 // set labels
@@ -149,7 +153,7 @@ angular.module('ngm.widget.highchart', ['ngm.provider'])
 
       // set data
       $scope.highchart.update();
-			console.log($scope.highchart);
+			
 
   }
 

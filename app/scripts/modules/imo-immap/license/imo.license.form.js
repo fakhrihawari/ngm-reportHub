@@ -193,8 +193,14 @@ angular.module('ngm.widget.license.form', ['ngm.provider'])
 						// remove on server 
 					}
 				},
-
-
+				checkExpiredDate:function(license){
+					currentDate = moment().format('YYYY-MM-DD')
+					console.log("EXpired", license.expired_date < currentDate)
+					if( (license.expired_date < currentDate) && (license.status === 'ACTIVE')){
+						return true
+					}
+					return false;
+				},
 
 
 				save: function () {

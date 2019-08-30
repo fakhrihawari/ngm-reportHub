@@ -16,6 +16,11 @@
 	.modal-content .ng-table-pager {
 		display: none;
 	}
+	.expired{
+	/* color: #ffffff !important; */
+	color: #959595 !important;
+	font-weight: 500;
+}
 </style>
 <div id="manage-license" class="modal" style="width:40%">
 	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
@@ -112,16 +117,16 @@
 					<div ng-if="data.length">
 						<table class="centered highlight responsive-table" ng-table="table.tableParams">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
-								<td data-title="'country_mayus'|translate" sortable="'admin0name'">
+								<td data-title="'country_mayus'|translate" sortable="'admin0name'" ng-class="{'expired':table.checkExpiredDate(row)}">
 									{{ row.admin0name }}
 								</td>
-								<td data-title="'organization' | translate" sortable="'organization'">
+								<td data-title="'organization' | translate" sortable="'organization'" ng-class="{'expired':table.checkExpiredDate(row)}">
 									{{ row.organization }}
 								</td>
-								<td data-title="'name_mayus' | translate" sortable="'name'">
+								<td data-title="'name_mayus' | translate" sortable="'name'" ng-class="{'expired':table.checkExpiredDate(row)}">
 									{{ row.name }}
 								</td>
-								<td data-title="'position'|translate" sortable="'position'">
+								<td data-title="'position'|translate" sortable="'position'" ng-class="{'expired':table.checkExpiredDate(row)}">
 
 									{{ row.position }}
 								</td>
@@ -129,19 +134,22 @@
 									{{ row.cluster }}
 								</td> -->
 								<td data-title="'Active'" sortable="'start_date'">
-									<div class="btn">
+									<div class="btn" ng-disabled="table.checkExpiredDate(row)">
 										{{ row.start_date  | date:'mediumDate' }}
 									</div>
 								</td>
 								<td data-title="'Expired'" sortable="'expired_date'">
-									<div  class="btn" style="background-color: #b71c1c;">{{ row.expired_date  | date:'mediumDate' }}</div>
+									<div  class="btn" style="background-color: #b71c1c;" ng-disabled="table.checkExpiredDate(row)">{{ row.expired_date  | date:'mediumDate' }}</div>
 									
 								</td>
 								<!-- <td data-title="'username'|translate" sortable="'username'">
 									{{ row.username }}
 								</td> -->
-								<td data-title="'License'" sortable="'license_name'">
+								<td data-title="'License'" sortable="'license_name'" ng-class="{'expired':table.checkExpiredDate(row)}">
 									{{row.license_name}}
+									<div style="color: #be2126;font-weight: 500" ng-if="table.checkExpiredDate(row)">
+										License is Expired!
+									</div>
 								</td>
 								<td data-title="'Manage'">
 									<div class="btn" ng-click="table.openModal('manage-license');table.getUser(row)">

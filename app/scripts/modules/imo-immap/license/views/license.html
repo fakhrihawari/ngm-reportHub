@@ -4,6 +4,15 @@
 		left: 50% !important;
 		transform: translateX(-50%) !important;
 	}
+.expired{
+	/* color: #ffffff !important; */
+	color: #959595 !important;
+	font-weight: 500;
+}
+.expired-backgroundrow{
+		/* background-color: #e9e9e9; */
+		background-color: #fff;
+}
 </style>
 <div id="remove-license" class="modal">
 	<div class="modal-content">
@@ -49,21 +58,25 @@
 										<td>Status</td>
 										<td>Edit</td>
 									</tr>
-									<tr ng-repeat="l in project.license track by $index">
-										<td><span><i class="material-icons" style="color: #be2126">insert_drive_file</i></span></td>
+									<tr ng-repeat="l in project.license track by $index" ng-class="{ 'expired-backgroundrow' : project.checkExpiredDate(l)}">
+										<td><span><i class="material-icons" style="color: #be2126" ng-class="{ 'expired' : project.checkExpiredDate(l)}">insert_drive_file</i></span></td>
 										<td>
 											<!-- project_donor_id -->
 											<span e-form="licenseform" 
 												e-name="category_id" 
 												editable-select="l.license_id" 
 												e-placeholder="{{'select'|translate}}"
-												e-ng-options="a_t.id as a_t.name for a_t in project.license_list">
+												e-ng-options="a_t.id as a_t.name for a_t in project.license_list" ng-class="{ 'expired' : project.checkExpiredDate(l)}">
 												{{ project.displayLicense( project,$data, l ) }}
 											</span>
+											<div style="color: #be2126;font-weight: 500" ng-if="project.checkExpiredDate(l)">
+												License is Expired!
+											</div>
 										</td>
 										<td>
 											<!-- project_donor_id -->
 											<input ngm-date
+											 ng-class="{ 'expired' : project.checkExpiredDate(l)}"
                           type="text"
                           style="color:rgba(0, 0, 0, 0.87);margin-bottom:0px;border-bottom:0px;"
                           ng-model="l.start_date"
@@ -75,6 +88,7 @@
 										<td>
 											<!-- project_donor_id -->
 												<input ngm-date
+												 ng-class="{ 'expired' : project.checkExpiredDate(l)}"
                           type="text"
                           style="color:rgba(0, 0, 0, 0.87);margin-bottom:0px;border-bottom:0px;"
                           ng-model="l.expired_date"
@@ -86,7 +100,8 @@
 										</td>
 										<td>
 											<!-- project_donor_id -->
-											<span e-form="licenseform" 
+											<span e-form="licenseform"
+											 ng-class="{ 'expired' : project.checkExpiredDate(l)}"
 												e-name="category_id" 
 												editable-select="l.status" 
 												e-placeholder="{{'select'|translate}}"

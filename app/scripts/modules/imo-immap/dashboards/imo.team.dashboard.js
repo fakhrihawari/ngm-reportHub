@@ -542,17 +542,17 @@ angular.module('ngmReportHub')
 									},
 									xAxis: {
 										categories: [
-											'Parner A',
-											'Parner AB',
-											'Parner AC',
-											'Parner AD',
-											'Parner AE',
-											'Parner AF',
-											'Parner AG',
-											'Parner AH',
-											'Parner AI',
-											'Parner AJ',
-											'Parner AK'
+											// 'Parner A',
+											// 'Parner AB',
+											// 'Parner AC',
+											// 'Parner AD',
+											// 'Parner AE',
+											// 'Parner AF',
+											// 'Parner AG',
+											// 'Parner AH',
+											// 'Parner AI',
+											// 'Parner AJ',
+											// 'Parner AK'
 										],
 										labels: {
 											rotation: 0,
@@ -585,18 +585,19 @@ angular.module('ngmReportHub')
 									// 		8
 									// 	]
 									// }]
-									series:[
-										{
-											name:'Map',
-											color: '#7cb5ec',
-											data: [10,19,11,12,15,21,5,25,40,31,8]
-										},
-										{
-											name: 'Dashboard',
-											color: '#be2126',
-											data: [5, 10, 4, 6, 7, 10, 2, 12, 20, 15, 4]
-										}
-									]
+									series: [{ request: $scope.report.getRequestDummy('bar_chart_partner') }]
+									// series:[
+									// 	{
+									// 		name:'Map',
+									// 		color: '#7cb5ec',
+									// 		data: [10,19,11,12,15,21,5,25,40,31,8]
+									// 	},
+									// 	{
+									// 		name: 'Dashboard',
+									// 		color: '#be2126',
+									// 		data: [5, 10, 4, 6, 7, 10, 2, 12, 20, 15, 4]
+									// 	}
+									// ]
 								}
 							}
 						}]
@@ -641,17 +642,17 @@ angular.module('ngmReportHub')
 										},
 										xAxis: {
 											categories: [
-												'User A',
-												'User AB',
-												'User AC',
-												'User AD',
-												'User AE',
-												'User AF',
-												'User AG',
-												'User AH',
-												'User AI',
-												'User AJ',
-												'User AK'
+												// 'User A',
+												// 'User AB',
+												// 'User AC',
+												// 'User AD',
+												// 'User AE',
+												// 'User AF',
+												// 'User AG',
+												// 'User AH',
+												// 'User AI',
+												// 'User AJ',
+												// 'User AK'
 											],
 											labels: {
 												rotation: 0,
@@ -684,17 +685,17 @@ angular.module('ngmReportHub')
 										// 		8
 										// 	]
 										// }]
-										series: [
-											{
-												name: 'Map',
-												color: '#7cb5ec',
-												data: [10, 19, 11, 12, 15, 21, 5, 25, 40, 31, 8]
-											},
-											{
-												name: 'Dashboard',
-												color: '#be2126',
-												data: [5, 10, 4, 6, 7, 10, 2, 12, 20, 15, 4]
-											}
+										series: [{request: $scope.report.getRequestDummy('bar_chart_user')}
+											// {
+											// 	name: 'Map',
+											// 	color: '#7cb5ec',
+											// 	data: [10, 19, 11, 12, 15, 21, 5, 25, 40, 31, 8]
+											// },
+											// {
+											// 	name: 'Dashboard',
+											// 	color: '#be2126',
+											// 	data: [5, 10, 4, 6, 7, 10, 2, 12, 20, 15, 4]
+											// }
 										]
 									}
 								}

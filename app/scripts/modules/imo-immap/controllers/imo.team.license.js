@@ -116,6 +116,13 @@ angular.module('ngmReportHub')
 									},
 									dummyListStatus: ['ACTIVE', 'REQUESTED', 'TERMINATED'],
 									request: $scope.dashboard.getLicenseRequest('active'),
+									checkExpiredDate: function (license) {
+										currentDate = moment().format('YYYY-MM-DD')
+										if ((license.expired_date < currentDate) && (license.status === 'ACTIVE')) {
+											return true
+										}
+										return false;
+									},
 								}
 							}]
 						}]
