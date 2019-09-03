@@ -134,12 +134,12 @@
 									{{ row.cluster }}
 								</td> -->
 								<td data-title="'Active'" sortable="'start_date'">
-									<div class="btn" ng-disabled="table.checkExpiredDate(row)">
+									<div ng-class="{'expired':table.checkExpiredDate(row)}" ng-disabled="table.checkExpiredDate(row)">
 										{{ row.start_date  | date:'mediumDate' }}
 									</div>
 								</td>
 								<td data-title="'Expired'" sortable="'expired_date'">
-									<div  class="btn" style="background-color: #b71c1c;" ng-disabled="table.checkExpiredDate(row)">{{ row.expired_date  | date:'mediumDate' }}</div>
+									<div ng-class="{'expired':table.checkExpiredDate(row)}" ng-disabled="table.checkExpiredDate(row)">{{ row.expired_date  | date:'mediumDate' }}</div>
 									
 								</td>
 								<!-- <td data-title="'username'|translate" sortable="'username'">
