@@ -72,8 +72,8 @@
 									</span>
 								</td>							
 								
-								<td data-title="'Suport partner'" sortable="">
-									{{ row.support_partner.length }}
+								<td data-title="'Products #'" sortable="">
+									{{ table.sumProducts(row.products,'number_products') }}
 								</td>
 								<td data-title="'Go to Report'" sortable="'id'">
 									<a href="#/immap/reporting/report/{{row.id}}" target="_blank">

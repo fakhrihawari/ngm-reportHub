@@ -67,14 +67,15 @@ angular.module('ngmReportHub')
 									// color: 'teal lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title: 'Report To Do',
+									title: 'Reports To Do',
 									icon: 'edit',
 									templateUrl:'/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
 										url: ngmImoAuth.LOCATION+'/api/immap/report/getReportsList',
 										data: {
-											status:'todo'
+											status:'todo',
+											list: true,
 										}
 									}
 								}
@@ -91,14 +92,15 @@ angular.module('ngmReportHub')
 									// color: 'lime lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title:'Report Completed',
+									title:'Reports Completed',
 									icon: 'done',
 									templateUrl: '/scripts/widgets/ngm-list/template/imo_report.html',
 									request: {
 										method: 'POST',
 										url: ngmImoAuth.LOCATION+'/api/immap/report/getReportsList',
 										data: { 
-											status:'complete'
+											status:'complete',
+											list: true,
 										}
 									}
 								}

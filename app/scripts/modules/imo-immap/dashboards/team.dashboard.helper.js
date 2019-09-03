@@ -29,9 +29,66 @@ angular.module('ngmReportHub')
 					setParam:function(param){
 						dashboardImoStatHelper.parameter = param;
 					},
+					// :country/:partner_category/:partner/:area/:type/:user/:email/:start_date/:end_date
 					// get Menu Country
+					getCountryMenu: function (url,country) {
+						sectorRows = [{
+							'title': 'ALL',
+							'param': 'country',
+							'active': 'all',
+							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+							'href': url + '/all'
+								+ '/' + dashboardImoStatHelper.parameter.partner_category
+								+ '/' + dashboardImoStatHelper.parameter.partner
+								+ '/' + dashboardImoStatHelper.parameter.area
+								+ '/' + dashboardImoStatHelper.parameter.type
+								+ '/' + dashboardImoStatHelper.parameter.person_user
+								+ '/' + dashboardImoStatHelper.parameter.email
+								+ '/' + dashboardImoStatHelper.parameter.start_date
+								+ '/' + dashboardImoStatHelper.parameter.end_date
+						}];
+						angular.forEach(country, function (s, i) {
+							sectorRows.push({
+								'title': s.admin0name,
+								'param': 'country',
+								'active': s.admin0pcode,
+								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+								'href': url + '/' + s.admin0pcode
+									+ '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner
+									+ '/' + dashboardImoStatHelper.parameter.area
+									+ '/' + dashboardImoStatHelper.parameter.type
+									+ '/' + dashboardImoStatHelper.parameter.person_user
+									+ '/' + dashboardImoStatHelper.parameter.email
+									+ '/' + dashboardImoStatHelper.parameter.start_date
+									+ '/' + dashboardImoStatHelper.parameter.end_date
+							})
+						})
+						var sector = {
+							'search': true,
+							'id': 'search-sector',
+							'icon': 'donut_large',
+							'title': 'Country',
+							'class': 'teal lighten-1 white-text',
+							'rows': sectorRows
+						};
+						return sector
+					},
 					getSectorMenu: function (url) {						
-						sectorRows=[];
+						sectorRows=[{
+								'title':'ALL',
+								'param':'sector',
+								'active':'all',
+								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+								'href': url + '/' + dashboardImoStatHelper.parameter.sector 
+								+ '/all' 
+								+ '/' + dashboardImoStatHelper.parameter.type 
+								+ '/' + dashboardImoStatHelper.parameter.partner 
+								+ '/' + dashboardImoStatHelper.parameter.person_user 
+								+ '/' + dashboardImoStatHelper.parameter.email 
+								+ '/' + dashboardImoStatHelper.parameter.start_date 
+								+ '/' + dashboardImoStatHelper.parameter.end_date
+							}];
 						angular.forEach(['a'],function(s,i){
 							sectorRows.push({
 								'title':'ALL',
@@ -58,6 +115,49 @@ angular.module('ngmReportHub')
 						};
 						return sector
 					},
+					getPartnerCategoryMenu: function (url,partner_category) {
+						sectorRows = [{
+							'title': 'ALL',
+							'param': 'partner_category',
+							'active': 'all',
+							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+							'href': url + '/' + dashboardImoStatHelper.parameter.country
+								+ '/all'
+								+ '/' + dashboardImoStatHelper.parameter.partner
+								+ '/' + dashboardImoStatHelper.parameter.area
+								+ '/' + dashboardImoStatHelper.parameter.type
+								+ '/' + dashboardImoStatHelper.parameter.person_user
+								+ '/' + dashboardImoStatHelper.parameter.email
+								+ '/' + dashboardImoStatHelper.parameter.start_date
+								+ '/' + dashboardImoStatHelper.parameter.end_date
+						}];
+						angular.forEach(partner_category, function (pc, i) {
+							sectorRows.push({
+								'title': pc.partner_category_name,
+								'param': 'partner_category',
+								'active': pc.partner_category_id,
+								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+								'href': url + '/' + dashboardImoStatHelper.parameter.country
+									+ '/' + pc.partner_category_id
+									+ '/' + dashboardImoStatHelper.parameter.partner
+									+ '/' + dashboardImoStatHelper.parameter.area
+									+ '/' + dashboardImoStatHelper.parameter.type
+									+ '/' + dashboardImoStatHelper.parameter.person_user
+									+ '/' + dashboardImoStatHelper.parameter.email
+									+ '/' + dashboardImoStatHelper.parameter.start_date
+									+ '/' + dashboardImoStatHelper.parameter.end_date
+							})
+						})
+						var sector = {
+							'search': true,
+							'id': 'search-sector',
+							'icon': 'donut_large',
+							'title': 'Partner Category',
+							'class': 'teal lighten-1 white-text',
+							'rows': sectorRows
+						};
+						return sector
+					},
 					// get Menu Region 
 					getAreaMenu: function (url,area) {
 						areaRows = [{
@@ -65,26 +165,29 @@ angular.module('ngmReportHub')
 							'param': 'area',
 							'active': 'all',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': url + '/' + dashboardImoStatHelper.parameter.sector
+							'href': url + '/'+dashboardImoStatHelper.parameter.partner_category
+								+ '/' + dashboardImoStatHelper.parameter.partner_category
+								+ '/' + dashboardImoStatHelper.parameter.partner
 								+ '/all'
 								+ '/' + dashboardImoStatHelper.parameter.type
-								+ '/' + dashboardImoStatHelper.parameter.partner
 								+ '/' + dashboardImoStatHelper.parameter.person_user
 								+ '/' + dashboardImoStatHelper.parameter.email
 								+ '/' + dashboardImoStatHelper.parameter.start_date
-								+ '/' + dashboardImoStatHelper.parameter.end_date
+								+ '/' + dashboardImoStatHelper.parameter.end_date  
 						}];
-						console.log(areaRows[0].href)
+						
 						angular.forEach(area, function (a,i) {
+							console.log(a)
 							areaRows.push({
 								'title': a.area_name,
 								'param': 'area',
 								'active': a.area_id,
 								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-								'href': url + '/' + dashboardImoStatHelper.parameter.sector
+								'href': url +'/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner
 									+ '/' + a.area_id
 									+ '/' + dashboardImoStatHelper.parameter.type
-									+ '/' + dashboardImoStatHelper.parameter.partner
 									+ '/' + dashboardImoStatHelper.parameter.person_user
 									+ '/' + dashboardImoStatHelper.parameter.email
 									+ '/' + dashboardImoStatHelper.parameter.start_date
@@ -111,10 +214,11 @@ angular.module('ngmReportHub')
 								'param': 'area',
 								'active': sa.subarea_id,
 								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-								'href': url + '/' + dashboardImoStatHelper.parameter.sector
+								'href': url + '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner
 									+ '/' + dashboardImoStatHelper.parameter.area
 									+ '/' + dashboardImoStatHelper.parameter.type
-									+ '/' + dashboardImoStatHelper.parameter.partner
 									+ '/' + dashboardImoStatHelper.parameter.person_user
 									+ '/' + dashboardImoStatHelper.parameter.email
 									+ '/' + dashboardImoStatHelper.parameter.start_date
@@ -141,10 +245,11 @@ angular.module('ngmReportHub')
 							'param': 'type',
 							'active': 'all',
 							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-							'href': url + '/' + dashboardImoStatHelper.parameter.sector
+							'href': url + '/' + dashboardImoStatHelper.parameter.partner_category
+								+ '/' + dashboardImoStatHelper.parameter.partner_category
+								+ '/' + dashboardImoStatHelper.parameter.partner
 								+ '/' + dashboardImoStatHelper.parameter.area
 								+ '/all'
-								+ '/' + dashboardImoStatHelper.parameter.partner
 								+ '/' + dashboardImoStatHelper.parameter.person_user
 								+ '/' + dashboardImoStatHelper.parameter.email
 								+ '/' + dashboardImoStatHelper.parameter.start_date
@@ -156,10 +261,11 @@ angular.module('ngmReportHub')
 								'param': 'type',
 								'active': t.product_id,
 								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-								'href': url + '/' + dashboardImoStatHelper.parameter.sector
+								'href': url + '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner
 									+ '/' + dashboardImoStatHelper.parameter.area
 									+ '/' + t.product_id
-									+ '/' + dashboardImoStatHelper.parameter.partner
 									+ '/' + dashboardImoStatHelper.parameter.person_user
 									+ '/' + dashboardImoStatHelper.parameter.email
 									+ '/' + dashboardImoStatHelper.parameter.start_date
@@ -176,18 +282,33 @@ angular.module('ngmReportHub')
 						};
 						return type
 					},
-					getPartnerMenu: function (url) {
-						partnerRows = [];
-						angular.forEach(['a'], function (p,i) {
-							partnerRows.push({
+					getPartnerMenu: function (url,partner) {
+						partnerRows = [{
 								'title': 'ALL',
 								'param': 'partner',
 								'active': 'all',
 								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-								'href': url + '/' + dashboardImoStatHelper.parameter.sector
+								'href': url + '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/all'
 									+ '/' + dashboardImoStatHelper.parameter.area
 									+ '/' + dashboardImoStatHelper.parameter.type
-									+ '/' + p
+									+ '/' + dashboardImoStatHelper.parameter.person_user
+									+ '/' + dashboardImoStatHelper.parameter.email
+									+ '/' + dashboardImoStatHelper.parameter.start_date
+									+ '/' + dashboardImoStatHelper.parameter.end_date
+							}];
+						angular.forEach(partner, function (p,i) {
+							partnerRows.push({
+								'title':  p.partner,
+								'param': 'partner',
+								'active': p.partner_id,
+								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+								'href': url + '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + p.partner_id
+									+ '/' + dashboardImoStatHelper.parameter.area
+									+ '/' + dashboardImoStatHelper.parameter.type
 									+ '/' + dashboardImoStatHelper.parameter.person_user
 									+ '/' + dashboardImoStatHelper.parameter.email
 									+ '/' + dashboardImoStatHelper.parameter.start_date
@@ -204,19 +325,35 @@ angular.module('ngmReportHub')
 						};
 						return partner
 					},
-					getUserMenu: function (url) {
-						userRows = [];
-						angular.forEach(['a'], function (u,i) {
+					getUserMenu: function (url,user) {
+						userRows = [{
+							'title': 'ALL',
+							'param': 'person_user',
+							'active': 'all',
+							'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+							'href': url + '/' + dashboardImoStatHelper.parameter.partner_category
+								+ '/' + dashboardImoStatHelper.parameter.partner_category
+								+ '/' + dashboardImoStatHelper.parameter.partner
+								+ '/' + dashboardImoStatHelper.parameter.area
+								+ '/' + dashboardImoStatHelper.parameter.type
+								+ '/all'
+								+ '/' + dashboardImoStatHelper.parameter.email
+								+ '/' + dashboardImoStatHelper.parameter.start_date
+								+ '/' + dashboardImoStatHelper.parameter.end_date
+						}];
+						angular.forEach(user, function (u,i) {
+							console.log(u)
 							userRows.push({
-								'title': 'ALL',
-								'param': 'user',
-								'active': 'all',
+								'title': u.name,
+								'param': 'person_user',
+								'active': u.username,
 								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-								'href': url + '/' + dashboardImoStatHelper.parameter.sector
+								'href': url + '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner_category
+									+ '/' + dashboardImoStatHelper.parameter.partner
 									+ '/' + dashboardImoStatHelper.parameter.area
 									+ '/' + dashboardImoStatHelper.parameter.type
-									+ '/' + dashboardImoStatHelper.parameter.partner
-									+ '/' + u
+									+ '/' + u.username
 									+ '/' + dashboardImoStatHelper.parameter.email
 									+ '/' + dashboardImoStatHelper.parameter.start_date
 									+ '/' + dashboardImoStatHelper.parameter.end_date

@@ -502,14 +502,14 @@
 								<td>{{item.filename}}</td>
 								<td>
 									<button data-position="bottom" data-tooltip="{{'preview'|translate}}" class="btn-floating  wave-effect blue watch-detail"
-									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv' || report.imo_report.report_submit">
+									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv'">
 										<i class="small material-icons">compare</i>
 									</button>
-									<a class="btn-floating  wave-effect watch-detail" data-position="bottom" data-tooltip="{{'download'|translate}}" ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}">
+									<a class="btn-floating  wave-effect watch-detail" data-position="bottom" data-tooltip="{{'download'|translate}}" ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}" ng-disabled="report.imo_report.report_submit">
 										<i class="small material-icons">cloud_download</i>
 									</a>
 									<button class="btn-floating  wave-effect red watch-detail" data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
-									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)">
+									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)" ng-disabled="report.imo_report.report_submit">
 										<i class="small material-icons">delete</i>
 									</button>
 								</td>
@@ -549,15 +549,15 @@
 								<div class="line">
 			
 									<button class="btn-floating  wave-effect blue tooltipped-report-upload" data-position="bottom" data-tooltip="{{'preview'|translate}}"
-									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv' || report.imo_report.report_submit">
+									 ng-click="ngmClusterDocument.openPreview('close-preview-file',item.fileid)" ng-disabled="item.filename_extension === '.csv'">
 										<i class="small material-icons">compare</i>
 									</button>
 									<a class="btn-floating  wave-effect space tooltipped-report-upload" data-position="bottom" data-tooltip="{{'download'|translate}}"
-									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}" ng-disabled="report.imo_report.report_submit">
+									 ng-href="{{ngmClusterDocument.setDownloadLink(item.fileid)}}" ng-disabled="report.imo_report.report_submit" ng-disabled="report.imo_report.report_submit">
 										<i class="small material-icons">cloud_download</i>
 									</a>
 									<button ng-disabled="!imoform.$visible" class="btn-floating  wave-effect tooltipped-report-upload red space " data-position="bottom" data-tooltip="{{'delete_mayus1'|translate}}"
-									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)">
+									 ng-click="ngmClusterDocument.setRemoveId('remove-modal',item.fileid);report.setRemoveRowFile($partnerIndex,item.fileid)" ng-disabled="report.imo_report.report_submit">
 										<i class="small material-icons">delete</i>
 									</button>
 								</div>
