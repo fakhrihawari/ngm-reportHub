@@ -192,10 +192,12 @@ angular
 			// project list
 			.when('/immap/reporting/dashboard-team', {
 				// redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/2018-01-01/' + moment().format('YYYY-MM-DD')
-				redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/all/' + this.page.start_date() + '/' + this.page.end_date()
+				// redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/all/' + this.page.start_date() + '/' + this.page.end_date()
+				redirectTo: '/immap/reporting/dashboard-team/all/all/all/all/all/all/all/' + this.page.start_date() + '/' + this.page.end_date()
 			})
 			// .when('/immap/reporting/dashboard-team/:admin0pcode/:project/:product_sector_id/:product_type_id/:email/:start_date/:end_date', {
-			.when('/immap/reporting/dashboard-team/:sector/:area/:type/:partner/:person_user/:email/:start_date/:end_date', {
+			// .when('/immap/reporting/dashboard-team/:sector/:area/:type/:partner/:person_user/:email/:start_date/:end_date', {
+			.when('/immap/reporting/dashboard-team/:country/:partner_category/:partner/:area/:type/:person_user/:email/:start_date/:end_date', {
 				reloadOnSearch: false,
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamDashboardCtrl',
@@ -205,7 +207,8 @@ angular
 					}],
 				}
 			})
-			.when('/immap/reporting/dashboard-team/:sector/:area/:type/:partner/:person_user/:email/:start_date/:end_date/:sub_area', {
+			//.when('/immap/reporting/dashboard-team/:sector/:area/:type/:partner/:person_user/:email/:start_date/:end_date/:sub_area', {
+			.when('/immap/reporting/dashboard-team/:country/:partner_category/:partner/:area/:type/:user/:email/:start_date/:end_date/:sub_area', {
 				reloadOnSearch: false,
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ImoTeamDashboardCtrl',

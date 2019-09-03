@@ -169,10 +169,13 @@ angular
 			// 	redirectTo: '/cluster/projects'
 			// });
 	}])
-	.run([ '$rootScope', '$window', '$location', 'ngmAuth', 'ngmUser', function( $rootScope, $window, $location, ngmAuth, ngmUser ) {
-
+	.run(['$rootScope', '$window', '$location', 'ngmAuth', 'ngmImoAuth', 'ngmUser', function ($rootScope, $window, $location, ngmAuth, ngmImoAuth, ngmUser ) {
+		if ($location.path().split('/')[1]==='immap' && $location.path().split('/')[2]==='reporting'){
+			// check session by last login if /immap/reporting
+			ngmImoAuth.setSessionTimeout(ngmUser.get())
+		}else{
 		// check session by last login
-		ngmAuth.setSessionTimeout( ngmUser.get() );
+		ngmAuth.setSessionTimeout( ngmUser.get() );}
 		
 		// new guest page visit
 		if ( ngmUser.get() && ngmUser.get().guest ) {
