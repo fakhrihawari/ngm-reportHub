@@ -11,7 +11,55 @@
  *
  */
 angular.module('ngmReportHub')
-	.factory('ngmImoAuth', ['$q', '$route', '$http', '$location', '$timeout', 'ngmUser', 'ngmPermissions', function ($q, $route, $http, $location, $timeout, ngmUser, ngmPermissions) {
+	.constant('ngmImoPermissions', [{
+		ROLE: 'USER',
+		EDIT_USER: false,
+		// EDIT_USER_ROLES: ['USER', 'COUNTRY', 'COUNTRY_ADMIN', 'GLOBAL', 'GLOBAL_ADMIN'],
+		EDIT_USER_RESTRICTED: [],
+		LEVEL: 1,
+		DESCRIPTION: 'The USER'
+	},
+	{
+		ROLE: 'COUNTRY',
+		EDIT_USER: true,
+		EDIT_USER_ROLES: ['USER', 'COUNTRY',],
+		EDIT_USER_RESTRICTED: [],
+		LEVEL: 2,
+		DESCRIPTION: 'The COUNTRY '
+	},
+	{
+		ROLE: 'COUNTRY_ADMIN',
+		EDIT_USER: true,
+		EDIT_USER_RESTRICTED: [],
+		LEVEL: 3,
+		DESCRIPTION: 'The COUNTRY_ADMIN '
+	},
+	{
+		ROLE: 'GLOBAL',
+		EDIT_USER: true,
+		EDIT_USER_ROLES: ['USER', 'ORG'],
+		EDIT_USER_RESTRICTED: [],
+		LEVEL: 4,
+		DESCRIPTION: 'The GLOBAL'
+	},
+	{
+		ROLE: 'GLOBAL_ADMIN',
+		EDIT_USER: true,
+		EDIT_USER_ROLES: ['USER','COUNTRY', 'COUNTRY_ADMIN','GLOBAL', 'GLOBAL_ADMIN'],
+		EDIT_USER_RESTRICTED: [],
+		LEVEL: 5,
+		DESCRIPTION: 'The GLOBAL ADMIN'
+	},
+	{
+		ROLE: 'SUPERADMIN',
+		EDIT_USER: true,
+		EDIT_USER_ROLES: ['USER', 'COUNTRY', 'COUNTRY_ADMIN', 'GLOBAL', 'GLOBAL_ADMIN'],
+		EDIT_USER_RESTRICTED: [],
+		LEVEL: 6,
+		DESCRIPTION: 'Beware, here be dragons!'
+	}]
+	)
+	.factory('ngmImoAuth', ['$q', '$route', '$http', '$location', '$timeout', 'ngmUser', 'ngmPermissions', 'ngmImoPermissions', function ($q, $route, $http, $location, $timeout, ngmUser, ngmPermissions, ngmImoPermissions) {
 		// auth
 		var ngmImoAuth = {
 
@@ -283,7 +331,7 @@ angular.module('ngmReportHub')
 			 * @returns {UserPermissions[]} - User permissions definitions array
 			 */
 			getUserRoleDescriptions: function (role) {
-				return ngmPermissions.filter(function (x) { return x.ROLE === role })[0].DESCRIPTION;
+				return ngmImoPermissions.filter(function (x) { return x.ROLE === role })[0].DESCRIPTION;
 			},
 
 			/**
@@ -292,7 +340,7 @@ angular.module('ngmReportHub')
 			 */
 			userPermissions: function () {
 				const user = ngmUser.get();
-				return ngmPermissions.filter(function (x) { return user.roles.includes(x.ROLE) })
+				return ngmImoPermissions.filter(function (x) { return user.roles.includes(x.ROLE) })
 			},
 
 			/**
@@ -374,7 +422,7 @@ angular.module('ngmReportHub')
 			 */
 			getEditableRoles: function () {
 				// filter permissions if EDIT_USER allowed
-				const USER_PERMISSIONS = ngmAuth.userPermissions().filter(role => role['EDIT_USER'] && role['EDIT_USER_ROLES']);
+				const USER_PERMISSIONS = ngmImoAuth.userPermissions().filter(role => role['EDIT_USER'] && role['EDIT_USER_ROLES']);
 				if (!USER_PERMISSIONS.length) return [];
 				// get users allowed roles to edit highest priority if user has multiple roles 
 				return USER_PERMISSIONS.reduce(function (max, role) { return role.LEVEL > max.LEVEL ? role : max })['EDIT_USER_ROLES']

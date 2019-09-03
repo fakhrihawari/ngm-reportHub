@@ -17,7 +17,7 @@
 		display: none;
 	}
 </style>
-<div id="manage-modal" class="modal" style="width:80%">
+<div id="manage-modal" class="modal" style="width:50%">
 	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
 		<ul class="collection with-header" style="margin-top:0">
 			<li class="collection-header teal lighten-1" style="border-bottom: 0">
@@ -29,7 +29,7 @@
 		</ul>
 
 		<div class="row" style="margin-left: 10px;margin-right:10px;">
-			<div class="col s4" ng-repeat="role in table.editableRole">
+			<div class="col s6" ng-repeat="role in table.editableRole">
 				<input type="checkbox" class="filled-in" id={{role}} value={{role}} ng-checked="editedUser.roles.indexOf(role) > -1" ng-disabled="role === 'USER'"
 				 ng-click="table.manageUser(role,editedUser)" />
 				<label for="{{role}}" style="color: #000000; font-weight: 500;">{{role}}</label>
@@ -96,7 +96,7 @@
 										</span>
 									</p>
 								</td>
-								<td data-title="'edit_role'|translate" sortable="'name'" ng-if="!table.formDisabled && table.editableRole">
+								<td data-title="'Edit Role'" sortable="'name'" ng-if="!table.formDisabled">
 									<button class="btn waves-effect waves-teal" style="font-size: 12px;height: 30px; line-height: 30px" ng-click="table.openModal('manage-modal');table.getUser(row)"
 									 ng-disabled="table.btnDisabled()">
 										{{'manage_user'|translate}}
