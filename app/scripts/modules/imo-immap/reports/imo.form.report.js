@@ -86,15 +86,18 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					$scope.reportMonth =[];					
 					var todo = $http({
 						method: 'POST',
-						url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
+						url: ngmImoAuth.LOCATION+'/api/immap/report/getReportsList',
 						data: {
-							status: 'todo'}
+							status: 'todo',
+							list: true
+						}
 					});
 					var complete = $http({
 						method: 'POST',
-						url: 'http://192.168.33.16:80/api/immap/report/getReportsList',
+						url: ngmImoAuth.LOCATION +'/api/immap/report/getReportsList',
 						data: {
-							status: 'complete'
+							status: 'complete',
+							list: true,
 						}
 					});
 					function pushToArray(arrayOrigin, property1,property2,arrayToPut) {
@@ -115,9 +118,6 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 					}else{
 						$scope.openFormReport = true;
 					};
-					// $scope.report.imo_report.support_partner.forEach(function (x) {
-					// 	x.collabArray=[]
-					// });
 
 				},
 
@@ -705,6 +705,7 @@ angular.module('ngm.widget.imo.report', ['ngm.provider'])
 				},
 				// cek report exist or not
 				openReport:function(reportMonth,reportDate){			
+					console.log($scope.reportMonth);
 					report =$scope.reportMonth.filter(function(el){
 						el.report_month
 						var year = moment(new Date(reportDate)).format('YYYY');

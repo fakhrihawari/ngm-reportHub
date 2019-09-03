@@ -37,6 +37,8 @@ angular.module('ngmReportHub')
 							email:u.email,
 							phone:u.phone,
 							position:u.position,
+							admin0pcode: u.admin0pcode,
+							admin0name: u.admin0name,
 						}
 
 						// var report = { support_partner: [], planed_activity: [], report_status: 'new', report_submit:false}
