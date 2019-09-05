@@ -1,30 +1,74 @@
-/**
- * Welcome to your Workbox-powered service worker!
- *
- * You'll need to register this file in your web app and you should
- * disable HTTP caching for this file too.
- * See https://goo.gl/nhQhGp
- *
- * The rest of the code is auto-generated. Please don't update this file
- * directly; instead, make changes to your Workbox build configuration
- * and re-run your build process.
- * See https://goo.gl/2aRDsh
- */
-
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+workbox.setConfig({ debug: true })
+// PROFILE-PAGE
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/list/organizations'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'listOrganization',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	})
+);
+// PROFILE-PAGE-END
+// HOME-PAGE
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/getOrganization'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getOrganization',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// HOME-PAGE-END
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
+// TEAM PAGE
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/getOrganizationMenu'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getMenuTeam',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/getOrganizationIndicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getIndicatorTeam',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+workbox.routing.registerRoute(
+	new RegExp('https://www.gravatar.com/avatar/ecc6fdfef9593d82e81a3efcb0b344e4?s=188'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getAvatar',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// TEAM PAGE-END
 
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-self.__precacheManifest = [
+workbox.precaching.precacheAndRoute([
   {
     "url": "images/chrome.png",
     "revision": "c996399dc6e0be48ccf0efe4765007da"
@@ -659,7 +703,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "894015e4abf437e6a036b098cae698b9"
+    "revision": "af423fb60e564b7ce79ba797865e159b"
   },
   {
     "url": "maintenance/css/materialize.min.css",
@@ -999,7 +1043,7 @@ self.__precacheManifest = [
   },
   {
     "url": "scripts/app/controllers/admin/controller.team.js",
-    "revision": "5493db42e02015f0264e89cbecf00459"
+    "revision": "cd11309047817ff52baee88682403b32"
   },
   {
     "url": "scripts/app/controllers/guides/controller.guide.feedback.js",
@@ -1115,7 +1159,7 @@ self.__precacheManifest = [
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.home.page.app.js",
-    "revision": "fa3c7bd70608f9041f227bf55c1615cf"
+    "revision": "5af547e4a86c190665a31d5539fe9285"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.details.js",
@@ -2041,5 +2085,4 @@ self.__precacheManifest = [
     "url": "views/modals/session.html",
     "revision": "bbe5b9d61fc5748f25020b60baeaa8d5"
   }
-].concat(self.__precacheManifest || []);
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+]);

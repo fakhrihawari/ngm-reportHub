@@ -229,7 +229,12 @@ angular.module( 'ngmReportHub' )
 
 		// get data
 		ngmData
-			.get( $scope.report.getOrganization( organization_id ) )
+			// using GET methode
+			.get({
+				method: 'GET', url: ngmAuth.LOCATION + '/api/getOrganization?organization_id=' + organization_id
+			})
+			// using POST methode
+			// .get( $scope.report.getOrganization( organization_id ) )
 			.then( function( organization ){
 				
 				// set organization

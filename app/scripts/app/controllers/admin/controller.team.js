@@ -109,6 +109,29 @@ angular.module('ngmReportHub')
 						}
 					}
 			},
+			getRequestIndicatorMethodGet: function (indicator, status) {
+				  
+				parameter = 'indicator=' + indicator + '&status=' + status
+					+ '&admin0pcode=' + $scope.dashboard.admin0pcode
+					+ '&organization_tag=' + $scope.dashboard.organization_tag
+					+ '&project=' + $scope.dashboard.project
+					+ '&cluster_id=' + $scope.dashboard.project
+				return {
+					method: 'GET',
+					url: ngmAuth.LOCATION + '/api/getOrganizationIndicator?'+ parameter,
+				}
+			},
+			getRequestMenuMethodGet:function(indicator,status){				
+				parameter = 'indicator=' + indicator + '&status=' + status 
+										+ '&admin0pcode=' + $scope.dashboard.admin0pcode 
+										+ '&organization_tag=' + $scope.dashboard.organization_tag
+										+ '&project=' + $scope.dashboard.project
+										+ '&cluster_id='+ $scope.dashboard.project
+				return {
+					method: 'GET',
+					url: ngmAuth.LOCATION + '/api/getOrganizationMenu?'+parameter,					
+				}
+			},
 
 			// set menu based on URL
 			setMenu: function() {
@@ -124,7 +147,12 @@ angular.module('ngmReportHub')
 				menu_items.push( 'cluster_id');
 
 				// request
-				var request = angular.merge( $scope.dashboard.getRequest( 0, 0 ), { url: ngmAuth.LOCATION + '/api/getOrganizationMenu', data: { menu_items: menu_items } } ) 
+				// using POST Method
+				// var request = angular.merge( $scope.dashboard.getRequest( 0, 0 ), { url: ngmAuth.LOCATION + '/api/getOrganizationMenu', data: { menu_items: menu_items } } )
+				
+				// using GET Method
+				var request = $scope.dashboard.getRequestMenuMethodGet(0,0);
+				request.url +='&menu_items='+menu_items;
 
 				// ngmData
 				ngmData
@@ -175,7 +203,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Active Staff',
-							request: $scope.dashboard.getRequest( 'total', 'active' )
+							// request: $scope.dashboard.getRequest( 'total', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'total', 'active' )
 						}
 					}]
 				}];
@@ -189,7 +218,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Organizations',
-							request: $scope.dashboard.getRequest( 'organizations', 'active' )
+							// request: $scope.dashboard.getRequest( 'organizations', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'organizations', 'active' )
 						}
 					}]
 				},{
@@ -200,7 +230,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Active Partners',
-							request: $scope.dashboard.getRequest( 'total', 'active' )
+							// request: $scope.dashboard.getRequest( 'total', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'total', 'active' )
 						}
 					}]
 				}];
@@ -214,7 +245,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Sectors',
-							request: $scope.dashboard.getRequest( 'sectors', 'active' )
+							// request: $scope.dashboard.getRequest( 'sectors', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'sectors', 'active' )
 						}
 					}]
 				},{
@@ -225,7 +257,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Organizations',
-							request: $scope.dashboard.getRequest( 'organizations', 'active' )
+							// request: $scope.dashboard.getRequest( 'organizations', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'organizations', 'active' )
 						}
 					}]
 				},{
@@ -236,7 +269,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Active Partners',
-							request: $scope.dashboard.getRequest( 'total', 'active' )
+							// request: $scope.dashboard.getRequest( 'total', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'total', 'active' )
 						}
 					}]
 				}];
@@ -250,7 +284,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Countries',
-							request: $scope.dashboard.getRequest( 'countries', 'active' )
+							// request: $scope.dashboard.getRequest( 'countries', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet('countries', 'active')
 						}
 					}]
 				},{
@@ -261,7 +296,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Sectors',
-							request: $scope.dashboard.getRequest( 'sectors', 'active' )
+							// request: $scope.dashboard.getRequest( 'sectors', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'sectors', 'active' )
 						}
 					}]
 				},{
@@ -272,7 +308,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Active Partners',
-							request: $scope.dashboard.getRequest( 'total', 'active' )
+							// request: $scope.dashboard.getRequest( 'total', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'total', 'active' )
 						}
 					}]
 				}];
@@ -286,7 +323,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Countries',
-							request: $scope.dashboard.getRequest( 'countries', 'active' )
+							// request: $scope.dashboard.getRequest( 'countries', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'countries', 'active' )
 						}
 					}]
 				},{
@@ -297,7 +335,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Sectors',
-							request: $scope.dashboard.getRequest( 'sectors', 'active' )
+							// request: $scope.dashboard.getRequest( 'sectors', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'sectors', 'active' )
 						}
 					}]
 				},{
@@ -308,7 +347,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Organizations',
-							request: $scope.dashboard.getRequest( 'organizations', 'active' )
+							// request: $scope.dashboard.getRequest( 'organizations', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'organizations', 'active' )
 						}
 					}]
 				},{
@@ -319,7 +359,8 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Active Partners',
-							request: $scope.dashboard.getRequest( 'total', 'active' )
+							// request: $scope.dashboard.getRequest( 'total', 'active' )
+							request: $scope.dashboard.getRequestIndicatorMethodGet( 'total', 'active' )
 						}
 					}]
 				}];
@@ -411,7 +452,8 @@ angular.module('ngmReportHub')
 										count: 10,
 										sorting: { updatedAt: "desc" } 
 									},
-									request: $scope.dashboard.getRequest( 'list', 'active' ),
+									// request: $scope.dashboard.getRequest( 'list', 'active' ),
+									request: $scope.dashboard.getRequestIndicatorMethodGet( 'list', 'active' ),
 									onClick: function(user){
 										// go to profile
 										$location.path( $scope.dashboard.profileHref + '/' + user.username );
@@ -472,7 +514,8 @@ angular.module('ngmReportHub')
 										count: 10,
 										sorting: { updatedAt: "desc" } 
 									},
-									request: $scope.dashboard.getRequest( 'list', 'deactivated' ),
+									// request: $scope.dashboard.getRequest( 'list', 'deactivated' ),
+									request: $scope.dashboard.getRequestIndicatorMethodGet( 'list', 'deactivated' ),
 									onClick: function(user){
 										// go to profile
 										$location.path( $scope.dashboard.profileHref + '/' + user.username );
