@@ -68,4 +68,18 @@ workbox.routing.registerRoute(
 );
 // TEAM PAGE-END
 
+// ADMIN PAGE
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/admin/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getAdminDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// ADMIN PAGE- END
 workbox.precaching.precacheAndRoute([]);

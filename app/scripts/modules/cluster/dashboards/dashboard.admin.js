@@ -177,7 +177,20 @@ angular.module('ngmReportHub')
 					return request;
 
 				},
-
+				// request query for GET Method
+				getRequestMethodeGet:function(indicator,list){
+					var request = 'list='+list
+												+'&indicator='+ indicator
+												+'&cluster_id='+ $scope.dashboard.cluster_id
+												+'&organization_tag='+ $scope.dashboard.organization_tag
+												+'&adminRpcode='+ $scope.dashboard.adminRpcode
+												+'&admin0pcode='+ $scope.dashboard.admin0pcode
+												+'&report_type='+ $scope.dashboard.report_type
+												+'&activity_type_id='+ $scope.dashboard.activity_type_id
+												+'&start_date='+ $scope.dashboard.startDateReport
+												+'&end_date='+ $scope.dashboard.endDateReport;
+					return request
+				},
 				// request
 				getCsvRequest: function( obj ){
 					var request = {
@@ -1101,10 +1114,14 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: $filter('translate')('organizations'),
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	data: $scope.dashboard.getRequest( 'organizations', false )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											data: $scope.dashboard.getRequest( 'organizations', false )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('organizations', false)
 										}
 									}
 								}]
@@ -1116,10 +1133,14 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: $scope.dashboard.report_type==='stock' ? $filter('translate')('warehouses_total') : $filter('translate')('total_projects'),
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	data: $scope.dashboard.getRequest( $scope.dashboard.report_type==='stock' ? 'warehouses_total' : 'projects_total', false )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											data: $scope.dashboard.getRequest( $scope.dashboard.report_type==='stock' ? 'warehouses_total' : 'projects_total', false )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('projects_total', false)
 										}
 									}
 								}]
@@ -1137,10 +1158,14 @@ angular.module('ngmReportHub')
 											icon: 'error'
 										},
 										title: $filter('translate')('reports_due'),
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	data: $scope.dashboard.getRequest( 'reports_due', false )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											data: $scope.dashboard.getRequest( 'reports_due', false )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('reports_due', false)
 										}
 									}
 								}]
@@ -1156,10 +1181,14 @@ angular.module('ngmReportHub')
 											icon: 'watch_later'
 										},
 										title: $filter('translate')('reports_saved'),
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	data: $scope.dashboard.getRequest( 'reports_saved', false )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											data: $scope.dashboard.getRequest( 'reports_saved', false )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('reports_saved', false)
 										}
 									}
 								}]
@@ -1175,10 +1204,14 @@ angular.module('ngmReportHub')
 											icon: 'check_circle'
 										},
 										title: $filter('translate')('reports_submitted'),
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	data: $scope.dashboard.getRequest( 'reports_submitted', false )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											data: $scope.dashboard.getRequest( 'reports_submitted', false )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('reports_submitted', false)
 										}
 									}
 								}]
@@ -1196,11 +1229,15 @@ angular.module('ngmReportHub')
 											icon: 'assignment_turned_in'
 										},
 										title: $filter('translate')('reports_total'),
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	// indicator, list
+										// 	data: $scope.dashboard.getRequest( 'reports_total', false )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											// indicator, list
-											data: $scope.dashboard.getRequest( 'reports_total', false )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('reports_total', false)
 										}
 									}
 								}]
@@ -1225,11 +1262,15 @@ angular.module('ngmReportHub')
 										tableOptions:{
 											count: 10
 										},
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	// indicator, list
+										// 	data: $scope.dashboard.getRequest( 'reports_due', true )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											// indicator, list
-											data: $scope.dashboard.getRequest( 'reports_due', true )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('reports_due', true)
 										}
 									}
 								}]
@@ -1254,11 +1295,15 @@ angular.module('ngmReportHub')
 										tableOptions:{
 											count: 10
 										},
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	// indicator, list
+										// 	data: $scope.dashboard.getRequest( 'reports_submitted', true )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											// indicator, list
-											data: $scope.dashboard.getRequest( 'reports_submitted', true )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('reports_submitted', true)
 										}
 									}
 								}]
@@ -1284,11 +1329,15 @@ angular.module('ngmReportHub')
 										tableOptions:{
 											count: 10
 										},
+										// request: {
+										// 	method: 'POST',
+										// 	url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
+										// 	// indicator, list
+										// 	data: $scope.dashboard.getRequest( 'progress_beneficiaries', true )
+										// }
 										request: {
-											method: 'POST',
-											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
-											// indicator, list
-											data: $scope.dashboard.getRequest( 'progress_beneficiaries', true )
+											method: 'GET',
+											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator?' + $scope.dashboard.getRequestMethodeGet('progress_beneficiaries', true)
 										}
 									}
 								}]

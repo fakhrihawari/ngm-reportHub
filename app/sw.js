@@ -68,6 +68,19 @@ workbox.routing.registerRoute(
 );
 // TEAM PAGE-END
 
+// ADMIN PAGE /api/cluster/admin/indicator
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/admin/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getAdminDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
 workbox.precaching.precacheAndRoute([
   {
     "url": "images/chrome.png",
@@ -703,7 +716,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "af423fb60e564b7ce79ba797865e159b"
+    "revision": "ec60045c090c79ec0df4aa8fdf59bc6a"
   },
   {
     "url": "maintenance/css/materialize.min.css",
@@ -1139,7 +1152,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/dashboards/dashboard.admin.js",
-    "revision": "72c6b3cb73f1e7d8ca09cb62ca779d19"
+    "revision": "806d733ed1cf0f631a35f6a9724c38f5"
   },
   {
     "url": "scripts/modules/cluster/dashboards/dashboard.cluster.js",
