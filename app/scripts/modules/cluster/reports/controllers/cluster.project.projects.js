@@ -430,6 +430,49 @@ angular.module( 'ngmReportHub' )
 				// return
 				return request;
 
+			},
+			getProjectRequestMethodGet: function (project_status) {
+
+				var filter = 'project_status=' + project_status
+				if ($scope.report.adminRpcode !== 'all') {
+					filter +='&adminRpcode='+$scope.report.adminRpcode;
+				};
+
+				if ($scope.report.admin0pcode !== 'all') {
+					filter +='&admin0pcode='+$scope.report.admin0pcode;
+				};
+
+				if ($route.current.params.cluster_id !== 'all') {
+					filter +='&cluster_id='+$scope.report.cluster_id;
+				}
+
+				if ($route.current.params.organization_tag !== 'all') {
+					filter +='&organization_tag='+$scope.report.organization_tag;
+				}
+				
+
+				var admin_org = ["OCHA", "iMMAP"];
+				if ($scope.report.user.roles.find(rol => rol === "COUNTRY") &&
+					$scope.report.user.admin0pcode === "COL" && //delete to enable for all countries
+					admin_org.includes($scope.report.user.organization)) {
+
+					// filter = {
+					// 	project_status: project_status,
+					// 	admin0pcode: $scope.report.user.admin0pcode
+					// };
+					filter = 'project_status=' + project_status +'&admin0pcode='+$scope.report.user.admin0pcode;
+				}	
+				filter +='&filter=get';
+				
+				// get projects
+				var request = {
+					method: 'GET',
+					url: ngmAuth.LOCATION + '/api/cluster/project/getProjectsList?'+filter,
+				}
+
+				// return
+				return request;
+
 			},			
 			setUrl:function(){
 				if ($scope.report.userRestricted.length){
@@ -568,7 +611,8 @@ angular.module( 'ngmReportHub' )
 										textColor: 'white-text',
 										title: 'Plan',
 										icon: 'edit',
-										request: $scope.report.getProjectRequest('plan'),
+										// request: $scope.report.getProjectRequest('plan'),
+										request: $scope.report.getProjectRequestMethodGet('plan'),
 										templateUrl: '/scripts/widgets/ngm-list/template/hide_list.html',
 									}
 								}]
@@ -586,7 +630,8 @@ angular.module( 'ngmReportHub' )
 									textColor: 'white-text',
 									title: $filter('translate')('active_projects'),
 									icon: 'edit',
-									request: $scope.report.getProjectRequest( 'active' )
+									// request: $scope.report.getProjectRequest( 'active' ),
+									request: $scope.report.getProjectRequestMethodGet('active'),
 								}
 							}]
 						}]
@@ -603,7 +648,8 @@ angular.module( 'ngmReportHub' )
 									textColor: 'white-text',
 									title: $filter('translate')('completed_projects'),
 									icon: 'done',
-									request: $scope.report.getProjectRequest( 'complete' )
+									// request: $scope.report.getProjectRequest( 'complete' ),
+									request: $scope.report.getProjectRequestMethodGet('complete'),
 								}
 							}]
 						}]
@@ -620,7 +666,8 @@ angular.module( 'ngmReportHub' )
 										textColor: 'white-text',
 										title: 'Not Implemented',
 										icon: 'edit',
-										request: $scope.report.getProjectRequest('not_implemented'),
+										// request: $scope.report.getProjectRequest('not_implemented'),
+										request: $scope.report.getProjectRequestMethodGet('not_implemented'),
 										templateUrl: '/scripts/widgets/ngm-list/template/hide_list.html',
 									}
 								}]

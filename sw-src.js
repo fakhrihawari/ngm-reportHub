@@ -82,4 +82,32 @@ workbox.routing.registerRoute(
 	}),
 );
 // ADMIN PAGE- END
+// PROJECT LIST
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/project/getProjectsList'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getListProject',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// PROJECT LIST-END
+// STOCK LIST'
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/stock/getReportsList'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getStockList',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// STOCK LIST-END
 workbox.precaching.precacheAndRoute([]);

@@ -68,7 +68,7 @@ workbox.routing.registerRoute(
 );
 // TEAM PAGE-END
 
-// ADMIN PAGE /api/cluster/admin/indicator
+// ADMIN PAGE
 workbox.routing.registerRoute(
 	new RegExp('http://192.168.33.16/api/cluster/admin/indicator'),
 	new workbox.strategies.StaleWhileRevalidate({
@@ -81,6 +81,35 @@ workbox.routing.registerRoute(
 		]
 	}),
 );
+// ADMIN PAGE- END
+// PROJECT LIST
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/project/getProjectsList'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getListProject',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// PROJECT LIST-END
+// STOCK LIST'
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/stock/getReportsList'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getStockList',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// STOCK LIST-END
 workbox.precaching.precacheAndRoute([
   {
     "url": "images/chrome.png",
@@ -1152,7 +1181,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/dashboards/dashboard.admin.js",
-    "revision": "806d733ed1cf0f631a35f6a9724c38f5"
+    "revision": "ab3679dbc4467554a1262d5160130667"
   },
   {
     "url": "scripts/modules/cluster/dashboards/dashboard.cluster.js",
@@ -1188,7 +1217,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.projects.js",
-    "revision": "c0d615537478302888e3262eb8d0f47a"
+    "revision": "30d7c2ed0032d3426745f940c4b4ef97"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.report.js",
@@ -1212,7 +1241,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.stocks.list.js",
-    "revision": "ead0d934fa699421cbbf463bc55fa2a2"
+    "revision": "af4e6b7a70a7a77142b0f17aab922a33"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.syria.dashboard.js",

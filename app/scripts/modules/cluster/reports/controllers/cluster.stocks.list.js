@@ -44,6 +44,14 @@ angular.module('ngmReportHub')
 					}
 				}
 			},
+			getStockRequest:function(org_id,status){
+				var query= 'filter=get&report_active=true'+'&organization_id='+org_id+'&report_status='+status;
+				var request ={
+					method: 'GET',
+					url: ngmAuth.LOCATION + '/api/cluster/stock/getReportsList?'+query,
+					}				
+				return request
+			},
 
 			// set project details
 			init: function(){
@@ -97,17 +105,18 @@ angular.module('ngmReportHub')
 									templateUrl: '/scripts/widgets/ngm-list/template/stock.html',
 									orderBy: 'reporting_due_date',
 									format: true,
-									request: {
-										method: 'POST',
-										url: ngmAuth.LOCATION + '/api/cluster/stock/getReportsList',
-										data: {
-											filter: {
-												organization_id: $scope.report.organization.id,
-												report_active: true,
-												report_status: 'todo'
-											}
-										}
-									}
+									// request: {
+									// 	method: 'POST',
+									// 	url: ngmAuth.LOCATION + '/api/cluster/stock/getReportsList',
+									// 	data: {
+									// 		filter: {
+									// 			organization_id: $scope.report.organization.id,
+									// 			report_active: true,
+									// 			report_status: 'todo'
+									// 		}
+									// 	}
+									// }
+									request: $scope.report.getStockRequest($scope.report.organization.id, 'todo')
 								}
 							}]
 						}]
@@ -127,17 +136,18 @@ angular.module('ngmReportHub')
 									templateUrl: '/scripts/widgets/ngm-list/template/stock.html',
 									orderBy: 'reporting_due_date',
 									format: true,
-									request: {
-										method: 'POST',
-										url: ngmAuth.LOCATION + '/api/cluster/stock/getReportsList',
-										data: {
-											filter: {
-												organization_id: $scope.report.organization.id,
-												report_active: true,
-												report_status: 'complete'
-											}
-										}
-									}
+									// request: {
+									// 	method: 'POST',
+									// 	url: ngmAuth.LOCATION + '/api/cluster/stock/getReportsList',
+									// 	data: {
+									// 		filter: {
+									// 			organization_id: $scope.report.organization.id,
+									// 			report_active: true,
+									// 			report_status: 'complete'
+									// 		}
+									// 	}
+									// }
+									request: $scope.report.getStockRequest($scope.report.organization.id, 'complete')
 								}
 							}]
 						}]
@@ -165,7 +175,10 @@ angular.module('ngmReportHub')
 
 		// run page
 		ngmData
-			.get( $scope.report.getOrganization( organization_id ) )
+			// .get( $scope.report.getOrganization( organization_id ) )
+			.get({
+				method: 'GET', url: ngmAuth.LOCATION + '/api/getOrganization?organization_id=' + organization_id
+			})
 			.then( function( organization ){
 
 				// set organization
