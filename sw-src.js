@@ -1,5 +1,11 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 workbox.setConfig({ debug: true })
+const match4WProjectPlanRoute = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/indicator4wprojectplan');
+};
+const matchClusterIndicator = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/indicator');
+};
 // PROFILE-PAGE
 workbox.routing.registerRoute(
 	new RegExp('http://192.168.33.16/api/list/organizations'),
@@ -110,4 +116,114 @@ workbox.routing.registerRoute(
 	}),
 );
 // STOCK LIST-END
+// 5W Dashboard
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/indicator'),
+	matchClusterIndicator,
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getClusterDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// 5W Dashboard -END
+// EPR ADMIN
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getEPRAdminDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/latestUpdate'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getEPRAdminDashboardLatest',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// EPR ADMIN-END
+// EPR Dashboard
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/alerts/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getEPRAlertDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/disasters/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getEPRDisasterDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// EPR Dashboard-END
+// 4W Project Plan
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/indicator4wprojectplan'),
+	match4WProjectPlanRoute,
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getProjectDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// 4W Project Plan-END
+// DEWS DASHBOARD
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/dews'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getDEWSDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// DEWS DASHBOARD -END
+// DROUGHT DASHBOARD
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/drought/afghanistan'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getDroughtDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// DROUGHT DASHBOARD-END
 workbox.precaching.precacheAndRoute([]);

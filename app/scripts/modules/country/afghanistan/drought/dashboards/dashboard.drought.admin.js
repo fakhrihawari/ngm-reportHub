@@ -56,7 +56,8 @@ angular.module('ngmReportHub')
 				setMenu: function (role) {
 
 					ngmData
-						.get(ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'organizations', true))
+						// .get(ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'organizations', true))
+						.get(ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/beneficiaries/indicator', 'organizations', true))
 						.then(function (organizations) {
 							
 							
@@ -100,11 +101,16 @@ angular.module('ngmReportHub')
 				},
 
 				setRequest: function () {
-						 	$scope.beneficiaryStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'total', false);
-							$scope.activityStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'activities', false);
-							$scope.clusterStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'cluster', false);
-							$scope.organizationStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'organizations', false);
-							$scope.locationStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'locations', false);					
+							// $scope.beneficiaryStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'total', false);
+							$scope.beneficiaryStat = ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/beneficiaries/indicator', 'total', false); 
+							// $scope.activityStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'activities', false);
+							$scope.activityStat = ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/beneficiaries/indicator', 'activities', false);
+							// $scope.clusterStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'cluster', false);
+							$scope.clusterStat = ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/beneficiaries/indicator', 'cluster', false);
+							// $scope.organizationStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'organizations', false);
+							$scope.organizationStat = ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/beneficiaries/indicator', 'organizations', false);
+							// $scope.locationStat = ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'locations', false);
+							$scope.locationStat = ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/beneficiaries/indicator', 'locations', false);					
 				},
 				setLink:function (){
 					link = { 
@@ -404,7 +410,8 @@ angular.module('ngmReportHub')
 												}
 											}
 										},
-										request: ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'markers', false)
+										// request: ngmDroughtHelper.getRequest('drought/afghanistan/beneficiaries/indicator', 'markers', false)
+										request: ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/beneficiaries/indicator', 'markers', false)
 									}
 								}]
 							}]
@@ -435,7 +442,8 @@ angular.module('ngmReportHub')
 											templateUrl: '/scripts/modules/country/afghanistan/drought/views/drought.heatmap.html',
 											showCount:true,
 											options: { itemName: 'Reports(s)', start: new Date($scope.dashboard.startDate) },
-											request: ngmDroughtHelper.getRequest('drought/afghanistan/indicator', 'calendar')
+											// request: ngmDroughtHelper.getRequest('drought/afghanistan/indicator', 'calendar')
+											request: ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/indicator', 'calendar')
 										}
 									}]
 								}]
@@ -459,7 +467,8 @@ angular.module('ngmReportHub')
 											tableOptions: {
 												count: 10
 											},
-											request: ngmDroughtHelper.getRequest('drought/afghanistan/indicator', 'reports', true)
+											// request: ngmDroughtHelper.getRequest('drought/afghanistan/indicator', 'reports', true)
+											request: ngmDroughtHelper.getRequestMethodGet('drought/afghanistan/indicator', 'reports', true)
 											
 										}
 									}]

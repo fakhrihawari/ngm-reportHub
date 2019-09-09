@@ -219,7 +219,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'EPR Reports',
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'submitted_reports', false )
+										// request: ngmEprHelper.getRequest( 'epr/indicator', 'submitted_reports', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/indicator', 'submitted_reports', false)
 									}
 								}]
 							}]
@@ -244,7 +245,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Alerts',
-										request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'total', false )
+										// request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'total', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/alerts/indicator', 'total', false)
 									}
 								}]
 							},{
@@ -255,7 +257,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Cases',
-										request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'cases', false )
+										// request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'cases', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/alerts/indicator', 'cases', false)
 									}
 								}]
 							},{
@@ -266,7 +269,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Deaths',
-										request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'deaths', false )
+										// request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'deaths', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/alerts/indicator', 'deaths', false)
 									}
 								}]
 							}]
@@ -307,7 +311,8 @@ angular.module('ngmReportHub')
 												}
 											}
 										},				
-										request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'markers', false )
+										// request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'markers', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/alerts/indicator', 'markers', false)
 									}
 								}]
 							}]
@@ -332,7 +337,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Incidents',
-										request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'total', false )
+										// request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'total', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/disasters/indicator', 'total', false)
 									}
 								}]
 							},{
@@ -343,7 +349,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Casualties',
-										request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'casualties', false )
+										// request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'casualties', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/disasters/indicator', 'casualties', false)
 									}
 								}]
 							},{
@@ -354,7 +361,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Deaths',
-										request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'deaths', false )
+										// request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'deaths', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/disasters/indicator', 'deaths', false)
 									}
 								}]
 							}]
@@ -395,7 +403,8 @@ angular.module('ngmReportHub')
 												}
 											}
 										},				
-										request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'markers', false )
+										// request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'markers', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/disasters/indicator', 'markers', false)
 									}
 								}]
 							}]

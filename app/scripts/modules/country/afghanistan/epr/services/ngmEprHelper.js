@@ -111,6 +111,26 @@ angular.module( 'ngmReportHub' )
         }
       },
 
+			// get http request
+			getRequestMethodGet: function (url, indicator, list) {
+				params={
+						indicator: indicator,
+						list: list,
+						year: dashboard.year,
+						region: dashboard.region,
+						province: dashboard.province,
+						week: dashboard.week,
+						start_date: dashboard.startDate,
+						end_date: dashboard.endDate
+					}
+				var query = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+
+				return {
+					method: 'GET',
+					url: ngmAuth.LOCATION + '/api/' + url+'?'+query,
+				}
+			},
+
       // get http request
       getMetrics: function( theme, format ){
         return {

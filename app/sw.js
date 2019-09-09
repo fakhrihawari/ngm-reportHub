@@ -1,5 +1,11 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 workbox.setConfig({ debug: true })
+const match4WProjectPlanRoute = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/indicator4wprojectplan');
+};
+const matchClusterIndicator = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/indicator');
+};
 // PROFILE-PAGE
 workbox.routing.registerRoute(
 	new RegExp('http://192.168.33.16/api/list/organizations'),
@@ -110,6 +116,116 @@ workbox.routing.registerRoute(
 	}),
 );
 // STOCK LIST-END
+// 5W Dashboard
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/indicator'),
+	matchClusterIndicator,
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getClusterDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// 5W Dashboard -END
+// EPR ADMIN
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getEPRAdminDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/latestUpdate'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getEPRAdminDashboardLatest',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// EPR ADMIN-END
+// EPR Dashboard
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/alerts/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getEPRAlertDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/epr/disasters/indicator'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getEPRDisasterDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// EPR Dashboard-END
+// 4W Project Plan
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/indicator4wprojectplan'),
+	match4WProjectPlanRoute,
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getProjectDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// 4W Project Plan-END
+// DEWS DASHBOARD
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/dews'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getDEWSDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// DEWS DASHBOARD -END
+// DROUGHT DASHBOARD
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/drought/afghanistan'),
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getDroughtDashboard',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// DROUGHT DASHBOARD-END
 workbox.precaching.precacheAndRoute([
   {
     "url": "images/chrome.png",
@@ -745,7 +861,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "ec60045c090c79ec0df4aa8fdf59bc6a"
+    "revision": "af423fb60e564b7ce79ba797865e159b"
   },
   {
     "url": "maintenance/css/materialize.min.css",
@@ -1177,7 +1293,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/dashboards/dashboard.4wprojectplan.js",
-    "revision": "1008f701c7faab75c22aeea8097571b4"
+    "revision": "eabd9baa2978f57d2965de6ac647cedd"
   },
   {
     "url": "scripts/modules/cluster/dashboards/dashboard.admin.js",
@@ -1185,7 +1301,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/dashboards/dashboard.cluster.js",
-    "revision": "5bf9663e43b300c414a1010cb3adbae2"
+    "revision": "1941c7d3e5b7dd04c7be206e43f968a9"
   },
   {
     "url": "scripts/modules/cluster/dashboards/health/dashboard.hct.js",
@@ -1605,7 +1721,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/country/afghanistan/dews/dashboards/dashboard.dews.js",
-    "revision": "04b7b96e67e5a69aa870c9d77c0467bb"
+    "revision": "b231db444652f5f8b756bb2d9958db92"
   },
   {
     "url": "scripts/modules/country/afghanistan/dews/upload/upload.dews.js",
@@ -1617,7 +1733,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/country/afghanistan/drought/dashboards/dashboard.drought.admin.js",
-    "revision": "bc294bbd06a3f7cd26359a65fdb0ef1f"
+    "revision": "1f94162cafa595f826ad9fe7d59437b1"
   },
   {
     "url": "scripts/modules/country/afghanistan/drought/main/drought.main.js",
@@ -1625,7 +1741,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/country/afghanistan/drought/services/ngmDroughtHelper.js",
-    "revision": "1ee1984876a3780e655965bbfbc4b538"
+    "revision": "6b4cc40ac87b37ccd9596c9989d6fcfa"
   },
   {
     "url": "scripts/modules/country/afghanistan/drought/views/drought.admin.list.html",
@@ -1661,15 +1777,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/country/afghanistan/epr/dashboards/dashboard.admin.js",
-    "revision": "b894166a07bcdd2e60818ae527228ea2"
+    "revision": "e965eec1586923c16b2710220b5bfb31"
   },
   {
     "url": "scripts/modules/country/afghanistan/epr/dashboards/dashboard.epr.js",
-    "revision": "38a951e8d7b4440475f717a110890aa6"
+    "revision": "571324f3e4f9c8a66bcc7e568a2518ad"
   },
   {
     "url": "scripts/modules/country/afghanistan/epr/services/ngmEprHelper.js",
-    "revision": "faa027610fc56a6a3c573d7ee0d9602c"
+    "revision": "8b09b4c41135b292b4bbfcaeefadd1cb"
   },
   {
     "url": "scripts/modules/country/afghanistan/nutrition/app.js",

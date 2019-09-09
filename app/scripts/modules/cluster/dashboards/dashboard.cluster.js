@@ -183,6 +183,36 @@ angular.module('ngmReportHub')
 					return request;
 				},
 
+				// Get Request With Method GET
+				getRequestMethodGet:function (obj) {
+					query = 'adminRpcode='+ $scope.dashboard.adminRpcode
+									+'&admin0pcode='+ $scope.dashboard.admin0pcode
+									+'&admin1pcode='+ $scope.dashboard.admin1pcode
+									+'&admin2pcode='+ $scope.dashboard.admin2pcode
+									+'&cluster_id='+ $scope.dashboard.cluster_id
+									+'&activity_type_id='+ $scope.dashboard.activity_type_id
+									+'&organization_tag='+ $scope.dashboard.organization_tag
+									+'&start_date='+ $scope.dashboard.startDate
+									+'&end_date='+ $scope.dashboard.endDate;
+					
+					for (i = 0; i < $scope.dashboard.beneficiaries.length;i++){
+						query += '&beneficiaries[]=' + $scope.dashboard.beneficiaries[i]
+					}
+
+					if( typeof obj ==='object'){
+						for (var key in obj) {			
+							query += '&' + key + '=' + obj[key];
+						}
+					}
+
+					var request = {
+						method: 'GET',
+						url: ngmAuth.LOCATION + '/api/cluster/indicator?'+ query,
+					}
+					console.log(request);
+					return request;
+				},
+
 				// metrics
 				getMetrics: function( theme, format ){
 					return {
@@ -767,7 +797,8 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: $filter('translate')('individual_households'),
-								request: $scope.dashboard.getRequest({ indicator: 'households_population' })
+								// request: $scope.dashboard.getRequest({ indicator: 'households_population' })
+								request: $scope.dashboard.getRequestMethodGet({ indicator: 'households_population' })
 							}
 						}]
 					}, {
@@ -778,7 +809,8 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: $filter('translate')('individual_beneficiaries'),
-								request: $scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
+								// request: $scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
+								request: $scope.dashboard.getRequestMethodGet({ indicator: 'beneficiaries_population' })
 							}
 						}]
 					}, {
@@ -789,7 +821,8 @@ angular.module('ngmReportHub')
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
 								title: $filter('translate')('services_to_beneficiaries'),
-								request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
+								// request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
+								request: $scope.dashboard.getRequestMethodGet({ indicator: 'beneficiaries' })
 							}
 						}]
 					}];
@@ -803,7 +836,8 @@ angular.module('ngmReportHub')
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
 									title: $filter('translate')('services_to_beneficiaries'),
-									request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
+									// request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
+									request: $scope.dashboard.getRequestMethodGet({ indicator: 'beneficiaries' })
 								}
 							}]
 						}]						
@@ -878,7 +912,8 @@ angular.module('ngmReportHub')
 									style: 'margin:15px; padding-bottom:30px;',
 									config: {
 										id: 'dashboard-btn',
-										request: $scope.dashboard.getRequest( { indicator: 'latest_update' } ),
+										// request: $scope.dashboard.getRequest( { indicator: 'latest_update' } ),
+										request: $scope.dashboard.getRequestMethodGet({ indicator: 'latest_update' }),
 										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard.html'
 									}
 								}]
@@ -892,7 +927,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: $filter('translate')('active_organizations'),
-										request: $scope.dashboard.getRequest( { indicator: 'organizations' } )
+										// request: $scope.dashboard.getRequest( { indicator: 'organizations' } )
+										request: $scope.dashboard.getRequestMethodGet({ indicator: 'organizations' })
 									}
 								}]
 							},{
@@ -903,7 +939,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: $filter('translate')('active_projects'),
-										request: $scope.dashboard.getRequest( { indicator: 'projects' } )
+										// request: $scope.dashboard.getRequest( { indicator: 'projects' } )
+										request: $scope.dashboard.getRequestMethodGet({ indicator: 'projects' })
 									}
 								}]
 							}]
@@ -957,7 +994,8 @@ angular.module('ngmReportHub')
 												dataLabels: {
 													enabled: false
 												},
-												request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for:'children'})												
+												// request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for:'children'})
+												request: $scope.dashboard.getRequestMethodGet({ indicator: 'pieChart', chart_for: 'children' })												
 																						}]
 										}
 									}
@@ -1009,7 +1047,8 @@ angular.module('ngmReportHub')
 												dataLabels: {
 													enabled: false
 												},
-												request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'adult' })												
+												// request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'adult' })
+												request: $scope.dashboard.getRequestMethodGet({ indicator: 'pieChart', chart_for: 'adult' })												
 											}]
 										}
 									}
@@ -1061,7 +1100,8 @@ angular.module('ngmReportHub')
 												dataLabels: {
 													enabled: false
 												},
-												request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'elderly' })												
+												// request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'elderly' })
+												request: $scope.dashboard.getRequestMethodGet({ indicator: 'pieChart', chart_for: 'elderly' })												
 											}]
 										}
 									}
@@ -1088,7 +1128,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: $filter('translate')('active_locations'),
-										request: $scope.dashboard.getRequest( { indicator: 'locations' } )
+										// request: $scope.dashboard.getRequest( { indicator: 'locations' } )
+										request: $scope.dashboard.getRequestMethodGet({ indicator: 'locations' })
 									}
 								}]
 							}]
@@ -1130,7 +1171,8 @@ angular.module('ngmReportHub')
 												}
 											}
 										},
-										request: $scope.dashboard.getRequest( { indicator: 'markers' } )
+										// request: $scope.dashboard.getRequest( { indicator: 'markers' } )
+										request: $scope.dashboard.getRequestMethodGet({ indicator: 'markers' })
 									}
 								}]
 							}]

@@ -179,7 +179,16 @@ angular.module('ngmReportHub')
 				}
 
 				return rows;
+			},
+			getRequestMethodGet:function(url,params){
+				var query = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+				var request = {
+					method: 'GET',
+					url: ngmAuth.LOCATION +url+'?'+query
+				}
+				return request
 			}
+
 		}
 
 		// report
@@ -389,17 +398,18 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Outbreaks',
-							request: {
-								method: 'POST',
-								url: ngmAuth.LOCATION + '/api/dews/indicator',
-								data: {
-									start_date: $scope.dashboard.startDate,
-									end_date: $scope.dashboard.endDate,
-									indicator: '*',
-									disease: $scope.dashboard.disease.id,
-									prov_code: $scope.dashboard.location.id
-								}
-							}
+							// request: {
+							// 	method: 'POST',
+							// 	url: ngmAuth.LOCATION + '/api/dews/indicator',
+							// 	data: {
+							// 		start_date: $scope.dashboard.startDate,
+							// 		end_date: $scope.dashboard.endDate,
+							// 		indicator: '*',
+							// 		disease: $scope.dashboard.disease.id,
+							// 		prov_code: $scope.dashboard.location.id
+							// 	}
+							// }
+							request: $scope.dashboard.getRequestMethodGet('/api/dews/indicator', {start_date: $scope.dashboard.startDate,end_date: $scope.dashboard.endDate,indicator: '*',disease: $scope.dashboard.disease.id,prov_code: $scope.dashboard.location.id})
 						}
 					}]
 				},{
@@ -409,18 +419,25 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Individual Cases',
-							request: {
-								method: 'POST',
-								url: ngmAuth.LOCATION + '/api/dews/indicator',
-								data: {
+							// request: {
+							// 	method: 'POST',
+							// 	url: ngmAuth.LOCATION + '/api/dews/indicator',
+							// 	data: {
+							// 		start_date: $scope.dashboard.startDate,
+							// 		end_date: $scope.dashboard.endDate,									
+							// 		// indicator: 'u5male + u5female + o5male + o5female + u5death + o5death',
+							// 		indicator: 'total_cases + total_deaths',
+							// 		disease: $scope.dashboard.disease.id,
+							// 		prov_code: $scope.dashboard.location.id
+							// 	}
+							// }
+							request: $scope.dashboard.getRequestMethodGet('/api/dews/indicator', {
 									start_date: $scope.dashboard.startDate,
-									end_date: $scope.dashboard.endDate,									
-									// indicator: 'u5male + u5female + o5male + o5female + u5death + o5death',
-									indicator: 'total_cases + total_deaths',
+									end_date: $scope.dashboard.endDate,
+									indicator: 'total_cases %2B total_deaths',
 									disease: $scope.dashboard.disease.id,
 									prov_code: $scope.dashboard.location.id
-								}
-							}
+								})
 						}
 					}]
 				},{
@@ -430,18 +447,25 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: 'Deaths',
-							request: {
-								method: 'POST',
-								url: ngmAuth.LOCATION + '/api/dews/indicator',
-								data: {
-									start_date: $scope.dashboard.startDate,
-									end_date: $scope.dashboard.endDate,
-									// indicator: 'u5death + o5death',
-									indicator: 'total_deaths',
-									disease: $scope.dashboard.disease.id,
-									prov_code: $scope.dashboard.location.id
-								}
-							}
+							// request: {
+							// 	method: 'POST',
+							// 	url: ngmAuth.LOCATION + '/api/dews/indicator',
+							// 	data: {
+							// 		start_date: $scope.dashboard.startDate,
+							// 		end_date: $scope.dashboard.endDate,
+							// 		// indicator: 'u5death + o5death',
+							// 		indicator: 'total_deaths',
+							// 		disease: $scope.dashboard.disease.id,
+							// 		prov_code: $scope.dashboard.location.id
+							// 	}
+							// }
+							request: $scope.dashboard.getRequestMethodGet('/api/dews/indicator', {
+								start_date: $scope.dashboard.startDate,
+								end_date: $scope.dashboard.endDate,
+								indicator: 'total_deaths',
+								disease: $scope.dashboard.disease.id,
+								prov_code: $scope.dashboard.location.id
+							})
 						}
 					}]
 				}]
@@ -489,16 +513,22 @@ angular.module('ngmReportHub')
 								}
 
 							},
-							request: {
-								method: 'POST',
-								url: ngmAuth.LOCATION + '/api/dews/calendar',
-								data: {
+							// request: {
+							// 	method: 'POST',
+							// 	url: ngmAuth.LOCATION + '/api/dews/calendar',
+							// 	data: {
+							// 		start_date: $scope.dashboard.startDate,
+							// 		end_date: $scope.dashboard.endDate,
+							// 		disease: $scope.dashboard.disease.id,
+							// 		prov_code: $scope.dashboard.location.id
+							// 	}
+							// }
+							request: $scope.dashboard.getRequestMethodGet('/api/dews/calendar',{								
 									start_date: $scope.dashboard.startDate,
 									end_date: $scope.dashboard.endDate,
 									disease: $scope.dashboard.disease.id,
 									prov_code: $scope.dashboard.location.id
-								}
-							}
+								})
 						}
 					}]
 				}]
@@ -574,16 +604,23 @@ angular.module('ngmReportHub')
 									name: 'Incidents',
 									color: '#7cb5ec',
 									turboThreshold: 0,
-									request: {
-										method: 'POST',
-										url: ngmAuth.LOCATION + '/api/dews/chart',
-										data: {
+									// request: {
+									// 	method: 'POST',
+									// 	url: ngmAuth.LOCATION + '/api/dews/chart',
+									// 	data: {
+									// 		start_date: $scope.dashboard.startDate,
+									// 		end_date: $scope.dashboard.endDate,
+									// 		disease: $scope.dashboard.disease.id,
+									// 		prov_code: $scope.dashboard.location.id
+									// 	}
+									// }
+									request: $scope.dashboard.getRequestMethodGet('/api/dews/chart',
+										{
 											start_date: $scope.dashboard.startDate,
 											end_date: $scope.dashboard.endDate,
 											disease: $scope.dashboard.disease.id,
 											prov_code: $scope.dashboard.location.id
-										}
-									}
+										})									
 								}]
 							}
 						}
@@ -627,17 +664,25 @@ angular.module('ngmReportHub')
 									}
 								}
 							},				
-							request: {
-								method: 'POST',
-								url: ngmAuth.LOCATION + '/api/dews/markers',
-								data: {
+							// request: {
+							// 	method: 'POST',
+							// 	url: ngmAuth.LOCATION + '/api/dews/markers',
+							// 	data: {
+							// 		layer: 'outbreaks',
+							// 		start_date: $scope.dashboard.startDate,
+							// 		end_date: $scope.dashboard.endDate,
+							// 		disease: $scope.dashboard.disease.id,
+							// 		prov_code: $scope.dashboard.location.id
+							// 	}
+							// }
+							request: $scope.dashboard.getRequestMethodGet('/api/dews/markers',{
 									layer: 'outbreaks',
 									start_date: $scope.dashboard.startDate,
 									end_date: $scope.dashboard.endDate,
 									disease: $scope.dashboard.disease.id,
 									prov_code: $scope.dashboard.location.id
-								}
-							}
+								})
+							
 						}
 					}]
 				}]

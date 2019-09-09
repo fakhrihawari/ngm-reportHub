@@ -219,7 +219,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Total Reports Due',
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'expected_reports', false )
+										// request: ngmEprHelper.getRequest( 'epr/indicator', 'expected_reports', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/indicator', 'expected_reports', false)
 									}
 								}]
 							},{
@@ -230,7 +231,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Submitted Reports',
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'submitted_reports', false )
+										// request: ngmEprHelper.getRequest( 'epr/indicator', 'submitted_reports', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/indicator', 'submitted_reports', false)
 									}
 								}]
 							},{
@@ -241,7 +243,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Outstanding Reports',
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'outstanding_reports', false )
+										// request: ngmEprHelper.getRequest( 'epr/indicator', 'outstanding_reports', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/indicator', 'outstanding_reports', false)
 									}
 								}]
 							},{
@@ -252,7 +255,8 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										title: 'Duplicate Reports',
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'duplicate_reports', false )
+										// request: ngmEprHelper.getRequest( 'epr/indicator', 'duplicate_reports', false )
+										request: ngmEprHelper.getRequestMethodGet('epr/indicator', 'duplicate_reports', false)
 									}
 								}]
 							}]
@@ -273,7 +277,8 @@ angular.module('ngmReportHub')
 										tableOptions:{
 											count: 10
 										},
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'duplicate_reports', true )
+										// request: ngmEprHelper.getRequest( 'epr/indicator', 'duplicate_reports', true )
+										request: ngmEprHelper.getRequestMethodGet('epr/indicator', 'duplicate_reports', true)
 									}
 								}]
 							}]
@@ -294,7 +299,8 @@ angular.module('ngmReportHub')
 										tableOptions:{
 											count: 10
 										},
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'reports_submitted', true )
+										// request: ngmEprHelper.getRequest( 'epr/indicator', 'reports_submitted', true )
+										request: ngmEprHelper.getRequestMethodGet('epr/indicator', 'reports_submitted', true)
 									}
 								}]
 							}]

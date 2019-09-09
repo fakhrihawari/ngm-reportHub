@@ -53,7 +53,28 @@ angular.module('ngmReportHub')
 					}
 				}
 			},
-
+			getRequestMethodGet: function (url, indicator, list){
+				var params = {
+					indicator: indicator,
+					list: list,
+					urgency: dashboard.urgency,
+					status_plan: dashboard.statusPlan,
+					year: dashboard.year,
+					cluster: dashboard.cluster,
+					province: dashboard.province,
+					district: dashboard.district,
+					organization_tag: dashboard.organization,
+					month: dashboard.month,
+					start_date: dashboard.startDate,
+					end_date: dashboard.endDate
+				}
+				var query = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+				var request = {
+					method: 'GET',
+					url: ngmAuth.LOCATION + '/api/' + url+'?'+query,
+				}
+				return request
+			},
 			// get http request
 			getMetrics: function (theme, format) {
 				return {
