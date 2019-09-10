@@ -55,6 +55,12 @@ angular.module('ngmReportHub')
 				}
 			}),
 
+			// get project Get Method
+			getProjectMethodGet: $http({
+				method: 'GET',
+				url: ngmAuth.LOCATION + '/api/cluster/project/getProject?id=' + $route.current.params.project
+			}),
+
 			// set project details
 			setProjectDetails: function( data ){
 
@@ -162,7 +168,8 @@ angular.module('ngmReportHub')
 		}
 
 		// send request
-		$q.all([ $scope.report.getProject ]).then( function( results ){
+		// $q.all([ $scope.report.getProject ]).then( function( results ){
+		$q.all([$scope.report.getProjectMethodGet]).then(function (results) {
 
 			// assign
 			$scope.report.setProjectDetails( results );

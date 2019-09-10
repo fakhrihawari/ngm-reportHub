@@ -57,6 +57,12 @@ angular.module('ngmReportHub')
 				}
 			}),
 
+			// get project Get Method
+			getProjectMethodGet: $http({
+				method: 'GET',
+				url: ngmAuth.LOCATION + '/api/cluster/project/getProject?id='+$route.current.params.project
+			}),
+
 			// get report
 			getReport: $http({
 				method: 'POST',
@@ -66,6 +72,17 @@ angular.module('ngmReportHub')
 					location_group_id: $route.current.params.location_group
 				}
 			}),
+			// get report Get Method
+			getReportMethodGet: function(){
+				query = 'report_id=' + $route.current.params.report;
+				if($route.current.params.location_group){
+					query += '&location_group_id=' + $route.current.params.location_group
+				};
+				return $http({
+					method: 'GET',
+					url: ngmAuth.LOCATION + '/api/cluster/report/getReport?'+query
+				})
+			},
 
 			// set project details
 			setProjectDetails: function( data ){
@@ -207,8 +224,9 @@ angular.module('ngmReportHub')
 		$timeout( function() { Materialize.toast( $filter('translate')('loading_monhtly_progress_report'), 4000, 'success' ); }, 400 );
 
 		// send request
-		$q.all([ $scope.report.getProject, $scope.report.getReport ]).then( function( results ){
-
+		// $q.all([ $scope.report.getProject, $scope.report.getReport ]).then( function( results ){
+		$q.all([$scope.report.getProjectMethodGet, $scope.report.getReportMethodGet()]).then(function (results) {
+			
 			// assign
 			$scope.report.setProjectDetails( results );
 

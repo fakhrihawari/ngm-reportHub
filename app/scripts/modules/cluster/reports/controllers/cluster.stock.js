@@ -53,6 +53,11 @@ angular.module('ngmReportHub')
 					'organization_id': $route.current.params.organization_id
 				}
 			},
+			getOrganizationMethodGet: {
+				method: 'GET',
+				url: ngmAuth.LOCATION + '/api/getOrganization?organization_id='+ $route.current.params.organization_id
+				
+			},
 
 			// get report
 			getReport: {
@@ -61,6 +66,10 @@ angular.module('ngmReportHub')
 				data: {
 					id: $route.current.params.report_id
 				}
+			},
+			getReportMethodGet: {
+				method: 'GET',
+				url: ngmAuth.LOCATION + '/api/cluster/stock/getReport?id='+ $route.current.params.report_id
 			},
 
 			// set project details
@@ -156,7 +165,8 @@ angular.module('ngmReportHub')
 		}
 
 		// send request
-		$q.all([ $http( $scope.report.getOrganization ), $http( $scope.report.getReport ) ]).then( function( results ){
+		// $q.all([$http($scope.report.getOrganization), $http($scope.report.getReport)]).then(function (results) {
+		$q.all([$http($scope.report.getOrganizationMethodGet), $http($scope.report.getReportMethodGet)]).then(function (results) {
 
 			// set
 			$scope.report.organization = results[0].data;

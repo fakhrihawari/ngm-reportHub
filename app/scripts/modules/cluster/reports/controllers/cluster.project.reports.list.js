@@ -61,7 +61,19 @@ angular.module('ngmReportHub')
 				}
 				return obj;
 			},
-
+			getRequestMethodGet:function (url,obj) {
+				if ($scope.report.project.admin0pcode === 'SO') {
+					var so = { reporting_period: { '>=': '2018-12-01' } };
+					obj = angular.merge(obj, so);
+				}
+				obj.filter = 'get';
+				query = Object.keys(obj).map(key => key + '=' + obj[key]).join('&');
+				var request = {
+					method: 'GET',
+					url: ngmAuth.LOCATION +url+'?'+query,
+				}
+				return request
+			},
 			// return url for report or summary page 
 			getReportUrl: function(){
 				// report
@@ -159,13 +171,14 @@ angular.module('ngmReportHub')
 									templateUrl: $scope.report.getReportTemplate(),
 									orderBy: 'reporting_due_date',
 									format: true,
-									request: {
-										method: 'POST',
-										url: ngmAuth.LOCATION + '/api/cluster/report/getReportsList',
-										data: {
-											filter: $scope.report.getReportFilter({ project_id: $scope.report.project.id, report_active: true, report_status: 'todo' })
-										}
-									}
+									// request: {
+									// 	method: 'POST',
+									// 	url: ngmAuth.LOCATION + '/api/cluster/report/getReportsList',
+									// 	data: {
+									// 		filter: $scope.report.getReportFilter({ project_id: $scope.report.project.id, report_active: true, report_status: 'todo' })
+									// 	}
+									// }
+									request: $scope.report.getRequestMethodGet('/api/cluster/report/getReportsList', { project_id: $scope.report.project.id, report_active: true, report_status: 'todo' })
 								}
 							}]
 						}]
@@ -189,13 +202,14 @@ angular.module('ngmReportHub')
 									templateUrl: $scope.report.getReportTemplate(),
 									orderBy: 'reporting_due_date',
 									format: true,
-									request: {
-										method: 'POST',
-										url: ngmAuth.LOCATION + '/api/cluster/report/getReportsList',
-										data: {
-											filter: $scope.report.getReportFilter({ project_id: $scope.report.project.id, report_active: true, report_status: 'complete' })
-										}
-									}
+									// request: {
+									// 	method: 'POST',
+									// 	url: ngmAuth.LOCATION + '/api/cluster/report/getReportsList',
+									// 	data: {
+									// 		filter: $scope.report.getReportFilter({ project_id: $scope.report.project.id, report_active: true, report_status: 'complete' })
+									// 	}
+									// }
+									request: $scope.report.getRequestMethodGet('/api/cluster/report/getReportsList',{ project_id: $scope.report.project.id, report_active: true, report_status: 'complete' })
 								}
 							}]
 						}]						
@@ -233,13 +247,18 @@ angular.module('ngmReportHub')
 
 		// Run page
 		// return project
+		// ngmData.get({
+		// 	method: 'POST',
+		// 	url: ngmAuth.LOCATION + '/api/cluster/project/getProject',
+		// 	data: {
+		// 		id: $route.current.params.project
+		// 	}
+		// })
 		ngmData.get({
-			method: 'POST',
-			url: ngmAuth.LOCATION + '/api/cluster/project/getProject',
-			data: {
-				id: $route.current.params.project
-			}
-		}).then(function(data){
+			method: 'GET',
+			url: ngmAuth.LOCATION + '/api/cluster/project/getProject?id=' + $route.current.params.project
+		})
+		.then(function(data){
 			// assign data
 			$scope.report.setProjectDetails(data);
 		});

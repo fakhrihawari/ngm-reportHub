@@ -6,6 +6,12 @@ const match4WProjectPlanRoute = ({ url, event }) => {
 const matchClusterIndicator = ({ url, event }) => {
 	return (url.pathname === '/api/cluster/indicator');
 };
+const matchReport = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/report/getReport');
+};
+const matchReportStock = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/stock/getReport');
+};
 // PROFILE-PAGE
 workbox.routing.registerRoute(
 	new RegExp('http://192.168.33.16/api/list/organizations'),
@@ -116,6 +122,21 @@ workbox.routing.registerRoute(
 	}),
 );
 // STOCK LIST-END
+// STOCK Monthly
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/stock/getReport'),
+	matchReportStock,
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getStockReport',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// STOCK Monthly - END
 // 5W Dashboard
 workbox.routing.registerRoute(
 	// new RegExp('http://192.168.33.16/api/cluster/indicator'),
@@ -226,6 +247,49 @@ workbox.routing.registerRoute(
 	}),
 );
 // DROUGHT DASHBOARD-END
+// project summary page
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/project/getProject'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getProjectSummary',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// project summary page-END
+// Monthly Report
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/report/getReport'),
+	matchReport,
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getMonthlyReport',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// Monthly Report - END
+// Monthly ReportList 
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/report/getReportsList'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getMonthlyReportList',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// Monthly ReportList - END
 workbox.precaching.precacheAndRoute([
   {
     "url": "images/chrome.png",
@@ -861,7 +925,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "af423fb60e564b7ce79ba797865e159b"
+    "revision": "ec60045c090c79ec0df4aa8fdf59bc6a"
   },
   {
     "url": "maintenance/css/materialize.min.css",
@@ -1321,7 +1385,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.details.js",
-    "revision": "e4f62802d5c3253e31ee2e467846954e"
+    "revision": "9b3348dc5c7286a15177a082dcc89fe4"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.documents.js",
@@ -1329,7 +1393,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.financials.js",
-    "revision": "67853ef763b49ee2675f0668ca26e6ed"
+    "revision": "a53365b92c09701efbead1c5bcade576"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.projects.js",
@@ -1337,7 +1401,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.report.js",
-    "revision": "24c277f4d5b9d43fb1c5b1316e334f5e"
+    "revision": "5bc78db6c253bdf81bbbe5d0a6e9b5cd"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.reports.group.js",
@@ -1345,15 +1409,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.reports.list.js",
-    "revision": "db29550bd6f604fa8049af620fce120b"
+    "revision": "a8a561c85fe63c5c27765c3e68c89f86"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.project.summary.js",
-    "revision": "987e01ab57c514e571d5cbf7def444cb"
+    "revision": "d74e950174d39f060bad2b5c9065c855"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.stock.js",
-    "revision": "bd4ba80166ccbe50da902fda621f1f6f"
+    "revision": "708954169b237c6f9e9fbe1695ee9ac1"
   },
   {
     "url": "scripts/modules/cluster/reports/controllers/cluster.stocks.list.js",
@@ -1721,7 +1785,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "scripts/modules/country/afghanistan/dews/dashboards/dashboard.dews.js",
-    "revision": "b231db444652f5f8b756bb2d9958db92"
+    "revision": "2907c0093628523e1b916d5422575dc6"
   },
   {
     "url": "scripts/modules/country/afghanistan/dews/upload/upload.dews.js",

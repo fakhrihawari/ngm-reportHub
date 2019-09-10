@@ -14,12 +14,16 @@ angular.module('ngmReportHub')
 		];
 
 		// return project
+		// ngmData.get({
+		// 	method: 'POST',
+		// 	url: ngmAuth.LOCATION + '/api/cluster/project/getProject',
+		// 	data: {
+		// 		id: $route.current.params.project
+		// 	}
+		// })
 		ngmData.get({
-			method: 'POST',
-			url: ngmAuth.LOCATION + '/api/cluster/project/getProject',
-			data: {
-				id: $route.current.params.project
-			}
+			method: 'GET',
+			url: ngmAuth.LOCATION + '/api/cluster/project/getProject?id='+ $route.current.params.project
 		}).then(function(data){
 			// assign data
 			$scope.report.setProjectSummary( data );

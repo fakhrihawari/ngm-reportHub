@@ -6,6 +6,12 @@ const match4WProjectPlanRoute = ({ url, event }) => {
 const matchClusterIndicator = ({ url, event }) => {
 	return (url.pathname === '/api/cluster/indicator');
 };
+const matchReport = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/report/getReport');
+};
+const matchReportStock = ({ url, event }) => {
+	return (url.pathname === '/api/cluster/stock/getReport');
+};
 // PROFILE-PAGE
 workbox.routing.registerRoute(
 	new RegExp('http://192.168.33.16/api/list/organizations'),
@@ -116,6 +122,21 @@ workbox.routing.registerRoute(
 	}),
 );
 // STOCK LIST-END
+// STOCK Monthly
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/stock/getReport'),
+	matchReportStock,
+	new workbox.strategies.StaleWhileRevalidate({
+		cacheName: 'getStockReport',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// STOCK Monthly - END
 // 5W Dashboard
 workbox.routing.registerRoute(
 	// new RegExp('http://192.168.33.16/api/cluster/indicator'),
@@ -226,4 +247,47 @@ workbox.routing.registerRoute(
 	}),
 );
 // DROUGHT DASHBOARD-END
+// project summary page
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/project/getProject'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getProjectSummary',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// project summary page-END
+// Monthly Report
+workbox.routing.registerRoute(
+	// new RegExp('http://192.168.33.16/api/cluster/report/getReport'),
+	matchReport,
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getMonthlyReport',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// Monthly Report - END
+// Monthly ReportList 
+workbox.routing.registerRoute(
+	new RegExp('http://192.168.33.16/api/cluster/report/getReportsList'),
+	new workbox.strategies.NetworkFirst({
+		cacheName: 'getMonthlyReportList',
+		plugins: [
+			new workbox.expiration.Plugin({
+				maxEntries: 100,
+				maxAgeSeconds: 30 * 60 // 30 Minutes
+			})
+		]
+	}),
+);
+// Monthly ReportList - END
 workbox.precaching.precacheAndRoute([]);

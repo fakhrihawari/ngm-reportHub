@@ -188,12 +188,16 @@ angular.module('ngmReportHub')
 		} else {
 
 			// return project
+			// ngmData.get({
+			// 	method: 'POST',
+			// 	url: ngmAuth.LOCATION + '/api/cluster/project/getProject',
+			// 	data: {
+			// 		id: $route.current.params.project
+			// 	}
+			// })
 			ngmData.get({
-				method: 'POST',
-				url: ngmAuth.LOCATION + '/api/cluster/project/getProject',
-				data: {
-					id: $route.current.params.project
-				}
+				method: 'GET',
+				url: ngmAuth.LOCATION + '/api/cluster/project/getProject?id=' + $route.current.params.project
 			}).then( function( data ){
 				// assign data
 				if ( data.target_locations && data.target_beneficiaries ){
