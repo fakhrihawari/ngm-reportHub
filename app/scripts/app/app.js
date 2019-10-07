@@ -499,12 +499,40 @@ angular
 				if ($scope.ngm.openMinimize){
 					// $('g[class*="highcharts-series"]').css('transform', 'translate(-25px, 0)');
 					$('g[class*="highcharts-series-group"]').css('transform', 'translate(0, 0)');
+					// fix bug when expand in login page
+					$(".carousel-item").each(function () {
+						var matrix = $(this).css('transform')
+						var values = matrix.match(/-?[\d\.]+/g);
+						if (parseInt(values[4]) !== 0) {
+							if (Math.sign(values[4]) < 0) {
+								values[4] = parseFloat(values[4]) + 100;
+							} else {
+								values[4] = parseFloat(values[4]) - 100;
+							}
+							string = 'matrix(' + values.join(',') + ')';
+							$(this).css('transform', string);
+						}
+					})
 				}else{
 					// $('g[class*="highcharts-series"]').css('transform', 'translate(0, 0)');
 					$('g[class*="highcharts-series-group"]').css('transform', 'translate(50px, 0)');
 					if(screen.width > 1440){
 						$('g[class*="highcharts-series-group"]').css('transform', 'translate(1.5%, 0)');
 					}
+					// fix bug when expand in login page
+					$(".carousel-item").each(function () {
+						var matrix = $(this).css('transform')
+						var values = matrix.match(/-?[\d\.]+/g);
+						if (parseInt(values[4]) !== 0) {
+							if (Math.sign(values[4]) < 0) {
+								values[4] = parseFloat(values[4]) - 100;
+							} else {
+								values[4] = parseFloat(values[4]) + 100;
+							}
+							string = 'matrix(' + values.join(',') + ')';
+							$(this).css('transform', string);
+						}
+					})
 					// close menu dropdown
 					if($('.ngm-profile-icon').hasClass('rotate-icon')){
 						$('.ngm-profile-menu-content').slideToggle();
