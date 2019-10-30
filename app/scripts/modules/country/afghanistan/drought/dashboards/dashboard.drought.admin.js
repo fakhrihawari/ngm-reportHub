@@ -208,16 +208,17 @@ angular.module('ngmReportHub')
 						name: 'drought_admin_dashboard',
 						header: {
 							div: {
-								'class': 'col s12 m12 l12 report-header',
+								'class': 'col s12 m12 l12 report-header with-background',
 								'style': 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 							},
 							title: {
 								'class': 'col s12 m10 l10 report-title truncate',
-								'style': 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+								'style': 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 								'title': $route.current.params.year + ' ' + 'Drought Response' + ' | ' + ngmDroughtHelper.getTitle(),//+ $scope.dashboard.user.admin0pcode + ' | ' + $scope.dashboard.user.cluster + ' | ' + $scope.dashboard.user.organization,
 							},
 							subtitle: {
 								'class': 'col hide-on-small-only m8 l9 report-subtitle truncate',
+								style: 'color:#fff;font-weight:400;',
 								'title': 'Afghanistan Drought Response' +' | '+ ngmDroughtHelper.getSubtitle(),
 							},
 							download: {

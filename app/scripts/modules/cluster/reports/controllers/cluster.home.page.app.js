@@ -58,16 +58,17 @@ angular.module( 'ngmReportHub' )
 					name: 'cluster_organization',
 					header: {
 						div: {
-							'class': 'col s12 m12 l12 report-header',
+							'class': 'col s12 m12 l12 report-header with-background',
 							style: 'border-bottom: 3px ' + $scope.report.ngm.style.defaultPrimaryColor + ' solid;'
 						},
 						title: {
 							'class': 'col s12 m12 l12 report-title truncate',
-							style: 'font-size: 3.4rem; color: ' + $scope.report.ngm.style.defaultPrimaryColor,
+							style: 'font-size: 3.4rem; color: ' + $scope.report.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 							title: $scope.report.title
 						},
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
+							style: 'color:#fff;font-weight:400;',
 							title: $scope.report.subtitle
 						}
 					},

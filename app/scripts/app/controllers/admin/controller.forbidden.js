@@ -32,16 +32,17 @@ angular.module('ngmReportHub')
 			name: 'dashboard_forbidden',
 			header: {
 				div: {
-					'class': 'col s12 m12 l12 report-header',
+					'class': 'col s12 m12 l12 report-header with-background',
 					style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 				},
 				title: {
 					'class': 'col s12 m12 l12 report-title',
 					title: 'Forbidden!',
-					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 				},
 				subtitle: {
 					'class': 'col s12 m12 l12 report-subtitle',
+					style: 'color:#fff;font-weight:400;',
 					title: 'Sorry' + $scope.dashboard.username + ', you are not authorized to access this page<span class="hide-on-small-only">, please contact <a href="mailto:ngmreporthub@gmail.com">ngmReportHub@gmail.com</a></span>',
 				}
 			},

@@ -29,16 +29,17 @@ angular.module('ngmReportHub')
 			name: 'dashboard_admin',
 			header: {
 				div: {
-					'class': 'col s12 m12 l12 report-header',
+					'class': 'col s12 m12 l12 report-header with-background',
 					style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 				},
 				title: {
 					'class': 'col s12 m12 l12 report-title truncate',
 					title: 'ReportHub | Feedback',
-					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + 'color:#fff;font-weight:400;',
 				},
 				subtitle: {
 					'class': 'col s12 m12 l12 report-subtitle',
+					style:  'color:#fff;font-weight:400;',
 					title: 'Follow the feedback guidelines to register a feature request or file a bug report',
 				}
 			},

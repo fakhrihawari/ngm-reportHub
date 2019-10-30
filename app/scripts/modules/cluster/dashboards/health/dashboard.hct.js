@@ -112,16 +112,17 @@ angular.module( 'ngmReportHub' )
 						name: 'health_4w_dashboard',
 						header: {
 							div: {
-								'class': 'col s12 m12 l12 report-header',
+								'class': 'col s12 m12 l12 report-header with-background',
 								'style': 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 							},
 							title: {
 								'class': 'col s12 m8 l8 report-title truncate',
-								'style': 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+								'style': 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 								'title': 'AFG | HEALTH | ' + data.title.toUpperCase(),
 							},
 							subtitle: {
 								'class': 'col hide-on-small-only s12 report-subtitle truncate',
+								style: 'color:#fff;font-weight:400;',
 								'title': 'BPHS ( no TCU ) Q4 2016 & Select Health Cluster Services ( FATP, TCU, MCH, Vacc. ) Q1 2017 in Target Districts ( HRP White Areas 2016 / OCHA IDP Districts 2017 )',
 							},
 							download: {

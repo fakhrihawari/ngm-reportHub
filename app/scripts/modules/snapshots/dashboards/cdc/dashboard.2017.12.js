@@ -80,16 +80,17 @@ angular.module('ngmReportHub')
 						name: 'cdc_monthly_2017_12',
 						header: {
 							div: {
-								'class': 'col s12 report-header',
+								'class': 'col s12 report-header with-background',
 								'style': 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 							},
 							title: {
 								'class': 'col s12 report-title truncate',
-								'style': 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+								'style': 'font-size: 3.4rem; color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + 'color:#fff;font-weight:400;',
 								'title': $scope.dashboard.title,
 							},
 							subtitle: {
 								'class': 'col hide-on-small-only m8 l9 report-subtitle truncate',
+								style:  'color:#fff;font-weight:400;',
 								'title': $scope.dashboard.subTitle,
 							},			
 						},

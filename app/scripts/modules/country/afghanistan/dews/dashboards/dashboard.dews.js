@@ -227,16 +227,17 @@ angular.module('ngmReportHub')
 			name: 'who_dews_dashboard',
 			header: {
 				div: {
-					'class': 'col s12 m12 l12 report-header',
+					'class': 'col s12 m12 l12 report-header with-background',
 					'style': 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 				},
 				title: {
 					'class': 'col s12 m8 l8 report-title truncate',
-					'style': 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+					'style': 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 					'title': $scope.dashboard.title,
 				},
 				subtitle: {
 					'class': 'col hide-on-small-only m8 l9 report-subtitle',
+					style: 'color:#fff;font-weight:400;',
 					'title': $scope.dashboard.subtitle,
 				},
 				datePicker: {

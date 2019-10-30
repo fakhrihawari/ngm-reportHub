@@ -35,16 +35,17 @@ angular.module('ngmReportHub')
 			name: 'dashboard_reset_password',
 			header: {
 				div: {
-					'class': 'col s12 m12 l12 report-header',
+					'class': 'col s12 m12 l12 report-header with-background',
 					style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 				},
 				title: {
 					'class': 'col s12 m12 l12 report-title truncate',
-					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 					title: 'Reset Password'
 				},
 				subtitle: {
 					'class': 'col s12 m12 l12 report-subtitle',
+					style: 'color:#fff;font-weight:400;',
 					html: true,
 					title: 'Complete below<span class="hide-on-small-only"> to reset your ReportHub password',
 				}

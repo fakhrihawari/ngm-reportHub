@@ -315,4 +315,8 @@ body.md-default-theme, body, html.md-default-theme, html {
 #splash-screen {
 	display: none;
 }
+.with-background{
+	background-color: #2196f3;
+	padding: 0 70px !important;
+}
 

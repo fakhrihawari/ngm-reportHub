@@ -43,17 +43,18 @@ angular.module('ngmReportHub')
 			name: 'dashboard_register',
 			header: {
 				div: {
-					'class': 'col s12 m12 l12 report-header',
+					'class': 'col s12 m12 l12 report-header with-background',
 					style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 				},
 				title: {
 					'class': 'col s12 m12 l12 report-title truncate',
-					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 					//title: '{{"Register" | translate}}'
 					title: $filter('translate')('register'),
 				},
 				subtitle: {
 					'class': 'col s12 m12 l12 report-subtitle',
+					style: 'color:#fff;font-weight:400;',
 					html: true,
 					title: $filter('translate')('welcome_to')+' '+var4wplusrh+' <span class="hide-on-small-only">, '+$filter('translate')('please register to continue')+'</span>',
 				} 

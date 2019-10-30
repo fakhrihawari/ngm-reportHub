@@ -375,16 +375,17 @@ angular.module('ngmReportHub')
 					name: 'dashboard_team',
 					header: {
 						div: {
-							'class': 'col s12 m12 l12 report-header',
+							'class': 'col s12 m12 l12 report-header with-background',
 							style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 						},
 						title: {
 							'class': 'col s12 m12 l12 report-title truncate',
-							style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+							style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 							title: $scope.dashboard.organization + ' | ' +  $scope.dashboard.admin0name + ' | '+$filter('translate')('team')
 						},
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle',
+							style: 'color:#fff;font-weight:400;',
 							html: true,
 							title: $scope.dashboard.organization  + ' | ' +  $scope.dashboard.admin0name + ' | '+ $filter('translate')('team') +' | ' + $scope.dashboard.user.username
 						}

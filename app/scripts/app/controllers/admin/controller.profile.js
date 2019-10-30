@@ -59,17 +59,18 @@ angular.module('ngmReportHub')
 					name: 'dashboard_profile',
 					header: {
 						div: {
-							'class': 'col s12 m12 l12 report-header',
+							'class': 'col s12 m12 l12 report-header with-background',
 							style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 						},
 						title: {
 							'class': 'col s12 m12 l12 report-title report-title',
-							style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+							style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 							title: $filter('translate')('profile')+' | ' + user.username
 
 						},
 						subtitle: {
 							'class': 'col s12 m12 l12 report-subtitle',
+							style: 'color:#fff;font-weight:400;',
 							html: true,
 							title: user.admin0name.toUpperCase().substring(0, 3) + ' | ' + user.cluster.toUpperCase() + ' | ' + user.organization + ' | ' + user.username,
 						}

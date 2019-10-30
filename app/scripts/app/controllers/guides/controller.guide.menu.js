@@ -29,16 +29,17 @@ angular.module('ngmReportHub')
 			name: 'dashboard_admin',
 			header: {
 				div: {
-					'class': 'col s12 m12 l12 report-header',
+					'class': 'col s12 m12 l12 report-header with-background',
 					style: 'border-bottom: 3px ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ' solid;'
 				},
 				title: {
 					'class': 'col s12 m12 l12 report-title truncate',
 					title: 'ReportHub',
-					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+					style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + 'color:#fff;font-weight:400;',
 				},
 				subtitle: {
 					'class': 'col s12 m12 l12 report-subtitle',
+					style:  'color:#fff;font-weight:400;',
 					title: 'Select from the available options for ReportHub tips & usage guides',
 				}
 			},

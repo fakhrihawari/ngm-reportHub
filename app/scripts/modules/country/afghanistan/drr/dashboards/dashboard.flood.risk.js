@@ -192,10 +192,11 @@ angular.module('ngmReportHub')
 						title: {
 							'class': 'col s12 m8 l8 report-title truncate',
 							title:  title,
-							style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor,
+							style: 'color: ' + $scope.dashboard.ngm.style.defaultPrimaryColor + ';color:#fff;font-weight:400;',
 						},
 						subtitle: {
 							'class': 'col hide-on-small-only m8 l9 report-subtitle truncate',
+							style: 'color:#fff;font-weight:400;',
 							title: subtitle,
 						},
 						download: {
