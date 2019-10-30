@@ -111,7 +111,7 @@ angular.module('ngmReportHub')
 							},
 							subtitle: {
 								'class': 'col hide-on-small-only m8 l9 report-subtitle truncate',
-								style: : 'color: #fff; font- weight: 400;',
+								style:  'color: #fff; font- weight: 400;',
 								'title': ngmNutritionHelper.getSubtitle(),
 							},
 							datePicker: {

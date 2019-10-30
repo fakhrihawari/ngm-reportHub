@@ -564,6 +564,17 @@ angular
 			// set application
 			$scope.ngm.setApplication( app );
 
+
+			setTimeout(() => {
+				if ($(".dashboard")[0]) { 
+					$('.dashboard').addClass('container') 
+				}
+				if ($('#ngm-report-datepicker')[0]){
+					$('#ngm-report-datepicker label').css({ 'color': '#fff', 'font-weight': '400' });
+					$('.ngm-date input[type=text]').css({ 'color': '#fff', 'font-weight': '500' });
+				}
+			}, 100);
+
 		});
 
 		// annoying loading artifacts of left menu
