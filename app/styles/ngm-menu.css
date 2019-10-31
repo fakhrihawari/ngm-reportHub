@@ -18,7 +18,7 @@
 .shrink{
 transform: translateX(-230px);
 transition: .30s ease-in-out;
-background-color: #2196f3;
+/* background-color: #2196f3; */
 }
 .ngm-search {
 	height: 52px;
