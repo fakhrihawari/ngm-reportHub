@@ -150,7 +150,7 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 					// documents upload
 					$scope.project.setTokenUpload();
 					// for minimize-maximize beneficiary form
-					if ($translate.use() === 'afg') {
+					if ($translate.use() === 'prs') {
 						$scope.rtlClass = true;
 					} else {
 						$scope.rtlClass = false;
@@ -945,6 +945,13 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();
 			})
+			$scope.$on('rtl', function (event, ready) {
+				if (ready) {
+					$scope.rtlClass = true;
+				} else {
+					$scope.rtlClass = false;
+				}
+			});
   }
 
 ]);

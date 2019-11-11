@@ -302,7 +302,7 @@
 											class="waves-effect waves-light btn blue"
 											ng-click="project.validateBeneficiariesDetailsForm( true, false )"
 											ng-cloak>
-							<i class="material-icons left">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
+							<i class="material-icons left" ng-class="{'left':!rtlClass,'right':rtlClass}">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
 
 						</button>
 

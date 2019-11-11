@@ -1166,7 +1166,7 @@
 			</div>
 
 			<!-- else -->
-			<div ng-if="project.definition.admin0pcode !== 'NG'">
+			<div ng-if="project.definition.admin0pcode !== 'NG'" ng-class="{'language-rtl':rtlClass}">
 				<button class="btn"
 								ng-if="( project.canEdit && project.definition.project_status !== 'complete' && project.report.report_status !== 'complete' )"
 								ng-click="project.addBeneficiary( $locationIndex );"
