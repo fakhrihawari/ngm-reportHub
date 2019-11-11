@@ -201,6 +201,7 @@ angular.module( 'ngmReportHub' )
 										if ( $route.current.params.organization_id ) { href += '/' + $route.current.params.organization_id }
 										return href;
 									},
+									rtlEvent: 'rtl',
 									report_date: moment().subtract( 1, 'M').endOf( 'M' ).format('YYYY-MM-DD'),
 									templateUrl: '/scripts/modules/cluster/views/cluster.home.page.html',
 					      }

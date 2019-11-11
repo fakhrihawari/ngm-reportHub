@@ -447,10 +447,12 @@ angular
 				var set_language = {
 					default: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
 					{ language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' },
+					{ language_id: 'prs', language_name: 'Prs-Afghanistan', flag: 'spain.png' },
 					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
 					col: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
 					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
 					af: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
+					{ language_id: 'prs', language_name: 'Prs-Afghanistan', flag: 'spain.png' },
 					{ language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' }]
 				}
 				// $scope.ngm.getLanguage = set_language[country] ? set_language[country]:[];

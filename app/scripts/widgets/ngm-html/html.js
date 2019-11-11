@@ -95,7 +95,7 @@ angular.module('ngm.widget.html', ['ngm.provider'])
 			// RTL
 			if ($scope.panel.rtlEvent) {
 				$scope.rtlClass = false;
-				if ($translate.use() === 'afg') {
+				if ($translate.use() === 'prs') {
 					$scope.rtlClass = true;
 				}
 				$scope.$on('rtl', function (event, ready) {

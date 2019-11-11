@@ -245,7 +245,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					}
 					// RTL
 					$scope.rtlClass = false;
-					if ($translate.use() === 'afg') {
+					if ($translate.use() === 'prs') {
 						$scope.rtlClass = true;
 					}
 
@@ -885,6 +885,13 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();				
 			})
+			$scope.$on('rtl', function (event, ready) {
+				if(ready){
+					$scope.rtlClass = true;
+				}else{
+					$scope.rtlClass = false;
+				}
+			});
   }
 
 ]);
