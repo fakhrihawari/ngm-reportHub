@@ -1236,7 +1236,8 @@ angular.module('ngmReportHub')
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
 											// indicator, list
 											data: $scope.dashboard.getRequest( 'reports_due', true )
-										}
+										},
+										rtlEvent:'rtl'
 									}
 								}]
 							}]
@@ -1265,7 +1266,8 @@ angular.module('ngmReportHub')
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
 											// indicator, list
 											data: $scope.dashboard.getRequest( 'reports_submitted', true )
-										}
+										},
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1295,7 +1297,8 @@ angular.module('ngmReportHub')
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
 											// indicator, list
 											data: $scope.dashboard.getRequest( 'progress_beneficiaries', true )
-										}
+										},
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]

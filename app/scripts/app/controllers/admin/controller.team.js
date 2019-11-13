@@ -449,7 +449,8 @@ angular.module('ngmReportHub')
 										}
 										return true;
 									}),
-									search_tool: true
+									search_tool: true,
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]
@@ -476,7 +477,8 @@ angular.module('ngmReportHub')
 									onClick: function(user){
 										// go to profile
 										$location.path( $scope.dashboard.profileHref + '/' + user.username );
-									}
+									},
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]

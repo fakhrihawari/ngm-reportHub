@@ -13,6 +13,12 @@
 .pagination li.active {
     background-color: #009688;
 }
+.table-rtl {
+	direction: rtl;
+}
+.title-rtl{
+		text-align: right;
+	}
 
 </style>
 
@@ -22,7 +28,7 @@
     <div class="card">
       <ul class="collection with-header">
         
-        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}"><i class="material-icons left">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5></li>
+        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}" ng-class="{'title-rtl':rtlClass}"><i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5></li>
         <li class="collection-item avatar" style="padding:10px;">
           
           <!-- if no data -->
@@ -35,7 +41,7 @@
 
           <!-- if data -->
           <div ng-if="data.length">
-            <table class="centered highlight responsive-table" ng-table="table.tableParams">
+            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
               <tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
                 <td data-title="'Sector'" sortable="'cluster'" >
                   {{ row.cluster }}

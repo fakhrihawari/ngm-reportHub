@@ -23,6 +23,11 @@
 		right: 15px;
 		margin-top:5px;	
 	}
+	.percentage-wrapper.rtl span:last-child{
+		position: absolute;
+		left: 15px;
+		margin-top:5px;	
+	}
 	.project-progress-bar-wrapper {
 			background-color: #ffffff;
 			border: 1px solid #4db6ac;
@@ -36,6 +41,12 @@
 			height: 100%;
 			background-color:#4db6ac;
 	}
+	.table-rtl {
+	direction: rtl;
+	}
+	.title-rtl{
+		text-align: right;
+	}
 </style>
 
 <!-- ngTable -->
@@ -44,8 +55,8 @@
 		<div class="card">
 			<ul class="collection with-header">
 				<li class="{{ table.headerClass }}">
-					<h5 class="report-work-title {{ table.headerText }}">
-						<i class="material-icons left">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5>
+					<h5 class="report-work-title {{ table.headerText }}" ng-class="{'title-rtl':rtlClass}">
+						<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5>
 				</li>
 				<li class="collection-item avatar" style="padding:10px;">
 
@@ -58,7 +69,7 @@
 
 					<!-- if data -->
 					<div ng-if="data.length">
-						<table class="centered highlight responsive-table" ng-table="table.tableParams">
+						<table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
 								<td data-title="'Cluster'" sortable="'cluster'">
 									{{ row.cluster }}
@@ -86,7 +97,7 @@
 									{{ row.progress_percentage}}
 								</td>
 								<td width="15%" data-title="'progress'|translate" sortable="'progress_percentage'" ng-if="row.progress_percentage !=='N/A'">
-									<div class="percentage-wrapper">
+									<div class="percentage-wrapper" ng-class="{'rtl':rtlClass}">
 										<span>{{ row.progress_percentage| number : 1 }}%</span>
 										<span class="project-progress-bar-wrapper ">
 											<div class="project-progress-bar-inner" style="width: {{row.progress_percentage}}%" ng-if="row.progress_percentage <=100">
