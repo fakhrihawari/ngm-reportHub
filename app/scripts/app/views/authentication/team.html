@@ -50,6 +50,9 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
 .table-rtl {
 	direction: rtl;
 }
+.right-title{
+	text-align: right;
+}
 </style>
 <div id="manage-modal" class="modal" style="width:80%">
 	<div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
@@ -89,14 +92,14 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
     <div class="card">
       <ul class="collection with-header">
         <li class="{{ table.headerClass }}" style="{{ table.headerStyle }};height:80px;">
-					<div class="col s12 m8">
+					<div class="col s12 m8" ng-class="{'right right-title':rtlClass}">
 						<h5 class="report-work-title {{ table.headerText }}">
-							<i class="material-icons left">{{ table.headerIcon }}</i>
+							<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>
 							{{ table.headerTitle }}
 						</h5>
 					</div>
 					<div class="col s12 m4 right" ng-if="showSearch">
-						<nav class="nav-list-search right" ng-class="{'focused':table.search.focused===true || table.search.filter }">
+						<nav class="nav-list-search right" ng-class="{'focused':table.search.focused===true || table.search.filter,'left':rtlClass,'right':!rtlClass}">
 							<div class="nav-wrapper" ng-click="table.toggleSearch()">
 								<form style="padding: 0px">
 									<div class="input-field">

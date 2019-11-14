@@ -39,19 +39,22 @@
 		direction: rtl;
 		text-align: left;
 	}
+	.right-title{
+		text-align: right;
+	}
 </style>
 
 <!-- bind html -->
 <div>
 	<ul class="collection with-header z-depth-1">
 		<li class="collection-header {{ list.color }}" style="height:80px;">
-			<div class="col s12 m8">
+			<div class="col s12 m8" ng-class="{'right right-title':rtlClass}">
 				<h4 class="report-work-title {{ list.textColor }}" style="font-size:1.8rem;">
-					<i class="material-icons left">{{ list.titleIcon }}</i>{{ list.title }}
+					<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ list.titleIcon }}</i>{{ list.title }}
 				</h4>
 			</div>
-			<div ng-if="list.data.length > list.itemsPerPage" class="col s12 m4 right">
-			  <nav class="nav-list-search right" ng-class="{'focused':list.search.focused===true || list.search.filter }">
+			<div ng-if="list.data.length > list.itemsPerPage" class="col s12 m4 " ng-class="{'left':rtlClass,'right':!rtlClass}">
+			  <nav class="nav-list-search " ng-class="{'focused':list.search.focused===true || list.search.filter,'left':rtlClass,'right':!rtlClass }">
 			    <div class="nav-wrapper" ng-click="list.toggleSearch()">
 			      <form>
 			        <div class="input-field">
