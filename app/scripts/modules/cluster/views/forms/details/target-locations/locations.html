@@ -83,8 +83,8 @@
 							    	<td ng-if="project.definition.admin0pcode !== 'COL'">
 							    	{{'implementation' | translate}}</td>
 							    	<td ng-if="project.definition.admin0pcode === 'COL'">{{'implementation_level' | translate}}</td>
-							      <td>{{ project.lists.admin2[0].admin1type_name }}*</td>
-							      <td>{{ project.lists.admin2[0].admin2type_name }}*</td>
+							      <td>{{ !rtlClass?project.lists.admin2[0].admin1type_name:'province' | translate}}*</td>
+							      <td>{{ !rtlClass?project.lists.admin2[0].admin2type_name:'district' | translate}}*</td>
 							      <td ng-if="project.lists.admin3.length">{{ project.lists.admin3[0].admin3type_name }}</td>
 							      <td ng-if="project.lists.admin4.length">{{ project.lists.admin4[0].admin4type_name }}</td>
 							      <td ng-if="project.lists.admin5.length">{{ project.lists.admin5[0].admin5type_name }}</td>

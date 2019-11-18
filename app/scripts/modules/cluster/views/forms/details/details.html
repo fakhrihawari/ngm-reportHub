@@ -28,6 +28,9 @@
 	md-chips .md-chips .md-chip-input-container input:disabled{
 		display: none;
 	} 
+	.rtl{
+		direction: rtl;
+	}
 </style>
 
 <!-- bind html -->
@@ -260,7 +263,7 @@
 									
 									<!-- no other_activities_in_addition_to for CB && health -->
 									<div class="input-field col s12 m6" style="padding-bottom:5px;">
-										<label>{{'other_activities_in_addition_to' | translate}} {{ project.definition.cluster }}?</label>
+										<label ng-class="{'rtl':rtlClass}">{{'other_activities_in_addition_to' | translate}} {{ project.definition.cluster }}?</label>
 										<div style="padding-bottom:35px;"></div>
 								    <p ng-repeat="a in project.lists.clusters | filter: { cluster_id: '!' + project.definition.cluster_id }"
 								    		ng-if="a.cluster_id !== 'acbar'">
