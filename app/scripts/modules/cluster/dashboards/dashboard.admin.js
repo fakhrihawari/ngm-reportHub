@@ -480,7 +480,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster',
 							'icon': 'camera',
-							'title': $filter('translate')('sectors_mayus'),
+							'title': $filter('translate')('sector_mayus'),
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});

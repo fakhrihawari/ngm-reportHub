@@ -226,7 +226,7 @@ angular.module( 'ngmReportHub' )
 						'search': true,
 						'id': 'search-org',
 						'icon': 'people',
-						'title': 'Organization',
+						'title': $filter('translate')('organization'),
 						'class': 'teal lighten-1 white-text',
 						'rows': listOrg
 					};
@@ -286,7 +286,7 @@ angular.module( 'ngmReportHub' )
 							'search': true,
 							'id': 'search-sector',
 							'icon': 'camera',
-							'title': 'Sector',
+							'title': $filter('translate')('sector_mayus'),
 							'class': 'teal lighten-1 white-text',
 							'rows': sectorRows
 						}

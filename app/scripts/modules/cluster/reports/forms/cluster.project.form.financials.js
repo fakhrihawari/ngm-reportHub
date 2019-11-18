@@ -616,7 +616,7 @@ angular.module( 'ngm.widget.project.financials', [ 'ngm.provider' ])
 			
 			// RTL
 			$scope.rtlClass = false;
-			if ($translate.use() === 'afg') {
+			if ($translate.use() === 'prs') {
 				$scope.rtlClass = true;
 			}
 			$scope.$on('rtl', function (event, ready) {

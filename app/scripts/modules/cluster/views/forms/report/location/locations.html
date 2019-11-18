@@ -73,13 +73,15 @@
 			
 				<li class="collection-item avatar">
 						<div ng-if="project.report.admin0pcode === 'AF'" ng-class="{'language-rtl':rtlClass}">
-							<p style="color: #e57373;padding-top: 10px">
+							<p ng-if="!rtlClass"style="color: #e57373;padding-top: 10px">
 								<b>{{'note'|translate}}:</b> {{'to_report' | translate}}
 								<b>{{'flood_response' | translate}}</b> {{'activities_please_select_from' | translate}}
 								<b>{{'beneficiary' | translate}}</b> {{'drop_down_beneficiary_types' | translate}} </br>
 								<b>{{'flood_affected_displaced' | translate}}</b> {{'or'| translate}}
 								<b>{{'flood_affected_non_displaced' | translate}}</b>
 							</p>
+							<p ng-if="rtlClass" style="color: #e57373;padding-top: 10px">یاداشت: برای گزارش پاسخگویی به فعالیت های سیلاب، لطفا از لیست افراد ذینفع ذیل نوع افراد ذینفع را انتخاب نمایید</p>
+							<p ng-if="rtlClass" style="color: #e57373;">افراد سیلاب زده بیجا شده ویا افراد سیلاب زده بیجا نشده</p>
 						</div>
 					<!-- form -->
 
