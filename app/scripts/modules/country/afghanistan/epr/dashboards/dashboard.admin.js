@@ -273,7 +273,8 @@ angular.module('ngmReportHub')
 										tableOptions:{
 											count: 10
 										},
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'duplicate_reports', true )
+										request: ngmEprHelper.getRequest( 'epr/indicator', 'duplicate_reports', true ),
+										rtlEvent: 'rtl',
 									}
 								}]
 							}]
@@ -294,7 +295,8 @@ angular.module('ngmReportHub')
 										tableOptions:{
 											count: 10
 										},
-										request: ngmEprHelper.getRequest( 'epr/indicator', 'reports_submitted', true )
+										request: ngmEprHelper.getRequest( 'epr/indicator', 'reports_submitted', true ),
+										rtlEvent: 'rtl',
 									}
 								}]
 							}]

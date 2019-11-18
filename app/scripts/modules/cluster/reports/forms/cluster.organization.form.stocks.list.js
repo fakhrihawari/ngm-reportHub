@@ -31,6 +31,7 @@ angular.module( 'ngm.widget.organization.stocks.list', [ 'ngm.provider' ])
     'ngmClusterValidation',
     'ngmLists',
     'config',
+    '$translate',
     function( $scope,
         $location,
         $timeout,
@@ -44,7 +45,8 @@ angular.module( 'ngm.widget.organization.stocks.list', [ 'ngm.provider' ])
         ngmClusterHelper,
         ngmClusterValidation,
         ngmLists,
-        config ){
+        config, 
+        $translate){
 
       // project
       $scope.report = {
@@ -200,6 +202,18 @@ angular.module( 'ngm.widget.organization.stocks.list', [ 'ngm.provider' ])
         }
 
       }
+      $scope.rtlClass = false;
+      if ($translate.use() === 'prs') {
+        $scope.rtlClass = true;
+      }
+      $scope.$on('rtl', function (event, ready) {
+        if (ready) {
+          $scope.rtlClass = true;
+
+        } else {
+          $scope.rtlClass = false;
+        }
+      });
   }
 
 ]);

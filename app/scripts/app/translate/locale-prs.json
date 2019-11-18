@@ -296,7 +296,7 @@
         "project_target_locations":"موقعیت های تحت پوشش پروژه",
         "children":"اطفال",
         "adult":"جوانان",
-        "elderly":"کهن سال",
+        "elderly":"کلان سال",
         "new_project":"پروژه جدید",
         "as":"به عنوان",
         "processing":" ...در حال جریان",
@@ -524,8 +524,10 @@
         "report_mayus":"گزارش",
         "country_mayus":"کشور",
         "countries_mayus":"کشورها",
-         "reports_completed":"گزارش ها کامل شد",
+         "reports_completed":"گزارش هاى کامل شده",
          "reports_saved":"گزارش ها ذخیره شد",
+         "sector_mayus":"بخش",
+         "organization_mayus":"سازمان",
 
 
         "organizations":"ارگان ها",
@@ -595,6 +597,7 @@
         "treatment_same_province":"رفتار عین ولایت",
         "edit":"ویرایش",
         "region":"ناحیه",
+        "cluster":"گروه",
 
         "cholera_response":"پاسخ به کولرا",
         "activity_status":"وضعیت فعالیت",

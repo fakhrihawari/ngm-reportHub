@@ -15,8 +15,8 @@
 		<div class="card">
 			<ul class="collection with-header">
 				<li class="collection-header teal lighten-4">
-					<h5 class="report-work-title">
-						<i class="material-icons left">location_on</i>{{'warehouse_locations'|translate}}
+					<h5 class="report-work-title" ng-class="{'right-title':rtlClass}">
+						<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">location_on</i>{{'warehouse_locations'|translate}}
 					</h5>
 				</li>
 				<li class="collection-item avatar">

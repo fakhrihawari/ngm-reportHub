@@ -480,7 +480,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster',
 							'icon': 'camera',
-							'title': 'Sector',
+							'title': $filter('translate')('sectors_mayus'),
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});
@@ -535,7 +535,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-cluster-organization',
 									'icon': 'supervisor_account',
-									'title': 'Organization',
+									'title': $filter('translate')('organization'),
 									'class': 'teal lighten-1 white-text',
 									'rows': orgRows
 								});

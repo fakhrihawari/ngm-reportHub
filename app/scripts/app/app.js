@@ -257,7 +257,7 @@ angular
 				 $translate.use($key);
 				if ($key !== 'en') {
 					$rootScope.$broadcast('rtl', true);
-					moment.locale('ar-tn');
+					// moment.locale('ar-tn');
 				} else {
 					moment.locale('en');
 					$rootScope.$broadcast('rtl', false);

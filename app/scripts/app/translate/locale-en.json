@@ -618,6 +618,7 @@
         "treatment_same_province":"Treatment Same Province",
         "edit":"Edit",
         "region":"Region",
+        "cluster": "Cluster",
 
         "cholera_response":"Cholera Response",
         "activity_status":"Activity Status",

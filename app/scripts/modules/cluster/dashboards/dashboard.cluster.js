@@ -490,7 +490,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster-cluster',
 							'icon': 'camera',
-							'title': 'Cluster',
+							'title': $filter('translate')('cluster'),
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});

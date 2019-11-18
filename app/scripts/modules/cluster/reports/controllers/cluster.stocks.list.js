@@ -131,7 +131,8 @@ angular.module('ngmReportHub')
 												report_year: parseInt(year)
 											}
 										}
-									}
+									},
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]
@@ -162,7 +163,8 @@ angular.module('ngmReportHub')
 												report_year: parseInt(year)
 											}
 										}
-									}
+									},
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]
