@@ -152,7 +152,7 @@ angular.module('ngm.widget.highchart', ['ngm.provider'])
       $scope.highchart.update();
       // RTL
       if ($scope.highchart.rtlEvent) {
-        console.log("a")
+        
         $scope.rtlClass = false;
         if ($translate.use() === 'prs') {
           $scope.rtlClass = true;

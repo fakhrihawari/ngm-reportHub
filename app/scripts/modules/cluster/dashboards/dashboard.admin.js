@@ -990,7 +990,11 @@ angular.module('ngmReportHub')
 					if ($route.current.params.activity_type_id==='all'){
 						$scope.dashboard.activity_filename = '';
 					}
-
+					// RTL
+					$scope.rtlClass = false;
+					if ($translate.use() === 'prs') {
+						$scope.rtlClass = true;
+					}
 					// model
 					$scope.model = {
 						name: 'cluster_admin_dashboard',
@@ -1006,6 +1010,7 @@ angular.module('ngmReportHub')
 							},
 							subtitle: {
 								'class': 'col hide-on-small-only report-subtitle truncate m8 l9',
+								'style': $scope.rtlClass ? 'text-align:left; direction:rtl':'',
 								'title': $scope.dashboard.subtitle,
 							},
 							datePicker: {
@@ -1094,7 +1099,8 @@ angular.module('ngmReportHub')
 											// update new date
 											$location.path( path );
 										},
-										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard.admin.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard.admin.html',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]

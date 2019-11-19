@@ -889,6 +889,7 @@ angular.module('ngmReportHub')
 							},
 							subtitle: {
 								'class': 'col hide-on-small-only report-subtitle truncate m8 l9',
+								'style': $scope.rtlClass ? 'text-align:left; direction:rtl' : '',
 								'title': $scope.dashboard.subtitle,
 							},
 							datePicker: {

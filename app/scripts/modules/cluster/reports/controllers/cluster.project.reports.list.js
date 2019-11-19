@@ -41,7 +41,17 @@ angular.module('ngmReportHub')
 										+'</div>'
 									+'</div>';
 
-				return html;
+				var html_rtl = '<div class="row">'
+										+'<div class="col s12 m12 l12">'
+											+'<div style="padding:20px;">'
+												+'<a class="btn-flat waves-effect waves-teal" href="#/cluster/projects/summary/' + $scope.report.project.id +'">'
+													+'<i class="material-icons left">keyboard_return</i>'+$filter('translate')('back_to_project_summary')
+												+'</a>'
+												+'<span class="right" style="padding-top:8px;">&#x202a;' + moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a') + '&#x202c; :' + $filter('translate')('last_updated') + '</span>'
+											+'</div>'
+										+'</div>'
+					+ '</div>';
+				return $scope.rtlClass ? html_rtl: html;
 			},
 
 			// return default template or Somalia template
@@ -95,7 +105,12 @@ angular.module('ngmReportHub')
 				// add project code to subtitle?
 				var text = $filter('translate')('actual_monthly_beneficiaries_report_for')+' ' + $scope.report.project.project_title
 				var subtitle = $scope.report.project.project_code ?  $scope.report.project.project_code + ' - ' + text : text;
-
+				
+				// RTL
+				$scope.rtlClass = false;
+				if ($translate.use() === 'prs') {
+					$scope.rtlClass = true;
+				}
 				// report dashboard model
 				$scope.model = {
 					name: 'cluster_project_report_list',
@@ -151,7 +166,8 @@ angular.module('ngmReportHub')
 							widgets: [{
 								type: 'html',
 								config: {
-									html: $scope.report.getHeaderHtml()
+									html: $scope.report.getHeaderHtml(),
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]

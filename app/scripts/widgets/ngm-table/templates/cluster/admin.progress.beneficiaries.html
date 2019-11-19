@@ -71,7 +71,7 @@
 					<div ng-if="data.length">
 						<table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
-								<td data-title="'Cluster'" sortable="'cluster'">
+								<td data-title="'cluster'|translate" sortable="'cluster'">
 									{{ row.cluster }}
 								</td>
 								<td data-title="'organization'|translate" sortable="'organization'">
