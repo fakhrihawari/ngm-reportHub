@@ -19,6 +19,27 @@
 	.title-right{
 		text-align: right;
 	}
+	input[type=number].validate.inrtl + label{
+		text-align: right;
+		padding-right: 25px;
+	}
+	input[type=number].validate.inrtl{
+		text-align: right;
+	}
+	.input-field.col label.inrtl{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+	}
+	.input-field.inrtl > .select-wrapper input.select-dropdown {
+		text-align: right;
+	}
+	.input-field.inrtl > .select-wrapper span.caret {
+    	left: 0;
+	}
+	.input-field.inrtl > .select-wrapper  .dropdown-content li{
+		text-align: right;
+	}
 </style>
 <div class="row">
 	<div class="col s12 m12 l12">
@@ -94,7 +115,7 @@
 
 							<div class="row">
 								<!-- DONOR -->
-								<div class="input-field col s12 m4">
+								<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
 										<select materialize-select id="ngm-project_donor_id-{{$index}}"
 											name="ngm-project_donor_id-{{$index}}" class="validate"
 											ng-options="d.project_donor_id as d.project_donor_name for d in project.definition.project_donor"								
@@ -105,12 +126,12 @@
 											required>
 											<option value="">{{ 'select' | translate }}</option>
 										</select>
-									<label for="ngm-project_donor_id-{{$index}}" class="active"
+									<label for="ngm-project_donor_id-{{$index}}" class="active" ng-class="{'inrtl':rtlClass}"
 										style="transform:translateY(-10%)">{{'donor'|translate}}*</label>
 								</div>
 
 								<!-- Activity -->
-								<div class="input-field col s12 m4">
+								<div class="input-field col s12 m4"ng-class="{'inrtl':rtlClass}">
 									<select materialize-select id="ngm-activity_type_id-{{$index}}" name="ngm-activity_type_id-{{$index}}"
 										class="validate" 
 										ng-options="d.activity_type_id as d.activity_type_name for d in project.lists.activity_type"
@@ -121,7 +142,7 @@
 										required>
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
-									<label for="ngm-activity_type_id-{{$index}}" class="active"
+									<label for="ngm-activity_type_id-{{$index}}" class="active" ng-class="{'inrtl':rtlClass}"
 										style="transform:translateY(-10%)">{{'activity' | translate}}*</label>
 								</div>
 
@@ -143,6 +164,7 @@
 									<input id="ngm-project_budget_amount_recieved-{{$index }}"
 											name="ngm-project_budget_amount_recieved-{{$index }}"
 											type="number"
+											ng-class="{'inrtl':rtlClass}"
 											class="validate"
 											min="0"
 											ng-model="budget.project_budget_amount_recieved"
@@ -154,7 +176,7 @@
 								</div>
 
 								<!-- Currency -->
-								<div class="input-field col s12 m4">
+								<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
 									<select materialize-select id="ngm-currency_id-{{$index}}" 
 										name="ngm-currency_id-{{$index}}"
 										class="validate" 
@@ -166,7 +188,7 @@
 										required>
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
-									<label for="ngm-currency_id-{{$index}}" class="active" style="transform:translateY(-10%)">{{'currency' | translate}}*</label>
+									<label for="ngm-currency_id-{{$index}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{'currency' | translate}}*</label>
 								</div>
 
 								<!-- Received -->
@@ -183,40 +205,40 @@
 							
 							<div class="row">
 								<!-- Fund -->
-								<div class="input-field col s12 m4">
+								<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
 									<select materialize-select id="ngm-budget_funds_id-{{$index}}" name="ngm-budget_funds_id-{{$index}}" class="validate"
 										ng-options="d.budget_funds_id as d.budget_funds_name for d in project.lists.budget_funds"
 										ng-model="budget.budget_funds_id" ng-change="ngmClusterFinancial.updateName( project.lists.budget_funds, 'budget_funds_id', 'budget_funds_name', budget,project );
 																								 ngmClusterFinancial.inputChange( 'ngm-budget_funds_id-{{$index}}' );" ng-disabled="project.definition.project_status === 'complete'" required>
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
-									<label for="ngm-budget_funds_id-{{$index}}" class="active"
+									<label for="ngm-budget_funds_id-{{$index}}" class="active" ng-class="{'inrtl':rtlClass}"
 										style="transform:translateY(-10%)">{{'funds' | translate}}*</label>
 								</div>
 
 								<!-- Programing -->
-								<div ng-show="project.showProgrammingField(budget)" class="input-field col s12 m4">
+								<div ng-show="project.showProgrammingField(budget)" class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
 									<select materialize-select id="ngm-financial_programming_id-{{$index}}" name="ngm-financial_programming_id-{{$index}}"
 										class="validate" ng-options="d.financial_programming_id as d.financial_programming_name for d in project.lists.financial_programming"
 										ng-model="budget.financial_programming_id" ng-change="ngmClusterFinancial.updateName( project.lists.financial_programming, 'financial_programming_id', 'financial_programming_name', budget,project );
 																							 ngmClusterFinancial.inputChange( 'ngm-project_donor_id-{{$index}}' );" ng-disabled="project.definition.project_status === 'complete'" >
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
-									<label for="ngm-financial_programming_id-{{$index}}" class="active"
+									<label for="ngm-financial_programming_id-{{$index}}" class="active" ng-class="{'inrtl':rtlClass}"
 										style="transform:translateY(-10%)">{{'programming' | translate}}</label>
 								</div>
 							
 								
 							
 								<!-- Multi year -->
-								<div class="input-field col s12 m4">
+								<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
 									<select materialize-select id="ngm-multi_year_funding_id-{{$index}}" name="ngm-multi_year_funding_id-{{$index}}" class="validate"
 										ng-options="d.multi_year_funding_id as d.multi_year_funding_name for d in project.lists.multi_year_funding" ng-model="budget.multi_year_funding_id"
 										ng-change="ngmClusterFinancial.updateName( project.lists.multi_year_funding, 'multi_year_funding_id', 'multi_year_funding_name', budget,project );
 																																 ngmClusterFinancial.inputChange( 'ngm-multi_year_funding_id-{{$index}}' )" ng-disabled="project.definition.project_status === 'complete'" >
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
-									<label for="ngm-multi_year_funding_id-{{$index}}" class="active"
+									<label for="ngm-multi_year_funding_id-{{$index}}" class="active" ng-class="{'inrtl':rtlClass}"
 										style="transform:translateY(-10%)">{{'multi_year_funding' | translate}}</label>
 								</div>							
 								
@@ -232,6 +254,7 @@
 									<input id="year-index-{{item.year}}-{{$index}}"
 											name="year-index-{{item.year}}-{{$index}}"
 											type="number"
+											ng-class="{'inrtl':rtlClass}"
 											class="validate"
 											min="0"
 											ng-model="item.budget"
@@ -244,7 +267,7 @@
 
 							<div class="row">
 								<!-- Fts -->
-								<div class="input-field col s12 m4">
+								<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
 									<select materialize-select id="ngm-reported_on_fts_id-{{$index}}" name="ngm-reported_on_fts_id-{{$index}}"
 										class="validate" ng-options="d.reported_on_fts_id as d.reported_on_fts_name for d in project.lists.reported_on_fts"
 										ng-model="budget.reported_on_fts_id" ng-change="ngmClusterFinancial.updateName( project.lists.reported_on_fts, 'reported_on_fts_id', 'reported_on_fts_name', budget,project );
@@ -254,7 +277,7 @@
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
 								
-									<label style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}" class="active">{{'on' |translate}}
+									<label style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}" class="active" ng-class="{'inrtl':rtlClass}">{{'on' |translate}}
 										FTS?</label>
 								</div>
 								
