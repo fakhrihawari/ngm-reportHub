@@ -31,6 +31,40 @@
 	.rtl{
 		direction: rtl;
 	}
+	input[type=number].validate.inrtl + label{
+		text-align: right;
+		padding-right: 25px;
+	}
+	input[type=number].validate.inrtl{
+		text-align: right;
+	}
+	input[type=text].validate.inrtl,input[type=text].picker__input.inrtl{
+		text-align: right;
+	}
+	.input-field.col label.inrtl{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+	}
+	.input-field.col label.inrtltext{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+		padding-right: 25px;
+	}
+	.input-field.inrtl > .select-wrapper input.select-dropdown {
+		text-align: right;
+	}
+	.input-field.inrtl > .select-wrapper span.caret {
+    	left: 0;
+	}
+	.input-field.inrtl > .select-wrapper  .dropdown-content li{
+		text-align: right;
+	}
+	.rtl{
+		direction: rtl;
+	}
+</style>
 </style>
 
 <!-- bind html -->
@@ -57,21 +91,22 @@
 							<!-- project details -->
 							<div class="row">
 
-								<div class="input-field col s12 m6">
-								  <input id="ngm-project-name" type="text" class="validate"
+								<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+								  <input id="ngm-project-name" type="text" class="validate" ng-class="{'inrtl':rtlClass}"
 												ng-model="project.definition.project_title"
 												ng-disabled="project.definition.project_status === 'complete'"
 												required>
-								  <label for="ngm-project-name">{{'project_title' | translate}} *</label>
+								  <label ng-class="{'inrtltext':rtlClass}" for="ngm-project-name">{{'project_title' | translate}} *</label>
 								</div>
 
 								<!-- input-date directive -->
-								<div class="input-field col s12 m3">
-											<label id="ngm-start-date" for="ngm-start-date" class="validate">{{'start_date' | translate}} *</label>
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">
+											<label ng-class="{'inrtl':rtlClass}" id="ngm-start-date" for="ngm-start-date" class="validate">{{'start_date' | translate}} *</label>
 											<input ngm-date
 											    type="text"
 											    name="created"
-											    id="ngm-start-date"
+												id="ngm-start-date"
+												ng-class="{'inrtl':rtlClass}"
 											    ng-model="project.definition.project_start_date"
 											    format="dd mmm, yyyy"
 											    select-years="15"
@@ -81,12 +116,13 @@
 								</div>
 
 								<!-- input-date directive -->
-								<div class="input-field col s12 m3">
-								  <label for="ngm-end-date">{{'end_date' | translate}} *</label>
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">
+								  <label ng-class="{'inrtl':rtlClass}" for="ngm-end-date">{{'end_date' | translate}} *</label>
 											<input ngm-date
 											    type="text"
 											    name="created"
-											    id="ngm-end-date"
+												id="ngm-end-date"
+												ng-class="{'inrtl':rtlClass}"
 											    ng-model="project.definition.project_end_date"
 											    format="dd mmm, yyyy"
 											    select-years="15"
@@ -101,22 +137,22 @@
 							<div class="row">
 
 								<!-- org project code  -->
-								<div class="input-field col s12 m6">
+								<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
 								  <input id="ngm-project_code" type="text" class="validate"
 								  	ng-model="project.definition.project_code"
 								  	ng-disabled="project.definition.project_status === 'complete'">
-								  <label for="ngm-project_code">{{ project.definition.organization }} {{'project_code' | translate}}</label>
+								  <label for="ngm-project_code" ng-class="{'inrtltext':rtlClass}">{{ project.definition.organization }} {{'project_code' | translate}}</label>
 								</div>
 
-								<div class="input-field col s12 m3">
-								  <input id="ngm-project-budget" type="text" class="validate"
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">
+								  <input id="ngm-project-budget" type="text" class="validate" ng-class="{'inrtl':rtlClass}"
 								  	ng-model="project.definition.project_budget"
 								  	ng-disabled="project.definition.project_status === 'complete'"
 								  	required>
-								  <label for="ngm-project-budget">{{'project_budget' | translate}} ( {{ project.definition.project_budget_currency | uppercase }} ) *</label>
+								  <label ng-class="{'inrtltext':rtlClass}" for="ngm-project-budget">{{'project_budget' | translate}} ( {{ project.definition.project_budget_currency | uppercase }} ) *</label>
 								</div>
 
-								<div class="input-field col s12 m3"
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}"
 									ng-class="{ 'error-label': healthProjectForm.$submitted && !project.definition.project_budget_currency }">
 									    <select class="validate"
 									    	id="ngm-project_budget_currency"
@@ -126,7 +162,7 @@
 									    	required>
 									      <option value="" disabled selected>{{'select_project_budget_currency' | translate}}</option>
 									    </select>
-									    <label for="ngm-project_budget_currency">{{'project_budget_currency' | translate}} *</label>
+									    <label ng-class="{'inrtl':rtlClass}" for="ngm-project_budget_currency">{{'project_budget_currency' | translate}} *</label>
 								</div>
 
 							</div>
@@ -152,7 +188,7 @@
 
 								<!-- switch -->
 								<div class="switch input-field col s12 m6">
-									<label>
+									<label ng-if="!rtlClass">
 										Non-{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project'|translate}}
 										<input ng-click="project.setHrpStatus();" 
 														ng-checked="project.definition.project_hrp_project" type="checkbox" class="filled-in"
@@ -160,25 +196,32 @@
 										<span class="lever"></span>
 											{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project'|translate}}
 									</label>
+									<label ng-if="rtlClass">
+										{{'project'|translate}} Non-{{ ngmClusterHelper.getProjectHrpName( project.definition ) }}
+										<input ng-click="project.setHrpStatus();" ng-checked="project.definition.project_hrp_project" type="checkbox"
+											class="filled-in" ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
+										<span class="lever"></span>
+										{{'project'|translate}} {{ ngmClusterHelper.getProjectHrpName( project.definition ) }}
+									</label>
 								</div>
 								
 								<!-- project_hrp_code -->
 
 								<!-- default -->
 								<div ng-if="project.definition.admin0pcode !== 'SO'">
-									<div ng-if="project.definition.project_hrp_project" class="input-field col s12 m6">
-									  <input id="ngm-project_hrp_code" type="text" class="validate"
+									<div ng-if="project.definition.project_hrp_project" class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+									  <input ng-class="{'inrtl':rtlClass}" id="ngm-project_hrp_code" type="text" class="validate"
 									  				ng-model="project.definition.project_hrp_code"
 									  				disabled="true"/>
-									  <label for="ngm-project-budget">
+									  <label for="ngm-project-budget" ng-class="{'inrtltext':rtlClass}">
 									  	{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} Project Code
 									  </label>
 									</div>
-									<div ng-if="!project.definition.project_hrp_project" class="input-field col s12 m6">
+									<div ng-if="!project.definition.project_hrp_project" class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
 									  <input id="ngm-project_hrp_code" type="text" class="validate"
 									  				ng-model="project.definition.project_hrp_code"
 									  				disabled="true">
-									  <label for="ngm-project_hrp_code">
+									  <label for="ngm-project_hrp_code" ng-class="{'inrtl':rtlClass}">
 									  	Non-{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project_code' | translate}}
 										</label>
 									</div>
@@ -387,7 +430,7 @@
 					        	<input type="checkbox" class="filled-in" id="ngm-project-other_partbers"
 					        		ng-model="project.definition.implementing_partners_checked"
 					        		ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
-					          <label class="checkbox-label" for="ngm-project-other_partbers">{{'other_implementing_partners' | translate}}?</label>
+					          <label class="checkbox-label"ng-class="{'rtl':rtlClass}" for="ngm-project-other_partbers">{{'other_implementing_partners' | translate}}?</label>
 					        </p>
 				        </div>
 
