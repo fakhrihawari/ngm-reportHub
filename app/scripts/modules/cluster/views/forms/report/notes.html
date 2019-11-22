@@ -8,6 +8,9 @@
 		left: 0;
 		right: 0.75rem;
 	}
+	.rtl{
+		direction: rtl;
+	}
 </style>
 
 <script>
@@ -36,7 +39,7 @@
 							<i class="material-icons left">location_on</i>{{'notes_for'|translate}} {{ project.monthlyTitleFormat }}
 						</div>
 						<!-- 2019 onwards -->
-						<div ng-if="project.report.admin0pcode !== 'SO'">
+						<div ng-if="project.report.admin0pcode !== 'SO'" ng-class="{'rtl':rtlClass}">
 							<i class="material-icons left">location_on</i>{{'notes_for'|translate}} {{ project.monthlyTitleFormat }}
 						</div>
 					</h5>
