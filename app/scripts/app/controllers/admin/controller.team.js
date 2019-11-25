@@ -405,7 +405,7 @@ angular.module('ngmReportHub')
 									headerStyle: 'background-color:' + $scope.dashboard.ngm.style.defaultPrimaryColor,
 									headerText: 'white-text',
 									headerIcon: 'group',
-									headerTitle: $filter('translate')('active_users'),
+									headerTitle: 'active_users',//$filter('translate')('active_users'),
 									templateUrl: '/scripts/app/views/authentication/team.html',
 									tableOptions:{
 										count: 10,
@@ -467,7 +467,7 @@ angular.module('ngmReportHub')
 									headerStyle: 'background-color: grey',
 									headerText: 'white-text',
 									headerIcon: 'group',
-									headerTitle: $filter('translate')('desactivated_users'),
+									headerTitle: 'desactivated_users',//$filter('translate')('desactivated_users'),
 									templateUrl: '/scripts/app/views/authentication/team.html',
 									tableOptions:{
 										count: 10,

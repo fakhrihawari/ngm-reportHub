@@ -827,7 +827,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('individual_households'),
+								title: 'individual_households',//$filter('translate')('individual_households'),
 								request: $scope.dashboard.getRequest({ indicator: 'households_population' })
 							}
 						}]
@@ -838,7 +838,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('individual_beneficiaries'),
+								title: 'individual_beneficiaries',//$filter('translate')('individual_beneficiaries'),
 								request: $scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
 							}
 						}]
@@ -849,7 +849,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('services_to_beneficiaries'),
+								title: 'services_to_beneficiaries',//$filter('translate')('services_to_beneficiaries'),
 								request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
 							}
 						}]
@@ -863,7 +863,7 @@ angular.module('ngmReportHub')
 								style: 'text-align: center;',
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
-									title: $filter('translate')('services_to_beneficiaries'),
+									title: 'services_to_beneficiaries',//$filter('translate')('services_to_beneficiaries'),
 									request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
 								}
 							}]
@@ -958,7 +958,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('active_organizations'),
+										title: 'active_organizations',//$filter('translate')('active_organizations'),
 										request: $scope.dashboard.getRequest( { indicator: 'organizations' } )
 									}
 								}]
@@ -969,7 +969,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('active_projects'),
+										title: 'active_projects',//$filter('translate')('active_projects'),
 										request: $scope.dashboard.getRequest( { indicator: 'projects' } )
 									}
 								}]
@@ -985,7 +985,7 @@ angular.module('ngmReportHub')
 									card: 'card-panel chart-stats-card white grey-text text-darken-2',
 									config: {
 										title: {
-											text: $filter('translate')('children'),
+											text: 'children',//$filter('translate')('children'),
 										},
 										display: {
 											label: true,
@@ -1038,7 +1038,7 @@ angular.module('ngmReportHub')
 									card: 'card-panel chart-stats-card white grey-text text-darken-2',
 									config: {
 										title: {
-											text: $filter('translate')('adult')
+											text: 'adult',//$filter('translate')('adult')
 										},
 										display: {
 											label: true,
@@ -1091,7 +1091,7 @@ angular.module('ngmReportHub')
 									card: 'card-panel chart-stats-card white grey-text text-darken-2',
 									config: {
 										title: {
-											text: $filter('translate')('elderly')
+											text: 'elderly',//$filter('translate')('elderly')
 										},
 										display: {
 											label: true,
@@ -1158,7 +1158,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('active_locations'),
+										title: 'active_locations',//$filter('translate')('active_locations'),
 										request: $scope.dashboard.getRequest( { indicator: 'locations' } )
 									}
 								}]

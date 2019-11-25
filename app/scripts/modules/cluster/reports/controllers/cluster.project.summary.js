@@ -102,7 +102,11 @@ angular.module('ngmReportHub')
 								card: 'white grey-text text-darken-2',
 								style: 'padding: 20px;',
 								config: {
-									html: '<a class="btn-flat waves-effect waves-teal left" href="' + $scope.report.getProjectsHref() + '"><i class="material-icons left">keyboard_return</i>' + $filter('translate')('back_to_projects') + '</a><span class="right" style="padding-top:8px;">' + ($scope.rtlClass ?'&#x202a;'+ moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a') + '&#x202c; :' +$filter('translate')('last_updated'): $filter('translate')('last_updated')+': ' + moment( $scope.report.project.updatedAt ).format( 'DD MMMM, YYYY @ h:mm:ss a' )) + '</span>'
+									//html: '<a class="btn-flat waves-effect waves-teal left" href="' + $scope.report.getProjectsHref() + '"><i class="material-icons left">keyboard_return</i>' + $filter('translate')('back_to_projects') + '</a><span class="right" style="padding-top:8px;">' + ($scope.rtlClass ?'&#x202a;'+ moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a') + '&#x202c; :' +$filter('translate')('last_updated'): $filter('translate')('last_updated')+': ' + moment( $scope.report.project.updatedAt ).format( 'DD MMMM, YYYY @ h:mm:ss a' )) + '</span>',
+									projHref: $scope.report.getProjectsHref(),
+									dateUpdate: moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a'),
+									templateUrl: '/scripts/widgets/ngm-html/template/cluster.project.summary.btn.html',
+									rtlEvent: 'rtl'
 								}
 							}]
 						}]

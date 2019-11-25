@@ -166,7 +166,10 @@ angular.module('ngmReportHub')
 							widgets: [{
 								type: 'html',
 								config: {
-									html: $scope.report.getHeaderHtml(),
+									// html: $scope.report.getHeaderHtml(),
+									projHref: '#/cluster/projects/summary/' + $scope.report.project.id,
+									dateUpdate: moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a'),
+									templateUrl: '/scripts/widgets/ngm-html/template/cluster.reportlist.btn.html',
 									rtlEvent: 'rtl',
 								}
 							}]

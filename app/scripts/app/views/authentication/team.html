@@ -95,7 +95,7 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
 					<div class="col s12 m8" ng-class="{'right right-title':rtlClass}">
 						<h5 class="report-work-title {{ table.headerText }}">
 							<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>
-							{{ table.headerTitle }}
+							{{ table.headerTitle | translate }}
 						</h5>
 					</div>
 					<div class="col s12 m4 right" ng-if="showSearch">

@@ -28,14 +28,14 @@
     <div class="card">
       <ul class="collection with-header">
         
-        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}" ng-class="{'title-rtl':rtlClass}"><i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5></li>
+        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}" ng-class="{'title-rtl':rtlClass}"><i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>{{ table.headerTitle | translate}}</h5></li>
         <li class="collection-item avatar" style="padding:10px;">
           
           <!-- if no data -->
           <div ng-if="data.length === 0">
             <div class="label"
                 style="text-align:center; padding-top:20px;">
-              <span>No {{ table.headerTitle }}!</span>
+              <span>No {{ table.headerTitle | translate}}!</span>
             </div>
           </div>
 

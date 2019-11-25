@@ -82,7 +82,11 @@ angular.module('ngmReportHub')
 								card: 'white grey-text text-darken-2',
 								style: 'padding: 20px;',
 								config: {
-									html: $scope.dashboard.getHeaderHtml()
+									// html: $scope.dashboard.getHeaderHtml(),
+									urlHref: $rootScope.teamPreviouseUrl ? $rootScope.teamPreviouseUrl :'#/team',
+									dateUpdate: moment($scope.dashboard.user.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a'),
+									templateUrl: '/scripts/widgets/ngm-html/template/profile.btn.html',
+									rtlEvent:'rtl'
 								}
 							}]
 						}]

@@ -1112,7 +1112,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('organizations'),
+										title: 'organizations',//$filter('translate')('organizations'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1127,7 +1127,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $scope.dashboard.report_type==='stock' ? $filter('translate')('warehouses_total') : $filter('translate')('total_projects'),
+										title: $scope.dashboard.report_type === 'stock' ? 'warehouses_total' : 'total_projects',//$filter('translate')('warehouses_total') : $filter('translate')('total_projects'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1148,7 +1148,7 @@ angular.module('ngmReportHub')
 											style: 'color:#e57373; font-size:64px; bottom:-10;right:-10px;',
 											icon: 'error'
 										},
-										title: $filter('translate')('reports_due'),
+										title: 'reports_due',//$filter('translate')('reports_due'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1167,7 +1167,7 @@ angular.module('ngmReportHub')
 											style: 'color:#fff176; font-size:64px; bottom:-10;right:-10px;',
 											icon: 'watch_later'
 										},
-										title: $filter('translate')('reports_saved'),
+										title: 'reports_saved', //$filter('translate')('reports_saved'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1186,7 +1186,7 @@ angular.module('ngmReportHub')
 											style: 'color:#4db6ac; font-size:64px; bottom:-10;right:-10px;',
 											icon: 'check_circle'
 										},
-										title: $filter('translate')('reports_submitted'),
+										title: 'reports_submitted', //$filter('translate')('reports_submitted'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1207,7 +1207,7 @@ angular.module('ngmReportHub')
 											// style: 'color:#2196F3; font-size:142px; bottom:-40px; right:-50px;',
 											icon: 'assignment_turned_in'
 										},
-										title: $filter('translate')('reports_total'),
+										title: 'reports_total',//$filter('translate')('reports_total'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1232,7 +1232,7 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header red lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_late',
-										headerTitle: $filter('translate')('reports_due'),
+										headerTitle: 'reports_due',//$filter('translate')('reports_due'),
 										templateUrl: '/scripts/widgets/ngm-table/templates/cluster/admin.project.list.html',
 										tableOptions:{
 											count: 10
@@ -1262,7 +1262,7 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header teal lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_turned_in',
-										headerTitle: $filter('translate')('reports_completed'),
+										headerTitle: 'reports_completed',//$filter('translate')('reports_completed'),
 										templateUrl: '/scripts/widgets/ngm-table/templates/cluster/admin.project.list.html',
 										tableOptions:{
 											count: 10
@@ -1293,7 +1293,7 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header teal lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_turned_in',
-										headerTitle: $filter('translate')('projects_progress'),
+										headerTitle: 'projects_progress',//$filter('translate')('projects_progress'),
 										templateUrl: '/scripts/widgets/ngm-table/templates/cluster/admin.progress.beneficiaries.html',
 										tableOptions:{
 											count: 10
