@@ -139,6 +139,7 @@
 								<!-- org project code  -->
 								<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
 								  <input id="ngm-project_code" type="text" class="validate"
+									ng-class="{'inrtl':rtlClass}"
 								  	ng-model="project.definition.project_code"
 								  	ng-disabled="project.definition.project_status === 'complete'">
 								  <label for="ngm-project_code" ng-class="{'inrtltext':rtlClass}">{{ project.definition.organization }} {{'project_code' | translate}}</label>
