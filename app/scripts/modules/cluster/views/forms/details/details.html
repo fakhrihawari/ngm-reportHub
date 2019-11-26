@@ -64,6 +64,9 @@
 	.rtl{
 		direction: rtl;
 	}
+	.row.inrtl .col{
+		float: right;
+	}
 </style>
 </style>
 
@@ -134,7 +137,7 @@
 							</div>
 
 							<!-- project budget -->
-							<div class="row">
+							<div class="row" ng-class="{'inrtl':rtlClass}">
 
 								<!-- org project code  -->
 								<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
@@ -214,15 +217,15 @@
 									  <input ng-class="{'inrtl':rtlClass}" id="ngm-project_hrp_code" type="text" class="validate"
 									  				ng-model="project.definition.project_hrp_code"
 									  				disabled="true"/>
-									  <label for="ngm-project-budget" ng-class="{'inrtltext':rtlClass}">
-									  	{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} Project Code
+									  <label for="ngm-project-budget" ng-class="{'inrtltext rtl':rtlClass}">
+									  	{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project_code' | translate}}
 									  </label>
 									</div>
 									<div ng-if="!project.definition.project_hrp_project" class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
 									  <input id="ngm-project_hrp_code" type="text" class="validate"
 									  				ng-model="project.definition.project_hrp_code"
 									  				disabled="true">
-									  <label for="ngm-project_hrp_code" ng-class="{'inrtl':rtlClass}">
+									  <label for="ngm-project_hrp_code" ng-class="{'inrtltext rtl':rtlClass}">
 									  	Non-{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project_code' | translate}}
 										</label>
 									</div>

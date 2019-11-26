@@ -34,6 +34,43 @@
 	.input-field.inrtl > .select-wrapper  .dropdown-content li{
 		text-align: right;
 	}
+	.row.inrtl .col{
+		float: right;
+	}
+	/* simplify */
+	.inrtl .row .col{
+		float: right;}
+	.inrtl input[type=number].validate + label{
+		text-align: right;
+		padding-right: 25px;
+	}
+	.inrtl input[type=number].validate{
+		text-align: right;
+	}
+	.inrtl .input-field.col label{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+	}
+	.inrtl .input-field.col label.inrtltext{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+		padding-right: 25px;
+	}
+	.inrtl .input-field > .select-wrapper input.select-dropdown {
+		text-align: right;
+	}
+	.inrtl .input-field > .select-wrapper span.caret {
+    	left: 0;
+	}
+	.inrtl .input-field > .select-wrapper  .dropdown-content li{
+		text-align: right;
+	}
+	.inrtl input[type=text].validate,.inrtl input[type=text].picker__input{
+		text-align: right;
+	}
+	
 	</style>
 		<!-- beneficiaries -->
 		<div id="{{ $beneficiaryIndex=$index; id = 'ngm-' + $locationIndex + '-' + $index }}" ng-repeat="beneficiary in project.report.locations[ $locationIndex ].beneficiaries | filterBeneficiary:project.beneficiary_search track by $index" ng-class="{'add-padding': !detailBeneficiaries[$locationIndex][$beneficiaryIndex]}">
@@ -114,17 +151,17 @@
 			<!-- CARD PANEL -->
 			<div class="card-panel"
 						ng-if="detailBeneficiaries[$locationIndex][$beneficiaryIndex]"
-						ng-class="{'card-panel-expand':detailBeneficiaries[$locationIndex][$beneficiaryIndex]}"
+						ng-class="{'card-panel-expand':detailBeneficiaries[$locationIndex][$beneficiaryIndex],'inrtl':rtlClass}"
 						ng-disabled="!project.canEdit">
 
 				<!-- DEFAULT -->
-				<div class="row" ng-if="!beneficiary.activity_description_id ||
+				<div class="row"  ng-if="!beneficiary.activity_description_id ||
 																	( beneficiary.activity_description_id && !ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'display_activity_detail' ] ) &&
 																	( beneficiary.activity_description_id !== 'fatp_stabilization_referrals_conflict' &&
 																		beneficiary.activity_description_id !== 'fatp_stabilization_referrals_civilian')">
 
 					<!-- activity_type_id -->
-					<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+					<div class="input-field col s12 m6" >
 						<select materialize-select id="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											class="validate"
@@ -136,11 +173,11 @@
 											required>
 							<option value="">{{ 'select' | translate }}</option>
 						</select>
-						<label for="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'activity' | translate }}</label>
+						<label for="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'activity' | translate }}</label>
 					</div>
 
 					<!-- activity_description_id -->
-					<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+					<div class="input-field col s12 m6" >
 						<select materialize-select watch id="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											class="validate"
@@ -158,20 +195,20 @@
 							<option value="">{{ 'select' | translate }}</option>
 						</select>
 						<label ng-if="project.definition.admin0pcode !== 'SO'"
-										for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'description' | translate }}</label>
+										for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'description' | translate }}</label>
 						<label ng-if="project.definition.admin0pcode === 'SO'"
-										for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'specific_indicator' | translate }}</label>
+										for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'specific_indicator' | translate }}</label>
 					</div>
 				</div>
 
 				<!-- DETAILS -->
-				<div class="row"
+				<div class="row" 
 							ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'display_activity_detail' ] &&
 											( beneficiary.activity_description_id !== 'fatp_stabilization_referrals_conflict' &&
 												beneficiary.activity_description_id !== 'fatp_stabilization_referrals_civilian')">
 
 					<!-- activity_type_id -->
-					<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+					<div class="input-field col s12 m4" >
 						<select materialize-select id="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											class="validate"
@@ -183,11 +220,11 @@
 											required>
 							<option value="">{{ 'select' | translate }}</option>
 						</select>
-						<label for="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'activity' | translate }}</label>
+						<label for="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'activity' | translate }}</label>
 					</div>
 
 					<!-- activity_description_id -->
-					<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+					<div class="input-field col s12 m4" >
 						<select materialize-select watch id="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											class="validate"
@@ -205,13 +242,13 @@
 							<option value="">{{ 'select' | translate }}</option>
 						</select>
 						<label ng-if="project.definition.admin0pcode !== 'SO'"
-										for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'description' | translate }}</label>
+										for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'description' | translate }}</label>
 						<label ng-if="project.definition.admin0pcode === 'SO'"
 										for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" style="transform:translateY(-10%)">{{ 'specific_indicator' | translate }}</label>
 					</div>
 
 					<!-- activity_detail_id -->
-					<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+					<div class="input-field col s12 m4" >
 						<select materialize-select watch id="ngm-activity_detail_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="activity_detail_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											class="validate"
@@ -229,7 +266,7 @@
 											required>
 							<option value="">{{ 'select' | translate }}</option>
 						</select>
-						<label for="ngm-activity_detail_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'details' | translate }}</label>
+						<label for="ngm-activity_detail_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'details' | translate }}</label>
 					</div>
 				</div>
 
@@ -238,11 +275,11 @@
 				<div ng-if="ngmClusterBeneficiaries.showFormInputs( beneficiary, ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ] )">
 
 					<!-- FATP SAME PROVINCE -->
-					<div class="row" ng-if="beneficiary.activity_description_id === 'fatp_stabilization_referrals_conflict' ||
+					<div class="row"  ng-if="beneficiary.activity_description_id === 'fatp_stabilization_referrals_conflict' ||
 																			beneficiary.activity_description_id === 'fatp_stabilization_referrals_civilian'">
 
 						<!-- activity_type_id -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select id="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -254,11 +291,11 @@
 												required>
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'activity' | translate }}</label>
+							<label for="ngm-activity_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'activity' | translate }}</label>
 						</div>
 
 						<!-- activity_description_id -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select watch id="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -276,13 +313,13 @@
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
 							<label ng-if="project.definition.admin0pcode !== 'SO'"
-											for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'description' | translate }}</label>
+											for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'description' | translate }}</label>
 							<label ng-if="project.definition.admin0pcode === 'SO'"
 											for="ngm-activity_description_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" style="transform:translateY(-10%)">{{ 'specific_indicator' | translate }}</label>
 						</div>
 
 						<!-- injury_treatment_same_province -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select id="ngm-injury_treatment_same_province-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="injury_treatment_same_province-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -295,7 +332,7 @@
 												required>
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-injury_treatment_same_province-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'treatment_same_province' | translate }}</label>
+							<label for="ngm-injury_treatment_same_province-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'treatment_same_province' | translate }}</label>
 						</div>
 					</div>
 
@@ -304,10 +341,10 @@
 					<!-- INDICATORS -->
 
 					<!-- indicator -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'display_indicator' ]">
+					<div class="row"  ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'display_indicator' ]">
 
 						<!-- indicator_id -->
-						<div class="input-field col s12" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12" >
 							<select materialize-select watch id="ngm-indicator_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="indicator_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -325,7 +362,7 @@
 												required>
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-indicator_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'indicator' | translate }}</label>
+							<label for="ngm-indicator_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'indicator' | translate }}</label>
 						</div>
 					</div>
 
@@ -334,11 +371,11 @@
 					<!-- BENEFICIARIES -->
 
 					<!-- activity_description_id && !category_type_id && !delivery_type_id -->
-					<div class="row" ng-if="!ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_category_type_id' ] &&
+					<div class="row"  ng-if="!ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_category_type_id' ] &&
 																	!ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_delivery_type_id' ]">
 
 						<!-- beneficiary_type -->
-						<div class="input-field col s12" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12" >
 							<select materialize-select id="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -352,17 +389,17 @@
 												ng-disabled="project.definition.project_status === 'complete' || project.report.report_status === 'complete' || !beneficiary.activity_description_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'beneficiary' | translate }}</label>
+							<label for="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'beneficiary' | translate }}</label>
 						</div>
 
 					</div>
 
 					<!-- activity_description_id && !category_type_id && delivery_type_id -->
-					<div class="row" ng-if="!ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_category_type_id' ] &&
+					<div class="row"  ng-if="!ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_category_type_id' ] &&
 																	ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_delivery_type_id' ]">
 
 						<!-- beneficiary_type -->
-						<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m6" >
 							<select materialize-select id="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -376,11 +413,11 @@
 												ng-disabled="project.definition.project_status === 'complete' || project.report.report_status === 'complete' || !beneficiary.activity_description_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'beneficiary' | translate }}</label>
+							<label for="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'beneficiary' | translate }}</label>
 						</div>
 
 						<!-- delivery_type_id -->
-						<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m6" >
 							<select materialize-select id="ngm-delivery_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="delivery_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -392,17 +429,17 @@
 								<option value="">{{ 'select' | translate }}</option>
 
 							</select>
-							<label for="ngm-delivery_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'type' | translate }}</label>
+							<label for="ngm-delivery_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'type' | translate }}</label>
 						</div>
 
 					</div>
 
 					<!-- activity_description_id && !category_type_id && !delivery_type_id -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_category_type_id' ] &&
+					<div class="row"  ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_category_type_id' ] &&
 																	ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'beneficiary_delivery_type_id' ]">
 
 						<!-- beneficiary_type -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select id="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -417,11 +454,11 @@
 												ng-disabled="project.definition.project_status === 'complete' || project.report.report_status === 'complete' || !beneficiary.activity_description_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'beneficiary' | translate }}</label>
+							<label for="ngm-beneficiary_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'beneficiary' | translate }}</label>
 						</div>
 
 						<!-- beneficiary_type -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select id="ngm-beneficiary_category_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="beneficiary_category_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -432,7 +469,7 @@
 												ng-disabled="project.definition.project_status === 'complete' || project.report.report_status === 'complete' || !beneficiary.beneficiary_type_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-beneficiary_category_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'beneficiary_category' | translate }}</label>
+							<label for="ngm-beneficiary_category_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'beneficiary_category' | translate }}</label>
 						</div>
 
 						<!-- delivery_type_id -->
@@ -447,7 +484,7 @@
 												ng-disabled="project.definition.project_status === 'complete' || project.report.report_status === 'complete' || !beneficiary.beneficiary_type_id" materialize-select>
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-delivery_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'type' | translate }}</label>
+							<label for="ngm-delivery_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active"  style="transform:translateY(-10%)">{{ 'type' | translate }}</label>
 						</div>
 
 					</div>
@@ -461,12 +498,12 @@
 
 					<!-- MPC DELIVERY + MECHANISM -->
 					<!-- mpc_delivery_type_id, mpc_mechanism_type_id -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_delivery_type_id' ] &&
+					<div class="row"  ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_delivery_type_id' ] &&
 																		ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_mechanism_type_id' ] &&
 																		!ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_package_type_id' ]">
 
 						<!-- mpc_delivery_type_id -->
-						<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m6" >
 							<select materialize-select watch id="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												name="mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												class="validate"
@@ -477,11 +514,11 @@
 												ng-disabled="project.definition.project_status === 'complete' || !beneficiary.beneficiary_type_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'delivery' | translate }}</label>
+							<label for="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active"  style="transform:translateY(-10%)">{{ 'delivery' | translate }}</label>
 						</div>
 
 						<!-- mpc_mechanism_type_id -->
-						<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m6" >
 							<select materialize-select watch id="ngm-mpc_mechanism_type_id-{{ $index }}"
 												name="mpc_mechanism_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												class="validate"
@@ -492,7 +529,7 @@
 												ng-disabled="project.definition.project_status === 'complete' || !beneficiary.mpc_delivery_type_id || !filtered.length">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-mpc_mechanism_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'mechanism' | translate }}</label>
+							<label for="ngm-mpc_mechanism_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active"  style="transform:translateY(-10%)">{{ 'mechanism' | translate }}</label>
 						</div>
 
 					</div>
@@ -500,12 +537,12 @@
 
 					<!-- MPC PACKAGE -->
 					<!-- MPC mpc_delivery_type_id, mpc_mechanism_type_id, mpc_package_type_id -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_delivery_type_id' ] &&
+					<div class="row"  ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_delivery_type_id' ] &&
 																		ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_mechanism_type_id' ] &&
 																		ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_package_type_id' ]">
 
 						<!-- mpc_delivery_type_id -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select watch id="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												name="mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												class="validate"
@@ -516,11 +553,11 @@
 												ng-disabled="project.definition.project_status === 'complete' || !beneficiary.beneficiary_type_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'delivery' | translate }}</label>
+							<label for="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active"  style="transform:translateY(-10%)">{{ 'delivery' | translate }}</label>
 						</div>
 
 						<!-- mpc_mechanism_type_id -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select watch id="ngm-mpc_mechanism_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												name="mpc_mechanism_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												class="validate"
@@ -531,11 +568,11 @@
 												ng-disabled="project.definition.project_status === 'complete' || !beneficiary.mpc_delivery_type_id || !filtered.length">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-mpc_mechanism_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'mechanism' | translate }}</label>
+							<label for="ngm-mpc_mechanism_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active"  style="transform:translateY(-10%)">{{ 'mechanism' | translate }}</label>
 						</div>
 
 						<!-- package_type_id -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select id="ngm-package_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												name="package_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												class="validate"
@@ -552,18 +589,18 @@
 												ng-disabled="project.definition.project_status === 'complete' || !beneficiary.mpc_delivery_type_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-package_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'package' | translate }}</label>
+							<label for="ngm-package_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active"  style="transform:translateY(-10%)">{{ 'package' | translate }}</label>
 						</div>
 
 					</div>
 
 					<!-- MPC inkind -->
 					<!-- MPC mpc_delivery_type_id -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_delivery_type_id' ]
+					<div class="row"  ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_delivery_type_id' ]
 																	&& !ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_mechanism_type_id' ]
 																	&& !ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_package_type_id' ]
 																	&& !ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_transfer_type_id' ] ">
-						<div class="input-field col s12 m12" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m12" >
 							<select materialize-select watch id="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												name="mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="validate"
 												ng-model="beneficiary.mpc_delivery_type_id"
@@ -572,17 +609,17 @@
 												ng-disabled="project.definition.project_status === 'complete' || !beneficiary.beneficiary_type_id">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'delivery' | translate }}</label>
+							<label for="ngm-mpc_delivery_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active"  style="transform:translateY(-10%)">{{ 'delivery' | translate }}</label>
 						</div>
 					</div>
 
 					<!-- UNITS -->
-					<div class="row"
+					<div class="row" 
 								ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'unit_type_id' ] &&
 												ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'units' ] &&
 												!ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_transfer_type_id' ]">
 						<!-- unit_type_id -->
-						<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m6" >
 							<select materialize-select watch id="ngm-unit_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="unit_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -595,14 +632,14 @@
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
 							<label for="ngm-unit_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
-											class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'units' | translate }}</label>
+											class="active"  style="transform:translateY(-10%)">{{ 'units' | translate }}</label>
 						</div>
 						<!-- amount -->
 						<div class="input-field col s12 m6">
 							<input id="ngm-units-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-units-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.units"
@@ -616,12 +653,12 @@
 
 
 					<!-- UNITS -->
-					<div class="row"
+					<div class="row" 
 								ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'unit_type_id' ] &&
 												ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'units' ] &&
 												ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'mpc_transfer_type_id' ]">
 						<!-- unit_type_id -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select watch id="ngm-unit_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												name="unit_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 												class="validate"
@@ -634,14 +671,14 @@
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
 							<label for="ngm-unit_type_id-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
-											class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'units' | translate }}</label>
+											class="active"  style="transform:translateY(-10%)">{{ 'units' | translate }}</label>
 						</div>
 						<!-- amount -->
 						<div class="input-field col s12 m4">
 							<input id="ngm-units-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-units-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.units"
@@ -652,7 +689,7 @@
 							<label for="ngm-units-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active">{{ 'amount' | translate }}</label>
 						</div>
 						<!-- transfer_type_id -->
-						<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+						<div class="input-field col s12 m4" >
 							<select materialize-select id="ngm-transfer_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												name="transfer_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 												class="validate"
@@ -662,7 +699,7 @@
 												ng-disabled="project.definition.project_status === 'complete'">
 								<option value="">{{ 'select' | translate }}</option>
 							</select>
-							<label for="ngm-transfer_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active" ng-class="{'inrtl':rtlClass}" style="transform:translateY(-10%)">{{ 'transfers' | translate }}</label>
+							<label for="ngm-transfer_type_id-{{ $locationIndex }}-{{$beneficiaryIndex}}" class="active"  style="transform:translateY(-10%)">{{ 'transfers' | translate }}</label>
 						</div>
 
 					</div>
@@ -671,14 +708,14 @@
 					<!-- HHs / FAMILIES-->
 
 					<!-- HHs -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'households' ]">
+					<div class="row"  ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'households' ]">
 
 						<!-- households -->
 						<div class="input-field col s12">
 							<input id="ngm-households-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-households-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.households"
@@ -692,14 +729,14 @@
 					</div>
 
 					<!-- families -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'families' ]">
+					<div class="row"  ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'families' ]">
 
 						<!-- families -->
 						<div class="input-field col s12">
 							<input id="ngm-families-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-families-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.families"
@@ -715,7 +752,7 @@
 
 
 					<!-- SADD ( very SAD age breakdown - male ) -->
-					<div class="row"
+					<div class="row" 
 								ng-if="( ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'boys_0_5' ] &&
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'boys_6_11' ] &&
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'boys_12_17' ] &&
@@ -728,7 +765,7 @@
 							<input id="ngm-boys_0_5-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-boys_0_5-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.boys_0_5"
@@ -743,7 +780,7 @@
 							<input id="ngm-boys_6_11-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-boys_6_11-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.boys_6_11"
@@ -758,7 +795,7 @@
 							<input id="ngm-boys_12_17-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-boys_12_17-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.boys_12_17"
@@ -774,7 +811,7 @@
 							<input id="ngm-men-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-men-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.men"
@@ -789,7 +826,7 @@
 							<input id="ngm-elderly_men-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-elderly_men-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.elderly_men"
@@ -804,7 +841,7 @@
 							<input id="ngm-total_male-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-total_male-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.total_male"
@@ -817,7 +854,7 @@
 					</div>
 
 					<!-- SADD ( very SAD age breakdown - female ) -->
-					<div class="row"
+					<div class="row" 
 								ng-if="( ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'girls_0_5' ] &&
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'girls_6_11' ] &&
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'girls_12_17' ] &&
@@ -830,7 +867,7 @@
 							<input id="ngm-girls_0_5-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-girls_0_5-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.girls_0_5"
@@ -845,7 +882,7 @@
 							<input id="ngm-girls_6_11-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-girls_6_11-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.girls_6_11"
@@ -860,7 +897,7 @@
 							<input id="ngm-girls_12_17-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-girls_12_17-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.girls_12_17"
@@ -876,7 +913,7 @@
 							<input id="ngm-women-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-women-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.women"
@@ -891,7 +928,7 @@
 							<input id="ngm-elderly_women-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-elderly_women-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.elderly_women"
@@ -906,7 +943,7 @@
 							<input id="ngm-total_female-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											name="ngm-total_female-{{ $locationIndex }}-{{$beneficiaryIndex}}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.total_female"
@@ -920,7 +957,7 @@
 
 
 					<!-- SADD (boys, girls, men, women) -->
-					<div class="row"
+					<div class="row" 
 								ng-if="( ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'boys' ] ||
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'girls' ] ||
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'men' ] ||
@@ -939,7 +976,7 @@
 							<input id="ngm-boys-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-boys-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.boys"
@@ -955,7 +992,7 @@
 							<input id="ngm-girls-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-girls-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.girls"
@@ -971,7 +1008,7 @@
 							<input id="ngm-men-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-men-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.men"
@@ -987,7 +1024,7 @@
 							<input id="ngm-women-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-women-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.women"
@@ -1002,7 +1039,7 @@
 
 
 					<!-- SADD (boys, girls, men, women, elderly_men, elderly_women) -->
-					<div class="row"
+					<div class="row" 
 								ng-if="( ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'boys' ] &&
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'girls' ] &&
 													ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'men' ] &&
@@ -1021,7 +1058,7 @@
 							<input id="ngm-boys-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-boys-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.boys"
@@ -1036,7 +1073,7 @@
 							<input id="ngm-girls-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-girls-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.girls"
@@ -1051,7 +1088,7 @@
 							<input id="ngm-men-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-men-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.men"
@@ -1066,7 +1103,7 @@
 							<input id="ngm-women-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-women-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.women"
@@ -1081,7 +1118,7 @@
 							<input id="ngm-elderly_men-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-elderly_men-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.elderly_men"
@@ -1096,7 +1133,7 @@
 							<input id="ngm-elderly_women-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-elderly_women-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.elderly_women"
@@ -1111,14 +1148,14 @@
 
 
 					<!-- TOTAL -->
-					<div class="row" ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'total_beneficiaries' ]">
+					<div class="row"   ng-if="ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'total_beneficiaries' ]">
 
 						<!-- total_beneficiaries -->
 						<div class="input-field col s12">
 							<input id="ngm-total_beneficiaries-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											name="ngm-total_beneficiaries-{{ $locationIndex }}-{{ $beneficiaryIndex }}"
 											type="number"
-											ng-class="{'inrtl':rtlClass}"
+											
 											class="validate"
 											min="0"
 											ng-model="beneficiary.total_beneficiaries"
@@ -1140,7 +1177,7 @@
 											ng-change="ngmClusterBeneficiaries.inputChange( 'ngm-beneficiary-remarks-{{ $locationIndex }}-{{ $beneficiaryIndex }}' );"
 											ng-disabled="project.definition.project_status === 'complete' || project.report.report_status === 'complete' || !ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'remarks' ]"
 											required>
-							<label for="ngm-beneficiary-remarks-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active">{{'remarks' | translate}}</label>
+							<label for="ngm-beneficiary-remarks-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtltext':rtlClass}">{{'remarks' | translate}}</label>
 						</div>
 					</div>
 
