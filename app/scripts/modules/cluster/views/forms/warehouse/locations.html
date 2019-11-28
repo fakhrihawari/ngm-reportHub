@@ -68,9 +68,10 @@
 							    	ng-model-options="{ trackBy: '$value.admin1pcode'}"
 							    	ng-change="report.updateLocationSelect( true, false )"
 			      				ng-options="item as item.admin1name for item in report.options.list.admin1 | filter : { inactive: '!true' }">
-			      				<option value="" selected>{{'choose'|translate}} {{ report.options.list.admin1[0].admin1type_name }}</option>
+			      				<option value="" selected>{{'choose'|translate}} {{'province'|translate}}</option>
 			      			</select>
-			      			<label ng-class="{'inrtl':rtlClass}">{{ report.options.list.admin1[0].admin1type_name }} *</label>
+							<label ng-if="!rtlClass">{{ report.options.list.admin1[0].admin1type_name }} *</label>
+							<label ng-if="rtlClass" ng-class="{'inrtl':rtlClass}">{{'province'|translate}}</label>
 			      		</div>
 
 			      		<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}"
@@ -82,9 +83,10 @@
 							    	ng-change="report.updateLocationSelect( false, false )"
 							    	ng-disabled="!report.options.warehouse.admin1"
 			      				ng-options="item as item.admin2name for item in report.options.list.admin2 | filter: { admin1pcode: report.options.warehouse.admin1.admin1pcode }">
-			      				<option value="" disabled selected>{{'choose'|translate}} {{ report.options.list.admin2[0].admin2type_name }}</option>
+			      				<option value="" disabled selected>{{'choose'|translate}} {{'district'|translate}}</option>
 			      			</select>
-			      			<label ng-class="{'inrtl':rtlClass}">{{ report.options.list.admin2[0].admin2type_name }} *</label>
+							<label ng-if="!rtlClass">{{ report.options.list.admin2[0].admin2type_name }} *</label>
+							<label ng-if="rtlClass" ng-class="{'inrtl':rtlClass}">{{'district'|translate}}</label>
 			      		</div>
 
 							  <div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">

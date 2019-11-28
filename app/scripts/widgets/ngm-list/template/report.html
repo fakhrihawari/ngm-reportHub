@@ -43,7 +43,32 @@
 	}
  	.language-rtl-left{
 		direction: rtl;
-		text-align: left;
+		text-align: right;
+	}
+	.right-title{
+		text-align: right;
+	}
+	.circle-rtl{
+		position: absolute;
+		width: 42px;
+		height: 42px;
+		overflow: hidden;
+		right: 15px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.secondary-content-rtl {
+		position: absolute;
+		top: 16px;
+		left: 16px;
+		color: #009688;
+	}
+	i.circle-rtl {
+		font-size: 18px;
+		line-height: 42px;
+		color: #fff;
+		background-color: #999;
+		text-align: center;
 	}
 
 </style>
@@ -53,13 +78,13 @@
 	<div class="col s12">
 		<ul class="collection with-header z-depth-1">
 			<li class="collection-header {{ list.color }}" style="height:80px;">
-				<div class="col s12 m8">
-					<h4 class="report-work-title {{ list.textColor }}" style="font-size:1.8rem;">
-						<i class="material-icons left">{{ list.titleIcon }}</i>{{ list.title }}
+				<div class="col s12 m8" ng-class="{'right':rtlClass}">
+					<h4 class="report-work-title {{ list.textColor }}" style="font-size:1.8rem;" ng-class="{'right-title':rtlClass}">
+						<i class="material-icons left" ng-class="{'left':!rtlClass,'right':rtlClass}">{{ list.titleIcon }}</i>{{ list.title | translate }}
 					</h4>
 				</div>
 				<div ng-if="list.data.length > list.itemsPerPage" class="col s12 m4 ">
-				  <nav class="nav-list-search right" ng-class="{'focused':list.search.focused===true || list.search.filter }">
+				  <nav class="nav-list-search " ng-class="{'focused':list.search.focused===true || list.search.filter,'left':rtlClass,'right':!rtlClass }">
 				    <div class="nav-wrapper" ng-click="list.toggleSearch()">
 				      <form>
 				        <div class="input-field">
@@ -86,20 +111,20 @@
 					<p align="justify" style="padding:10px 0px 10px 0px;">
 						{{'monthly_beneficiaries_report_for' | translate}} {{ item.reporting_period_title }}
 					</p>
-					<a href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}" title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report" class="secondary-content">
+					<a ng-if="!rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}" title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report" class="secondary-content">
 						<i class="material-icons right" style="padding-top:20px; padding-right:40px; color: {{ item.status }}">{{ item.icon }}</i>
 					</a>
 				</a>
 				
 				<a ng-if="rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}" title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
-					<i class="material-icons circle white teal-text">{{ list.icon }}</i>
-					<span class="title">{{ item.reporting_period_title }}</span>
-					<span class="right"  style="padding-top:20px; padding-right:40px; color:#616161;"> &#x202a; {{list.dueFormat(item.report_status === 'complete'?item.report_submitted: item.reporting_due_date)}} &#x202c; :{{item.report_status === 'complete'?'report_submitted' :'report_due_date' | translate}}</span>
-					<p align="justify" style="padding:10px 0px 10px 0px;">
+					<i class="material-icons circle-rtl white teal-text">{{ list.icon }}</i>
+					<span class="title" style="padding-left: 70%;">{{ item.reporting_period_title }}</span>
+					<span class="left"  style="padding-top:20px; padding-left:40px; color:#616161;"> &#x202a; {{list.dueFormat(item.report_status === 'complete'?item.report_submitted: item.reporting_due_date)}} &#x202c; :{{item.report_status === 'complete'?'report_submitted' :'report_due_date' | translate}}</span>
+					<p  style="padding:10px 30px 10px 0px; text-align: right;">
 						{{ item.reporting_period_title }} {{'monthly_beneficiaries_report_for' | translate}}
 					</p>
-					<a href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}" title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report" class="secondary-content">
-						<i class="material-icons right" style="padding-top:20px; padding-right:40px; color: {{ item.status }}">{{ item.icon }}</i>
+					<a ng-if="rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}" title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report" class="secondary-content-rtl">
+						<i class="material-icons right" style="padding-top:20px; padding-left:40px; color: {{ item.status }}">{{ item.icon }}</i>
 					</a>
 				</a>
 	    </li>
@@ -109,11 +134,20 @@
 
 	 		<!-- no data -->
 			<li ng-if="!list.data.length" class="collection-item avatar">
-				<a>
+				<a ng-if="!rtlClass">
 					<i class="material-icons circle white teal-text">{{ list.icon }}</i>
 					<span class="title">{{ list.title }} {{'reports' | translate}}</span>
 					<p ng-class="{'language-rtl-left':rtlClass}">{{'you_have' | translate}} 0 {{ list.title }} {{'reports' |translate}}</p>
-					<a class="secondary-content" style="padding-right:40px;">
+					<a  ng-if="!rtlClass" class="secondary-content" style="padding-right:40px;">
+						<i class="material-icons">check_circle</i>
+					</a>
+				</a>
+				<a ng-if="rtlClass">
+					<i class="material-icons circle-rtl white teal-text">{{ list.icon }}</i>
+					<span class="title" style="padding-left: 77%;">{{ list.title | translate}} {{'reports' | translate}}</span>
+					<p ng-class="{'language-rtl-left':rtlClass}">{{'you_have' | translate}} 0 {{ list.title | translate}} {{'reports' |translate}}
+					</p>
+					<a ng-if="rtlClass" class="secondary-content-rtl" style="padding-left:40px;">
 						<i class="material-icons">check_circle</i>
 					</a>
 				</a>

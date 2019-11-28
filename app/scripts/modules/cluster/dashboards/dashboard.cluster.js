@@ -80,7 +80,7 @@ angular.module('ngmReportHub')
 					'search': true,
 					'id': 'search-region',
 					'icon': 'person_pin',
-					'title': $filter('translate')('region'),
+					'title': 'region',
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': 'HQ',
@@ -359,7 +359,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-afro',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Democratic Republic of Congo',
@@ -391,7 +391,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-emro',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Afghanistan',
@@ -423,7 +423,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-searo',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Bangladesh',
@@ -443,7 +443,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-amer',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',
 
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
@@ -490,7 +490,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster-cluster',
 							'icon': 'camera',
-							'title': $filter('translate')('cluster'),
+							'title': 'cluster',
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});
@@ -600,7 +600,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-organization',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('organization'),
+								'title': 'organization',
 								'class': 'teal lighten-1 white-text',
 								'rows': orgRows
 							});

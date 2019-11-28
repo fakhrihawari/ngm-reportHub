@@ -207,8 +207,11 @@
       <div class="card-content white-text">
       	<p ng-class="{'right':rtlClass}" class="card-title">{{ 'projects_mayus1' | translate }}</p>
       </div>
-      <div class="card-action">
-        <a  ng-class="{'right':rtlClass}" href="{{ panel.getProjectsHref() }}">{{ 'go_to' | translate}} {{ panel.organization.organization }} {{'projects_mayus1' | translate}}</a>
+      <div ng-if="!rtlClass" class="card-action">
+        <a   href="{{ panel.getProjectsHref() }}">{{ 'go_to' | translate}} {{ panel.organization.organization }} {{'projects_mayus1' | translate}}</a>
+      </div>
+      <div ng-if="rtlClass" class="card-action">
+        <a  ng-class="{'right':rtlClass}" href="{{ panel.getProjectsHref() }}">{{ panel.organization.organization }} بروبه پروژه های</a>
       </div>
     </div>
     </a>
@@ -238,10 +241,13 @@
 	        <img src="images/cluster/stocks.jpg">
 	      </div>
 	      <div class="card-content white-text">
-	        <p ng-class="{'right':rtlClass}" class="card-title">Stocks</p>
+	        <p ng-class="{'right':rtlClass}" class="card-title">{{rtlClass?'انبار ها':'Stocks'}}</p>
 	      </div>
-	      <div class="card-action">
-	        <a  ng-class="{'right':rtlClass}" href="{{ panel.getStocksHref() }}">{{ 'go_to' | translate}} {{ panel.organization.organization }} Stocks</a>
+	      <div ng-if="!rtlClass" class="card-action">
+          <a  href="{{ panel.getStocksHref() }}">{{ 'go_to' | translate}} {{ panel.organization.organization }} Stocks</a>
+        </div>
+        <div ng-if="rtlClass" class="card-action">
+          <a  ng-class="{'right':rtlClass}" href="{{ panel.getStocksHref() }}">{{ panel.organization.organization }} بروبه انبارهای</a>
 	      </div>
 	    </div>
 	   </a>

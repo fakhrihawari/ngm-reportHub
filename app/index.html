@@ -442,7 +442,7 @@
 								<li align="center" class="teal z-depth-2">
 									<a class="white-text right" ng-click="ngm.openDashboard= !ngm.openDashboard;">
 										<i class="material-icons smedium right">bubble_chart</i>
-										<i class="material-icons small right icon-arrow" ng-class="{'rotate-icon':ngm.openDashboard === true}">keyboard_arrow_down</i>DASHBOARD</a>
+										<i class="material-icons small right icon-arrow" ng-class="{'rotate-icon':ngm.openDashboard === true}">keyboard_arrow_down</i>{{'dashboard_dropdown'|translate}}</a>
 									</a>
 								</li>
 								<div ng-if="ngm.openDashboard" style="margin-bottom: 5px; background-color: #fff">
@@ -515,8 +515,11 @@
 								</div>
 								<!-- contact modal -->
 								<li align="center" class="teal z-depth-2">
-									<a class="white-text right" ng-click="ngm.contact(); ngm.toggleNavigationMenu()">
+									<a ng-if="!ngm.rtlClass"class="white-text right" ng-click="ngm.contact(); ngm.toggleNavigationMenu()">
 										<i class="material-icons smedium right">perm_phone_msg</i>{{'contact_mayus' | translate}} {{ngm.var4wplusrh}}</span>
+									</a>
+									<a ng-if="ngm.rtlClass" class="white-text right" ng-click="ngm.contact(); ngm.toggleNavigationMenu()">
+										<i class="material-icons smedium right">perm_phone_msg</i>{{ngm.var4wplusrh}} {{'contact_mayus' | translate}} </span>
 									</a>
 								</li>
 							
@@ -539,7 +542,7 @@
 
 			  	<li ng-show="ngm.dashboard.model.menu" id="li-{{ list.id }}" ng-repeat="list in ngm.dashboard.model.menu" ng-cloak ng-class="{'change-margin':!ngm.openMinimize}">
 			  		<div id="{{ list.id }}" class="collapsible-header {{ list.class }}" ng-click="ngm.toggleSearch(list.id)" ng-cloak>
-			  			<i class="material-icons" ng-cloak>{{ list.icon }}</i>{{ list.title }}
+			  			<i class="material-icons" ng-cloak>{{ list.icon }}</i>{{ list.title | translate}}
 			  		</div>
 
 			  		<!-- search list options (navClass toggles search) -->

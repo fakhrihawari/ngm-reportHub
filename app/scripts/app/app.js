@@ -255,12 +255,20 @@ angular
 			// change language
 			changeFunction : function ($key) {
 				 $translate.use($key);
+				 $scope.ngm.rtlClass= false;
 				if ($key !== 'en') {
 					$rootScope.$broadcast('rtl', true);
 					// moment.locale('ar-tn');
+					if($key === 'prs'){
+						$scope.ngm.rtlClass =true;
+						$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
+						$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>تماس");
+					}
 				} else {
 					moment.locale('en');
 					$rootScope.$broadcast('rtl', false);
+					$(".ngm-menu-footer-body").html("Supported by <a class='grey-text' href='http://immap.org'><b>iMMAP</b></a>")
+					$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>Contact");
 				}
 			 },
 
@@ -586,6 +594,12 @@ angular
 			var app = $location.$$path.split('/')[1];
 			// set application
 			$scope.ngm.setApplication( app );
+			if ($translate.use()==='prs'){
+				$timeout(function(){
+					$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
+					$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>تماس")
+				},100)
+			}
 
 		});
 

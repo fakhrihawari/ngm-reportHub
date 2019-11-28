@@ -185,7 +185,7 @@ angular.module('ngmReportHub')
 									titleIcon: 'alarm_on',
 									color: 'indigo lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('progress_update_todo'),
+									title: 'progress_update_todo',
 									hoverTitle: $filter('translate')('update'),
 									icon: 'edit',
 									rightIcon: 'watch_later',
@@ -214,7 +214,7 @@ angular.module('ngmReportHub')
 									titleIcon: 'done_all',
 									color: 'indigo lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('progress_update_complete'),
+									title: 'progress_update_complete',
 
 									hoverTitle: $filter('translate')('view'),
 

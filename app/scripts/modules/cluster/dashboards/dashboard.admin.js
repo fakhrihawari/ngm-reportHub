@@ -75,7 +75,7 @@ angular.module('ngmReportHub')
 				menu: [{
 					'id': 'search-region',
 					'icon': 'person_pin',
-					'title': $filter('translate')('region'),
+					'title': 'region',
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': 'HQ',
@@ -480,7 +480,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster',
 							'icon': 'camera',
-							'title': $filter('translate')('sector_mayus'),
+							'title': 'sector_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});
@@ -535,7 +535,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-cluster-organization',
 									'icon': 'supervisor_account',
-									'title': $filter('translate')('organization'),
+									'title': 'organization',
 									'class': 'teal lighten-1 white-text',
 									'rows': orgRows
 								});
@@ -659,7 +659,7 @@ angular.module('ngmReportHub')
 						'search': false,
 						'id': 'search-cluster-report',
 						'icon': 'assignment_turned_in',
-						'title': $filter('translate')('report_mayus'),
+						'title': 'report_mayus',
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': $filter('translate')('activity_mayus'),
@@ -688,7 +688,7 @@ angular.module('ngmReportHub')
 								'search': false,
 								'id': 'search-cluster-activity',
 								'icon': 'data_usage',
-								'title': $filter('translate')('activity'),
+								'title': 'activity',
 								'class': 'teal lighten-1 white-text',
 								'rows': [{
 									'title': $filter('translate')('all'),
@@ -755,7 +755,7 @@ angular.module('ngmReportHub')
 						'all': {
 							'id': 'search-country',
 							'icon': 'location_on',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Afghanistan',
@@ -835,7 +835,7 @@ angular.module('ngmReportHub')
 						'afro': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Democratic Republic of Congo',
@@ -866,7 +866,7 @@ angular.module('ngmReportHub')
 						'emro': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Afghanistan',
@@ -897,7 +897,7 @@ angular.module('ngmReportHub')
 						'searo': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Bangladesh',
@@ -916,7 +916,7 @@ angular.module('ngmReportHub')
 						'euro': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Ukraine',
@@ -929,7 +929,7 @@ angular.module('ngmReportHub')
 						'amer': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Colombia',

@@ -7,6 +7,9 @@
 	.rtl{
 		direction: rtl;
 	}
+	.title-right{
+		text-align: right;
+	}
 
 </style>
 
@@ -16,8 +19,8 @@
 		<div class="card">
 			<ul class="collection with-header">
 				<li class="collection-header light-blue lighten-4">
-					<h5 class="report-panel-title">
-						<i class="material-icons left">location_on</i>{{'stock_report_for'|translate}} {{ report.titleFormat }}
+					<h5 class="report-panel-title" ng-class="{'rtl title-right':rtlClass}">
+						<i class="material-icons" ng-class="{'left':!rtlClass,'right':rtlClass}">location_on</i>{{'stock_report_for'|translate}} {{ report.titleFormat }}
 					</h5>
 				</li>
 				<li class="collection-item avatar">
