@@ -109,7 +109,9 @@
 				<a ng-if="rtlClass" href="#/cluster/stocks/report/{{ item.organization_id }}/{{ item.id }}"
 					title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
 					<i class="material-icons circle-rtl white teal-text">{{ list.icon }}</i>
-					<span class="title" style="padding-left: 60%">{{ item.reporting_period_title }}</span>
+					<!-- <span class="title" style="padding-left: 60%">{{ item.reporting_period_title }}</span> -->
+					<span class="title">&nbsp;</span>
+					<span class="title" style="float: right; margin-right: 30px;">{{ item.reporting_period_title }}</span>
 					<span class="left" style="padding-top:20px; padding-left:40px; color:#616161;"> &#x202a;
 						{{list.dueFormat(item.report_status === 'complete'?item.report_submitted: item.reporting_due_date)}} &#x202c;
 						:{{item.report_status === 'complete'?'report_submitted' :'report_due_date' | translate}}</span>
