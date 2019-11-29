@@ -118,7 +118,7 @@
 				
 				<a ng-if="rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}" title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
 					<i class="material-icons circle-rtl white teal-text">{{ list.icon }}</i>
-					<span class="title" style="padding-left: 70%;">{{ item.reporting_period_title }}</span>
+					<span class="title" style="padding-left: 65%;">{{ item.reporting_period_title }}</span>
 					<span class="left"  style="padding-top:20px; padding-left:40px; color:#616161;"> &#x202a; {{list.dueFormat(item.report_status === 'complete'?item.report_submitted: item.reporting_due_date)}} &#x202c; :{{item.report_status === 'complete'?'report_submitted' :'report_due_date' | translate}}</span>
 					<p  style="padding:10px 30px 10px 0px; text-align: right;">
 						{{ item.reporting_period_title }} {{'monthly_beneficiaries_report_for' | translate}}
@@ -136,8 +136,8 @@
 			<li ng-if="!list.data.length" class="collection-item avatar">
 				<a ng-if="!rtlClass">
 					<i class="material-icons circle white teal-text">{{ list.icon }}</i>
-					<span class="title">{{ list.title }} {{'reports' | translate}}</span>
-					<p ng-class="{'language-rtl-left':rtlClass}">{{'you_have' | translate}} 0 {{ list.title }} {{'reports' |translate}}</p>
+					<span class="title">{{ list.title | translate }} {{'reports' | translate}}</span>
+					<p ng-class="{'language-rtl-left':rtlClass}">{{'you_have' | translate}} 0 {{ list.title | translate }} {{'reports' |translate}}</p>
 					<a  ng-if="!rtlClass" class="secondary-content" style="padding-right:40px;">
 						<i class="material-icons">check_circle</i>
 					</a>
