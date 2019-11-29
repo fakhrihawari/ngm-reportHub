@@ -777,6 +777,7 @@
         "no_in_pipeline":"تعداد در مسیر",
         "monthly_stock_report_for":"برای گزارش ماهانه انبار",
         "stock_reports_for":"برای گزارش های انبار",
+        "stock_reports_for": "Stock Reports for",
         "stock_reports_todo":"گزارش های انبار قابل اجرا",
         "stock_reports_complete":"گزارش های تکمیل شده انبار",
         "remove_warehouse_location":"موقعیت انبار راحذف کنید",
