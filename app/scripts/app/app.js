@@ -263,12 +263,23 @@ angular
 						$scope.ngm.rtlClass =true;
 						$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
 						$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>تماس");
+						$(".report-header .row").addClass('reverse-header')
+						$(".dashboard > .row").addClass('reverse-column')
+						$("#ngm-report-datepicker").css("text-align", "left");
+						$("#ngmDateContainer-0").css({ "float": "right" });
+						$("#ngmDateContainer-1").css({ "float": "left" });
+
 					}
 				} else {
 					moment.locale('en');
 					$rootScope.$broadcast('rtl', false);
 					$(".ngm-menu-footer-body").html("Supported by <a class='grey-text' href='http://immap.org'><b>iMMAP</b></a>")
 					$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>Contact");
+					$(".report-header .row").removeClass('reverse-header')
+					$(".dashboard > .row").removeClass('reverse-column')
+					$("#ngm-report-datepicker").css("text-align", "left");
+					$("#ngmDateContainer-0").css({ "float": "left" });
+					$("#ngmDateContainer-1").css({ "float": "right" });
 				}
 			 },
 
@@ -454,14 +465,15 @@ angular
 				// 	}
 				var set_language = {
 					default: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
-					{ language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' },
-					{ language_id: 'prs', language_name: 'Prs-Afghanistan', flag: 'spain.png' },
+					// { language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' },
+					{ language_id: 'prs', language_name: 'Afghanistan', flag: 'spain.png' },
 					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
 					col: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
 					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
 					af: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
-					{ language_id: 'prs', language_name: 'Prs-Afghanistan', flag: 'spain.png' },
-					{ language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' }]
+					{ language_id: 'prs', language_name: 'Afghanistan', flag: 'spain.png' },
+					// { language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' }
+				]
 				}
 				// $scope.ngm.getLanguage = set_language[country] ? set_language[country]:[];
 				$scope.ngm.getLanguage = set_language[country] ? set_language[country] : set_language['default'];
@@ -598,6 +610,11 @@ angular
 				$timeout(function(){
 					$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
 					$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>تماس")
+					$(".report-header .row").addClass('reverse-header')
+					$(".dashboard >.row").addClass('reverse-column')
+					$("#ngm-report-datepicker").css("text-align", "left");
+					$("#ngmDateContainer-0").css({ "float": "right" });
+					$("#ngmDateContainer-1").css({ "float": "left" });
 				},100)
 			}
 

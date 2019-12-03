@@ -242,7 +242,8 @@ angular.module('ngmReportHub')
 											
 										},
 										request: { method: 'GET', url: ngmAuth.LOCATION + '/api/nutrition/afghanistan/latestUpdate' },
-										templateUrl: '/scripts/widgets/ngm-html/template/nutrition.dashboard.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/nutrition.dashboard.html',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -254,7 +255,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('beneficiaries'),
+										title: 'beneficiaries',
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/beneficiaries/indicator', 'total', false )
 									}
 								}]
@@ -267,7 +268,10 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('beneficiaries_mayus')+'</h2>'
+										// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('beneficiaries_mayus')+'</h2>'
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'beneficiaries_mayus',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -279,7 +283,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('organizations'),
+										title: 'organizations',
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/beneficiaries/indicator', 'organizations', false )
 									}
 								}]
@@ -290,7 +294,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('reports'),
+										title: 'reports',
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/beneficiaries/indicator', 'submitted_reports', false )
 									}
 								}]
@@ -301,7 +305,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('activities'),
+										title: 'activities',
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/beneficiaries/indicator', 'activities', false )
 									}
 								}]
@@ -312,7 +316,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('locations'),
+										title: 'locations',
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/beneficiaries/indicator', 'locations', false )
 									}
 								}]

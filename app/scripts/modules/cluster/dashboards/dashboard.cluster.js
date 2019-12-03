@@ -1145,8 +1145,11 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: $scope.rtlClass ? '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;text-align:right;">' + $filter('translate')('project_locations') + '</h2>'
-												:'<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_locations')+'</h2>'
+										// html: $scope.rtlClass ? '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;text-align:right;">' + $filter('translate')('project_locations') + '</h2>'
+										// 		:'<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_locations')+'</h2>'
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'project_locations',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]

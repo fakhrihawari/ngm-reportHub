@@ -147,7 +147,7 @@ angular.module( 'ngmReportHub' )
         return [{
           'id': 'epr-admin-year',
           'icon': 'search',
-          'title': 'Year',
+          'title': 'year',
           'class': 'teal lighten-1 white-text',
           'rows': [{
             'title': '2017',
@@ -171,7 +171,7 @@ angular.module( 'ngmReportHub' )
         },{
           'id': 'epr-admin-region',
           'icon': 'location_on',
-          'title': 'Region',
+          'title': 'region',
           'class': 'teal lighten-1 white-text',
           'rows': rows
         }];
@@ -201,7 +201,7 @@ angular.module( 'ngmReportHub' )
         return {
           'id': 'epr-admin-province',
           'icon': 'location_on',
-          'title': 'Province',
+          'title': 'province',
           'class': 'teal lighten-1 white-text',
           'rows': rows
         };
@@ -241,7 +241,7 @@ angular.module( 'ngmReportHub' )
         return {
           'id': 'epr-admin-week',
           'icon': 'date_range',
-          'title': 'Report Week',
+          'title': 'report_week',
           'class': 'teal lighten-1 white-text',
           'rows': rows
         };

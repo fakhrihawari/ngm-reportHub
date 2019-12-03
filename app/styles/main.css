@@ -315,4 +315,14 @@ body.md-default-theme, body, html.md-default-theme, html {
 #splash-screen {
 	display: none;
 }
+/* to reverse header */
+.reverse-header{
+display: flex;
+flex-direction: row-reverse;
+text-align: right;
+}
+.reverse-column{
+	display: flex;
+	flex-direction: row-reverse;
+}
 

@@ -303,6 +303,7 @@
         "target_population":"Población Objetivo",
         "project_target_locations":"Ubicaciones Objetivo del Proyecto",
          "select_focal_point_of_your_project_in_the_form_below":"Seleccione el PUNTO FOCAL de su PROYECTO en el siguiente formulario",
+         "focal_point": "Punto Focal",
          "enter_the_target_beneficiaries_of_your_project_in_the_form_below":"Ingrese los BENEFICIARIOS OBJETIVO de su PROYECTO en el siguiente formulario",
          "save_project":"Guardar Proyecto",
          "minimize":"Minimizar",
@@ -379,6 +380,8 @@
          "yes_remove_beneficiary":"Si, Eliminar Beneficiario",
          "people_in_need_saved":"Personas con Necesidades Guardadas!",
          "project_status_updated":"Estado del Proyecto Actualizado!",
+         "total_reports_due": "Total de informes vencidos",
+         "outstanding_reports":"Informes pendientes",
 
 
          "remove_borehole":"Eliminar Pozo",
@@ -872,6 +875,8 @@
         "nutrition_weekly_assessment":"Evaluación Semanal Nutrición",
         "complete_survey":"Completar Encuesta",
         "nutrition_admin_dashboard":"Dashboard Administración de Nutrición",
+        "go_to_nutrition_admin_dashboard": "Ir al panel de administración",
+        "go_to_nutrition_dashboard": "Ir al panel de control de nutrición",
         "new_mayus1":"Nuevo",
         "please_complete_an_assessment_in_the_form_below":"Por favor complete una evaluación en el siguiente formulario",
         "form":"formulario",
@@ -888,6 +893,7 @@
         "year_end_totals":"TOTALES DE FIN DE AÑO",
 
         "report_week":"Reporte Semanal",
+        "week": "Semana",
         "nutrition_mayus":"NUTRICIÓN",
         "monitoring_assesment":"Evaluación de Monitoreo",
         "view":"Ver",
