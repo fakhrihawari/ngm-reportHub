@@ -333,7 +333,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Clusters',
+										title: 'clusters',
 										request: $scope.clusterStat
 									}
 								}]

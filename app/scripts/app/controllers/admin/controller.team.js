@@ -154,7 +154,7 @@ angular.module('ngmReportHub')
 				// 235
 
 				var stats = [{
-					styleClass: 's12 m6',
+					styleClass: 's12 m6 reverse-profile',
 					widgets: [{
 						type: 'html',
 						config: {
@@ -390,6 +390,7 @@ angular.module('ngmReportHub')
 						}
 					},
 					rows: [{
+						styleClass:'not-reverse',
 						columns: $scope.dashboard.setStats()
 
 					},{

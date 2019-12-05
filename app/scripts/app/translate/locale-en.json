@@ -556,7 +556,8 @@
         "uploaded":"Upluaded",
         "total_projects":"Total Projects",
          "total_beneficiaries_population":"Total Population Beneficiaries",
-         "total_financing":"Total Financing",
+         "total_financing":"Total Financing US$",
+         "total_financing_with_dollar_plan":"Total Financing US$",
 
 
         "warehouses_total":"Warehouses",
@@ -620,11 +621,13 @@
         "population_beneficiaries":"Population Beneficiaries",
         "number_executing_agencies":"Number of Executing Agencies",
         "number_implementing_agencies":"Number of Implementing Agencies",
+        "total_financing_with_dollar": "Total Financing (US$)",
 
         "treatment_same_province":"Treatment Same Province",
         "edit":"Edit",
         "region":"Region",
         "cluster": "Cluster",
+        "clusters":"Clusters",
 
         "cholera_response":"Cholera Response",
         "activity_status":"Activity Status",
@@ -721,6 +724,13 @@
         "or":"or",
         "drought_affected_non_displaced": "Drought Affected Non Displaced",
         "flood_affected_non_displaced": "Flood Affected Non Displaced",
+        "drought_dashboard": " Drought Dashboard",
+        "drought_non_displaced": "Drought Non-Displaced",
+        "drought_displaced": "Drought Displaced",
+        "goto_dashboard": "Go to Dashboard",
+        "report_month":"Report Month",
+        "response_type":"Response Type",
+        "population_type":"Population Type",
         "selected_locations":"Selected Locations",
         "edit_report":"Edit Report",
         "please_enter_the_amount_per":"Please enter the amount per",
@@ -900,6 +910,12 @@
          "action":"Action",
          "the_action_you_were_performing_at_the_time_ie_adding_a_new_beneficiary":"The action you were performing at the time. i.e. 'Adding a new Beneficiary'",
          "any_error_messages_that_the_reporthub_displayed":"Any error messages that the ReportHub displayed",
-         "any_additional_description_of_the_error_that_will_prove_useful_ie_I_removed_a_location_and_then_added_a_new_location":"Any additional description of the error that will prove useful. i.e. 'I removed a location and then added a new location'"
+         "any_additional_description_of_the_error_that_will_prove_useful_ie_I_removed_a_location_and_then_added_a_new_location":"Any additional description of the error that will prove useful. i.e. 'I removed a location and then added a new location'",
+         
+         "outbreaks":"Outbreaks",
+         "individual_cases":"Individual Cases",
+         "deaths":"Deaths",
+         "disease":"Disease",
+         "outbreaks_trends": "Outbreaks - Trend"
 
 }

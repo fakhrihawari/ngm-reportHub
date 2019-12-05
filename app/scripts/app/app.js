@@ -262,12 +262,19 @@ angular
 					if($key === 'prs'){
 						$scope.ngm.rtlClass =true;
 						$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
-						$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>تماس");
+						$("#ngm-contact a").html("<i class='material-icons right' style='color:white;'>perm_contact_calendar</i>تماس");
+						$(".ngm-menu-footer-body").css({ "float": "right", "padding": "5px 10px 0px 0px" });
+						$("#ngm-contact").css({ "float": "left" });
 						$(".report-header .row").addClass('reverse-header')
 						$(".dashboard > .row").addClass('reverse-column')
+						$(".dashboard > .not-reverse.row").removeClass('reverse-column')
 						$("#ngm-report-datepicker").css("text-align", "left");
 						$("#ngmDateContainer-0").css({ "float": "right" });
 						$("#ngmDateContainer-1").css({ "float": "left" });
+						// ngm-report-download
+						$('div#ngm-report-download[align="right"]').attr('align', 'left');
+						$('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
+						$(".not-reverse.row > .col:first").addClass('right')
 
 					}
 				} else {
@@ -275,11 +282,18 @@ angular
 					$rootScope.$broadcast('rtl', false);
 					$(".ngm-menu-footer-body").html("Supported by <a class='grey-text' href='http://immap.org'><b>iMMAP</b></a>")
 					$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>Contact");
+					$(".ngm-menu-footer-body").css({ "float": "left", "padding": "5px 0px 0px 10px" });
+					$("#ngm-contact").css({ "float": "right" });
 					$(".report-header .row").removeClass('reverse-header')
 					$(".dashboard > .row").removeClass('reverse-column')
+					// for date picker
 					$("#ngm-report-datepicker").css("text-align", "left");
 					$("#ngmDateContainer-0").css({ "float": "left" });
 					$("#ngmDateContainer-1").css({ "float": "right" });
+					// ngm-report-download
+					$('#ngm-report-download > .fixed-action-btn.horizontal > ul').removeClass('reverse-download')
+					$('div#ngm-report-download[align="left"]').attr('align', 'right');
+					$(".not-reverse.row > col:first").removeClass('right');
 				}
 			 },
 
@@ -609,12 +623,20 @@ angular
 			if ($translate.use()==='prs'){
 				$timeout(function(){
 					$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
-					$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>تماس")
+					$(".ngm-menu-footer-body").css({ "float": "right", "padding": "5px 10px 0px 0px"});
+					$("#ngm-contact a").html("<i class='material-icons right' style='color:white;'>perm_contact_calendar</i>تماس")
+					$("#ngm-contact").css({ "float": "left" });
 					$(".report-header .row").addClass('reverse-header')
 					$(".dashboard >.row").addClass('reverse-column')
+					$(".dashboard > .not-reverse.row").removeClass('reverse-column')
+					// date picker
 					$("#ngm-report-datepicker").css("text-align", "left");
 					$("#ngmDateContainer-0").css({ "float": "right" });
 					$("#ngmDateContainer-1").css({ "float": "left" });
+					// ngm-report-download
+					$('div#ngm-report-download[align="right"]').attr("align", "left");
+					$('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
+					$(".reverse-profile").addClass('right')
 				},100)
 			}
 

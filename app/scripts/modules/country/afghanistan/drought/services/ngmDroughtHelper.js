@@ -80,7 +80,7 @@ angular.module('ngmReportHub')
 				return {
 					'id': 'drought-dashboard-year',
 					'icon': 'search',
-					'title': 'Year',
+					'title': 'year',
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': '2018',
@@ -127,7 +127,7 @@ angular.module('ngmReportHub')
 				return {
 					'id': 'drought-admin-province',
 					'icon': 'location_on',
-					'title': 'Province',
+					'title': 'province',
 					'class': 'teal lighten-1 white-text',
 					'rows': rows
 				};
@@ -164,7 +164,7 @@ angular.module('ngmReportHub')
 				return {
 					'id': 'drought-province',
 					'icon': 'location_on',
-					'title': 'District',
+					'title': 'district',
 					'class': 'teal lighten-1 white-text',
 					'rows': rows
 				};
@@ -194,7 +194,7 @@ angular.module('ngmReportHub')
 					'search': true,
 					'id': 'search-cluster-organization',
 					'icon': 'supervisor_account',
-					'title': 'Organization',
+					'title': 'organization',
 					'class': 'teal lighten-1 white-text',
 					'rows': orgRows
 				}
@@ -227,7 +227,7 @@ angular.module('ngmReportHub')
 				return {
 					'id': 'drought-admin-month',
 					'icon': 'date_range',
-					'title': 'Report Month',
+					'title': 'report_month',
 					'class': 'teal lighten-1 white-text',
 					'rows': rows
 				};
@@ -259,7 +259,7 @@ angular.module('ngmReportHub')
 				return {
 					'id': 'drought-cluster',
 					'icon': 'camera',
-					'title': 'Clusters',
+					'title': 'clusters',
 					'class': 'teal lighten-1 white-text',
 					'rows': rows
 				};
@@ -293,7 +293,7 @@ angular.module('ngmReportHub')
 				return {
 					'id': 'drought-response',
 					'icon': 'compare_arrows',
-					'title': 'Response Type',
+					'title': 'response_type',
 					'class': 'teal lighten-1 white-text',
 					'rows': rows
 				};
@@ -381,7 +381,7 @@ angular.module('ngmReportHub')
 				return {
 					'id': 'drought-plan',
 					'icon': 'recent_actors',
-					'title': 'Population Type',
+					'title': 'population_type',
 					'class': 'teal lighten-1 white-text',
 					'rows': rows
 				};

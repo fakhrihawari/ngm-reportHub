@@ -1078,7 +1078,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('total_financing')+' US$',
+										title: 'total_financing_with_dollar_plan',//$filter('translate')('total_financing')+' US$',
 										request: $scope.dashboard.getRequest( { indicator: 'total_financing_4wdashboard_projectplan' } )
 									}
 								}]

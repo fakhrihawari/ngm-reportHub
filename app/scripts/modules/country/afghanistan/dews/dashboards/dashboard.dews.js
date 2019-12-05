@@ -243,7 +243,7 @@ angular.module('ngmReportHub')
 					'class': 'col s12 m4 l3',
 					dates: [{
 						style: 'float:left;',
-						label: 'from',
+						label: $filter('translate')('from'),//'from',
 						format: 'd mmm, yyyy',
 						max: $scope.dashboard.endDate,
 						currentTime: $scope.dashboard.startDate,
@@ -260,7 +260,7 @@ angular.module('ngmReportHub')
 						}
 					},{
 						style: 'float:right',
-						label: 'to',
+						label: $filter('translate')('to'),//'to',
 						format: 'd mmm, yyyy',
 						min: $scope.dashboard.startDate,
 						currentTime: $scope.dashboard.endDate,
@@ -344,14 +344,14 @@ angular.module('ngmReportHub')
 				'id': 'search-dews-disease',
 				'search': true,
 				'icon': 'group_work',
-				'title': 'Disease',
+				'title': 'disease',
 				'class': 'teal lighten-1 white-text',
 				'rows': $scope.dashboard.getRows('disease')
 			},{
 				'id': 'search-dews-province',
 				'search': true,
 				'icon': 'place',
-				'title': 'Province',
+				'title': 'province',
 				'class': 'teal lighten-1 white-text',
 				'rows': $scope.dashboard.getRows('province')
 			}],
@@ -388,7 +388,7 @@ angular.module('ngmReportHub')
 						type: 'stats',
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
-							title: 'Outbreaks',
+							title: 'outbreaks',
 							request: {
 								method: 'POST',
 								url: ngmAuth.LOCATION + '/api/dews/indicator',
@@ -408,7 +408,7 @@ angular.module('ngmReportHub')
 						type: 'stats',
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
-							title: 'Individual Cases',
+							title: 'individual_cases',
 							request: {
 								method: 'POST',
 								url: ngmAuth.LOCATION + '/api/dews/indicator',
@@ -429,7 +429,7 @@ angular.module('ngmReportHub')
 						type: 'stats',
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
-							title: 'Deaths',
+							title: 'deaths',
 							request: {
 								method: 'POST',
 								url: ngmAuth.LOCATION + '/api/dews/indicator',
@@ -511,7 +511,7 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: {
-								text: 'Outbreaks - Trend',
+								text: 'outbreaks_trends',
 							},
 							chartConfig: {
 								options: {
@@ -585,7 +585,8 @@ angular.module('ngmReportHub')
 										}
 									}
 								}]
-							}
+							},
+							rtlEvent: 'rtl'
 						}
 					}]
 				}]
