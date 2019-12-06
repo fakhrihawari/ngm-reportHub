@@ -1,14 +1,25 @@
-
-<div style="padding-left: 20px;">
-  <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.report.stocklocations[$locationIndex].stocks.length">
-    <tr style="font-weight: 400">
-			<td>Cluster</td>
+<style>
+  tr.tRtl td{
+    text-align: right;
+    direction: rtl;
+  }
+  table.tRtl{
+    direction: rtl;
+  }
+  .rtLpadding{
+    padding-right: 25px;
+  }
+</style>
+<div style="padding-left: 20px;" ng-class="{'rtLpadding':rtlClass}">
+  <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.report.stocklocations[$locationIndex].stocks.length" ng-class="{'tRtl':rtlClass}">
+    <tr style="font-weight: 400" ng-class="{'tRtl':rtlClass}">
+			<td>{{'cluster'|translate}}</td>
 			<td>{{'stock_purpose'|translate}}</td>
 			<td>{{'targeted_groups'|translate}}</td>
       <td>{{'stock_type' | translate}}</td>
       <td>{{'status_mayus'|translate}}</td>
-      <td>No. {{'in'|translate}} Stock</td>
-      <td>No. {{'in'|translate}} {{'pipeline'|translate}}</td>
+      <td>{{'no_in_stock'|translate}}</td>
+      <td>{{'no_in_pipeline'|translate}}</td>
       <td>{{'units'|translate}}</td>
 			<td>{{'beneficiary_coverage'|translate}}</td>
       <td ng-show="report.report.report_status !== 'complete'">{{'edit'|translate}}</td>
@@ -93,7 +104,7 @@
     </tr>
   </table>
 
-  <button class="btn" ng-show="report.report.report_status !== 'complete'" ng-click="report.addStock( $locationIndex )">
+  <button class="btn" ng-show="report.report.report_status !== 'complete'" ng-click="report.addStock( $locationIndex )" ng-class="{'right':rtlClass}">
     <i class="material-icons left">add</i>{{'add_row'|translate}}
   </button>
 

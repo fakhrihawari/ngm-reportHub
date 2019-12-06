@@ -63,7 +63,7 @@ angular.module('ngmReportHub')
 				$scope.model.menu.push({
 					'id': 'search-sector',
 					'icon': 'date_range',
-					'title': 'Year',
+					'title': 'year',
 					'class': 'teal lighten-1 white-text',
 					'rows':yearRow})
 			},
@@ -113,7 +113,7 @@ angular.module('ngmReportHub')
 									titleIcon: 'alarm_on',
 									color: 'light-blue lighten-4',
 									// textColor: 'white-text',
-									title: $filter('translate')('stock_reports_todo'),
+									title: 'stock_reports_todo',
 									hoverTitle: 'Update',
 									icon: 'edit',
 									rightIcon: 'watch_later',
@@ -131,7 +131,8 @@ angular.module('ngmReportHub')
 												report_year: parseInt(year)
 											}
 										}
-									}
+									},
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]
@@ -144,7 +145,7 @@ angular.module('ngmReportHub')
 								config: {
 									titleIcon: 'done_all',
 									color: 'light-blue lighten-4',
-									title: $filter('translate')('stock_reports_complete'),
+									title: 'stock_reports_complete',
 									hoverTitle: 'View',
 									icon: 'done',
 									rightIcon: 'check_circle',
@@ -162,7 +163,8 @@ angular.module('ngmReportHub')
 												report_year: parseInt(year)
 											}
 										}
-									}
+									},
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]

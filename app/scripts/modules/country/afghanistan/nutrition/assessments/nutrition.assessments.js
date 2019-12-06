@@ -51,6 +51,7 @@ angular.module( 'ngmReportHub' )
 								style: 'padding: 0px;',
 								config: {
 									templateUrl: '/scripts/modules/country/afghanistan/nutrition/views/nutrition.assessments.html',
+								rtlEvent: 'rtl',
 					      }
 					    }]
 					  }]

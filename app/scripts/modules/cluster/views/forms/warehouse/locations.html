@@ -1,4 +1,35 @@
-
+<style>
+	input[type=number].validate.inrtl + label{
+		text-align: right;
+		padding-right: 25px;
+	}
+	input[type=number].validate.inrtl{
+		text-align: right;
+	}
+	.input-field.col label.inrtl{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+	}
+	.input-field.col label.inrtltext{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+		padding-right: 20px;
+	}
+	.input-field.inrtl > .select-wrapper input.select-dropdown {
+		text-align: right;
+	}
+	.input-field.inrtl > .select-wrapper span.caret {
+    	left: 0;
+	}
+	.input-field.inrtl > .select-wrapper  .dropdown-content li{
+		text-align: right;
+	}
+	.rtl{
+		direction: rtl;
+	}
+</style>
 <script>
 
 	// add init delay to load data
@@ -15,8 +46,8 @@
 		<div class="card">
 			<ul class="collection with-header">
 				<li class="collection-header teal lighten-4">
-					<h5 class="report-work-title">
-						<i class="material-icons left">location_on</i>{{'warehouse_locations'|translate}}
+					<h5 class="report-work-title" ng-class="{'right-title':rtlClass}">
+						<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">location_on</i>{{'warehouse_locations'|translate}}
 					</h5>
 				</li>
 				<li class="collection-item avatar">
@@ -29,7 +60,7 @@
 
 				      <div class="row remove" ng-if="!report.options.list.admin3.length">
 
-			      		<div class="input-field col s12 m4"
+			      		<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}"
 			      			ng-class="{ 'error-label': clusterStockReportsForm.$submitted
 							  								&& report.organization.warehouses.length === 0 }">
 			      			<select id="ngm-project-admin1" class="validate"
@@ -37,12 +68,13 @@
 							    	ng-model-options="{ trackBy: '$value.admin1pcode'}"
 							    	ng-change="report.updateLocationSelect( true, false )"
 			      				ng-options="item as item.admin1name for item in report.options.list.admin1 | filter : { inactive: '!true' }">
-			      				<option value="" selected>{{'choose'|translate}} {{ report.options.list.admin1[0].admin1type_name }}</option>
+			      				<option value="" selected>{{'choose'|translate}} {{'province'|translate}}</option>
 			      			</select>
-			      			<label>{{ report.options.list.admin1[0].admin1type_name }} *</label>
+							<label ng-if="!rtlClass">{{ report.options.list.admin1[0].admin1type_name }} *</label>
+							<label ng-if="rtlClass" ng-class="{'inrtl':rtlClass}">{{'province'|translate}}</label>
 			      		</div>
 
-			      		<div class="input-field col s12 m4"
+			      		<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}"
 			      			ng-class="{ 'error-label': clusterStockReportsForm.$submitted
 							  								&& report.organization.warehouses.length === 0 }">
 			      			<select id="ngm-project-admin2" class="validate"
@@ -51,16 +83,17 @@
 							    	ng-change="report.updateLocationSelect( false, false )"
 							    	ng-disabled="!report.options.warehouse.admin1"
 			      				ng-options="item as item.admin2name for item in report.options.list.admin2 | filter: { admin1pcode: report.options.warehouse.admin1.admin1pcode }">
-			      				<option value="" disabled selected>{{'choose'|translate}} {{ report.options.list.admin2[0].admin2type_name }}</option>
+			      				<option value="" disabled selected>{{'choose'|translate}} {{'district'|translate}}</option>
 			      			</select>
-			      			<label>{{ report.options.list.admin2[0].admin2type_name }} *</label>
+							<label ng-if="!rtlClass">{{ report.options.list.admin2[0].admin2type_name }} *</label>
+							<label ng-if="rtlClass" ng-class="{'inrtl':rtlClass}">{{'district'|translate}}</label>
 			      		</div>
 
-							  <div class="input-field col s12 m3">
+							  <div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">
 							    <input id="ngm-project-hf_name" type="text" class="validate"
 							    	ng-model="report.options.warehouse.site_type.site_name"
 							    	ng-disabled="!report.options.warehouse.admin2">
-							    <label for="ngm-project-hf_name">{{'warehouse_name'|translate}} *</label>
+							    <label for="ngm-project-hf_name" ng-class="{'inrtltext':rtlClass}">{{'warehouse_name'|translate}} *</label>
 							  </div>
 
 			      		<div class="col s12 m1" style="padding-top:15px;">
@@ -89,7 +122,7 @@
 			      			<label>{{ report.options.list.admin1[0].admin1type_name }} *</label>
 			      		</div>
 
-			      		<div class="input-field col s12 m3"
+			      		<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}"
 			      			ng-class="{ 'error-label': clusterStockReportsForm.$submitted
 							  								&& report.organization.warehouses.length === 0 }">
 			      			<select id="ngm-project-admin2" class="validate"
@@ -100,10 +133,10 @@
 			      				ng-options="item as item.admin2name for item in report.options.list.admin2 | filter: { admin1pcode: report.options.warehouse.admin1.admin1pcode }">
 			      				<option value="" disabled selected>{{'choose'|translate}} {{ report.options.list.admin2[0].admin2type_name }}</option>
 			      			</select>
-			      			<label>{{ report.options.list.admin2[0].admin2type_name }} *</label>
+			      			<label ng-class="{'inrtl':rtlClass}">{{ report.options.list.admin2[0].admin2type_name }} *</label>
 			      		</div>
 
-			      		<div class="input-field col s12 m3"
+			      		<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}"
 			      			ng-class="{ 'error-label': clusterStockReportsForm.$submitted
 							  								&& report.organization.warehouses.length === 0 }">
 			      			<select id="ngm-project-admin3" class="validate"
@@ -114,14 +147,14 @@
 			      				ng-options="item as item.admin3name for item in report.options.list.admin3 | filter: { admin2pcode: report.options.warehouse.admin2.admin2pcode }">
 			      				<option value="" disabled selected>{{'choose'|translate}} {{ report.options.list.admin3[0].admin3type_name }}</option>
 			      			</select>
-			      			<label>{{ report.options.list.admin3[0].admin3type_name }} *</label>
+			      			<label ng-class="{'inrtl':rtlClass}">{{ report.options.list.admin3[0].admin3type_name }} *</label>
 			      		</div>
 
-							  <div class="input-field col s12 m2">
+							  <div class="input-field col s12 m2" ng-class="{'inrtl':rtlClass}">
 							    <input id="ngm-project-hf_name" type="text" class="validate"
 							    	ng-model="report.options.warehouse.site_type.site_name"
 							    	ng-disabled="!report.options.warehouse.admin3">
-							    <label for="ngm-project-hf_name">{{'warehouse_name'|translate}} *</label>
+							    <label ng-class="{'inrtltext':rtlClass}" for="ngm-project-hf_name">{{'warehouse_name'|translate}} *</label>
 							  </div>
 
 			      		<div class="col s12 m1" style="padding-top:15px;">
@@ -142,7 +175,7 @@
 							 <div class="row" style="padding-left:40px;" ng-if="report.organization.warehouses.length">
 
 							 	<div class="row">
-									<h5 class="report-selected-locations">{{ report.organization.warehouses.length }} {{'selected_warehouses'|translate}}</h5>
+									<h5 class="report-selected-locations" ng-class="{'rtl':rtlClass}">{{ report.organization.warehouses.length }} {{'selected_warehouses'|translate}}</h5>
 								</div>
 
 								<div class="row" ng-repeat="warehouse in report.organization.warehouses">

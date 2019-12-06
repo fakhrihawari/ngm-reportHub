@@ -1,4 +1,11 @@
-
+<style>
+	.btn-rtl{
+		direction: rtl;
+	}
+	.btn-rtl i.left {
+		transform: rotate(180deg);
+	}
+</style>
 <!-- save modal -->
 <div id="save-modal" class="modal">
   <div class="modal-content">
@@ -45,7 +52,8 @@
 				<i class="material-icons left">keyboard_return</i>{{'back_to_stock_reports'|translate}}
 			</button>
 
-			<span class="right" style="padding-top:8px;">{{'last_updated' | translate}}: {{ report.updatedAt }}</span>
+			<span ng-if="!rtlClass" class="right" style="padding-top:8px;">{{'last_updated' | translate}}: {{ report.updatedAt }}</span>
+			<span ng-if="rtlClass" class="right" style="padding-top:8px;">&#x202a;{{ report.updatedAt }} &#x202c; :{{'last_updated' | translate}}</span>
 
 		</div>
 	</div>
@@ -68,7 +76,7 @@
 				<div class="widget card-panel white grey-text text-darken-2">
 
 					<!-- submission -->
-					<div align="center" >
+					<div align="center" ng-class="{'btn-rtl':rtlClass}" >
 
 						<!-- validation -->
 						<!--
@@ -85,7 +93,7 @@
 						<div ng-if="!report.formComplete()" style="padding:20px;"><span style="color:#EE6E73">{{'form_not_completed'|translate}}</span></div>
 
 						<button class="waves-effect waves-light btn modal-trigger" data-target="save-modal" ng-disabled="!report.formComplete()">
-							<i class="material-icons right">send</i>{{'save_mayus'|translate}}</button>
+							<i class="material-icons " ng-class="{'right':!rtlClass,'left':rtlClass}">send</i>{{'save_mayus'|translate}}</button>
 
 
 						<!-- no validation -->
@@ -104,7 +112,7 @@
 
 						<button class="waves-effect waves-light btn modal-trigger blue"
 							data-target="complete-modal" ng-disabled="!report.formComplete()">
-							<i class="material-icons left">assignment_turned_in</i>{{'submit_monthly_report'|translate}}
+							<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">assignment_turned_in</i>{{'submit_monthly_report'|translate}}
 						</button>
 
 					</div>

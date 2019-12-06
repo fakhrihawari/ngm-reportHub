@@ -315,4 +315,27 @@ body.md-default-theme, body, html.md-default-theme, html {
 #splash-screen {
 	display: none;
 }
+/* to reverse header */
+.reverse-header{
+display: flex;
+flex-direction: row-reverse;
+text-align: right;
+}
+.reverse-column{
+	display: flex;
+	flex-direction: row-reverse;
+}
+.fixed-action-btn.horizontal ul.reverse-download{
+  text-align: left;
+  /* right: 64px; */
+  top: 45%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 100%;
+  /* left: auto; */
+  width: 500px;
+  /*width 100% only goes to width of button container */
+  direction: rtl;
+  left: 84px;
+}
 

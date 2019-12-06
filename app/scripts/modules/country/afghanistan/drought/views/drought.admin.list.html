@@ -12,6 +12,12 @@
 	.pagination li.active {
 		background-color: #009688;
 	}
+	.right-title{
+		text-align: right;
+	}
+  .table-rtl {
+	direction: rtl;
+}
 </style>
 
 <!-- ngTable -->
@@ -20,8 +26,8 @@
 		<div class="card">
 			<ul class="collection with-header">
 				<li class="{{ table.headerClass }}">
-					<h5 class="report-work-title {{ table.headerText }}">
-						<i class="material-icons left">{{ table.headerIcon }}</i>{{ table.headerTitle }}</h5>
+					<h5 class="report-work-title {{ table.headerText }}" ng-class="{'right-title':rtlClass}">
+						<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>{{ table.headerTitle | translate}}</h5>
 				</li>
 				<li class="collection-item avatar" style="padding:10px;">					
 										
@@ -34,15 +40,15 @@
 
 					<!-- if data -->
 					<div ng-if="data.length">
-						<table class="centered highlight responsive-table" ng-table="table.tableParams">
+						<table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
 							<tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
 								<!-- <td data-title="'Cluster'" sortable="'cluster'" ng-if="table.cluster_id === 'all'">
 									{{ row.cluster }}
 								</td> -->
-								<td data-title="'Sector'" sortable="'cluster'" >
+								<td data-title="'sector_mayus'|translate" sortable="'cluster'" >
 									{{ row.cluster }}
 								</td>
-								<td data-title="'Organization'" sortable="'organization'">
+								<td data-title="'organization'|translate" sortable="'organization'">
 
 									<div ng-if="table.user.roles.indexOf( 'ADMIN' ) === -1">
 
@@ -69,10 +75,10 @@
 									</div>
 
 								</td>
-								<td data-title="'User'" sortable="'username'">
+								<td data-title="'users'|translate" sortable="'username'">
 									{{ row.username }}
 								</td>
-								<td data-title="'Contact'" sortable="'email'">
+								<td data-title="'contact'|translate" sortable="'email'">
 									{{ row.email }}
 								</td>
 								<td data-title="'Title'" sortable="'project_title'" ng-if="table.showTitle">
@@ -81,10 +87,10 @@
 									</a>
 								</td>
 
-								<td data-title="'Month'" sortable="'reporting_period'">
+								<td data-title="'month'|translate" sortable="'reporting_period'">
 									{{ table.formatUtcDate( row.reporting_period ) }}
 								</td>
-								<td data-title="'GoTo'" sortable="'reporting_period'">
+								<td data-title="'go_to'|translate" sortable="'reporting_period'">
 
 									<div ng-if="table.user.roles.indexOf( 'ADMIN' ) === -1">
 
@@ -115,7 +121,7 @@
 									</div>
 
 								</td>
-								<td data-title="'Status'" sortable="'status'">
+								<td data-title="'status_mayus'|translate" sortable="'status'">
 
 									<div ng-if="table.user.roles.indexOf( 'ADMIN' ) === -1">										
 										<i class="material-icons" style="color: {{ row.status }}">{{ row.icon }}</i>

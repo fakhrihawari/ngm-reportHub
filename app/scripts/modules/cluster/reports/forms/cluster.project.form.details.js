@@ -243,6 +243,11 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 							})
 						}
 					}
+					// RTL
+					$scope.rtlClass = false;
+					if ($translate.use() === 'prs') {
+						$scope.rtlClass = true;
+					}
 
 					// detailBeneficiaries
 					$scope.detailBeneficiaries = $scope.project.definition.target_beneficiaries.length ? 
@@ -880,21 +885,13 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();				
 			})
-			// for loading mask			
-			$scope.loading = true;
-			$scope.$on('$includeContentLoaded', function (eve, htmlpath) {
-				// Emitted every time the ngInclude content is reloaded
-				// use this '/scripts/modules/cluster/views/forms/details/project-upload.html' because the last loaded
-				if ( $scope.project.definition.project_status === 'new' ) {
-					setTimeout(() => {
-						$scope.loading = false;
-					}, 100 );
-				} else if (htmlpath ==='/scripts/modules/cluster/views/forms/details/project-upload.html') {
-					setTimeout(() => {
-						$scope.loading = false;
-					}, 100 );
-				}					
+			$scope.$on('rtl', function (event, ready) {
+				if(ready){
+					$scope.rtlClass = true;
+				}else{
+					$scope.rtlClass = false;
+				}
 			});
-	}
+  }
 
 ]);

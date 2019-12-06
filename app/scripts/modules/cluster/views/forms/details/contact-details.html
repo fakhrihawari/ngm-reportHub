@@ -3,10 +3,10 @@
 	<div class="row">
 		<div class="col s12 m12 l12">
 			<div class="card">
-				<ul class="collection with-header">
+				<ul class="collection with-header" ng-class="{'language-rtl':rtlClass}">
 					<li class="collection-header blue lighten-1">
 						<h5 class="report-work-title white-text">
-              <i class="material-icons left">account_circle</i>
+              <i class="material-icons" ng-class="{'right':rtlClass,'left':!rtlClass}">account_circle</i>
               	{{'project_focal_point' | translate}}
 
             </h5>
@@ -20,7 +20,7 @@
 						<div class="row">
 							<div class="col s12 card">
 								<div style="padding-top: 10px; padding-bottom: 25px; padding-left: 40px; ">
-									<table class="bordered responsive-table" ng-show="project.definition">
+									<table class="bordered responsive-table" ng-show="project.definition" ng-class="{'tableRtl':rtlClass}">
 										<thead>
 										<tr style="font-weight: 400">
 											<td></td>

@@ -240,7 +240,8 @@ angular.module('ngmReportHub')
 
 										},
 										request: { method: 'GET', url: ngmAuth.LOCATION + '/api/nutrition/afghanistan/latestUpdate' },
-										templateUrl: '/scripts/widgets/ngm-html/template/nutrition.admin.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/nutrition.admin.html',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -252,7 +253,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('submitted_reports'),
+										title: 'submitted_reports',//$filter('translate')('submitted_reports'),
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/beneficiaries/indicator', 'submitted_reports', false )
 									}
 								}]
@@ -263,7 +264,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('duplicate_reports'),
+										title: 'duplicate_reports',//$filter('translate')('duplicate_reports'),
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/indicator', 'duplicate_reports', false )
 									}
 								}]
@@ -278,7 +279,7 @@ angular.module('ngmReportHub')
 									config: {
 										title: {
 											style: 'padding-top: 10px;',
-											name: $filter('translate')('reports_timeline')
+											name: 'reports_timeline',//$filter('translate')('reports_timeline')
 										},
 										options: { itemName: 'Reports(s)', start: new Date( $scope.dashboard.startDate ) },
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/indicator', 'calendar' )
@@ -297,11 +298,12 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header red lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_late',
-										headerTitle: $filter('translate')('duplicate_reports'),
+										headerTitle: 'duplicate_reports',//$filter('translate')('duplicate_reports'),
 										templateUrl: '/scripts/widgets/ngm-table/templates/nutrition/nutrition.list.html',
 										tableOptions:{
 											count: 10
 										},
+										rtlEvent: 'rtl',
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/indicator', 'duplicate_reports', true ),
 										fetchData: function( pk,dataid ) {
 
@@ -387,12 +389,13 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header teal lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_turned_in',
-										headerTitle: $filter('translate')('reports_submitted'),
+										headerTitle: 'reports_submitted',
 										templateUrl: '/scripts/widgets/ngm-table/templates/nutrition/nutrition.list.html',
 										tableOptions:{
 											count: 10
 										},
 										request: ngmNutritionHelper.getRequest( 'nutrition/afghanistan/indicator', 'reports_submitted', true ),
+										rtlEvent: 'rtl',
 										fetchData: function(pk,dataid) {
 
 											// disabled btn

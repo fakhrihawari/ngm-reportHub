@@ -28,6 +28,96 @@
 	md-chips .md-chips .md-chip-input-container input:disabled{
 		display: none;
 	} 
+	.rtl{
+		direction: rtl;
+	}
+	input[type=number].validate.inrtl + label{
+		text-align: right;
+		padding-right: 25px;
+	}
+	input[type=number].validate.inrtl, textarea.materialize-textarea.valid.inrtl{
+		text-align: right;
+	}
+	input[type=text].validate.inrtl,input[type=text].picker__input.inrtl{
+		text-align: right;
+	}
+	.input-field.col label.inrtl{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+	}
+	.input-field.col label.inrtltext{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+		padding-right: 25px;
+	}
+	.input-field.inrtl > .select-wrapper input.select-dropdown {
+		text-align: right;
+	}
+	.input-field.inrtl > .select-wrapper span.caret {
+    	left: 0;
+	}
+	.input-field.inrtl > .select-wrapper  .dropdown-content li{
+		text-align: right;
+	}
+	.rtl{
+		direction: rtl;
+	}
+	.row.inrtl .col{
+		float: right;
+	}
+
+	.check-title-rtl{
+		text-align: right;
+		padding-right: 12px;
+	}
+	input[type="checkbox"].rtlCheck + label{
+		padding-left: 0;   
+		padding-right: 35px;
+	}
+	
+	
+	[type="checkbox"].filled-in.rtlCheck:not(:checked) + label:after {
+		height: 20px;
+		width: 20px;
+		background-color: transparent;
+		border: 2px solid #5a5a5a;
+		top: 0px;
+		z-index: 0;
+		right: 0;
+		left: unset;
+	}
+	[type="checkbox"].filled-in.rtlCheck:checked + label:after {
+		top: 0;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #26a69a;
+		background-color: #26a69a;
+		z-index: 0;
+		right: 0px;
+		left: unset;
+	}
+	[type="checkbox"].filled-in.rtlCheck:checked + label:before {
+		top: 0;    
+		width: 8px;
+		height: 13px;
+		border-top: 2px solid transparent;
+		border-left: 2px solid transparent;
+		border-right: 2px solid #fff;
+		border-bottom: 2px solid #fff;
+		-webkit-transform: rotateZ(37deg);
+		transform: rotateZ(37deg);
+		-webkit-transform-origin: 100% 100%;
+		transform-origin: 100% 100%;
+		right: 10px !important;
+		left: unset;
+	}
+	textarea.materialize-textarea.validate + label.inrtl{
+		text-align: right;
+		padding-right: 20px;
+	}
+</style>
 </style>
 
 <!-- bind html -->
@@ -36,9 +126,9 @@
 		<div class="card">
 			<ul id="project_details_form" class="collection with-header">
 				
-				<li class="collection-header blue lighten-1">
-					<h5 class="report-work-title white-text">
-						<i class="material-icons left">border_color</i>{{'project_plan'|translate}}
+				<li class="collection-header blue lighten-1" ng-class="{'language-rtl':rtlClass}">
+					<h5 class="report-work-title white-text" ng-class="{'language-rtl':rtlClass}">
+						<i class="material-icons" ng-class="{'right':rtlClass,'left':!rtlClass}">border_color</i>{{'project_plan'|translate}}
 
 					</h5>
 				</li>
@@ -54,21 +144,22 @@
 							<!-- project details -->
 							<div class="row">
 
-								<div class="input-field col s12 m6">
-								  <input id="ngm-project-name" type="text" class="validate"
+								<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+								  <input id="ngm-project-name" type="text" class="validate" ng-class="{'inrtl':rtlClass}"
 												ng-model="project.definition.project_title"
 												ng-disabled="project.definition.project_status === 'complete'"
 												required>
-								  <label for="ngm-project-name">{{'project_title' | translate}} *</label>
+								  <label ng-class="{'inrtltext':rtlClass}" for="ngm-project-name">{{'project_title' | translate}} *</label>
 								</div>
 
 								<!-- input-date directive -->
-								<div class="input-field col s12 m3">
-											<label id="ngm-start-date" for="ngm-start-date" class="validate">{{'start_date' | translate}} *</label>
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">
+											<label ng-class="{'inrtl':rtlClass}" id="ngm-start-date" for="ngm-start-date" class="validate">{{'start_date' | translate}} *</label>
 											<input ngm-date
 											    type="text"
 											    name="created"
-											    id="ngm-start-date"
+												id="ngm-start-date"
+												ng-class="{'inrtl':rtlClass}"
 											    ng-model="project.definition.project_start_date"
 											    format="dd mmm, yyyy"
 											    select-years="15"
@@ -78,12 +169,13 @@
 								</div>
 
 								<!-- input-date directive -->
-								<div class="input-field col s12 m3">
-								  <label for="ngm-end-date">{{'end_date' | translate}} *</label>
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">
+								  <label ng-class="{'inrtl':rtlClass}" for="ngm-end-date">{{'end_date' | translate}} *</label>
 											<input ngm-date
 											    type="text"
 											    name="created"
-											    id="ngm-end-date"
+												id="ngm-end-date"
+												ng-class="{'inrtl':rtlClass}"
 											    ng-model="project.definition.project_end_date"
 											    format="dd mmm, yyyy"
 											    select-years="15"
@@ -95,25 +187,26 @@
 							</div>
 
 							<!-- project budget -->
-							<div class="row">
+							<div class="row" ng-class="{'inrtl':rtlClass}">
 
 								<!-- org project code  -->
-								<div class="input-field col s12 m6">
+								<div class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
 								  <input id="ngm-project_code" type="text" class="validate"
+									ng-class="{'inrtl':rtlClass}"
 								  	ng-model="project.definition.project_code"
 								  	ng-disabled="project.definition.project_status === 'complete'">
-								  <label for="ngm-project_code">{{ project.definition.organization }} {{'project_code' | translate}}</label>
+								  <label for="ngm-project_code" ng-class="{'inrtltext':rtlClass}">{{ project.definition.organization }} {{'project_code' | translate}}</label>
 								</div>
 
-								<div class="input-field col s12 m3">
-								  <input id="ngm-project-budget" type="text" class="validate"
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}">
+								  <input id="ngm-project-budget" type="text" class="validate" ng-class="{'inrtl':rtlClass}"
 								  	ng-model="project.definition.project_budget"
 								  	ng-disabled="project.definition.project_status === 'complete'"
 								  	required>
-								  <label for="ngm-project-budget">{{'project_budget' | translate}} ( {{ project.definition.project_budget_currency | uppercase }} ) *</label>
+								  <label ng-class="{'inrtltext':rtlClass}" for="ngm-project-budget">{{'project_budget' | translate}} ( {{ project.definition.project_budget_currency | uppercase }} ) *</label>
 								</div>
 
-								<div class="input-field col s12 m3"
+								<div class="input-field col s12 m3" ng-class="{'inrtl':rtlClass}"
 									ng-class="{ 'error-label': healthProjectForm.$submitted && !project.definition.project_budget_currency }">
 									    <select class="validate"
 									    	id="ngm-project_budget_currency"
@@ -123,7 +216,7 @@
 									    	required>
 									      <option value="" disabled selected>{{'select_project_budget_currency' | translate}}</option>
 									    </select>
-									    <label for="ngm-project_budget_currency">{{'project_budget_currency' | translate}} *</label>
+									    <label ng-class="{'inrtl':rtlClass}" for="ngm-project_budget_currency">{{'project_budget_currency' | translate}} *</label>
 								</div>
 
 							</div>
@@ -145,11 +238,11 @@
 							</div>
 
 							<!-- HRP / JRP -->
-							<div class="row" ng-if="project.definition.admin0pcode !== 'COL'">
+							<div class="row" ng-if="project.definition.admin0pcode !== 'COL'" ng-class="{'inrtl':rtlClass}">
 
 								<!-- switch -->
 								<div class="switch input-field col s12 m6">
-									<label>
+									<label ng-if="!rtlClass">
 										Non-{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project'|translate}}
 										<input ng-click="project.setHrpStatus();" 
 														ng-checked="project.definition.project_hrp_project" type="checkbox" class="filled-in"
@@ -157,25 +250,32 @@
 										<span class="lever"></span>
 											{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project'|translate}}
 									</label>
+									<label ng-if="rtlClass">
+										{{'project'|translate}} Non-{{ ngmClusterHelper.getProjectHrpName( project.definition ) }}
+										<input ng-click="project.setHrpStatus();" ng-checked="project.definition.project_hrp_project" type="checkbox"
+											class="filled-in" ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
+										<span class="lever"></span>
+										{{'project'|translate}} {{ ngmClusterHelper.getProjectHrpName( project.definition ) }}
+									</label>
 								</div>
 								
 								<!-- project_hrp_code -->
 
 								<!-- default -->
 								<div ng-if="project.definition.admin0pcode !== 'SO'">
-									<div ng-if="project.definition.project_hrp_project" class="input-field col s12 m6">
-									  <input id="ngm-project_hrp_code" type="text" class="validate"
+									<div ng-if="project.definition.project_hrp_project" class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
+									  <input ng-class="{'inrtl':rtlClass}" id="ngm-project_hrp_code" type="text" class="validate"
 									  				ng-model="project.definition.project_hrp_code"
 									  				disabled="true"/>
-									  <label for="ngm-project-budget">
-									  	{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} Project Code
+									  <label for="ngm-project-budget" ng-class="{'inrtltext rtl':rtlClass}">
+									  	{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project_code' | translate}}
 									  </label>
 									</div>
-									<div ng-if="!project.definition.project_hrp_project" class="input-field col s12 m6">
+									<div ng-if="!project.definition.project_hrp_project" class="input-field col s12 m6" ng-class="{'inrtl':rtlClass}">
 									  <input id="ngm-project_hrp_code" type="text" class="validate"
 									  				ng-model="project.definition.project_hrp_code"
 									  				disabled="true">
-									  <label for="ngm-project_hrp_code">
+									  <label for="ngm-project_hrp_code" ng-class="{'inrtltext rtl':rtlClass}">
 									  	Non-{{ ngmClusterHelper.getProjectHrpName( project.definition ) }} {{'project_code' | translate}}
 										</label>
 									</div>
@@ -223,7 +323,7 @@
 							<div ng-if="project.definition.admin0pcode !== 'CB' || ( project.definition.admin0pcode === 'CB' && project.definition.cluster_id !== 'health' )">
 								
 								<!-- activities --> 
-								<div class="row" id="ngm-activity_type_label">
+								<div class="row" id="ngm-activity_type_label" ng-class="{'reverse-column check-title-rtl':rtlClass}">
 									<div class="activity-field col s12 m6" style="padding-top:12px;padding-bottom:5px;">
 										
 										<label class="label" id="ngm-activity_type" for="ngm-activity_type">{{'activity_type' | translate}} *</label>
@@ -231,7 +331,7 @@
 										<label class="label">{{ project.definition.cluster }}</label>
 										<!-- for project cluster activity_type -->
 										<p style="padding-left:10px;" ng-repeat="a in project.lists.activity_types | filter: { cluster_id: project.definition.cluster_id } ">
-											<input type="checkbox" class="filled-in" id="activity_{{ a.activity_type_id }}" 
+											<input type="checkbox" class="filled-in" ng-class="{'rtlCheck':rtlClass}" id="activity_{{ a.activity_type_id }}" 
 															ng-model="project.definition.activity_type_check[ a.activity_type_id ]"
 															ng-click="project.compileInterClusterActivities()"
 															ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
@@ -260,11 +360,11 @@
 									
 									<!-- no other_activities_in_addition_to for CB && health -->
 									<div class="input-field col s12 m6" style="padding-bottom:5px;">
-										<label>{{'other_activities_in_addition_to' | translate}} {{ project.definition.cluster }}?</label>
+										<label ng-class="{'rtl inrtl':rtlClass}">{{'other_activities_in_addition_to' | translate}} {{ project.definition.cluster }}?</label>
 										<div style="padding-bottom:35px;"></div>
 								    <p ng-repeat="a in project.lists.clusters | filter: { cluster_id: '!' + project.definition.cluster_id }"
 								    		ng-if="a.cluster_id !== 'acbar'">
-								      <input type="checkbox" class="filled-in" id="activity_{{ a.cluster_id }}" 
+								      <input type="checkbox" class="filled-in" ng-class="{'rtlCheck':rtlClass}" id="activity_{{ a.cluster_id }}" 
 								     					ng-model="project.definition.inter_cluster_check[ a.cluster_id ]"
 								      				ng-click="project.compileInterClusterActivities()"
 								      				ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
@@ -294,14 +394,14 @@
 								</div>
 
 								<!-- project donor -->
-								<div class="row" ng-if="project.definition.admin0pcode !== 'COL'" id="ngm-project_donor_select" >
+								<div class="row" ng-if="project.definition.admin0pcode !== 'COL'" id="ngm-project_donor_select" ng-class="{'check-title-rtl':rtlClass}">
 
 									<div class="input-field col s12" style="padding-bottom:5px;">
-										<label for="ngm-project_donor">{{'project_donor' | translate}} *</label>
+										<label for="ngm-project_donor" ng-class="{'inrtl':rtlClass}">{{'project_donor' | translate}} *</label>
 										<div style="padding-bottom:35px;"></div>
 
 										<p ng-repeat="donor in project.lists.donors">
-									      <input type="checkbox" class="filled-in" id="donor_{{ donor.project_donor_id }}" 
+									      <input type="checkbox" class="filled-in" ng-class="{'rtlCheck':rtlClass}"id="donor_{{ donor.project_donor_id }}" 
 										      ng-model="project.definition.project_donor_check[ donor.project_donor_id ]"
 										      ng-click="project.compileDonor()"
 										      ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
@@ -318,7 +418,7 @@
 							<div ng-if="project.definition.admin0pcode === 'CB' && project.definition.cluster_id === 'health'">
 								
 								<!-- activities -->
-								<div class="row" id="ngm-activity_type_label">
+								<div class="row" id="ngm-activity_type_label" ng-class="{'reverse-column check-title-rtl':rtlClass}">
 									<div class="activity-field col s12 m6" style="padding-top:12px;padding-bottom:5px;">
 										
 										<label class="label" id="ngm-activity_type" for="ngm-activity_type">{{'activity_type' | translate}} *</label>
@@ -335,14 +435,14 @@
 									</div>
 
 									<!-- project donor -->
-									<div class="row" ng-if="project.definition.admin0pcode !== 'COL'" id="ngm-project_donor_select" >
+									<div class="row" ng-if="project.definition.admin0pcode !== 'COL'" id="ngm-project_donor_select" ng-class="{'check-title-rtl':rtlClass}">
 
 										<div class="input-field col s12 m6" style="padding-top:12px;padding-bottom:5px;">
 											<label for="ngm-project_donor">{{'project_donor' | translate}} *</label>
 											<div style="padding-bottom:20px;"></div>
 
 											<p ng-repeat="donor in project.lists.donors">
-										      <input type="checkbox" class="filled-in" id="donor_{{ donor.project_donor_id }}" 
+										      <input type="checkbox" class="filled-in" ng-class="{'rtlCheck':rtlClass}" id="donor_{{ donor.project_donor_id }}" 
 											      ng-model="project.definition.project_donor_check[ donor.project_donor_id ]"
 											      ng-click="project.compileDonor()"
 											      ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
@@ -375,23 +475,23 @@
 							</div>
 
 							<!-- other partners -->
-							<div class="row" >
+							<div class="row" ng-class="{'check-title-rtl':rtlClass}" >
 								
-				        <div class="input-field col s12 m6" style="padding-bottom:35px;">
-				        	<label>{{'project_partners' | translate}}</label>
+				        <div class="input-field col s12 m6" ng-class="{'right':rtlClass}" style="padding-bottom:35px;">
+				        	<label ng-class="{'inrtl':rtlClass}">{{'project_partners' | translate}}</label>
 				        	<br/>
 				        	<p style="padding-top:10px;">
-					        	<input type="checkbox" class="filled-in" id="ngm-project-other_partbers"
+					        	<input type="checkbox" class="filled-in" ng-class="{'rtlCheck':rtlClass}" id="ngm-project-other_partbers"
 					        		ng-model="project.definition.implementing_partners_checked"
 					        		ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
-					          <label class="checkbox-label" for="ngm-project-other_partbers">{{'other_implementing_partners' | translate}}?</label>
+					          <label class="checkbox-label"ng-class="{'rtl':rtlClass}" for="ngm-project-other_partbers">{{'other_implementing_partners' | translate}}?</label>
 					        </p>
 				        </div>
 
 	              <div ng-show="project.definition.implementing_partners_checked" style="padding-bottom:40px;">
 									<div class="input-field col s12 m6" ng-class="{ 'has-error' : healthProjectForm.implementing_partners_list.$error.pattern }"
 									 ng-show="project.definition.implementing_partners_checked">
-										<label for="ngm-project-implementing_partners">{{'list_project_partners' | translate}}</label>
+										<label for="ngm-project-implementing_partners" ng-class="{'inrtl':rtlClass}">{{'list_project_partners' | translate}}</label>
 										<div class="padding-top-35"></div>
 										<md-chips ng-model="project.definition.implementing_partners" 
 											md-autocomplete-snap="width"											
@@ -428,12 +528,13 @@
 				        <div class="input-field col s12 m12 l12">
 				          <textarea id="ngm-project-description" type="text" 
 				          				style="padding-left:10px;"
-				          				class="validate materialize-textarea"
+										class="validate materialize-textarea"
+										ng-class="{'inrtl':rtlClass}"
 										ng-model="project.definition.project_description"
 										ng-disabled="project.definition.project_status === 'complete' || !project.canEdit"
 										required>
 									</textarea>
-				          <label for="ngm-project-description">{{'project_description_objetives' | translate}} *</label>
+				          <label for="ngm-project-description" ng-class="{'inrtl':rtlClass}">{{'project_description_objetives' | translate}} *</label>
 				        </div>
 		      		</div>
 

@@ -75,7 +75,7 @@ angular.module('ngmReportHub')
 				menu: [{
 					'id': 'search-region',
 					'icon': 'person_pin',
-					'title': $filter('translate')('region'),
+					'title': 'region',
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': 'HQ',
@@ -480,7 +480,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster',
 							'icon': 'camera',
-							'title': 'Sector',
+							'title': 'sector_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});
@@ -535,7 +535,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-cluster-organization',
 									'icon': 'supervisor_account',
-									'title': 'Organization',
+									'title': 'organization',
 									'class': 'teal lighten-1 white-text',
 									'rows': orgRows
 								});
@@ -659,7 +659,7 @@ angular.module('ngmReportHub')
 						'search': false,
 						'id': 'search-cluster-report',
 						'icon': 'assignment_turned_in',
-						'title': $filter('translate')('report_mayus'),
+						'title': 'report_mayus',
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': $filter('translate')('activity_mayus'),
@@ -688,7 +688,7 @@ angular.module('ngmReportHub')
 								'search': false,
 								'id': 'search-cluster-activity',
 								'icon': 'data_usage',
-								'title': $filter('translate')('activity'),
+								'title': 'activity',
 								'class': 'teal lighten-1 white-text',
 								'rows': [{
 									'title': $filter('translate')('all'),
@@ -755,7 +755,7 @@ angular.module('ngmReportHub')
 						'all': {
 							'id': 'search-country',
 							'icon': 'location_on',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Afghanistan',
@@ -835,7 +835,7 @@ angular.module('ngmReportHub')
 						'afro': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Democratic Republic of Congo',
@@ -866,7 +866,7 @@ angular.module('ngmReportHub')
 						'emro': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Afghanistan',
@@ -897,7 +897,7 @@ angular.module('ngmReportHub')
 						'searo': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Bangladesh',
@@ -916,7 +916,7 @@ angular.module('ngmReportHub')
 						'euro': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Ukraine',
@@ -929,7 +929,7 @@ angular.module('ngmReportHub')
 						'amer': {
 							'id': 'search-country',
 							'icon': 'person_pin',
-							'title': $filter('translate')('country_mayus'),
+							'title': 'country_mayus',
 							'class': 'teal lighten-1 white-text',
 							'rows': [{
 								'title': 'Colombia',
@@ -990,7 +990,11 @@ angular.module('ngmReportHub')
 					if ($route.current.params.activity_type_id==='all'){
 						$scope.dashboard.activity_filename = '';
 					}
-
+					// RTL
+					$scope.rtlClass = false;
+					if ($translate.use() === 'prs') {
+						$scope.rtlClass = true;
+					}
 					// model
 					$scope.model = {
 						name: 'cluster_admin_dashboard',
@@ -1006,6 +1010,7 @@ angular.module('ngmReportHub')
 							},
 							subtitle: {
 								'class': 'col hide-on-small-only report-subtitle truncate m8 l9',
+								// 'style': $scope.rtlClass ? 'text-align:left; direction:rtl':'',
 								'title': $scope.dashboard.subtitle,
 							},
 							datePicker: {
@@ -1094,7 +1099,8 @@ angular.module('ngmReportHub')
 											// update new date
 											$location.path( path );
 										},
-										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard.admin.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard.admin.html',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1106,7 +1112,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('organizations'),
+										title: 'organizations',//$filter('translate')('organizations'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1121,7 +1127,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $scope.dashboard.report_type==='stock' ? $filter('translate')('warehouses_total') : $filter('translate')('total_projects'),
+										title: $scope.dashboard.report_type === 'stock' ? 'warehouses_total' : 'total_projects',//$filter('translate')('warehouses_total') : $filter('translate')('total_projects'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1142,7 +1148,7 @@ angular.module('ngmReportHub')
 											style: 'color:#e57373; font-size:64px; bottom:-10;right:-10px;',
 											icon: 'error'
 										},
-										title: $filter('translate')('reports_due'),
+										title: 'reports_due',//$filter('translate')('reports_due'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1161,7 +1167,7 @@ angular.module('ngmReportHub')
 											style: 'color:#fff176; font-size:64px; bottom:-10;right:-10px;',
 											icon: 'watch_later'
 										},
-										title: $filter('translate')('reports_saved'),
+										title: 'reports_saved', //$filter('translate')('reports_saved'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1180,7 +1186,7 @@ angular.module('ngmReportHub')
 											style: 'color:#4db6ac; font-size:64px; bottom:-10;right:-10px;',
 											icon: 'check_circle'
 										},
-										title: $filter('translate')('reports_submitted'),
+										title: 'reports_submitted', //$filter('translate')('reports_submitted'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1201,7 +1207,7 @@ angular.module('ngmReportHub')
 											// style: 'color:#2196F3; font-size:142px; bottom:-40px; right:-50px;',
 											icon: 'assignment_turned_in'
 										},
-										title: $filter('translate')('reports_total'),
+										title: 'reports_total',//$filter('translate')('reports_total'),
 										request: {
 											method: 'POST',
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
@@ -1226,7 +1232,7 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header red lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_late',
-										headerTitle: $filter('translate')('reports_due'),
+										headerTitle: 'reports_due',//$filter('translate')('reports_due'),
 										templateUrl: '/scripts/widgets/ngm-table/templates/cluster/admin.project.list.html',
 										tableOptions:{
 											count: 10
@@ -1236,7 +1242,8 @@ angular.module('ngmReportHub')
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
 											// indicator, list
 											data: $scope.dashboard.getRequest( 'reports_due', true )
-										}
+										},
+										rtlEvent:'rtl'
 									}
 								}]
 							}]
@@ -1255,7 +1262,7 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header teal lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_turned_in',
-										headerTitle: $filter('translate')('reports_completed'),
+										headerTitle: 'reports_completed',//$filter('translate')('reports_completed'),
 										templateUrl: '/scripts/widgets/ngm-table/templates/cluster/admin.project.list.html',
 										tableOptions:{
 											count: 10
@@ -1265,7 +1272,8 @@ angular.module('ngmReportHub')
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
 											// indicator, list
 											data: $scope.dashboard.getRequest( 'reports_submitted', true )
-										}
+										},
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1285,7 +1293,7 @@ angular.module('ngmReportHub')
 										headerClass: 'collection-header teal lighten-2',
 										headerText: 'white-text',
 										headerIcon: 'assignment_turned_in',
-										headerTitle: $filter('translate')('projects_progress'),
+										headerTitle: 'projects_progress',//$filter('translate')('projects_progress'),
 										templateUrl: '/scripts/widgets/ngm-table/templates/cluster/admin.progress.beneficiaries.html',
 										tableOptions:{
 											count: 10
@@ -1295,7 +1303,8 @@ angular.module('ngmReportHub')
 											url: ngmAuth.LOCATION + '/api/cluster/admin/indicator',
 											// indicator, list
 											data: $scope.dashboard.getRequest( 'progress_beneficiaries', true )
-										}
+										},
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1398,7 +1407,8 @@ angular.module('ngmReportHub')
 											request: {
 												method: 'GET',
 												url: ngmAuth.LOCATION + '/api/listDocuments?'+$scope.dashboard.getRequestDocUpload()
-											}
+											},
+											rtlEvent: 'rtl'
 										}
 									}]
 								}]

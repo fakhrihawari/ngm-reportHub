@@ -16,6 +16,76 @@
 	.add-padding {
 		padding-bottom: 30px;
 	}
+	.title-right{
+		text-align: right;
+	}
+	/* input[type=number].validate.inrtl + label{
+		text-align: right;
+		padding-right: 25px;
+	}
+	input[type=number].validate.inrtl{
+		text-align: right;
+	}
+	.input-field.col label.inrtl{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+	}
+	.input-field.col label.inrtltext{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+		padding-right: 25px;
+	}
+	.input-field.inrtl > .select-wrapper input.select-dropdown {
+		text-align: right;
+	}
+	.input-field.inrtl > .select-wrapper span.caret {
+    	left: 0;
+	}
+	.input-field.inrtl > .select-wrapper  .dropdown-content li{
+		text-align: right;
+	}
+	input[type=text].validate.inrtl,input[type=text].picker__input.inrtl{
+		text-align: right;
+	}
+	.row.inrtl .col{
+		float: right;
+	} */
+	/* simplify */
+	.inrtl .row .col{
+		float: right;}
+	.inrtl input[type=number].validate + label{
+		text-align: right;
+		padding-right: 25px;
+	}
+	.inrtl input[type=number].validate{
+		text-align: right;
+	}
+	.inrtl .input-field.col label{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+	}
+	.inrtl .input-field.col label.inrtltext{
+		left: 0.75rem;
+    	right: 0.75rem;
+    	text-align: right;
+		padding-right: 25px;
+	}
+	.inrtl .input-field > .select-wrapper input.select-dropdown {
+		text-align: right;
+	}
+	.inrtl .input-field > .select-wrapper span.caret {
+    	left: 0;
+	}
+	.inrtl .input-field > .select-wrapper  .dropdown-content li{
+		text-align: right;
+	}
+	.inrtl input[type=text].validate,.inrtl input[type=text].picker__input{
+		text-align: right;
+	}
+	
 </style>
 <div class="row">
 	<div class="col s12 m12 l12">
@@ -23,14 +93,14 @@
 			<ul class="collection with-header">
 
 				<li class="collection-header teal lighten-4">
-					<h5 class="report-work-title">
-						<i class="material-icons left">attach_money</i>{{'project_budget_progress' | translate}}
+					<h5 class="report-work-title" ng-class="{'title-right':rtlClass}">
+						<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">attach_money</i>{{'project_budget_progress' | translate}}
 					</h5>
 				</li>
 
 				<li class="collection-item avatar">
 
-					<p style="padding:10px;">
+					<p style="padding:10px;" ng-class="{'title-right':rtlClass}">
 						{{'add_new_row_of_financial_details_to_your_project_for_each_payment_recieved' | translate}};
 					</p>
 
@@ -87,7 +157,7 @@
 						</div>
 						<!-- detail form-->
 						<div class="card-panel" ng-if="detailFinancial[$index]"
-							ng-class="{'card-panel-expand':detailFinancial[$index]}">
+							ng-class="{'card-panel-expand':detailFinancial[$index],'inrtl':rtlClass}">
 
 							<div class="row">
 								<!-- DONOR -->
@@ -127,19 +197,21 @@
 									<input id="ngm-grant_id-{{ $ndex }}" 
 										type="text" 
 										placeholder="Put your {{'grant' | translate}} ID" 
-										ng-model="budget.grant_id"
+										ng-model="budget.grant_id"										
 										class="validate"
 										ng-disabled="project.definition.project_status === 'complete'"
 										required>
-									<label for="ngm-grant_id-{{ $ndex }}" class="active"
-										>{{'grant' | translate}} ID</label>
+									<label ng-if="rtlClass" for="ngm-grant_id-{{ $ndex }}" class="active"
+										>ID {{'grant' | translate}}</label>
+									<label ng-if="!rtlClass" for="ngm-grant_id-{{ $ndex }}" class="active">{{'grant' | translate}}
+										ID</label>
 								</div>
 
 								<!-- Amount -->
 								<div class="input-field col s12 m4">
 									<input id="ngm-project_budget_amount_recieved-{{$index }}"
 											name="ngm-project_budget_amount_recieved-{{$index }}"
-											type="number"
+											type="number"											
 											class="validate"
 											min="0"
 											ng-model="budget.project_budget_amount_recieved"
@@ -168,8 +240,8 @@
 
 								<!-- Received -->
 								<div class="input-field col s12 m4">
-									<label id="ngm-project_budget_date_recieved-{{$index}}" for="ngm-project_budget_date_recieved-{{$index}}"
-										class="active">{{'recieved' | translate}}*</label>
+									<label id="ngm-project_budget_date_recieved-{{$index}}"
+										for="ngm-project_budget_date_recieved-{{$index}}" class="active">{{'recieved' | translate}}*</label>
 									<input ngm-date type="text" style="color:rgba(0, 0, 0, 0.87);margin-bottom:0px;border-bottom:0px;"
 										ng-model="budget.project_budget_date_recieved" format="dd mmm, yyyy" select-years="15"
 										ng-disabled="project.definition.project_status === 'complete'"
@@ -192,7 +264,7 @@
 								</div>
 
 								<!-- Programing -->
-								<div ng-show="project.showProgrammingField(budget)" class="input-field col s12 m4">
+								<div ng-show="project.showProgrammingField(budget)" class="input-field col s12 m4" >
 									<select materialize-select id="ngm-financial_programming_id-{{$index}}" name="ngm-financial_programming_id-{{$index}}"
 										class="validate" ng-options="d.financial_programming_id as d.financial_programming_name for d in project.lists.financial_programming"
 										ng-model="budget.financial_programming_id" ng-change="ngmClusterFinancial.updateName( project.lists.financial_programming, 'financial_programming_id', 'financial_programming_name', budget,project );
@@ -228,7 +300,7 @@
 									<!-- <input id="year-index-{{item.year}}" name="year-index" type="number" step="any" class="validate" min="0"> -->
 									<input id="year-index-{{item.year}}-{{$index}}"
 											name="year-index-{{item.year}}-{{$index}}"
-											type="number"
+											type="number"											
 											class="validate"
 											min="0"
 											ng-model="item.budget"
@@ -241,7 +313,7 @@
 
 							<div class="row">
 								<!-- Fts -->
-								<div class="input-field col s12 m4">
+								<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
 									<select materialize-select id="ngm-reported_on_fts_id-{{$index}}" name="ngm-reported_on_fts_id-{{$index}}"
 										class="validate" ng-options="d.reported_on_fts_id as d.reported_on_fts_name for d in project.lists.reported_on_fts"
 										ng-model="budget.reported_on_fts_id" ng-change="ngmClusterFinancial.updateName( project.lists.reported_on_fts, 'reported_on_fts_id', 'reported_on_fts_name', budget,project );
@@ -251,7 +323,11 @@
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
 								
-									<label style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}" class="active">{{'on' |translate}}
+									<label ng-if="rtlClass" style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}" class="active"
+										>
+										?FTS {{'on' |translate}}</label>
+									<label ng-if="!rtlClass" style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}" class="active"
+										>{{'on' |translate}}
 										FTS?</label>
 								</div>
 								
@@ -260,7 +336,7 @@
 									<input id="ngm-fts_record_id-{{ $ndex }}" type="text" placeholder="put fts ID" ng-model="budget.fts_record_id"
 									ng-disabled="project.definition.project_status === 'complete'"
 										class="validate" required>
-									<label for="ngm-fts_record_id-{{ $ndex }}" class="active">FTS ID</label>
+									<label for="ngm-fts_record_id-{{ $ndex }}" ng-class="{'inrtltext':rtlClass}" class="active">FTS ID</label>
 								
 								</div>
 								
@@ -270,7 +346,7 @@
 										class="validate" 
 										ng-disabled="project.definition.project_status === 'complete'"
 										required>
-									<label for="ngm-comments-{{ $ndex }}" class="active">{{'notes' | translate}} </label>
+									<label for="ngm-comments-{{ $ndex }}" class="active" ng-class="{'inrtltext':rtlClass}">{{'notes' | translate}} </label>
 								</div>
 							</div>
 						</div>						

@@ -67,7 +67,7 @@ angular.module( 'ngmReportHub' )
         return {
           'id': 'nutrition-dashboard-year',
           'icon': 'search',
-          'title': $filter('translate')('year'),
+          'title': 'year',
           'class': 'teal lighten-1 white-text',
           'rows': [{
             'title': '2018',
@@ -113,7 +113,7 @@ angular.module( 'ngmReportHub' )
         return {
           'id': 'nutrition-admin-province',
           'icon': 'location_on',
-          'title': $filter('translate')('province'),
+          'title': 'province',
           'class': 'teal lighten-1 white-text',
           'rows': rows
         };
@@ -148,7 +148,7 @@ angular.module( 'ngmReportHub' )
         return {
           'id': 'epr-admin-province',
           'icon': 'location_on',
-          'title': ('translate')('district'),
+          'title': 'district',
           'class': 'teal lighten-1 white-text',
           'rows': rows
         };
@@ -178,7 +178,7 @@ angular.module( 'ngmReportHub' )
 								'search': true,
 								'id': 'search-cluster-organization',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('organization'),
+								'title': 'organization',
 								'class': 'teal lighten-1 white-text',
 								'rows': orgRows
 							}
@@ -217,7 +217,7 @@ angular.module( 'ngmReportHub' )
         return {
           'id': 'epr-admin-week',
           'icon': 'date_range',
-          'title': $filter('translate')('report_week'),
+          'title': 'report_week',
           'class': 'teal lighten-1 white-text',
           'rows': rows
         };

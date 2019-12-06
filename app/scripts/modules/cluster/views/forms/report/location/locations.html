@@ -24,6 +24,14 @@
 		transition: width 1s ease;
 	}
 
+	.language-rtl{
+		direction: rtl;
+		text-align: right;
+	}
+	.language-rtl .edit-report-btn{
+		left: 20px;
+		right:0px;
+	}
 </style>
 
 <!-- bind html -->
@@ -62,20 +70,22 @@
 							</div>
 						</nav>
 					</div>
-				</li>
+			
 				<li class="collection-item avatar">
-						<div ng-if="project.report.admin0pcode === 'AF'">
-							<p style="color: #e57373;padding-top: 10px">
+						<div ng-if="project.report.admin0pcode === 'AF'" ng-class="{'language-rtl':rtlClass}">
+							<p ng-if="!rtlClass"style="color: #e57373;padding-top: 10px">
 								<b>{{'note'|translate}}:</b> {{'to_report' | translate}}
 								<b>{{'flood_response' | translate}}</b> {{'activities_please_select_from' | translate}}
 								<b>{{'beneficiary' | translate}}</b> {{'drop_down_beneficiary_types' | translate}} </br>
 								<b>{{'flood_affected_displaced' | translate}}</b> {{'or'| translate}}
 								<b>{{'flood_affected_non_displaced' | translate}}</b>
 							</p>
+							<p ng-if="rtlClass" style="color: #e57373;padding-top: 10px">یاداشت: برای گزارش پاسخگویی به فعالیت های سیلاب، لطفا از لیست افراد ذینفع ذیل نوع افراد ذینفع را انتخاب نمایید</p>
+							<p ng-if="rtlClass" style="color: #e57373;">افراد سیلاب زده بیجا شده ویا افراد سیلاب زده بیجا نشده</p>
 						</div>
 					<!-- form -->
 
-					 	<div class="row">
+					 	<div class="row" ng-class="{'language-rtl':rtlClass}">
 
 							<h3 class="report-selected-locations">{{ project.report.locations.length }} {{'selected_locations'|translate}}</h3>
 							<button class="btn waves-effect waves-light hide-on-small-only edit-report-btn"
@@ -104,12 +114,12 @@
 															filter:{ location_group_id: project.location_group } | 
 															limitTo: project.location_limit track by $index">
 
-							<div class="row">
+							<div class="row" ng-class="{'language-rtl':rtlClass}">
 								<!-- location title -->
 								<div class="col s12 m9 left">
 
 							  	<!-- location title -->
-							  	<h4 class="report-location-title" 
+							  	<h5 class="report-location-title" 
 							  				ng-if="project.definition.cluster_id !== 'eiewg'">
 												<i class="material-icons left" style="color: teal;">location_on</i>
 												{{ project.getReportTitle( location ) }}
@@ -135,7 +145,8 @@
 								</div>
 
 								<!-- location totals -->
-								<div class="col s12 m3 hide-on-med-and-down">
+								<div class="col s12 m3 hide-on-med-and-down" 
+											ng-if="project.definition.admin0pcode !== 'NG' ">
 									<div class="beneficiary-count right">
 										<span style="font-size:1.2rem;">
 											<i class="material-icons" style="padding-right:10px;">group</i></span>

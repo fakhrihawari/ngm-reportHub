@@ -51,6 +51,7 @@ angular.module('ngmReportHub')
 								style: 'padding: 0px;',
 								config: {
 									templateUrl: '/scripts/modules/country/afghanistan/drought/views/drought.main.html',
+									rtlEvent: 'rtl'
 								}
 							}]
 						}]
