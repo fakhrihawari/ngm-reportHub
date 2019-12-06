@@ -634,10 +634,14 @@ angular
 					$("#ngmDateContainer-0").css({ "float": "right" });
 					$("#ngmDateContainer-1").css({ "float": "left" });
 					// ngm-report-download
-					$('div#ngm-report-download[align="right"]').attr("align", "left");
-					$('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
+					// $('div#ngm-report-download[align="right"]').attr("align", "left");
+					// $('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
 					$(".reverse-profile").addClass('right')
 				},100)
+				$timeout(function () {
+					$('div#ngm-report-download[align="right"]').attr("align", "left");
+					$('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
+				}, 500)
 			}
 
 		});
