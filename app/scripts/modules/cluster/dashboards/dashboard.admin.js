@@ -1407,7 +1407,8 @@ angular.module('ngmReportHub')
 											request: {
 												method: 'GET',
 												url: ngmAuth.LOCATION + '/api/listDocuments?'+$scope.dashboard.getRequestDocUpload()
-											}
+											},
+											rtlEvent: 'rtl'
 										}
 									}]
 								}]
