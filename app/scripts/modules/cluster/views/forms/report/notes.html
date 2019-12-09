@@ -25,7 +25,7 @@
 							<i class="material-icons left">location_on</i>{{'notes_for'|translate}} {{ project.monthlyTitleFormat }}
 						</div>
 						<!-- 2019 onwards -->
-						<div ng-if="project.report.admin0pcode !== 'SO'">
+						<div ng-if="project.report.admin0pcode !== 'SO'" ng-class="{'rtl':rtlClass}">
 							<i class="material-icons left">location_on</i>{{'notes_for'|translate}} {{ project.monthlyTitleFormat }}
 						</div>
 					</h5>
@@ -55,8 +55,8 @@
 
 				        <button class="btn" style="margin:10px 10px;"
 				        				ng-if="project.report.report_status !== 'complete' && project.canEdit"
-				        				ng-click="project.validateBeneficiariesDetailsForm( false, false )">
-				        	<i class="material-icons left">save</i>{{'save_notes' |translate}}
+				        				ng-click="project.validateBeneficiariesDetailsForm( false, false )"  ng-class="{'right':rtlClass,'left':!rtlClass}">
+				        	<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">save</i>{{'save_notes' |translate}}
 				        </button>
 
 			      	</div>

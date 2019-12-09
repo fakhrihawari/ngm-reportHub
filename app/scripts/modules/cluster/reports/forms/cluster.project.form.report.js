@@ -154,7 +154,12 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 					$scope.detailBeneficiaries = {};
 					$scope.project.beneficiary_search;
 					$scope.beneficiary_search_input = false;
-					
+					// RTL
+					if ($translate.use() === 'prs') {
+						$scope.rtlClass = true;
+					} else {
+						$scope.rtlClass = false;
+					}
 					// init search
 					$scope.searchToogle = function () {
 						$('#search_').focus();
@@ -940,6 +945,14 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();
 			})
+			// RTL
+			$scope.$on('rtl', function (event, ready) {
+				if (ready) {
+					$scope.rtlClass = true;
+				} else {
+					$scope.rtlClass = false;
+				}
+			});
 	}
 
 ]);
