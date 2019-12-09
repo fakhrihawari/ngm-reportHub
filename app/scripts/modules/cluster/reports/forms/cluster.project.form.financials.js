@@ -613,6 +613,19 @@ angular.module( 'ngm.widget.project.financials', [ 'ngm.provider' ])
 
 
       }, 0 );
+      // RTL
+      $scope.rtlClass = false;
+      if ($translate.use() === 'prs') {
+        $scope.rtlClass = true;
+      }
+      $scope.$on('rtl', function (event, ready) {
+
+        if (ready) {
+          $scope.rtlClass = true;
+        } else {
+          $scope.rtlClass = false;
+        }
+      });
 
   }
 
