@@ -459,7 +459,7 @@ angular.module( 'ngmReportHub' )
             'search': true,
 						'id': 'search-all',
 						'icon': 'location_on',
-						'title': $filter('translate')('country_mayus'),
+            'title': 'country_mayus',//$filter('translate')('country_mayus'),
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': 'Afghanistan',
@@ -540,7 +540,7 @@ angular.module( 'ngmReportHub' )
             'search': true,
 						'id': 'search-afro',
 						'icon': 'person_pin',
-						'title': $filter('translate')('country_mayus'),
+            'title': 'country_mayus',//$filter('translate')('country_mayus'),
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': 'Democratic Republic of Congo',
@@ -572,7 +572,7 @@ angular.module( 'ngmReportHub' )
             'search': true,
 						'id': 'search-emro',
 						'icon': 'person_pin',
-						'title': $filter('translate')('country_mayus'),
+            'title': 'country_mayus',//$filter('translate')('country_mayus'),
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': 'Afghanistan',
@@ -604,7 +604,7 @@ angular.module( 'ngmReportHub' )
             'search': true,
 						'id': 'search-searo',
 						'icon': 'person_pin',
-						'title': $filter('translate')('country_mayus'),
+            'title': 'country_mayus',//$filter('translate')('country_mayus'),
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': 'Bangladesh',
@@ -624,7 +624,7 @@ angular.module( 'ngmReportHub' )
             'search': true,
 						'id': 'search-euro',
 						'icon': 'person_pin',
-						'title': $filter('translate')('country_mayus'),
+            'title': 'country_mayus',//$filter('translate')('country_mayus'),
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': 'Ukraine',
@@ -638,7 +638,7 @@ angular.module( 'ngmReportHub' )
             'search': true,
 						'id': 'search-amer',
 						'icon': 'person_pin',
-						'title': $filter('translate')('country_mayus'),
+            'title': 'country_mayus',//$filter('translate')('country_mayus'),
 						'class': 'teal lighten-1 white-text',
 						'rows': [{
 							'title': 'Colombia',
@@ -658,7 +658,7 @@ angular.module( 'ngmReportHub' )
           'search': true,
 					'id': 'search-region',
 					'icon': 'person_pin',
-					'title': $filter('translate')('region'),
+          'title': 'region',//$filter('translate')('region'),
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': 'HQ',
