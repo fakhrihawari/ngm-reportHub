@@ -164,7 +164,7 @@
 
 
 						<!-- CARD PANEL -->
-						<div id="tb-detail-{{$index}}" class="card-panel" ng-if="detailBeneficiaries[$index]">
+						<div id="tb-detail-{{$index}}" class="card-panel" ng-if="detailBeneficiaries[$index]" ng-class="{'inrtl':rtlClass}">
 
 							<!-- DEFAULT -->
 							<div class="row" ng-if="!beneficiary.activity_description_id ||
@@ -1067,7 +1067,7 @@
 				                  	ng-model="beneficiary.remarks"
 				                  	ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'remarks' ]"
 				                  	required>
-				            <label for="ngm-beneficiary-remarks-{{ $index }}" class="active">{{ 'remarks' | translate }}</label>
+				            <label for="ngm-beneficiary-remarks-{{ $index }}" class="active" ng-class="{'inrtltext':rtlClass}">{{ 'remarks' | translate }}</label>
 				          </div>
 				        </div>
 

@@ -242,6 +242,12 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 						}
 					}
 
+					// RTL
+					$scope.rtlClass = false;
+					if ($translate.use() === 'prs') {
+						$scope.rtlClass = true;
+					}
+
 					// detailBeneficiaries
 					$scope.detailBeneficiaries = $scope.project.definition.target_beneficiaries.length ? 
 																			new Array($scope.project.definition.target_beneficiaries.length).fill(true) : new Array(0).fill(true);
@@ -919,6 +925,14 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 						$scope.loading = false;
 					}, 100 );
 				}					
+			});
+
+			$scope.$on('rtl', function (event, ready) {
+				if (ready) {
+					$scope.rtlClass = true;
+				} else {
+					$scope.rtlClass = false;
+				}
 			});
 	}
 
