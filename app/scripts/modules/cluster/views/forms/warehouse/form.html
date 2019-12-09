@@ -27,7 +27,9 @@
 			</a>
 
 
-			<span class="right" style="padding-top:8px;">{{'last_updated'|translate}}: {{ report.updatedAt }}</span>
+			<!-- <span class="right" style="padding-top:8px;">{{'last_updated'|translate}}: {{ report.updatedAt }}</span> -->
+			<span ng-if="!rtlClass" class="right" style="padding-top:8px;">{{'last_updated'|translate}}: {{ report.updatedAt }}</span>
+			<span ng-if="rtlClass" class="right" style="padding-top:8px;">&#x202a;{{ report.updatedAt }} &#x202c; :{{'last_updated' | translate}}</span>
 
 		</div>
 	</div>

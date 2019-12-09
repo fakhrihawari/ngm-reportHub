@@ -252,3 +252,26 @@ text-align: right;
 	.title-rtl{
 		text-align: right;
 	}
+/* stock */
+.circle-rtl{
+		position: absolute;
+		width: 42px;
+		height: 42px;
+		overflow: hidden;
+		right: 15px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+.secondary-content-rtl {
+		position: absolute;
+		top: 16px;
+		left: 16px;
+		color: #009688;
+	}
+	i.circle-rtl {
+		font-size: 18px;
+		line-height: 42px;
+		color: #fff;
+		background-color: #999;
+		text-align: center;
+	}
