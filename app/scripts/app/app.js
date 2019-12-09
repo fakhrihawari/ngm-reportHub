@@ -214,7 +214,7 @@ angular
 		});
 
 	}])
-	.controller('ngmReportHubCrtl', ['$scope', '$route', '$location', '$http', '$timeout', 'ngmAuth', 'ngmUser','$window','$translate','$filter', function ($scope, $route, $location, $http, $timeout, ngmAuth, ngmUser,$window,$translate,$filter) {
+	.controller('ngmReportHubCrtl', ['$scope', '$route', '$location', '$http', '$timeout', 'ngmAuth', 'ngmUser','$window','$translate','$filter','$rootScope', function ($scope, $route, $location, $http, $timeout, ngmAuth, ngmUser,$window,$translate,$filter,$rootScope) {
 
 		// ngm object
 		$scope.ngm = {
@@ -249,6 +249,48 @@ angular
 			// change language
 			changeFunction: function( $key ) {
 			 	$translate.use( $key );
+				
+				$scope.ngm.rtlClass = false;
+				if ($key !== 'en') {
+					$rootScope.$broadcast('rtl', true);
+					// moment.locale('ar-tn');
+					if ($key === 'prs') {
+						$scope.ngm.rtlClass = true;
+						$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
+						$("#ngm-contact a").html("<i class='material-icons right' style='color:white;'>perm_contact_calendar</i>تماس");
+						$(".ngm-menu-footer-body").css({ "float": "right", "padding": "5px 10px 0px 0px" });
+						$("#ngm-contact").css({ "float": "left" });
+						$(".report-header .row").addClass('reverse-header')
+						$(".dashboard > .row").addClass('reverse-column')
+						$(".dashboard > .not-reverse.row").removeClass('reverse-column')
+						$("#ngm-report-datepicker").css("text-align", "left");
+						$("#ngmDateContainer-0").css({ "float": "right" });
+						$("#ngmDateContainer-1").css({ "float": "left" });
+						// ngm-report-download
+						$('div#ngm-report-download[align="right"]').attr('align', 'left');
+						$('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
+						$(".not-reverse.row > .col:first").addClass('right')
+
+					}
+				} else {
+					moment.locale('en');
+					$rootScope.$broadcast('rtl', false);
+					$(".ngm-menu-footer-body").html("Supported by <a class='grey-text' href='http://immap.org'><b>iMMAP</b></a>")
+					$("#ngm-contact a").html("<i class='material-icons left' style='color:white;'>perm_contact_calendar</i>Contact");
+					$(".ngm-menu-footer-body").css({ "float": "left", "padding": "5px 0px 0px 10px" });
+					$("#ngm-contact").css({ "float": "right" });
+					$(".report-header .row").removeClass('reverse-header')
+					$(".dashboard > .row").removeClass('reverse-column')
+					// for date picker
+					$("#ngm-report-datepicker").css("text-align", "left");
+					$("#ngmDateContainer-0").css({ "float": "left" });
+					$("#ngmDateContainer-1").css({ "float": "right" });
+					// ngm-report-download
+					$('#ngm-report-download > .fixed-action-btn.horizontal > ul').removeClass('reverse-download')
+					$('div#ngm-report-download[align="left"]').attr('align', 'right');
+					$(".not-reverse.row > col:first").removeClass('right');
+				}
+
 	     	$timeout(function() { $translate.refresh(); }, 1000 );
 			 },
 
@@ -425,11 +467,30 @@ angular
 
 			// language
 			setLanguage:function(country){
+				// var set_language = {
+				// 	col:[{ language_id: 'en', language_name: 'English', flag:'en.png'},
+				// 			{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }]					
+				// 	}
+				// $scope.ngm.getLanguage = set_language[country] ? set_language[country]:[];
+
+				if (!country) {
+					country = 'default';
+				} else { country = country.toLowerCase() }
+
 				var set_language = {
-					col:[{ language_id: 'en', language_name: 'English', flag:'en.png'},
-							{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }]					
-					}
-				$scope.ngm.getLanguage = set_language[country] ? set_language[country]:[];
+					default: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
+					// { language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' },
+					{ language_id: 'prs', language_name: 'Afghanistan', flag: 'spain.png' },
+					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
+					col: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
+					{ language_id: 'es', language_name: 'Español', flag: 'spain.png' }],
+					af: [{ language_id: 'en', language_name: 'English', flag: 'en.png' },
+					{ language_id: 'prs', language_name: 'Afghanistan', flag: 'spain.png' },
+						// { language_id: 'afg', language_name: 'Dummy-Afghanistan', flag: 'spain.png' }
+					]
+				}
+				$scope.ngm.getLanguage = set_language[country] ? set_language[country] : set_language['default'];
+				
 				if ($scope.ngm.getLanguage.length>0){
 					$scope.ngm.translate_version = true;
 				}else{
@@ -553,6 +614,30 @@ angular
 			var app = $location.$$path.split('/')[1];
 			// set application
 			$scope.ngm.setApplication( app );
+
+			if ($translate.use() === 'prs') {
+				$timeout(function () {
+					$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
+					$(".ngm-menu-footer-body").css({ "float": "right", "padding": "5px 10px 0px 0px" });
+					$("#ngm-contact a").html("<i class='material-icons right' style='color:white;'>perm_contact_calendar</i>تماس")
+					$("#ngm-contact").css({ "float": "left" });
+					$(".report-header .row").addClass('reverse-header')
+					$(".dashboard >.row").addClass('reverse-column')
+					$(".dashboard > .not-reverse.row").removeClass('reverse-column')
+					// date picker
+					$("#ngm-report-datepicker").css("text-align", "left");
+					$("#ngmDateContainer-0").css({ "float": "right" });
+					$("#ngmDateContainer-1").css({ "float": "left" });
+					// ngm-report-download
+					// $('div#ngm-report-download[align="right"]').attr("align", "left");
+					// $('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
+					$(".reverse-profile").addClass('right')
+				}, 100)
+				$timeout(function () {
+					$('div#ngm-report-download[align="right"]').attr("align", "left");
+					$('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
+				}, 500)
+			}
 
 		});
 

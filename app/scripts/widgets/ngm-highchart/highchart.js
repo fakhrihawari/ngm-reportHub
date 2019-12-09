@@ -37,7 +37,8 @@ angular.module('ngm.widget.highchart', ['ngm.provider'])
     '$element',
     'config',
     'ngmData',
-    function($scope, $filter, $element, config, ngmData){
+    '$translate',
+    function($scope, $filter, $element, config, ngmData, $translate){
 
       // statistics widget default config
       $scope.highchart = {
@@ -149,6 +150,24 @@ angular.module('ngm.widget.highchart', ['ngm.provider'])
 
       // set data
       $scope.highchart.update();
+
+      // RTL
+      if ($scope.highchart.rtlEvent) {
+
+        $scope.rtlClass = false;
+        if ($translate.use() === 'prs') {
+          $scope.rtlClass = true;
+        }
+        $scope.$on('rtl', function (event, ready) {
+          if (ready) {
+            $scope.rtlClass = true;
+
+          } else {
+            $scope.rtlClass = false;
+          }
+        });
+
+      }
 
   }
 
