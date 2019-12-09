@@ -74,8 +74,8 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
 		</div>
 	</div>
 	<div class="modal-footer">
-		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">Close</div>
-		<div class="modal-action modal-close wave-effects wave-green btn" ng-click="table.saveEditAccess(editedUser)">Save</div>
+		<div class="modal-action modal-close wave-effects wave-red red darken-1 btn" style="margin-left:10px;margin-right: 25px">{{'close_mayus1'|translate}}</div>
+		<div class="modal-action modal-close wave-effects wave-green btn" ng-click="table.saveEditAccess(editedUser)">{{'save_mayus'|translate}}</div>
 	</div>
 </div>
 
@@ -86,14 +86,14 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
     <div class="card">
       <ul class="collection with-header">
         <li class="{{ table.headerClass }}" style="{{ table.headerStyle }};height:80px;">
-					<div class="col s12 m8">
+					<div class="col s12 m8" ng-class="{'right right-title':rtlClass}">
 						<h5 class="report-work-title {{ table.headerText }}">
-							<i class="material-icons left">{{ table.headerIcon }}</i>
-							{{ table.headerTitle }}
+							<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>
+							{{ table.headerTitle | translate }}
 						</h5>
 					</div>
 					<div class="col s12 m4 right" ng-if="showSearch">
-						<nav class="nav-list-search right" ng-class="{'focused':table.search.focused===true || table.search.filter }">
+						<nav class="nav-list-search " ng-class="{'focused':table.search.focused===true || table.search.filter,'left':rtlClass,'right':!rtlClass }">
 							<div class="nav-wrapper" ng-click="table.toggleSearch()">
 								<form style="padding: 0px">
 									<div class="input-field">
@@ -112,7 +112,7 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
 
           <!-- if data -->
           <div ng-if="data.length">
-            <table class="centered highlight responsive-table" ng-table="table.tableParams">
+            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
               <tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
                 <td data-title="'country_mayus'|translate" sortable="'admin0name'" ng-click="table.onClick(row)">
                     {{ row.admin0name }}
@@ -127,9 +127,12 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
 
                   {{ row.position }}
                 </td>
-                <td data-title="'Sector'" sortable="'cluster'" ng-click="table.onClick(row)">
+                <!-- <td data-title="'Sector'" sortable="'cluster'" ng-click="table.onClick(row)">
                     {{ row.cluster }}
-                </td>
+				</td> -->
+				<td data-title="'sector_mayus'|translate" sortable="'cluster'" ng-click="table.onClick(row)">
+					{{ row.cluster }}
+				</td>
                 <td data-title="'username'|translate" sortable="'username'" ng-click="table.onClick(row)">
                     {{ row.username }}
                 </td>
