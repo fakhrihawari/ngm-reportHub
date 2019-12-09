@@ -1,7 +1,7 @@
 
 
 <!-- Not Syria && CXB -->
-<div class="row" ng-if="panel.organization.admin0pcode !== 'SY' && panel.organization.admin0pcode !== 'CB'">
+<div class="row" ng-if="panel.organization.admin0pcode !== 'SY' && panel.organization.admin0pcode !== 'CB'" ng-class="{'reverse-column':rtlClass}">
   
   <!-- team -->
   <div class="col s12 m4">
@@ -11,11 +11,11 @@
           <img src="images/cluster/team.jpg">
         </div>
         <div class="card-content white-text">
-          <p class="card-title">{{ panel.teamTitle() }}</p>
+          <p ng-class="{'right':rtlClass}" class="card-title">{{ panel.teamTitle() }}</p>
 
         </div>
         <div class="card-action">
-          <a class="left" href="{{ panel.getTeamUrl() }}">{{ 'view_team' | translate }}</a>
+          <a class="left" ng-class="{'right':rtlClass}" href="{{ panel.getTeamUrl() }}">{{ 'view_team' | translate }}</a>
         </div>
       </div>
      </a>
@@ -43,10 +43,14 @@
         						src="images/cluster/projects.jpg">
       </div>
       <div class="card-content white-text">
-      	<p class="card-title">{{ 'projects_mayus1' | translate }}</p>
+      	<p ng-class="{'right':rtlClass}" class="card-title">{{ 'projects_mayus1' | translate }}</p>
       </div>
-      <div class="card-action">
+      <div ng-if="!rtlClass" class="card-action">
         <a href="{{ panel.getProjectsHref() }}">{{ 'go_to' | translate}} {{ panel.organization.organization }} {{'projects_mayus1' | translate}}</a>
+      </div>
+      <div ng-if="rtlClass" class="card-action">
+        <a ng-class="{'right':rtlClass}" href="{{ panel.getProjectsHref() }}">{{ panel.organization.organization }} بروبه
+          پروژه های</a>
       </div>
     </div>
     </a>
@@ -76,11 +80,15 @@
 	        <img src="images/cluster/stocks.jpg">
 	      </div>
 	      <div class="card-content white-text">
-	        <p class="card-title">Stocks</p>
+	        <p ng-class="{'right':rtlClass}" class="card-title">{{rtlClass?'انبار ها':'Stocks'}}</p>
 	      </div>
-	      <div class="card-action">
+	      <div ng-if="!rtlClass" class="card-action">
 	        <a href="{{ panel.getStocksHref() }}">{{ 'go_to' | translate}} {{ panel.organization.organization }} Stocks</a>
-	      </div>
+        </div>
+        <div ng-if="rtlClass" class="card-action">
+          <a ng-class="{'right':rtlClass}" href="{{ panel.getStocksHref() }}">{{ panel.organization.organization }} بروبه
+            انبارهای</a>
+        </div>
 	    </div>
 	   </a>
   </div>
