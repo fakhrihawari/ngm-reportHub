@@ -818,5 +818,10 @@
     "individual_cases": "قضایای خاص",
     "deaths": "مرگ ومیر",
     "disease": "امراض",
-    "outbreaks_trends": "روند-شیوع بیماری"
+    "outbreaks_trends": "روند-شیوع بیماری",
+    "alerts": "هشدارها",
+    "cases":"موارد",
+    "epr_reports":"EPR گزارش ",
+    "incidents":"حوادث",
+    "casualties": "اتفاقی"
 }

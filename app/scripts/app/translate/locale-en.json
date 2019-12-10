@@ -916,6 +916,11 @@
          "individual_cases":"Individual Cases",
          "deaths":"Deaths",
          "disease":"Disease",
-         "outbreaks_trends": "Outbreaks - Trend"
+         "outbreaks_trends": "Outbreaks - Trend",
+         "alerts":"Alerts",
+         "cases": "Cases",
+         "epr_reports": "EPR Reports ",
+         "incidents":"Incidents",
+         "casualties":"Casualties"
 
 }
