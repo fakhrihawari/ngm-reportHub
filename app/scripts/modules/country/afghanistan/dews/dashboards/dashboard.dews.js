@@ -7,8 +7,8 @@
  */
 angular.module('ngmReportHub')
 	// modal controller
-	.controller('DashboardDewsCtrl', ['$rootScope', '$scope', '$http', '$location', '$route', '$window', '$timeout', 'ngmAuth', 'ngmUser', 
-		function ($rootScope, $scope, $http, $location, $route, $window, $timeout, ngmAuth, ngmUser) {
+	.controller('DashboardDewsCtrl', ['$rootScope', '$scope', '$http', '$location', '$route', '$window', '$timeout', 'ngmAuth', 'ngmUser','$translate', 
+		function ($rootScope, $scope, $http, $location, $route, $window, $timeout, ngmAuth, ngmUser, $translate) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -344,14 +344,14 @@ angular.module('ngmReportHub')
 				'id': 'search-dews-disease',
 				'search': true,
 				'icon': 'group_work',
-				'title': 'Disease',
+				'title': 'disease',//'Disease',
 				'class': 'teal lighten-1 white-text',
 				'rows': $scope.dashboard.getRows('disease')
 			},{
 				'id': 'search-dews-province',
 				'search': true,
 				'icon': 'place',
-				'title': 'Province',
+				'title': 'province',//'Province',
 				'class': 'teal lighten-1 white-text',
 				'rows': $scope.dashboard.getRows('province')
 			}],
@@ -388,7 +388,7 @@ angular.module('ngmReportHub')
 						type: 'stats',
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
-							title: 'Outbreaks',
+							title: 'outbreaks',//'Outbreaks',
 							request: {
 								method: 'POST',
 								url: ngmAuth.LOCATION + '/api/dews/indicator',
@@ -408,7 +408,7 @@ angular.module('ngmReportHub')
 						type: 'stats',
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
-							title: 'Individual Cases',
+							title: 'individual_cases',//'Individual Cases',
 							request: {
 								method: 'POST',
 								url: ngmAuth.LOCATION + '/api/dews/indicator',
@@ -429,7 +429,7 @@ angular.module('ngmReportHub')
 						type: 'stats',
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
-							title: 'Deaths',
+							title: 'deaths',//'Deaths',
 							request: {
 								method: 'POST',
 								url: ngmAuth.LOCATION + '/api/dews/indicator',
@@ -511,7 +511,7 @@ angular.module('ngmReportHub')
 						card: 'card-panel stats-card white grey-text text-darken-2',
 						config: {
 							title: {
-								text: 'Outbreaks - Trend',
+								text: 'outbreaks_trends',//'Outbreaks - Trend',
 							},
 							chartConfig: {
 								options: {
@@ -585,7 +585,8 @@ angular.module('ngmReportHub')
 										}
 									}
 								}]
-							}
+							},
+							rtlEvent: 'rtl'
 						}
 					}]
 				}]
