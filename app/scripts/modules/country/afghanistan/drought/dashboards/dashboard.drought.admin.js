@@ -292,7 +292,8 @@ angular.module('ngmReportHub')
 										},
 										reset: '#/response/afghanistan/drought/dashboard/all/all', //+ $route.current.params.status_plan,
 										getCurrentMonth: '#/response/afghanistan/drought/dashboard/'+ $route.current.params.urgency + '/' + $route.current.params.status_plan + '/' + moment().year() + '/all/all/all/all/' + (moment().month() - 1) + '/' + moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD') + '/' + moment().subtract(1, 'months').endOf('month').format('YYYY-MM-DD'),
-										templateUrl: '/scripts/widgets/ngm-html/template/drought.dashboard.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/drought.dashboard.html',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -304,7 +305,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Beneficiaries',
+										title: 'beneficiaries',//'Beneficiaries',
 										request: $scope.beneficiaryStat
 									}
 								}]
@@ -317,7 +318,10 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">ACTIVITY</h2>'
+										// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">ACTIVITY</h2>'
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'activity',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -329,7 +333,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Clusters',
+										title: 'clusters',//'Clusters',
 										request: $scope.clusterStat
 									}
 								}]
@@ -340,7 +344,7 @@ angular.module('ngmReportHub')
 										style: 'text-align: center;',
 										card: 'card-panel stats-card white grey-text text-darken-2',
 										config: {
-											title: 'Organizations',
+											title: 'organizations',//'Organizations',
 											request: $scope.organizationStat
 										}
 									}]
@@ -351,7 +355,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Locations',
+										title: 'locations',//'Locations',
 										request: $scope.locationStat
 									}
 								}]
@@ -362,7 +366,7 @@ angular.module('ngmReportHub')
 										style: 'text-align: center;',
 										card: 'card-panel stats-card white grey-text text-darken-2',
 										config: {
-											title: 'Activities',
+											title: 'activities',//'Activities',
 											request: $scope.activityStat
 										}
 									}]
@@ -416,7 +420,10 @@ angular.module('ngmReportHub')
 										card: 'card-panel',
 										style: 'padding:0px;',
 										config: {
-											html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">REPORTS</h2>'
+											// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">REPORTS</h2>'
+											templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+											title: 'reports',
+											rtlEvent: 'rtl'
 										}
 									}]
 								}]
@@ -430,7 +437,7 @@ angular.module('ngmReportHub')
 										config: {
 											title: {
 												style: 'padding-top: 10px;',
-												name: 'Reports Timeline'
+												name: 'reports_timeline'//'Reports Timeline'
 											},
 											templateUrl: '/scripts/modules/country/afghanistan/drought/views/drought.heatmap.html',
 											showCount:true,
@@ -454,12 +461,13 @@ angular.module('ngmReportHub')
 											headerClass: 'collection-header teal lighten-2',
 											headerText: 'white-text',
 											headerIcon: 'assignment_turned_in',
-											headerTitle: 'Reports Submitted',
+											headerTitle: 'reports_submitted',//'Reports Submitted',
 											templateUrl: '/scripts/modules/country/afghanistan/drought/views/drought.admin.list.html',
 											tableOptions: {
 												count: 10
 											},
-											request: ngmDroughtHelper.getRequest('drought/afghanistan/indicator', 'reports', true)
+											request: ngmDroughtHelper.getRequest('drought/afghanistan/indicator', 'reports', true),
+											rtlEvent: 'rtl'
 											
 										}
 									}]
