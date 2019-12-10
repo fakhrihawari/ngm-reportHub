@@ -514,6 +514,7 @@ angular
 			openHome:false,
 			openDashboard:false,
 			openMinimize:true,
+			openAdmin:false,
 			minimizeToggle:function () {
 				$scope.ngm.openMinimize = ! $scope.ngm.openMinimize;
 				$('.minimize-menu').toggleClass('open');
