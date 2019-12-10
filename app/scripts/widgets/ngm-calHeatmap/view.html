@@ -56,7 +56,7 @@
 </style>
 
 <div ng-if="!calHeatmap.showCount">
-  <div ng-if="calHeatmap.title" class="grey-text text-darken-2" style="{{ calHeatmap.title.style }}">{{ calHeatmap.title.name }}</div>
+  <div ng-if="calHeatmap.title" class="grey-text text-darken-2" style="{{ calHeatmap.title.style }}">{{ calHeatmap.title.name | translate}}</div>
   <div align="center" style="{{ calHeatmap.style }}">
     <div id="{{ calHeatmap.id }}" style="margin-top:5px;"></div>
   </div>
