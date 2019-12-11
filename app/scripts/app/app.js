@@ -251,10 +251,8 @@ angular
 			 	$translate.use( $key );
 				
 				$scope.ngm.rtlClass = false;
-				if ($key !== 'en') {
-					$rootScope.$broadcast('rtl', true);
-					// moment.locale('ar-tn');
-					if ($key === 'prs') {
+				if ($key === 'prs') {
+						$rootScope.$broadcast('rtl', true);
 						$scope.ngm.rtlClass = true;
 						$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
 						$("#ngm-contact a").html("<i class='material-icons right' style='color:white;'>perm_contact_calendar</i>تماس");
@@ -271,7 +269,6 @@ angular
 						$('div#ngm-report-download > .fixed-action-btn.horizontal > ul').addClass('reverse-download')
 						$(".not-reverse.row > .col:first").addClass('right')
 
-					}
 				} else {
 					moment.locale('en');
 					$rootScope.$broadcast('rtl', false);
