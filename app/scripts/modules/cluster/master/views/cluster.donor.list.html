@@ -1,33 +1,93 @@
+<style>
+    .nav-list-search {
+		margin-top: 6px;
+		background-color: white;
+		width:72px;
+		-webkit-transition: width 1s ease;
+		-moz-transition: width 1s ease;
+		-o-transition: width 1s ease;
+		-ms-transition: width 1s ease;
+		transition: width 1s ease;
+	}
+	.nav-list-search.focused {
+		margin-top: 6px;
+		width: 100%;
+		-webkit-transition: width 1s ease;
+		-moz-transition: width 1s ease;
+		-o-transition: width 1s ease;
+		-ms-transition: width 1s ease;
+		transition: width 1s ease;
+	}
+
+	.input-field input[type=search] {
+		font-weight: 300;
+		padding-top: 0px;
+	}
+</style>
+<div class="" style="position: absolute;
+    right: 59px;
+    top: 180px;">
+    <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1">
+
+        <i class="material-icons left">add</i> Add Donor
+    </a>
+</div>
 <div class="row">
     <div class="col s12 m12 l12">
         <div class="card">
 
             <ul class="collection with-header">
                 <li class="collection-header indigo lighten-1" style="height:80px;">
-                    <div class="col s12 m10">
+                    <div class="col s12 m6">
                         <h5 class="report-panel-title white-text">
                             <i
                                 class="material-icons left">attachment</i> Donor List
                             
                         </h5>
                     </div>
+                    <div ng-if="master.donor.length > master.itemsPerPage" class="col s12 m4 right">
+                        <nav class="nav-list-search right" ng-class="{'focused':master.search.focused===true || master.search.filter }">
+                            <div class="nav-wrapper" ng-click="list.toggleSearch()">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="search_{{ list.id }}" type="search" ng-model="master.search.filter"
+                                            ng-focus="master.search.focused=true" ng-blur="master.search.focused=false">
+                                        <label for="search_{{ master.listId }}"><i class="material-icons"
+                                                style="color: teal; padding-left:5px;">search</i></label>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
                 </li>
-                <li class="collection-item avatar"
-                    dir-paginate="item in master.donor | filter: master.search.filter | itemsPerPage: master.itemsPerPage"
+                <!-- <li class="collection-item avatar"
+                    dir-paginate="item in master.donor | filter: master.search.filter | orderBy: sortBy :false | itemsPerPage: master.itemsPerPage"
                     pagination-id="master.listId" style="padding-top:20px;">
                     <h4>{{item.project_donor_name}}</h4>
                 </li>
                 <li class="collection-item avatar" ng-if="master.donor.length > master.itemsPerPage" style="padding:20px 20px 0px 50px;">
                     <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
-                </li>
+                </li> -->
 
-                <!-- <div>
+                <div>
                     <li ng-if="master.donor.length>0" class="collection-item avatar" style="padding-left: 30px;padding-right: 30px">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col s12 m2"
                                 dir-paginate="item in master.donor | filter: master.search.filter | orderBy: list.orderBy : true | itemsPerPage: master.itemsPerPage"
                                 pagination-id="master.listId" style="padding-top:20px;">
                                 {{item.project_donor_name}}
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col s12 m4  " dir-paginate="item in master.donor | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
+                                pagination-id="master.listId" style="padding-top:20px;">
+                                <div class="card  darken-1 hoverable">
+                                    <div class="card-content " style="min-height: 100px;">
+                                        <p class="card-title"> {{item.project_donor_name}}</p>
+                        
+                                    </div>
+                        
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -38,7 +98,7 @@
                         style="padding:20px 20px 0px 50px;">
                         <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
                     </li>
-                </div> -->
+                </div>
 
             </ul>
         </div>

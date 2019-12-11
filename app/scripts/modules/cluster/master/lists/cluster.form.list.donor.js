@@ -17,7 +17,7 @@ angular.module('ngm.widget.form.donor.list', ['ngm.provider'])
         ){
             $scope.master = {
                 donor : config.donor,
-                itemsPerPage: 10,
+                itemsPerPage: 12,
                 listId : 'ngm-paginate-' + Math.floor((Math.random() * 1000000)),
                 search: {
                     filter: '',
