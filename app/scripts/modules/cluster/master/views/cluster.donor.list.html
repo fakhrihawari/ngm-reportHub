@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card">
+
+            <ul class="collection with-header">
+                <li class="collection-header indigo lighten-1" style="height:80px;">
+                    <div class="col s12 m10">
+                        <h5 class="report-panel-title white-text">
+                            <i
+                                class="material-icons left">attachment</i> Donor List
+                            
+                        </h5>
+                    </div>
+                </li>
+                <li class="collection-item avatar"
+                    dir-paginate="item in master.donor | filter: master.search.filter | itemsPerPage: master.itemsPerPage"
+                    pagination-id="master.listId" style="padding-top:20px;">
+                    <h4>{{item.project_donor_name}}</h4>
+                </li>
+                <li class="collection-item avatar" ng-if="master.donor.length > master.itemsPerPage" style="padding:20px 20px 0px 50px;">
+                    <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
+                </li>
+
+                <!-- <div>
+                    <li ng-if="master.donor.length>0" class="collection-item avatar" style="padding-left: 30px;padding-right: 30px">
+                        <div class="row">
+                            <div class="col s12 m2"
+                                dir-paginate="item in master.donor | filter: master.search.filter | orderBy: list.orderBy : true | itemsPerPage: master.itemsPerPage"
+                                pagination-id="master.listId" style="padding-top:20px;">
+                                {{item.project_donor_name}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-item avatar" ng-if="!master.donor.length">
+                        <p style="font-size: 17px; padding:10px 0px 10px 0px;">{{'you_have_no_project_documents_yet'|translate}}</p>
+                    </li>
+                    <li class="collection-item avatar" ng-if="master.donor.length > master.itemsPerPage"
+                        style="padding:20px 20px 0px 50px;">
+                        <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
+                    </li>
+                </div> -->
+
+            </ul>
+        </div>
+    </div>
+</div>

@@ -892,6 +892,26 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/lists/:admin0pcode?/:cluster_id?', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListAdminCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
+			.when('/cluster/admin/list/donor', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListDonorCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
 			// FORBIDDEN
 			.when( '/cluster/forbidden', {
 				templateUrl: '/views/app/dashboard.html',
