@@ -23,11 +23,63 @@
 		font-weight: 300;
 		padding-top: 0px;
 	}
+    .adddonor.modal {
+		width: 30%;
+		right: auto !important;
+		left: 50% !important;
+		transform: translateX(-50%) !important;
+	}
+    .btn:disabled{
+        background-color: #DFDFDF !important;
+    }
+    .inactive{
+        background-color: #cec9c9;
+    }
 </style>
+<div id="add-donor-modal" class="adddonor modal">
+    <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+        <ul class="collection with-header" style="margin-top:0">
+            <li class="collection-header teal lighten-1" style="border-bottom: 0">
+                <h5 style="color: #ffffff;font-weight:300;">
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Add Donor
+                </h5>
+            </li>
+        </ul>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <input id="ngm-donor-name" placeholder=""
+                    type="text" 
+                    ng-model="addDonorAtribute.project_donor_name"
+                    name="ngm-donor-name"
+                    class="validate">
+                <label class="active" for="ngm-donor-name"> Donor Name</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-donor-id" name="ngm-donor-id"
+                    class="validate"
+                    ng-options="cluster.cluster_id as cluster.cluster for cluster in master.clusters"
+                    ng-model="addDonorAtribute.cluster_id" 
+                    ng-disabled="" 
+                    required>
+                    <option value="">Select Cluster</option>
+                </select>
+                <label for="ngm-donor-id" class="active"
+                    style="transform:translateY(-10%)"> Cluster</label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="modal-action modal-close wave-effects wave-red red darken-1 btn"
+            style="margin-left:10px;margin-right: 25px">Close</div>
+        <button class="modal-action modal-close wave-effects wave-green btn sbtn" ng-disabled="master.validDonor(addDonorAtribute)" ng-click="master.addDonor()">Save</button>
+    </div>
+</div>
 <div class="" style="position: absolute;
     right: 59px;
     top: 180px;">
-    <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1">
+    <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1" ng-click="master.openAddModal()">
 
         <i class="material-icons left">add</i> Add Donor
     </a>
@@ -81,10 +133,15 @@
                         <div class="row">
                             <div class="col s12 m4  " dir-paginate="item in master.donor | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
                                 pagination-id="master.listId" style="padding-top:20px;">
-                                <div class="card  darken-1 hoverable">
-                                    <div class="card-content " style="min-height: 100px;">
+                                <div class="card  darken-1 hoverable" ng-class="{'inactive':'AusAid'=== item.project_donor_name }">
+                                    <div class="card-content " style="min-height: 150px;">
                                         <p class="card-title"> {{item.project_donor_name}}</p>
-                        
+                                        <div class="row switch input-field" style="margin-bottom:10px;margin-top:10px">
+                                            <label>
+                                                <input ng-checked=" 'AusAid' !== item.project_donor_name"type="checkbox" class="filled-in">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
                                     </div>
                         
                                 </div>
