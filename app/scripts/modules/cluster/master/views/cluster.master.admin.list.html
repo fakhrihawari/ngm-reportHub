@@ -125,7 +125,7 @@
         <a class="btn blue card" style="margin-left:10px">COUNTRY</a>
     </div>
     <div class="col s12 m4">
-        <a href="#/cluster/admin/list/organization" >
+        <a href="#/cluster/admin/list/organization{{panel.urlForResponseOrgList()}}" >
             <div class="card small blue-grey darken-1 hoverable">
                 <div class="card-image">
                     <img src="images/cluster/team.jpg">
@@ -134,14 +134,14 @@
                     <p class="card-title">Organizations </p>
                 </div>
                 <div class="card-action">
-                    <a class="left" href="#/cluster/admin/list/organization" >Go to Organization</a>
+                    <a class="left" href="#/cluster/admin/list/organization{{panel.urlForResponseOrgList()}}" >Go to Organization</a>
                 </div>
             </div>
         </a>
     </div>
 
     <div class="col s12 m4">
-        <a href="#/cluster/admin/list/donor/" >
+        <a href="#/cluster/admin/list/donor{{panel.urlForResponseDonorList()}}" >
             <div class="card small blue-grey darken-1 hoverable">
                 <div class="card-image">
                     <img src="images/country/afghanistan/assessments/nutrition_projects2.jpg">
@@ -150,14 +150,14 @@
                     <p class="card-title">Donors </p>
                 </div>
                 <div class="card-action">
-                    <a class="left" href="#/cluster/admin/list/donor/" >Go to Donors</a>
+                    <a class="left" href="#/cluster/admin/list/donor{{panel.urlForResponseDonorList()}}" >Go to Donors</a>
                 </div>
             </div>
         </a>
     </div>
 
     <!-- <div class="col s12 m4">
-        <a href="#/cluster/admin/list/activities{{panel.urlForResponseList()}}">
+        <a href="#/cluster/admin/list/activities{{panel.urlForResponseOrgList()}}">
             <div class="card small blue-grey darken-1 hoverable">
                 <div class="card-image">
                     <img src="images/country/ethiopia/assessments/monitoring.jpg">
@@ -166,7 +166,7 @@
                     <p class="card-title">Activities </p>
                 </div>
                 <div class="card-action">
-                    <a class="left" href="#/cluster/admin/list/activities{{panel.urlForResponseList()}}">Go to
+                    <a class="left" href="#/cluster/admin/list/activities{{panel.urlForResponseOrgList()}}">Go to
                         Activities</a>
                 </div>
             </div>

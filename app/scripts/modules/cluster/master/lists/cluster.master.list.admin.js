@@ -25,9 +25,33 @@ angular.module('ngmReportHub')
                 // current user
                 user: ngmUser.get(),
 
+                role: ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'],
+
+                getPath: function(country,cluster){
+                    var role =ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
+                    var path = '/cluster/admin/lists'
+                    if(role === "SUPERADMIN"){
+                        return path += '/'+country+'/'+cluster;
+                    }
+                    if (role ===  "CLUSTER"){
+                        path += '/'+ngmUser.get().admin0pcode +'/' + cluster;
+                    }
+                    if (role === "COUNTRY") {
+                        path += '/' +country+'/' + ngmUser.get().cluster_id;
+                    }
+                    return path
+                },
+                setUrl: function(){
+                    var path = $scope.master.getPath($route.current.params.admin0pcode, $route.current.params.cluster_id);
+                    if (path !== $location.$$path) {
+                        $location.path(path);
+                    }
+                },
+
                 // 
                 init: function () {
 
+                    $scope.master.setUrl()
                     // report dashboard model
                     $scope.model = {
                         name: 'cluster_master_list',
@@ -39,7 +63,7 @@ angular.module('ngmReportHub')
                             title: {
                                 'class': 'col s12 m12 l12 report-title truncate',
                                 style: 'font-size: 3.4rem; color: ' + $scope.master.ngm.style.defaultPrimaryColor,
-                                title: $scope.master.user.roles.indexOf("SUPERADMIN") > -1 ? 'ALL | LISTS ' : $scope.master.user.admin0pcode + '| LISTS '
+                                title: $route.current.params.admin0pcode.toUpperCase() + ' | LISTS ',//$scope.master.user.roles.indexOf("SUPERADMIN") > -1 ? 'ALL | LISTS ' : $scope.master.user.admin0pcode + '| LISTS '
                             },
                             subtitle: {
                                 'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
@@ -54,7 +78,8 @@ angular.module('ngmReportHub')
                                     card: 'white grey-text text-darken-2',
                                     style: 'padding: 0px;',
                                     config: {
-                                        urlForResponseList: function () { return $scope.master.setResponseListUrl() },
+                                        urlForResponseOrgList: function () { return $scope.master.setResponseListOrgUrl() },
+                                        urlForResponseDonorList: function(){ return $scope.master.setResponseListDonorUrl() },
                                         setTitleResponse: function () { return $scope.master.setTitleResponse() },
                                         showMasterlist: function () { return $scope.master.showMasterlist() },
                                         templateUrl: '/scripts/modules/cluster/master/views/cluster.master.admin.list.html',
@@ -161,12 +186,11 @@ angular.module('ngmReportHub')
                             'param': 'cluster_id',
                             'active': clusterId,
                             'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                            'href': '#/cluster/admin/lists/activities' + '/' + $scope.master.user.admin0pcode + '/' + clusterId
-                            // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + clusterId + '/' + dashboard.admin0pcode + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+                            'href': '#/cluster/admin/lists/' + $scope.master.user.admin0pcode + '/' + clusterId
                         });
                     };
-                    var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
-                    if(role === 'SUPERADMIN' || role === "COUNTRY"){
+
+                    if($scope.master.role === 'SUPERADMIN' || $scope.master.role === "COUNTRY"){
                         $scope.model.menu.push({
                             'id': 'search-cluster',
                             'icon': 'person_pin',
@@ -175,7 +199,7 @@ angular.module('ngmReportHub')
                             'rows': cluster_rows
                         });
                     }
-                    if (role === 'SUPERADMIN' || role === "CLUSTER"){
+                    if ($scope.master.role === 'SUPERADMIN' || $scope.master.role === "CLUSTER"){
 
                         $scope.model.menu.push({
                             'id': 'search-country',
@@ -186,35 +210,21 @@ angular.module('ngmReportHub')
                         });
                     }
                 },
-                setResponseListUrl: function () {
-                    if ($scope.master.user.roles.indexOf('CLUSTER') > -1) {
-                        if ($route.current.params.admin0pcode) {
-                            string = '/' + $route.current.params.admin0pcode //+'/'+$scope.master.user.cluster_id;
-                        } else {
-                            string = '/' + $scope.master.user.admin0pcode //+ '/' + $scope.master.user.cluster_id;
-                        }
+                setResponseListOrgUrl: function () {
+                    if ($scope.master.role === 'CLUSTER') {
+                            string = '/' + $scope.master.user.admin0pcode;
                     }
-                    if ($scope.master.user.roles.indexOf('COUNTRY') > -1) {
-                        if ($route.current.params.cluster_id) {
-                            string = '/' + $scope.master.user.admin0pcode //+ '/' + $route.current.params.cluster_id;
-                        } else {
-                            string = '/' + $scope.master.user.admin0pcode //+ '/' + $scope.master.user.cluster_id;
-                        }
+                    if ($scope.master.role === 'COUNTRY' || $scope.master.role === 'SUPERADMIN'){
+                            string = '/'+ $route.current.params.admin0pcode;
                     }
-                    if ($scope.master.user.roles.indexOf('SUPERADMIN') > -1) {
-                        if ($route.current.params.admin0pcode && $route.current.params.cluster_id) {
-                            string = '/' + $route.current.params.admin0pcode //+ '/' + $route.current.params.cluster_id;
-                        }
-                        if ($route.current.params.admin0pcode && !$route.current.params.cluster_id) {
-                            string = '?admin0pcode=' + $route.current.params.admin0pcode
-                        }
-                        if (!$route.current.params.admin0pcode && $route.current.params.cluster_id) {
-                            // string = '?cluster_id=' + $route.current.params.cluster_id
-                            string = '?admin0pcode=' + $scope.master.user.admin0pcode
-                        }
-                        if (!$route.current.params.admin0pcode && !$route.current.params.cluster_id) {
-                            string = '/' + $scope.master.user.admin0pcode //+ '/' + $scope.master.user.cluster_id;
-                        }
+                    return string
+                },
+                setResponseListDonorUrl: function () {
+                    if ($scope.master.role === 'COUNTRY') {
+                        string = '/' + $route.current.params.admin0pcode +'/' + $scope.master.user.cluster_id;
+                    }
+                    if ($scope.master.role === 'CLUSTER' || $scope.master.role === 'SUPERADMIN') {
+                        string = '/' + $route.current.params.admin0pcode+'/' + $route.current.params.cluster_id;
                     }
                     return string
                 },
@@ -261,6 +271,6 @@ angular.module('ngmReportHub')
             // set page
             $scope.master.init();
             $scope.master.setMenu();
-            $scope.master.setResponseListUrl();
+            $scope.master.getPath($route.current.params.admin0pcode, $route.current.params.cluster_id)
 
         }]);

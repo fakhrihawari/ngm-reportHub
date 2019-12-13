@@ -891,8 +891,10 @@ angular
 					}],
 				}
 			})
-
-			.when('/cluster/admin/lists/:admin0pcode?/:cluster_id?', {
+			.when('/cluster/admin/lists/',{
+				redirectTo:'/cluster/admin/lists/all/all'
+			})
+			.when('/cluster/admin/lists/:admin0pcode/:cluster_id', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'MasterListAdminCtrl',
 				resolve: {
@@ -902,7 +904,7 @@ angular
 				}
 			})
 
-			.when('/cluster/admin/list/donor', {
+			.when('/cluster/admin/list/donor/:admin0pcode/:cluster_id', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'MasterListDonorCtrl',
 				resolve: {
@@ -912,7 +914,7 @@ angular
 				}
 			})
 
-			.when('/cluster/admin/list/organization', {
+			.when('/cluster/admin/list/organization/:admin0pcode?', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'MasterListOrgCtrl',
 				resolve: {
