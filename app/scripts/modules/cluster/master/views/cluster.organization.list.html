@@ -132,15 +132,18 @@
                                 dir-paginate="item in master.organization | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
                                 pagination-id="master.listId" style="padding-top:20px;">
                                 <div class="card  darken-1 hoverable"
-                                    ng-class="{'inactive':'WHO'=== item.organization }">
+                                    ng-class="{'inactive':!master.activeInActive(item) }">
                                     <div class="card-content " style="min-height: 200px;">
                                         <p class="card-title"> {{item.organization}}</p>
                                         <br>
                                         <p>{{item.organization_name}}</p>
                                         <div class="row switch input-field" style="margin-bottom:10px;margin-top:10px">
                                             <label>
-                                                <input ng-checked=" 'AusAid' !== item.project_donor_name"
-                                                    type="checkbox" class="filled-in">
+                                                <input ng-checked="master.activeInActive(item)"
+                                                    id="{{item.id}}"
+                                                    type="checkbox" 
+                                                    class="filled-in" 
+                                                    ng-click="master.changeActiveInActive(item.id)">
                                                 <span class="lever"></span>
                                             </label>
                                         </div>

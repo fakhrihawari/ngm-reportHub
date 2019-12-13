@@ -112,6 +112,22 @@ angular.module('ngm.widget.form.organization.list', ['ngm.provider'])
                     } else {
                         return false
                     }
+                },
+                activeInActive:function(item){
+                    if(item.admin0pcode === "COL"){
+                        return true
+                    }
+                    return false
+                },
+                changeActiveInActive: function(id){
+                    $scope.IndexOrg = $scope.master.organization.map(x => { return x.id }).indexOf(id);   
+                    if (document.getElementById(id).checked) {
+                        $scope.master.organization[$scope.IndexOrg].admin0pcode = $scope.master.user.admin0pcode;                      
+                    }else{
+                        $scope.master.organization[$scope.IndexOrg].admin0pcode = "NONACTIVE - " + $scope.master.organization[$scope.IndexOrg].admin0pcode;
+                        
+                    }
+                    
                 }
             }
 
