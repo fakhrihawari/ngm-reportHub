@@ -912,6 +912,16 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/list/organization', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListOrgCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
 			// FORBIDDEN
 			.when( '/cluster/forbidden', {
 				templateUrl: '/views/app/dashboard.html',

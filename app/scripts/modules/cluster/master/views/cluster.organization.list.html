@@ -1,0 +1,166 @@
+<style>
+    .nav-list-search {
+        margin-top: 6px;
+        background-color: white;
+        width: 72px;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .nav-list-search.focused {
+        margin-top: 6px;
+        width: 100%;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .input-field input[type=search] {
+        font-weight: 300;
+        padding-top: 0px;
+    }
+
+    .adddonor.modal {
+        width: 30%;
+        right: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .btn:disabled {
+        background-color: #DFDFDF !important;
+    }
+
+    .inactive {
+        background-color: #cec9c9;
+    }
+</style>
+<div id="add-org-modal" class="adddonor modal">
+    <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+        <ul class="collection with-header" style="margin-top:0">
+            <li class="collection-header teal lighten-1" style="border-bottom: 0">
+                <h5 style="color: #ffffff;font-weight:300;">
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Add Organization
+                </h5>
+            </li>
+        </ul>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <input id="ngm-org-name" placeholder="" type="text" ng-model="addOrganizationAtribute.organization_name"
+                    name="ngm-org-name" class="validate">
+                <label class="active" for="ngm-org-name"> Organization Name</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-org-abbr-name" placeholder="" type="text" ng-model="addOrganizationAtribute.organization"
+                    name="ngm-org-abbr-name" class="validate">
+                <label class="active" for="ngm-org-abbr-name"> Organization Abbreviation </label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-org-type" name="ngm-org-type" class="validate"
+                    ng-options="country.organization_type as country.organization_type for country in master.type_org"
+                    ng-model="addOrganizationAtribute.organization_type" ng-disabled="" required>
+                    <option value="">Select Organization Type</option>
+                </select>
+                <label for="ngm-org-type" class="active" style="transform:translateY(-10%)"> Organization Type</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-donor-id" name="ngm-donor-id" class="validate"
+                    ng-options="country.admin0pcode as country.admin0pname for country in master.country"
+                    ng-model="addOrganizationAtribute.admin0pcode" ng-disabled="" required>
+                    <option value="">Select Country</option>
+                </select>
+                <label for="ngm-donor-id" class="active" style="transform:translateY(-10%)"> Country</label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="modal-action modal-close wave-effects wave-red red darken-1 btn"
+            style="margin-left:10px;margin-right: 25px">Close</div>
+        <button class="modal-action modal-close wave-effects wave-green btn sbtn"
+            ng-disabled="master.validOrganization(addOrganizationAtribute)" ng-click="master.addOrganization()">Save</button>
+    </div>
+</div>
+<div class="" style="position: absolute;
+    right: 59px;
+    top: 180px;">
+    <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1" ng-click="master.openAddModal()">
+
+        <i class="material-icons left">add</i> Add Organization
+    </a>
+</div>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card">
+
+            <ul class="collection with-header">
+                <li class="collection-header indigo lighten-1" style="height:80px;">
+                    <div class="col s12 m6">
+                        <h5 class="report-panel-title white-text">
+                            <i class="material-icons left">attachment</i> Organization List
+
+                        </h5>
+                    </div>
+                    <div ng-if="master.organization.length > master.itemsPerPage" class="col s12 m4 right">
+                        <nav class="nav-list-search right"
+                            ng-class="{'focused':master.search.focused===true || master.search.filter }">
+                            <div class="nav-wrapper" ng-click="list.toggleSearch()">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="search_{{ list.id }}" type="search" ng-model="master.search.filter"
+                                            ng-focus="master.search.focused=true" ng-blur="master.search.focused=false">
+                                        <label for="search_{{ master.listId }}"><i class="material-icons"
+                                                style="color: teal; padding-left:5px;">search</i></label>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+                </li>
+
+                <div>
+                    <li ng-if="master.organization.length>0" class="collection-item avatar"
+                        style="padding-left: 30px;padding-right: 30px">
+                        <div class="row">
+                            <div class="col s12 m4  "
+                                dir-paginate="item in master.organization | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
+                                pagination-id="master.listId" style="padding-top:20px;">
+                                <div class="card  darken-1 hoverable"
+                                    ng-class="{'inactive':'WHO'=== item.organization }">
+                                    <div class="card-content " style="min-height: 200px;">
+                                        <p class="card-title"> {{item.organization}}</p>
+                                        <br>
+                                        <p>{{item.organization_name}}</p>
+                                        <div class="row switch input-field" style="margin-bottom:10px;margin-top:10px">
+                                            <label>
+                                                <input ng-checked=" 'AusAid' !== item.project_donor_name"
+                                                    type="checkbox" class="filled-in">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-item avatar" ng-if="!master.organization.length">
+                        <p style="font-size: 17px; padding:10px 0px 10px 0px;">
+                            {{'you_have_no_project_documents_yet'|translate}}</p>
+                    </li>
+                    <li class="collection-item avatar" ng-if="master.organization.length > master.itemsPerPage"
+                        style="padding:20px 20px 0px 50px;">
+                        <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
+                    </li>
+                </div>
+
+            </ul>
+        </div>
+    </div>
+</div>

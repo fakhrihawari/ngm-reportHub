@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-    .controller('MasterListDonorCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists) {
+    .controller('MasterListOrgCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists) {
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -39,11 +39,11 @@ angular.module('ngmReportHub')
                         title: {
                             'class': 'col s12 m9 l9 report-title truncate',
                             style: 'font-size: 3.4rem; color: ' + $scope.list.ngm.style.defaultPrimaryColor,
-                            title: 'DONORS'
+                            title: 'Organization'
                         },
                         subtitle: {
                             'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
-                            title: 'List Donors'
+                            title: 'List Organizations'
                         },
                     },
                     menu: [],
@@ -63,11 +63,11 @@ angular.module('ngmReportHub')
                        columns: [{
                             styleClass: 's12 m12 l12',
                             widgets: [{
-                                type: 'form.donor.list',
+                                type: 'form.organization.list',
                                 style: 'padding:0px; height: 90px; padding-top:10px;',
                                 config: {
                                     style: $scope.list.ngm.style,
-                                    donor: $scope.list.donor 
+                                    organization: $scope.list.organizations 
                                 }
                             }]
                         }] 
@@ -94,8 +94,9 @@ angular.module('ngmReportHub')
         }
         // run page
 		
-        $scope.list.donor = ngmClusterLists.getDonors()
+        $scope.list.organizations = ngmClusterLists.getOrganizations()
         // init
         $scope.list.init();
+        // console.log(ngmClusterLists.getOrganizations())
 
     }]);
