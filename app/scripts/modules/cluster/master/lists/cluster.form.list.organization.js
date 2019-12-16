@@ -41,10 +41,11 @@ angular.module('ngm.widget.form.organization.list', ['ngm.provider'])
                     };
 
                 },
+                admin0pcode :config.admin0pcode.toUpperCase(),
                 country: [
                         {
                             'admin0pname': 'ALL',
-                            'admin0pcode': 'all',
+                            'admin0pcode': 'ALL',
                             
                         },
                         {
@@ -114,7 +115,7 @@ angular.module('ngm.widget.form.organization.list', ['ngm.provider'])
                     }
                 },
                 activeInActive:function(item){
-                    if(item.admin0pcode === "COL"){
+                    if (item.admin0pcode.indexOf($scope.master.admin0pcode) > -1 || item.admin0pcode.indexOf("ALL") > -1 ){
                         return true
                     }
                     return false
@@ -122,10 +123,23 @@ angular.module('ngm.widget.form.organization.list', ['ngm.provider'])
                 changeActiveInActive: function(id){
                     $scope.IndexOrg = $scope.master.organization.map(x => { return x.id }).indexOf(id);   
                     if (document.getElementById(id).checked) {
-                        $scope.master.organization[$scope.IndexOrg].admin0pcode = $scope.master.user.admin0pcode;                      
-                    }else{
-                        $scope.master.organization[$scope.IndexOrg].admin0pcode = "NONACTIVE - " + $scope.master.organization[$scope.IndexOrg].admin0pcode;
                         
+                        if ($scope.master.organization[$scope.IndexOrg].admin0pcode === ''){
+                            $scope.master.organization[$scope.IndexOrg].admin0pcode += $scope.master.admin0pcode;
+                        }else{
+                            $scope.master.organization[$scope.IndexOrg].admin0pcode = $scope.master.admin0pcode === 'ALL' ? 
+                                                                                      $scope.master.admin0pcode + ', ' + $scope.master.organization[$scope.IndexOrg].admin0pcode : 
+                                                                                      $scope.master.organization[$scope.IndexOrg].admin0pcode += ', ' + $scope.master.admin0pcode;
+                                                                                       
+                        }
+                    }else{
+                       var copy = $scope.master.organization[$scope.IndexOrg].admin0pcode
+                       var copyarray = copy.replace(/\s/g, '').split(",")
+                       var delIndex = copyarray.indexOf($scope.master.admin0pcode);
+                       copyarray.splice(delIndex,1)
+                       var copystring = copyarray.join("")
+                       $scope.master.organization[$scope.IndexOrg].admin0pcode = copystring
+
                     }
                     
                 }

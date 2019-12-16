@@ -93,7 +93,7 @@ angular.module('ngmReportHub')
 
         }
         // run page
-        var country = $route.current.params.admin0pcode === 'all' ? '' : $route.current.params.admin0pcod; 
+        var country = $route.current.params.admin0pcode === 'all' ? '' : $route.current.params.admin0pcode; 
         var cluster = $route.current.params.cluster_id === 'all' ? '' : $route.current.params.cluster_id;
         
         $scope.list.donor = cluster === '' ? ngmClusterLists.getDonors(country):ngmClusterLists.getDonors(country,cluster);

@@ -39,11 +39,11 @@ angular.module('ngmReportHub')
                         title: {
                             'class': 'col s12 m9 l9 report-title truncate',
                             style: 'font-size: 3.4rem; color: ' + $scope.list.ngm.style.defaultPrimaryColor,
-                            title: 'Organization'
+                            title: 'Organization | ' + $scope.list.title
                         },
                         subtitle: {
                             'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
-                            title: 'List Organizations'
+                            title: 'List Organizations For ' + $scope.list.title
                         },
                     },
                     menu: [],
@@ -67,7 +67,8 @@ angular.module('ngmReportHub')
                                 style: 'padding:0px; height: 90px; padding-top:10px;',
                                 config: {
                                     style: $scope.list.ngm.style,
-                                    organization: $scope.list.organizations 
+                                    organization: $scope.list.organizations,
+                                    admin0pcode: $route.current.params.admin0pcode 
                                 }
                             }]
                         }] 
@@ -95,8 +96,15 @@ angular.module('ngmReportHub')
         // run page
 		
         $scope.list.organizations = ngmClusterLists.getOrganizations()
+        $scope.list.title = $route.current.params.admin0pcode;
         // init
         $scope.list.init();
-        // console.log(ngmClusterLists.getOrganizations())
+
+        // ngmData.get({
+        //     method: 'GET',
+        //     url: ngmAuth.LOCATION + '/api/list/organizations'
+        // }).then(function (results) {
+        //     var d =results.map(x => x.admin0pcode);
+        // })
 
     }]);
