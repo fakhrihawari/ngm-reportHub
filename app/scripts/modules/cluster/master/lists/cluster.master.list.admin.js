@@ -108,76 +108,87 @@ angular.module('ngmReportHub')
                 setMenu: function () {
                     // country
                     var country = [{
-                        'title': 'Democratic Republic of Congo',
+                        'title': 'ALL',
                         'param': 'admin0pcode',
-                        'active': 'cd',
+                        'active': 'all',
                         'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cd' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
-                        'title': 'Ethiopia',
-                        'param': 'admin0pcode',
-                        'active': 'et',
-                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'et' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
-                        'title': 'Nigeria',
-                        'param': 'admin0pcode',
-                        'active': 'ng',
-                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ng' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
-                        'title': 'South Sudan',
-                        'param': 'admin0pcode',
-                        'active': 'ss',
-                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ss' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
+                        'href': '#/cluster/admin/lists/all/' + $route.current.params.cluster_id
+                    },{
                         'title': 'Afghanistan',
                         'param': 'admin0pcode',
                         'active': 'af',
                         'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'af' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+                        'href': '#/cluster/admin/lists/af/' + $route.current.params.cluster_id
                     }, {
-                        'title': 'Somalia',
+                            'title': 'Bangladesh',
+                            'param': 'admin0pcode',
+                            'active': 'bd',
+                            'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                            'href': '#/cluster/admin/lists/bd/' + $route.current.params.cluster_id
+                     }, {
+                        'title': 'Colombia',
                         'param': 'admin0pcode',
-                        'active': 'so',
+                        'active': 'col',
                         'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'so' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
-                        'title': 'Syria',
-                        'param': 'admin0pcode',
-                        'active': 'sy',
-                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'sy' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
-                        'title': 'Yemen',
-                        'param': 'admin0pcode',
-                        'active': 'ye',
-                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'ye' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
-                        'title': 'Bangladesh',
-                        'param': 'admin0pcode',
-                        'active': 'bd',
-                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'bd' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+                        'href': '#/cluster/admin/lists/col/'+$route.current.params.cluster_id
                     }, {
                         'title': 'Cox Bazar',
                         'param': 'admin0pcode',
                         'active': 'cb',
                         'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'cb' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
-                    }, {
-                        'title': 'Colombia',
+                        'href': '#/cluster/admin/lists/cb/'+$route.current.params.cluster_id
+                    },{
+                        'title': 'Democratic Republic of Congo',
                         'param': 'admin0pcode',
-                        'active': 'col',
+                        'active': 'cd',
                         'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                        // 'href': dashboard.url + dashboard.project_id + '/' + dashboard.report_id + '/' + dashboard.organization_tag + '/' + dashboard.cluster_id + '/' + 'col' + '/' + dashboard.adminRpcode + '/' + dashboard.startDate + '/' + dashboard.endDate + '/' + dashboard.type,
+                        'href': '#/cluster/admin/lists/cd/'+$route.current.params.cluster_id
+                    }, {
+                        'title': 'Ethiopia',
+                        'param': 'admin0pcode',
+                        'active': 'et',
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/lists/et/'+$route.current.params.cluster_id
+                    }, {
+                        'title': 'Nigeria',
+                        'param': 'admin0pcode',
+                        'active': 'ng',
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/lists/ng/'+$route.current.params.cluster_id
+                    }, {
+                        'title': 'South Sudan',
+                        'param': 'admin0pcode',
+                        'active': 'ss',
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/lists/ss/'+$route.current.params.cluster_id
+                    },  {
+                        'title': 'Somalia',
+                        'param': 'admin0pcode',
+                        'active': 'so',
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/lists/so/'+$route.current.params.cluster_id
+                    }, {
+                        'title': 'Syria',
+                        'param': 'admin0pcode',
+                        'active': 'sy',
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/lists/sy/'+$route.current.params.cluster_id
+                    }, {
+                        'title': 'Yemen',
+                        'param': 'admin0pcode',
+                        'active': 'ye',
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/lists/ye/'+$route.current.params.cluster_id
                     }];
 
                     // cluster
                     var clusters = ngmClusterLists.getClusters(ngmUser.get().admin0pcode);
-                    var cluster_rows = [];
+                    var cluster_rows = [{
+                        'title': 'ALL',
+                        'param': 'cluster_id',
+                        'active': 'all',
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/lists/' + $route.current.params.admin0pcode + '/all'}];
                     for (i = 0; i < clusters.length; i++) {
                         var clusterName = clusters[i].cluster;
                         var clusterId = clusters[i].cluster_id
@@ -186,20 +197,11 @@ angular.module('ngmReportHub')
                             'param': 'cluster_id',
                             'active': clusterId,
                             'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
-                            'href': '#/cluster/admin/lists/' + $scope.master.user.admin0pcode + '/' + clusterId
+                            'href': '#/cluster/admin/lists/' + $route.current.params.admin0pcode + '/' + clusterId
                         });
                     };
 
-                    if($scope.master.role === 'SUPERADMIN' || $scope.master.role === "COUNTRY"){
-                        $scope.model.menu.push({
-                            'id': 'search-cluster',
-                            'icon': 'person_pin',
-                            'title': 'Cluster',
-                            'class': 'teal lighten-1 white-text',
-                            'rows': cluster_rows
-                        });
-                    }
-                    if ($scope.master.role === 'SUPERADMIN' || $scope.master.role === "CLUSTER"){
+                    if ($scope.master.role === 'SUPERADMIN' || $scope.master.role === "CLUSTER") {
 
                         $scope.model.menu.push({
                             'id': 'search-country',
@@ -207,6 +209,15 @@ angular.module('ngmReportHub')
                             'title': 'Country',
                             'class': 'teal lighten-1 white-text',
                             'rows': country
+                        });
+                    }
+                    if($scope.master.role === 'SUPERADMIN' || $scope.master.role === "COUNTRY"){
+                        $scope.model.menu.push({
+                            'id': 'search-cluster',
+                            'icon': 'person_pin',
+                            'title': 'Cluster',
+                            'class': 'teal lighten-1 white-text',
+                            'rows': cluster_rows
                         });
                     }
                 },
