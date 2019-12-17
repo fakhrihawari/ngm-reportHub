@@ -67,7 +67,8 @@ angular.module('ngmReportHub')
                                 style: 'padding:0px; height: 90px; padding-top:10px;',
                                 config: {
                                     style: $scope.list.ngm.style,
-                                    donor: $scope.list.donor 
+                                    donor: $scope.list.donor,
+                                    admin0pcode: $route.current.params.admin0pcode
                                 }
                             }]
                         }] 
@@ -97,6 +98,7 @@ angular.module('ngmReportHub')
         var cluster = $route.current.params.cluster_id === 'all' ? '' : $route.current.params.cluster_id;
         
         $scope.list.donor = cluster === '' ? ngmClusterLists.getDonors(country):ngmClusterLists.getDonors(country,cluster);
+        $scope.list.donor.map(x=>x['admin0pcode'] = 'ALL'); 
         // init
         $scope.list.init();
 

@@ -68,6 +68,17 @@
                 <label for="ngm-donor-id" class="active"
                     style="transform:translateY(-10%)"> Cluster</label>
             </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select 
+                    id="ngm-donor-country-id" 
+                    name="ngm-donor-country-id" 
+                    class="validate"
+                    ng-options="country.admin0pcode as country.admin0pname for country in master.country"
+                    ng-model="addDonorAtribute.admin0pcode" ng-disabled="" required>
+                    <option value="">Select Country</option>
+                </select>
+                <label for="ngm-donor-id" class="active" style="transform:translateY(-10%)"> Country</label>
+            </div>
         </div>
     </div>
     <div class="modal-footer">
@@ -133,12 +144,16 @@
                         <div class="row">
                             <div class="col s12 m4  " dir-paginate="item in master.donor | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
                                 pagination-id="master.listId" style="padding-top:20px;">
-                                <div class="card  darken-1 hoverable" ng-class="{'inactive':'AusAid'=== item.project_donor_name }">
+                                <div class="card  darken-1 hoverable" ng-class="{'inactive':!master.activeInActive(item) }">
                                     <div class="card-content " style="min-height: 150px;">
                                         <p class="card-title"> {{item.project_donor_name}}</p>
                                         <div class="row switch input-field" style="margin-bottom:10px;margin-top:10px">
                                             <label>
-                                                <input ng-checked=" 'AusAid' !== item.project_donor_name"type="checkbox" class="filled-in">
+                                                <input ng-checked="master.activeInActive(item)" 
+                                                    id="{{item.id}}" 
+                                                    type="checkbox" 
+                                                    class="filled-in"
+                                                    ng-click="master.changeActiveInActive(item.id)">
                                                 <span class="lever"></span>
                                             </label>
                                         </div>
