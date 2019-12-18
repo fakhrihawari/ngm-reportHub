@@ -1,0 +1,149 @@
+<style>
+    .nav-list-search {
+        margin-top: 6px;
+        background-color: white;
+        width: 72px;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .nav-list-search.focused {
+        margin-top: 6px;
+        width: 100%;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .input-field input[type=search] {
+        font-weight: 300;
+        padding-top: 0px;
+    }
+
+    .add.modal {
+        width: 30%;
+        right: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .btn:disabled {
+        background-color: #DFDFDF !important;
+    }
+
+    .inactive {
+        background-color: #cec9c9;
+    }
+    .collection .collection-item.list.avatar {
+        min-height: 60px;
+    }
+</style>
+<div id="add-beneficiaries-modal" class="add modal">
+    <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+        <ul class="collection with-header" style="margin-top:0">
+            <li class="collection-header teal lighten-1" style="border-bottom: 0">
+                <h5 style="color: #ffffff;font-weight:300;">
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Add Beneficiaries Type
+                </h5>
+            </li>
+        </ul>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <input id="ngm-beneficiary-type-name" placeholder="" type="text" ng-model="addBeneficiaryTypes.beneficiary_type_name"
+                    name="ngm-beneficiary-type-name" class="validate">
+                <label class="active" for="ngm-beneficiary-type-name"> Beneficiary Type Name</label>
+            </div>
+            
+            <!-- <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-donor-id" name="ngm-donor-id" class="validate"
+                    ng-options="cluster.cluster_id as cluster.cluster for cluster in master.clusters"
+                    ng-model="addDonorAtribute.cluster_id" ng-disabled="" required>
+                    <option value="">Select Cluster</option>
+                </select>
+                <label for="ngm-donor-id" class="active" style="transform:translateY(-10%)"> Cluster</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-donor-country-id" name="ngm-donor-country-id" class="validate"
+                    ng-options="country.admin0pcode as country.admin0pname for country in master.country"
+                    ng-model="addDonorAtribute.admin0pcode" ng-disabled="" required>
+                    <option value="">Select Country</option>
+                </select>
+                <label for="ngm-donor-id" class="active" style="transform:translateY(-10%)"> Country</label>
+            </div> -->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="modal-action modal-close wave-effects wave-red red darken-1 btn"
+            style="margin-left:10px;margin-right: 25px">Close</div>
+        <button class="modal-action modal-close wave-effects wave-green btn sbtn"
+            ng-disabled="master.validBeneficiaries(addBeneficiaryTypes)" ng-click="master.addBeneficiaries(addBeneficiaryTypes)">Save</button>
+    </div>
+</div>
+<div class="" style="position: absolute;
+    right: 59px;
+    top: 180px;">
+    <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1" ng-click="master.openAddModal()">
+        <i class="material-icons left">add</i> Add Beneficiaries
+    </a>
+</div>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card">
+
+            <ul class="collection with-header">
+                <li class="collection-header indigo lighten-1" style="height:80px;">
+                    <div class="col s12 m6">
+                        <h5 class="report-panel-title white-text">
+                            <i class="material-icons left">attachment</i> Beneficiaries List
+
+                        </h5>
+                    </div>
+                    <div ng-if="master.beneficiaries.length > master.itemsPerPage" class="col s12 m4 right">
+                        <nav class="nav-list-search right"
+                            ng-class="{'focused':master.search.focused===true || master.search.filter }">
+                            <div class="nav-wrapper" ng-click="list.toggleSearch()">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="search_{{ list.id }}" type="search" ng-model="master.search.filter"
+                                            ng-focus="master.search.focused=true" ng-blur="master.search.focused=false">
+                                        <label for="search_{{ master.listId }}"><i class="material-icons"
+                                                style="color: teal; padding-left:5px;">search</i></label>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+                </li>
+                <li class="collection-item list avatar "
+                    dir-paginate="item in master.beneficiaries | filter: master.search.filter | orderBy: sortBy :false | itemsPerPage: master.itemsPerPage"
+                    pagination-id="master.listId">
+                    <div class="row" style="padding-top: 10px;">
+
+                        <div class="col m4 s4">
+
+                        
+                        <input type="checkbox" class="filled-in" id={{item.beneficiary_type_name}} value={{item.beneficiary_type_name}}
+                            ng-checked="master.activeInActive(item)"
+                             ng-click="" />
+                        <label for="{{item.beneficiary_type_name}}" style="color: #000000; font-weight: 500;">{{item.beneficiary_type_name}}</label>
+                        </div>
+                        <div class="teal-text" style="margin-left: 35px"></div>
+                    </div>
+                    <!-- <h4>{{item.beneficiary_type_name}}</h4> -->
+                </li>
+                <li class="collection-item avatar" ng-if="master.beneficiaries.length > master.itemsPerPage" style="padding:20px 20px 0px 50px;">
+                    <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>

@@ -924,6 +924,26 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/list/beneficiaries/:admin0pcode/:cluster_id', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListBeneficairyTypesGroupCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
+			.when('/cluster/admin/list/beneficiary/year/:year/:admin0pcode/:cluster_id', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListBeneficairyTypesCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
 			// FORBIDDEN
 			.when( '/cluster/forbidden', {
 				templateUrl: '/views/app/dashboard.html',
