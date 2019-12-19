@@ -95,16 +95,17 @@ angular.module('ngmReportHub')
         }
         // run page
 		
-        $scope.list.organizations = ngmClusterLists.getOrganizations()
+        // $scope.list.organizations = ngmClusterLists.getOrganizations()
         $scope.list.title = $route.current.params.admin0pcode;
         // init
-        $scope.list.init();
+        // $scope.list.init();
 
-        // ngmData.get({
-        //     method: 'GET',
-        //     url: ngmAuth.LOCATION + '/api/list/organizations'
-        // }).then(function (results) {
-        //     var d =results.map(x => x.admin0pcode);
-        // })
+        ngmData.get({
+            method: 'GET',
+            url: ngmAuth.LOCATION + '/api/list/organizations'
+        }).then(function (results) {
+            $scope.list.organizations = results;
+            $scope.list.init();
+        })
 
     }]);

@@ -97,9 +97,19 @@ angular.module('ngmReportHub')
         var country = $route.current.params.admin0pcode === 'all' ? '' : $route.current.params.admin0pcode; 
         var cluster = $route.current.params.cluster_id === 'all' ? '' : $route.current.params.cluster_id;
         
-        $scope.list.donor = cluster === '' ? ngmClusterLists.getDonors(country):ngmClusterLists.getDonors(country,cluster);
-        $scope.list.donor.map(x=>x['admin0pcode'] = 'ALL'); 
-        // init
-        $scope.list.init();
+        // $scope.list.donor = cluster === '' ? ngmClusterLists.getDonors(country):ngmClusterLists.getDonors(country,cluster);
+        ngmData.get({
+            method: 'GET',
+            url: ngmAuth.LOCATION + '/api/cluster/list/donors'
+        }).then(function(data){
+            console.log(data)
+            $scope.list.donor = data;
+            $scope.list.donor.map(x => x['admin0pcode'] = 'ALL');
+            // init
+            $scope.list.init();
+        })
+        // $scope.list.donor.map(x=>x['admin0pcode'] = 'ALL'); 
+        // // init
+        // $scope.list.init();
 
     }]);

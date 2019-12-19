@@ -66,11 +66,11 @@ angular.module('ngmReportHub')
                             title: {
                                 'class': 'col s12 m12 l12 report-title truncate',
                                 style: 'font-size: 3.4rem; color: ' + $scope.master.ngm.style.defaultPrimaryColor,
-                                title: $route.current.params.admin0pcode.toUpperCase() + ' | LISTS ',//$scope.master.user.roles.indexOf("SUPERADMIN") > -1 ? 'ALL | LISTS ' : $scope.master.user.admin0pcode + '| LISTS '
+                                title: 'LIST',//$route.current.params.admin0pcode.toUpperCase() + ' | LISTS ',//$scope.master.user.roles.indexOf("SUPERADMIN") > -1 ? 'ALL | LISTS ' : $scope.master.user.admin0pcode + '| LISTS '
                             },
                             subtitle: {
                                 'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
-                                title: 'IMMAP Overview for ' + $scope.master.user.admin0name
+                                title: 'All Kind of List',//'IMMAP Overview for ' + $scope.master.user.admin0name
                             }
                         },
                         rows: [{
