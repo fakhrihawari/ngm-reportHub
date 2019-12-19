@@ -37,6 +37,7 @@ angular
 		'ngm.widget.form.donor.list',
 		'ngm.widget.form.organization.list',
 		'ngm.widget.form.beneficiaries.list',
+		'ngm.widget.form.stocks.list',
 		// modules
 		'ngmBangladesh',
 		'ngmCluster',

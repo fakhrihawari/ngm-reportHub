@@ -944,6 +944,16 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/list/stock/:admin0pcode/:cluster_id', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListStockCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
 			// FORBIDDEN
 			.when( '/cluster/forbidden', {
 				templateUrl: '/views/app/dashboard.html',
