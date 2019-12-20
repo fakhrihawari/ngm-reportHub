@@ -102,7 +102,6 @@ angular.module('ngmReportHub')
             method: 'GET',
             url: ngmAuth.LOCATION + '/api/cluster/list/donors'
         }).then(function(data){
-            console.log(data)
             $scope.list.donor = data;
             $scope.list.donor.map(x => x['admin0pcode'] = 'ALL');
             // init

@@ -97,7 +97,7 @@ angular.module('ngm.widget.form.stocks.list', ['ngm.provider'])
                 addStockItem: function () {
                     $scope.addStockAtribute.stock_item_type = $scope.addStockAtribute.stock_item_name.toLowerCase().split(' ').join('_');
                     $scope.master.stocks.unshift($scope.addStockAtribute);
-                    console.log($scope.addStockAtribute);
+                    
                 },
                 validStocks: function (stock) {
                     if (!stock || stock.cluster_id === '' || stock.stock_item_name === '') {

@@ -100,6 +100,6 @@ angular.module('ngmReportHub')
         // init
         $scope.list.init();
 
-        console.log($route.current.params.year);
+        
 
     }]);
