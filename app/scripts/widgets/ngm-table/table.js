@@ -46,7 +46,9 @@ angular.module('ngm.widget.table', ['ngm.provider'])
     'data', 
     'config',
     'NgTableParams',
-		function ($scope, $location, $element, $filter, data, config, NgTableParams){
+    '$translate',
+    'Language',
+    function ($scope, $location, $element, $filter, data, config, NgTableParams, $translate, Language){
     
       // table config
       $scope.table = {
@@ -125,7 +127,25 @@ angular.module('ngm.widget.table', ['ngm.provider'])
 
       // ngTable
 			$scope.table.tableParams = new NgTableParams($scope.table.tableOptions, $scope.table.tableSettings);
-			$scope.showSearch = (($scope.data.length > 10) && config.search_tool) ? true : false;
+      $scope.showSearch = (($scope.data.length > 10) && config.search_tool) ? true : false;
+      $scope.Language = Language;
+      
+      // RTL
+      // if ($scope.table.rtlEvent) {
+      //   $scope.rtlClass = false;
+      //   if ($translate.use() === 'prs') {
+      //     $scope.rtlClass = true;
+      //   }
+      //   $scope.$on('rtl', function (event, ready) {
+      //     if (ready) {
+      //       $scope.rtlClass = true;
+
+      //     } else {
+      //       $scope.rtlClass = false;
+      //     }
+      //   });
+
+      // }
 
   }
   

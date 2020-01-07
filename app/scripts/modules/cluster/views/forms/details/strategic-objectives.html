@@ -27,7 +27,7 @@
 
 					<li class="collection-item avatar">
 
-						<p style="padding:10px;">
+						<p style="padding:10px;" ng-class="{'rtl':Language.isRtl()}">
 							{{'select_the_objetives_that_your_project_will_target'|translate}};
 						</p>
 
@@ -44,7 +44,7 @@
 								      	ng-click="project.setStrategicObjectives( objective.cluster_id )"/>
 								      <label for="{{ objective.objective_type_id + ':' + objective.objective_year }}" style="color:#757575;">{{ objective.objective_type_description }}</label>
 								    </p>
-								    <p ng-if="objective.objective_type_objectives.length" align="justify" style="padding:5px 0px 10px 35px; font-weight:400;">
+								    <p ng-if="objective.objective_type_objectives.length" align="justify" style="padding:5px 0px 10px 35px; font-weight:400;" ng-class="{' rtl title-left':Language.isRtl()}">
 											{{'relates_to'|translate}} <span ng-repeat="so in objective.objective_type_objectives">{{ so }} </span>
 								    </p>
 									</li>

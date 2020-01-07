@@ -240,7 +240,9 @@
 				<i class="material-icons left">keyboard_return</i>{{'back_to_location_groups'|translate}}
 			</button>			
 
-			<span class="right" style="padding-top:8px;">{{'last_updated'|translate}}: {{ project.updatedAt }}</span>
+			<!-- <span class="right" style="padding-top:8px;">{{'last_updated'|translate}}: {{ project.updatedAt }}</span> -->
+			<span ng-if="!Language.isRtl()" class="right" style="padding-top:8px;">{{'last_updated'|translate}}: {{ project.updatedAt }}</span>
+			<span ng-if="Language.isRtl()" class="right" style="padding-top:8px;">&#x202a;{{ project.updatedAt }} &#x202c; :{{'last_updated' | translate}}</span>
 
 		</div>
 	</div>
@@ -268,13 +270,13 @@
 				<div class="widget card-panel white grey-text text-darken-2">			
 					
 					<!-- submission !== NG -->
-					<div align="center" ng-if="project.definition.admin0pcode !== 'NG'">
+					<div align="center" ng-if="project.definition.admin0pcode !== 'NG'" ng-class="{'btn-rtl':Language.isRtl()}">
 						
 						<!-- validation -->
 						<button class="waves-effect waves-light btn"
 											ng-click="project.validateBeneficiariesDetailsForm( false, true )"
 											ng-cloak>
-										<i class="material-icons right">send</i>{{'save_mayus'|translate}}
+										<i class="material-icons " ng-class="{'right':!Language.isRtl(),'left':Language.isRtl()}">send</i>{{'save_mayus'|translate}}
 						</button>
 
 						<!-- cancel new  -->
@@ -290,7 +292,7 @@
 											class="waves-effect waves-light btn blue"
 											ng-click="project.validateBeneficiariesDetailsForm( true, false )"
 											ng-cloak>
-							<i class="material-icons left">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
+							<i class="material-icons " ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
 
 						</button>
 
@@ -318,7 +320,7 @@
 						<button class="waves-effect waves-light btn blue"
 											ng-click="project.validateWashNgBeneficiariesForm( true, false )"
 											ng-cloak>
-							<i class="material-icons left">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
+							<i class="material-icons " ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">assignment_turned_in</i>{{'submit_monthly_progress'|translate}}
 
 						</button>
 

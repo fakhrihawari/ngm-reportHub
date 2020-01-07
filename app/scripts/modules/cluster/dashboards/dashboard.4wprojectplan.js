@@ -83,7 +83,7 @@ angular.module('ngmReportHub')
 				menu: [{
 					'id': 'search-region',
 					'icon': 'person_pin',
-					'title': $filter('translate')('region'),
+					'title': 'region',//$filter('translate')('region'),
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': 'HQ',
@@ -448,7 +448,7 @@ angular.module('ngmReportHub')
 								'afro': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Democratic Republic of Congo',
@@ -479,7 +479,7 @@ angular.module('ngmReportHub')
 								'emro': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Afghanistan',
@@ -510,7 +510,7 @@ angular.module('ngmReportHub')
 								'searo': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Bangladesh',
@@ -529,7 +529,7 @@ angular.module('ngmReportHub')
 								'amer': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
@@ -611,7 +611,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster-year',
 							'icon': 'date_range',
-							'title': $filter('translate')('year'),
+							'title': 'year',//$filter('translate')('year'),
 							'class': 'teal lighten-1 white-text',
 							'rows': yearRows
 						});
@@ -645,7 +645,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster-cluster',
 							'icon': 'camera',
-							'title': 'Cluster',
+							'title': 'cluster',//'Cluster',
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});
@@ -674,7 +674,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-organization',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('executor'),
+								'title': 'executor',//$filter('translate')('executor'),
 								'class': 'teal lighten-1 white-text',
 								'rows': orgRows
 							});
@@ -725,7 +725,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-implementingpartners',
 								'icon': 'people',
-								'title': $filter('translate')('implementer'),
+								'title': 'implementer',//$filter('translate')('implementer'),
 								'class': 'teal lighten-1 white-text',
 								'rows': implementingPartnersRows
 							});
@@ -779,7 +779,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-donorsproject',
 								'icon': 'attach_money',
-								'title': $filter('translate')('donor'),
+								'title': 'donor',//$filter('translate')('donor'),
 								'class': 'teal lighten-1 white-text',
 								'rows': donorsRows
 							});
@@ -831,7 +831,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-activitytype',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('activity_type'),
+								'title': 'activity_type',//$filter('translate')('activity_type'),
 								'class': 'teal lighten-1 white-text',
 								'rows': activitiesRows
 							});
@@ -883,7 +883,7 @@ angular.module('ngmReportHub')
 								'search': false,
 								'id': 'search-cluster-projecttypecomponent',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('project_type'),
+								'title': 'project_type',//$filter('translate')('project_type'),
 								'class': 'teal lighten-1 white-text',
 								'rows': project_type_componentRows
 							});
@@ -1191,7 +1191,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('executing_organizations'),
+										title: 'executing_organizations',//$filter('translate')('executing_organizations'),
 										request: $scope.dashboard.getRequest( { indicator: 'organizations_4wdashboard_projectplan' } )
 									}
 								}]
@@ -1203,7 +1203,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('implementing_organizations'),
+								title: 'implementing_organizations',//$filter('translate')('implementing_organizations'),
 								request: $scope.dashboard.getRequest({ indicator: 'total_implementing_partners_4wdashboard_projectplan' })
 							}
 						}]
@@ -1295,7 +1295,8 @@ angular.module('ngmReportHub')
 									config: {
 										id: 'dashboard-btn',
 										request: $scope.dashboard.getRequest( { indicator: 'latest_update' } ),
-										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard4wprojectplan.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard4wprojectplan.html',
+										rtlEvent: 'rtl'
 
 									}
 								}]
@@ -1309,7 +1310,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('total_projects'),
+										title: 'total_projects',//$filter('translate')('total_projects'),
 										request: $scope.dashboard.getRequest( { indicator: 'projects_4wdashboard_projectplan' } )
 									}
 								}]
@@ -1321,7 +1322,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('total_beneficiaries_population'),
+										title: 'total_beneficiaries_population',//$filter('translate')('total_beneficiaries_population'),
 										request: $scope.dashboard.getRequest( { indicator: 'total_beneficiariespopulation_4wdashboard_projectplan' } )
 									}
 								}]
@@ -1333,7 +1334,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('total_financing')+' US$',
+										title: 'total_financing_with_dollar_plan',//$filter('translate')('total_financing')+' US$',
 										request: $scope.dashboard.getRequest( { indicator: 'total_financing_4wdashboard_projectplan' } )
 									}
 								}]
@@ -1519,7 +1520,10 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_target_locations')+'</h2>'
+										// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_target_locations')+'</h2>'
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'project_target_locations',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1531,7 +1535,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('target_locations'),
+										title: 'target_locations',//$filter('translate')('target_locations'),
 										request: $scope.dashboard.getRequest( { indicator: 'target_locations_4wdashboard_projectplan' } )
 									}
 								}]

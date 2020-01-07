@@ -1,19 +1,22 @@
 
-<div style="padding-left: 20px;">
-  <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.report.stocklocations[$locationIndex].stocks.length">
-    <tr style="font-weight: 400">
-			<td>Cluster</td>
+<div style="padding-left: 20px;" ng-class="{'rtLpadding':Language.isRtl()}">
+  <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.report.stocklocations[$locationIndex].stocks.length" ng-class="{'tRtl':Language.isRtl()}">
+    <tr style="font-weight: 400" ng-class="{'tRtl':Language.isRtl()}">
+      <!-- <td>Cluster</td> -->
+      <td>{{'cluster'|translate}}</td>
 			<td>{{'stock_purpose'|translate}}</td>
 			<td>{{'targeted_groups'|translate}}</td>
       <td>{{'stock_type' | translate}}</td>
       <td>{{'status_mayus'|translate}}</td>
-      <td>No. {{'in'|translate}} Stock</td>
-      <td>No. {{'in'|translate}} {{'pipeline'|translate}}</td>
+      <!-- <td>No. {{'in'|translate}} Stock</td>
+      <td>No. {{'in'|translate}} {{'pipeline'|translate}}</td> -->
+      <td>{{'no_in_stock'|translate}}</td>
+      <td>{{'no_in_pipeline'|translate}}</td>
       <td>{{'units'|translate}}</td>
 			<td>{{'beneficiary_coverage'|translate}}</td>
       <td ng-show="report.report.report_status !== 'complete'">{{'edit'|translate}}</td>
     </tr>
-    <tr ng-repeat="stock in report.report.stocklocations[$locationIndex].stocks">
+    <tr ng-repeat="stock in report.report.stocklocations[$locationIndex].stocks" ng-class="{'tRtl':Language.isRtl()}">
       <td>
         <!-- editable activity_type from report -->
         <span e-placeholder="{{'select'|translate}}" editable-select="stock.cluster_id" e-name="cluster_id" e-form="rowform" e-ng-options="item.cluster_id as item.cluster for item in report.lists.clusters">
@@ -36,7 +39,7 @@
         <!-- editable activity_type from report -->
         <span e-placeholder="{{'select'|translate}}" editable-select="stock.stock_item_type" e-name="stock_item_type" e-form="rowform" e-ng-options="item.stock_item_type as item.stock_item_name for item in report.lists.stocks | filter: { cluster_id: stock.cluster_id }"
           e-ng-disabled="!stock.cluster_id">
-          {{ report.showStockType($data, stock) }}
+          &#x202a;{{ report.showStockType($data, stock) }}&#x202c;
         </span>
       </td>
       <td>
@@ -93,7 +96,7 @@
     </tr>
   </table>
 
-  <button class="btn" ng-show="report.report.report_status !== 'complete'" ng-click="report.addStock( $locationIndex )">
+  <button class="btn" ng-show="report.report.report_status !== 'complete'" ng-click="report.addStock( $locationIndex )"  ng-class="{'right':Language.isRtl()}">
     <i class="material-icons left">add</i>{{'add_row'|translate}}
   </button>
 

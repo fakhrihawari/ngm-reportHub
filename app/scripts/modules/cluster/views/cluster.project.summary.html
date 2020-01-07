@@ -70,7 +70,7 @@
 	</div>
 </div>
 	<!-- panels -->
-	<div class="row" ng-if="panel.project.admin0pcode === 'AF' || panel.project.admin0pcode === 'COL'">
+	<div class="row" ng-if="panel.project.admin0pcode === 'AF' || panel.project.admin0pcode === 'COL'" ng-class="{'reverse-column':Language.isRtl()}">
 	  <div class="col s12 m4">
 	  	<a href="#/cluster/projects/details/{{ panel.project.id }}">
 	   	 <div class="card small blue-grey darken-1 hoverable">
@@ -78,10 +78,10 @@
 	        <img src="images/cluster/details-1.jpg">
 	      </div>
 	      <div class="card-content white-text">
-	      	<p class="card-title">{{'project_plan'|translate}}</p>
+	      	<p class="card-title" ng-class="{'right':Language.isRtl()}">{{'project_plan'|translate}}</p>
 	      </div>
 	      <div class="card-action">
-	        <a class="left" href="#/cluster/projects/details/{{ panel.project.id }}">{{'go_to_project_plan'|translate}}</a>
+	        <a class="left" ng-class="{'right':Language.isRtl()}" href="#/cluster/projects/details/{{ panel.project.id }}">{{'go_to_project_plan'|translate}}</a>
 	      </div>
 	    </div>
 	    </a>
@@ -91,15 +91,15 @@
 				ng-class="{'disabled-link':panel.project.project_status === 'new'
 										|| panel.project.project_status === 'plan'
 										|| panel.project.project_status === 'not_implemented' }">
-		    <div class="card small blue-grey darken-1 hoverable" ng-class="{'disabled-link':panel.project.project_status === 'new' || panel.project.project_status === 'plan' || panel.project.project_status === 'not_implemented'}">
+		    <div class="card small blue-grey darken-1 hoverable" ng-class="{'disabled-link':panel.project.project_status === 'new' || panel.project.project_status === 'plan' || panel.project.project_status === 'not_implemented','right':Language.isRtl()}">
 		      <div class="card-image" ng-class="{'no-active':panel.project.project_status === 'new' || panel.project.project_status === 'plan' || panel.project.project_status === 'not_implemented'}">
 		        <img src="images/cluster/reports.jpg">
 		      </div>
 		      <div class="card-content white-text">
-		        <p class="card-title">{{'financial_reports'|translate}}</p>
+		        <p class="card-title" ng-class="{'right':Language.isRtl()}">{{'financial_reports'|translate}}</p>
 		      </div>
 		      <div class="card-action">
-		        <a class="left" ng-class="{'white-text disabled-link':panel.project.project_status === 'new' || panel.project.project_status === 'plan' || panel.project.project_status === 'not_implemented'}" href="#/cluster/projects/financials/{{ panel.project.id }}">{{'go_to' | translate}} {{'financial_reports' | translate}}</a>
+		        <a class="left" ng-class="{'white-text disabled-link':panel.project.project_status === 'new' || panel.project.project_status === 'plan' || panel.project.project_status === 'not_implemented','right':Language.isRtl()}" href="#/cluster/projects/financials/{{ panel.project.id }}">{{'go_to' | translate}} {{'financial_reports' | translate}}</a>
 		      </div>
 		    </div>
 		   </a>
@@ -111,10 +111,10 @@
 		        <img src="images/cluster/monthly_report.jpg">
 		      </div>
 		      <div class="card-content white-text">
-		        <p class="card-title">{{'monthly_progress'|translate}}</p>
+		        <p class="card-title" ng-class="{'right':Language.isRtl()}">{{'monthly_progress'|translate}}</p>
 		      </div>
 		      <div class="card-action">
-		        <a class="left" ng-class="{'white-text disabled-link':panel.project.project_status === 'new' || panel.project.project_status === 'plan' || panel.project.project_status === 'not_implemented'}" href="#/cluster/projects/report/{{ panel.project.id }}">{{'go_to_monthly_progress'|translate}}</a>
+		        <a class="left" ng-class="{'white-text disabled-link':panel.project.project_status === 'new' || panel.project.project_status === 'plan' || panel.project.project_status === 'not_implemented','right':Language.isRtl()}" href="#/cluster/projects/report/{{ panel.project.id }}">{{'go_to_monthly_progress'|translate}}</a>
 		      </div>
 		    </div>
 		   </a>
@@ -166,12 +166,12 @@
 					<!-- submission -->
 					<div align="center">
 						<button data-target="complete-modal" class="waves-effect waves-light btn modal-trigger blue" ng-cloak>
-							<i class="material-icons left">assignment_turned_in</i>{{'mark_project_as_complete' | translate}}
+							<i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">assignment_turned_in</i>{{'mark_project_as_complete' | translate}}
 						</button>
 						<br/>
 						<br/>
 						<button data-target="delete-modal" class="waves-effect waves-light btn modal-trigger red lighten-2" ng-cloak>
-							<i class="material-icons left">delete_forever</i>{{'delete_project' | translate}}
+							<i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">delete_forever</i>{{'delete_project' | translate}}
 						</button>
 					</div>
 				</div>
@@ -184,7 +184,7 @@
 					<!-- submission -->
 					<div align="center">
 						<button data-target="active-modal" class="waves-effect waves-light btn modal-trigger blue" ng-cloak>
-							<i class="material-icons left">assignment_turned_in</i>{{'mark_project_as_active' | translate}}
+							<i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">assignment_turned_in</i>{{'mark_project_as_active' | translate}}
 						</button>
 						<br/>
 						<br/>

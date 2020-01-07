@@ -226,7 +226,7 @@ angular.module( 'ngmReportHub' )
 						'search': true,
 						'id': 'search-org',
 						'icon': 'people',
-						'title': 'Organization',
+						'title': 'organization',//'Organization',
 						'class': 'teal lighten-1 white-text',
 						'rows': listOrg
 					};
@@ -286,7 +286,7 @@ angular.module( 'ngmReportHub' )
 							'search': true,
 							'id': 'search-sector',
 							'icon': 'camera',
-							'title': 'Sector',
+							'title': 'sector_mayus',//'Sector',
 							'class': 'teal lighten-1 white-text',
 							'rows': sectorRows
 						}
@@ -553,7 +553,10 @@ angular.module( 'ngmReportHub' )
 								card: 'white grey-text text-darken-2',
 								style: 'padding: 20px;',
 								config: {
-									html: '<a class="btn-flat waves-effect waves-teal left hide-on-small-only" href="' + $scope.report.getOrganizationHref() + '"><i class="material-icons left">keyboard_return</i>'+$filter('translate')('back_to_organization')+'</a><a class="waves-effect waves-light btn right" href="' + $scope.report.newProjectUrl + '"><i class="material-icons left">add_circle_outline</i>'+$filter('translate')('add_new_project')+'</a>'
+									// html: '<a class="btn-flat waves-effect waves-teal left hide-on-small-only" href="' + $scope.report.getOrganizationHref() + '"><i class="material-icons left">keyboard_return</i>'+$filter('translate')('back_to_organization')+'</a><a class="waves-effect waves-light btn right" href="' + $scope.report.newProjectUrl + '"><i class="material-icons left">add_circle_outline</i>'+$filter('translate')('add_new_project')+'</a>'
+									orgHref: $scope.report.getOrganizationHref(),
+									newProject: $scope.report.newProjectUrl,
+									templateUrl: '/scripts/widgets/ngm-html/template/cluster.project.project.btn.html'
 								}
 							}]
 						}]
@@ -586,9 +589,10 @@ angular.module( 'ngmReportHub' )
 									// color: 'teal lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('active_projects'),
+									title: 'active_projects',//$filter('translate')('active_projects'),
 									icon: 'edit',
-									request: $scope.report.getProjectRequest( 'active' )
+									request: $scope.report.getProjectRequest( 'active' ),
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]
@@ -603,9 +607,10 @@ angular.module( 'ngmReportHub' )
 									// color: 'lime lighten-4',
 									color: 'blue lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('completed_projects'),
+									title: 'completed_projects',//$filter('translate')('completed_projects'),
 									icon: 'done',
-									request: $scope.report.getProjectRequest( 'complete' )
+									request: $scope.report.getProjectRequest( 'complete' ),
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]

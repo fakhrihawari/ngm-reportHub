@@ -1,12 +1,12 @@
 
 		<!--  -->
-		<div class="col s12 m2" style="text-align:right;">
+		<div class="col s12 m2" ng-class="{text_align_right:!Language.isRtl(),'text_align_left':Language.isRtl()}">
 			<p style="font-size:16px; padding-top:26px;">{{ ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'activity_date' ] }}</p>
 		</div>
 
 		<!-- input-date directive -->
 		<div class="input-field col s12 m5">
-			<label for="ngm-activity-start-date-{{ $locationIndex }}-{{ $beneficiaryIndex }}">Start Date</label>
+			<label for="ngm-activity-start-date-{{ $locationIndex }}-{{ $beneficiaryIndex }}">{{'start_date' | translate}}</label>
 			<input ngm-date
 							type="text"
 							name="ngm-activity-start-date"
@@ -21,7 +21,7 @@
 
 		<!-- input-date directive -->
 		<div class="input-field col s12 m5">
-			<label for="ngm-activity-end-date-{{ $locationIndex }}-{{ $beneficiaryIndex }}">End Date</label>
+			<label for="ngm-activity-end-date-{{ $locationIndex }}-{{ $beneficiaryIndex }}">{{'end_date' | translate}}</label>
 			<input ngm-date
 							type="text"
 							name="ngm-activity-end-date"

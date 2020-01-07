@@ -207,6 +207,7 @@
        "5wdashboard":"5W DASHBOARD",
        "5W":"5W",
        "5WDASHBOARD_mayus":"5w DASHBOARD",
+       "dashboard_dropdown": "DASHBOARD",
        "province":"Departamento",
        "province_mayus":"DEPARTAMENTO",
        "all_provinces":"Todos los Departamentos",
@@ -223,6 +224,7 @@
        "services_to_beneficiaries":"Servicios a Beneficiarios",
        "individual_beneficiaries":"Beneficiarios individuales",
        "reset":"Restaurar",
+       "reset_dashboard": "Restaurar DASHBOARD",
        "back_to_team":"Regresar a Equipo",
 
        "all_mayus":"TODO",
@@ -241,6 +243,7 @@
        "desactivated_users":"Usuarios Desactivados",
        "name_mayus":"Nombre",
        "update_photo":"Actualizar Foto",
+       "active_partners": "Active Partners",
         "project_details":"Detalles del Proyecto",
         "project_plan":"Proyecto",
         "project_title":"Título del Proyecto",
@@ -306,6 +309,7 @@
         "target_population":"Población Objetivo",
         "project_target_locations":"Ubicaciones Objetivo del Proyecto",
          "select_focal_point_of_your_project_in_the_form_below":"Seleccione el PUNTO FOCAL de su PROYECTO en el siguiente formulario",
+         "focal_point": "Punto Focal",
          "enter_the_target_beneficiaries_of_your_project_in_the_form_below":"Ingrese los BENEFICIARIOS OBJETIVO de su PROYECTO en el siguiente formulario",
          "save_project":"Guardar Proyecto",
          "minimize":"Minimizar",
@@ -397,6 +401,8 @@
          "yes_remove_beneficiary":"Si, Eliminar Beneficiario",
          "people_in_need_saved":"Personas con Necesidades Guardadas!",
          "project_status_updated":"Estado del Proyecto Actualizado!",
+         "total_reports_due": "Total de informes vencidos",
+         "outstanding_reports":"Informes pendientes",
 
 
          "remove_borehole":"Eliminar Pozo",
@@ -435,6 +441,7 @@
          "reports_due":"Reportes Pendiente",
          "reports_total":"Total Reportes",
          "reports_saved":"Reportes Salvados",
+         "sector_mayus": "Sector",
          "download_projects_financials_as_csv":"Descargar Proyectos Financieros como CSV",
          "download_beneficiary_data_as_csv":"Descargar Datos de Beneficiarios como CSV",
          "download_stock_data_as_csv":"Descargar Datos de Stock como CSV",
@@ -486,7 +493,7 @@
 
          "total_projects":"Total Proyectos",
          "total_beneficiaries_population":"Total Beneficiarios Poblacionales",
-         "total_financing":"Total Financiamiento",
+         "total_financing":"Total Financiamiento US$",
          "financing_mayus":"FINANCIAMIENTO",
 
          "warehouses_total":"Warehouses",
@@ -551,6 +558,7 @@
         "treatment_same_province":"Tratamiento en la Misma Provincia",
         "edit":"Editar",
         "region":"REGIÓN",
+        "cluster": "Cluster",
         "add_activities":"Agregar Actividad",
 
 
@@ -871,6 +879,8 @@
         "stock_report":"Reporte de Stock",
         "donwload_monthly_stock_report_as_csv":"Descargar Reporte Mensual de Stock como CSV",
         "in":"en",
+        "no_in_stock": "No. en Stock",
+        "no_in_pipeline": "No. en Transporte",
         "monthly_stock_report_for":"Reporte Mensual de Stock para",
         "stock_reports_for":"Reportes de Stock para",
         "stock_reports_todo":"Reportes de Stock para Realizar",
@@ -888,6 +898,8 @@
         "nutrition_weekly_assessment":"Evaluación Semanal Nutrición",
         "complete_survey":"Completar Encuesta",
         "nutrition_admin_dashboard":"Dashboard Administración de Nutrición",
+        "go_to_nutrition_admin_dashboard": "Ir al panel de administración",
+        "go_to_nutrition_dashboard": "Ir al panel de control de nutrición",
         "new_mayus1":"Nuevo",
         "please_complete_an_assessment_in_the_form_below":"Por favor complete una evaluación en el siguiente formulario",
         "form":"formulario",
@@ -904,6 +916,7 @@
         "year_end_totals":"TOTALES DE FIN DE AÑO",
 
         "report_week":"Reporte Semanal",
+        "week": "Semana",
         "nutrition_mayus":"NUTRICIÓN",
         "monitoring_assesment":"Evaluación de Monitoreo",
         "view":"Ver",

@@ -80,7 +80,7 @@ angular.module('ngmReportHub')
 					'search': true,
 					'id': 'search-region',
 					'icon': 'person_pin',
-					'title': $filter('translate')('region'),
+					'title': 'region',//$filter('translate')('region'),
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': 'HQ',
@@ -359,7 +359,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-afro',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Democratic Republic of Congo',
@@ -391,7 +391,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-emro',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Afghanistan',
@@ -423,7 +423,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-searo',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Bangladesh',
@@ -443,7 +443,7 @@ angular.module('ngmReportHub')
 									'search': true,
 									'id': 'search-amer',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
@@ -490,7 +490,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster-cluster',
 							'icon': 'camera',
-							'title': 'Cluster',
+							'title': 'cluster',//'Cluster',
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});
@@ -600,7 +600,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-organization',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('organization'),
+								'title': 'organization',//$filter('translate')('organization'),
 								'class': 'teal lighten-1 white-text',
 								'rows': orgRows
 							});
@@ -827,7 +827,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('individual_households'),
+								title: 'individual_households',//$filter('translate')('individual_households'),
 								request: $scope.dashboard.getRequest({ indicator: 'households_population' })
 							}
 						}]
@@ -838,7 +838,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('individual_beneficiaries'),
+								title: 'individual_beneficiaries',//$filter('translate')('individual_beneficiaries'),
 								request: $scope.dashboard.getRequest({ indicator: 'beneficiaries_population' })
 							}
 						}]
@@ -849,7 +849,7 @@ angular.module('ngmReportHub')
 							style: 'text-align: center;',
 							card: 'card-panel stats-card white grey-text text-darken-2',
 							config: {
-								title: $filter('translate')('services_to_beneficiaries'),
+								title: 'services_to_beneficiaries',//$filter('translate')('services_to_beneficiaries'),
 								request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
 							}
 						}]
@@ -863,13 +863,18 @@ angular.module('ngmReportHub')
 								style: 'text-align: center;',
 								card: 'card-panel stats-card white grey-text text-darken-2',
 								config: {
-									title: $filter('translate')('services_to_beneficiaries'),
+									title: 'services_to_beneficiaries',//$filter('translate')('services_to_beneficiaries'),
 									request: $scope.dashboard.getRequest({ indicator: 'beneficiaries' })
 								}
 							}]
 						}]						
 					}
 
+					// RTL
+					// $scope.rtlClass = false;
+					// if ($translate.use() === 'prs') {
+					// 	$scope.rtlClass = true;
+					// }
 					// model
 					$scope.model = {
 						name: 'cluster_dashboard',
@@ -940,7 +945,8 @@ angular.module('ngmReportHub')
 									config: {
 										id: 'dashboard-btn',
 										request: $scope.dashboard.getRequest( { indicator: 'latest_update' } ),
-										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/cluster.dashboard.html',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -952,7 +958,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('active_organizations'),
+										title: 'active_organizations',//$filter('translate')('active_organizations'),
 										request: $scope.dashboard.getRequest( { indicator: 'organizations' } )
 									}
 								}]
@@ -963,7 +969,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('active_projects'),
+										title: 'active_projects',//$filter('translate')('active_projects'),
 										request: $scope.dashboard.getRequest( { indicator: 'projects' } )
 									}
 								}]
@@ -979,7 +985,7 @@ angular.module('ngmReportHub')
 									card: 'card-panel chart-stats-card white grey-text text-darken-2',
 									config: {
 										title: {
-											text: $filter('translate')('children'),
+											text: 'children',//$filter('translate')('children'),
 										},
 										display: {
 											label: true,
@@ -1020,7 +1026,8 @@ angular.module('ngmReportHub')
 												},
 												request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for:'children'})												
 																						}]
-										}
+										},
+										rtlEvent: 'rtl'
 									}
 								}]
 							},{
@@ -1031,7 +1038,7 @@ angular.module('ngmReportHub')
 									card: 'card-panel chart-stats-card white grey-text text-darken-2',
 									config: {
 										title: {
-											text: $filter('translate')('adult')
+											text: 'adult',//$filter('translate')('adult')
 										},
 										display: {
 											label: true,
@@ -1072,7 +1079,8 @@ angular.module('ngmReportHub')
 												},
 												request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'adult' })												
 											}]
-										}
+										},
+										rtlEvent: 'rtl'
 									}
 								}]
 							},{
@@ -1083,7 +1091,7 @@ angular.module('ngmReportHub')
 									card: 'card-panel chart-stats-card white grey-text text-darken-2',
 									config: {
 										title: {
-											text: $filter('translate')('elderly')
+											text: 'elderly',//$filter('translate')('elderly')
 										},
 										display: {
 											label: true,
@@ -1124,7 +1132,8 @@ angular.module('ngmReportHub')
 												},
 												request: $scope.dashboard.getRequest({ indicator: 'pieChart', chart_for: 'elderly' })												
 											}]
-										}
+										},
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1136,7 +1145,10 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_locations')+'</h2>'
+										// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_locations')+'</h2>',
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'project_locations',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1148,7 +1160,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('active_locations'),
+										title: 'active_locations',//$filter('translate')('active_locations'),
 										request: $scope.dashboard.getRequest( { indicator: 'locations' } )
 									}
 								}]

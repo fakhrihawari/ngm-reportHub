@@ -84,7 +84,7 @@ angular.module('ngmReportHub')
 				menu: [{
 					'id': 'search-region',
 					'icon': 'person_pin',
-					'title': $filter('translate')('region'),
+					'title': 'region',//$filter('translate')('region'),
 					'class': 'teal lighten-1 white-text',
 					'rows': [{
 						'title': 'HQ',
@@ -434,7 +434,7 @@ angular.module('ngmReportHub')
 								'afro': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Democratic Republic of Congo',
@@ -465,7 +465,7 @@ angular.module('ngmReportHub')
 								'emro': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Afghanistan',
@@ -496,7 +496,7 @@ angular.module('ngmReportHub')
 								'searo': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
 										'title': 'Bangladesh',
@@ -515,7 +515,7 @@ angular.module('ngmReportHub')
 								'amer': {
 									'id': 'search-country',
 									'icon': 'person_pin',
-									'title': $filter('translate')('country'),
+									'title': 'country',//$filter('translate')('country'),
 
 									'class': 'teal lighten-1 white-text',
 									'rows': [{
@@ -602,7 +602,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster-year',
 							'icon': 'date_range',
-							'title': $filter('translate')('year'),
+							'title': 'year',//$filter('translate')('year'),
 							'class': 'teal lighten-1 white-text',
 							'rows': yearRows
 						});
@@ -626,7 +626,7 @@ angular.module('ngmReportHub')
 							'search': true,
 							'id': 'search-cluster-cluster',
 							'icon': 'camera',
-							'title': 'Cluster',
+							'title': 'cluster',//'Cluster',
 							'class': 'teal lighten-1 white-text',
 							'rows': clusterRows
 						});
@@ -654,7 +654,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-organization',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('executor'),
+								'title': 'executor',//$filter('translate')('executor'),
 								'class': 'teal lighten-1 white-text',
 								'rows': orgRows
 							});
@@ -705,7 +705,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-implementingpartners',
 								'icon': 'people',
-								'title': $filter('translate')('implementer'),
+								'title': 'implementer',//$filter('translate')('implementer'),
 								'class': 'teal lighten-1 white-text',
 								'rows': implementingPartnersRows
 							});
@@ -764,7 +764,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-donorsproject',
 								'icon': 'attach_money',
-								'title': $filter('translate')('donor'),
+								'title': 'donor',//$filter('translate')('donor'),
 								'class': 'teal lighten-1 white-text',
 								'rows': donorsRows
 							});
@@ -818,7 +818,7 @@ angular.module('ngmReportHub')
 								'search': true,
 								'id': 'search-cluster-activitytype',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('activity_type'),
+								'title': 'activity_type',//$filter('translate')('activity_type'),
 								'class': 'teal lighten-1 white-text',
 								'rows': activitiesRows
 							});
@@ -871,7 +871,7 @@ angular.module('ngmReportHub')
 								'search': false,
 								'id': 'search-cluster-projecttypecomponent',
 								'icon': 'supervisor_account',
-								'title': $filter('translate')('project_type'),
+								'title': 'project_type',//$filter('translate')('project_type'),
 								'class': 'teal lighten-1 white-text',
 								'rows': project_type_componentRows
 							});
@@ -1284,7 +1284,8 @@ angular.module('ngmReportHub')
 									config: {
 										id: 'dashboard-btn',
 										request: $scope.dashboard.getRequest( { indicator: 'latest_update' } ),
-										templateUrl: '/scripts/widgets/ngm-html/template/cluster.4wplusdashboard.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/cluster.4wplusdashboard.html',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1298,7 +1299,7 @@ angular.module('ngmReportHub')
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
 										//title: $filter('translate')('projects_mayus1'),
-										title: $filter('translate')('projects_number'),
+										title: 'projects_number',//$filter('translate')('projects_number'),
 										request: $scope.dashboard.getRequest( { indicator: 'projects_4wplusdashboard' } )
 									}
 								}]
@@ -1310,7 +1311,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('population_beneficiaries'),
+										title: 'population_beneficiaries',//$filter('translate')('population_beneficiaries'),
 										request: $scope.dashboard.getRequest( { indicator: 'beneficiaries_4wplusdashboard' } )
 									}
 								}]
@@ -1322,39 +1323,68 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('total_financing')+' (US$)',
+										title: 'total_financing_with_dollar',//$filter('translate')('total_financing')+' (US$)',
 										request: $scope.dashboard.getRequest( { indicator: 'budgetprogress_4wplusdashboard' } )
 									}
 								}]
 							},
-							{
-								styleClass: 's12 m4 l6',
-								widgets: [{
-									type: 'stats',
-									style: 'text-align: center;',
-									card: 'card-panel stats-card white grey-text text-darken-2',
-									config: {
-										//title: $filter('translate')('organizations'),
-										title: $filter('translate')('number_executing_agencies'),
-										request: $scope.dashboard.getRequest( { indicator: 'organizations_4wplusdashboard' } )
-									}
-								}]
-							},
-							{
-								styleClass: 's12 m4 l6',
-						     	widgets: [{
-									type: 'stats',
-									style: 'text-align: center;',
-									card: 'card-panel stats-card white grey-text text-darken-2',
-									config: {
-										//title: $filter('translate')('other_implementing_partners'),
-										title: $filter('translate')('number_implementing_agencies'),
-										request: $scope.dashboard.getRequest({ indicator: 'total_implementing_partners_4wplus' })
-							        }
-						        }]
-							}
+							// {
+							// 	styleClass: 's12 m4 l6',
+							// 	widgets: [{
+							// 		type: 'stats',
+							// 		style: 'text-align: center;',
+							// 		card: 'card-panel stats-card white grey-text text-darken-2',
+							// 		config: {
+							// 			//title: $filter('translate')('organizations'),
+							// 			title: 'number_executing_agencies',//$filter('translate')('number_executing_agencies'),
+							// 			request: $scope.dashboard.getRequest( { indicator: 'organizations_4wplusdashboard' } )
+							// 		}
+							// 	}]
+							// },
+							// {
+							// 	styleClass: 's12 m4 l6',
+						    //  	widgets: [{
+							// 		type: 'stats',
+							// 		style: 'text-align: center;',
+							// 		card: 'card-panel stats-card white grey-text text-darken-2',
+							// 		config: {
+							// 			//title: $filter('translate')('other_implementing_partners'),
+							// 			title: 'number_implementing_agencies',//$filter('translate')('number_implementing_agencies'),
+							// 			request: $scope.dashboard.getRequest({ indicator: 'total_implementing_partners_4wplus' })
+							//         }
+						    //     }]
+							// }
 
 							
+							]
+						},{
+							columns:[
+								{
+									styleClass: 's12 m4 l6',
+									widgets: [{
+										type: 'stats',
+										style: 'text-align: center;',
+										card: 'card-panel stats-card white grey-text text-darken-2',
+										config: {
+											//title: $filter('translate')('organizations'),
+											title: 'number_executing_agencies',//$filter('translate')('number_executing_agencies'),
+											request: $scope.dashboard.getRequest({ indicator: 'organizations_4wplusdashboard' })
+										}
+									}]
+								},
+								{
+									styleClass: 's12 m4 l6',
+									widgets: [{
+										type: 'stats',
+										style: 'text-align: center;',
+										card: 'card-panel stats-card white grey-text text-darken-2',
+										config: {
+											//title: $filter('translate')('other_implementing_partners'),
+											title: 'number_implementing_agencies',//$filter('translate')('number_implementing_agencies'),
+											request: $scope.dashboard.getRequest({ indicator: 'total_implementing_partners_4wplus' })
+										}
+									}]
+								}
 							]
 						}/*,{
 							columns: $scope.dashboard.beneficiaries_row
@@ -1524,7 +1554,10 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_locations')+'</h2>'
+										// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">'+$filter('translate')('project_locations')+'</h2>'
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'project_locations',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -1536,7 +1569,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: $filter('translate')('project_locations'),
+										title: 'project_locations',//$filter('translate')('project_locations'),
 										request: $scope.dashboard.getRequest( { indicator: 'locations_4wplusDashboard' } )
 									}
 								}]

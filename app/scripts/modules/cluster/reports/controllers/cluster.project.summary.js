@@ -73,6 +73,11 @@ angular.module('ngmReportHub')
 				var text = $filter('translate')('actual_monthly_progress_report_for')+' ' + $scope.report.project.project_title
 				var subtitle = $scope.report.project.project_code ?  $scope.report.project.project_code + ' - ' + $scope.report.project.project_description : $scope.report.project.project_description;				
 				
+				// RTL
+				// $scope.rtlClass = false;
+				// if ($translate.use() === 'prs') {
+				// 	$scope.rtlClass = true;
+				// }
 				// report dashboard model
 				$scope.model = {
 					name: 'cluster_project_summary',
@@ -99,7 +104,11 @@ angular.module('ngmReportHub')
 								card: 'white grey-text text-darken-2',
 								style: 'padding: 20px;',
 								config: {
-									html: '<a class="btn-flat waves-effect waves-teal left" href="' + $scope.report.getProjectsHref() + '"><i class="material-icons left">keyboard_return</i>'+$filter('translate')('back_to_projects')+'</a><span class="right" style="padding-top:8px;">'+$filter('translate')('last_updated')+': ' + moment( $scope.report.project.updatedAt ).format( 'DD MMMM, YYYY @ h:mm:ss a' ) + '</span>'
+									// html: '<a class="btn-flat waves-effect waves-teal left" href="' + $scope.report.getProjectsHref() + '"><i class="material-icons left">keyboard_return</i>'+$filter('translate')('back_to_projects')+'</a><span class="right" style="padding-top:8px;">'+$filter('translate')('last_updated')+': ' + moment( $scope.report.project.updatedAt ).format( 'DD MMMM, YYYY @ h:mm:ss a' ) + '</span>'
+									projHref: $scope.report.getProjectsHref(),
+									dateUpdate: moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a'),
+									templateUrl: '/scripts/widgets/ngm-html/template/cluster.project.summary.btn.html',
+									rtlEvent: 'rtl'
 								}
 							}]
 						}]
@@ -113,6 +122,7 @@ angular.module('ngmReportHub')
 								config: {
 									project: $scope.report.project,
 									user: $scope.report.user,
+									rtlEvent: 'rtl',
 									report_date: moment().subtract( 1, 'M').endOf( 'M' ).format('YYYY-MM-DD'),
 									templateUrl: '/scripts/modules/cluster/views/cluster.project.summary.html',
 

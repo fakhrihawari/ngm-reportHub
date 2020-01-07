@@ -3,13 +3,13 @@
     <div class="card">
       <ul class="collection with-header">
         
-        <li class="collection-header teal lighten-4">
+        <li class="collection-header teal lighten-4" ng-class="{'language-rtl':Language.isRtl()}">
           <h5 class="report-work-title">
-            <i class="material-icons left">attach_money</i>{{'project_budget_progress' | translate}}
+            <i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">attach_money</i>{{'project_budget_progress' | translate}}
           </h5>
         </li>
 
-        <li class="collection-item avatar">
+        <li class="collection-item avatar" ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">
 
           <p style="padding:10px;">
             {{'add_new_row_of_financial_details_to_your_project_for_each_payment_recieved' | translate}};
@@ -19,7 +19,7 @@
             <div class="col s12 card">
               <div style="padding-top: 10px; padding-left: 40px;">
 
-                <table class="bordered responsive-table" ng-show="project.definition.project_budget_progress.length">
+                <table class="bordered responsive-table" ng-show="project.definition.project_budget_progress.length" ng-class="{'tableRtl':Language.isRtl()}">
                   <tr style="font-weight: 400">
                     <td>{{'donor'|translate}}*</td>
                     <td>{{'activity' | translate}}*</td>
@@ -225,7 +225,7 @@
                 </table>
 
                 <button class="btn" ng-show="project.definition.project_status !== 'complete'" ng-click="project.addBudgetItem()" style="margin:20px 0px;">
-                  <i class="material-icons left">add</i>{{'add_row' | translate}}
+                  <i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">add</i>{{'add_row' | translate}}
                 </button>
 
               </div>

@@ -206,7 +206,9 @@ angular.module('ngmReportHub')
 									config: {
 										id: 'dashboard-btn',
 										request: { method: 'GET', url: ngmAuth.LOCATION + '/api/epr/latestUpdate' },
-										templateUrl: '/scripts/widgets/ngm-html/template/epr.dashboard.html'
+										templateUrl: '/scripts/widgets/ngm-html/template/epr.dashboard.html',
+										rtlEvent: 'rtl'
+
 									}
 								}]
 							}]
@@ -218,7 +220,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'EPR Reports',
+										title: 'epr_reports',//'EPR Reports',
 										request: ngmEprHelper.getRequest( 'epr/indicator', 'submitted_reports', false )
 									}
 								}]
@@ -231,7 +233,10 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">ALERTS</h2>'
+										// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">ALERTS</h2>'
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'alerts',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -243,7 +248,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Alerts',
+										title: 'alerts',//'Alerts',
 										request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'total', false )
 									}
 								}]
@@ -254,7 +259,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Cases',
+										title: 'cases',//'Cases',
 										request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'cases', false )
 									}
 								}]
@@ -265,7 +270,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Deaths',
+										title: 'deaths',//'Deaths',
 										request: ngmEprHelper.getRequest( 'epr/alerts/indicator', 'deaths', false )
 									}
 								}]
@@ -319,7 +324,10 @@ angular.module('ngmReportHub')
 									card: 'card-panel',
 									style: 'padding:0px;',
 									config: {
-										html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">INCIDENTS</h2>'
+										// html: '<h2 class="col s12 report-title" style="margin-top: 20px; padding-bottom: 5px; font-size: 3.0rem; color: #2196F3; border-bottom: 3px #2196F3 solid;">INCIDENTS</h2>'
+										templateUrl: '/scripts/widgets/ngm-html/template/separator_title.html',
+										title: 'incidents',
+										rtlEvent: 'rtl'
 									}
 								}]
 							}]
@@ -331,7 +339,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Incidents',
+										title: 'incidents',//'Incidents',
 										request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'total', false )
 									}
 								}]
@@ -353,7 +361,7 @@ angular.module('ngmReportHub')
 									style: 'text-align: center;',
 									card: 'card-panel stats-card white grey-text text-darken-2',
 									config: {
-										title: 'Deaths',
+										title: 'deaths',//'Deaths',
 										request: ngmEprHelper.getRequest( 'epr/disasters/indicator', 'deaths', false )
 									}
 								}]

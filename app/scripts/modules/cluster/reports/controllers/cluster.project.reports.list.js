@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ClusterProjectReportsListCtrl', ['$scope', '$route', '$location', '$anchorScroll', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser','$translate','$filter', function ($scope, $route, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser,$translate,$filter) {
+	.controller('ClusterProjectReportsListCtrl', ['$scope', '$route', '$location', '$anchorScroll', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', 'Language', function ($scope, $route, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter, Language) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -41,7 +41,20 @@ angular.module('ngmReportHub')
 										+'</div>'
 									+'</div>';
 
-				return html;
+				var html_rtl = '<div class="row">'
+					+ '<div class="col s12 m12 l12">'
+					+ '<div style="padding:20px;">'
+					+ '<a class="btn-flat waves-effect waves-teal" href="#/cluster/projects/summary/' + $scope.report.project.id + '">'
+					+ '<i class="material-icons left">keyboard_return</i>' + $filter('translate')('back_to_project_summary')
+					+ '</a>'
+					+ '<span class="right" style="padding-top:8px;">&#x202a;' + moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a') + '&#x202c; :' + $filter('translate')('last_updated') + '</span>'
+					+ '</div>'
+					+ '</div>'
+					+ '</div>';
+
+				// return html;
+				// return $scope.rtlClass ? html_rtl : html;
+				$scope.Language.isRtl() ? html_rtl : html;
 			},
 
 			// return default template or Somalia template
@@ -95,6 +108,14 @@ angular.module('ngmReportHub')
 				// add project code to subtitle?
 				var text = $filter('translate')('actual_monthly_beneficiaries_report_for')+' ' + $scope.report.project.project_title
 				var subtitle = $scope.report.project.project_code ?  $scope.report.project.project_code + ' - ' + text : text;
+
+				// RTL
+				// $scope.rtlClass = false;
+				// if ($translate.use() === 'prs') {
+				// 	$scope.rtlClass = true;
+				// }
+
+				$scope.Language = Language;
 
 				// report dashboard model
 				$scope.model = {
@@ -151,7 +172,11 @@ angular.module('ngmReportHub')
 							widgets: [{
 								type: 'html',
 								config: {
-									html: $scope.report.getHeaderHtml()
+									// html: $scope.report.getHeaderHtml(),
+									projHref: '#/cluster/projects/summary/' + $scope.report.project.id,
+									dateUpdate: moment($scope.report.project.updatedAt).format('DD MMMM, YYYY @ h:mm:ss a'),
+									templateUrl: '/scripts/widgets/ngm-html/template/cluster.reportlist.btn.html',
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]
@@ -165,7 +190,7 @@ angular.module('ngmReportHub')
 									titleIcon: 'alarm_on',
 									color: 'indigo lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('progress_update_todo'),
+									title: 'progress_update_todo',//$filter('translate')('progress_update_todo'),
 									hoverTitle: $filter('translate')('update'),
 									icon: 'edit',
 									rightIcon: 'watch_later',
@@ -179,7 +204,8 @@ angular.module('ngmReportHub')
 										data: {
 											filter: $scope.report.getReportFilter({ project_id: $scope.report.project.id, report_active: true, report_status: 'todo' })
 										}
-									}
+									},
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]
@@ -193,7 +219,7 @@ angular.module('ngmReportHub')
 									titleIcon: 'done_all',
 									color: 'indigo lighten-1',
 									textColor: 'white-text',
-									title: $filter('translate')('progress_update_complete'),
+									title: 'progress_update_complete',//$filter('translate')('progress_update_complete'),
 
 									hoverTitle: $filter('translate')('view'),
 
@@ -209,7 +235,8 @@ angular.module('ngmReportHub')
 										data: {
 											filter: $scope.report.getReportFilter({ project_id: $scope.report.project.id, report_active: true, report_status: 'complete' })
 										}
-									}
+									},
+									rtlEvent: 'rtl',
 								}
 							}]
 						}]						

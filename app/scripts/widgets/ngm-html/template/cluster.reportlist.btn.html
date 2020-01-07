@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col s12 m12 l12" style="padding-top:20px;padding-bottom: 20px;">
+        <div style="padding-left: 20px; padding-right: 20px;">
+            <a class="btn-flat waves-effect waves-teal left" href="{{panel.projHref}}">
+                <i class="material-icons left">keyboard_return</i>{{'back_to_project_summary'| translate}}
+            </a>
+            <span ng-if="!Language.isRtl()" class="right" style="padding-top:8px;">{{'last_updated' | translate}}: &#x202a;
+                {{panel.dateUpdate}} &#x202c; </span>
+            <span ng-if="Language.isRtl()" class="right" style="padding-top:8px;">&#x202a; {{panel.dateUpdate}} &#x202c;
+                :{{'last_updated' | translate}}</span>
+        </div>
+
+    </div>
+</div>

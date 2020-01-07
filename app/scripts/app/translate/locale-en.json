@@ -172,7 +172,7 @@
               "5wdashboard":"5W DASHBOARD",
               "5W":"5W",
               "5WDASHBOARD_mayus":"5W DASHBOARD",
-
+       "dashboard_dropdown": "DASHBOARD",
        "province":"Province",
               "province_mayus":"PROVINCE",
 
@@ -189,6 +189,7 @@
        "services_to_beneficiaries":"Services to Beneficiaries",
        "individual_beneficiaries":"Individual Beneficiaries",
        "reset":"Reset",
+       "reset_dashboard":"RESET DASHBOARD",
        "back_to_team":"Back to Team",
 
        "all_mayus":"ALL",
@@ -208,6 +209,7 @@
         "name_mayus":"Name",
         "update_photo":"Update Photo",
         "active_staff":"Active Staff",
+        "active_partners": "Active Partners",
         "project_details":"Project Details",
         "project_plan":"Project Plan",
         "project_title":"Project Title",
@@ -282,6 +284,7 @@
         "target_beneficiary_removed":"People in Need Target Removed!",
         "minimize":"Minimize",
         "click_expand":"Click to Expand",
+        "focal_point": "Focal Point",
 
         "do_you_want_to_save_this_project":"Do you want to Save this project",
         "yes":"Yes",
@@ -358,6 +361,8 @@
          "reports_timeline":"Reports Timeline",
          "reports_submitted":"Reports Submitted",
          "project_report_for":"Project Report for",
+         "total_reports_due": "Total Reports Due",
+         "outstanding_reports":"Outstanding Reports",
 
          "project_budget_item_removed":"Project Budget Item Removed",
          "project_budget_item_added":"Project Budget Item Added",
@@ -560,6 +565,7 @@
         "countries_mayus":"Countries",
          "reports_completed":"Reports Completed",
          "reports_saved":"Reports Saved",
+         "sector_mayus" : "Sector",
 
 
         "organizations":"Organizations",
@@ -573,8 +579,9 @@
         "uploaded":"Upluaded",
         "total_projects":"Total Projects",
          "total_beneficiaries_population":"Total Population Beneficiaries",
-         "total_financing":"Total Financing",
+         "total_financing":"Total Financing US$",
          "financing_mayus":"FINANCING",
+         "total_financing_with_dollar_plan":"Total Financing US$",
 
 
         "warehouses_total":"Warehouses",
@@ -637,10 +644,13 @@
         "population_beneficiaries":"Population Beneficiaries",
         "number_executing_agencies":"Number of Executing Agencies",
         "number_implementing_agencies":"Number of Implementing Agencies",
+        "total_financing_with_dollar": "Total Financing (US$)",
 
         "treatment_same_province":"Treatment Same Province",
         "edit":"Edit",
         "region":"Region",
+        "cluster": "Cluster",
+        "clusters":"Clusters",
 
         "cholera_response":"Cholera Response",
         "activity_status":"Activity Status",
@@ -738,6 +748,13 @@
         "or":"or",
         "drought_affected_non_displaced": "Drought Affected Non Displaced",
         "flood_affected_non_displaced": "Flood Affected Non Displaced",
+        "drought_dashboard": " Drought Dashboard",
+        "drought_non_displaced": "Drought Non-Displaced",
+        "drought_displaced": "Drought Displaced",
+        "goto_dashboard": "Go to Dashboard",
+        "report_month":"Report Month",
+        "response_type":"Response Type",
+        "population_type":"Population Type",
         "selected_locations":"Selected Locations",
         "edit_report":"Edit Report",
         "please_enter_the_amount_per":"Please enter the amount per",
@@ -804,6 +821,8 @@
         "stock_report":"Stock Report",
         "donwload_monthly_stock_report_as_csv":"Download Monthly Stock Report as CSV",
         "in":"in",
+        "no_in_stock": "No. in Stock",
+        "no_in_pipeline": "No. in Pipleline",
         "monthly_stock_report_for":"Monthly Stock Report for",
         "stock_reports_for":"Stock Reports for",
         "stock_reports_todo":"Stock Reports ToDo",
@@ -827,6 +846,9 @@
         "nutrition_weekly_assessment":"Nutrition Weekly Assessment",
         "complete_survey":"Complete Survey",
         "nutrition_admin_dashboard":"Nutrition Admin Dashboard",
+        "nutrition_dashboard": "Nutrition Dashboard",
+        "go_to_nutrition_admin_dashboard":"Go To  Admin Dashboard",
+        "go_to_nutrition_dashboard": "Go To Nutrition Dashboard",
         "new_mayus1":"New",
         "please_complete_an_assessment_in_the_form_below":"Please complete an assessment in the form below",
         "form":"form",
@@ -841,6 +863,7 @@
         "activities":"Activities",
         "locations":"Locations",
         "report_week":"Report Week",
+        "week":"Week",
         "nutrition_mayus":"Nutrition",
         "monitoring_assesment":"Monitoring Assessment",
         "view":"View",
@@ -911,6 +934,17 @@
          "action":"Action",
          "the_action_you_were_performing_at_the_time_ie_adding_a_new_beneficiary":"The action you were performing at the time. i.e. 'Adding a new Beneficiary'",
          "any_error_messages_that_the_reporthub_displayed":"Any error messages that the ReportHub displayed",
-         "any_additional_description_of_the_error_that_will_prove_useful_ie_I_removed_a_location_and_then_added_a_new_location":"Any additional description of the error that will prove useful. i.e. 'I removed a location and then added a new location'"
+         "any_additional_description_of_the_error_that_will_prove_useful_ie_I_removed_a_location_and_then_added_a_new_location":"Any additional description of the error that will prove useful. i.e. 'I removed a location and then added a new location'",
+         
+         "outbreaks":"Outbreaks",
+         "individual_cases":"Individual Cases",
+         "deaths":"Deaths",
+         "disease":"Disease",
+         "outbreaks_trends": "Outbreaks - Trend",
+         "alerts":"Alerts",
+         "cases": "Cases",
+         "epr_reports": "EPR Reports ",
+         "incidents":"Incidents",
+         "casualties":"Casualties"
 
 }

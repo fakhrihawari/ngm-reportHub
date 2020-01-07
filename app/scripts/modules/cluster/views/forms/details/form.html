@@ -107,7 +107,9 @@
 				<i class="material-icons left">keyboard_return</i>{{'back_to_project_summary' | translate}}
 			</button>
 
-			<span class="right" style="padding-top:8px;">{{'last_updated' | translate}}: {{ project.updatedAt }}</span>
+			<!-- <span class="right" style="padding-top:8px;">{{'last_updated' | translate}}: {{ project.updatedAt }}</span> -->
+			<span ng-if="!Language.isRtl()"class="right" style="padding-top:8px;">{{'last_updated' | translate}}: {{ project.updatedAt }}</span>
+			<span ng-if="Language.isRtl()" class="right" style="padding-top:8px;">&#x202a;{{ project.updatedAt }} &#x202c; :{{'last_updated' | translate}}</span>
 
 		</div>
 	</div>
@@ -224,9 +226,9 @@
 				<div class="widget card-panel white grey-text text-darken-2">
 
 					<!-- submission -->
-					<div align="center">
+					<div align="center" ng-class="{'btn-rtl':Language.isRtl()}">
 						<button data-target="save-modal" class="waves-effect waves-light btn" ng-click="project.validate()" ng-disabled="!project.submit"
-							ng-cloak><i class="material-icons right">send</i>{{'save_mayus' | translate}}</button>
+							ng-cloak><i class="material-icons" ng-class="{'right':!Language.isRtl(),'left':Language.isRtl()}">send</i>{{'save_mayus' | translate}}</button>
 
 						<!-- cancel new -->
 						<button data-target="list-modal" class="waves-effect waves-light btn modal-trigger grey"
