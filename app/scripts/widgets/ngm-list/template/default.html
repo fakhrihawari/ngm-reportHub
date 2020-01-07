@@ -42,13 +42,13 @@
 <div>
 	<ul class="collection with-header z-depth-1">
 		<li class="collection-header {{ list.color }}" style="height:80px;">
-			<div class="col s12 m8" ng-class="{'right right-title':rtlClass}">
+			<div class="col s12 m8" ng-class="{'right right-title':Language.isRtl()}">
 				<h4 class="report-work-title {{ list.textColor }}" style="font-size:1.8rem;">
-					<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ list.titleIcon }}</i>{{ list.title | translate }}
+					<i class="material-icons " ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">{{ list.titleIcon }}</i>{{ list.title | translate }}
 				</h4>
 			</div>
-			<div ng-if="list.data.length > list.itemsPerPage" class="col s12 m4 " ng-class="{'left':rtlClass,'right':!rtlClass}">
-			  <nav class="nav-list-search " ng-class="{'focused':list.search.focused===true || list.search.filter,'left':rtlClass,'right':!rtlClass }">
+			<div ng-if="list.data.length > list.itemsPerPage" class="col s12 m4 " ng-class="{'left':Language.isRtl(),'right':!Language.isRtl()}">
+			  <nav class="nav-list-search " ng-class="{'focused':list.search.focused===true || list.search.filter,'left':Language.isRtl(),'right':!Language.isRtl() }">
 			    <div class="nav-wrapper" ng-click="list.toggleSearch()">
 			      <form>
 			        <div class="input-field">
@@ -90,10 +90,10 @@
 					<br/>
 
 					<!-- updated / submiteed -->
-					<div ng-if="list.title.indexOf('Active') !== -1" style="font-weight:400" ng-class="{'language-rtl-left':rtlClass}">
+					<div ng-if="list.title.indexOf('Active') !== -1" style="font-weight:400" ng-class="{'language-rtl-left':Language.isRtl()}">
 						{{'updated'|translate}}: &#x202a; {{ list.updatedAt( item.updatedAt ) }} &#x202c;
 					</div>
-					<div ng-if="list.title.indexOf('Complete') !== -1" style="font-weight:400" ng-class="{'language-rtl-left':rtlClass}">
+					<div ng-if="list.title.indexOf('Complete') !== -1" style="font-weight:400" ng-class="{'language-rtl-left':Language.isRtl()}">
 						{{'submitted'|translate}}: &#x202a; {{ list.updatedAt( item.updatedAt ) }} &#x202c;
 					</div>
 						

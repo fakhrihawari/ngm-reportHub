@@ -21,12 +21,12 @@
   <div class="col s12 m12 l12">
     <div class="card">
       <ul class="collection with-header">
-        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}" ng-class="{'right-title':rtlClass}"><i class="material-icons "ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>{{ table.headerTitle | translate }}</h5></li>
+        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}" ng-class="{'right-title':Language.isRtl()}"><i class="material-icons "ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">{{ table.headerIcon }}</i>{{ table.headerTitle | translate }}</h5></li>
         <li class="collection-item avatar" style="padding:10px;">
 
           <!-- if data -->
           <div ng-if="data.length">
-            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
+            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':Language.isRtl()}">
 
               <div id="delete-modal" class="modal">
                   <div class="modal-content">

@@ -86,14 +86,14 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
     <div class="card">
       <ul class="collection with-header">
         <li class="{{ table.headerClass }}" style="{{ table.headerStyle }};height:80px;">
-					<div class="col s12 m8" ng-class="{'right right-title':rtlClass}">
+					<div class="col s12 m8" ng-class="{'right right-title':Language.isRtl()}">
 						<h5 class="report-work-title {{ table.headerText }}">
-							<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>
+							<i class="material-icons " ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">{{ table.headerIcon }}</i>
 							{{ table.headerTitle | translate }}
 						</h5>
 					</div>
 					<div class="col s12 m4 right" ng-if="showSearch">
-						<nav class="nav-list-search " ng-class="{'focused':table.search.focused===true || table.search.filter,'left':rtlClass,'right':!rtlClass }">
+						<nav class="nav-list-search " ng-class="{'focused':table.search.focused===true || table.search.filter,'left':Language.isRtl(),'right':!Language.isRtl() }">
 							<div class="nav-wrapper" ng-click="table.toggleSearch()">
 								<form style="padding: 0px">
 									<div class="input-field">
@@ -112,7 +112,7 @@ input[type=text], input[type=text]:disabled, input[type=text]:focus, input[type=
 
           <!-- if data -->
           <div ng-if="data.length">
-            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
+            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':Language.isRtl()}">
               <tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
                 <td data-title="'country_mayus'|translate" sortable="'admin0name'" ng-click="table.onClick(row)">
                     {{ row.admin0name }}

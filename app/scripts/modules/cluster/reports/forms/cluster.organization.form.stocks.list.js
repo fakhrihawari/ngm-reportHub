@@ -32,6 +32,7 @@ angular.module( 'ngm.widget.organization.stocks.list', [ 'ngm.provider' ])
     'ngmLists',
     'config',
     '$translate',
+    'Language',
     function( $scope,
         $location,
         $timeout,
@@ -46,7 +47,8 @@ angular.module( 'ngm.widget.organization.stocks.list', [ 'ngm.provider' ])
         ngmClusterValidation,
         ngmLists,
         config,
-        $translate ){
+        $translate,
+        Language, ){
 
       // project
       $scope.report = {
@@ -203,18 +205,20 @@ angular.module( 'ngm.widget.organization.stocks.list', [ 'ngm.provider' ])
 
       }
       // RTL
-      $scope.rtlClass = false;
-      if ($translate.use() === 'prs') {
-        $scope.rtlClass = true;
-      }
-      $scope.$on('rtl', function (event, ready) {
-        if (ready) {
-          $scope.rtlClass = true;
+      // $scope.rtlClass = false;
+      // if ($translate.use() === 'prs') {
+      //   $scope.rtlClass = true;
+      // }
+      // $scope.$on('rtl', function (event, ready) {
+      //   if (ready) {
+      //     $scope.rtlClass = true;
 
-        } else {
-          $scope.rtlClass = false;
-        }
-      });
+      //   } else {
+      //     $scope.rtlClass = false;
+      //   }
+      // });
+
+      $scope.Language = Language;
   }
 
 ]);

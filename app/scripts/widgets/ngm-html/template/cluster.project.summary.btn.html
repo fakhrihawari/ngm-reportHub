@@ -1,7 +1,7 @@
 <a class="btn-flat waves-effect waves-teal left" href="{{panel.projHref}}">
     <i class="material-icons left">keyboard_return</i>{{'back_to_projects'| translate}}
 </a>
-<span ng-if="!rtlClass" class="right" style="padding-top:8px;">{{'last_updated' | translate}}: &#x202a;
+<span ng-if="!Language.isRtl()" class="right" style="padding-top:8px;">{{'last_updated' | translate}}: &#x202a;
     {{panel.dateUpdate}} &#x202c; </span>
-<span ng-if="rtlClass" class="right" style="padding-top:8px;">&#x202a; {{panel.dateUpdate}} &#x202c;
+<span ng-if="Language.isRtl()" class="right" style="padding-top:8px;">&#x202a; {{panel.dateUpdate}} &#x202c;
     :{{'last_updated' | translate}}</span>

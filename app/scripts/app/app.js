@@ -166,7 +166,7 @@ angular
 			// 	redirectTo: '/cluster/projects'
 			// });
 	}])
-	.run([ '$rootScope', '$window', '$location', 'ngmAuth', 'ngmUser', function( $rootScope, $window, $location, ngmAuth, ngmUser ) {
+	.run(['$rootScope', '$window', '$location', 'ngmAuth', 'ngmUser', 'Language', function ($rootScope, $window, $location, ngmAuth, ngmUser, Language ) {
 
 		// check session by last login
 		ngmAuth.setSessionTimeout( ngmUser.get() );
@@ -213,6 +213,8 @@ angular
 
 		});
 
+		$rootScope.Language = Language;
+
 	}])
 	.controller('ngmReportHubCrtl', ['$scope', '$route', '$location', '$http', '$timeout', 'ngmAuth', 'ngmUser','$window','$translate','$filter','$rootScope', function ($scope, $route, $location, $http, $timeout, ngmAuth, ngmUser,$window,$translate,$filter,$rootScope) {
 
@@ -250,10 +252,10 @@ angular
 			changeFunction: function( $key ) {
 			 	$translate.use( $key );
 				
-				$scope.ngm.rtlClass = false;
+				// $scope.ngm.rtlClass = false;
 				if ($key === 'prs') {
-						$rootScope.$broadcast('rtl', true);
-						$scope.ngm.rtlClass = true;
+						// $rootScope.$broadcast('rtl', true);
+						// $scope.ngm.rtlClass = true;
 						$(".ngm-menu-footer-body").html("<a class='grey-text' href='http://immap.org'><b>iMMAP </b></a>حما يت كننده")
 						$("#ngm-contact a").html("<i class='material-icons right' style='color:white;'>perm_contact_calendar</i>تماس");
 						$(".ngm-menu-footer-body").css({ "float": "right", "padding": "5px 10px 0px 0px" });
@@ -671,4 +673,24 @@ angular
 				obj[key] = undefined;
 			},
 		}
+	})
+
+	// service to RTL FLag
+	.factory('Language', function ($translate) {
+		//add the languages you support here. ar stands for arabic
+		var rtlLanguages = ['prs'];
+
+		var isRtl = function () {
+			var languageKey = $translate.proposedLanguage() || $translate.use();
+			for (var i = 0; i < rtlLanguages.length; i += 1) {
+				if (languageKey.indexOf(rtlLanguages[i]) > -1)
+					return true;
+			}
+			return false;
+		};
+
+		//public api
+		return {
+			isRtl: isRtl
+		};
 	});

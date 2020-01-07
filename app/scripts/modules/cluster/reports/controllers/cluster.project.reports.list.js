@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-	.controller('ClusterProjectReportsListCtrl', ['$scope', '$route', '$location', '$anchorScroll', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser','$translate','$filter', function ($scope, $route, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser,$translate,$filter) {
+	.controller('ClusterProjectReportsListCtrl', ['$scope', '$route', '$location', '$anchorScroll', '$timeout', 'ngmAuth', 'ngmData', 'ngmUser', '$translate', '$filter', 'Language', function ($scope, $route, $location, $anchorScroll, $timeout, ngmAuth, ngmData, ngmUser, $translate, $filter, Language) {
 		this.awesomeThings = [
 			'HTML5 Boilerplate',
 			'AngularJS',
@@ -53,7 +53,8 @@ angular.module('ngmReportHub')
 					+ '</div>';
 
 				// return html;
-				return $scope.rtlClass ? html_rtl : html;
+				// return $scope.rtlClass ? html_rtl : html;
+				$scope.Language.isRtl() ? html_rtl : html;
 			},
 
 			// return default template or Somalia template
@@ -109,10 +110,12 @@ angular.module('ngmReportHub')
 				var subtitle = $scope.report.project.project_code ?  $scope.report.project.project_code + ' - ' + text : text;
 
 				// RTL
-				$scope.rtlClass = false;
-				if ($translate.use() === 'prs') {
-					$scope.rtlClass = true;
-				}
+				// $scope.rtlClass = false;
+				// if ($translate.use() === 'prs') {
+				// 	$scope.rtlClass = true;
+				// }
+
+				$scope.Language = Language;
 
 				// report dashboard model
 				$scope.model = {

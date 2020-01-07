@@ -40,6 +40,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 		'ngmClusterDocument',
 		'config',
 		'$translate',
+		'Language',
 
 		function( 
 				$scope, 
@@ -64,7 +65,8 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				ngmCbBeneficiaries,
 				ngmClusterDocument,
 				config,
-				$translate ){
+				$translate,
+				Language){
 			// set to $scope
 			$scope.ngmClusterHelper = ngmClusterHelper;
 			$scope.ngmClusterBeneficiaries = ngmClusterBeneficiaries;
@@ -243,10 +245,11 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					}
 
 					// RTL
-					$scope.rtlClass = false;
-					if ($translate.use() === 'prs') {
-						$scope.rtlClass = true;
-					}
+					// $scope.rtlClass = false;
+					// if ($translate.use() === 'prs') {
+					// 	$scope.rtlClass = true;
+					// }
+					$scope.Language = Language;
 
 					// detailBeneficiaries
 					$scope.detailBeneficiaries = $scope.project.definition.target_beneficiaries.length ? 
@@ -927,13 +930,13 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				}					
 			});
 
-			$scope.$on('rtl', function (event, ready) {
-				if (ready) {
-					$scope.rtlClass = true;
-				} else {
-					$scope.rtlClass = false;
-				}
-			});
+			// $scope.$on('rtl', function (event, ready) {
+			// 	if (ready) {
+			// 		$scope.rtlClass = true;
+			// 	} else {
+			// 		$scope.rtlClass = false;
+			// 	}
+			// });
 	}
 
 ]);

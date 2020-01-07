@@ -51,7 +51,8 @@ angular.module('ngm.widget.list', ['ngm.provider'])
 		'ngmData',
     '$translate',
     '$filter',
-		function ($scope, $rootScope, $sce, $element, $location, $timeout, ngmAuth, data, config,ngmData, $translate,$filter){
+    'Language',
+		function ($scope, $rootScope, $sce, $element, $location, $timeout, ngmAuth, data, config,ngmData, $translate,$filter,Language){
 
     
       // statistics widget default config
@@ -142,21 +143,24 @@ angular.module('ngm.widget.list', ['ngm.provider'])
       }
       
       // RTL
-      if ($scope.list.rtlEvent) {
-        $scope.rtlClass = false;
-        if ($translate.use() === 'prs') {
-          $scope.rtlClass = true;
-        }
-        $scope.$on('rtl', function (event, ready) {
-          if (ready) {
-            $scope.rtlClass = true;
+      // if ($scope.list.rtlEvent) {
+      //   $scope.rtlClass = false;
+      //   if ($translate.use() === 'prs') {
+      //     $scope.rtlClass = true;
+      //   }
+      //   $scope.$on('rtl', function (event, ready) {
+      //     if (ready) {
+      //       $scope.rtlClass = true;
 
-          } else {
-            $scope.rtlClass = false;
-          }
-        });
+      //     } else {
+      //       $scope.rtlClass = false;
+      //     }
+      //   });
 
-      }
+      // }
+
+
+      $scope.Language = Language;
 
 
   }

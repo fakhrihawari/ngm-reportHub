@@ -93,7 +93,7 @@
 			<!-- CARD PANEL -->
 			<div class="card-panel"
 						ng-if="detailBeneficiaries[$locationIndex][$beneficiaryIndex]"
-						ng-class="{'card-panel-expand':detailBeneficiaries[$locationIndex][$beneficiaryIndex],'inrtl':rtlClass}"
+						ng-class="{'card-panel-expand':detailBeneficiaries[$locationIndex][$beneficiaryIndex],'inrtl':Language.isRtl()}"
 						ng-disabled="!project.canEdit">
 
 				<!-- DEFAULT -->
@@ -1092,7 +1092,7 @@
 											ng-change="ngmClusterBeneficiaries.inputChange( 'ngm-beneficiary-remarks-{{ $locationIndex }}-{{ $beneficiaryIndex }}' );"
 											ng-disabled="project.definition.project_status === 'complete' || project.report.report_status === 'complete' || !ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'remarks' ]"
 											required>
-							<label for="ngm-beneficiary-remarks-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtltext':rtlClass}">{{'remarks' | translate}}</label>
+							<label for="ngm-beneficiary-remarks-{{ $locationIndex }}-{{ $beneficiaryIndex }}" class="active" ng-class="{'inrtltext':Language.isRtl()}">{{'remarks' | translate}}</label>
 						</div>
 					</div>
 
@@ -1166,7 +1166,7 @@
 			</div>
 
 			<!-- else -->
-			<div ng-if="project.definition.admin0pcode !== 'NG'" ng-class="{'language-rtl':rtlClass}">
+			<div ng-if="project.definition.admin0pcode !== 'NG'" ng-class="{'language-rtl':Language.isRtl()}">
 				<button class="btn"
 								ng-if="( project.canEdit && project.definition.project_status !== 'complete' && project.report.report_status !== 'complete' )"
 								ng-click="project.addBeneficiary( $locationIndex );"

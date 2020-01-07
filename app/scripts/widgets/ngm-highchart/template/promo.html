@@ -46,7 +46,7 @@
 <div>
   <div id="{{highchart.id}}" align="{{ highchart.align }}" ng-if="highchart.chartConfig">
     <div ng-if="highchart.title.text" 
-        align="{{ rtlClass?'right': highchart.title.align }}" 
+        align="{{ Language.isRtl()?'right': highchart.title.align }}" 
         style="{{ highchart.title.style }}">{{ highchart.title.text | translate }}</div>
 
     <div class="row">

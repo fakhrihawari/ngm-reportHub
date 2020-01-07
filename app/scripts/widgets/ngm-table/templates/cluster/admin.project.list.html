@@ -22,7 +22,7 @@
     <div class="card">
       <ul class="collection with-header">
         
-        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}" ng-class="{'title-rtl':rtlClass}"><i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">{{ table.headerIcon }}</i>{{ table.headerTitle | translate}}</h5></li>
+        <li class="{{ table.headerClass }}"><h5 class="report-work-title {{ table.headerText }}" ng-class="{'title-rtl':Language.isRtl()}"><i class="material-icons " ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">{{ table.headerIcon }}</i>{{ table.headerTitle | translate}}</h5></li>
         <li class="collection-item avatar" style="padding:10px;">
           
           <!-- if no data -->
@@ -35,7 +35,7 @@
 
           <!-- if data -->
           <div ng-if="data.length">
-            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':rtlClass}">
+            <table class="centered highlight responsive-table" ng-table="table.tableParams" ng-class="{'table-rtl':Language.isRtl()}">
               <tr ng-repeat="row in $data" style="cursor: pointer; cursor: hand;">
                 <td data-title="'sector_mayus'|translate" sortable="'cluster'" >
                   {{ row.cluster }}

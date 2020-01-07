@@ -30,7 +30,8 @@ angular.module( 'ngm.widget.organization.stock', [ 'ngm.provider' ])
     'ngmClusterHelper',
     'ngmClusterLists', 'ngmLists',
     'config','$translate',
-    function( $scope, $location, $timeout, $filter, $q, $http, $route, ngmUser, ngmAuth, ngmData, ngmClusterHelper, ngmClusterLists, ngmLists, config,$translate ){
+    'Language',
+    function ($scope, $location, $timeout, $filter, $q, $http, $route, ngmUser, ngmAuth, ngmData, ngmClusterHelper, ngmClusterLists, ngmLists, config, $translate, Language, ){
       
       // project
       $scope.report = {
@@ -406,18 +407,20 @@ angular.module( 'ngm.widget.organization.stock', [ 'ngm.provider' ])
 
       $scope.report.init();
       // RTL
-      $scope.rtlClass = false;
-      if ($translate.use() === 'prs') {
-        $scope.rtlClass = true;
-      }
-      $scope.$on('rtl', function (event, ready) {
-        if (ready) {
-          $scope.rtlClass = true;
+      // $scope.rtlClass = false;
+      // if ($translate.use() === 'prs') {
+      //   $scope.rtlClass = true;
+      // }
+      // $scope.$on('rtl', function (event, ready) {
+      //   if (ready) {
+      //     $scope.rtlClass = true;
 
-        } else {
-          $scope.rtlClass = false;
-        }
-      });
+      //   } else {
+      //     $scope.rtlClass = false;
+      //   }
+      // });
+
+      $scope.Language = Language;
 
   }
 

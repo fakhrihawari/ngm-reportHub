@@ -1,7 +1,7 @@
 
-<div style="padding-left: 20px;" ng-class="{'rtLpadding':rtlClass}">
-  <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.report.stocklocations[$locationIndex].stocks.length" ng-class="{'tRtl':rtlClass}">
-    <tr style="font-weight: 400" ng-class="{'tRtl':rtlClass}">
+<div style="padding-left: 20px;" ng-class="{'rtLpadding':Language.isRtl()}">
+  <table class="bordered responsive-table" style="margin-bottom:10px;" ng-show="report.report.stocklocations[$locationIndex].stocks.length" ng-class="{'tRtl':Language.isRtl()}">
+    <tr style="font-weight: 400" ng-class="{'tRtl':Language.isRtl()}">
       <!-- <td>Cluster</td> -->
       <td>{{'cluster'|translate}}</td>
 			<td>{{'stock_purpose'|translate}}</td>
@@ -16,7 +16,7 @@
 			<td>{{'beneficiary_coverage'|translate}}</td>
       <td ng-show="report.report.report_status !== 'complete'">{{'edit'|translate}}</td>
     </tr>
-    <tr ng-repeat="stock in report.report.stocklocations[$locationIndex].stocks" ng-class="{'tRtl':rtlClass}">
+    <tr ng-repeat="stock in report.report.stocklocations[$locationIndex].stocks" ng-class="{'tRtl':Language.isRtl()}">
       <td>
         <!-- editable activity_type from report -->
         <span e-placeholder="{{'select'|translate}}" editable-select="stock.cluster_id" e-name="cluster_id" e-form="rowform" e-ng-options="item.cluster_id as item.cluster for item in report.lists.clusters">
@@ -96,7 +96,7 @@
     </tr>
   </table>
 
-  <button class="btn" ng-show="report.report.report_status !== 'complete'" ng-click="report.addStock( $locationIndex )"  ng-class="{'right':rtlClass}">
+  <button class="btn" ng-show="report.report.report_status !== 'complete'" ng-click="report.addStock( $locationIndex )"  ng-class="{'right':Language.isRtl()}">
     <i class="material-icons left">add</i>{{'add_row'|translate}}
   </button>
 

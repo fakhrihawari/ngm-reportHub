@@ -64,20 +64,20 @@
 					</div>
 				</li>
 				<li class="collection-item avatar">
-						<div ng-if="project.report.admin0pcode === 'AF'" ng-class="{'language-rtl':rtlClass}">
-							<p ng-if="!rtlClass" style="color: #e57373;padding-top: 10px">
+						<div ng-if="project.report.admin0pcode === 'AF'" ng-class="{'language-rtl':Language.isRtl()}">
+							<p ng-if="!Language.isRtl()" style="color: #e57373;padding-top: 10px">
 								<b>{{'note'|translate}}:</b> {{'to_report' | translate}}
 								<b>{{'flood_response' | translate}}</b> {{'activities_please_select_from' | translate}}
 								<b>{{'beneficiary' | translate}}</b> {{'drop_down_beneficiary_types' | translate}} </br>
 								<b>{{'flood_affected_displaced' | translate}}</b> {{'or'| translate}}
 								<b>{{'flood_affected_non_displaced' | translate}}</b>
 							</p>
-							<p ng-if="rtlClass" style="color: #e57373;padding-top: 10px">یاداشت: برای گزارش پاسخگویی به فعالیت های سیلاب، لطفا از لیست افراد ذینفع ذیل نوع افراد ذینفع را انتخاب نمایید</p>
-							<p ng-if="rtlClass" style="color: #e57373;">افراد سیلاب زده بیجا شده ویا افراد سیلاب زده بیجا نشده</p>
+							<p ng-if="Language.isRtl()" style="color: #e57373;padding-top: 10px">یاداشت: برای گزارش پاسخگویی به فعالیت های سیلاب، لطفا از لیست افراد ذینفع ذیل نوع افراد ذینفع را انتخاب نمایید</p>
+							<p ng-if="Language.isRtl()" style="color: #e57373;">افراد سیلاب زده بیجا شده ویا افراد سیلاب زده بیجا نشده</p>
 						</div>
 					<!-- form -->
 
-					 	<div class="row" ng-class="{'language-rtl':rtlClass}">
+					 	<div class="row" ng-class="{'language-rtl':Language.isRtl()}">
 
 							<h3 class="report-selected-locations">{{ project.report.locations.length }} {{'selected_locations'|translate}}</h3>
 							<button class="btn waves-effect waves-light hide-on-small-only edit-report-btn"
@@ -106,7 +106,7 @@
 															filter:{ location_group_id: project.location_group } | 
 															limitTo: project.location_limit track by $index">
 
-							<div class="row" ng-class="{'language-rtl':rtlClass}">
+							<div class="row" ng-class="{'language-rtl':Language.isRtl()}">
 								<!-- location title -->
 								<div class="col s12 m9 left">
 

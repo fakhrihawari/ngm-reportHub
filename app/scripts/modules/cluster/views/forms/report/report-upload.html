@@ -217,10 +217,10 @@ font-size: 18px;
 		<div class="card">
 
 			<ul class="collection with-header">
-				<li class="collection-header indigo lighten-1" ng-class="{'language-rtl':rtlClass}">
+				<li class="collection-header indigo lighten-1" ng-class="{'language-rtl':Language.isRtl()}">
 					<h5 class="report-panel-title white-text">
 						<div>
-							<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">attachment</i>{{'upload_documents_for'|translate}} {{ project.monthlyTitleFormat }}
+							<i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">attachment</i>{{'upload_documents_for'|translate}} {{ project.monthlyTitleFormat }}
 						</div>
 					</h5>
 				</li>
@@ -232,7 +232,7 @@ font-size: 18px;
 												data-tooltip="{{'upload_document'|translate}}"
 												ng-click="project.uploadDocument.openModal('upload-file')"
 												ng-if="project.definition.project_status !== 'complete' && project.report.report_status !== 'complete' && project.canEdit">
-								<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">cloud_upload</i>
+								<i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">cloud_upload</i>
 								{{'upload_document'|translate}}
 							</button>
 								

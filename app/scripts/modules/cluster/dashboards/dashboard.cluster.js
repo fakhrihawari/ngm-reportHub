@@ -871,10 +871,10 @@ angular.module('ngmReportHub')
 					}
 
 					// RTL
-					$scope.rtlClass = false;
-					if ($translate.use() === 'prs') {
-						$scope.rtlClass = true;
-					}
+					// $scope.rtlClass = false;
+					// if ($translate.use() === 'prs') {
+					// 	$scope.rtlClass = true;
+					// }
 					// model
 					$scope.model = {
 						name: 'cluster_dashboard',

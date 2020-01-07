@@ -44,16 +44,16 @@
 	<div class="col s12">
 		<ul class="collection with-header z-depth-1">
 			<li class="collection-header {{ list.color }}" style="height:80px;">
-				<div class="col s12 m8" ng-class="{'right':rtlClass}">
+				<div class="col s12 m8" ng-class="{'right':Language.isRtl()}">
 					<h4 class="report-work-title {{ list.textColor }}" style="font-size:1.8rem;"
-						ng-class="{'right-title':rtlClass}">
+						ng-class="{'right-title':Language.isRtl()}">
 						<i class="material-icons left"
-							ng-class="{'left':!rtlClass,'right':rtlClass}">{{ list.titleIcon }}</i>{{ list.title | translate }}
+							ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">{{ list.titleIcon }}</i>{{ list.title | translate }}
 					</h4>
 				</div>
 				<div ng-if="list.data.length > list.itemsPerPage" class="col s12 m4 ">
 					<nav class="nav-list-search "
-						ng-class="{'focused':list.search.focused===true || list.search.filter,'left':rtlClass,'right':!rtlClass }">
+						ng-class="{'focused':list.search.focused===true || list.search.filter,'left':Language.isRtl(),'right':!Language.isRtl() }">
 						<div class="nav-wrapper" ng-click="list.toggleSearch()">
 							<form>
 								<div class="input-field">
@@ -72,7 +72,7 @@
 			<li class="collection-item avatar"
 				dir-paginate="item in list.data | filter: list.search.filter | orderBy: list.orderBy : true | itemsPerPage: list.itemsPerPage"
 				pagination-id="list.id" style="padding-top:20px;">
-				<a ng-if="!rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
+				<a ng-if="!Language.isRtl()" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
 					title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
 					<i class="material-icons circle white teal-text">{{ list.icon }}</i>
 					<span class="title">{{ item.reporting_period_title }}</span>
@@ -81,7 +81,7 @@
 					<p align="justify" style="padding:10px 0px 10px 0px;">
 						{{'monthly_beneficiaries_report_for' | translate}} {{ item.reporting_period_title }}
 					</p>
-					<a ng-if="!rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
+					<a ng-if="!Language.isRtl()" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
 						title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report"
 						class="secondary-content">
 						<i class="material-icons right"
@@ -89,7 +89,7 @@
 					</a>
 				</a>
 
-				<a ng-if="rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
+				<a ng-if="Language.isRtl()" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
 					title="{{ list.hoverTitle }} {{ item.reporting_period_title }} Report">
 					<i class="material-icons circle-rtl white teal-text">{{ list.icon }}</i>
 					<!-- <span class="title" style="padding-left: 65%;">{{ item.reporting_period_title }}</span> -->
@@ -103,7 +103,7 @@
 					<p style="padding:10px 30px 10px 0px; text-align: right;">
 						{{ item.reporting_period_title }} {{'monthly_beneficiaries_report_for' | translate}}
 					</p>
-					<a ng-if="rtlClass" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
+					<a ng-if="Language.isRtl()" href="{{ list.report_url }}/{{ item.project_id }}/{{ item.id }}"
 						title="{{ list.hoverTitle }} {{ list.dueFormat( item.reporting_period ) }} Report"
 						class="secondary-content-rtl">
 						<i class="material-icons right"
@@ -118,23 +118,23 @@
 
 			<!-- no data -->
 			<li ng-if="!list.data.length" class="collection-item avatar">
-				<a ng-if="!rtlClass">
+				<a ng-if="!Language.isRtl()">
 					<i class="material-icons circle white teal-text">{{ list.icon }}</i>
 					<span class="title">{{ list.title | translate }} {{'reports' | translate}}</span>
-					<p ng-class="{'language-rtl-left':rtlClass}">{{'you_have' | translate}} 0
+					<p ng-class="{'language-rtl-left':Language.isRtl()}">{{'you_have' | translate}} 0
 						{{ list.title | translate }} {{'reports' |translate}}</p>
-					<a ng-if="!rtlClass" class="secondary-content" style="padding-right:40px;">
+					<a ng-if="!Language.isRtl()" class="secondary-content" style="padding-right:40px;">
 						<i class="material-icons">check_circle</i>
 					</a>
 				</a>
-				<a ng-if="rtlClass">
+				<a ng-if="Language.isRtl()">
 					<i class="material-icons circle-rtl white teal-text">{{ list.icon }}</i>
 					<span class="title" style="padding-left: 77%;">{{ list.title | translate}}
 						{{'reports' | translate}}</span>
-					<p ng-class="{'language-rtl-left':rtlClass}" style="text-align: right;">{{'you_have' | translate}} 0
+					<p ng-class="{'language-rtl-left':Language.isRtl()}" style="text-align: right;">{{'you_have' | translate}} 0
 						{{ list.title | translate}} {{'reports' |translate}}
 					</p>
-					<a ng-if="rtlClass" class="secondary-content-rtl" style="padding-left:40px;">
+					<a ng-if="Language.isRtl()" class="secondary-content-rtl" style="padding-left:40px;">
 						<i class="material-icons">check_circle</i>
 					</a>
 				</a>

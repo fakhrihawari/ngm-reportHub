@@ -13,7 +13,7 @@
 	}
 </style>
 
-<div class="row" ng-class="{'reverse-column':rtlClass}">
+<div class="row" ng-class="{'reverse-column':Language.isRtl()}">
 	
 	<div class="col s12 m4">
 		<a href="#/response/afghanistan/drought/dashboard/all/all" target="_blank">
@@ -22,10 +22,10 @@
 					<img src="images/country/afghanistan/assessments/nutrition_admin.jpg">
 				</div>
 				<div class="card-content white-text">
-					<p class="card-title" ng-class="{'right':rtlClass}">{{'drought_dashboard'| translate}} </p>
+					<p class="card-title" ng-class="{'right':Language.isRtl()}">{{'drought_dashboard'| translate}} </p>
 				</div>
 				<div class="card-action">
-					<a class="left" ng-class="{'right':rtlClass}" href="#/response/afghanistan/drought/dashboard/all/all" target="_blank">{{'goto_dashboard'|translate}}</a>
+					<a class="left" ng-class="{'right':Language.isRtl()}" href="#/response/afghanistan/drought/dashboard/all/all" target="_blank">{{'goto_dashboard'|translate}}</a>
 				</div>
 			</div>
 		</a>
@@ -38,10 +38,10 @@
 					<img src="images/country/afghanistan/assessments/nutrition_dashboard.jpg">
 				</div>
 				<div class="card-content white-text">
-					<p class="card-title" ng-class="{'right':rtlClass}">{{'drought_non_displaced' | translate}} </p>
+					<p class="card-title" ng-class="{'right':Language.isRtl()}">{{'drought_non_displaced' | translate}} </p>
 				</div>
 				<div class="card-action">
-					<a class="left" ng-class="{'right':rtlClass}" href="#/response/afghanistan/drought/dashboard/emergency/drought_affected_non_displaced" target="_blank">{{'goto_dashboard'|translate}}</a>
+					<a class="left" ng-class="{'right':Language.isRtl()}" href="#/response/afghanistan/drought/dashboard/emergency/drought_affected_non_displaced" target="_blank">{{'goto_dashboard'|translate}}</a>
 				</div>
 			</div>
 		</a>
@@ -54,10 +54,10 @@
 					<img src="images/country/afghanistan/assessments/nutrition_admin.jpg">
 				</div>
 				<div class="card-content white-text">
-					<p class="card-title" ng-class="{'right':rtlClass}">{{'drought_displaced' | translate}} </p>
+					<p class="card-title" ng-class="{'right':Language.isRtl()}">{{'drought_displaced' | translate}} </p>
 				</div>
 				<div class="card-action">
-					<a class="left" ng-class="{'right':rtlClass}" href="#/response/afghanistan/drought/dashboard/emergency/drought_affected_displaced" target="_blank">{{'goto_dashboard'|translate}}</a>
+					<a class="left" ng-class="{'right':Language.isRtl()}" href="#/response/afghanistan/drought/dashboard/emergency/drought_affected_displaced" target="_blank">{{'goto_dashboard'|translate}}</a>
 				</div>
 			</div>
 		</a>

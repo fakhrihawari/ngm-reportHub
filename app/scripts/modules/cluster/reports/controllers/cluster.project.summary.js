@@ -74,10 +74,10 @@ angular.module('ngmReportHub')
 				var subtitle = $scope.report.project.project_code ?  $scope.report.project.project_code + ' - ' + $scope.report.project.project_description : $scope.report.project.project_description;				
 				
 				// RTL
-				$scope.rtlClass = false;
-				if ($translate.use() === 'prs') {
-					$scope.rtlClass = true;
-				}
+				// $scope.rtlClass = false;
+				// if ($translate.use() === 'prs') {
+				// 	$scope.rtlClass = true;
+				// }
 				// report dashboard model
 				$scope.model = {
 					name: 'cluster_project_summary',

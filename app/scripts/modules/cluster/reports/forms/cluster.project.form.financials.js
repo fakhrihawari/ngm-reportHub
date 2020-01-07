@@ -32,7 +32,8 @@ angular.module( 'ngm.widget.project.financials', [ 'ngm.provider' ])
 		'ngmClusterFinancial',
     'config',
     '$translate',
-		function ($scope, $location, $timeout, $filter, $q, $http, $route, ngmUser, ngmAuth, ngmData, ngmClusterHelper, ngmClusterLists, ngmClusterFinancial, config,$translate ){
+    'Language',
+    function ($scope, $location, $timeout, $filter, $q, $http, $route, ngmUser, ngmAuth, ngmData, ngmClusterHelper, ngmClusterLists, ngmClusterFinancial, config, $translate, Language ){
 
       // project
 
@@ -614,18 +615,20 @@ angular.module( 'ngm.widget.project.financials', [ 'ngm.provider' ])
 
       }, 0 );
       // RTL
-      $scope.rtlClass = false;
-      if ($translate.use() === 'prs') {
-        $scope.rtlClass = true;
-      }
-      $scope.$on('rtl', function (event, ready) {
+      // $scope.rtlClass = false;
+      // if ($translate.use() === 'prs') {
+      //   $scope.rtlClass = true;
+      // }
+      // $scope.$on('rtl', function (event, ready) {
 
-        if (ready) {
-          $scope.rtlClass = true;
-        } else {
-          $scope.rtlClass = false;
-        }
-      });
+      //   if (ready) {
+      //     $scope.rtlClass = true;
+      //   } else {
+      //     $scope.rtlClass = false;
+      //   }
+      // });
+
+      $scope.Language = Language;
 
   }
 

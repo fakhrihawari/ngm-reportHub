@@ -244,14 +244,14 @@ font-size: 18px;
 		<div class="card">
 
 			<ul class="collection with-header">
-				<li class="collection-header blue lighten-1" ng-class="{'language-rtl':rtlClass}">
-					<h5 class="report-work-title white-text" ng-class="{'language-rtl':rtlClass}">
-						<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">attach_file</i>
+				<li class="collection-header blue lighten-1" ng-class="{'language-rtl':Language.isRtl()}">
+					<h5 class="report-work-title white-text" ng-class="{'language-rtl':Language.isRtl()}">
+						<i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">attach_file</i>
 						<span class="beneficiary-count">{{listUpload.length| number}}</span> {{'documents' |translate}}
 					</h5>
 				</li>
 
-				<li class="collection-item avatar " style=" border-bottom-width: 0px;min-height: 60px; " ng-class="{'language-rtl':rtlClass}">
+				<li class="collection-item avatar " style=" border-bottom-width: 0px;min-height: 60px; " ng-class="{'language-rtl':Language.isRtl()}">
 					<div class="left" >
 						<p style="font-weight: 300;margin-top:5px;color: #000">{{'click_upload_document_to_upload_document_of_your_project'|translate}} </p>
 					</div>
@@ -261,7 +261,7 @@ font-size: 18px;
 											data-tooltip="{{'upload_document'|translate}}"
 											ng-click="project.uploadDocument.openModal('upload-file')"
 											ng-if="project.definition.project_status !== 'complete' && project.canEdit">
-							<i class="material-icons " ng-class="{'right':rtlClass,'left':!rtlClass}">publish</i>
+							<i class="material-icons " ng-class="{'right':Language.isRtl(),'left':!Language.isRtl()}">publish</i>
 							{{'upload_document'|translate}}
 						</button>
 

@@ -1,6 +1,6 @@
 
 <!-- bind html -->
 <!-- <span class="left" style="padding-top:8px;">{{'lastest_project_update'| translate}} {{ panel.data.updatedAt }} {{'by' | translate}} {{ panel.data.organization }}</span> -->
-<span ng-if="!rtlClass" class="left" style="padding-top:8px;">{{'lastest_project_update'| translate}} {{ panel.data.updatedAt }} {{'by' | translate}} {{ panel.data.organization }}</span>
-<span ng-if="rtlClass" class="left" style="padding-top:8px;">{{ panel.data.organization }} {{'by' | translate}} &#x202a; {{ panel.data.updatedAt }} &#x202c; :{{'lastest_project_update'| translate}}</span>
-<a class="waves-effect waves-light btn right" href="#/cluster/4wprojectplan" title="Reset Dashboard"><i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">cached</i>{{'reset_dashboard'|translate}}</a> 
+<span ng-if="!Language.isRtl()" class="left" style="padding-top:8px;">{{'lastest_project_update'| translate}} {{ panel.data.updatedAt }} {{'by' | translate}} {{ panel.data.organization }}</span>
+<span ng-if="Language.isRtl()" class="left" style="padding-top:8px;">{{ panel.data.organization }} {{'by' | translate}} &#x202a; {{ panel.data.updatedAt }} &#x202c; :{{'lastest_project_update'| translate}}</span>
+<a class="waves-effect waves-light btn right" href="#/cluster/4wprojectplan" title="Reset Dashboard"><i class="material-icons " ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">cached</i>{{'reset_dashboard'|translate}}</a> 

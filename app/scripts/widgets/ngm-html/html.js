@@ -48,7 +48,8 @@ angular.module('ngm.widget.html', ['ngm.provider'])
     'data', 
     'config',
     '$translate',
-    function($scope, $sce, $element, $location, $timeout, ngmAuth, data, config, $translate){
+    'Language',
+    function ($scope, $sce, $element, $location, $timeout, ngmAuth, data, config, $translate, Language){
     
       // statistics widget default config
       $scope.panel = {
@@ -86,6 +87,7 @@ angular.module('ngm.widget.html', ['ngm.provider'])
 
       // trust html
       $scope.panel.html = $sce.trustAsHtml($scope.panel.html);
+      $scope.Language = Language
 
       // if updatedAt
       if ( $scope.panel.data && $scope.panel.data.updatedAt ) {
@@ -93,20 +95,20 @@ angular.module('ngm.widget.html', ['ngm.provider'])
       }
 
       // RTL
-      if ($scope.panel.rtlEvent) {
-        $scope.rtlClass = false;
-        if ($translate.use() === 'prs') {
-          $scope.rtlClass = true;
-        }
-        $scope.$on('rtl', function (event, ready) {
-          if (ready) {
-            $scope.rtlClass = true;
-          } else {
-            $scope.rtlClass = false;
-          }
-        });
+      // if ($scope.panel.rtlEvent) {
+      //   $scope.rtlClass = false;
+      //   if ($translate.use() === 'prs') {
+      //     $scope.rtlClass = true;
+      //   }
+      //   $scope.$on('rtl', function (event, ready) {
+      //     if (ready) {
+      //       $scope.rtlClass = true;
+      //     } else {
+      //       $scope.rtlClass = false;
+      //     }
+      //   });
 
-      }
+      // }
       
       // init tabs
       if ($scope.panel.tabs) {

@@ -22,15 +22,15 @@
 		<div class="card">
 			<ul class="collection with-header">
 
-				<li class="collection-header teal lighten-4" ng-class="{'title-right':rtlClass}">
+				<li class="collection-header teal lighten-4" ng-class="{'title-right':Language.isRtl()}">
 					<h5 class="report-work-title">
-						<i class="material-icons " ng-class="{'left':!rtlClass,'right':rtlClass}">attach_money</i>{{'project_budget_progress' | translate}}
+						<i class="material-icons " ng-class="{'left':!Language.isRtl(),'right':Language.isRtl()}">attach_money</i>{{'project_budget_progress' | translate}}
 					</h5>
 				</li>
 
 				<li class="collection-item avatar">
 
-					<p style="padding:10px;" ng-class="{'title-right':rtlClass}">
+					<p style="padding:10px;" ng-class="{'title-right':Language.isRtl()}">
 						{{'add_new_row_of_financial_details_to_your_project_for_each_payment_recieved' | translate}};
 					</p>
 
@@ -87,7 +87,7 @@
 						</div>
 						<!-- detail form-->
 						<div class="card-panel" ng-if="detailFinancial[$index]"
-							ng-class="{'card-panel-expand':detailFinancial[$index],'inrtl':rtlClass}">
+							ng-class="{'card-panel-expand':detailFinancial[$index],'inrtl':Language.isRtl()}">
 
 							<div class="row">
 								<!-- DONOR -->
@@ -124,16 +124,15 @@
 
 								<!-- Grant Id -->
 								<div class="input-field col s12 m4">
-									<input id="ngm-grant_id-{{ $ndex }}" 
+									<input id="ngm-grant_id-{{ $index }}" 
 										type="text" 
 										placeholder="Put your {{'grant' | translate}} ID" 
 										ng-model="budget.grant_id"
 										class="validate"
 										ng-disabled="project.definition.project_status === 'complete'"
 										required>
-									<label ng-if="rtlClass" for="ngm-grant_id-{{ $ndex }}" class="active">ID {{'grant' | translate}}</label>
-									<label ng-if="!rtlClass" for="ngm-grant_id-{{ $ndex }}" class="active">{{'grant' | translate}}
-										ID</label>
+									<label ng-if="Language.isRtl()" for="ngm-grant_id-{{ $index }}" class="active" >ID {{'grant' | translate}}</label>
+									<label ng-if="!Language.isRtl()" for="ngm-grant_id-{{ $index }}" class="active">{{'grant' | translate}} ID</label>
 								</div>
 
 								<!-- Amount -->
@@ -242,7 +241,7 @@
 
 							<div class="row">
 								<!-- Fts -->
-								<div class="input-field col s12 m4" ng-class="{'inrtl':rtlClass}">
+								<div class="input-field col s12 m4" ng-class="{'inrtl':Language.isRtl()}">
 									<select materialize-select id="ngm-reported_on_fts_id-{{$index}}" name="ngm-reported_on_fts_id-{{$index}}"
 										class="validate" ng-options="d.reported_on_fts_id as d.reported_on_fts_name for d in project.lists.reported_on_fts"
 										ng-model="budget.reported_on_fts_id" ng-change="ngmClusterFinancial.updateName( project.lists.reported_on_fts, 'reported_on_fts_id', 'reported_on_fts_name', budget,project );
@@ -252,9 +251,9 @@
 										<option value="">{{ 'select' | translate }}</option>
 									</select>
 								
-									<label ng-if="rtlClass" style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}" class="active">
+									<label ng-if="Language.isRtl()" style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}" class="active">
 										?FTS {{'on' |translate}}</label>
-									<label ng-if="!rtlClass" style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}"
+									<label ng-if="!Language.isRtl()" style="transform:translateY(-10%)" for="ngm-reported_on_fts_id-{{$index }}"
 										class="active">{{'on' |translate}}
 										FTS?</label>
 								</div>
@@ -274,7 +273,7 @@
 										class="validate" 
 										ng-disabled="project.definition.project_status === 'complete'"
 										required>
-									<label for="ngm-comments-{{ $ndex }}" class="active" ng-class="{'inrtltext':rtlClass}">{{'notes' | translate}} </label>
+									<label for="ngm-comments-{{ $ndex }}" class="active" ng-class="{'inrtltext':Language.isRtl()}">{{'notes' | translate}} </label>
 								</div>
 							</div>
 						</div>						

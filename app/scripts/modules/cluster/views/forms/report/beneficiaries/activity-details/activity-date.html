@@ -1,6 +1,6 @@
 
 		<!--  -->
-		<div class="col s12 m2" ng-class="{text_align_right:!rtlClass,'text_align_left':rtlClass}">
+		<div class="col s12 m2" ng-class="{text_align_right:!Language.isRtl(),'text_align_left':Language.isRtl()}">
 			<p style="font-size:16px; padding-top:26px;">{{ ngmClusterBeneficiaries.form[ $locationIndex ][ $beneficiaryIndex ][ 'activity_date' ] }}</p>
 		</div>
 
