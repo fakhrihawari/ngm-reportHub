@@ -108,7 +108,7 @@
 
                         </h5>
                     </div>
-                    <div ng-if="master.beneficiaries.length > master.itemsPerPage" class="col s12 m4 right">
+                    <div ng-if="master.activities.length > master.itemsPerPage" class="col s12 m4 right">
                         <nav class="nav-list-search right"
                             ng-class="{'focused':master.search.focused===true || master.search.filter }">
                             <div class="nav-wrapper" ng-click="list.toggleSearch()">
@@ -125,24 +125,24 @@
                     </div>
                 </li>
                 <li class="collection-item list avatar "
-                    dir-paginate="item in master.beneficiaries | filter: master.search.filter | orderBy: sortBy :false | itemsPerPage: master.itemsPerPage"
+                    dir-paginate="item in master.activities | filter: master.search.filter | orderBy: sortBy :false | itemsPerPage: master.itemsPerPage"
                     pagination-id="master.listId">
                     <div class="row" style="padding-top: 10px;">
 
                         <div class="col m4 s4">
 
 
-                            <input type="checkbox" class="filled-in" id={{item.beneficiary_type_name}}
-                                value={{item.beneficiary_type_name}} ng-checked="master.activeInActive(item)"
+                            <input type="checkbox" class="filled-in" id={{item.activity_type_name}}
+                                value={{item.activity_type_name}} ng-checked="master.activeInActive(item)"
                                 ng-click="" />
-                            <label for="{{item.beneficiary_type_name}}"
-                                style="color: #000000; font-weight: 500;">{{item.beneficiary_type_name}}</label>
+                            <label for="{{item.activity_type_name}}"
+                                style="color: #000000; font-weight: 500;">{{item.activity_type_name}} : {{item.activity_description_name}}</label>
                         </div>
                         <div class="teal-text" style="margin-left: 35px"></div>
                     </div>
                     <!-- <h4>{{item.beneficiary_type_name}}</h4> -->
                 </li>
-                <li class="collection-item avatar" ng-if="master.beneficiaries.length > master.itemsPerPage"
+                <li class="collection-item avatar" ng-if="master.activities.length > master.itemsPerPage"
                     style="padding:20px 20px 0px 50px;">
                     <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
                 </li>

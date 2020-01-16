@@ -127,13 +127,6 @@ angular.module('ngmReportHub')
             $scope.master.setMenu();
             // $scope.master.getPath($route.current.params.admin0pcode, $route.current.params.cluster_id)
             // console.log(ngmClusterLists.getBeneficiaries())
-            ngmData.get(
-            {
-                method: 'GET',
-                url: ngmAuth.LOCATION + '/api/cluster/list/activities?admin0pcode=' + ngmUser.get().admin0pcode
-            }).then(function(x){
-                // console.log(x);
-            })
 
 
         }]);

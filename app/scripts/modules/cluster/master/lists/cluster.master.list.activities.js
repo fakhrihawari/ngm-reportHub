@@ -96,9 +96,17 @@ angular.module('ngmReportHub')
 
         }
         // run page
-        $scope.list.activities = ngmClusterLists.getBeneficiaries();
+        ngmData.get(
+            {
+                method: 'GET',
+                url: ngmAuth.LOCATION + '/api/cluster/list/activities?admin0pcode=' + ngmUser.get().admin0pcode
+            }).then(function (x) {
+                $scope.list.activities = x
+                console.log(x);
+                $scope.list.init();
+
+            })
         // init
-        $scope.list.init();
 
 
 
