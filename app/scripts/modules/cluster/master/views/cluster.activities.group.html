@@ -1,0 +1,25 @@
+<style>
+    .card.group-card {
+        border-radius: 15px;
+    }
+</style>
+<div class="container">
+    <div class="row" style="padding-top: 20px;">
+        <div class="col s12 m4" ng-repeat="item in panel.year">
+            <div class="card  darken-1 hoverable group-card">
+                <div class="card-content" style="min-height: 150px;">
+                    <p>
+                        Activities List
+                    </p>
+                    <p class="card-title">
+                        {{item.year}}
+                    </p>
+                    <div style="position: absolute;
+                            bottom: 20px;">
+                        <a href="#/cluster/admin/list/activities/year/{{item.year}}{{panel.setUrl()}}">Go to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

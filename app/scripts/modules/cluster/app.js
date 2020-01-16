@@ -954,6 +954,26 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/list/activities/:admin0pcode/:cluster_id', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListActivityGroupCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
+			.when('/cluster/admin/list/activities/year/:year/:admin0pcode/:cluster_id', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'MasterListActivityCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
 			// FORBIDDEN
 			.when( '/cluster/forbidden', {
 				templateUrl: '/views/app/dashboard.html',
