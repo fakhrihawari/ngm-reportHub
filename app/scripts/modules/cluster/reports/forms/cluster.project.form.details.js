@@ -209,7 +209,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				targetBeneficiariesDefaultUrl: 'target-beneficiaries/2016/target-beneficiaries-default.html',
 				targetBeneficiariesUrl: moment( config.project.project_end_date ).year() === 2016 ? 'target-beneficiaries/2016/target-beneficiaries.html' : 'target-beneficiaries/target-beneficiaries.html',
 				// target locations
-				locationsUrl: config.project.admin0pcode === 'CB' ? 'target-locations/CB/locations.html' : 'target-locations/locations.html',
+				locationsUrl: config.project.admin0pcode === 'CB' ? 'target-locations/CB/locations.html' : (config.project.admin0pcode === 'AF' ? 'target-locations/locations-reform.html' : 'target-locations/locations.html'),
 				// upload
 				uploadUrl:'project-upload.html',
 
@@ -228,7 +228,11 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					// set beneficiaries form
 					ngmClusterBeneficiaries.setBeneficiariesForm( $scope.project.lists, 0, $scope.project.definition.target_beneficiaries );
 					// set form inputs
-					ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );					
+					ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );
+					
+					if ($scope.project.definition.admin0pcode === 'AF') {
+						ngmClusterLocations.setLocationAdminSelect($scope.project, $scope.project.definition.target_locations);
+					}
 					// documents uploads
 					$scope.project.setTokenUpload();
 					// implementing partners
@@ -351,6 +355,14 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					}
 				},
 
+				setYesorNoSiteList: function (location, id) {
+					if (document.getElementById(id).checked) {
+						location.site_list_select_id = 'yes'
+					} else {
+						location.site_list_select_id = 'no'
+					}
+					ngmClusterLocations.updateYesorNo($scope.project.lists, location);
+				},
 
 				/**** AFGHANISTAN ( ngmClusterHelperAf.js ) ****/
 
@@ -563,6 +575,9 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					// CB, run form
 					if ( $scope.project.definition.admin0pcode === 'CB' ) {
 						ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );		
+					}
+					if ($scope.project.definition.admin0pcode === 'AF') {
+						ngmClusterLocations.setLocationAdminSelect($scope.project, $scope.project.definition.target_locations);
 					}
 				},
 
