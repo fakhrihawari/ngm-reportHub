@@ -473,6 +473,10 @@ angular.module( 'ngmReportHub' )
       updateSiteImplementation: function (lists, location) {
         $timeout(function () {
           var selected = [];
+          if (!location.site_implementation_id) {
+            delete location.site_implementation_id;
+            delete location.site_implementation_name;
+          }
           if (location.site_implementation_id) {
             selected = $filter('filter')(lists.site_implementation, { site_implementation_id: location.site_implementation_id }, true);
             location.site_implementation_name = selected[0].site_implementation_name;
@@ -483,7 +487,10 @@ angular.module( 'ngmReportHub' )
         $timeout(function () {
           // attr
           var selected = [];
-
+          if (!location.site_type_id) {
+            delete location.site_type_id;
+            delete location.site_type_name
+          }
           // filter by site_type
           if (location.site_type_id) {
 
@@ -655,7 +662,7 @@ angular.module( 'ngmReportHub' )
             // merge object
             location = angular.merge(location, selected[0]);
             ngmClusterLocations.filterLocations(project, $index, location);
-            ngmClusterLocations.adminSitesSelect[$index] = $filter('filter')(list.adminSites, obj, true);
+            
           }
 
         }
@@ -699,15 +706,32 @@ angular.module( 'ngmReportHub' )
 
         if (project.lists.admin2 && location.admin1pcode) {
           ngmClusterLocations.admin2Select[$index] = $filter('filter')(project.lists.admin2, { admin1pcode: location.admin1pcode }, true)
+          ngmClusterLocations.adminSitesSelect[$index] = ngmClusterLocations.adminSitesSelect[$index].filter(function (i) {
+            return i.admin1pcode === location.admin1pcode;
+          });
         }
         if (project.lists.admin3 && location.admin2pcode) {
           ngmClusterLocations.admin3Select[$index] = $filter('filter')(project.lists.admin3, { admin2pcode: location.admin2pcode }, true)
+          ngmClusterLocations.adminSitesSelect[$index] = ngmClusterLocations.adminSitesSelect[$index].filter(function (i) {
+            return i.admin2pcode === location.admin2pcode;
+          });
         }
         if (project.lists.admin4 && location.admin3pcode) {
           ngmClusterLocations.admin4Select[$index] = $filter('filter')(project.lists.admin2, { admin3pcode: location.admin3pcode }, true)
+          ngmClusterLocations.adminSitesSelect[$index] = ngmClusterLocations.adminSitesSelect[$index].filter(function (i) {
+            return i.admin3pcode === location.admin3pcode;
+          });
         }
         if (project.lists.admin5 && location.admin4pcode) {
           ngmClusterLocations.admin5Select[$index] = $filter('filter')(project.lists.admin2, { admin4pcode: location.admin4pcode }, true)
+          ngmClusterLocations.adminSitesSelect[$index] = ngmClusterLocations.adminSitesSelect[$index].filter(function (i) {
+            return i.admin4pcode === location.admin4pcode;
+          });
+        }
+        if (location.admin5pcode){
+          ngmClusterLocations.adminSitesSelect[$index] = ngmClusterLocations.adminSitesSelect[$index].filter(function (i) {
+            return i.admin5pcode === location.admin5pcode;
+          });
         }
       },
       resetLocations: function (project, type, location) {
@@ -764,6 +788,14 @@ angular.module( 'ngmReportHub' )
 
       setLocationAdminSelect: function (project, locations) {
         locations = $filter('orderBy')(locations, 'createdAt');
+        ngmClusterLocations.setSiteTypeAndImplementationSelect(project);
+        angular.forEach(locations, function (location, $index) {
+          ngmClusterLocations.filterLocations(project, $index, location);
+        });
+      },
+
+      setSiteTypeAndImplementationSelect: function (project) {
+
         if (!ngmClusterLocations.site_typeFilter) {
           ngmClusterLocations.site_typeFilter = [];
         }
@@ -771,23 +803,24 @@ angular.module( 'ngmReportHub' )
         if (!ngmClusterLocations.site_implementationFilter && (project.lists.site_implementation.length > 0)) {
           ngmClusterLocations.site_implementationFilter = []
         }
-        
+
         ngmClusterLocations.site_typeFilter = project.lists.site_type.filter(function (i) {
-          return i.cluster_id.indexOf(project.definition.cluster_id) > -1;
+          return i.cluster_id && i.cluster_id.indexOf(project.definition.cluster_id) > -1;
         });
         ngmClusterLocations.site_implementationFilter = project.lists.site_implementation.filter(function (i) {
-          return i.cluster_id.indexOf(project.definition.cluster_id) > -1;
+          return i.cluster_id && i.cluster_id.indexOf(project.definition.cluster_id) > -1;
         });
+
         if (project.definition.inter_cluster_activities && project.definition.inter_cluster_activities.length > 0) {
 
           project.definition.inter_cluster_activities.forEach(function (intercluster) {
             var array_siteimplementation = project.lists.site_implementation.filter(function (i) {
-              return i.cluster_id.indexOf(intercluster.cluster_id) > -1;
+              return i.cluster_id && i.cluster_id.indexOf(intercluster.cluster_id) > -1;
             });
             ngmClusterLocations.site_implementationFilter.push(...array_siteimplementation);
 
             var array_siteType = project.lists.site_type.filter(function (i) {
-              return i.cluster_id.indexOf(intercluster.cluster_id) > -1;
+              return i.cluster_id && i.cluster_id.indexOf(intercluster.cluster_id) > -1;
             });
             ngmClusterLocations.site_typeFilter.push(...array_siteType);
           })
@@ -796,12 +829,7 @@ angular.module( 'ngmReportHub' )
           ngmClusterLocations.site_implementationFilter = ngmClusterLocations.site_implementationFilter.filter((item, index) => ngmClusterLocations.site_implementationFilter.indexOf(item) === index);
           ngmClusterLocations.site_typeFilter = ngmClusterLocations.site_typeFilter.filter((item, index) => ngmClusterLocations.site_typeFilter.indexOf(item) === index);
         }
-        
-        angular.forEach(locations, function (location, $index) {
-          ngmClusterLocations.filterLocations(project, $index, location);
-        });
       }
-
 
 		};
 

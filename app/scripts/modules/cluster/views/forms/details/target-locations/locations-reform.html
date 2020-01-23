@@ -349,7 +349,7 @@
                                         ng-options="item.site_type_id as item.site_type_name for item in ngmClusterLocations.site_typeFilter"
                                         ng-change="ngmClusterLocations.updateSiteType(project.lists,location)"
                                         ng-disabled="project.definition.project_status === 'complete'">
-                                        <option value="">{{ 'select' | translate }}</option>
+                                        <option value="">-</option>
                                     </select>
                                     <label ng-if="project.definition.admin0pcode !== 'COL'"
                                         for="ngm-site_type_id-{{ $index }}" class="active"
@@ -385,7 +385,7 @@
                                         ng-options="item.site_type_id as item.site_type_name for item in ngmClusterLocations.site_typeFilter"
                                         ng-change="ngmClusterLocations.updateSiteType(project.lists,location)"
                                         ng-disabled="project.definition.project_status === 'complete'">
-                                        <option value="">{{ 'select' | translate }}</option>
+                                        <option value="">-</option>
                                     </select>
                                     <label ng-if="project.definition.admin0pcode !== 'COL'"
                                         for="ngm-site_type_id-{{ $index }}" class="active"
@@ -438,7 +438,7 @@
                                         ng-options="item.site_type_id as item.site_type_name for item in ngmClusterLocations.site_typeFilter"
                                         ng-change="ngmClusterLocations.updateSiteType(project.lists,location)"
                                         ng-disabled="project.definition.project_status === 'complete'">
-                                        <option value="">{{ 'select' | translate }}</option>
+                                        <option value="">-</option>
                                     </select>
                                     <label ng-if="project.definition.admin0pcode !== 'COL'"
                                         for="ngm-site_type_id-{{ $index }}" class="active"
@@ -507,7 +507,7 @@
                                         ng-options="item.admin2pcode as item.admin2name for item in ngmClusterLocations.admin2Select[$index]"
                                         ng-change="ngmClusterLocations.updateLocation(project, $index, project.lists.admin2, 'admin2pcode', location)"
                                         ng-disabled="project.definition.project_status === 'complete' || !location.admin1pcode">
-                                        <option value="">{{ 'select' | translate }}</option>
+                                        <option value="" disabled>{{ 'select' | translate }}</option>
                                     </select>
                                     <label for="ngm-admin2pcode-{{ $index }}" class="active"
                                         style="transform:translateY(-10%)">{{ project.lists.admin2[0].admin2type_name }}*</label>
@@ -542,7 +542,7 @@
                                         ng-options="item.admin2pcode as item.admin2name for item in ngmClusterLocations.admin2Select[$index]"
                                         ng-change="ngmClusterLocations.updateLocation(project, $index, project.lists.admin2, 'admin2pcode', location)"
                                         ng-disabled="project.definition.project_status === 'complete' || !location.admin1pcode">
-                                        <option value="">{{ 'select' | translate }}</option>
+                                        <option value="" disabled>{{ 'select' | translate }}</option>
                                     </select>
                                     <label for="ngm-admin2pcode-{{ $index }}" class="active"
                                         style="transform:translateY(-10%)">{{ project.lists.admin2[0].admin2type_name }}*</label>
@@ -591,7 +591,7 @@
                                         ng-options="item.admin2pcode as item.admin2name for item in ngmClusterLocations.admin2Select[$index]"
                                         ng-change="ngmClusterLocations.updateLocation(project, $index, project.lists.admin2, 'admin2pcode', location)"
                                         ng-disabled="project.definition.project_status === 'complete' || !location.admin1pcode">
-                                        <option value="">{{ 'select' | translate }}</option>
+                                        <option value="" disabled>{{ 'select' | translate }}</option>
                                     </select>
                                     <label for="ngm-admin2pcode-{{ $index }}" class="active"
                                         style="transform:translateY(-10%)">{{ project.lists.admin2[0].admin2type_name }}*</label>
@@ -654,7 +654,7 @@
                                         ng-options="item.admin2pcode as item.admin2name for item in ngmClusterLocations.admin2Select[$index]"
                                         ng-change="ngmClusterLocations.updateLocation(project, $index, project.lists.admin2, 'admin2pcode', location)"
                                         ng-disabled="project.definition.project_status === 'complete' || !location.admin1pcode">
-                                        <option value="">{{ 'select' | translate }}</option>
+                                        <option value="" disabled>{{ 'select' | translate }}</option>
                                     </select>
                                     <label for="ngm-admin2pcode-{{ $index }}" class="active"
                                         style="transform:translateY(-10%)">{{ project.lists.admin2[0].admin2type_name }}*</label>
@@ -706,7 +706,7 @@
                             <!-- END -->
 
                             <!-- site name -->
-                            <div class="row" ng-if="project.definition.admin0pcode !== 'AF' && project.definition.admin0pcode !== 'COL'">
+                            <div class="row" ng-if="ngmClusterLocations.adminSitesSelect[ $index ] >0">
 
                                 <!-- switch site list select id -->
 
@@ -766,7 +766,7 @@
 
                             <!-- site name -->
                             <div class="row"
-                                ng-if="project.definition.admin0pcode === 'AF' || project.definition.admin0pcode === 'COL'">
+                                ng-if="ngmClusterLocations.adminSitesSelect[ $index ].length < 1">
 
                                 <div class="input-field col s12 m12" ng-if="location.site_list_select_id === 'yes'">
                                     <select materialize-select watch id="ngm-site_list_select_id-{{ $index }}"

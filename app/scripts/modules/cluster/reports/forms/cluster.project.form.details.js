@@ -230,9 +230,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					// set form inputs
 					ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );
 					
-					if ($scope.project.definition.admin0pcode === 'AF') {
-						ngmClusterLocations.setLocationAdminSelect($scope.project, $scope.project.definition.target_locations);
-					}
+					ngmClusterLocations.setLocationAdminSelect($scope.project, $scope.project.definition.target_locations);
 					// documents uploads
 					$scope.project.setTokenUpload();
 					// implementing partners
@@ -576,8 +574,10 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					if ( $scope.project.definition.admin0pcode === 'CB' ) {
 						ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );		
 					}
-					if ($scope.project.definition.admin0pcode === 'AF') {
-						ngmClusterLocations.setLocationAdminSelect($scope.project, $scope.project.definition.target_locations);
+
+					if ($scope.project.definition.admin0pcode !== 'CB') {
+						var newLocationIndex = $scope.project.definition.target_locations.length - 1;
+						ngmClusterLocations.filterLocations($scope.project, newLocationIndex, $scope.project.definition.target_locations[newLocationIndex])
 					}
 				},
 
@@ -677,6 +677,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				// compile cluster activities
 				compileInterClusterActivities: function(){					
 					ngmClusterHelper.compileInterClusterActivities( $scope.project.definition, $scope.project.lists );
+					ngmClusterLocations.setSiteTypeAndImplementationSelect($scope.project);
 				},
 
 				// compile cluster activities

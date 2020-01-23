@@ -302,7 +302,7 @@
 								      				ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
 									  <label class="checkbox-label" for="activity_{{ a.cluster_id }}">{{ a.cluster }}</label> -->
 										<label class="checkbox-label" for="activity_{{ a.cluster_id }}">
-											<input type="checkbox" class="filled-in" id="activity_{{ a.activity_type_id }}"
+											<input type="checkbox" class="filled-in" id="activity_{{ a.cluster_id }}"
 												ng-model="project.definition.inter_cluster_check[ a.cluster_id ]"
 												ng-click="project.compileInterClusterActivities()"
 												ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
