@@ -209,7 +209,7 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				targetBeneficiariesDefaultUrl: 'target-beneficiaries/2016/target-beneficiaries-default.html',
 				targetBeneficiariesUrl: moment( config.project.project_end_date ).year() === 2016 ? 'target-beneficiaries/2016/target-beneficiaries.html' : 'target-beneficiaries/target-beneficiaries.html',
 				// target locations
-				locationsUrl: config.project.admin0pcode === 'CB' ? 'target-locations/CB/locations.html' : 'target-locations/locations.html',
+				locationsUrl: config.project.admin0pcode === 'CB' ? 'target-locations/CB/locations.html' : (config.project.admin0pcode === 'AF' ? 'target-locations/locations-reform.html':'target-locations/locations.html'),
 				// upload
 				uploadUrl:'project-upload.html',
 
@@ -228,7 +228,9 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					// set beneficiaries form
 					ngmClusterBeneficiaries.setBeneficiariesForm( $scope.project.lists, 0, $scope.project.definition.target_beneficiaries );
 					// set form inputs
-					ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );					
+					ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );	
+					// set admin1,2,3,4,5 && site_type && site_implementation
+					ngmClusterLocations.setLocationAdminSelect($scope.project, $scope.project.definition.target_locations);
 					// documents uploads
 					$scope.project.setTokenUpload();
 					// implementing partners
@@ -346,6 +348,16 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 						$scope.project.definition.project_hrp_code = $scope.project.definition.project_hrp_code.replace( 'HRP', 'OTH' );
 						$scope.project.definition.project_hrp_code = $scope.project.definition.project_hrp_code.replace( 'JRP', 'OTH' );
 					}
+				},
+
+
+				setYesorNoSiteList: function(location,id){
+					if(document.getElementById(id).checked){
+						location.site_list_select_id = 'yes'
+					}else{
+						location.site_list_select_id = 'no'
+					}				
+					ngmClusterLocations.updateYesorNo($scope.project.lists, location);
 				},
 
 
@@ -554,6 +566,12 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					if ( $scope.project.definition.admin0pcode === 'CB' ) {
 						ngmCbLocations.setLocationsForm( $scope.project, $scope.project.definition.target_locations );		
 					}
+					
+					if ($scope.project.definition.admin0pcode !== 'CB') {
+						var newLocationIndex = $scope.project.definition.target_locations.length - 1;
+						// set admin1,2,3 etc for new location added
+						ngmClusterLocations.filterLocations($scope.project, newLocationIndex, $scope.project.definition.target_locations[newLocationIndex])
+					}
 				},
 
 				// save location
@@ -646,6 +664,8 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				// compile cluster activities
 				compileInterClusterActivities: function(){					
 					ngmClusterHelper.compileInterClusterActivities( $scope.project.definition, $scope.project.lists );
+					// when new inter cluster added set new list of site_type && site_implementation
+					ngmClusterLocations.setSiteTypeAndImplementationSelect($scope.project);
 				},
 
 				// compile cluster activities
