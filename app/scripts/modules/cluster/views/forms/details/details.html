@@ -497,7 +497,20 @@
 									</div>
 					     	</div>
 
-					    </div>
+						</div>
+					
+					<div class="row">
+						<div class="input-field col s12">
+						
+							<md-select style="margin-top: 15px;" ng-model="project.definition.supportive_org" multiple
+								ng-model-options="{trackBy: '$value.organization'}" placeholder="{{'not_set'|translate}}">
+								<md-option ng-value="partner" ng-repeat="partner in project.lists.organizations">
+									{{ partner.organization }}</md-option>
+							</md-select>
+							<label class="active" style="transform:translateY(-50%)" for="ngm-project-implementing_partners">Supportive
+								Organization</label>
+						</div>
+					</div>
 
 			      	<!-- project description -->
 							<div class="row">
