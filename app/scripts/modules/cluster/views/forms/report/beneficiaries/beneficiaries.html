@@ -311,11 +311,9 @@
 
 						<div class="input-field col s12">
 						
-							<md-select style="margin-top: 15px;" 
-								ng-model="beneficiary.implementing_partners" multiple
+							<md-select style="margin-top: 15px;" ng-model="beneficiary.implementing_partners" multiple
 								ng-model-options="{trackBy: '$value.organization'}" 
-								placeholder="{{'not_set'|translate}}"
-								ng-change="selectedImplementingPartner(beneficiary)">
+								placeholder="{{'not_set'|translate}}">
 								<md-option ng-value="partner" ng-repeat="partner in project.definition.implementing_partners">
 									{{ partner.organization }}</md-option>
 							</md-select>
