@@ -135,18 +135,10 @@ angular
 						}
 			});
 					$scope.$watch('maxDate', function (newMax) {
-						if (picker) {
-							var maxDate = new Date(newMax);
-							//   materialize 1.0.0
-							picker.options.maxDate = maxDate ? maxDate : false;
-						}
+						picker.options.maxDate = newMax ? new Date(newMax) : false;
 					});
 					$scope.$watch('minDate', function (newMin) {
-						if (picker) {
-							var minDate = new Date(newMin);
-							//   materialize 1.0.0
-							picker.options.minDate = minDate ? minDate : false;
-						}
+						picker.options.minDate = newMin ? new Date(newMin) : false;
 					});
 
 				}
