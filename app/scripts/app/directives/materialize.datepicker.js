@@ -125,6 +125,7 @@ angular
 
 					// init datepicker
 					var instance = M.Datepicker.init( element, options );
+					var picker = M.Datepicker.getInstance(element);
 
 					// format date
         	ngModelCtrl.$formatters.unshift(function ( modelValue ) {
@@ -132,7 +133,21 @@ angular
 							var date = new Date( modelValue );
               return (angular.isDefined($scope.format)) ? date.format($scope.format) : date.format( 'dd mmm, yyyy' );
 						}
-        	});
+			});
+					$scope.$watch('maxDate', function (newMax) {
+						if (picker) {
+							var maxDate = new Date(newMax);
+							//   materialize 1.0.0
+							picker.options.maxDate = maxDate ? maxDate : false;
+						}
+					});
+					$scope.$watch('minDate', function (newMin) {
+						if (picker) {
+							var minDate = new Date(newMin);
+							//   materialize 1.0.0
+							picker.options.minDate = minDate ? minDate : false;
+						}
+					});
 
 				}
 			}
