@@ -245,8 +245,28 @@
 	<!-- <h4>loading...</h4> -->
 </div>
 
+<div class="row" ng-if="loading && !show_project_private">
+	<div class="col s12 m12 l8 offset-l2">
+		<div class="card z-depth-1" style="padding:5% 20% 5% !important;">
+
+			<div class="icon center">
+				<div class="card" style="background-color: #fdd835;  width: 150px;
+  height: 150px;
+  padding: 30px 0px 30px 20px;
+  border-radius: 50% !important;
+  margin: 10px auto;">
+					<!-- <img title="Profile" src="images/registration.png" width="110%" style="margin-left:-20px;" /> -->
+					<i class="material-icons" style="margin-left:-20px;font-size: 90px;color: #ffffff;">warning</i>
+				</div>
+				<h5 class="title">You Can't See This Project Detail</h5>
+				<p style="font-weight: 600;"> Because this user set Project to Private</p>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Project form -->
-<div name="clusterProjectForm" class="col s12 m12 l12" style="padding:0px;" novalidate ng-hide="loading">
+<div name="clusterProjectForm" class="col s12 m12 l12" style="padding:0px;" novalidate ng-hide="loading && show_project_private">
 
 	<!-- disabled -->
 	<div ng-disabled="!project.canEdit">
@@ -301,6 +321,26 @@
 		
 					</div>
 		
+				</div>
+			</div>
+		</div>
+		<!-- form submission -->
+		<div class="row remove" ng-if="project.definition.project_status !== 'complete' && project.canEdit">
+			<div class="col s12 m12 l12">
+				<div class="card-panel white text-darken-2">
+						<label class="active" style="color: #000;font-weight: 600;">Private Project Checkbox</label>
+						<p>
+							<label class="checkbox-label" for="set_project_private" style="color: #000;">
+								<input type="checkbox" class="filled-in" id="set_project_private"
+									ng-checked="project.definition.private"
+									ng-click="project.setProjectPrivate('set_project_private')"
+									ng-disabled="" />
+								<span style="left: .75rem;"> Set Project Private ?</span>
+							</label>
+						</p>
+						<p>
+							** If you want to make this project cannot be seen by other you can checklist checkbox above
+						</p>
 				</div>
 			</div>
 		</div>

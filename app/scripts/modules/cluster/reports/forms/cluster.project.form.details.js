@@ -348,6 +348,13 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					}
 
 
+					if (!$scope.project.definition.private) {
+						$scope.show_project_private = true;
+					}else{
+						$scope.show_project_private = $scope.project.canEdit;
+					}
+
+
 				},
 				// Push objects, in chunk of 10s to the location array to make rendering easy
 				addMoreItems: function(){
@@ -2584,6 +2591,29 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 
 				copyProject:function(){
 					$location.path('/cluster/projects/details/new/' + $scope.project.definition.id);
+				},
+
+
+				setProjectPrivate:function(id){
+					if (document.getElementById(id).checked) {
+						$scope.project.definition.private = true;
+					}else{
+						$scope.project.definition.private = false;
+					}
+
+					M.toast({ html: $filter('translate')('processing'), displayLength: 6000, classes: 'note' });
+
+					// details update
+					$http({
+						method: 'POST',
+						url: ngmAuth.LOCATION + '/api/cluster/project/setProject',
+						data: { project: $scope.project.definition }
+					}).success(function (project) {
+						console.log(project)
+
+						M.toast({ html: 'Project Successfully to Private !', displayLength: 4000, classes: 'success' });
+					})
+					
 				},
 
 
