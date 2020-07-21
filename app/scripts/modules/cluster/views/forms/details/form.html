@@ -245,8 +245,8 @@
 	<!-- <h4>loading...</h4> -->
 </div>
 
-<div class="row" ng-if="loading && !show_project_private">
-	<div class="col s12 m12 l8 offset-l2">
+<div class="row" ng-hide="loading">
+	<div class="col s12 m12 l8 offset-l2" ng-if="!show_project_private">
 		<div class="card z-depth-1" style="padding:5% 20% 5% !important;">
 
 			<div class="icon center">
@@ -266,10 +266,10 @@
 </div>
 
 <!-- Project form -->
-<div name="clusterProjectForm" class="col s12 m12 l12" style="padding:0px;" novalidate ng-hide="loading && show_project_private">
+<div name="clusterProjectForm" class="col s12 m12 l12" style="padding:0px;" novalidate ng-hide="loading">
 
 	<!-- disabled -->
-	<div ng-disabled="!project.canEdit">
+	<div ng-disabled="!project.canEdit" ng-show="show_project_private">
 
 		<!-- Project details -->
 		<div ng-include="project.templatesUrl + project.detailsUrl"></div>
