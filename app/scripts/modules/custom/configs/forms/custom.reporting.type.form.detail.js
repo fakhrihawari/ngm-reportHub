@@ -84,15 +84,17 @@ angular.module('ngm.widget.reporting.type.form.detail', ['ngm.provider'])
                     var removeList = JSON.parse($scope.master.definition)
                     var setReportRequest = {
                         method: 'DELETE',
-                        url: ngmAuth.LOCATION + '/custom/config/deleteCustomList',
-                        params: { id: removeList.id }
+                        url: ngmAuth.LOCATION + '/api/custom/config/deleteCustomList/' + removeList.id,
+                        // params: { id: removeList.id }
                     }
-
+                    M.toast({ html: 'Processing...', displayLength: 2000, classes: 'note' });
                     // set report
                     $http(setReportRequest).success(function (response) {
                         if (!response.err) {
-                            $location.path('/custom/config/reporting-types/' + $route.current.params.report_type_id)
-                            M.toast({ html: 'Success Delete List', displayLength: 3000, classes: 'success' });
+                            $timeout(function(){
+                                $location.path('/custom/config/reporting-types/' + $route.current.params.report_type_id)
+                                M.toast({ html: 'Success Delete List', displayLength: 3000, classes: 'success' });
+                            },2000)
 
                         } else {
                             M.toast({ html: 'Error!', displayLength: 3000, classes: 'success' });
@@ -107,17 +109,20 @@ angular.module('ngm.widget.reporting.type.form.detail', ['ngm.provider'])
                         url: ngmAuth.LOCATION + '/api/custom/config/saveCustomList',
                         data: $scope.master.definition
                     }
-
+                    M.toast({ html: 'Processing...', displayLength: 2000, classes: 'note' });
                     // set report
                     $http(setReportRequest).success(function (response) {
                         if (!response.err) {
+                           
                             $scope.master.definition = JSON.stringify(response)
-                            if ($scope.master.newList) {
-                                M.toast({ html: 'Success Create New List', displayLength: 3000, classes: 'success' });
-                                $location.path('/custom/config/reporting-types/' + $route.current.params.report_type_id)
-                            } else {
-                                M.toast({ html: 'Successfully Update List', displayLength: 3000, classes: 'success' });
-                            }
+                            $timeout(function () {
+                                if ($scope.master.newList) {
+                                    M.toast({ html: 'Success Create New List', displayLength: 3000, classes: 'success' });
+                                    $location.path('/custom/config/reporting-types/' + $route.current.params.report_type_id)
+                                } else {
+                                    M.toast({ html: 'Successfully Update List', displayLength: 3000, classes: 'success' });
+                                }
+                            }, 2000)
 
                         }
 

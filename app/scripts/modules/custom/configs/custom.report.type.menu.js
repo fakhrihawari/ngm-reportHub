@@ -91,9 +91,12 @@ angular.module('ngmReportHub')
                                             data: report_type_config
                                         }).then(function (data) {
                                             // redirect on success
-                                            $location.path('/custom/config/report-types/');
-                                            // Materialize.toast( $filter('translate')('project_market_as_complete_congratulations')+'!', 6000, 'success');
-                                            M.toast({ html: 'Congratulation Report Type Configuration Mark as Active!', displayLength: 6000, classes: 'success' });
+                                            $timeout(function () {
+                                                $location.path('/custom/config/report-types/');
+                                                // Materialize.toast( $filter('translate')('project_market_as_complete_congratulations')+'!', 6000, 'success');
+                                                M.toast({ html: 'Congratulation Report Type Configuration Mark as Active!', displayLength: 6000, classes: 'success' });
+                                            },2000)
+                                            
                                         });
 
                                     },
@@ -115,26 +118,28 @@ angular.module('ngmReportHub')
                                             url: ngmAuth.LOCATION + '/api/custom/config/saveCustomReportingType',
                                             data: report_type_config
                                         }).then(function (data) {
-                                            // redirect on success
-                                            $location.path('/custom/config/report-types/');
-                                            // Materialize.toast( $filter('translate')('project_market_as_complete_congratulations')+'!', 6000, 'success');
-                                            M.toast({ html: 'Congratulation Report Type Configuration Mark as Complete!', displayLength: 6000, classes: 'success' });
+                                            $timeout(function(){
+                                                // redirect on success
+                                                $location.path('/custom/config/report-types/');
+                                                // Materialize.toast( $filter('translate')('project_market_as_complete_congratulations')+'!', 6000, 'success');
+                                                M.toast({ html: 'Congratulation Report Type Configuration Mark as Complete!', displayLength: 6000, classes: 'success' });
+                                            },2000)
+                                            
                                         });
 
                                     },
                                     delete: function (report_type_config) {
 
                                         // timeout
-                                        $timeout(function () {
+                                        
                                             //   Materialize.toast( $filter('translate')('processing')+'...', 6000, 'note'); 
-                                            M.toast({ html: $filter('translate')('processing') + '...', displayLength: 6000, classes: 'note' });
-                                        }, 200);
+                                            M.toast({ html: $filter('translate')('processing') + '...', displayLength: 3000, classes: 'note' });
+                                        
 
                                         // Submit project for save
                                         $http({
                                             method: 'DELETE',
-                                            url: ngmAuth.LOCATION + '/api/custom/config/deleteCustomReportingType',
-                                            params: { id: report_type_config.id }
+                                            url: ngmAuth.LOCATION + '/api/custom/config/deleteCustomReportingType/' + report_type_config.id,
                                         }).success(function (data) {
 
                                             // redirect on success
@@ -143,9 +148,12 @@ angular.module('ngmReportHub')
                                                 M.toast({ html: 'Repor Type Deleted Error, Please Try again', displayLength: 6000, classes: 'error' });
                                             }
                                             if (!data.err) {
-                                                $location.path('/custom/config/report-types/');
-                                                // Materialize.toast( $filter('translate')('project_deleted')+'!', 6000, 'success');
-                                                M.toast({ html: 'Report Type Deleted!', displayLength: 6000, classes: 'success' });
+                                                $timeout(function(){
+                                                    $location.path('/custom/config/report-types/');
+                                                    // Materialize.toast( $filter('translate')('project_deleted')+'!', 6000, 'success');
+                                                    M.toast({ html: 'Report Type Deleted!', displayLength: 6000, classes: 'success' });
+                                                },2000)
+                                                
                                             }
                                         }).error(function (err) {
                                             // redirect on success

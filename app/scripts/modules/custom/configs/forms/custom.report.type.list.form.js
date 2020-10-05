@@ -73,15 +73,17 @@ angular.module('ngm.widget.form.report.type.list', ['ngm.provider'])
                     var removeConfig = JSON.parse($scope.master.definition)
                     var setReportRequest = {
                         method: 'DELETE',
-                        url: ngmAuth.LOCATION + '/api/custom/config/deleteCustomReportingType',
-                        params: { id: removeConfig.id }
+                        url: ngmAuth.LOCATION + '/api/custom/config/deleteCustomReportingType/' + removeConfig.id,
+                        // params: { id: removeConfig.id }
                     }
-
+                    M.toast({ html: 'Processing...', displayLength: 2000, classes: 'note' });
                     // set report
                     $http(setReportRequest).success(function (response) {
                         if (!response.err) {
-                            $location.path('/custom/config/report-types/' + $route.current.params.admin0pcode)
-                            M.toast({ html: 'Success Delete List', displayLength: 3000, classes: 'success' });
+                            $timeout(function(){
+                                $location.path('/custom/config/report-types/' + $route.current.params.admin0pcode)
+                                M.toast({ html: 'Success Delete List', displayLength: 3000, classes: 'success' });
+                            },2000)
 
                         } else {
                             M.toast({ html: 'Error!', displayLength: 3000, classes: 'success' });
@@ -108,17 +110,19 @@ angular.module('ngm.widget.form.report.type.list', ['ngm.provider'])
                         url: ngmAuth.LOCATION + '/api/custom/config/saveCustomReportingType',
                         data: $scope.master.definition
                     }
-
+                    M.toast({ html: 'Processing...', displayLength: 2000, classes: 'note' });
                     // set report
                     $http(setReportRequest).success(function (response) {
                         if(!response.err){
-                            if ($scope.master.newConfig) {
-                                M.toast({ html: 'Success Create New Config', displayLength: 3000, classes: 'success' });
-                                $location.path('/custom/config/report-types/' + $route.current.params.admin0pcode)
-                            } else {
-                                $scope.master.definition = response
-                                M.toast({ html: 'Success Update Config', displayLength: 3000, classes: 'success' });
-                            }
+                            $timeout(function(){
+                                if ($scope.master.newConfig) {
+                                    M.toast({ html: 'Success Create New Config', displayLength: 3000, classes: 'success' });
+                                    $location.path('/custom/config/report-types/' + $route.current.params.admin0pcode)
+                                } else {
+                                    $scope.master.definition = response
+                                    M.toast({ html: 'Success Update Config', displayLength: 3000, classes: 'success' });
+                                }
+                            },2000)
                         }
                         
                     })

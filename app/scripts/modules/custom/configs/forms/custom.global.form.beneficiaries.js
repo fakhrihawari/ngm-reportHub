@@ -263,15 +263,19 @@ angular.module('ngm.widget.global.form.beneficiaries', ['ngm.provider'])
                     // setReportRequest
                     var setReportRequest = {
                         method: 'DELETE',
-                        url: ngmAuth.LOCATION + '/api/custom/config/deleteCustomBeneficiariesForm',
-                        params: { id: $scope.master.definition.id}
+                        url: ngmAuth.LOCATION + '/api/custom/config/deleteCustomBeneficiariesForm/' + $scope.master.definition.id,
+                        // params: { id: $scope.master.definition.id}
                     }
 
+                    M.toast({ html: 'Processing...', displayLength: 2000, classes: 'note' });
                     // set report
                     $http(setReportRequest).success(function (response) {
                         if(!response.err){
-
-                            M.toast({ html: 'Success Delete Form', displayLength: 3000, classes: 'success' });
+                            $timeout(function(){
+                                M.toast({ html: 'Success Delete Form', displayLength: 3000, classes: 'success' });
+                                $location.path('/custom/config/beneficiaries-forms/')
+                            },2000)
+                            
 
                         } else {
                             if (typeof $scope.master.definition === 'object') {
@@ -306,7 +310,7 @@ angular.module('ngm.widget.global.form.beneficiaries', ['ngm.provider'])
                         url: ngmAuth.LOCATION + '/api/custom/config/saveCustomBeneficiariesForm',
                         data: $scope.master.definition
                     }
-
+                    M.toast({ html: 'Processing...', displayLength: 3000, classes: 'note' });
                     // set report
                     $http(setReportRequest).success(function (response) {
                         if (!response.err) {
@@ -315,12 +319,15 @@ angular.module('ngm.widget.global.form.beneficiaries', ['ngm.provider'])
                             }else{
                                 $scope.master.definition = response
                             }
-                            if ($scope.master.newForm) {
-                                M.toast({ html: 'Success Create New Form', displayLength: 3000, classes: 'success' });
-                                $location.path('/custom/config/global/' + $route.current.params.admin0pcode)
-                            } else {
-                                M.toast({ html: 'Successfully Update Form', displayLength: 3000, classes: 'success' });
-                            }
+                            $timeout(function(){
+                                if ($scope.master.newForm) {
+                                    M.toast({ html: 'Success Create New Form', displayLength: 3000, classes: 'success' });
+                                    $location.path('/custom/config/global/' + $route.current.params.admin0pcode)
+                                } else {
+                                    M.toast({ html: 'Successfully Update Form', displayLength: 3000, classes: 'success' });
+                                }
+                            },2000)
+                            
 
                         }
 
