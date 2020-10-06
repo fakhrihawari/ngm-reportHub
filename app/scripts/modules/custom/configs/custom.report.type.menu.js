@@ -106,6 +106,8 @@ angular.module('ngmReportHub')
                                         // mark report_type_config complete
                                         report_type_config.status = 'complete';
 
+                                        report_type_config = { definition: report_type_config }
+
                                         // timeout
                                         $timeout(function () {
                                             //   Materialize.toast( $filter('translate')('processing')+'...', 6000, 'note'); 

@@ -427,15 +427,14 @@ angular.module('ngmReportHub')
                                         title: 'Complete Report Type',
                                         icon: 'edit',
                                         templateUrl: '/scripts/widgets/ngm-list/template/global_list.html',
-                                        // request: {
-                                        //     method:'GET',
-                                        //     url: ngmAuth.LOCATION + '/api/getCustomActivityDefinitions',
-                                        //     params:{
-                                        //         admin0pcode: $route.current.params.admin0pcode,
-                                        //         status:'complete',
-                                        //         reporting_type_id:''
-                                        //     }
-                                        // }
+                                        request: {
+                                            method: 'GET',
+                                            url: ngmAuth.LOCATION + '/api/custom/config/getCustomReportingTypes',
+                                            params: {
+                                                admin0pcode: $route.current.params.admin0pcode,
+                                                status: 'complete'
+                                            }
+                                        }
                                     }
                                 }]
                             }]
