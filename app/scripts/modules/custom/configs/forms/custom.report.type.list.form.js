@@ -40,7 +40,9 @@ angular.module('ngm.widget.form.report.type.list', ['ngm.provider'])
                     missing = '';
 
                     if(!json.definition){
-                        missing += 'definition </br>'
+                        if ($scope.master.newConfig){
+                            missing += 'definition </br>'
+                        }
                     }else{
                         if(!json.definition.admin0pcode){
                             missing += 'admin0pcode </br>'
@@ -55,6 +57,7 @@ angular.module('ngm.widget.form.report.type.list', ['ngm.provider'])
                     if(missing !== ''){
                         M.toast({ html: 'Please Put The missing atribute below </br>' + missing, displayLength: 4000, classes: 'error' });
                     }else{
+                        $scope.master.definition = json;
                         $scope.master.save()
                     }
                 },
@@ -104,7 +107,11 @@ angular.module('ngm.widget.form.report.type.list', ['ngm.provider'])
                 },
                 save: function () {
 
-                    setReportRequest
+                    // setReportRequest
+                    if (!$scope.master.newConfig){
+                        $scope.master.definition = { definition: $scope.master.definition};
+                        
+                    }
                     var setReportRequest = {
                         method: 'POST',
                         url: ngmAuth.LOCATION + '/api/custom/config/saveCustomReportingType',
@@ -119,7 +126,9 @@ angular.module('ngm.widget.form.report.type.list', ['ngm.provider'])
                                     M.toast({ html: 'Success Create New Config', displayLength: 3000, classes: 'success' });
                                     $location.path('/custom/config/report-types/' + $route.current.params.admin0pcode)
                                 } else {
-                                    $scope.master.definition = response
+                                    // $scope.master.definition = response
+                                    // $scope.master.definition = JSON.stringify($scope.master.definition)
+                                    $scope.master.definition = JSON.stringify(response)
                                     M.toast({ html: 'Success Update Config', displayLength: 3000, classes: 'success' });
                                 }
                             },2000)

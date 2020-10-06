@@ -45,6 +45,9 @@ angular.module('ngm.widget.global.form.beneficiaries', ['ngm.provider'])
                     }else{
                         json = $scope.master.definition;
                     }
+                    if (!$scope.master.newForm) {
+                        json = { form: json }
+                    }
                     missing = '';
                     if(!json.form){
                         missing += 'form </br>'
@@ -73,6 +76,11 @@ angular.module('ngm.widget.global.form.beneficiaries', ['ngm.provider'])
                     if(missing !==''){
                         M.toast({ html: 'Please Put The missing atribute below </br>' + missing, displayLength: 4000, classes: 'error' });
                     } else{
+                        if ($scope.inputString) {
+                            $scope.master.definition = JSON.parse($scope.master.definition)
+                        } else {
+                            $scope.master.definition = $scope.master.definition;
+                        }
                         $scope.master.save();
                     }
 
@@ -305,6 +313,9 @@ angular.module('ngm.widget.global.form.beneficiaries', ['ngm.provider'])
                     if (typeof $scope.master.definition === 'string'){
                         $scope.master.definition = JSON.parse($scope.master.definition)
                     }
+                    if (!$scope.master.newForm) {
+                        $scope.master.definition = { form: $scope.master.definition }
+                    }
                     var setReportRequest = {
                         method: 'POST',
                         url: ngmAuth.LOCATION + '/api/custom/config/saveCustomBeneficiariesForm',
@@ -322,7 +333,7 @@ angular.module('ngm.widget.global.form.beneficiaries', ['ngm.provider'])
                             $timeout(function(){
                                 if ($scope.master.newForm) {
                                     M.toast({ html: 'Success Create New Form', displayLength: 3000, classes: 'success' });
-                                    $location.path('/custom/config/global/' + $route.current.params.admin0pcode)
+                                    $location.path('/custom/config/beneficiaries-forms/')
                                 } else {
                                     M.toast({ html: 'Successfully Update Form', displayLength: 3000, classes: 'success' });
                                 }

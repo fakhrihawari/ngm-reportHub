@@ -37,7 +37,7 @@ angular.module('ngm.widget.form.global.list', ['ngm.provider'])
                 newList: $route.current.params.id === 'new' ? true: false,
                 validate:function(){
                     json = JSON.parse($scope.master.definition)
-                    console.log(json)
+                    json = {list: json};
                     missing='';
                     if(!json.list){
 
@@ -65,6 +65,7 @@ angular.module('ngm.widget.form.global.list', ['ngm.provider'])
                     if(missing){
                         M.toast({ html: 'Please Put The missing atribute below </br>'+ missing, displayLength: 4000, classes: 'error' });
                     }else{
+                        $scope.master.definition = JSON.parse($scope.master.definition);
                         $scope.master.save()
                     }
                 },
@@ -103,7 +104,10 @@ angular.module('ngm.widget.form.global.list', ['ngm.provider'])
 
                 },
                 save:function(){
-                    
+                    if (!$scope.master.newList) {
+                        $scope.master.definition = { list: $scope.master.definition };
+
+                    }
                     // setReportRequest
                     var setReportRequest = {
                         method: 'POST',

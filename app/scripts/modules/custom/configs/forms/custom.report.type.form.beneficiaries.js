@@ -45,6 +45,9 @@ angular.module('ngm.widget.report.type.form.beneficiaries', ['ngm.provider'])
                     } else {
                         json = $scope.master.definition;
                     }
+                    if(!$scope.master.newForm){
+                        json = {form: json}
+                    }
                     missing = '';
                     if (!json.form) {
                         missing += 'form </br>'
@@ -73,6 +76,11 @@ angular.module('ngm.widget.report.type.form.beneficiaries', ['ngm.provider'])
                     if (missing !== '') {
                         M.toast({ html: 'Please Put The missing atribute below </br>' + missing, displayLength: 4000, classes: 'error' });
                     } else {
+                        if ($scope.inputString) {
+                            $scope.master.definition = JSON.parse($scope.master.definition)
+                        } else {
+                            $scope.master.definition = $scope.master.definition;
+                        }
                         $scope.master.save();
                     }
                 },
@@ -291,6 +299,9 @@ angular.module('ngm.widget.report.type.form.beneficiaries', ['ngm.provider'])
                     // setReportRequest
                     if (typeof $scope.master.definition === 'string') {
                         $scope.master.definition = JSON.parse($scope.master.definition)
+                    }
+                    if(!$scope.master.newForm){
+                        $scope.master.definition = { form: $scope.master.definition }
                     }
                     var setReportRequest = {
                         method: 'POST',
