@@ -728,20 +728,36 @@ angular.module('ngmReportHub')
                                     },
                                     schedule: {
                                         defaults: {
-                                            schedule_type: 'every',
-                                            schedule_period: 'quarter',
-                                            shift_period: 0,
-                                            shift_days: 0,
-                                            time: "00:00",
-                                            scheduled_report_type: 'beneficiaries',
-                                            report_start_date: 'year',
-                                            report_start_date_shift_period: 0,
-                                            report_start_date_shift_days: 0,
-                                            report_end_date: 'month',
-                                            report_end_date_shift_period: 1,
-                                            report_end_date_shift_days: 0,
-                                            start_date: '2020-01-01',
-                                            end_date: '2020-01-01'
+                                            // schedule_type: 'every',
+                                            // schedule_period: 'quarter',
+                                            // shift_period: 0,
+                                            // shift_days: 0,
+                                            // time: "00:00",
+                                            // scheduled_report_type: 'beneficiaries',
+                                            // report_start_date: 'year',
+                                            // report_start_date_shift_period: 0,
+                                            // report_start_date_shift_days: 0,
+                                            // report_end_date: 'month',
+                                            // report_end_date_shift_period: 1,
+                                            // report_end_date_shift_days: 0,
+                                            // start_date: '2020-01-01',
+                                            // end_date: '2020-01-01'
+                                            "schedule": "0/10 * * * * *",
+                                            "schedule_period": "month",
+                                            "schedule_type": "every",
+                                            "schedule_shift_period": 0,
+                                            "schedule_shift_days": 0,
+                                            "schedule_time": "4:30 PM",
+                                            "schedule_datetime": "2020-10-06",
+                                            "report_start_date_type": "year",
+                                            "report_start_date": "2020-01-06",
+                                            "report_end_date": "2020-10-06",
+                                            "report_start_date_shift_period": -1,
+                                            "report_start_date_shift_days": 1,
+                                            "report_end_date_type": "year",
+                                            "report_end_date_shift_period": -1,
+                                            "report_end_date_shift_days": 1,
+                                            "schedule_report_type": "beneficiaries"
                                         },
                                         lists: {
                                             schedule_periodes: ['year',
@@ -750,8 +766,8 @@ angular.module('ngmReportHub')
                                                 'week',
                                                 'day',
                                                 'custom'],
-                                            report_types: [{ scheduled_report_type: 'beneficiaries', scheduled_report_name: 'Beneficiaries', type: 'csv' },
-                                            { scheduled_report_type: 'indicators_summary', scheduled_report_name: 'Indicators Summary', type: 'excel' }
+                                            report_types: [{ schedule_report_type: 'beneficiaries', schedule_report_name: 'Beneficiaries', type: 'csv' },
+                                            { schedule_report_type: 'indicators_summary', schedule_report_name: 'Indicators Summary', type: 'excel' }
                                             ],
                                             types: ['every', 'once']
                                         }
