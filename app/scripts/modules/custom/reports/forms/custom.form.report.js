@@ -357,6 +357,8 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                     $scope.project.checkListBeneficiariesFromAPI()
 
 
+
+
                     // page limits
                     angular.forEach($scope.project.report.locations, function (e, i) {
                         $scope.detailBeneficiaries[i] = $scope.project.report.locations[i].beneficiaries.length ?
@@ -624,14 +626,35 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
 
                 checkListBeneficiariesFromAPI:function(){
                     var beneficiaries_lists_api = ngmCustomConfig.getCustomBeneficiariesConfig($scope.project.definition.report_type_id, $scope.project.definition.version).lists_api
-                    if (beneficiaries_lists_api.some_list_id) {
-                        $http({
-                            method: beneficiaries_lists_api.some_list_id.method,
-                            url: beneficiaries_lists_api.some_list_id.api,
-                            params: beneficiaries_lists_api.some_list_id.params
-                        }).success(function (x) {
-                            api_list = x[0].list
-                            $scope.project.beneficiaries_lists = angular.merge({}, $scope.project.beneficiaries_lists, ...api_list)
+                    // if (beneficiaries_lists_api.some_list_id) {
+                    //     $http({
+                    //         method: beneficiaries_lists_api.some_list_id.method,
+                    //         url: beneficiaries_lists_api.some_list_id.api,
+                    //         params: beneficiaries_lists_api.some_list_id.params
+                    //     }).success(function (x) {
+                    //         api_list = x[0].list
+                    //         $scope.project.beneficiaries_lists = angular.merge({}, $scope.project.beneficiaries_lists, ...api_list)
+                    //     })
+                    // }
+                    // second
+                    var array_list_api=[];
+                    name_list = Object.keys(beneficiaries_lists_api)
+                    if(Object.keys(beneficiaries_lists_api)){
+                        for (i in beneficiaries_lists_api) {
+                           var req= $http({
+                                    method: beneficiaries_lists_api[i].method,
+                                    url: beneficiaries_lists_api[i].api,
+                                    params: beneficiaries_lists_api[i].params
+                            });
+                            array_list_api.push(req);
+                        }
+                        $q.all(array_list_api).then(function (result) { 
+                            result_api ={}
+                            for(i=0;i<name_list.length;i++){
+                                result_api[name_list[i]]=result[i].data.list;
+                            }
+                            $scope.project.beneficiaries_lists = angular.merge({}, $scope.project.beneficiaries_lists, result_api)
+                            
                         })
                     }
                 },

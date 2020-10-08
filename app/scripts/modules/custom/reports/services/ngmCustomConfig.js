@@ -567,14 +567,27 @@ angular.module('ngmReportHub')
                                         //     }
                                         // ],
                                         lists_api:{
-                                            some_list_id: { 
-                                                api: ngmAuth.LOCATION + '/api/custom/config/getCustomLists', 
+                                            first_list_id: { 
+                                                api: ngmAuth.LOCATION + '/api/custom/config/getCustomList', 
                                                 method:'GET',
                                                 params: {
-                                                    list_type_id: 'project',
-                                                    status: 'active'
+                                                    list_id: 'project'
                                                 } 
-                                            } 
+                                            },
+                                            second_list_id: {
+                                                api: ngmAuth.LOCATION + '/api/custom/config/getCustomList',
+                                                method: 'GET',
+                                                params: {
+                                                    list_id: 'ksksk',
+                                                }
+                                            },
+                                            third_list_id: {
+                                                api: ngmAuth.LOCATION + '/api/custom/config/getCustomList',
+                                                method: 'GET',
+                                                params: {
+                                                    list_id: 'ksksk1',
+                                                }
+                                            }
                                         },
                                         lists: {
                                             clusters: [
