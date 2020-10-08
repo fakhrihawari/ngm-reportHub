@@ -567,7 +567,12 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
 
                 formBeneficiaries:function(){
                     var template = ngmCustomConfig.getCustomBeneficiariesConfigTemplate($scope.project.definition.report_type_id, $scope.project.definition.version)
-                    link_file = 'template-form-beneficiaries/'+template;
+                    // link_file = 'template-form-beneficiaries/'+template;
+                    if(template.indexOf(ngmAuth.LOCATION)>-1){
+                        link_file = template;
+                    }else{
+                        link_file = $scope.project.templatesUrl + '/template-form-beneficiaries/' + template;
+                    }
                     return link_file
                 },
                 

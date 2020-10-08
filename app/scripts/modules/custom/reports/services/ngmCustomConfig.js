@@ -517,6 +517,7 @@ angular.module('ngmReportHub')
                                     },
                                     beneficiaries: {
                                         template: 'annualworkplan20.v1.beneficiaries.html',
+                                        template_api: ngmAuth.LOCATION + '/report/annualworkplan20.v1.beneficiaries.html',
                                         defaults: {
                                             cluster_id: '',
                                             cluster_project_id: '',
@@ -1700,7 +1701,9 @@ angular.module('ngmReportHub')
                     },
                     // get template for Beneficiaries
                     getCustomBeneficiariesConfigTemplate: function (report_type_id,version) {
-
+                        if (ngmCustomConfig.getCustomBeneficiariesConfig(report_type_id, version).template_api){
+                            return ngmCustomConfig.getCustomBeneficiariesConfig(report_type_id, version).template_api
+                        }
                         return ngmCustomConfig.getCustomBeneficiariesConfig(report_type_id,version).template;
 
                     },
