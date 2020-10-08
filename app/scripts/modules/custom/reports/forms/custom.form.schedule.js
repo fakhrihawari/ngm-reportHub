@@ -118,8 +118,18 @@ angular.module('ngm.widget.custom.schedule', ['ngm.provider'])
                     //    time:'',
                     //    date: moment().format('YYYY-MM-DD')
                     // };
+
+                    
                     
                     $scope.inserted = {data:ngmCustomConfig.getCustomScheduleConfigAttribute($route.current.params.report_type_id)}
+                    var schedule_shift_default_value = {
+                        schedule_shift_period: 1,
+                        schedule_shift_days: 1,
+                        report_start_date_shift_period: 1,
+                        report_start_date_shift_days: 1,
+                        report_end_date_shift_period: 1,
+                        report_end_date_shift_days: 1
+                    }
                     var info={
                         reporting_type_id: $route.current.params.report_type_id,
                         admin0pcode:$scope.schedule.user.admin0pcode,
@@ -140,7 +150,7 @@ angular.module('ngm.widget.custom.schedule', ['ngm.provider'])
                             indicator: "beneficiaries"
                         }
                     }
-                    $scope.inserted.data = angular.merge({},$scope.inserted.data,info)
+                    $scope.inserted.data = angular.merge({}, schedule_shift_default_value,$scope.inserted.data,info)
 
                     
 

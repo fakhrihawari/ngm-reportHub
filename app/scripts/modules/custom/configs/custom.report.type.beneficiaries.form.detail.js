@@ -139,7 +139,7 @@ angular.module('ngmReportHub')
             var x = {
                 "form": {
                     "admin0pcode": "AF",
-                    "form_id": "winterization",
+                    "form_id": $route.current.params.report_type_id,
                     "form_type_id": "project",
                     "type": "json",
                     "config": {

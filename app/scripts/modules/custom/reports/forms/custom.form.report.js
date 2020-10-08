@@ -354,6 +354,7 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
 
                     // SET LIST for Beneficiries;
                     $scope.project.beneficiaries_lists = ngmCustomConfig.getCustomBeneficiariesConfigLists($scope.project.definition.report_type_id, $scope.project.definition.version);
+                    $scope.project.checkListBeneficiariesFromAPI()
 
 
                     // page limits
@@ -619,6 +620,20 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
 
                     console.log(beneficiary[att])
 
+                },
+
+                checkListBeneficiariesFromAPI:function(){
+                    var beneficiaries_lists_api = ngmCustomConfig.getCustomBeneficiariesConfig($scope.project.definition.report_type_id, $scope.project.definition.version).lists_api
+                    if (beneficiaries_lists_api.some_list_id) {
+                        $http({
+                            method: beneficiaries_lists_api.some_list_id.method,
+                            url: beneficiaries_lists_api.some_list_id.api,
+                            params: beneficiaries_lists_api.some_list_id.params
+                        }).success(function (x) {
+                            api_list = x[0].list
+                            $scope.project.beneficiaries_lists = angular.merge({}, $scope.project.beneficiaries_lists, ...api_list)
+                        })
+                    }
                 },
 
                 // remove beneficiary

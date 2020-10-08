@@ -138,7 +138,7 @@ angular.module('ngmReportHub')
             var template = {
                 list: {
                     admin0pcode: 'all',
-                    list_id: "",
+                    list_id: $route.current.params.report_type_id,
                     list_type_id: "project",
                     list: [{}]
                 }

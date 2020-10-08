@@ -37,9 +37,13 @@ angular.module('ngm.widget.reporting.type.form.detail', ['ngm.provider'])
                 newList: $route.current.params.id === 'new' ? true : false,
                 validate: function () {
                     json = JSON.parse($scope.master.definition)
-                    json = {list: json}
+                    if (!$scope.master.newList){
+                        json = { list: json }
+                    }
                     missing = '';
                     if (!json.list && !$scope.master.newList) {
+                        
+
 
                         missing += 'list </br>'
                     } else {
@@ -112,7 +116,7 @@ angular.module('ngm.widget.reporting.type.form.detail', ['ngm.provider'])
                     var setReportRequest = {
                         method: 'POST',
                         url: ngmAuth.LOCATION + '/api/custom/config/saveCustomList',
-                        data: {list: $scope.master.definition}
+                        data:  $scope.master.definition
                     }
                     M.toast({ html: 'Processing...', displayLength: 2000, classes: 'note' });
                     // set report
