@@ -355,6 +355,11 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                     // SET LIST for Beneficiries;
                     $scope.project.beneficiaries_lists = ngmCustomConfig.getCustomBeneficiariesConfigLists($scope.project.definition.report_type_id, $scope.project.definition.version);
                     $scope.project.checkListBeneficiariesFromAPI()
+                    $scope.templateBeneficiariesFormUrl = false;
+                    $scope.templateBeneficiariesFormAPIString = false;
+                    $scope.templateBeneficiariesFormAPIJSON = false;
+                    $scope.project.formBeneficiaries()
+
 
 
 
@@ -568,12 +573,20 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                 formBeneficiaries:function(){
                     var template = ngmCustomConfig.getCustomBeneficiariesConfigTemplate($scope.project.definition.report_type_id, $scope.project.definition.version)
                     // link_file = 'template-form-beneficiaries/'+template;
-                    if(template.indexOf(ngmAuth.LOCATION)>-1){
+                    if(typeof template === 'string'){
+                        $scope.templateBeneficiariesFormUrl = true;
                         link_file = template;
+                        return link_file;
                     }else{
-                        link_file = $scope.project.templatesUrl + '/template-form-beneficiaries/' + template;
+                        
+                        $scope.templateBeneficiariesFormAPIString = true;
+                        ngmData.get(template).then(function (result) {
+                            $timeout(function(){
+                                $("#template-beneficiaries-string").append(result.config.html);
+                            },200)
+                        })
                     }
-                    return link_file
+                   
                 },
                 
                 // countTotalBeneficiary:function(total_attr,array_attribut_to_count,beneficiary){
@@ -643,8 +656,8 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                     // }
                     // second
                     var array_list_api=[];
-                    name_list = Object.keys(beneficiaries_lists_api)
-                    if(Object.keys(beneficiaries_lists_api)){
+                    if (beneficiaries_lists_api && Object.keys(beneficiaries_lists_api).length){
+                        name_list = Object.keys(beneficiaries_lists_api)
                         for (i in beneficiaries_lists_api) {
                            var req= $http({
                                     method: beneficiaries_lists_api[i].method,

@@ -85,7 +85,7 @@ angular.module('ngmReportHub')
                                         overwriteFields: false
                                     },
                                     beneficiaries: {
-                                        template: 'winterization.v1.beneficiaries.html',
+                                        template: '/scripts/modules/custom/views/forms/report/template-form-beneficiaries/winterization.v1.beneficiaries.html',
                                         defaults: {
                                             planned_families: 0,
                                             assisted_returnee_families: 0,
@@ -516,8 +516,14 @@ angular.module('ngmReportHub')
                                         overwriteFields: false
                                     },
                                     beneficiaries: {
-                                        template: 'annualworkplan20.v1.beneficiaries.html',
-                                        template_api: ngmAuth.LOCATION + '/report/annualworkplan20.v1.beneficiaries.html',
+                                        template: ngmAuth.LOCATION + '/report/annualworkplan20.v1.beneficiaries.html',//'annualworkplan20.v1.beneficiaries.html',
+                                        template_api: {
+                                            method: 'GET',
+                                            url: ngmAuth.LOCATION + '/api/custom/config/getCustomBeneficiariesForm',
+                                            params: {
+                                                form_id: 'test_html'
+                                            }
+                                        },
                                         defaults: {
                                             cluster_id: '',
                                             cluster_project_id: '',

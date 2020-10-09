@@ -136,7 +136,7 @@ angular.module('ngmReportHub')
                 "form": {
                     "admin0pcode": "AF",
                     "form_id": "winterization",
-                    "form_type_id": "project",
+                    "form_type_id": "global",
                     "type": "json",
                     "config": {
                     }
