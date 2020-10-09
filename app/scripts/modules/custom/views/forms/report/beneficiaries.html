@@ -150,6 +150,14 @@
     <div ng-if="templateBeneficiariesFormUrl" ng-include="project.formBeneficiaries()"></div>
     <!-- template string  -->
     <div ng-if="templateBeneficiariesFormAPIString" id="template-beneficiaries-string"></div>
+    <!-- Template json -->
+    <div ng-if="templateBeneficiariesFormAPIJSON" dir="ltr" class="card-panel" ng-if="detailBeneficiaries[$locationIndex][$beneficiaryIndex]"
+    ng-class="{'card-panel-expand':detailBeneficiaries[$locationIndex][$beneficiaryIndex]}"
+    ng-disabled="!project.canEdit">
+        <form-beneficiaries
+            formid="{{ project.beneficiariesFormConfig && project.beneficiariesFormConfig.keys && project.beneficiariesFormConfig.keys.key }}">
+        </form-beneficiaries>
+    </div>
 </div>
 
 <!-- buttons -->

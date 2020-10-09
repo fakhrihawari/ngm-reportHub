@@ -516,12 +516,12 @@ angular.module('ngmReportHub')
                                         overwriteFields: false
                                     },
                                     beneficiaries: {
-                                        template: ngmAuth.LOCATION + '/report/annualworkplan20.v1.beneficiaries.html',//'annualworkplan20.v1.beneficiaries.html',
+                                        template: '/scripts/modules/custom/views/forms/report/template-form-beneficiaries/annualworkplan20.v1.beneficiaries.html',//ngmAuth.LOCATION + '/report/annualworkplan20.v1.beneficiaries.html',//'annualworkplan20.v1.beneficiaries.html',
                                         template_api: {
                                             method: 'GET',
                                             url: ngmAuth.LOCATION + '/api/custom/config/getCustomBeneficiariesForm',
                                             params: {
-                                                form_id: 'test_html'
+                                                form_id: 'beneficiariesv1'
                                             }
                                         },
                                         defaults: {

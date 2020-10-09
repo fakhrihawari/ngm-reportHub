@@ -76,8 +76,8 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
             // project
             $scope.project = {
 								beneficiariesFormConfig: {
-									"keys": { "key": "beneficiaries.v1" },
-									"beneficiaries.v1": {
+									"keys": { "key": "beneficiariesv1" },
+									"beneficiariesv1": {
 										"config": {
 											"rows": [
 													{
@@ -297,12 +297,12 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
 																	"classInput": "materialize-textarea"
 															}
 													]
-												},
-											],
-									},
-										// configById: { "cluster_id": { "input_type": "select", "class": "s12 m4 l4", "id": "cluster_id", "model": "cluster_id", "name": "cluster_name", "label": "Cluster/Unit *", "options": "b.cluster_id as b.cluster_name for b in project.beneficiaries_lists.clusters", "list": "clusters" }, "cluster_project_id": { "input_type": "select", "watch": "true", "class": "s12 m4 l4", "id": "cluster_project_id", "name": "cluster_project_name", "model": "cluster_project_id", "label": "Project", "options": "b.cluster_project_id as b.cluster_project_name for b in project.beneficiaries_lists.projects | filter: { cluster_id: beneficiary.cluster_id }:true", "list": "projects", "noselection": "true" }, "donor_id": { "input_type": "select", "class": "s12 m4 l4", "id": "donor_id", "name": "donor_name", "model": "donor_id", "label": "Donor", "options": "b.donor_id as b.donor_name for b in project.beneficiaries_lists.donor", "list": "donor", "noselection": "true" } },
+												}
+											]
 									}
-								},
+                                }
+                            },
+                            // configById: { "cluster_id": { "input_type": "select", "class": "s12 m4 l4", "id": "cluster_id", "model": "cluster_id", "name": "cluster_name", "label": "Cluster/Unit *", "options": "b.cluster_id as b.cluster_name for b in project.beneficiaries_lists.clusters", "list": "clusters" }, "cluster_project_id": { "input_type": "select", "watch": "true", "class": "s12 m4 l4", "id": "cluster_project_id", "name": "cluster_project_name", "model": "cluster_project_id", "label": "Project", "options": "b.cluster_project_id as b.cluster_project_name for b in project.beneficiaries_lists.projects | filter: { cluster_id: beneficiary.cluster_id }:true", "list": "projects", "noselection": "true" }, "donor_id": { "input_type": "select", "class": "s12 m4 l4", "id": "donor_id", "name": "donor_name", "model": "donor_id", "label": "Donor", "options": "b.donor_id as b.donor_name for b in project.beneficiaries_lists.donor", "list": "donor", "noselection": "true" } },
 
 								// beneficiariesFormConfigKeys: { key: 'beneficiaries.v1' },
 
@@ -579,11 +579,24 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                         return link_file;
                     }else{
                         
-                        $scope.templateBeneficiariesFormAPIString = true;
+                        // $scope.templateBeneficiariesFormAPIString = true;
                         ngmData.get(template).then(function (result) {
-                            $timeout(function(){
-                                $("#template-beneficiaries-string").append(result.config.html);
-                            },200)
+                            if(!result.err){
+                                if (result.type === 'html') {
+                                    $scope.templateBeneficiariesFormAPIString = true;
+                                    $timeout(function () {
+                                        $("#template-beneficiaries-string").append(result.config.html);
+                                    }, 200)
+                                }
+
+                                if (result.type === 'json') {
+                                    $scope.project.beneficiariesFormConfig = result.config
+                                    $scope.templateBeneficiariesFormAPIJSON = true;
+                                }
+
+                            }
+                            
+                            
                         })
                     }
                    
