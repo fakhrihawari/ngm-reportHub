@@ -1707,7 +1707,9 @@ angular.module('ngmReportHub')
                     },
                     // get template for Beneficiaries
                     getCustomBeneficiariesConfigTemplate: function (report_type_id,version) {
+                        // check template that need to return 
                         if (ngmCustomConfig.getCustomBeneficiariesConfig(report_type_id, version).template_api){
+                            // if template_api is exist then return template_api
                             return ngmCustomConfig.getCustomBeneficiariesConfig(report_type_id, version).template_api
                         }
                         return ngmCustomConfig.getCustomBeneficiariesConfig(report_type_id,version).template;

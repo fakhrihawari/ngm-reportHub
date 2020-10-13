@@ -355,9 +355,11 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                     // SET LIST for Beneficiries;
                     $scope.project.beneficiaries_lists = ngmCustomConfig.getCustomBeneficiariesConfigLists($scope.project.definition.report_type_id, $scope.project.definition.version);
                     $scope.project.checkListBeneficiariesFromAPI()
+                    // variable to indentify template type
                     $scope.templateBeneficiariesFormUrl = false;
                     $scope.templateBeneficiariesFormAPIString = false;
                     $scope.templateBeneficiariesFormAPIJSON = false;
+                    // to get template Beneficiaries form
                     $scope.project.formBeneficiaries()
 
 
@@ -572,14 +574,15 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
 
                 formBeneficiaries:function(){
                     var template = ngmCustomConfig.getCustomBeneficiariesConfigTemplate($scope.project.definition.report_type_id, $scope.project.definition.version)
+
                     // link_file = 'template-form-beneficiaries/'+template;
+                    // if template is return string path file
                     if(typeof template === 'string'){
                         $scope.templateBeneficiariesFormUrl = true;
                         link_file = template;
                         return link_file;
                     }else{
-                        
-                        // $scope.templateBeneficiariesFormAPIString = true;
+                        // if template is return object that contain API
                         ngmData.get(template).then(function (result) {
                             if(!result.err){
                                 if (result.type === 'html') {
@@ -593,7 +596,11 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                                 }
 
                             }
-                            
+                            if (!result ||result === '') { 
+                                
+                                $scope.templateBeneficiariesFormAPInotDefined = true; 
+                                M.toast({ html: 'Error! The form is not defined', displayLength: 6000, classes: 'error' });
+                            }
                             
                         })
                     }
