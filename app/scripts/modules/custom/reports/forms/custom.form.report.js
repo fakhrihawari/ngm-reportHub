@@ -584,9 +584,7 @@ angular.module('ngm.widget.custom.report', ['ngm.provider'])
                             if(!result.err){
                                 if (result.type === 'html') {
                                     $scope.templateBeneficiariesFormAPIString = true;
-                                    $timeout(function () {
-                                        $("#template-beneficiaries-string").append(result.config.html);
-                                    }, 200)
+                                    $scope.project.beneficiariesFormConfig = result.config;
                                 }
 
                                 if (result.type === 'json') {

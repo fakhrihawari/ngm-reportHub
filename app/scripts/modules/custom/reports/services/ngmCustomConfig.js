@@ -521,7 +521,7 @@ angular.module('ngmReportHub')
                                             method: 'GET',
                                             url: ngmAuth.LOCATION + '/api/custom/config/getCustomBeneficiariesForm',
                                             params: {
-                                                form_id: 'beneficiariesv1'
+                                                form_id: 'test_html2'//'beneficiariesv1'
                                             }
                                         },
                                         defaults: {
