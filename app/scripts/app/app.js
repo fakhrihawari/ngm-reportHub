@@ -37,6 +37,7 @@ angular
 		'ngm.widget.organization.stocks.list',
 		'ngm.widget.organization.stock',
 		'ngm.widget.form.organization.list',
+		'ngm.widget.form.donor.list',
 		'ngm.widget.upload.beneficiaries.stock.report',
 		// modules
 		'ngmBangladesh',
