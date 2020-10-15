@@ -130,10 +130,12 @@ angular.module('ngmReportHub')
 
         }
         // run page
-        ngmData.get({
+        ngmData.get(
+        {
             method: 'GET',
-            url: ngmAuth.LOCATION + '/api/cluster/list/donors'
-        }).then(function (donors) {
+            url: ngmAuth.LOCATION + '/api/admin/cluster/list/donors',
+        }
+        ).then(function (donors) {
             if (donors.length) {
                 cluster = $route.current.params.cluster_id ? $route.current.params.cluster_id:'all';
                 $scope.list.donors = donors;

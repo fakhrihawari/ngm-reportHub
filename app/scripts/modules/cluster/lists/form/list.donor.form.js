@@ -156,33 +156,33 @@ angular.module('ngm.widget.form.donor.list', ['ngm.provider'])
                 // },
                 addDonor:function(){
                     if (!$scope.addDonorAttribute.project_donor_id){
-                        $scope.addDonorAttribute.project_donor_id = $scope.addDonorAttribute.project_donor_name.toLowerCase().replace(' ','_');
+                        $scope.addDonorAttribute.project_donor_id = $scope.addDonorAttribute.project_donor_name.split(' ').join('_').toLowerCase();
                     }
                     M.toast({ html: 'Adding New Donor ...', displayLength: 2000, classes: 'note' });
-                    // $http({
-                    //     method: 'POST',
-                    //     url: ngmAuth.LOCATION + '/api/',
-                    //     data: {
-                    //         donor: $scope.addDonorAttribute
-                    //     }
-                    // }).success(function (new_org) {
-                    //     if (new_org.err) {
-                    //         M.toast({ html: 'Error! Donor Not Added </br>' + new_org.err, displayLength: 3000, classes: 'error' });
-                    //     }
-                    //     if (!new_org.err) {
-                    //         $scope.master.organization.unshift(new_org);
-                    //         $timeout(function () {
-                    //             $('#add-donor-modal').modal('close');
-                    //             // Materialize.toast( msg , 6000, 'success');
-                    //             M.toast({ html: 'Successfully Added New Donor ', displayLength: 4000, classes: 'success' });
-                    //         }, 1000);
+                    $http({
+                        method: 'POST',
+                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/donors',
+                        data: {
+                            data: $scope.addDonorAttribute
+                        }
+                    }).success(function (new_donor) {
+                        if (new_donor.err) {
+                            M.toast({ html: 'Error! Donor Not Added </br>' + new_donor.err, displayLength: 3000, classes: 'error' });
+                        }
+                        if (!new_donor.err) {
+                            $scope.master.donors.unshift(new_donor);
+                            $timeout(function () {
+                                $('#add-donor-modal').modal('close');
+                                // Materialize.toast( msg , 6000, 'success');
+                                M.toast({ html: 'Successfully Added New Donor ', displayLength: 4000, classes: 'success' });
+                            }, 1000);
 
-                    //     }
-                    // }).error(function (err) {
-                    //     M.toast({
-                    //         html: 'Error! Donor Not Added </br>' + err.err , displayLength: 6000, classes: 'error'
-                    //     });
-                    // })
+                        }
+                    }).error(function (err) {
+                        M.toast({
+                            html: 'Error! Donor Not Added </br>' + err.err , displayLength: 6000, classes: 'error'
+                        });
+                    })
                 },
                 // checkValidationOrganization: function (org) {
                 //     valid = false;
@@ -354,28 +354,28 @@ angular.module('ngm.widget.form.donor.list', ['ngm.provider'])
                 editDonor: function (donor) {
 
                     M.toast({ html: 'Updating Donor....', displayLength: 2000, classes: 'note' });
-                    // $http({
-                    //     method: 'POST',
-                    //     url: ngmAuth.LOCATION + '/api/',
-                    //     data: {
-                    //         donor: donor
-                    //     }
-                    // }).success(function (donor_edited) {
-                    //     if (donor_edited.err) {
-                    //         M.toast({ html: 'Error! Donor not updated', displayLength: 3000, classes: 'error' });
-                    //     }
-                    //     if (!donor_edited.err) {
-                    //         var index = $scope.master.donors.map(x => { return x.id }).indexOf(donor_edited.id);
-                    //         $scope.master.organization[index] = donor_edited;
-                    //         $timeout(function () {
-                    //             // Materialize.toast( msg , 6000, 'success');
-                    //             M.toast({ html: 'Donor is Updated ', displayLength: 3000, classes: 'success' });
-                    //         }, 1000);
+                    $http({
+                        method: 'POST',
+                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/donors',
+                        data: {
+                            data: donor
+                        }
+                    }).success(function (donor_edited) {
+                        if (donor_edited.err) {
+                            M.toast({ html: 'Error! Donor not updated', displayLength: 3000, classes: 'error' });
+                        }
+                        if (!donor_edited.err) {
+                            var index = $scope.master.donors.map(x => { return x.id }).indexOf(donor_edited.id);
+                            $scope.master.donors[index] = donor_edited;
+                            $timeout(function () {
+                                // Materialize.toast( msg , 6000, 'success');
+                                M.toast({ html: 'Donor is Updated ', displayLength: 3000, classes: 'success' });
+                            }, 1000);
 
-                    //     }
-                    // }).error(function (err) {
-                    //     M.toast({ html: 'Error! Donor not updated', displayLength: 3000, classes: 'error' });
-                    // })
+                        }
+                    }).error(function (err) {
+                        M.toast({ html: 'Error! Donor not updated', displayLength: 3000, classes: 'error' });
+                    })
 
                     //after save reset
                     $scope.editedDonor = {};
@@ -577,28 +577,28 @@ angular.module('ngm.widget.form.donor.list', ['ngm.provider'])
                 // },
                 removeDonor: function (id) {
                     M.toast({ html: 'Deleting Donor....', displayLength: 2000, classes: 'note' });
-                    // $http({
-                    //     method: 'POST',
-                    //     url: ngmAuth.LOCATION + '/api/list/deleteOrganization',
-                    //     data: {
-                    //         id: id
-                    //     }
-                    // }).success(function (org) {
-                    //     if (org.err) {
-                    //         M.toast({ html: 'Error! Delete not deleted', displayLength: 3000, classes: 'error' });
-                    //     }
-                    //     if (!org.err) {
-                    //         $timeout(function () {
-                    //             var index = $scope.master.organization.map(x => { return x.id }).indexOf(id);
-                    //             $scope.master.organization.splice(index, 1);
-                    //             // Materialize.toast( msg , 6000, 'success');
-                    //             M.toast({ html: 'Succesfully delete donor ', displayLength: 3000, classes: 'success' });
-                    //         }, 1000);
+                    $http({
+                        method: 'DELETE',
+                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/donors',
+                        data: {
+                            data: $scope.master.removedDonor
+                        }
+                    }).success(function (org) {
+                        if (org.err) {
+                            M.toast({ html: 'Error! Delete not deleted', displayLength: 3000, classes: 'error' });
+                        }
+                        if (!org.err) {
+                            $timeout(function () {
+                                var index = $scope.master.donors.map(x => { return x.id }).indexOf(id);
+                                $scope.master.donors.splice(index, 1);
+                                // Materialize.toast( msg , 6000, 'success');
+                                M.toast({ html: 'Succesfully delete donor ', displayLength: 3000, classes: 'success' });
+                            }, 1000);
 
-                    //     }
-                    // }).error(function (err) {
-                    //     M.toast({ html: 'Error! Donor not deleted </br>' + err.err, displayLength: 3000, classes: 'error' });
-                    // })
+                        }
+                    }).error(function (err) {
+                        M.toast({ html: 'Error! Donor not deleted </br>' + err.err, displayLength: 3000, classes: 'error' });
+                    })
                 },
                 // changeListCountry: function (item) {
                 //     if (item.organization_type !== 'United Nations' && item.organization_type !== 'International NGO') {
