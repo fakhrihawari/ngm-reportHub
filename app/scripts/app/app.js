@@ -42,6 +42,8 @@ angular
 		'ngm.widget.form.stock.targeted.group.list',
 		'ngm.widget.form.stock.status.list',
 		'ngm.widget.form.currencies.list',
+		'ngm.widget.form.project.detail.list',
+		'ngm.widget.form.beneficiary.categories.list',
 		'ngm.widget.upload.beneficiaries.stock.report',
 		// modules
 		'ngmBangladesh',
