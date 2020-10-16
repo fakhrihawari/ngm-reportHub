@@ -983,6 +983,34 @@ angular
 				}
 			})
 
+			.when('/cluster/admin/list/stock_item/:admin0pcode?', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ListStockItemCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+			.when('/cluster/admin/list/stock_targeted_group/:admin0pcode?', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ListStockTargetedGroupsCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+			.when('/cluster/admin/list/stock_status/:admin0pcode?', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ListStockStatusCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
+
 			.when('/cluster/record-admin/',{
 				redirectTo: '/cluster/record-admin/beneficiaries/hq/all/all/all/'+ this.page.start_date() + '/' + this.page.end_date()
 			})

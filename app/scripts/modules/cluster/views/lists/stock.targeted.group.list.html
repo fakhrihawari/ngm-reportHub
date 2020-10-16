@@ -1,0 +1,247 @@
+<style>
+    .nav-list-search {
+        margin-top: 6px;
+        background-color: white;
+        width: 72px;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .nav-list-search.focused {
+        margin-top: 6px;
+        width: 100%;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .input-field input[type=search] {
+        font-weight: 300;
+        padding-top: 0px;
+    }
+
+    .add_org.modal {
+        width: 50%;
+        right: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .btn:disabled {
+        background-color: #DFDFDF !important;
+    }
+
+    .inactive {
+        background-color: #cec9c9;
+    }
+
+    .modal-footer.addorg {
+        text-align: center;
+    }
+
+    .card-title.tag.active {
+        color: #6c6c6c;
+        font-weight: 500;
+    }
+
+    .card-title.tag.not_active {
+        font-weight: 500;
+    }
+</style>
+<div id="add-stock-targeted-modal" class="add_org modal">
+    <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+        <ul class="collection with-header" style="margin-top:0">
+            <li class="collection-header teal lighten-1" style="border-bottom: 0">
+                <h5 style="color: #ffffff;font-weight:300;">
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Add Stock Item
+                </h5>
+            </li>
+        </ul>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <input id="ngm-stock_item-name" placeholder="" type="text" ng-model="addStockTargetedGroup.stock_targeted_groups_name"
+                    name="ngm-stock_item-name" class="validate">
+                <label class="active" for="ngm-stock_item-name"> Stock Targeted Group Name</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-stock_item-country" name="ngm-stock_item-country" class="validate"
+                    ng-options="c.admin0pcode as c.admin0pname for c in master.country"
+                    ng-model="addStockTargetedGroup.admin0pcode" ng-disabled="" ng-change="" required>
+                    <option value="">Select Country</option>
+                </select>
+                <label for="ngm-stock_item-country" class="active" style="transform:translateY(-10%)"> Country</label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer addorg" style="margin-bottom: 10px;">
+        <div class="modal-action wave-effects wave-green btn" ng-disabled="!master.checkValidationStock(addStockTargetedGroup)"
+            ng-click="master.addStock()">Save
+        </div>
+        <div class="modal-action modal-close red darken-1 btn">Close</div>
+    </div>
+</div>
+
+<div id="edit-stock-targeted-modal" class="add_org modal">
+    <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+        <ul class="collection with-header" style="margin-top:0">
+            <li class="collection-header teal lighten-1" style="border-bottom: 0">
+                <h5 style="color: #ffffff;font-weight:300;">
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Edit {{master.editedStock.stock_targeted_groups_name}} Stock Item
+                </h5>
+            </li>
+        </ul>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <input id="ngm-stock_item-name" placeholder="" type="text"
+                    ng-model="master.editedStock.stock_targeted_groups_name" name="ngm-stock_item-name" class="validate">
+                <label class="active" for="ngm-stock_item-name"> Stock Targeted Groups Name</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-stock_item-country" name="ngm-stock_item-country" class="validate"
+                    ng-options="c.admin0pcode as c.admin0pname for c in master.country"
+                    ng-model="master.editedStock.admin0pcode" ng-disabled="" ng-change="" required>
+                    <option value="">Select Country</option>
+                </select>
+                <label for="ngm-stock_item-country" class="active" style="transform:translateY(-10%)"> Country</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer addorg" style="margin-bottom: 10px;">
+        <div class="modal-action modal-close wave-effects wave-green btn"
+            ng-disabled="!master.checkValidationStock(master.editedStock)"
+            ng-click="master.editStock(master.editedStock)">Save
+        </div>
+        <div class="modal-action modal-close red darken-1 btn">Close</div>
+    </div>
+</div>
+
+<div id="remove-stock-targeted-modal" class="add_org modal">
+    <div class="modal-content dialog">
+        <h4 class="header-modal red lighten-2"><i class="material-icons small left">delete</i> Delete Donor
+        </h4>
+        <p style=" font-size:24px;font-weight: 500; text-align: center;">Delete
+            {{ master.removedStock.stock_targeted_groups_name }}
+            ?</p>
+        <p style="color: #f44336; font-weight: 700; text-align: center;">{{'warning_mayus'|translate}}!
+            {{'this_action_can_not_be_undone'|translate}}!</p>
+    </div>
+    <div class="modal-footer addorg" style="margin-bottom: 10px;">
+        <div class="modal-action modal-close wave-effects wave-green btn"
+            ng-click="master.removeStock(master.removedStock.id)">Delete
+        </div>
+        <div class="modal-action modal-close red darken-1 btn">Close</div>
+    </div>
+
+</div>
+
+<div class="" style="position: absolute;
+    right: 85px;
+    top: 180px;">
+    <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1" ng-click="master.openAddModal()">
+
+        <i class="material-icons left">add</i> Add Stock Targeted Groups
+    </a>
+</div>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card">
+
+            <ul class="collection with-header">
+                <li class="collection-header indigo lighten-1" style="height:80px;">
+                    <div class="col s12 m6">
+                        <h5 class="report-panel-title white-text">
+                            <i class="material-icons left">attachment</i>Stock Targeted Group List
+
+                        </h5>
+                    </div>
+                    <div ng-if="master.organization.length > master.itemsPerPage" class="col s12 m4 right">
+                        <nav class="nav-list-search right"
+                            ng-class="{'focused':master.search.focused===true || master.search.filter }">
+                            <div class="nav-wrapper" ng-click="list.toggleSearch()">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="search_{{ list.id }}" type="search" ng-model="master.search.filter"
+                                            ng-focus="master.search.focused=true" ng-blur="master.search.focused=false">
+                                        <label for="search_{{ master.listId }}" style="top:-10px" class="search"><i
+                                                class="material-icons"
+                                                style="color: teal; padding-left:25px;">search</i></label>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+                </li>
+
+                <div>
+                    <li ng-if="master.stock_targeted_groups.length>0" class="collection-item avatar"
+                        style="padding-left: 30px;padding-right: 30px">
+                        <div class="row">
+                            <div class="col s12 m4  "
+                                dir-paginate="item in master.stock_targeted_groups | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
+                                pagination-id="master.listId" style="padding-top:20px;">
+                                <div class="card  darken-1 hoverable">
+                                    <div class="card-content " style="min-height: 60px;">
+                                        <p class="card-title activator tag truncate active"> <span
+                                                style="font-weight: 500; font-size: 18px;">{{item.stock_targeted_groups_name | limitTo: 20 }}{{item.stock_targeted_groups_name.length < 20 ? '' : '...'}}</span>
+                                            <i class="material-icons right">more_vert</i></p>
+                                        <!-- <p class="card-title activator tag truncate"
+                                            ng-class="{'active':master.checkActiveDeactivedDonor(item), 'not_active':!master.checkActiveDeactivedDonor(item)}">
+                                            {{item.organization}} <i class="material-icons right">more_vert</i></p>
+                                        <br>
+                                        <p class="truncate">{{item.stock_targeted_groups_name}}</p>
+                                        <br>
+                                        <br>
+                                        <div class="row switch input-field" style="margin-bottom:10px;margin-top:-8%">
+                                            <label>
+                                                <input ng-checked="master.checkActiveDeactivedDonor(item)"
+                                                    id="{{item.id}}" ng-disabled="master.disabledOrg(item)"
+                                                    type="checkbox" class="filled-in"
+                                                    ng-click="master.changeActiveDeactivedOrgByCountry(item.id)">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div> -->
+                                    </div>
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4"><i
+                                                class="material-icons right">close</i></span>
+                                        <div class="center" style="margin-top: 0%;">
+                                            <button class="btn" ng-click="master.setEditedStock(item)"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">create</i>
+                                            </button>
+                                            <button class="btn red" ng-click="master.removeStockModal(item)"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-item avatar" ng-if="!master.stock_targeted_groups.length">
+                        <p style="font-size: 17px; padding:10px 0px 10px 0px;">
+                            {{'you_have_no_project_documents_yet'|translate}}</p>
+                    </li>
+                    <li class="collection-item avatar" ng-if="master.stock_targeted_groups.length > master.itemsPerPage"
+                        style="padding:20px 20px 0px 50px;">
+                        <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
+                    </li>
+                </div>
+
+            </ul>
+        </div>
+    </div>
+</div>
