@@ -47,6 +47,7 @@ angular
 		'ngm.widget.form.delivery.types.list',
 		'ngm.widget.form.cluster.list',
 		'ngm.widget.form.unit.list',
+		'ngm.widget.form.site.implementation.list',
 		'ngm.widget.upload.beneficiaries.stock.report',
 		// modules
 		'ngmBangladesh',
