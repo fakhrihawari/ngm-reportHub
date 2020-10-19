@@ -53,22 +53,23 @@
         font-weight: 500;
     }
 </style>
-<div id="add-site-implementation-modal" class="add_org modal">
+<div id="add-site-type-modal" class="add_org modal">
     <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
         <ul class="collection with-header" style="margin-top:0">
             <li class="collection-header teal lighten-1" style="border-bottom: 0">
                 <h5 style="color: #ffffff;font-weight:300;">
                     <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
-                    Add Site Implementation
+                    Add Site Type
                 </h5>
             </li>
         </ul>
 
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
-                <input id="ngm-org-name" placeholder="" type="text" ng-model="addSiteImplementationAttribute.site_implementation_name"
-                    name="ngm-org-name" class="validate">
-                <label class="active" for="ngm-org-name"> Site Implementation Name</label>
+                <input id="ngm-org-name" placeholder="" type="text"
+                    ng-model="addSiteTypeAttribute.site_type_name" name="ngm-org-name"
+                    class="validate">
+                <label class="active" for="ngm-org-name"> Site Type Name</label>
             </div>
         </div>
         <div class="row" style="margin-left: 50px;margin-right:10px;">
@@ -78,7 +79,7 @@
             <div class="col s6" ng-repeat="c in master.list_cluster ">
                 <label>
                     <input type="checkbox" class="filled-in" id="add-{{c.cluster_id}}" value={{c.cluster}}
-                        ng-checked="addSiteImplementationAttribute.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
+                        ng-checked="addSiteTypeAttribute.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
                         ng-click="master.addClusterSite(c.cluster_id)" />
                     <span style="color: #000000; font-weight: 500;">{{c.cluster}}</span>
                 </label>
@@ -88,28 +89,30 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationSite(addSiteImplementationAttribute)" ng-click="master.addSiteImplementation()">Save
+            ng-disabled="!master.checkValidationSite(addSiteTypeAttribute)"
+            ng-click="master.addSiteType()">Save
         </div>
         <div class="modal-action modal-close red darken-1 btn">Close</div>
     </div>
 </div>
 
-<div id="edit-site-implementation-modal" class="add_org modal">
+<div id="edit-site-type-modal" class="add_org modal">
     <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
         <ul class="collection with-header" style="margin-top:0">
             <li class="collection-header teal lighten-1" style="border-bottom: 0">
                 <h5 style="color: #ffffff;font-weight:300;">
                     <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
-                    Edit {{master.editedSiteImplementation.site_implementation_name}} 
+                    Edit {{master.editedSiteType.site_type_name}}
                 </h5>
             </li>
         </ul>
 
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
-                <input id="ngm-org-name" placeholder="" type="text" ng-model="master.editedSiteImplementation.site_implementation_name"
-                    name="ngm-org-name" class="validate">
-                <label class="active" for="ngm-org-name"> Site Implementation</label>
+                <input id="ngm-org-name" placeholder="" type="text"
+                    ng-model="master.editedSiteType.site_type_name" name="ngm-org-name"
+                    class="validate">
+                <label class="active" for="ngm-org-name"> Site Type Name</label>
             </div>
         </div>
         <div class="row" style="margin-left: 50px;margin-right:10px;">
@@ -120,8 +123,8 @@
             <div class="col s6" ng-repeat="c in master.list_cluster">
                 <label>
                     <input type="checkbox" class="filled-in" id="edit-{{c.cluster_id}}" value={{c.cluster}}
-                        ng-checked="master.editedSiteImplementation.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
-                        ng-click="master.editClusterSite(c.cluster_id)" />
+                        ng-checked="master.editedSiteType.cluster_id.indexOf(c.cluster_id) > -1"
+                        ng-disabled="" ng-click="master.editClusterSite(c.cluster_id)" />
                     <span style="color: #000000; font-weight: 500;">{{c.cluster}}</span>
                 </label>
             </div>
@@ -130,25 +133,27 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action modal-close wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationSite(master.editedSiteImplementation)" ng-click="master.editSite(master.editedSiteImplementation)">
+            ng-disabled="!master.checkValidationSite(master.editedSiteType)"
+            ng-click="master.editSite(master.editedSiteType)">
             Save
         </div>
         <div class="modal-action modal-close red darken-1 btn">Close</div>
     </div>
 </div>
 
-<div id="remove-site-implementation-modal" class="add_org modal">
+<div id="remove-site-type-modal" class="add_org modal">
     <div class="modal-content dialog">
         <h4 class="header-modal red lighten-2"><i class="material-icons small left">delete</i> Delete Unit
         </h4>
-        <p style=" font-size:24px;font-weight: 500; text-align: center;">Delete {{ master.removeSiteImplementation.site_implementation_name }}
+        <p style=" font-size:24px;font-weight: 500; text-align: center;">Delete
+            {{ master.removeSiteType.site_type_name }}
             ?</p>
         <p style="color: #f44336; font-weight: 700; text-align: center;">{{'warning_mayus'|translate}}!
             {{'this_action_can_not_be_undone'|translate}}!</p>
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action modal-close wave-effects wave-green btn"
-            ng-click="master.removedSite(master.removeSiteImplementation.id)">Delete
+            ng-click="master.removedSite(master.removeSiteType.id)">Delete
         </div>
         <div class="modal-action modal-close red darken-1 btn">Close</div>
     </div>
@@ -160,7 +165,7 @@
     top: 180px;">
     <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1" ng-click="master.openAddModal()">
 
-        <i class="material-icons left">add</i> Add Site Implementation
+        <i class="material-icons left">add</i> Add Site Type
     </a>
 </div>
 <div class="row">
@@ -171,11 +176,11 @@
                 <li class="collection-header indigo lighten-1" style="height:80px;">
                     <div class="col s12 m6">
                         <h5 class="report-panel-title white-text">
-                            <i class="material-icons left">attachment</i> Site Implementation List
+                            <i class="material-icons left">attachment</i> Site Type List
 
                         </h5>
                     </div>
-                    <div ng-if="master.site_implementations.length > master.itemsPerPage" class="col s12 m4 right">
+                    <div ng-if="master.site_types.length > master.itemsPerPage" class="col s12 m4 right">
                         <nav class="nav-list-search right"
                             ng-class="{'focused':master.search.focused===true || master.search.filter }">
                             <div class="nav-wrapper" ng-click="list.toggleSearch()">
@@ -194,17 +199,18 @@
                 </li>
 
                 <div>
-                    <li ng-if="master.site_implementations.length>0" class="collection-item avatar"
+                    <li ng-if="master.site_types.length>0" class="collection-item avatar"
                         style="padding-left: 30px;padding-right: 30px">
                         <div class="row">
                             <div class="col s12 m4  "
-                                dir-paginate="item in master.site_implementations | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
+                                dir-paginate="item in master.site_types | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
                                 pagination-id="master.listId" style="padding-top:20px;">
                                 <div class="card  darken-1 hoverable">
                                     <div class="card-content " style="min-height: 60px;">
                                         <p class="card-title activator tag truncate active"
                                             style="font-weight: 500; font-size: 18px;">
-                                            {{item.site_implementation_name}} <i class="material-icons right">more_vert</i></p>
+                                            {{item.site_type_name}} <i
+                                                class="material-icons right">more_vert</i></p>
                                         <!-- <br>
                                         <p class="truncate">{{item.organization_name}}</p>
                                         <p style="font-style: italic; font-weight: 400;">{{item.organization_type}}</p>
@@ -227,7 +233,8 @@
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">create</i>
                                             </button>
-                                            <button class="btn red" ng-click="master.removeSiteImplementationModal(item)"
+                                            <button class="btn red"
+                                                ng-click="master.removeSiteTypeModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
                                             </button>
@@ -239,11 +246,11 @@
                             </div>
                         </div>
                     </li>
-                    <li class="collection-item avatar" ng-if="!master.site_implementations.length">
+                    <li class="collection-item avatar" ng-if="!master.site_types.length">
                         <p style="font-size: 17px; padding:10px 0px 10px 0px;">
                             {{'you_have_no_project_documents_yet'|translate}}</p>
                     </li>
-                    <li class="collection-item avatar" ng-if="master.site_implementations.length > master.itemsPerPage"
+                    <li class="collection-item avatar" ng-if="master.site_types.length > master.itemsPerPage"
                         style="padding:20px 20px 0px 50px;">
                         <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
                     </li>
