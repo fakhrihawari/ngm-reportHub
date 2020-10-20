@@ -50,6 +50,7 @@ angular
 		'ngm.widget.form.site.implementation.list',
 		'ngm.widget.form.site.type.list',
 		'ngm.widget.form.hrp.type.list',
+		'ngm.widget.form.beneficiary.type.list',
 		'ngm.widget.upload.beneficiaries.stock.report',
 		// modules
 		'ngmBangladesh',

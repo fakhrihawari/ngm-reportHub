@@ -61,56 +61,56 @@ angular.module('ngm.widget.form.site.type.list', ['ngm.provider'])
                 // admin0pcode: config.admin0pcode.toUpperCase(),
                 country: [
                     {
-                        'admin0pname': 'All',
+                        'admin0name': 'All',
                         'admin0pcode': 'ALL',
 
                     },
                     {
-                        'admin0pname': 'Afghanistan',
+                        'admin0name': 'Afghanistan',
                         'admin0pcode': 'AF',
 
                     }, {
-                        'admin0pname': 'Bangladesh',
+                        'admin0name': 'Bangladesh',
                         'admin0pcode': 'BD',
 
                     }, {
-                        'admin0pname': 'Cox Bazar',
+                        'admin0name': 'Cox Bazar',
                         'admin0pcode': 'CB',
 
                     }, {
-                        'admin0pname': 'Democratic Republic of Congo',
+                        'admin0name': 'Democratic Republic of Congo',
                         'admin0pcode': 'CD',
                     }, {
-                        'admin0pname': 'Ethiopia',
+                        'admin0name': 'Ethiopia',
                         'admin0pcode': 'ET',
 
                     }, {
-                        'admin0pname': 'Somalia',
+                        'admin0name': 'Somalia',
                         'admin0pcode': 'SO',
 
                     }, {
-                        'admin0pname': 'South Sudan',
+                        'admin0name': 'South Sudan',
                         'admin0pcode': 'SS',
 
                     }, {
-                        'admin0pname': 'Syria',
+                        'admin0name': 'Syria',
                         'admin0pcode': 'SY',
 
                     }, {
-                        'admin0pname': 'Ukraine',
+                        'admin0name': 'Ukraine',
                         'admin0pcode': 'UA',
 
                     }, {
-                        'admin0pname': 'Yemen',
+                        'admin0name': 'Yemen',
                         'admin0pcode': 'YE',
 
                     }, {
-                        'admin0pname': 'Nigeria',
+                        'admin0name': 'Nigeria',
                         'admin0pcode': 'NG',
 
                     },
                     {
-                        'admin0pname': 'Colombia',
+                        'admin0name': 'Colombia',
                         'admin0pcode': 'COL',
                     }],
                 addSiteType: function () {

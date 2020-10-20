@@ -83,7 +83,7 @@
             </div>
             <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-stock_item-country" name="ngm-stock_item-country" class="validate"
-                    ng-options="c.admin0pcode as c.admin0pname for c in master.country"
+                    ng-options="c.admin0pcode as c.admin0name for c in master.country"
                     ng-model="addDeliveryType.admin0pcode" ng-disabled="" ng-change="" required>
                     <option value="">Select Country</option>
                 </select>
@@ -129,7 +129,7 @@
             </div>
             <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-stock_item-country" name="ngm-stock_item-country" class="validate"
-                    ng-options="c.admin0pcode as c.admin0pname for c in master.country"
+                    ng-options="c.admin0pcode as c.admin0name for c in master.country"
                     ng-model="master.editedDeliveryType.admin0pcode" ng-disabled="" ng-change="" required>
                     <option value="">Select Country</option>
                 </select>

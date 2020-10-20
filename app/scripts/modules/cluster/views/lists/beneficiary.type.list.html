@@ -53,22 +53,22 @@
         font-weight: 500;
     }
 </style>
-<div id="add-hrp-beneficiary-type-modal" class="add_org modal">
+<div id="add-beneficiary-type-modal" class="add_org modal">
     <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
         <ul class="collection with-header" style="margin-top:0">
             <li class="collection-header teal lighten-1" style="border-bottom: 0">
                 <h5 style="color: #ffffff;font-weight:300;">
                     <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
-                    Add HRP Beneficiary Type
+                    Add Beneficiary Type
                 </h5>
             </li>
         </ul>
 
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
-                <input id="ngm-org-name" placeholder="" type="text" ng-model="addHrpTypeAttribute.hrp_beneficiary_type_name"
-                    name="ngm-org-name" class="validate">
-                <label class="active" for="ngm-org-name"> HRP Beneficiary Type Name</label>
+                <input id="ngm-org-name" placeholder="" type="text"
+                    ng-model="addBeneficiaryTypeAttribute.beneficiary_type_name" name="ngm-org-name" class="validate">
+                <label class="active" for="ngm-org-name"> Beneficiary Type Name</label>
             </div>
         </div>
         <div class="row" style="margin-left: 50px;margin-right:10px;">
@@ -78,8 +78,8 @@
             <div class="col s6" ng-repeat="c in master.list_cluster ">
                 <label>
                     <input type="checkbox" class="filled-in" id="add-{{c.cluster_id}}" value={{c.cluster}}
-                        ng-checked="addHrpTypeAttribute.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
-                        ng-click="master.addClusterHrp(c.cluster_id)" />
+                        ng-checked="addBeneficiaryTypeAttribute.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
+                        ng-click="master.addClusterBeneficiaryType(c.cluster_id)" />
                     <span style="color: #000000; font-weight: 500;">{{c.cluster}}</span>
                 </label>
             </div>
@@ -88,28 +88,28 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationHrp(addHrpTypeAttribute)" ng-click="master.addHrpType()">Save
+            ng-disabled="!master.checkValidationBeneficiaryType(addBeneficiaryTypeAttribute)" ng-click="master.addBeneficiaryType()">Save
         </div>
         <div class="modal-action modal-close red darken-1 btn">Close</div>
     </div>
 </div>
 
-<div id="edit-hrp-beneficiary-type-modal" class="add_org modal">
+<div id="edit-beneficiary-type-modal" class="add_org modal">
     <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
         <ul class="collection with-header" style="margin-top:0">
             <li class="collection-header teal lighten-1" style="border-bottom: 0">
                 <h5 style="color: #ffffff;font-weight:300;">
                     <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
-                    Edit {{master.editedHrpType.hrp_beneficiary_type_name}}
+                    Edit {{master.editedBeneficiaryType.beneficiary_type_name}}
                 </h5>
             </li>
         </ul>
 
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
-                <input id="ngm-org-name" placeholder="" type="text" ng-model="master.editedHrpType.hrp_beneficiary_type_name"
-                    name="ngm-org-name" class="validate">
-                <label class="active" for="ngm-org-name"> HRP Beneficiary Type Name</label>
+                <input id="ngm-org-name" placeholder="" type="text"
+                    ng-model="master.editedBeneficiaryType.beneficiary_type_name" name="ngm-org-name" class="validate">
+                <label class="active" for="ngm-org-name"> Beneficiary Type Name</label>
             </div>
         </div>
         <div class="row" style="margin-left: 50px;margin-right:10px;">
@@ -120,8 +120,8 @@
             <div class="col s6" ng-repeat="c in master.list_cluster">
                 <label>
                     <input type="checkbox" class="filled-in" id="edit-{{c.cluster_id}}" value={{c.cluster}}
-                        ng-checked="master.editedHrpType.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
-                        ng-click="master.editClusterHrp(c.cluster_id)" />
+                        ng-checked="master.editedBeneficiaryType.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
+                        ng-click="master.editClusterBeneficiaryType(c.cluster_id)" />
                     <span style="color: #000000; font-weight: 500;">{{c.cluster}}</span>
                 </label>
             </div>
@@ -130,27 +130,28 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action modal-close wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationHrp(master.editedHrpType)"
-            ng-click="master.editHrp(master.editedHrpType)">
+            ng-disabled="!master.checkValidationBeneficiaryType(master.editedBeneficiaryType)"
+            ng-click="master.editBeneficiaryType(master.editedBeneficiaryType)">
             Save
         </div>
         <div class="modal-action modal-close red darken-1 btn">Close</div>
     </div>
 </div>
 
-<div id="remove-hrp-beneficiary-type-modal" class="add_org modal">
+<div id="remove-beneficiary-type-modal" class="add_org modal">
     <div class="modal-content dialog">
-        <h4 class="header-modal red lighten-2"><i class="material-icons small left">delete</i> Delete HRP Beneficiary Type
+        <h4 class="header-modal red lighten-2"><i class="material-icons small left">delete</i> Delete Beneficiary
+            Type
         </h4>
         <p style=" font-size:24px;font-weight: 500; text-align: center;">Delete
-            {{ master.removeHrpType.hrp_beneficiary_type_name }}
+            {{ master.removeBeneficiaryType.beneficiary_type_name }}
             ?</p>
         <p style="color: #f44336; font-weight: 700; text-align: center;">{{'warning_mayus'|translate}}!
             {{'this_action_can_not_be_undone'|translate}}!</p>
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action modal-close wave-effects wave-green btn"
-            ng-click="master.removedHrp(master.removeHrpType.id)">Delete
+            ng-click="master.removedBeneficiaryType(master.removeBeneficiaryType.id)">Delete
         </div>
         <div class="modal-action modal-close red darken-1 btn">Close</div>
     </div>
@@ -162,7 +163,7 @@
     top: 180px;">
     <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1" ng-click="master.openAddModal()">
 
-        <i class="material-icons left">add</i> Add HRP Beneficiary Type
+        <i class="material-icons left">add</i> Add Beneficiary Type
     </a>
 </div>
 <div class="row">
@@ -173,11 +174,11 @@
                 <li class="collection-header indigo lighten-1" style="height:80px;">
                     <div class="col s12 m6">
                         <h5 class="report-panel-title white-text">
-                            <i class="material-icons left">attachment</i> HRP Beneficiary Type List
+                            <i class="material-icons left">attachment</i> Beneficiary Type List
 
                         </h5>
                     </div>
-                    <div ng-if="master.hrp_beneficiary_types.length > master.itemsPerPage" class="col s12 m4 right">
+                    <div ng-if="master.beneficiary_types.length > master.itemsPerPage" class="col s12 m4 right">
                         <nav class="nav-list-search right"
                             ng-class="{'focused':master.search.focused===true || master.search.filter }">
                             <div class="nav-wrapper" ng-click="list.toggleSearch()">
@@ -196,17 +197,18 @@
                 </li>
 
                 <div>
-                    <li ng-if="master.hrp_beneficiary_types.length>0" class="collection-item avatar"
+                    <li ng-if="master.beneficiary_types.length>0" class="collection-item avatar"
                         style="padding-left: 30px;padding-right: 30px">
                         <div class="row">
                             <div class="col s12 m4  "
-                                dir-paginate="item in master.hrp_beneficiary_types | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
+                                dir-paginate="item in master.beneficiary_types | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
                                 pagination-id="master.listId" style="padding-top:20px;">
                                 <div class="card  darken-1 hoverable">
                                     <div class="card-content " style="min-height: 60px;">
                                         <p class="card-title activator tag truncate active"
                                             style="font-weight: 500; font-size: 18px;">
-                                            {{item.hrp_beneficiary_type_name}} <i class="material-icons right">more_vert</i></p>
+                                            {{item.beneficiary_type_name}} <i
+                                                class="material-icons right">more_vert</i></p>
                                         <!-- <br>
                                         <p class="truncate">{{item.organization_name}}</p>
                                         <p style="font-style: italic; font-weight: 400;">{{item.organization_type}}</p>
@@ -225,11 +227,11 @@
                                         <span class="card-title grey-text text-darken-4"><i
                                                 class="material-icons right">close</i></span>
                                         <div class="center" style="margin-top: 0%;">
-                                            <button class="btn" ng-click="master.setEditedHrp(item)"
+                                            <button class="btn" ng-click="master.setEditedBeneficiaryType(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">create</i>
                                             </button>
-                                            <button class="btn red" ng-click="master.removeHrpTypeModal(item)"
+                                            <button class="btn red" ng-click="master.removeBeneficiaryTypeModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
                                             </button>
@@ -241,11 +243,11 @@
                             </div>
                         </div>
                     </li>
-                    <li class="collection-item avatar" ng-if="!master.hrp_beneficiary_types.length">
+                    <li class="collection-item avatar" ng-if="!master.beneficiary_types.length">
                         <p style="font-size: 17px; padding:10px 0px 10px 0px;">
                             {{'you_have_no_project_documents_yet'|translate}}</p>
                     </li>
-                    <li class="collection-item avatar" ng-if="master.hrp_beneficiary_types.length > master.itemsPerPage"
+                    <li class="collection-item avatar" ng-if="master.beneficiary_types.length > master.itemsPerPage"
                         style="padding:20px 20px 0px 50px;">
                         <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
                     </li>

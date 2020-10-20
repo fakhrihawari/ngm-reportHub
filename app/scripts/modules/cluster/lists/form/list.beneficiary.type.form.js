@@ -1,14 +1,14 @@
-angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
+angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
     .config(function (dashboardProvider) {
         dashboardProvider
-            .widget('form.hrp.type.list', {
-                title: 'HRP Type Form List',
-                description: 'HRP Type Form List',
-                controller: 'HrpBeneficiaryTypeFormListCtrl',
-                templateUrl: '/scripts/modules/cluster/views/lists/hrp.type.list.html'
+            .widget('form.beneficiary.type.list', {
+                title: 'Beneficiary Type Form List',
+                description: 'Beneficiary Type Form List',
+                controller: 'BeneficiaryTypeFormListCtrl',
+                templateUrl: '/scripts/modules/cluster/views/lists/beneficiary.type.list.html'
             });
     })
-    .controller('HrpBeneficiaryTypeFormListCtrl', [
+    .controller('BeneficiaryTypeFormListCtrl', [
         '$scope',
         'config',
         'ngmClusterLists',
@@ -31,7 +31,7 @@ angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
             $scope.master = {
                 // current user
                 user: ngmUser.get(),
-                hrp_beneficiary_types: config.hrp_beneficiary_types ? config.hrp_beneficiary_types : [],
+                beneficiary_types: config.beneficiary_types ? config.beneficiary_types : [],
                 clusters: ngmClusterLists.getClusters(ngmUser.get().admin0pcode),
                 cluster_id: config.cluster_id,
                 itemsPerPage: 9,
@@ -40,22 +40,22 @@ angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
                     filter: '',
                     focused: false
                 },
-                editedHrpType: {},
-                removeHrpType: {},
+                editedBeneficiaryType: {},
+                removeBeneficiaryType: {},
                 openAddModal: function (modal) {
-                    $('#add-hrp-beneficiary-type-modal').modal({ dismissible: false });
-                    $('#add-hrp-beneficiary-type-modal').modal('open');
-                    $scope.addHrpTypeAttribute = {
+                    $('#add-beneficiary-type-modal').modal({ dismissible: false });
+                    $('#add-beneficiary-type-modal').modal('open');
+                    $scope.addBeneficiaryTypeAttribute = {
                         cluster_id: [],
-                        hrp_beneficiary_type_id: '',
-                        hrp_beneficiary_type_name: ''
+                        beneficiary_type_id: '',
+                        beneficiary_type_name: ''
                     };
 
                 },
-                removeHrpTypeModal: function (site) {
-                    $scope.master.removeHrpType = site;
-                    $('#remove-hrp-beneficiary-type-modal').modal({ dismissible: false });
-                    $('#remove-hrp-beneficiary-type-modal').modal('open');
+                removeBeneficiaryTypeModal: function (type) {
+                    $scope.master.removeBeneficiaryType = type;
+                    $('#remove-beneficiary-type-modal').modal({ dismissible: false });
+                    $('#remove-beneficiary-type-modal').modal('open');
 
                 },
                 // admin0pcode: config.admin0pcode.toUpperCase(),
@@ -113,40 +113,40 @@ angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
                         'admin0name': 'Colombia',
                         'admin0pcode': 'COL',
                     }],
-                addHrpType: function () {
-                    if (!$scope.addHrpTypeAttribute.hrp_beneficiary_type_id) {
-                        $scope.addHrpTypeAttribute.hrp_beneficiary_type_id = $scope.addHrpTypeAttribute.hrp_beneficiary_type_name.split(' ').join('_').toLowerCase()
+                addBeneficiaryType: function () {
+                    if (!$scope.addBeneficiaryTypeAttribute.beneficiary_type_id) {
+                        $scope.addBeneficiaryTypeAttribute.beneficiary_type_id = $scope.addBeneficiaryTypeAttribute.beneficiary_type_name.split(' ').join('_').toLowerCase()
                     }
-                    console.log($scope.addHrpTypeAttribute)
-                    M.toast({ html: 'Adding New HRP Type Beneficiary Type...', displayLength: 2000, classes: 'note' });
+                    console.log($scope.addBeneficiaryTypeAttribute)
+                    M.toast({ html: 'Adding New Beneficiary Type ...', displayLength: 2000, classes: 'note' });
                     $http({
                         method: 'POST',
-                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/hrpbeneficiarytypes',
+                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/beneficiarytypes',
                         data: {
-                            data: $scope.addHrpTypeAttribute
+                            data: $scope.addBeneficiaryTypeAttribute
                         }
-                    }).success(function (new_hrp) {
-                        if (new_hrp.err) {
-                            M.toast({ html: 'Error! HRP Type Beneficiary Type Not Added </br>' + new_hrp.err, displayLength: 3000, classes: 'error' });
+                    }).success(function (new_type) {
+                        if (new_type.err) {
+                            M.toast({ html: 'Error! Beneficiary Type  Not Added </br>' + new_type.err, displayLength: 3000, classes: 'error' });
                         }
-                        if (!new_hrp.err) {
-                            $scope.master.hrp_beneficiary_types.unshift(new_hrp);
+                        if (!new_type.err) {
+                            $scope.master.beneficiary_types.unshift(new_type);
                             $timeout(function () {
-                                $('#add-hrp-beneficiary-type-modal').modal('close');
+                                $('#add-beneficiary-type-modal').modal('close');
                                 // Materialize.toast( msg , 6000, 'success');
-                                M.toast({ html: 'Successfully Added New HRP Type Beneficiary Type ', displayLength: 4000, classes: 'success' });
+                                M.toast({ html: 'Successfully Added New Beneficiary Type  ', displayLength: 4000, classes: 'success' });
                             }, 1000);
 
                         }
                     }).error(function (err) {
                         M.toast({
-                            html: 'Error! HRP Type Beneficiary Type Not Added </br>' + err.err, displayLength: 6000, classes: 'error'
+                            html: 'Error! Beneficiary Type  Not Added </br>' + err.err, displayLength: 6000, classes: 'error'
                         });
                     })
                 },
-                checkValidationHrp: function (site) {
+                checkValidationBeneficiaryType: function (site) {
                     valid = false;
-                    if (!site || site.hrp_beneficiary_type_name === '' || !site.cluster_id || !site.cluster_id.length) {
+                    if (!site || site.beneficiary_type_name === '' || !site.cluster_id || !site.cluster_id.length) {
                         valid = false;
                     } else {
                         valid = true;
@@ -159,39 +159,39 @@ angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
                 },
                 disabledUnit: function (item) {
                 },
-                setEditedHrp: function (hrp_type) {
-                    $scope.master.editedHrpType = angular.copy(hrp_type);
-                    $('#edit-hrp-beneficiary-type-modal').modal({ dismissible: false });
-                    $('#edit-hrp-beneficiary-type-modal').modal('open');
+                setEditedBeneficiaryType: function (type) {
+                    $scope.master.editedBeneficiaryType = angular.copy(type);
+                    $('#edit-beneficiary-type-modal').modal({ dismissible: false });
+                    $('#edit-beneficiary-type-modal').modal('open');
                 },
-                editHrp: function (hrp_type) {
+                editBeneficiaryType: function (type) {
 
-                    M.toast({ html: 'Updating HRP Type....', displayLength: 2000, classes: 'note' });
+                    M.toast({ html: 'Updating Beneficiary Type....', displayLength: 2000, classes: 'note' });
                     $http({
                         method: 'POST',
-                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/hrpbeneficiarytypes',
+                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/beneficiarytypes',
                         data: {
-                            data: hrp_type
+                            data: type
                         }
-                    }).success(function (hrp_edited) {
-                        if (hrp_edited.err) {
-                            M.toast({ html: 'Error! HRP Type not updated', displayLength: 3000, classes: 'error' });
+                    }).success(function (type_edited) {
+                        if (type_edited.err) {
+                            M.toast({ html: 'Error! Beneficiary Type not updated', displayLength: 3000, classes: 'error' });
                         }
-                        if (!hrp_edited.err) {
-                            var index = $scope.master.hrp_beneficiary_types.map(x => { return x.id }).indexOf(hrp_edited.id);
-                            $scope.master.hrp_beneficiary_types[index] = hrp_edited;
+                        if (!type_edited.err) {
+                            var index = $scope.master.beneficiary_types.map(x => { return x.id }).indexOf(type_edited.id);
+                            $scope.master.beneficiary_types[index] = type_edited;
                             $timeout(function () {
                                 // Materialize.toast( msg , 6000, 'success');
-                                M.toast({ html: 'HRP Type is Updated ', displayLength: 3000, classes: 'success' });
+                                M.toast({ html: 'Beneficiary Type is Updated ', displayLength: 3000, classes: 'success' });
                             }, 1000);
 
                         }
                     }).error(function (err) {
-                        M.toast({ html: 'Error! HRP Type not updated', displayLength: 3000, classes: 'error' });
+                        M.toast({ html: 'Error! Beneficiary Type not updated', displayLength: 3000, classes: 'error' });
                     })
 
                     //after save reset
-                    $scope.master.editedHrpType = {};
+                    $scope.master.editedBeneficiaryType = {};
                 },
                 disabledEditButton: function (item) {
                     var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
@@ -208,48 +208,48 @@ angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
                     }
                     return false;
                 },
-                editClusterHrp: function (id) {
+                editClusterBeneficiaryType: function (id) {
                     if (document.getElementById('edit-' + id).checked) {
-                        console.log($scope.master.editedHrpType)
-                        $scope.master.editedHrpType.cluster_id.push(id)
+                        console.log($scope.master.editedBeneficiaryType)
+                        $scope.master.editedBeneficiaryType.cluster_id.push(id)
                     } else {
-                        var index = $scope.master.editedHrpType.cluster_id.indexOf(id)
-                        $scope.master.editedHrpType.cluster_id.splice(index, 1)
+                        var index = $scope.master.editedBeneficiaryType.cluster_id.indexOf(id)
+                        $scope.master.editedBeneficiaryType.cluster_id.splice(index, 1)
 
                     }
                 },
-                addClusterHrp: function (id) {
+                addClusterBeneficiaryType: function (id) {
                     if (document.getElementById('add-' + id).checked) {
-                        $scope.addHrpTypeAttribute.cluster_id.push(id)
+                        $scope.addBeneficiaryTypeAttribute.cluster_id.push(id)
                     } else {
-                        var index = $scope.addHrpTypeAttribute.cluster_id.indexOf(id)
-                        $scope.addHrpTypeAttribute.cluster_id.splice(index, 1)
+                        var index = $scope.addBeneficiaryTypeAttribute.cluster_id.indexOf(id)
+                        $scope.addBeneficiaryTypeAttribute.cluster_id.splice(index, 1)
 
                     }
                 },
-                removedHrp: function (id) {
-                    M.toast({ html: 'Deleting Hrp Type....', displayLength: 2000, classes: 'note' });
+                removedBeneficiaryType: function (id) {
+                    M.toast({ html: 'Deleting Beneficiary Type....', displayLength: 2000, classes: 'note' });
                     $http({
                         method: 'DELETE',
-                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/hrpbeneficiarytypes',
+                        url: ngmAuth.LOCATION + '/api/admin/cluster/list/beneficiarytypes',
                         data: {
-                            data: $scope.master.removeHrpType
+                            data: $scope.master.removeBeneficiaryType
                         }
                     }).success(function (org) {
                         if (org.err) {
-                            M.toast({ html: 'Error! Hrp Type not deleted', displayLength: 3000, classes: 'error' });
+                            M.toast({ html: 'Error! Beneficiary Type not deleted', displayLength: 3000, classes: 'error' });
                         }
                         if (!org.err) {
                             $timeout(function () {
-                                var index = $scope.master.hrp_beneficiary_types.map(x => { return x.id }).indexOf(id);
-                                $scope.master.hrp_beneficiary_types.splice(index, 1);
+                                var index = $scope.master.beneficiary_types.map(x => { return x.id }).indexOf(id);
+                                $scope.master.beneficiary_types.splice(index, 1);
                                 // Materialize.toast( msg , 6000, 'success');
-                                M.toast({ html: 'Succesfully delete Hrp Type ', displayLength: 3000, classes: 'success' });
+                                M.toast({ html: 'Succesfully delete Beneficiary Type ', displayLength: 3000, classes: 'success' });
                             }, 1000);
 
                         }
                     }).error(function (err) {
-                        M.toast({ html: 'Error! Hrp Type not deleted </br>' + err.err, displayLength: 3000, classes: 'error' });
+                        M.toast({ html: 'Error! Beneficiary Type not deleted </br>' + err.err, displayLength: 3000, classes: 'error' });
                     })
                 },
                 // changeListCountry: function (item) {

@@ -79,7 +79,7 @@
             </div>
             <!-- <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-country-id" name="ngm-country-id" class="validate"
-                    ng-options="country.admin0pcode as country.admin0pname for country in master.country"
+                    ng-options="country.admin0pcode as country.admin0name for country in master.country"
                     ng-model="addOrganizationAtribute.admin0pcode" ng-disabled="" required>
                     <option value="">Select Country</option>
                 </select>
@@ -100,10 +100,10 @@
                     </div>
                     <div class="col s6" ng-repeat="c in master.list_country ">
                         <label>
-                            <input type="checkbox" class="filled-in" id="add-{{c.admin0pcode}}" value={{c.admin0pname}}
+                            <input type="checkbox" class="filled-in" id="add-{{c.admin0pcode}}" value={{c.admin0name}}
                                 ng-checked="addOrganizationAtribute.admin0pcode.indexOf(c.admin0pcode) > -1"
                                 ng-click="master.addCountryOrg(c.admin0pcode)" />
-                            <span style="color: #000000; font-weight: 500;">{{c.admin0pname}}</span>
+                            <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
                         </label>
                     </div>
                 
@@ -147,7 +147,7 @@
             </div>
             <!-- <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-country-id" name="ngm-country-id" class="validate"
-                    ng-options="country.admin0pcode as country.admin0pname for country in master.country"
+                    ng-options="country.admin0pcode as country.admin0name for country in master.country"
                     ng-model="master.editedOrg.admin0pcode" ng-disabled="" required>
                     <option value="">Select Country</option>
                 </select>
@@ -169,10 +169,10 @@
            
             <div class="col s6" ng-repeat="c in master.list_country">
                 <label>
-                     <input type="checkbox" class="filled-in" id="edit-{{c.admin0pcode}}" value={{c.admin0pname}}
+                     <input type="checkbox" class="filled-in" id="edit-{{c.admin0pcode}}" value={{c.admin0name}}
                             ng-checked="(master.editedOrg.admin0pcode.indexOf(c.admin0pcode) > -1) && (!master.editedOrg.admin0pcode_inactive || master.editedOrg.admin0pcode_inactive === '' || master.editedOrg.admin0pcode_inactive.indexOf(c.admin0pcode)<0)"
                             ng-click="master.editCountryOrg(c.admin0pcode)"/>
-                            <span style="color: #000000; font-weight: 500;">{{c.admin0pname}}</span>
+                            <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
                  </label>
             </div>
 
