@@ -53,6 +53,7 @@ angular
 		'ngm.widget.form.beneficiary.type.list',
 		'ngm.widget.form.admin1.list',
 		'ngm.widget.form.admin2.list',
+		'ngm.widget.form.admin3.list',
 		'ngm.widget.upload.beneficiaries.stock.report',
 		// modules
 		'ngmBangladesh',
