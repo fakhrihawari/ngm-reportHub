@@ -1129,6 +1129,15 @@ angular
 					}]
 				}
 			})
+			.when('/cluster/admin/list/admin4/:admin0pcode?', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ListAdmin4Ctrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
 
 			.when('/cluster/record-admin/',{
 				redirectTo: '/cluster/record-admin/beneficiaries/hq/all/all/all/'+ this.page.start_date() + '/' + this.page.end_date()
