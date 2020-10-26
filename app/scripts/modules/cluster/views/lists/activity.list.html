@@ -1,0 +1,1051 @@
+<style>
+    .nav-list-search {
+        margin-top: 6px;
+        background-color: white;
+        width: 72px;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .nav-list-search.focused {
+        margin-top: 6px;
+        width: 100%;
+        -webkit-transition: width 1s ease;
+        -moz-transition: width 1s ease;
+        -o-transition: width 1s ease;
+        -ms-transition: width 1s ease;
+        transition: width 1s ease;
+    }
+
+    .input-field input[type=search] {
+        font-weight: 300;
+        padding-top: 0px;
+    }
+
+    .add_org.modal {
+        width: 50%;
+        right: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    .btn:disabled {
+        background-color: #DFDFDF !important;
+    }
+
+    .inactive {
+        background-color: #cec9c9;
+    }
+
+    .modal-footer.addorg {
+        text-align: center;
+    }
+
+    .card-title.tag.active {
+        color: #6c6c6c;
+        font-weight: 500;
+    }
+
+    .card-title.tag.not_active {
+        font-weight: 500;
+    }
+</style>
+<div id="add-activity-modal" class="add_org modal">
+    <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+        <ul class="collection with-header" style="margin-top:0">
+            <li class="collection-header teal lighten-1" style="border-bottom: 0">
+                <h5 style="color: #ffffff;font-weight:300;">
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Add Activity
+                </h5>
+            </li>
+        </ul>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.cluster_id as c.cluster for c in master.clusters" ng-model="master.addActivityAttribute.cluster_id"
+                    ng-disabled=""
+                    ng-change="master.updateName(master.clusters, 'cluster_id', 'cluster', master.addActivityAttribute)" required>
+                    <option value="">Select Cluster</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Cluster</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-activity_type_name" placeholder="" type="text"
+                    ng-model="master.addActivityAttribute.activity_type_name" name="ngm-activity_type_name" class="validate">
+                <label class="active" for="ngm-activity_type_name"> Activity Type Name</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-activity_description_name" placeholder="" type="text"
+                    ng-model="master.addActivityAttribute.activity_description_name" name="ngm-activity_description_name"
+                    class="validate">
+                <label class="active" for="ngm-activity_description_name"> Activity Description</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-activity_detail_name" placeholder="" type="text"
+                    ng-model="master.addActivityAttribute.activity_detail_name" name="ngm-activity_detail_name" class="validate">
+                <label class="active" for="ngm-activity_detail_name"> Activity Detail</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-indicator-name" placeholder="" type="text" ng-model="master.addActivityAttribute.indicator_name"
+                    name="ngm-indicator-name" class="validate">
+                <label class="active" for="ngm-indicator-name"> Indicator</label>
+            </div>
+        </div>
+        
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Activate/Deactivate Field</label>
+            <br>
+            <br>
+
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.active"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Active</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.display_activity_detail" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Display Activity
+                    Detail</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.display_indicator" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Display Indicator</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.beneficiary_category_type_id" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Beneficiary
+                    Category</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.beneficiary_delivery_type_id" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Beneficiary Delivery
+                    Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.vulnerable_populations" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Vulnerable
+                    Populations</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.mpc_delivery_type_id" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Delivery Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.mpc_mechanism_type_id" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Mechanism
+                    Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.mpc_transfer_category_id" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Transfer
+                    Category</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.mpc_grant_type_id" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Grant Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.mpc_package_type_id" , ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Package Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.mpc_transfer_type_id" ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Tranfer Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.units"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Units</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.unit_type_id"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Unit Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.display_details"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Display Detail</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.details"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Details</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.households"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Households</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.families"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Families</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.boys_0_5"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy (0-5)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.boys_0_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(0-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.boys_6_11"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(6-11)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.boys_6_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(6-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.boys_12_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(12-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.boys_13_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(13-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.boys"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boys</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.girls_0_5"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl (0-5)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.girls_0_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(0-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.girls_6_11"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(6-11)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.girls_6_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(6-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.girls_12_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(12-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.girls_13_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(13-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.girls"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girls</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.men"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Men</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.women"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Women</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.elderly_men"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Elderly Men</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.elderly_women"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Elderly Women</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.total_male"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Total Male</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.total_female"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Total Female</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.addActivityAttribute.total_beneficiaries" ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Total
+                    Beneficairies</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.remarks"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Remarks</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.addActivityAttribute.activity_date"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Activity Date</label>
+            </div>
+        
+        </div>
+        
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m6 l6">
+                <label id="ngm-start-date" for="ngm-start-date" class="validate">{{'start_date' | translate}} *</label>
+                <input ngm-date type="text" name="created" id="ngm-start-date" ng-model="master.addActivityAttribute.start_date"
+                    ng-change="ngmClusterBeneficiaries.inputChange('ngm-start-date')" format="dd mmm, yyyy" select-years="15"
+                    max="" on-close="master.setDate(master.addActivityAttribute,'start_date')" ng-disabled="" required />
+            </div>
+        
+            <div class="input-field col s12 m6 l6">
+                <label for="ngm-end-date">{{'end_date' | translate}} *</label>
+                <input ngm-date type="text" name="created" id="ngm-end-date" ng-model="master.addActivityAttribute.end_date"
+                    ng-change="ngmClusterBeneficiaries.inputChange('ngm-end-date')" format="dd mmm, yyyy" select-years="15"
+                    min="{{ master.addActivityAttribute.start_date }}" on-close="master.setDate(master.addActivityAttribute,'end_date')"
+                    ng-disabled="" />
+            </div>
+        </div>
+        
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <input id="ngm-template-url" placeholder="" type="text" ng-model="master.addActivityAttribute.templateUrl"
+                    name="ngm-template-url" class="validate">
+                <label class="active" for="ngm-template-url"> Template Url</label>
+            </div>
+        </div>
+        
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Select Country</label>
+            <br>
+            <div class="col s6" ng-repeat="c in master.country">
+                <p style="margin-bottom: 5px;margin-top: 10px;">
+                <label>
+                    <input type="checkbox" class="filled-in" id={{c.admin0pcode}} value={{c.admin0pcode}}
+                        ng-checked="master.addActivityAttribute.admin0pcode.indexOf(c.admin0pcode) > -1"
+                        ng-click="master.setCountry(c.admin0pcode,master.addActivityAttribute)" />
+                    <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
+                </label>
+                </p>
+            </div>
+        </div>
+
+        
+
+    </div>
+    <div class="modal-footer addorg" style="margin-bottom: 10px;">
+        <div class="modal-action wave-effects wave-green btn"
+            ng-disabled="!master.checkValidationActivity(master.addActivityAttribute)" ng-click="master.addActivity()">Save
+        </div>
+        <div class="modal-action modal-close red darken-1 btn">Close</div>
+    </div>
+</div>
+
+<div id="edit-activity-modal" class="add_org modal">
+    <div class="modal-content" style=" padding-top: 0px; padding-left: 0px; padding-right: 0px">
+        <ul class="collection with-header" style="margin-top:0">
+            <li class="collection-header teal lighten-1" style="border-bottom: 0">
+                <h5 style="color: #ffffff;font-weight:300;">
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Edit
+                    {{master.editedActivity.activity_type_name}},{{master.editedActivity.activity_description_name}}
+                </h5>
+            </li>
+        </ul>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.cluster_id as c.cluster for c in master.clusters"
+                    ng-model="master.editedActivity.cluster_id" ng-disabled=""
+                    ng-change="master.updateName(master.clusters, 'cluster_id', 'cluster', master.editedActivity)"
+                    required>
+                    <option value="">Select Cluster</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Cluster</label>
+            </div>
+             <div class="input-field col s12 m12">
+                <input id="ngm-activity_type_name" placeholder="" type="text"
+                    ng-model="master.editedActivity.activity_type_name" name="ngm-activity_type_name"
+                    class="validate">
+                <label class="active" for="ngm-activity_type_name"> Activity Type Name</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-activity_description_name" placeholder="" type="text"
+                    ng-model="master.editedActivity.activity_description_name" name="ngm-activity_description_name"
+                    class="validate">
+                <label class="active" for="ngm-activity_description_name"> Activity Description</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-activity_detail_name" placeholder="" type="text"
+                    ng-model="master.editedActivity.activity_detail_name" name="ngm-activity_detail_name"
+                    class="validate">
+                <label class="active" for="ngm-activity_detail_name"> Activity Detail</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <input id="ngm-indicator-name" placeholder="" type="text"
+                    ng-model="master.editedActivity.indicator_name" name="ngm-indicator-name" class="validate">
+                <label class="active" for="ngm-indicator-name"> Indicator</label>
+            </div>
+        </div>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Activate/Deactivate Field</label>
+            <br>
+            <br>
+
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types"
+                    ng-model="master.editedActivity.active" ng-disabled=""
+                    ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Active</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.display_activity_detail", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Display Activity Detail</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.display_indicator", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Display Indicator</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.beneficiary_category_type_id", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Beneficiary Category</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.beneficiary_delivery_type_id", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Beneficiary Delivery Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.vulnerable_populations", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Vulnerable Populations</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.mpc_delivery_type_id", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Delivery Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.mpc_mechanism_type_id", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Mechanism Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.mpc_transfer_category_id", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Transfer Category</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.mpc_grant_type_id", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Grant Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.mpc_package_type_id", ng-disabled="" ng-change=""
+                    required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Package Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.mpc_transfer_type_id"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Tranfer Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.units"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Units</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.unit_type_id"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Unit Type</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.display_details"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Display Detail</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.details"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Details</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.households"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Households</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.families"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Families</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.boys_0_5"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy (0-5)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.boys_0_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(0-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.boys_6_11"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(6-11)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.boys_6_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(6-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.boys_12_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(12-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.boys_13_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boy(13-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.boys"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Boys</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.girls_0_5"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl (0-5)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.girls_0_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(0-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.girls_6_11"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(6-11)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.girls_6_12"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(6-12)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.girls_12_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(12-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.girls_13_17"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girl(13-17)</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.girls"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Girls</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.men"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Men</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.women"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Women</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.elderly_men" ng-disabled=""
+                    ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Elderly Men</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.elderly_women"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Elderly Women</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.total_male"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Total Male</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.total_female"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Total Female</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.total_beneficiaries"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Total Beneficairies</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.remarks"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Remarks</label>
+            </div>
+            <div class="input-field col s3 m3">
+                <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.value as c.name for c in master.active_types" ng-model="master.editedActivity.activity_date"
+                    ng-disabled="" ng-change="" required>
+                    <option value="">Select ...</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Activity Date</label>
+            </div>
+            
+        </div>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m6 l6">
+                <label id="ngm-start-date" for="ngm-start-date" class="validate">{{'start_date' | translate}} *</label>
+                <input ngm-date type="text" name="created" id="ngm-start-date" ng-model="master.editedActivity.start_date"
+                    ng-change="ngmClusterBeneficiaries.inputChange('ngm-start-date')" format="dd mmm, yyyy" select-years="15" max=""
+                    on-close="master.setDate(master.editedActivity,'start_date')" ng-disabled="" required />
+            </div>
+            
+            <div class="input-field col s12 m6 l6">
+                <label for="ngm-end-date">{{'end_date' | translate}} *</label>
+                <input ngm-date type="text" name="created" id="ngm-end-date" ng-model="master.editedActivity.end_date"
+                    ng-change="ngmClusterBeneficiaries.inputChange('ngm-end-date')" format="dd mmm, yyyy" select-years="15"
+                    min="{{ master.editedActivity.start_date }}" on-close="master.setDate(master.editedActivity,'end_date')"
+                    ng-disabled="" />
+            </div>
+        </div>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <div class="input-field col s12 m12">
+                <input id="ngm-template-url" placeholder="" type="text" ng-model="master.editedActivity.templateUrl" name="ngm-template-url"
+                    class="validate">
+                <label class="active" for="ngm-template-url"> Template Url</label>
+            </div>
+        </div>
+
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Select Country</label>
+            <br>
+            <div class="col s6" ng-repeat="c in master.country">
+                <p style="margin-bottom: 5px;margin-top: 10px;">
+                <label>
+                    <input type="checkbox" class="filled-in" id=edit-{{c.admin0pcode}} value={{c.admin0pcode}}
+                        ng-checked="master.editedActivity.admin0pcode.indexOf(c.admin0pcode) > -1" 
+                        ng-click="master.setCountry(c.admin0pcode,master.editedActivity,true)" />
+                    <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
+                </label>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer addorg" style="margin-bottom: 10px;">
+        <div class="modal-action modal-close wave-effects wave-green btn"
+            ng-disabled="!master.checkValidationActivity(master.editedActivity)"
+            ng-click="master.editeActivity(master.editedActivity)">
+            Save
+        </div>
+        <div class="modal-action modal-close red darken-1 btn">Close</div>
+    </div>
+</div>
+
+<div id="remove-activity-modal" class="add_org modal">
+    <div class="modal-content dialog">
+        <h4 class="header-modal red lighten-2"><i class="material-icons small left">delete</i> Delete Unit
+        </h4>
+        <p style=" font-size:24px;font-weight: 500; text-align: center;">Delete
+            Remove {{master.removeActivity.activity_type_name}}, 
+            {{master.removeActivity.activity_description_name}}
+            ?</p>
+        <p style="color: #f44336; font-weight: 700; text-align: center;">{{'warning_mayus'|translate}}!
+            {{'this_action_can_not_be_undone'|translate}}!</p>
+    </div>
+    <div class="modal-footer addorg" style="margin-bottom: 10px;">
+        <div class="modal-action modal-close wave-effects wave-green btn"
+            ng-click="master.removedActivity(master.removeActivity.id)">Delete
+        </div>
+        <div class="modal-action modal-close red darken-1 btn">Close</div>
+    </div>
+
+</div>
+
+<div class="" style="position: absolute;
+    right: 85px;
+    top: 180px;">
+    <a class=" btn waves-effect waves-teal waves-teal-lighten-4 indigo lighten-1" ng-click="master.openAddModal()">
+
+        <i class="material-icons left">add</i> Add Activity
+    </a>
+</div>
+<div class="row">
+    <div class="col s12 m12 l12">
+        <div class="card">
+
+            <ul class="collection with-header">
+                <li class="collection-header indigo lighten-1" style="height:80px;">
+                    <div class="col s12 m6">
+                        <h5 class="report-panel-title white-text">
+                            <i class="material-icons left">attachment</i> Activity List
+
+                        </h5>
+                    </div>
+                    <div ng-if="master.activities.length > master.itemsPerPage" class="col s12 m4 right">
+                        <nav class="nav-list-search right"
+                            ng-class="{'focused':master.search.focused===true || master.search.filter }">
+                            <div class="nav-wrapper" ng-click="list.toggleSearch()">
+                                <form>
+                                    <div class="input-field">
+                                        <input id="search_{{ list.id }}" type="search" ng-model="master.search.filter"
+                                            ng-focus="master.search.focused=true" ng-blur="master.search.focused=false">
+                                        <label for="search_{{ master.listId }}" style="top:-10px" class="search"><i
+                                                class="material-icons"
+                                                style="color: teal; padding-left:25px;">search</i></label>
+                                    </div>
+                                </form>
+                            </div>
+                        </nav>
+                    </div>
+                </li>
+
+                <div>
+                    <li ng-if="master.activities.length>0" class="collection-item avatar"
+                        style="padding-left: 30px;padding-right: 30px">
+                        <div class="row">
+                            <div class="col s12 m4  "
+                                dir-paginate="item in master.activities | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
+                                pagination-id="master.listId" style="padding-top:20px;">
+                                <div class="card  darken-1 hoverable">
+                                    <div class="card-content " style="min-height: 60px;">
+                                        <p class="card-title activator tag truncate active"
+                                            style="font-weight: 500; font-size: 18px;">
+                                            {{item.activity_type_name}} <i
+                                                class="material-icons right">more_vert</i></p>
+                                        <p class="card-title activator tag truncate active"
+                                            style="font-weight: 500; font-size: 18px;">
+                                            {{item.activity_description_name}}</p>
+                                        <!-- <br>
+                                        <p class="truncate">{{item.organization_name}}</p>
+                                        <p style="font-style: italic; font-weight: 400;">{{item.organization_type}}</p>
+                                        <br>
+                                        <div class="row switch input-field" style="margin-bottom:10px;margin-top:-8%">
+                                            <label>
+                                                <input ng-checked="master.checkActiveDeactivedOrg(item)"
+                                                    id="{{item.id}}" ng-disabled="master.disabledOrg(item)"
+                                                    type="checkbox" class="filled-in"
+                                                    ng-click="master.changeActiveDeactivedOrgByCountry(item.id)">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div> -->
+                                    </div>
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4"><i
+                                                class="material-icons right">close</i></span>
+                                        <div class="center" style="margin-top: 0%;">
+                                            <button class="btn" ng-click="master.setEditedActivity(item)"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">create</i>
+                                            </button>
+                                            <button class="btn red" ng-click="master.removeActivityModal(item)"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">delete</i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-item avatar" ng-if="!master.activities.length">
+                        <p style="font-size: 17px; padding:10px 0px 10px 0px;">
+                            {{'you_have_no_project_documents_yet'|translate}}</p>
+                    </li>
+                    <li class="collection-item avatar" ng-if="master.activities.length > master.itemsPerPage"
+                        style="padding:20px 20px 0px 50px;">
+                        <dir-pagination-controls pagination-id="master.listId"></dir-pagination-controls>
+                    </li>
+                </div>
+
+            </ul>
+        </div>
+    </div>
+</div>

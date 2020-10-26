@@ -1174,6 +1174,15 @@ angular
 					}]
 				}
 			})
+			.when('/cluster/admin/list/activities/:admin0pcode?', {
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ListActivitiesCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}]
+				}
+			})
 
 			.when('/cluster/record-admin/',{
 				redirectTo: '/cluster/record-admin/beneficiaries/hq/all/all/all/'+ this.page.start_date() + '/' + this.page.end_date()
