@@ -27,37 +27,142 @@ angular.module('ngmReportHub')
             getAdmin1: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin1',
-                params: { admin0pcode: 'CB' }
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin2: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin2',
-                params: { admin0pcode: 'CB' }
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin3: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin3',
-                params: { admin0pcode: 'CB' }
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin4: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin4',
-                params: { admin0pcode: 'CB' }
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin5: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin5',
-                params: { admin0pcode: 'CB' }
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdminSites: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/AdminSites',
-                params: { admin0pcode: 'CB' }
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getSiteType: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/list/sitetypes',
             }),
+            setMenu: function () {
+                // country
+                var country = [{
+                    'title': 'Afghanistan',
+                    'param': 'admin0pcode',
+                    'active': 'af',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/af/'
+                }, {
+                    'title': 'Bangladesh',
+                    'param': 'admin0pcode',
+                    'active': 'bd',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/bd/'
+                }, {
+                    'title': 'Colombia',
+                    'param': 'admin0pcode',
+                    'active': 'col',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/col/'
+                }, {
+                    'title': 'Cox Bazar',
+                    'param': 'admin0pcode',
+                    'active': 'cb',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/cb/'
+                }, {
+                    'title': 'Democratic Republic of Congo',
+                    'param': 'admin0pcode',
+                    'active': 'cd',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/cd/'
+                }, {
+                    'title': 'Ethiopia',
+                    'param': 'admin0pcode',
+                    'active': 'et',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/et/'
+                }, {
+                    'title': 'Iraq',
+                    'param': 'admin0pcode',
+                    'active': 'iq',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/ng/'
+                }, {
+                    'title': 'Kenya',
+                    'param': 'admin0pcode',
+                    'active': 'ke',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/ng/'
+                }, {
+                    'title': 'Nigeria',
+                    'param': 'admin0pcode',
+                    'active': 'ng',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/ng/'
+                }, {
+                    'title': 'Papua New Guinea',
+                    'param': 'admin0pcode',
+                    'active': 'pg',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/ng/'
+                }, {
+                    'title': 'Philiphine',
+                    'param': 'admin0pcode',
+                    'active': 'phl',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/ng/'
+                }, {
+                    'title': 'South Sudan',
+                    'param': 'admin0pcode',
+                    'active': 'ss',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/ss/'
+                }, {
+                    'title': 'Somalia',
+                    'param': 'admin0pcode',
+                    'active': 'so',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/so/'
+                }, {
+                    'title': 'Syria',
+                    'param': 'admin0pcode',
+                    'active': 'sy',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/sy/'
+                }, {
+                    'title': 'Yemen',
+                    'param': 'admin0pcode',
+                    'active': 'ye',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin_site/ye/'
+                }];
+
+                // if ($scope.master.role === 'SUPERADMIN' || $scope.master.user.email === 'farifin@immap.org' || $scope.master.user.email === 'pfitzgerald@immap.org' || $scope.master.user.email === 'tkilkeiev@immap.org') {
+
+                $scope.model.menu.push({
+                    'id': 'search-country',
+                    'icon': 'person_pin',
+                    'title': 'Country',
+                    'class': 'teal lighten-1 white-text',
+                    'rows': country
+                });
+                // }
+            },
 
             // init
             init: function () {
@@ -201,19 +306,12 @@ angular.module('ngmReportHub')
             $scope.list.admin_sites = result[5].data
             $scope.list.site_types = result[6].data 
 
-            console.log($scope.list.admin1lists)
-            console.log($scope.list.admin2lists)
-            console.log($scope.list.admin3lists)
-            console.log($scope.list.admin4lists)
-            console.log($scope.list.admin5lists)
-            console.log($scope.list.admin_sites)
-            console.log($scope.list.site_types)
-
             setTimeout(() => {
                 $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
             }, 0);
             // init
             $scope.list.init();
+            $scope.list.setMenu();
 
         })
         // setTimeout(() => {

@@ -24,31 +24,137 @@ angular.module('ngmReportHub')
 
             // user
             user: ngmUser.get(),
+            title: $route.current.params.admin0pcode.toUpperCase(),
             getAdmin1: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin1',
-                params:{admin0pcode:'CB'}
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin2: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin2',
-                params:{admin0pcode:'CB'}
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin3: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin3',
-                params:{admin0pcode:'CB'}
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin4: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin4',
-                params:{admin0pcode:'CB'}
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin5: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin5',
-                params:{admin0pcode:'CB'}
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
+            setMenu: function () {
+                // country
+                var country = [{
+                    'title': 'Afghanistan',
+                    'param': 'admin0pcode',
+                    'active': 'af',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/af/'
+                }, {
+                    'title': 'Bangladesh',
+                    'param': 'admin0pcode',
+                    'active': 'bd',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/bd/'
+                }, {
+                    'title': 'Colombia',
+                    'param': 'admin0pcode',
+                    'active': 'col',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/col/'
+                }, {
+                    'title': 'Cox Bazar',
+                    'param': 'admin0pcode',
+                    'active': 'cb',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/cb/'
+                }, {
+                    'title': 'Democratic Republic of Congo',
+                    'param': 'admin0pcode',
+                    'active': 'cd',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/cd/'
+                }, {
+                    'title': 'Ethiopia',
+                    'param': 'admin0pcode',
+                    'active': 'et',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/et/'
+                }, {
+                    'title': 'Iraq',
+                    'param': 'admin0pcode',
+                    'active': 'iq',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/ng/'
+                }, {
+                    'title': 'Kenya',
+                    'param': 'admin0pcode',
+                    'active': 'ke',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/ng/'
+                }, {
+                    'title': 'Nigeria',
+                    'param': 'admin0pcode',
+                    'active': 'ng',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/ng/'
+                }, {
+                    'title': 'Papua New Guinea',
+                    'param': 'admin0pcode',
+                    'active': 'pg',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/ng/'
+                }, {
+                    'title': 'Philiphine',
+                    'param': 'admin0pcode',
+                    'active': 'phl',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/ng/'
+                }, {
+                    'title': 'South Sudan',
+                    'param': 'admin0pcode',
+                    'active': 'ss',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/ss/'
+                }, {
+                    'title': 'Somalia',
+                    'param': 'admin0pcode',
+                    'active': 'so',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/so/'
+                }, {
+                    'title': 'Syria',
+                    'param': 'admin0pcode',
+                    'active': 'sy',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/sy/'
+                }, {
+                    'title': 'Yemen',
+                    'param': 'admin0pcode',
+                    'active': 'ye',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin5/ye/'
+                }];
+
+                // if ($scope.master.role === 'SUPERADMIN' || $scope.master.user.email === 'farifin@immap.org' || $scope.master.user.email === 'pfitzgerald@immap.org' || $scope.master.user.email === 'tkilkeiev@immap.org') {
+
+                $scope.model.menu.push({
+                    'id': 'search-country',
+                    'icon': 'person_pin',
+                    'title': 'Country',
+                    'class': 'teal lighten-1 white-text',
+                    'rows': country
+                });
+                // }
+            },
 
             // init
             init: function () {
@@ -191,6 +297,7 @@ angular.module('ngmReportHub')
             }, 0);
             // init
             $scope.list.init();
+            $scope.list.setMenu();
 
         })
             // setTimeout(() => {

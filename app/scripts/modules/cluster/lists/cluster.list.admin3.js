@@ -27,12 +27,120 @@ angular.module('ngmReportHub')
 
             getAdmin2: $http({
                 method: 'GET',
-                url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin2'
+                url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin2',
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
             getAdmin3: $http({
                 method: 'GET',
-                url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin3'
+                url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin3',
+                params: { admin0pcode: $route.current.params.admin0pcode.toUpperCase() }
             }),
+            setMenu: function () {
+                // country
+                var country = [{
+                    'title': 'Afghanistan',
+                    'param': 'admin0pcode',
+                    'active': 'af',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/af/'
+                }, {
+                    'title': 'Bangladesh',
+                    'param': 'admin0pcode',
+                    'active': 'bd',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/bd/'
+                }, {
+                    'title': 'Colombia',
+                    'param': 'admin0pcode',
+                    'active': 'col',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/col/'
+                }, {
+                    'title': 'Cox Bazar',
+                    'param': 'admin0pcode',
+                    'active': 'cb',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/cb/'
+                }, {
+                    'title': 'Democratic Republic of Congo',
+                    'param': 'admin0pcode',
+                    'active': 'cd',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/cd/'
+                }, {
+                    'title': 'Ethiopia',
+                    'param': 'admin0pcode',
+                    'active': 'et',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/et/'
+                }, {
+                    'title': 'Iraq',
+                    'param': 'admin0pcode',
+                    'active': 'iq',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/ng/'
+                }, {
+                    'title': 'Kenya',
+                    'param': 'admin0pcode',
+                    'active': 'ke',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/ng/'
+                }, {
+                    'title': 'Nigeria',
+                    'param': 'admin0pcode',
+                    'active': 'ng',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/ng/'
+                }, {
+                    'title': 'Papua New Guinea',
+                    'param': 'admin0pcode',
+                    'active': 'pg',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/ng/'
+                }, {
+                    'title': 'Philiphine',
+                    'param': 'admin0pcode',
+                    'active': 'phl',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/ng/'
+                }, {
+                    'title': 'South Sudan',
+                    'param': 'admin0pcode',
+                    'active': 'ss',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/ss/'
+                }, {
+                    'title': 'Somalia',
+                    'param': 'admin0pcode',
+                    'active': 'so',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/so/'
+                }, {
+                    'title': 'Syria',
+                    'param': 'admin0pcode',
+                    'active': 'sy',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/sy/'
+                }, {
+                    'title': 'Yemen',
+                    'param': 'admin0pcode',
+                    'active': 'ye',
+                    'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                    'href': '#/cluster/admin/list/admin3/ye/'
+                }];
+
+                // if ($scope.master.role === 'SUPERADMIN' || $scope.master.user.email === 'farifin@immap.org' || $scope.master.user.email === 'pfitzgerald@immap.org' || $scope.master.user.email === 'tkilkeiev@immap.org') {
+
+                $scope.model.menu.push({
+                    'id': 'search-country',
+                    'icon': 'person_pin',
+                    'title': 'Country',
+                    'class': 'teal lighten-1 white-text',
+                    'rows': country
+                });
+                // }
+            },
+            title: $route.current.params.admin0pcode.toUpperCase(),
 
             // init
             init: function () {
@@ -167,6 +275,7 @@ angular.module('ngmReportHub')
             }, 0);
             // init
             $scope.list.init();
+            $scope.list.setMenu();
 
         })
 

@@ -410,7 +410,7 @@ angular.module('ngm.widget.form.admin.site.list', ['ngm.provider'])
                     })
                 },
                 init: function () {
-                    console.log($scope.master.site_types, ngmClusterLists.getSiteTypes())
+                    
                 }
             }
 
