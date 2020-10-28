@@ -135,13 +135,17 @@ angular.module('ngmReportHub')
         }).then(function (site_types) {
             if (site_types.length) {
                 $scope.list.site_types = site_types;
-                $scope.list.title = 'ALL'
-                setTimeout(() => {
-                    $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
-                }, 0);
+                // $scope.list.title = 'ALL'
+                // setTimeout(() => {
+                //     $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+                // }, 0);
                 // init
-                $scope.list.init();
+                // $scope.list.init();
             }
+            $scope.list.title = 'ALL'
+            setTimeout(() => {
+                $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+            }, 0);
             $scope.list.init();
         })
 

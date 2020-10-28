@@ -133,16 +133,20 @@ angular.module('ngmReportHub')
             method: 'GET',
             url: ngmAuth.LOCATION + '/api/admin/cluster/list/beneficiarytypes'
         }).then(function (beneficiary_types) {
-            console.log()
+            
             if (beneficiary_types.length) {
                 $scope.list.beneficiary_types = beneficiary_types;
-                $scope.list.title = 'ALL'
-                setTimeout(() => {
-                    $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
-                }, 0);
+                // $scope.list.title = 'ALL'
+                // setTimeout(() => {
+                //     $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+                // }, 0);
                 // init
-                $scope.list.init();
+                // $scope.list.init();
             }
+            $scope.list.title = 'ALL'
+            setTimeout(() => {
+                $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+            }, 0);
             $scope.list.init();
         })
 

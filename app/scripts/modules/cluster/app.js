@@ -1156,7 +1156,7 @@ angular
 					}]
 				}
 			})
-			.when('/cluster/admin/list/indicator/:admin0pcode?', {
+			.when('/cluster/admin/list/indicator/:cluster_id?', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ListIndicatorCtrl',
 				resolve: {
@@ -1174,7 +1174,7 @@ angular
 					}]
 				}
 			})
-			.when('/cluster/admin/list/activities/:admin0pcode?', {
+			.when('/cluster/admin/list/activities/:cluster_id?', {
 				templateUrl: '/views/app/dashboard.html',
 				controller: 'ListActivitiesCtrl',
 				resolve: {

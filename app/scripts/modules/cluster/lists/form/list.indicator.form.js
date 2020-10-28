@@ -18,6 +18,7 @@ angular.module('ngm.widget.form.indicator.list', ['ngm.provider'])
         '$http',
         '$timeout',
         '$filter',
+        '$route',
         function (
             $scope,
             config,
@@ -27,7 +28,8 @@ angular.module('ngm.widget.form.indicator.list', ['ngm.provider'])
             ngmData,
             $http,
             $timeout,
-            $filter
+            $filter,
+            $route
         ) {
 
             $scope.master = {
@@ -297,6 +299,8 @@ angular.module('ngm.widget.form.indicator.list', ['ngm.provider'])
                     } else {
                         $scope.master.list_cluster = $scope.master.clusters.filter(x => x.cluster_id === $scope.master.cluster_id);
                     }
+
+                    $scope.filterCluster = $route.current.params.cluster_id ? $route.current.params.cluster_id:''
 
                 }
             }

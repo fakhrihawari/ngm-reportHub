@@ -67,7 +67,7 @@
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-mpc_type-cluster" name="ngm-mpc_type-cluster" class="validate"
-                    ng-options="c.cluster_id as c.cluster for c in master.clusters"
+                    ng-options="c.cluster_id as c.cluster for c in master.clusters | filter: { cluster_id: 'cvwg'}"
                     ng-model="master.addMpcTypeAttribute.cluster_id" ng-disabled="" 
                     ng-change="master.updateName(master.clusters, 'cluster_id', 'cluster', master.addMpcTypeAttribute)" 
                     required>
@@ -130,7 +130,7 @@
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
-                    ng-options="c.cluster_id as c.cluster for c in master.clusters" ng-model="master.editedMpcType.cluster_id"
+                    ng-options="c.cluster_id as c.cluster for c in master.clusters | | filter: { cluster_id: 'cvwg'}" ng-model="master.editedMpcType.cluster_id"
                     ng-disabled="" ng-change="master.updateName(master.clusters, 'cluster_id', 'cluster', master.editedMpcType)"
                     required>
                     <option value="">Select Cluster</option>

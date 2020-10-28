@@ -67,7 +67,7 @@
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
-                    ng-options="c.cluster_id as c.cluster for c in master.clusters" ng-model="master.addActivityAttribute.cluster_id"
+                    ng-options="c.cluster_id as c.cluster for c in master.clusters | filter:{cluster_id: filterCluster}" ng-model="master.addActivityAttribute.cluster_id"
                     ng-disabled=""
                     ng-change="master.updateName(master.clusters, 'cluster_id', 'cluster', master.addActivityAttribute)" required>
                     <option value="">Select Cluster</option>
@@ -506,7 +506,7 @@
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
-                    ng-options="c.cluster_id as c.cluster for c in master.clusters"
+                    ng-options="c.cluster_id as c.cluster for c in master.clusters | filter:{cluster_id: filterCluster}"
                     ng-model="master.editedActivity.cluster_id" ng-disabled=""
                     ng-change="master.updateName(master.clusters, 'cluster_id', 'cluster', master.editedActivity)"
                     required>
@@ -996,11 +996,11 @@
                                     <div class="card-content " style="min-height: 60px;">
                                         <p class="card-title activator tag truncate active"
                                             style="font-weight: 500; font-size: 18px;">
-                                            {{item.activity_type_name}} <i
+                                            {{item.activity_type_name | limitTo: 20}} {{item.activity_type_name.length < 20 ? '' : '...'}} <i
                                                 class="material-icons right">more_vert</i></p>
                                         <p class="card-title activator tag truncate active"
                                             style="font-weight: 500; font-size: 18px;">
-                                            {{item.activity_description_name}}</p>
+                                            {{item.activity_description_name | limitTo: 20}}{{item.activity_description_name.length < 20 ? '' : '...'}}</p>
                                         <!-- <br>
                                         <p class="truncate">{{item.organization_name}}</p>
                                         <p style="font-style: italic; font-weight: 400;">{{item.organization_type}}</p>

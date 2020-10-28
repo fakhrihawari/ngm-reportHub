@@ -27,12 +27,42 @@ angular.module('ngmReportHub')
 
             getActivities: $http({
                 method: 'GET',
-                url: ngmAuth.LOCATION + '/api/admin/cluster/list/activities'
+                url: ngmAuth.LOCATION + '/api/admin/cluster/list/activities',
+                params:{
+                    cluster_id: $route.current.params.cluster_id
+                }
             }),
             getIndicators: $http({
                 method: 'GET',
-                url: ngmAuth.LOCATION + '/api/admin/cluster/list/indicators'
+                url: ngmAuth.LOCATION + '/api/admin/cluster/list/indicators',
+                params: {
+                    cluster_id: $route.current.params.cluster_id
+                }
             }),
+            clusters : ngmClusterLists.getClusters(ngmUser.get().admin0pcode),
+            setMenu:function(){
+                // cluster
+                var clusters = $scope.list.clusters;
+                var cluster_rows =[]
+                for (i = 0; i < clusters.length; i++) {
+                    var clusterName = clusters[i].cluster;
+                    var clusterId = clusters[i].cluster_id
+                    cluster_rows.push({
+                        'title': clusterName,
+                        'param': 'cluster_id',
+                        'active': clusterId,
+                        'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+                        'href': '#/cluster/admin/list/indicator/'+ clusterId
+                    });
+                };
+                $scope.model.menu.push({
+                            'id': 'search-cluster',
+                            'icon': 'person_pin',
+                            'title': 'Cluster',
+                            'class': 'teal lighten-1 white-text',
+                            'rows': cluster_rows
+                        });
+            },
 
             // init
             init: function () {
@@ -156,8 +186,10 @@ angular.module('ngmReportHub')
             setTimeout(() => {
                 $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
             }, 0);
+            $scope.list.title = $route.current.params.cluster_id ? $scope.list.clusters.filter(x => x.cluster_id === $route.current.params.cluster_id)[0]['cluster']:"ALL"
             // init
             $scope.list.init();
+            $scope.list.setMenu();
 
         })
 

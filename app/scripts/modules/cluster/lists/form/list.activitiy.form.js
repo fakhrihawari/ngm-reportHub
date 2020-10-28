@@ -19,6 +19,7 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
         '$http',
         '$timeout',
         '$filter',
+        '$route',
         function (
             $scope,
             config,
@@ -28,7 +29,8 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
             ngmData,
             $http,
             $timeout,
-            $filter
+            $filter,
+            $route
         ) {
 
             $scope.master = {
@@ -412,6 +414,9 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
                     }
                 },
                 init: function () {
+
+                    $scope.filterCluster = $route.current.params.cluster_id === 'all' ? '' : $route.current.params.cluster_id ;
+                    console.log($scope.filterCluster)
                     
                 }
             }

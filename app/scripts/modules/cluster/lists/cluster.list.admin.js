@@ -87,6 +87,7 @@ angular.module('ngmReportHub')
                                         showMasterlist: function () { return $scope.master.showMasterlist()}, 
                                         setTag: function(){return $scope.master.setTag()},
                                         country: $scope.master.user.admin0pcode.toLowerCase(),
+                                        cluster_id:  $scope.master.user.cluster_id.toLowerCase(),
                                         templateUrl: '/scripts/modules/cluster/views/lists/cluster.list.admin.html',
                                     }
                                 }]

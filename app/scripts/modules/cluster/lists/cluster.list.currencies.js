@@ -142,13 +142,17 @@ angular.module('ngmReportHub')
                 if (cluster !== 'all') {
                     $scope.list.currencies = currencies.filter(x => x.cluster_id === cluster);
                 }
-                $scope.list.title = 'ALL'//$route.current.params.admin0pcode.toUpperCase();
-                setTimeout(() => {
-                    $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
-                }, 0);
+                // $scope.list.title = 'ALL'//$route.current.params.admin0pcode.toUpperCase();
+                // setTimeout(() => {
+                //     $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+                // }, 0);
                 // init
-                $scope.list.init();
+                // $scope.list.init();
             }
+            $scope.list.title = 'ALL'//$route.current.params.admin0pcode.toUpperCase();
+            setTimeout(() => {
+                $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+            }, 0);
             $scope.list.init();
         })
 

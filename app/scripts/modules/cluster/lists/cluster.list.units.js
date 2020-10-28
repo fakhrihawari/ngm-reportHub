@@ -135,13 +135,17 @@ angular.module('ngmReportHub')
         }).then(function (units) {
             if (units.length) {
                 $scope.list.units = units;
-                $scope.list.title = 'ALL'
-                setTimeout(() => {
-                    $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
-                }, 0);
+                // $scope.list.title = 'ALL'
+                // setTimeout(() => {
+                //     $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+                // }, 0);
                 // init
-                $scope.list.init();
+                // $scope.list.init();
             }
+            $scope.list.title = 'ALL'
+            setTimeout(() => {
+                $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
+            }, 0);
             $scope.list.init();
         })
 

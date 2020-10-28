@@ -27,7 +27,10 @@ angular.module('ngmReportHub')
 
             getActivities: $http({
                 method: 'GET',
-                url: ngmAuth.LOCATION + '/api/admin/cluster/list/activities'
+                url: ngmAuth.LOCATION + '/api/admin/cluster/list/activities',
+                params:{
+                    cluster_id:'cvwg'
+                }
             }),
             getMpcTypes: $http({
                 method: 'GET',
@@ -152,7 +155,7 @@ angular.module('ngmReportHub')
                     activity_description_name: x.activity_description_name,
                 }
             })
-            console.log($scope.list.activity_descriptions)
+            $scope.list.title ='MPC'
             setTimeout(() => {
                 $('.fixed-action-btn').floatingActionButton({ direction: 'left' });
             }, 0);
