@@ -287,10 +287,10 @@ angular.module('ngmReportHub')
                 }
             })
             $scope.list.admin0lists = getTheInfo.filter((v, i, a) => a.findIndex(t => (t.admin0pcode === v.admin0pcode)) === i);
-            $scope.list.admin2lists = result[1].data.filter(x => x.admin0pcode === 'CB');
-            $scope.list.admin3lists = result[2].data.filter(x => x.admin0pcode === 'CB');
-            $scope.list.admin4lists = result[3].data.filter(x => x.admin0pcode === 'CB');
-            $scope.list.admin5lists = result[4].data.filter(x => x.admin0pcode === 'CB');
+            $scope.list.admin2lists = result[1].data
+            $scope.list.admin3lists = result[2].data
+            $scope.list.admin4lists = result[3].data
+            $scope.list.admin5lists = result[4].data
 
             setTimeout(() => {
                 $('.fixed-action-btn').floatingActionButton({ direction: 'left' });

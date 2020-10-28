@@ -24,6 +24,7 @@ angular.module('ngmReportHub')
 
             // user
             user: ngmUser.get(),
+            title: $route.current.params.admin0pcode.toUpperCase(),
             getAdmin1: $http({
                 method: 'GET',
                 url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin1',
@@ -299,10 +300,10 @@ angular.module('ngmReportHub')
                 }
             })
             $scope.list.admin0lists = getTheInfo.filter((v, i, a) => a.findIndex(t => (t.admin0pcode === v.admin0pcode)) === i);
-            $scope.list.admin2lists = result[1].data.filter(x => x.admin0pcode === 'CB');
-            $scope.list.admin3lists = result[2].data.filter(x => x.admin0pcode === 'CB');
-            $scope.list.admin4lists = result[3].data.filter(x => x.admin0pcode === 'CB');
-            $scope.list.admin5lists = result[4].data.filter(x => x.admin0pcode === 'CB');
+            $scope.list.admin2lists = result[1].data
+            $scope.list.admin3lists = result[2].data
+            $scope.list.admin4lists = result[3].data
+            $scope.list.admin5lists = result[4].data
             $scope.list.admin_sites = result[5].data
             $scope.list.site_types = result[6].data 
 

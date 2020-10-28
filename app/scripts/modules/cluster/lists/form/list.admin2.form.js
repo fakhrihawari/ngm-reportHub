@@ -67,16 +67,15 @@ angular.module('ngm.widget.form.admin2.list', ['ngm.provider'])
                 },
                 addAdmin2: function () {
 
-                    console.log($scope.addAdmin2Attribute)
+                    
                     M.toast({ html: 'Adding New Admin2 ...', displayLength: 2000, classes: 'note' });
                     $http({
                         method: 'POST',
                         url: ngmAuth.LOCATION + '/api/admin/cluster/adminlist/Admin2',
                         data: {
-                            data: $scope.addAdmin2Attribute
+                            data: $scope.master.addAdmin2Attribute
                         }
                     }).success(function (new_admin2) {
-                        console.log(new_admin2)
                         if (new_admin2.err) {
                             M.toast({ html: 'Error! Admin2  Not Added </br>' + new_admin2.err, displayLength: 3000, classes: 'error' });
                         }
