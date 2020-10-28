@@ -56,6 +56,21 @@ angular.module('ngm.widget.form.admin4.list', ['ngm.provider'])
                     admin4zoom: 14,
                     inactive: false
                 },
+                resetAddForm: function () {
+                    var reset_form = {
+                        admin0pcode: '',
+                        admin1pcode: '',
+                        admin2pcode: '',
+                        admin4lat: 0.0,
+                        admin4lng: 0.0,
+                        admin4name: "",
+                        admin4pcode: "",
+                        admin4type_name: "",
+                        admin4zoom: 14,
+                        inactive: false
+                    }
+                    $scope.master.addAdmin4Attribute = reset_form;
+                },
                 editedAdmin4: {},
                 removeAdmin4: {},
                 openAddModal: function (modal) {

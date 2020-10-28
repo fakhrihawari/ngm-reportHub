@@ -55,6 +55,16 @@ angular.module('ngm.widget.form.indicator.list', ['ngm.provider'])
                     indicator_name: '',
                     indicator_id: '',
                 },
+                resetAddForm: function () {
+                    var reset_form = {
+                        cluster_id: '',
+                        activity_type_id: '',
+                        activity_description_id: '',
+                        indicator_name: '',
+                        indicator_id: '',
+                    }
+                    $scope.master.addIndicatorAttribute = reset_form;
+                },
                 openAddModal: function (modal) {
                     $('#add-indicator-modal').modal({ dismissible: false });
                     $('#add-indicator-modal').modal('open');

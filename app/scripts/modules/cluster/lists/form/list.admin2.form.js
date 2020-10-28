@@ -51,6 +51,19 @@ angular.module('ngm.widget.form.admin2.list', ['ngm.provider'])
                     admin2zoom: 10,
                     inactive: false
                 },
+                resetAddForm: function () {
+                    var reset_form = {
+                        admin0pcode: '',
+                        admin2lat: 0.0,
+                        admin2lng: 0.0,
+                        admin2name: "",
+                        admin2pcode: "",
+                        admin2type_name: "",
+                        admin2zoom: 10,
+                        inactive: false
+                    }
+                    $scope.master.addAdmin2Attribute = reset_form;
+                },
                 editedAdmin2: {},
                 removeAdmin2: {},
                 openAddModal: function (modal) {

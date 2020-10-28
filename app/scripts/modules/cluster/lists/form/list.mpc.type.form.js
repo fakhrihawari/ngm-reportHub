@@ -55,6 +55,18 @@ angular.module('ngm.widget.form.mpc.type.list', ['ngm.provider'])
                     mpc_mechanism_type_id: '',
                     mpc_mechanism_type_name: ''
                 },
+                resetAddForm: function () {
+                    var reset_form = {
+                        cluster_id: '',
+                        activity_type_id: '',
+                        activity_description_id: '',
+                        mpc_delivery_type_name: '',
+                        mpc_delivery_type_id: '',
+                        mpc_mechanism_type_id: '',
+                        mpc_mechanism_type_name: ''
+                    }
+                    $scope.master.addMpcTypeAttribute = reset_form;
+                },
                 openAddModal: function (modal) {
                     $('#add-mpc-type-modal').modal({ dismissible: false });
                     $('#add-mpc-type-modal').modal('open');
