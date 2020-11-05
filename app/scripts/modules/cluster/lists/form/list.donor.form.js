@@ -67,60 +67,59 @@ angular.module('ngm.widget.form.donor.list', ['ngm.provider'])
                 },
                 cluster: config.cluster ? config.cluster :'all',
                 // admin0pcode: config.admin0pcode.toUpperCase(),
-                // country: [
-                //     {
-                //         'admin0name': 'All',
-                //         'admin0pcode': 'ALL',
+                country: [
+                    {
+                        'admin0name': 'Afghanistan',
+                        'admin0pcode': 'AF',
 
-                //     },
-                //     {
-                //         'admin0name': 'Afghanistan',
-                //         'admin0pcode': 'AF',
+                    }, {
+                        'admin0name': 'Bangladesh',
+                        'admin0pcode': 'BD',
 
-                //     }, {
-                //         'admin0name': 'Bangladesh',
-                //         'admin0pcode': 'BD',
+                    }, {
+                        'admin0name': 'Cox Bazar',
+                        'admin0pcode': 'CB',
 
-                //     }, {
-                //         'admin0name': 'Cox Bazar',
-                //         'admin0pcode': 'CB',
+                    }, {
+                        'admin0name': 'Democratic Republic of Congo',
+                        'admin0pcode': 'CD',
+                    }, {
+                        'admin0name': 'Ethiopia',
+                        'admin0pcode': 'ET',
 
-                //     }, {
-                //         'admin0name': 'Democratic Republic of Congo',
-                //         'admin0pcode': 'CD',
-                //     }, {
-                //         'admin0name': 'Ethiopia',
-                //         'admin0pcode': 'ET',
+                    }, {
+                        'admin0name': 'Iraq',
+                        'admin0pcode': 'IQ',
 
-                //     }, {
-                //         'admin0name': 'Somalia',
-                //         'admin0pcode': 'SO',
+                    }, {
+                        'admin0name': 'Somalia',
+                        'admin0pcode': 'SO',
 
-                //     }, {
-                //         'admin0name': 'South Sudan',
-                //         'admin0pcode': 'SS',
+                    }, {
+                        'admin0name': 'South Sudan',
+                        'admin0pcode': 'SS',
 
-                //     }, {
-                //         'admin0name': 'Syria',
-                //         'admin0pcode': 'SY',
+                    }, {
+                        'admin0name': 'Syria',
+                        'admin0pcode': 'SY',
 
-                //     }, {
-                //         'admin0name': 'Ukraine',
-                //         'admin0pcode': 'UA',
+                    }, {
+                        'admin0name': 'Ukraine',
+                        'admin0pcode': 'UA',
 
-                //     }, {
-                //         'admin0name': 'Yemen',
-                //         'admin0pcode': 'YE',
+                    }, {
+                        'admin0name': 'Yemen',
+                        'admin0pcode': 'YE',
 
-                //     }, {
-                //         'admin0name': 'Nigeria',
-                //         'admin0pcode': 'NG',
+                    }, {
+                        'admin0name': 'Nigeria',
+                        'admin0pcode': 'NG',
 
-                //     },
-                //     {
-                //         'admin0name': 'Colombia',
-                //         'admin0pcode': 'COL',
-                //     }],
+                    },
+                    {
+                        'admin0name': 'Colombia',
+                        'admin0pcode': 'COL',
+                    }],
                 // type_org: [
                 //     { organization_type: 'United Nations' },
                 //     { organization_type: 'Government' },
@@ -652,6 +651,76 @@ angular.module('ngm.widget.form.donor.list', ['ngm.provider'])
                 //         }
                 //     }
                 // },
+                setCluster: function (id, item, edit) {
+                    
+                    
+                    if (edit) {
+                        id = 'edit-' + id
+                    }else{
+                        id = 'add-' + id;
+                    }
+                    console.log(id)
+                    if (document.getElementById(id).checked) {
+                        var values = document.getElementById(id).value;
+                        if (item.cluster_id.indexOf(values) === -1) {
+                            if (item.cluster_id === '') {
+                                item.cluster_id = values;
+                            } else {
+                                temp = item.cluster_id.replace(/\s/g, '').split(',')
+                                temp.push(values)
+                                item.cluster_id = temp.join(', ');
+                            }
+                        }
+                    } else {
+                        var values = document.getElementById(id).value;
+                        if (item.cluster_id.indexOf(values) > -1) {
+                            temp = item.cluster_id.replace(/\s/g, '').split(',')
+                            var index = temp.indexOf(values);
+                            temp.splice(index, 1)
+
+                            if (temp.length < 1) {
+                                item.cluster_id = '';
+                            } else {
+                                item.cluster_id = temp.join(', ');
+                            }
+
+                        }
+                    }
+                },
+                setCountry: function (id, item, edit) {
+                    if (edit) {
+                        id = 'edit-' + id
+                    }
+                    if(!item.admin0pcode){
+                        item.admin0pcode='';
+                    }
+                    if (document.getElementById(id).checked) {
+                        var values = document.getElementById(id).value;
+                        if (item.admin0pcode.indexOf(values) === -1) {
+                            if (item.admin0pcode === '') {
+                                item.admin0pcode = values;
+                            } else {
+                                temp = item.admin0pcode.replace(/\s/g, '').split(',')
+                                temp.push(values)
+                                item.admin0pcode = temp.join(', ');
+                            }
+                        }
+                    } else {
+                        var values = document.getElementById(id).value;
+                        if (item.admin0pcode.indexOf(values) > -1) {
+                            temp = item.admin0pcode.replace(/\s/g, '').split(',')
+                            var index = temp.indexOf(values);
+                            temp.splice(index, 1)
+
+                            if (temp.length < 1) {
+                                item.admin0pcode = '';
+                            } else {
+                                item.admin0pcode = temp.join(', ');
+                            }
+
+                        }
+                    }
+                },
                 init: function () {
                     // $scope.master.list_country = [];
                     // // $scope.master.list_inactive_country = [];

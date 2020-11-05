@@ -70,7 +70,7 @@
                     name="ngm-org-name" class="validate">
                 <label class="active" for="ngm-org-name"> Donor Name</label>
             </div>
-            <div class="input-field col s12 m12">
+            <!-- <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-org-type" name="ngm-org-type" class="validate"
                     ng-options="c.cluster_id as c.cluster for c in master.clusters"
                     ng-model="addDonorAttribute.cluster_id" ng-disabled=""
@@ -78,6 +78,35 @@
                     <option value="">Select Cluster</option>
                 </select>
                 <label for="ngm-org-type" class="active" style="transform:translateY(-10%)"> Cluster</label>
+            </div> -->
+        </div>
+
+        <div class="row" style="margin-left: 50px;margin-right:10px;">
+            <div class="input-field col s12 m12">
+                <label for="ngm-org-country" class="active" style="transform:translateY(-120%)"> Cluster</label>
+            </div>
+            <div class="col s6" ng-repeat="c in master.clusters ">
+                <label>
+                    <input type="checkbox" class="filled-in" id="add-{{c.cluster_id}}" value={{c.cluster_id}}
+                        ng-checked="addDonorAttribute.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
+                        ng-click="master.setCluster(c.cluster_id,addDonorAttribute, false)" />
+                    <span style="color: #000000; font-weight: 500;">{{c.cluster}}</span>
+                </label>
+            </div>
+        
+        </div>
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Select Country</label>
+            <br>
+            <div class="col s6" ng-repeat="c in master.country">
+                <p style="margin-bottom: 5px;margin-top: 10px;">
+                    <label>
+                        <input type="checkbox" class="filled-in" id={{c.admin0pcode}} value={{c.admin0pcode}}
+                            ng-checked="addDonorAttribute.admin0pcode.indexOf(c.admin0pcode) > -1"
+                            ng-click="master.setCountry(c.admin0pcode,addDonorAttribute,false)" />
+                        <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
+                    </label>
+                </p>
             </div>
         </div>
     </div>
@@ -107,13 +136,43 @@
                             name="ngm-org-name" class="validate">
                         <label class="active" for="ngm-org-name"> Donor Name</label>
                     </div>
-                    <div class="input-field col s12 m12">
+                    <!-- <div class="input-field col s12 m12">
                         <select materialize-select id="ngm-org-type" name="ngm-org-type" class="validate"
                             ng-options="c.cluster_id as c.cluster for c in master.clusters" ng-model="master.editedDonor.cluster_id"
                             ng-disabled="" ng-change="" required>
                             <option value="">Select Cluster</option>
                         </select>
                         <label for="ngm-org-type" class="active" style="transform:translateY(-10%)"> Cluster</label>
+                    </div> -->
+                </div>
+
+                <div class="row" style="margin-left: 50px;margin-right:10px;">
+                    <div class="input-field col s12 m12">
+                        <label for="ngm-org-country" class="active" style="transform:translateY(-120%)"> Cluster</label>
+                    </div>
+                    <div class="col s6" ng-repeat="c in master.clusters ">
+                        <label>
+                            <input type="checkbox" class="filled-in" id="edit-{{c.cluster_id}}" value={{c.cluster_id}}
+                                ng-checked="master.editedDonor.cluster_id.indexOf(c.cluster_id) > -1" ng-disabled=""
+                                ng-click="master.setCluster(c.cluster_id,master.editedDonor, true)" />
+                            <span style="color: #000000; font-weight: 500;">{{c.cluster}}</span>
+                        </label>
+                    </div>
+                
+                </div>
+
+                <div class="row" style="margin: 20px 50px 10px 50px;">
+                    <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Select Country</label>
+                    <br>
+                    <div class="col s6" ng-repeat="c in master.country">
+                        <p style="margin-bottom: 5px;margin-top: 10px;">
+                            <label>
+                                <input type="checkbox" class="filled-in" id=edit-{{c.admin0pcode}} value={{c.admin0pcode}}
+                                    ng-checked="master.editedDonor.admin0pcode.indexOf(c.admin0pcode) > -1"
+                                    ng-click="master.setCountry(c.admin0pcode,master.editedDonor,true)" />
+                                <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
+                            </label>
+                        </p>
                     </div>
                 </div>
 
@@ -192,15 +251,14 @@
                                 pagination-id="master.listId" style="padding-top:20px;">
                                 <div class="card  darken-1 hoverable"
                                     ng-class="{'inactive':!master.checkActiveDeactivedDonor(item) }">
-                                    <div class="card-content " style="min-height: 200px;">
-                                        <p class="card-title activator tag truncate"
-                                            ng-class="{'active':master.checkActiveDeactivedDonor(item), 'not_active':!master.checkActiveDeactivedDonor(item)}">
-                                            {{item.organization}} <i class="material-icons right">more_vert</i></p>
-                                        <br>
-                                        <p class="truncate">{{item.project_donor_name}}</p>
-                                        <br>
-                                        <br>
-                                        <div class="row switch input-field" style="margin-bottom:10px;margin-top:-8%">
+                                    <div class="card-content " style="min-height: 60px;">
+                                        <p class="card-title activator tag truncate active">
+                                            {{item.project_donor_name}} <i class="material-icons right">more_vert</i></p>
+                                        <!-- <br> -->
+                                        <!-- <p class="truncate">{{item.project_donor_name}}</p> -->
+                                        <!-- <br>
+                                        <br> -->
+                                        <!-- <div class="row switch input-field" style="margin-bottom:10px;margin-top:-8%">
                                             <label>
                                                 <input ng-checked="master.checkActiveDeactivedDonor(item)"
                                                     id="{{item.id}}" ng-disabled="master.disabledOrg(item)"
@@ -208,12 +266,12 @@
                                                     ng-click="master.changeActiveDeactivedOrgByCountry(item.id)">
                                                 <span class="lever"></span>
                                             </label>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="card-reveal">
                                         <span class="card-title grey-text text-darken-4"><i
                                                 class="material-icons right">close</i></span>
-                                        <div class="center" style="margin-top: 16%;">
+                                        <div class="center" style="margin-top: 0%;">
                                             <button class="btn" ng-click="master.setEditedDonor(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">create</i>
