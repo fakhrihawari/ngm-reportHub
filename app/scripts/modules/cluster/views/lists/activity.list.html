@@ -989,18 +989,27 @@
                     <li ng-if="master.activities.length>0" class="collection-item avatar"
                         style="padding-left: 30px;padding-right: 30px">
                         <div class="row">
-                            <div class="col s12 m4  "
+                            <div class="col s12 m6  "
                                 dir-paginate="item in master.activities | filter: master.search.filter | orderBy: list.orderBy : false | itemsPerPage: master.itemsPerPage"
                                 pagination-id="master.listId" style="padding-top:20px;">
                                 <div class="card  darken-1 hoverable">
                                     <div class="card-content " style="min-height: 60px;">
                                         <p class="card-title activator tag truncate active"
-                                            style="font-weight: 500; font-size: 18px;">
-                                            {{item.activity_type_name | limitTo: 20}} {{item.activity_type_name.length < 20 ? '' : '...'}} <i
-                                                class="material-icons right">more_vert</i></p>
+                                            style="font-weight: 500; font-size: 14px; padding-top: 5px;">
+                                            <span style="border: 2px solid #26a69a;
+                                            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+                                            margin-top: 0px;
+                                            padding: 0 5px;
+                                            color: #fff;
+                                            background: #26a69a;
+                                            border-radius: 5px;">{{item.cluster}}</span>
+                                             
+                                            <i class="material-icons right">more_vert</i></p>
+                                        <p class="card-title activator tag truncate active" style="font-weight: 500; font-size: 18px;">
+                                            {{item.activity_type_name}}</p>
                                         <p class="card-title activator tag truncate active"
                                             style="font-weight: 500; font-size: 18px;">
-                                            {{item.activity_description_name | limitTo: 20}}{{item.activity_description_name.length < 20 ? '' : '...'}}</p>
+                                            {{item.activity_description_name}}</p>
                                         <!-- <br>
                                         <p class="truncate">{{item.organization_name}}</p>
                                         <p style="font-style: italic; font-weight: 400;">{{item.organization_type}}</p>
@@ -1018,7 +1027,7 @@
                                     <div class="card-reveal">
                                         <span class="card-title grey-text text-darken-4"><i
                                                 class="material-icons right">close</i></span>
-                                        <div class="center" style="margin-top: 0%;">
+                                        <div class="center" style="margin-top: 5%;">
                                             <button class="btn" ng-click="master.setEditedActivity(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">create</i>

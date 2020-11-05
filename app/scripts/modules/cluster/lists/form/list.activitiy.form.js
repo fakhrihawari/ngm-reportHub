@@ -37,7 +37,7 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
                 // current user
                 user: ngmUser.get(),
                 activities: config.activities ? config.activities:[],
-                itemsPerPage: 9,
+                itemsPerPage: 10,
                 clusters: ngmClusterLists.getClusters(ngmUser.get().admin0pcode),
                 listId: 'ngm-paginate-' + Math.floor((Math.random() * 1000000)),
                 search: {
