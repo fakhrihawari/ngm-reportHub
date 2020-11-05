@@ -95,7 +95,7 @@
                 </select>
                 <label for="ngm-mpc_type-desc" class="active" style="transform:translateY(-10%)"> Activity Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <!-- <div class="input-field col s12 m12">
                 <input id="ngm-mpc_type-name" placeholder="" type="text" ng-model="master.addMpcTypeAttribute.mpc_delivery_type_name"
                     name="ngm-mpc_type-name" class="validate">
                 <label class="active" for="ngm-mpc_type-name"> MPC Delivery Type Name</label>
@@ -104,6 +104,26 @@
                 <input id="ngm-mpc_mechanism-name" placeholder="" type="text" ng-model="master.addMpcTypeAttribute.mpc_mechanism_type_name"
                     name="ngm-mpc_mechanism-name" class="validate">
                 <label class="active" for="ngm-mpc_mechanism-name"> MPC Mechanism Type Name</label>
+            </div> -->
+            <div class="input-field col s12 m12">
+                <select materialize-select watch id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.mpc_delivery_type_id as c.mpc_delivery_type_name for c in master.mpc_delivery_types"
+                    ng-model="master.addMpcTypeAttribute.mpc_delivery_type_id" ng-disabled=""
+                    ng-change="master.updateName(master.mpc_delivery_types, 'mpc_delivery_type_id', 'mpc_delivery_type_name', master.addMpcTypeAttribute)"
+                    required>
+                    <option value="">Select Delivery</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Delivery Type</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select watch id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.mpc_mechanism_type_id as c.mpc_mechanism_type_name for c in master.mpc_mechanism_types | filter :{ mpc_delivery_type_id : master.addMpcTypeAttribute.mpc_delivery_type_id}"
+                    ng-model="master.addMpcTypeAttribute.mpc_mechanism_type_id" ng-disabled=""
+                    ng-change="master.updateName(master.mpc_mechanism_types, 'mpc_mechanism_type_id', 'mpc_mechanism_type_name', master.addMpcTypeAttribute)"
+                    required>
+                    <option value="">Select Mechanism</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Delivery Type</label>
             </div>
         </div>
         
@@ -130,7 +150,7 @@
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
                 <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
-                    ng-options="c.cluster_id as c.cluster for c in master.clusters | | filter: { cluster_id: 'cvwg'}" ng-model="master.editedMpcType.cluster_id"
+                    ng-options="c.cluster_id as c.cluster for c in master.clusters | filter: { cluster_id: 'cvwg'}" ng-model="master.editedMpcType.cluster_id"
                     ng-disabled="" ng-change="master.updateName(master.clusters, 'cluster_id', 'cluster', master.editedMpcType)"
                     required>
                     <option value="">Select Cluster</option>
@@ -157,7 +177,7 @@
                 </select>
                 <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Activity Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <!-- <div class="input-field col s12 m12">
                 <input id="ngm-org-name" placeholder="" type="text" ng-model="master.editedMpcType.mpc_delivery_type_name"
                     name="ngm-org-name" class="validate">
                 <label class="active" for="ngm-org-name"> MPC Delivery Type Name</label>
@@ -166,6 +186,26 @@
                 <input id="ngm-org-name" placeholder="" type="text" ng-model="master.editedMpcType.mpc_mechanism_type_name"
                     name="ngm-org-name" class="validate">
                 <label class="active" for="ngm-org-name"> MPC Mechanism Type Name</label>
+            </div> -->
+            <div class="input-field col s12 m12">
+                <select materialize-select watch id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.mpc_delivery_type_id as c.mpc_delivery_type_name for c in master.mpc_delivery_types"
+                    ng-model="master.editedMpcType.mpc_delivery_type_id" ng-disabled=""
+                    ng-change="master.updateName(master.mpc_delivery_types, 'mpc_delivery_type_id', 'mpc_delivery_type_name', master.editedMpcType)"
+                    required>
+                    <option value="">Select Delivery</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Delivery Type</label>
+            </div>
+            <div class="input-field col s12 m12">
+                <select materialize-select watch id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
+                    ng-options="c.mpc_mechanism_type_id as c.mpc_mechanism_type_name for c in master.mpc_mechanism_types | filter :{ mpc_delivery_type_id : master.editedMpcType.mpc_delivery_type_id}"
+                    ng-model="master.editedMpcType.mpc_mechanism_type_id" ng-disabled=""
+                    ng-change="master.updateName(master.mpc_mechanism_types, 'mpc_mechanism_type_id', 'mpc_mechanism_type_name', master.editedMpcType)"
+                    required>
+                    <option value="">Select Mechanism</option>
+                </select>
+                <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> MPC Delivery Type</label>
             </div>
         </div>
     </div>
