@@ -85,6 +85,20 @@
             </div>
 
         </div>
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Select Country</label>
+            <br>
+            <div class="col s6" ng-repeat="c in master.country">
+                <p style="margin-bottom: 5px;margin-top: 10px;">
+                    <label>
+                        <input type="checkbox" class="filled-in" id={{c.admin0pcode}} value={{c.admin0pcode}}
+                            ng-checked="addHrpTypeAttribute.admin0pcode.indexOf(c.admin0pcode) > -1"
+                            ng-click="master.setCountry(c.admin0pcode,addHrpTypeAttribute,true)" />
+                        <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
+                    </label>
+                </p>
+            </div>
+        </div>
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
@@ -126,6 +140,20 @@
                 </label>
             </div>
 
+        </div>
+        <div class="row" style="margin: 20px 50px 10px 50px;">
+            <label class="active" style="color: #26a69a;font-weight: 500;padding-left: 10px;">Select Country</label>
+            <br>
+            <div class="col s6" ng-repeat="c in master.country">
+                <p style="margin-bottom: 5px;margin-top: 10px;">
+                    <label>
+                        <input type="checkbox" class="filled-in" id=edit-{{c.admin0pcode}} value={{c.admin0pcode}}
+                            ng-checked="master.editedHrpType.admin0pcode.indexOf(c.admin0pcode) > -1"
+                            ng-click="master.setCountry(c.admin0pcode,master.editedHrpType,true)" />
+                        <span style="color: #000000; font-weight: 500;">{{c.admin0name}}</span>
+                    </label>
+                </p>
+            </div>
         </div>
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">

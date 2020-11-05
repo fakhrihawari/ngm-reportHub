@@ -60,11 +60,11 @@ angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
                 },
                 // admin0pcode: config.admin0pcode.toUpperCase(),
                 country: [
-                    {
-                        'admin0name': 'All',
-                        'admin0pcode': 'ALL',
+                    // {
+                    //     'admin0name': 'All',
+                    //     'admin0pcode': 'ALL',
 
-                    },
+                    // },
                     {
                         'admin0name': 'Afghanistan',
                         'admin0pcode': 'AF',
@@ -117,7 +117,7 @@ angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
                     if (!$scope.addBeneficiaryTypeAttribute.beneficiary_type_id) {
                         $scope.addBeneficiaryTypeAttribute.beneficiary_type_id = $scope.addBeneficiaryTypeAttribute.beneficiary_type_name.split(' ').join('_').toLowerCase()
                     }
-                    console.log($scope.addBeneficiaryTypeAttribute)
+                    
                     M.toast({ html: 'Adding New Beneficiary Type ...', displayLength: 2000, classes: 'note' });
                     $http({
                         method: 'POST',
@@ -210,7 +210,7 @@ angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
                 },
                 editClusterBeneficiaryType: function (id) {
                     if (document.getElementById('edit-' + id).checked) {
-                        console.log($scope.master.editedBeneficiaryType)
+                        
                         $scope.master.editedBeneficiaryType.cluster_id.push(id)
                     } else {
                         var index = $scope.master.editedBeneficiaryType.cluster_id.indexOf(id)
@@ -258,6 +258,40 @@ angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
                 // },
                 // editInactiveCountry: function (id, prefix, item) {
                 // },
+                setCountry: function (id, item, edit) {
+                    if (edit) {
+                        id = 'edit-' + id
+                    }
+                    if (!item.admin0pcode) {
+                        item.admin0pcode = '';
+                    }
+                    if (document.getElementById(id).checked) {
+                        var values = document.getElementById(id).value;
+                        if (item.admin0pcode.indexOf(values) === -1) {
+                            if (item.admin0pcode === '') {
+                                item.admin0pcode = values;
+                            } else {
+                                temp = item.admin0pcode.replace(/\s/g, '').split(',')
+                                temp.push(values)
+                                item.admin0pcode = temp.join(', ');
+                            }
+                        }
+                    } else {
+                        var values = document.getElementById(id).value;
+                        if (item.admin0pcode.indexOf(values) > -1) {
+                            temp = item.admin0pcode.replace(/\s/g, '').split(',')
+                            var index = temp.indexOf(values);
+                            temp.splice(index, 1)
+
+                            if (temp.length < 1) {
+                                item.admin0pcode = '';
+                            } else {
+                                item.admin0pcode = temp.join(', ');
+                            }
+
+                        }
+                    }
+                },
                 init: function () {
                     $scope.master.list_cluster = [];
                     var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
