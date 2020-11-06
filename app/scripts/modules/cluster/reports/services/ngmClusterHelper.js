@@ -747,6 +747,25 @@ angular.module( 'ngmReportHub' )
        
        template = angular.merge({},template,project);
        return template;
+      },
+      copyObject: function(item,name){
+        var item = JSON.stringify(item);
+        sessionStorage.setItem(name, item); 
+      },
+      checkCopyObject: function(name){
+        result =JSON.parse(sessionStorage.getItem(name))
+        if(result){
+          return true;
+        }
+        return false;
+      },
+      pasteObject: function(name){
+        var paste = angular.copy(JSON.parse(sessionStorage.getItem(name))); //returns "xxx"
+        ngmClusterHelper.removeObject(name);
+        return paste
+      },
+      removeObject: function(name){
+        sessionStorage.removeItem(name);
       }
 
 		};

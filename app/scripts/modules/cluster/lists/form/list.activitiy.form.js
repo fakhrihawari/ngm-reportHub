@@ -13,6 +13,7 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
         '$scope',
         'config',
         'ngmClusterLists',
+        'ngmClusterHelper',
         'ngmUser',
         'ngmAuth',
         'ngmData',
@@ -24,6 +25,7 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
             $scope,
             config,
             ngmClusterLists,
+            ngmClusterHelper,
             ngmUser,
             ngmAuth,
             ngmData,
@@ -32,7 +34,7 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
             $filter,
             $route
         ) {
-
+            $scope.ngmClusterHelper = ngmClusterHelper
             $scope.master = {
                 // current user
                 user: ngmUser.get(),
@@ -485,6 +487,14 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
                             
                         }
                     }
+                },
+                copy:function(item){
+                    console.log(item)
+                },
+                paste:function(name){
+                    temp = ngmClusterHelper.pasteObject(name);
+                    delete temp.id;
+                    $scope.master.addActivityAttribute = temp;
                 },
                 init: function () {
 

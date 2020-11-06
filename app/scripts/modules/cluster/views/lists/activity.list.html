@@ -506,9 +506,10 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationActivity(master.addActivityAttribute)" ng-click="master.addActivity()">Save
+            ng-disabled="!master.checkValidationActivity(master.addActivityAttribute)" ng-click="master.addActivity(); ngmClusterHelper.removeObject('activity')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn" ng-click="master.resetAddForm()">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('activity')" ng-click="master.paste('activity')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="master.resetAddForm(); ngmClusterHelper.removeObject('activity')">Close</div>
     </div>
 </div>
 
@@ -1079,6 +1080,10 @@
                                             <button class="btn red" ng-click="master.removeActivityModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'activity')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 
