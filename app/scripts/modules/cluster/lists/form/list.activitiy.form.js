@@ -76,6 +76,12 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
                     "mpc_grant_type_id": "",
                     "mpc_package_type_id": 0,
                     "mpc_transfer_type_id": 0,
+                    "sector_objective_description": "",
+                    "sector_objective_id": "",
+                    "sector_objective_name": "",
+                    "strategic_objective_description": "",
+                    "strategic_objective_id": "",
+                    "strategic_objective_name": "",
                     "units": 0,
                     "unit_type_id": 0,
                     "display_details": 0,
@@ -282,6 +288,12 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
                     }
                     if (!$scope.master.addActivityAttribute.activity_detail_id) {
                         $scope.master.addActivityAttribute.activity_detail_id = $scope.master.addActivityAttribute.activity_detail_name.split(' ').join('_').toLowerCase();
+                    }
+                    if(!$scope.master.addActivityAttribute.sector_objective_id){
+                        $scope.master.addActivityAttribute.sector_objective_id = $scope.master.addActivityAttribute.sector_objective_name.split('').join('_').toLowerCase();
+                    }
+                    if(!$scope.master.addActivityAttribute.strategic_objective_id){
+                        $scope.master.addActivityAttribute.strategic_objective_id = $scope.master.addActivityAttribute.strategic_objective_name.split('').join('_').toLowerCase();
                     }
                     M.toast({ html: 'Adding New Activity ...', displayLength: 2000, classes: 'note' });
                     $http({
