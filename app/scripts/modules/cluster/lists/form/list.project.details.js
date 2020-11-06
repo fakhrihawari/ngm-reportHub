@@ -238,6 +238,14 @@ angular.module('ngm.widget.form.project.detail.list', ['ngm.provider'])
                         M.toast({ html: 'Error! project_details not deleted </br>' + err.err, displayLength: 3000, classes: 'error' });
                     })
                 },
+                disabledEditButton: function (item) {
+                    var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
+                    // disable edit if role is COUNTRY;
+                    if (role === 'USER') {
+                        return true;
+                    }
+                    return false;
+                },
                 init: function () {
                 }
             }

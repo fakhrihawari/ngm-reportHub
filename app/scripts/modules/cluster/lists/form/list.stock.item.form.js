@@ -399,21 +399,14 @@ angular.module('ngm.widget.form.stock.item.list', ['ngm.provider'])
                     //after save reset
                     $scope.editedStockItem = {};
                 },
-                // disabledEditButton: function (item) {
-                //     var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
-                //     // disable edit if role is COUNTRY;
-                //     if (role === 'COUNTRY') {
-                //         return true;
-                //     }
-                //     // if organization type is international
-                //     if (item.organization_type === 'International NGO' || item.organization_type === 'United Nations') {
-                //         if (role === 'SUPERADMIN') {
-                //             return false;
-                //         }
-                //         return true;
-                //     }
-                //     return false;
-                // },
+                disabledEditButton: function (item) {
+                    var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
+                    // disable edit if role is COUNTRY;
+                    if (role === 'USER') {
+                        return true;
+                    }
+                    return false;
+                },
                 // editCountryOrg: function (id) {
                 //     // old flow
                 //     // if (!$scope.master.editedOrg.admin0pcode_inactive) {

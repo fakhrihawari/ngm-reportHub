@@ -166,14 +166,7 @@ angular.module('ngm.widget.form.admin3.list', ['ngm.provider'])
                 disabledEditButton: function (item) {
                     var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
                     // disable edit if role is COUNTRY;
-                    if (role === 'COUNTRY') {
-                        return true;
-                    }
-                    // if organization type is international
-                    if (item.organization_type === 'International NGO' || item.organization_type === 'United Nations') {
-                        if (role === 'SUPERADMIN') {
-                            return false;
-                        }
+                    if (role === 'USER') {
                         return true;
                     }
                     return false;
