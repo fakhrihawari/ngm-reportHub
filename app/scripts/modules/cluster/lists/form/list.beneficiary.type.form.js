@@ -12,6 +12,7 @@ angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
         '$scope',
         'config',
         'ngmClusterLists',
+        'ngmClusterHelper',
         'ngmUser',
         'ngmAuth',
         'ngmData',
@@ -21,12 +22,14 @@ angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
             $scope,
             config,
             ngmClusterLists,
+            ngmClusterHelper,
             ngmUser,
             ngmAuth,
             ngmData,
             $http,
             $timeout
         ) {
+            $scope.ngmClusterHelper = ngmClusterHelper
 
             $scope.master = {
                 // current user
@@ -284,6 +287,11 @@ angular.module('ngm.widget.form.beneficiary.type.list', ['ngm.provider'])
 
                         }
                     }
+                },
+                paste: function (name) {
+                    temp = ngmClusterHelper.pasteObject(name);
+                    delete temp.id;
+                    $scope.addBeneficiaryTypeAttribute = temp;
                 },
                 init: function () {
                     $scope.master.list_cluster = [];

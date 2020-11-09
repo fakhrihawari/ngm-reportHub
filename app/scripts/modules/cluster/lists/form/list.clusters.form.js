@@ -12,6 +12,7 @@ angular.module('ngm.widget.form.cluster.list', ['ngm.provider'])
         '$scope',
         'config',
         'ngmClusterLists',
+        'ngmClusterHelper',
         'ngmUser',
         'ngmAuth',
         'ngmData',
@@ -22,6 +23,7 @@ angular.module('ngm.widget.form.cluster.list', ['ngm.provider'])
             $scope,
             config,
             ngmClusterLists,
+            ngmClusterHelper,
             ngmUser,
             ngmAuth,
             ngmData,
@@ -29,6 +31,7 @@ angular.module('ngm.widget.form.cluster.list', ['ngm.provider'])
             $timeout,
             $filter
         ) {
+            $scope.ngmClusterHelper = ngmClusterHelper
 
             $scope.master = {
                 // current user
@@ -242,6 +245,11 @@ angular.module('ngm.widget.form.cluster.list', ['ngm.provider'])
                         return true;
                     }
                     return false;
+                },
+                paste: function (name) {
+                    temp = ngmClusterHelper.pasteObject(name);
+                    delete temp.id;
+                    $scope.addCluster = temp;
                 },
                 init: function () {
                 }

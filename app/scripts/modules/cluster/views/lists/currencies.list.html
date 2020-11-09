@@ -83,9 +83,11 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationCurrency(addCurrency)" ng-click="master.addCurrency()">Save
+            ng-disabled="!master.checkValidationCurrency(addCurrency)" ng-click="master.addCurrency();ngmClusterHelper.removeObject('currencies')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('currencies')"
+            ng-click="master.paste('currencies')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="ngmClusterHelper.removeObject('currencies')">Close</div>
     </div>
 </div>
 
@@ -224,6 +226,10 @@
                                             <button class="btn red" ng-click="master.removeCurrencykModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'currencies')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 

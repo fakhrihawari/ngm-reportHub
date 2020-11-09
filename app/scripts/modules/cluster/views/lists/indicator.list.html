@@ -107,9 +107,11 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationIndicator(master.addIndicatorAttribute)" ng-click="master.addIndicator()">Save
+            ng-disabled="!master.checkValidationIndicator(master.addIndicatorAttribute)" ng-click="master.addIndicator();ngmClusterHelper.removeObject('indicator')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn" ng-click="master.resetAddForm()">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('indicator')"
+            ng-click="master.paste('indicator')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="master.resetAddForm();ngmClusterHelper.removeObject('indicator')">Close</div>
     </div>
 </div>
 
@@ -269,6 +271,10 @@
                                             <button class="btn red" ng-click="master.removeIndicatorModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'indicator')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 

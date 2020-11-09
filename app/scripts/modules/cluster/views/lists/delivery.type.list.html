@@ -94,9 +94,11 @@
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
             ng-disabled="!master.checkValidationDeliveryType(addDeliveryType)"
-            ng-click="master.addDeliveryType()">Save
+            ng-click="master.addDeliveryType();ngmClusterHelper.removeObject('delivery_type')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('delivery_type')"
+            ng-click="master.paste('delivery_type')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="ngmClusterHelper.removeObject('delivery_type')">Close</div>
     </div>
 </div>
 
@@ -244,6 +246,10 @@
                                             <button class="btn red" ng-click="master.removedDeliveryTypeModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'delivery_type')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 

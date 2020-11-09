@@ -132,9 +132,11 @@
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
             <div class="modal-action wave-effects wave-green btn" 
             ng-disabled="!master.checkValidationOrganization(addOrganizationAtribute)"
-            ng-click="master.addOrganization()">Save
+            ng-click="master.addOrganization();ngmClusterHelper.removeObject('org')">Save
             </div>
-            <div class="modal-action modal-close red darken-1 btn">Close</div>
+            <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('org')"
+                ng-click="master.paste('org')">PASTE</div>
+            <div class="modal-action modal-close red darken-1 btn" ng-click="ngmClusterHelper.removeObject('org')">Close</div>
     </div>
 </div>
 
@@ -312,6 +314,10 @@
                                             </button>
                                             <button class="btn red" ng-click="master.removeOrgModal(item)" ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'org')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
                                        

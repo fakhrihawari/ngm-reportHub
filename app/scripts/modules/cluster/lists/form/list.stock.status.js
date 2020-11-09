@@ -12,6 +12,7 @@ angular.module('ngm.widget.form.stock.status.list', ['ngm.provider'])
         '$scope',
         'config',
         'ngmClusterLists',
+        'ngmClusterHelper',
         'ngmUser',
         'ngmAuth',
         'ngmData',
@@ -22,6 +23,7 @@ angular.module('ngm.widget.form.stock.status.list', ['ngm.provider'])
             $scope,
             config,
             ngmClusterLists,
+            ngmClusterHelper,
             ngmUser,
             ngmAuth,
             ngmData,
@@ -29,6 +31,7 @@ angular.module('ngm.widget.form.stock.status.list', ['ngm.provider'])
             $timeout,
             $filter
         ) {
+            $scope.ngmClusterHelper = ngmClusterHelper
 
             $scope.master = {
                 // current user
@@ -246,6 +249,11 @@ angular.module('ngm.widget.form.stock.status.list', ['ngm.provider'])
                         return true;
                     }
                     return false;
+                },
+                paste: function (name) {
+                    temp = ngmClusterHelper.pasteObject(name);
+                    delete temp.id;
+                    $scope.addStockStatus = temp;
                 },
                 
                 init: function () {

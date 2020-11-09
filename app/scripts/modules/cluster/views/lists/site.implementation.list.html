@@ -88,9 +88,11 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationSite(addSiteImplementationAttribute)" ng-click="master.addSiteImplementation()">Save
+            ng-disabled="!master.checkValidationSite(addSiteImplementationAttribute)" ng-click="master.addSiteImplementation();ngmClusterHelper.removeObject('site_implementation')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('site_implementation')"
+            ng-click="master.paste('site_implementation')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="ngmClusterHelper.removeObject('site_implementation')">Close</div>
     </div>
 </div>
 
@@ -230,6 +232,10 @@
                                             <button class="btn red" ng-click="master.removeSiteImplementationModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'site_implementation')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 

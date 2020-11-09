@@ -82,9 +82,11 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn" ng-disabled="!master.checkValidationStock(addStockTargetedGroup)"
-            ng-click="master.addStock()">Save
+            ng-click="master.addStock();ngmClusterHelper.removeObject('stock_targeted_group')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('stock_targeted_group')"
+            ng-click="master.paste('stock_targeted_group')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="ngmClusterHelper.removeObject('stock_targeted_group')">Close</div>
     </div>
 </div>
 
@@ -222,6 +224,10 @@
                                             <button class="btn red" ng-click="master.removeStockModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'stock_targeted_group')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 

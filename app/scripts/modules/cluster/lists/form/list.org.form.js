@@ -12,6 +12,7 @@ angular.module('ngm.widget.form.organization.list', ['ngm.provider'])
         '$scope',
         'config',
         'ngmClusterLists',
+        'ngmClusterHelper',
         'ngmUser',
         'ngmAuth',
         'ngmData',
@@ -21,12 +22,14 @@ angular.module('ngm.widget.form.organization.list', ['ngm.provider'])
             $scope,
             config,
             ngmClusterLists,
+            ngmClusterHelper,
             ngmUser,
             ngmAuth,
             ngmData,
             $http,
             $timeout
         ) {
+            $scope.ngmClusterHelper = ngmClusterHelper
 
             $scope.master = {
                 // current user
@@ -616,6 +619,11 @@ angular.module('ngm.widget.form.organization.list', ['ngm.provider'])
                             }
                         }
                     }
+                },
+                paste: function (name) {
+                    temp = ngmClusterHelper.pasteObject(name);
+                    delete temp.id;
+                    $scope.addOrganizationAtribute = temp;
                 },
                 init:function(){
                     $scope.master.list_country=[];

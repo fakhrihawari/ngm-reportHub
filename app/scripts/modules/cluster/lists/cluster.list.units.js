@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-    .controller('ListUnitCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists) {
+    .controller('ListUnitCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterHelper, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists) {
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -15,6 +15,7 @@ angular.module('ngmReportHub')
 
         // init empty model
         $scope.model = $scope.$parent.ngm.dashboard.model;
+        $scope.ngmClusterHelper = ngmClusterHelper;
 
         // report object
         $scope.list = {

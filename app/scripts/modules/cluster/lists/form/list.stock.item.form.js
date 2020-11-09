@@ -12,6 +12,7 @@ angular.module('ngm.widget.form.stock.item.list', ['ngm.provider'])
         '$scope',
         'config',
         'ngmClusterLists',
+        'ngmClusterHelper',
         'ngmUser',
         'ngmAuth',
         'ngmData',
@@ -22,6 +23,7 @@ angular.module('ngm.widget.form.stock.item.list', ['ngm.provider'])
             $scope,
             config,
             ngmClusterLists,
+            ngmClusterHelper,
             ngmUser,
             ngmAuth,
             ngmData,
@@ -29,6 +31,7 @@ angular.module('ngm.widget.form.stock.item.list', ['ngm.provider'])
             $timeout,
             $filter
         ) {
+            $scope.ngmClusterHelper = ngmClusterHelper
 
             $scope.master = {
                 // current user
@@ -664,6 +667,11 @@ angular.module('ngm.widget.form.stock.item.list', ['ngm.provider'])
                 //         }
                 //     }
                 // },
+                paste: function (name) {
+                    temp = ngmClusterHelper.pasteObject(name);
+                    delete temp.id;
+                    $scope.addStockItems = temp;
+                },
                 init: function () {
                     // $scope.master.list_country = [];
                     // // $scope.master.list_inactive_country = [];

@@ -113,9 +113,11 @@
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
             ng-disabled="!master.checkValidationDonor(addDonorAttribute)"
-            ng-click="master.addDonor()">Save
+            ng-click="master.addDonor();ngmClusterHelper.removeObject('donor')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('donor')"
+            ng-click="master.paste('donor')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="ngmClusterHelper.removeObject('donor')">Close</div>
     </div>
 </div>
 
@@ -279,6 +281,10 @@
                                             <button class="btn red" ng-click="master.removeDonorModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'donor')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 

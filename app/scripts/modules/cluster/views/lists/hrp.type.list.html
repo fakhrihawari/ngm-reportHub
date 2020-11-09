@@ -102,9 +102,11 @@
     </div>
     <div class="modal-footer addorg" style="margin-bottom: 10px;">
         <div class="modal-action wave-effects wave-green btn"
-            ng-disabled="!master.checkValidationHrp(addHrpTypeAttribute)" ng-click="master.addHrpType()">Save
+            ng-disabled="!master.checkValidationHrp(addHrpTypeAttribute)" ng-click="master.addHrpType();ngmClusterHelper.removeObject('hrp')">Save
         </div>
-        <div class="modal-action modal-close red darken-1 btn">Close</div>
+        <div class="modal-action blue darken-1 btn" ng-if="ngmClusterHelper.checkCopyObject('hrp')"
+            ng-click="master.paste('hrp')">PASTE</div>
+        <div class="modal-action modal-close red darken-1 btn" ng-click="ngmClusterHelper.removeObject('hrp')">Close</div>
     </div>
 </div>
 
@@ -260,6 +262,10 @@
                                             <button class="btn red" ng-click="master.removeHrpTypeModal(item)"
                                                 ng-disabled="master.disabledEditButton(item)">
                                                 <i class="material-icons">delete</i>
+                                            </button>
+                                            <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'hrp')"
+                                                ng-disabled="master.disabledEditButton(item)">
+                                                <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>
 

@@ -12,6 +12,7 @@ angular.module('ngm.widget.form.unit.list', ['ngm.provider'])
         '$scope',
         'config',
         'ngmClusterLists',
+        'ngmClusterHelper',
         'ngmUser',
         'ngmAuth',
         'ngmData',
@@ -21,13 +22,14 @@ angular.module('ngm.widget.form.unit.list', ['ngm.provider'])
             $scope,
             config,
             ngmClusterLists,
+            ngmClusterHelper,
             ngmUser,
             ngmAuth,
             ngmData,
             $http,
             $timeout
         ) {
-
+            $scope.ngmClusterHelper = ngmClusterHelper
             $scope.master = {
                 // current user
                 user: ngmUser.get(),
@@ -251,6 +253,11 @@ angular.module('ngm.widget.form.unit.list', ['ngm.provider'])
                 // },
                 // editInactiveCountry: function (id, prefix, item) {
                 // },
+                paste: function (name) {
+                    temp = ngmClusterHelper.pasteObject(name);
+                    delete temp.id;
+                    $scope.master.addActivityAttribute = temp;
+                },
                 init: function () {
                     $scope.master.list_cluster = [];
                     var role = ngmAuth.userPermissions().reduce(function (max, v) { return v.LEVEL > max.LEVEL ? v : max })['ROLE'];
