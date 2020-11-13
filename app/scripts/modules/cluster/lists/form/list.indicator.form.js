@@ -297,6 +297,41 @@ angular.module('ngm.widget.form.indicator.list', ['ngm.provider'])
                 // },
                 // editInactiveCountry: function (id, prefix, item) {
                 // },
+                setCountry: function (id, item, edit) {
+                    if (edit) {
+                        id = 'edit-' + id
+                    }
+                    if (!item.admin0pcode) {
+                        item.admin0pcode = '';
+                    }
+                    if (document.getElementById(id).checked) {
+                        var values = document.getElementById(id).value;
+                        if (item.admin0pcode.indexOf(values) === -1) {
+                            if (item.admin0pcode === '') {
+                                item.admin0pcode = values;
+                            } else {
+                                temp = item.admin0pcode.replace(/\s/g, '').split(',')
+                                temp.push(values)
+                                item.admin0pcode = temp.join(', ');
+                            }
+                        }
+                    } else {
+                        var values = document.getElementById(id).value;
+                        if (item.admin0pcode.indexOf(values) > -1) {
+                            temp = item.admin0pcode.replace(/\s/g, '').split(',')
+                            var index = temp.indexOf(values);
+                            temp.splice(index, 1)
+
+                            if (temp.length < 1) {
+                                item.admin0pcode = '';
+                            } else {
+                                item.admin0pcode = temp.join(', ');
+                            }
+
+                        }
+                    }
+                    console.log(item.admin0pcode)
+                },
                 paste: function (name) {
                     temp = ngmClusterHelper.pasteObject(name);
                     delete temp.id;
