@@ -488,6 +488,67 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
                         }
                     }
                 },
+                setAttributeArray:function(type, item){
+                    switch (type) {
+                        case 'response':
+                            if (!item.response || typeof item.response !== 'array' ) {
+                                item.response = []
+                            };
+                            var input ={
+                                response_id:'',
+                                response_name:''
+                            }
+                            item.response.push(input);
+                            break;
+                        case 'details':
+                            if (!item.details || typeof item.details !== 'array') {
+                                item.details = []
+                            };
+                            var input = {
+                                unit_type_label: "", 
+                                unit_type_id: "", 
+                                unit_type_name: ""}
+                            item.details.push(input);
+                            break;
+                        case 'unit_type_id':
+                            if (!item.unit_type_id || typeof item.unit_type_id !== 'array') {
+                                item.unit_type_id = []
+                            };
+                            var input = {
+                                unit_type_id: "",
+                                unit_type_name: ""
+                            }
+                            item.unit_type_id.push(input);
+                            break;
+                        case 'vulnerable_populations':
+                            if (!item.vulnerable_populations || typeof item.vulnerable_populations !== 'array'){
+                                item.vulnerable_populations =[];
+                            }
+                            var input={
+                                vuln_pop_id: "",
+                                vuln_pop_label: "",
+                                vuln_pop_name: "",
+                                vuln_pop_quantity: 0
+                            }
+                            item.vulnerable_populations.push(input);
+                            break
+                        default:
+                            break;
+                    }
+                    
+                    
+                },
+                setAttributeId: function (item, attr,index,key,name,third){
+                    if (item[attr][index][name] !==''){
+                        item[attr][index][key] = item[attr][index][name].split(' ').join('_').toLowerCase();
+                        if (third === 'unit_type_label'){
+                            item[attr][index][third] = item[attr][index][name];
+                        }
+                    }
+                },
+                removeArrayAtrributeItem: function (item, attr, index){
+                    item[attr].splice(index,1);
+                },
                 copy:function(item){
                     console.log(item)
                 },

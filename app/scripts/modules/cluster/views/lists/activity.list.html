@@ -26,7 +26,7 @@
     }
 
     .add_org.modal {
-        width: 50%;
+        width: 60%;
         right: auto !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
@@ -65,7 +65,7 @@
         </ul>
 
         <div class="row" style="margin: 20px 50px 10px 50px;">
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
                     ng-options="c.cluster_id as c.cluster for c in master.clusters | filter:{cluster_id: filterCluster}"
                     ng-model="master.addActivityAttribute.cluster_id" ng-disabled=""
@@ -75,49 +75,49 @@
                 </select>
                 <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Cluster</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-activity_type_name" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.activity_type_name" name="ngm-activity_type_name"
                     class="validate">
                 <label class="active" for="ngm-activity_type_name"> Activity Type Name</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-activity_description_name" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.activity_description_name"
                     name="ngm-activity_description_name" class="validate">
                 <label class="active" for="ngm-activity_description_name"> Activity Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-activity_detail_name" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.activity_detail_name" name="ngm-activity_detail_name"
                     class="validate">
                 <label class="active" for="ngm-activity_detail_name"> Activity Detail</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-sector_objective_name" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.sector_objective_name" name="ngm-sector_objective_name"
                     class="validate">
                 <label class="active" for="ngm-sector_objective_name"> Sector Objective</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-sector_objective_description" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.sector_objective_description"
                     name="ngm-sector_objective_description" class="validate">
                 <label class="active" for="ngm-sector_objective_description"> Sector Objective Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-strategic_objective_name" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.strategic_objective_name" name="ngm-strategic_objective_name"
                     class="validate">
                 <label class="active" for="ngm-strategic_objective_name"> Strategic Objective</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-strategic_objective_description" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.strategic_objective_description"
                     name="ngm-strategic_objective_description" class="validate">
                 <label class="active" for="ngm-strategic_objective_description"> Strategic Objective Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-indicator-name" placeholder="" type="text"
                     ng-model="master.addActivityAttribute.indicator_name" name="ngm-indicator-name" class="validate">
                 <label class="active" for="ngm-indicator-name"> Indicator</label>
@@ -522,6 +522,146 @@
             </div>
         </div>
 
+        <div ng-if="master.addActivityAttribute.response || master.addActivityAttribute.response.length" class="row" style="margin: 20px 50px 10px 50px;">
+                <button class=" teal darken-1 btn"
+                    ng-click="master.setAttributeArray('response',master.addActivityAttribute)"> 
+                    <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                    Add Response
+                </button>
+                <div ng-if="master.addActivityAttribute.response.length" class="card" style="padding:20px;">
+                    <div class="row" ng-repeat="item in master.addActivityAttribute.response track by $index" ng-init="$responseIndex = $index">
+                        <!-- label -->
+                        <div class="col s12 m2">
+                            <p style="font-size:16px; padding-top:10px;">Response {{ $responseIndex+1 }} </p>
+                        </div>
+    
+                        <div class="input-field col s12 m9">
+                            <input id="add-response-{{$responseIndex}}" placeholder="" type="text"
+                                ng-model="master.addActivityAttribute.response[$responseIndex].response_name"
+                                ng-change="master.setAttributeId(master.addActivityAttribute,'response',$responseIndex,'response_id','response_name')"
+                                name="add-response-{{$responseIndex}}" class="validate">
+                            <label class="active" for="add-response-{{$responseIndex}}"> Response Name</label>
+                        </div>
+                        
+                        <!-- remove -->
+                        <div class="input-field col s12 m1">
+                            <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                                ng-click="master.removeArrayAtrributeItem(master.addActivityAttribute,'response',$responseIndex)">
+                                <i class="material-icons">clear</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div ng-if="master.addActivityAttribute.details || master.addActivityAttribute.details.length" class="row" style="margin: 20px 50px 10px 50px;">
+            <button class=" teal darken-1 btn" ng-click="master.setAttributeArray('details',master.addActivityAttribute)">
+                <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                Add Details
+            </button>
+            <div ng-if="master.addActivityAttribute.details.length" class="card" style="padding:20px;">
+                <div class="row" ng-repeat="item in master.addActivityAttribute.details track by $index"
+                    ng-init="$detailIndex = $index">
+                    <!-- label -->
+                    <div class="col s12 m2">
+                        <p style="font-size:16px; padding-top:10px;">Detail {{ $detailIndex+1 }} </p>
+                    </div>
+        
+                    <div class="input-field col s12 m9">
+                        <input id="add-detail-{{$detailIndex}}" placeholder="" type="text"
+                            ng-model="master.addActivityAttribute.details[$detailIndex].unit_type_name"
+                            ng-change="master.setAttributeId(master.addActivityAttribute,'details',$detailIndex,'unit_type_id','unit_type_name','unit_type_label')"
+                            name="add-detail-{{$detailIndex}}" class="validate">
+                        <label class="active" for="add-detail-{{$detailIndex}}"> Detail Name</label>
+                    </div>
+        
+                    <!-- remove -->
+                    <div class="input-field col s12 m1">
+                        <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                            ng-click="master.removeArrayAtrributeItem(master.addActivityAttribute,'details',$detailIndex)">
+                            <i class="material-icons">clear</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="master.addActivityAttribute.unit_type_id || master.addActivityAttribute.unit_type_id.length" class="row" style="margin: 20px 50px 10px 50px;">
+            <button class=" teal darken-1 btn" ng-click="master.setAttributeArray('unit_type_id',master.addActivityAttribute)">
+                <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                Add Unit Type
+            </button>
+            <div ng-if="master.addActivityAttribute.unit_type_id.length" class="card" style="padding:20px;">
+                <div class="row" ng-repeat="item in master.addActivityAttribute.unit_type_id track by $index"
+                    ng-init="$unitTypeIndex = $index">
+                    <!-- label -->
+                    <div class="col s12 m2">
+                        <p style="font-size:16px; padding-top:10px;">Unit Type {{ $unitTypeIndex+1 }} </p>
+                    </div>
+        
+                    <div class="input-field col s12 m9">
+                        <input id="add-unit-{{$unitTypeIndex}}" placeholder="" type="text"
+                            ng-model="master.addActivityAttribute.unit_type_id[$unitTypeIndex].unit_type_name"
+                            ng-change="master.setAttributeId(master.addActivityAttribute,'unit_type_id',$unitTypeIndex,'unit_type_id','unit_type_name')"
+                            name="add-unit-{{$unitTypeIndex}}" class="validate">
+                        <label class="active" for="add-unit-{{$unitTypeIndex}}"> Unit Type Name</label>
+                    </div>
+        
+                    <!-- remove -->
+                    <div class="input-field col s12 m1">
+                        <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                            ng-click="master.removeArrayAtrributeItem(master.addActivityAttribute,'unit_type_id',$unitTypeIndex)">
+                            <i class="material-icons">clear</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="master.addActivityAttribute.vulnerable_populations || master.addActivityAttribute.vulnerable_populations.length" class="row" style="margin: 20px 50px 10px 50px;">
+            <button class=" teal darken-1 btn" ng-click="master.setAttributeArray('vulnerable_populations',master.addActivityAttribute)">
+                <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                Add Vulnerable Populations
+            </button>
+            <div ng-if="master.addActivityAttribute.vulnerable_populations.length" class="card" style="padding:20px;">
+                <div class="row" ng-repeat="item in master.addActivityAttribute.vulnerable_populations track by $index"
+                    ng-init="$vulnerablePopulationIndex = $index">
+                    <!-- label -->
+                    <div class="col s12 m2">
+                        <p style="font-size:16px; padding-top:10px;">Vulnerable {{ $vulnerablePopulationIndex+1 }} </p>
+                    </div>
+                    
+                    <div class="input-field col s12 m4">
+                        <input id="add-vulnerable-{{$vulnerablePopulationIndex}}" placeholder="" type="text"
+                            ng-model="master.addActivityAttribute.vulnerable_populations[$vulnerablePopulationIndex].vuln_pop_label"
+                            name="add-vulnerable-{{$vulnerablePopulationIndex}}" class="validate">
+                        <label class="active" for="add-vulnerable-{{$vulnerablePopulationIndex}}"> Vulnerable Populations Label</label>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <input id="add-vulnerable-{{$vulnerablePopulationIndex}}" placeholder="" type="text"
+                            ng-model="master.addActivityAttribute.vulnerable_populations[$vulnerablePopulationIndex].vuln_pop_name"
+                            ng-change="master.setAttributeId(master.addActivityAttribute,'vulnerable_populations',$vulnerablePopulationIndex,'vuln_pop_id','vuln_pop_name')"
+                            name="add-vulnerable-{{$vulnerablePopulationIndex}}" class="validate">
+                        <label class="active" for="add-vulnerable-{{$vulnerablePopulationIndex}}"> Vulnerable Populations Name</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <input id="add-vulnerable-{{$vulnerablePopulationIndex}}" name="add-vulnerable-{{$vulnerablePopulationIndex}}" type="number" class="validate" min="0"
+                            ng-model="master.addActivityAttribute.vulnerable_populations[$vulnerablePopulationIndex].vuln_pop_quantity" />
+                        <label
+                            for="add-vulnerable-{{$vulnerablePopulationIndex}}" class="active"
+                            style="transform:translateY(-65%)"> Quantity</label>
+                    </div>
+        
+                    <!-- remove -->
+                    <div class="input-field col s12 m1">
+                        <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                            ng-click="master.removeArrayAtrributeItem(master.addActivityAttribute,'vulnerable_populations',$vulnerablePopulationIndex)">
+                            <i class="material-icons">clear</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
                 <label for="ngm-country-select" class="active" style="transform:translateY(-120%)"> Select
@@ -565,7 +705,7 @@
         </ul>
 
         <div class="row" style="margin: 20px 50px 10px 50px;">
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <select materialize-select id="ngm-stock_item-cluster" name="ngm-stock_item-cluster" class="validate"
                     ng-options="c.cluster_id as c.cluster for c in master.clusters | filter:{cluster_id: filterCluster}"
                     ng-model="master.editedActivity.cluster_id" ng-disabled=""
@@ -575,48 +715,48 @@
                 </select>
                 <label for="ngm-stock_item-cluster" class="active" style="transform:translateY(-10%)"> Cluster</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-activity_type_name" placeholder="" type="text"
                     ng-model="master.editedActivity.activity_type_name" name="ngm-activity_type_name" class="validate">
                 <label class="active" for="ngm-activity_type_name"> Activity Type Name</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-activity_description_name" placeholder="" type="text"
                     ng-model="master.editedActivity.activity_description_name" name="ngm-activity_description_name"
                     class="validate">
                 <label class="active" for="ngm-activity_description_name"> Activity Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-activity_detail_name" placeholder="" type="text"
                     ng-model="master.editedActivity.activity_detail_name" name="ngm-activity_detail_name"
                     class="validate">
                 <label class="active" for="ngm-activity_detail_name"> Activity Detail</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-sector_objective_name" placeholder="" type="text"
                     ng-model="master.editedActivity.sector_objective_name" name="ngm-sector_objective_name"
                     class="validate">
                 <label class="active" for="ngm-sector_objective_name"> Sector Objective</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-sector_objective_description" placeholder="" type="text"
                     ng-model="master.editedActivity.sector_objective_description"
                     name="ngm-sector_objective_description" class="validate">
                 <label class="active" for="ngm-sector_objective_description"> Sector Objective Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-strategic_objective_name" placeholder="" type="text"
                     ng-model="master.editedActivity.strategic_objective_name" name="ngm-strategic_objective_name"
                     class="validate">
                 <label class="active" for="ngm-strategic_objective_name"> Strategic Objective</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-strategic_objective_description" placeholder="" type="text"
                     ng-model="master.editedActivity.strategic_objective_description"
                     name="ngm-strategic_objective_description" class="validate">
                 <label class="active" for="ngm-strategic_objective_description"> Strategic Objective Description</label>
             </div>
-            <div class="input-field col s12 m12">
+            <div class="input-field col s12 m4">
                 <input id="ngm-indicator-name" placeholder="" type="text"
                     ng-model="master.editedActivity.indicator_name" name="ngm-indicator-name" class="validate">
                 <label class="active" for="ngm-indicator-name"> Indicator</label>
@@ -1016,6 +1156,156 @@
             </div>
         </div>
 
+        <div ng-if="master.editedActivity.response || master.editedActivity.response.length" class="row" style="margin: 20px 50px 10px 50px;">
+            <button class=" teal darken-1 btn" ng-click="master.setAttributeArray('response',master.editedActivity)">
+                <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                Add Response
+            </button>
+            <div ng-if="master.editedActivity.response.length" class="card" style="padding:20px;">
+                <div class="row" ng-repeat="item in master.editedActivity.response track by $index"
+                    ng-init="$responseIndex = $index">
+                    <!-- label -->
+                    <div class="col s12 m2">
+                        <p style="font-size:16px; padding-top:10px;">Response {{ $responseIndex+1 }} </p>
+                    </div>
+        
+                    <div class="input-field col s12 m9">
+                        <input id="edit-response-{{$responseIndex}}" placeholder="" type="text"
+                            ng-model="master.editedActivity.response[$responseIndex].response_name"
+                            ng-change="master.setAttributeId(master.editedActivity,'response',$responseIndex,'response_id','response_name')"
+                            name="edit-response-{{$responseIndex}}" class="validate" 
+                            ng-disabled="master.editedActivity.response[$responseIndex].id">
+                        <label class="active" for="edit-response-{{$responseIndex}}"> Response Name</label>
+                    </div>
+        
+                    <!-- remove -->
+                    <div class="input-field col s12 m1">
+                        <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                            ng-click="master.removeArrayAtrributeItem(master.editedActivity,'response',$responseIndex)">
+                            <i class="material-icons">{{master.editedActivity.response[$responseIndex].id?'delete':'clear'}}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="master.editedActivity.details || master.editedActivity.details.length" class="row" style="margin: 20px 50px 10px 50px;">
+            <button class=" teal darken-1 btn" ng-click="master.setAttributeArray('details',master.editedActivity)">
+                <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                Add Details
+            </button>
+            <div ng-if="master.editedActivity.details.length" class="card" style="padding:20px;">
+                <div class="row" ng-repeat="item in master.editedActivity.details track by $index"
+                    ng-init="$detailIndex = $index">
+                    <!-- label -->
+                    <div class="col s12 m2">
+                        <p style="font-size:16px; padding-top:10px;">Detail {{ $detailIndex+1 }} </p>
+                    </div>
+        
+                    <div class="input-field col s12 m9">
+                        <input id="edit-detail-{{$detailIndex}}" placeholder="" type="text"
+                            ng-model="master.editedActivity.details[$detailIndex].unit_type_name"
+                            ng-change="master.setAttributeId(master.editedActivity,'details',$detailIndex,'unit_type_id','unit_type_name','unit_type_label')"
+                            name="edit-detail-{{$detailIndex}}" class="validate"
+                            ng-disabled="master.editedActivity.details[$detailIndex].id">
+                        <label class="active" for="edit-detail-{{$detailIndex}}"> Detail Name</label>
+                    </div>
+        
+                    <!-- remove -->
+                    <div class="input-field col s12 m1">
+                        <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                            ng-click="master.removeArrayAtrributeItem(master.editedActivity,'details',$detailIndex)">
+                            <i class="material-icons">{{master.editedActivity.details[$detailIndex].id?'delete':'clear'}}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div ng-if="master.editedActivity.unit_type_id || master.editedActivity.unit_type_id.length" class="row" style="margin: 20px 50px 10px 50px;">
+            <button class=" teal darken-1 btn" ng-click="master.setAttributeArray('unit_type_id',master.editedActivity)">
+                <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                Add Unit Type
+            </button>
+            <div ng-if="master.editedActivity.unit_type_id.length" class="card" style="padding:20px;">
+                <div class="row" ng-repeat="item in master.editedActivity.unit_type_id track by $index"
+                    ng-init="$unitTypeIndex = $index">
+                    <!-- label -->
+                    <div class="col s12 m2">
+                        <p style="font-size:16px; padding-top:10px;">Unit Type {{ $unitTypeIndex+1 }} </p>
+                    </div>
+        
+                    <div class="input-field col s12 m9">
+                        <input id="edit-unit-{{$unitTypeIndex}}" placeholder="" type="text"
+                            ng-model="master.editedActivity.unit_type_id[$unitTypeIndex].unit_type_name"
+                            ng-change="master.setAttributeId(master.editedActivity,'unit_type_id',$unitTypeIndex,'unit_type_id','unit_type_name')"
+                            name="edit-unit-{{$unitTypeIndex}}" class="validate"
+                            ng-disabled="master.editedActivity.unit_type_id[$unitTypeIndex].id">
+                        <label class="active" for="edit-unit-{{$unitTypeIndex}}"> Unit Type Name</label>
+                    </div>
+        
+                    <!-- remove -->
+                    <div class="input-field col s12 m1">
+                        <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                            ng-click="master.removeArrayAtrributeItem(master.editedActivity,'unit_type_id',$unitTypeIndex)">
+                            <i class="material-icons">{{master.editedActivity.unit_type_id[$unitTypeIndex].id?'delete':'clear'}}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div ng-if="master.editedActivity.vulnerable_populations || master.editedActivity.vulnerable_populations.length" class="row" style="margin: 20px 50px 10px 50px;">
+            <button class=" teal darken-1 btn"
+                ng-click="master.setAttributeArray('vulnerable_populations',master.editedActivity)">
+                <i class="material-icons left" style="font-size: 25px">add_circle_outline</i>
+                Add Vulnerable Populations
+            </button>
+            <div ng-if="master.editedActivity.vulnerable_populations.length" class="card" style="padding:20px;">
+                <div class="row" ng-repeat="item in master.editedActivity.vulnerable_populations track by $index"
+                    ng-init="$vulnerablePopulationIndex = $index">
+                    <!-- label -->
+                    <div class="col s12 m2">
+                        <p style="font-size:16px; padding-top:10px;">Vulnerable {{ $vulnerablePopulationIndex+1 }} </p>
+                    </div>
+        
+                    <div class="input-field col s12 m4">
+                        <input id="edit-vulnerable-{{$vulnerablePopulationIndex}}" placeholder="" type="text"
+                            ng-model="master.editedActivity.vulnerable_populations[$vulnerablePopulationIndex].vuln_pop_label"
+                            name="edit-vulnerable-{{$vulnerablePopulationIndex}}" class="validate"
+                            ng-disabled="master.editedActivity.vulnerable_populations[$vulnerablePopulationIndex].id">
+                        <label class="active" for="edit-vulnerable-{{$vulnerablePopulationIndex}}"> Vulnerable Populations
+                            Label</label>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <input id="edit-vulnerable-{{$vulnerablePopulationIndex}}" placeholder="" type="text"
+                            ng-model="master.editedActivity.vulnerable_populations[$vulnerablePopulationIndex].vuln_pop_name"
+                            ng-change="master.setAttributeId(master.editedActivity,'vulnerable_populations',$vulnerablePopulationIndex,'vuln_pop_id','vuln_pop_name')"
+                            name="edit-vulnerable-{{$vulnerablePopulationIndex}}" class="validate"
+                            ng-disabled="master.editedActivity.vulnerable_populations[$vulnerablePopulationIndex].id">
+                        <label class="active" for="edit-vulnerable-{{$vulnerablePopulationIndex}}"> Vulnerable Populations
+                            Name</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <input id="edit-vulnerable-{{$vulnerablePopulationIndex}}"
+                            name="edit-vulnerable-{{$vulnerablePopulationIndex}}" type="number" class="validate" min="0"
+                            ng-model="master.editedActivity.vulnerable_populations[$vulnerablePopulationIndex].vuln_pop_quantity" 
+                            ng-disabled="master.editedActivity.vulnerable_populations[$vulnerablePopulationIndex].id"
+                            />
+                        <label for="edit-vulnerable-{{$vulnerablePopulationIndex}}" class="active"
+                            style="transform:translateY(-65%)"> Quantity</label>
+                    </div>
+        
+                    <!-- remove -->
+                    <div class="input-field col s12 m1">
+                        <div class="btn-floating waves-effect waves-light red lighten-2" title="Remove"
+                            ng-click="master.removeArrayAtrributeItem(master.editedActivity,'vulnerable_populations',$vulnerablePopulationIndex)">
+                            <i class="material-icons">{{master.editedActivity.vulnerable_populations[$vulnerablePopulationIndex].id?'delete':'clear'}}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row" style="margin: 20px 50px 10px 50px;">
             <div class="input-field col s12 m12">
                 <label for="ngm-country-select" class="active" style="transform:translateY(-120%)"> Select
