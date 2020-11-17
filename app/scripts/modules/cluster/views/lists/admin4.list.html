@@ -338,11 +338,11 @@
                                                 class="material-icons right">close</i></span>
                                         <div class="center" style="margin-top: 0%;">
                                             <button class="btn" ng-click="master.setEditedAdmin4(item)"
-                                                ng-disabled="master.disabledEditButton(item)">
+                                                ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">create</i>
                                             </button>
                                             <button class="btn red" ng-click="master.removeAdmin4Modal(item)"
-                                                ng-disabled="master.disabledEditButton(item)">
+                                                ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">delete</i>
                                             </button>
                                         </div>

@@ -1434,16 +1434,16 @@
                                                 class="material-icons right">close</i></span>
                                         <div class="center" style="margin-top: 5%;">
                                             <button class="btn" ng-click="master.setEditedActivity(item)"
-                                                ng-disabled="master.disabledEditButton(item)">
+                                                ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">create</i>
                                             </button>
                                             <button class="btn red" ng-click="master.removeActivityModal(item)"
-                                                ng-disabled="master.disabledEditButton(item)">
+                                                ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">delete</i>
                                             </button>
                                             <button class="btn blue"
                                                 ng-click="ngmClusterHelper.copyObject(item,'activity')"
-                                                ng-disabled="master.disabledEditButton(item)">
+                                                ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>

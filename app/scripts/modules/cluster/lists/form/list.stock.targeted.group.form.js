@@ -32,7 +32,7 @@ angular.module('ngm.widget.form.stock.targeted.group.list', ['ngm.provider'])
             $filter
         ) {
             $scope.ngmClusterHelper = ngmClusterHelper
-
+            $scope.listService = listService;
             $scope.master = {
                 // current user
                 user: ngmUser.get(),

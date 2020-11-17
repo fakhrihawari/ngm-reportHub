@@ -309,14 +309,14 @@
                                     <div class="card-reveal">
                                         <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
                                         <div class="center" style="margin-top: 16%;">
-                                            <button class="btn" ng-click="master.setEditedOrg(item)" ng-disabled="master.disabledEditButton(item)">
+                                            <button class="btn" ng-click="master.setEditedOrg(item)" ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">create</i>
                                             </button>
-                                            <button class="btn red" ng-click="master.removeOrgModal(item)" ng-disabled="master.disabledEditButton(item)">
+                                            <button class="btn red" ng-click="master.removeOrgModal(item)" ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">delete</i>
                                             </button>
                                             <button class="btn blue" ng-click="ngmClusterHelper.copyObject(item,'org')"
-                                                ng-disabled="master.disabledEditButton(item)">
+                                                ng-disabled="!listService.canEditList(item)">
                                                 <i class="material-icons">content_copy</i>
                                             </button>
                                         </div>

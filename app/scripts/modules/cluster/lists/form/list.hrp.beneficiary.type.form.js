@@ -18,6 +18,7 @@ angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
         'ngmData',
         '$http',
         '$timeout',
+        'listService',
         function (
             $scope,
             config,
@@ -27,9 +28,11 @@ angular.module('ngm.widget.form.hrp.type.list', ['ngm.provider'])
             ngmAuth,
             ngmData,
             $http,
-            $timeout
+            $timeout,
+            listService
         ) {
             $scope.ngmClusterHelper = ngmClusterHelper
+            $scope.listService = listService;
 
             $scope.master = {
                 // current user

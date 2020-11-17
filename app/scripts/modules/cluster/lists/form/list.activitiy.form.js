@@ -21,6 +21,7 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
         '$timeout',
         '$filter',
         '$route',
+        'listService',
         function (
             $scope,
             config,
@@ -32,9 +33,11 @@ angular.module('ngm.widget.form.activities.list', ['ngm.provider'])
             $http,
             $timeout,
             $filter,
-            $route
+            $route,
+            listService
         ) {
             $scope.ngmClusterHelper = ngmClusterHelper
+            $scope.listService = listService;
             $scope.master = {
                 // current user
                 user: ngmUser.get(),

@@ -19,6 +19,7 @@ angular.module('ngm.widget.form.admin.site.list', ['ngm.provider'])
         '$http',
         '$timeout',
         '$filter',
+        'listService',
         function (
             $scope,
             config,
@@ -28,9 +29,10 @@ angular.module('ngm.widget.form.admin.site.list', ['ngm.provider'])
             ngmData,
             $http,
             $timeout,
-            $filter
+            $filter,
+            listService
         ) {
-
+            $scope.listService = listService;
             $scope.master = {
                 // current user
                 user: ngmUser.get(),
