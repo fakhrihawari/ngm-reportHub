@@ -45,41 +45,66 @@ angular.module('ngmReportHub')
                             'class': 'col s12 m12 l12 report-subtitle hide-on-small-only',
                             title: 'List Project Details For ' + $scope.list.title
                         },
-                        // download: {
-                        //     'class': 'col s12 m3 l3 hide-on-small-only',
-                        //     downloads: [
-                        //         {
-                        //             type: 'csv',
-                        //             color: 'blue lighten-2',
-                        //             icon: 'assignment',
-                        //             hover: 'Download Organization CSV',
-                        //             request: {
-                        //                 method: 'GET',
-                        //                 url: ngmAuth.LOCATION + '/api/list/organizationsCSV',
-                        //                 params: {
-                        //                     admin0pcode: $route.current.params.admin0pcode
-                        //                 },
-                        //                 data: {
-                        //                     report: 'list_organization_' + $route.current.params.admin0pcode,
-                        //                     csv: true
-                        //                 }
-                        //             },
-                        //             metrics: {
-                        //                 method: 'POST',
-                        //                 url: ngmAuth.LOCATION + '/api/metrics/set',
-                        //                 data: {
-                        //                     organization: $scope.list.user.organization,
-                        //                     username: $scope.list.user.username,
-                        //                     email: $scope.list.user.email,
-                        //                     dashboard: 'organization list',
-                        //                     theme: 'list_organizations',
-                        //                     format: 'csv',
-                        //                     url: $location.$$path
-                        //                 }
-                        //             }
-                        //         }
-                        //     ]
-                        // }
+                        download: {
+                            'class': 'col s12 m3 l3 hide-on-small-only',
+                            downloads: [
+                                {
+                                    type: 'csv',
+                                    color: 'blue lighten-2',
+                                    icon: 'assignment',
+                                    hover: 'Download Project Detail List CSV',
+                                    // request: {
+                                    //     method: 'GET',
+                                    //     url: ngmAuth.LOCATION + '/api/list/organizationsCSV',
+                                    //     params: {
+                                    //         admin0pcode: $route.current.params.admin0pcode
+                                    //     },
+                                    //     data: {
+                                    //         report: 'list_organization_' + $route.current.params.admin0pcode,
+                                    //         csv: true
+                                    //     }
+                                    // },
+                                    // metrics: {
+                                    //     method: 'POST',
+                                    //     url: ngmAuth.LOCATION + '/api/metrics/set',
+                                    //     data: {
+                                    //         organization: $scope.list.user.organization,
+                                    //         username: $scope.list.user.username,
+                                    //         email: $scope.list.user.email,
+                                    //         dashboard: 'organization list',
+                                    //         theme: 'list_organizations',
+                                    //         format: 'csv',
+                                    //         url: $location.$$path
+                                    //     }
+                                    // }
+                                }, {
+                                    type: 'xlsx',
+                                    color: 'blue lighten-2',
+                                    icon: 'description',
+                                    hover: 'Download Project Detail List Excel',
+                                    // request: {
+                                    //     method: 'GET',
+                                    //     url: ngmAuth.LOCATION + '/api/cluster/report/getProjectLists',
+                                    //     params: {
+                                    //         project_id: $scope.report.project.id
+                                    //     },
+                                    // },
+                                    // metrics: {
+                                    //     method: 'POST',
+                                    //     url: ngmAuth.LOCATION + '/api/metrics/set',
+                                    //     data: {
+                                    //         organization: $scope.report.user.organization,
+                                    //         username: $scope.report.user.username,
+                                    //         email: $scope.report.user.email,
+                                    //         dashboard: $scope.report.project.project_title,
+                                    //         theme: 'cluster_project_lists',
+                                    //         format: 'xlsx',
+                                    //         url: $location.$$path
+                                    //     }
+                                    // }
+                                }
+                            ]
+                        }
                     },
                     menu: [],
                     rows: [{
