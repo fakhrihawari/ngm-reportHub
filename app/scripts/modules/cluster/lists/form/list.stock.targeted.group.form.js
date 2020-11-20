@@ -19,6 +19,7 @@ angular.module('ngm.widget.form.stock.targeted.group.list', ['ngm.provider'])
         '$http',
         '$timeout',
         '$filter',
+        'listService',
         function (
             $scope,
             config,
@@ -29,7 +30,8 @@ angular.module('ngm.widget.form.stock.targeted.group.list', ['ngm.provider'])
             ngmData,
             $http,
             $timeout,
-            $filter
+            $filter,
+            listService
         ) {
             $scope.ngmClusterHelper = ngmClusterHelper
             $scope.listService = listService;

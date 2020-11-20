@@ -322,6 +322,10 @@ angular.module('ngmReportHub')
                                     if (book[x][y][z] === undefined) {
                                         book[x][y][z] = "";
                                     }
+                                    // if array string from file to array;
+                                    if ((book[x][y][z].match(/[\[\]]+/g) !== null) && (book[x][y][z].match(/[\[\]]+/g).length === 2)) {
+                                        book[x][y][z] = JSON.parse(book[x][y][z]);
+                                    }
                                     obj[book[x][0][z]] = book[x][y][z];
                                 }
                                 book_obj.push(obj)
@@ -369,6 +373,10 @@ angular.module('ngmReportHub')
                                     array[0][z] === 'No. in Stock' ||
                                     array[0][z] === 'Stock Year') {
                                     array[y][z] = parseInt(array[y][z]);
+                                }
+                                // if array string from file to array;
+                                if ((array[y][z].match(/[\[\]]+/g) !== null) && (array[y][z].match(/[\[\]]+/g).length === 2)) {
+                                    array[y][z] = JSON.parse(array[y][z]);
                                 }
 
                                 obj[array[0][z]] = array[y][z];

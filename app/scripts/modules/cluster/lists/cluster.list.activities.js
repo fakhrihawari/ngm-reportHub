@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-    .controller('ListActivitiesCtrl', ['$scope', '$location', '$route', '$http', '$q', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', function ($scope, $location, $route, $http, $q, ngmAuth, ngmData, ngmUser, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists) {
+    .controller('ListActivitiesCtrl', ['$scope', '$location', '$route', '$http', '$q', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', 'listService', function ($scope, $location, $route, $http, $q, ngmAuth, ngmData, ngmUser, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists, listService) {
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -209,6 +209,9 @@ angular.module('ngmReportHub')
         // }, 0);
         // // init
         // $scope.list.init();
+        
+        // to send emit link previous link to upload
+        listService.backLink()
 
 
     }]);

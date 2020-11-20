@@ -6,7 +6,7 @@
  * Controller of the ngmReportHub
  */
 angular.module('ngmReportHub')
-    .controller('ListUnitCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterHelper, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists) {
+    .controller('ListUnitCtrl', ['$scope', '$location', '$route', 'ngmAuth', 'ngmData', 'ngmUser', 'ngmClusterHelper', 'ngmClusterHelper', '$translate', '$filter', '$rootScope', 'ngmClusterLists', 'listService', function ($scope, $location, $route, ngmAuth, ngmData, ngmUser, ngmClusterHelper, ngmClusterHelper, $translate, $filter, $rootScope, ngmClusterLists, listService) {
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -174,5 +174,6 @@ angular.module('ngmReportHub')
             }, 0);
             $scope.list.init();
         })
+        listService.backLink()
 
     }]);

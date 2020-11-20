@@ -60,6 +60,7 @@ angular
 		'ngm.widget.form.indicator.list',
 		'ngm.widget.form.admin.site.list',
 		'ngm.widget.form.activities.list',
+		'ngm.widget.form.upload.list',
 		'ngm.widget.upload.beneficiaries.stock.report',
 		// modules
 		'ngmBangladesh',
