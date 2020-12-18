@@ -81,6 +81,9 @@ angular.module('ngmReportHub')
 				} else {
 					$scope.report.title += $scope.report.project.cluster_id.toUpperCase() + ' | ';
 				}
+				if ($scope.report.project.clusters && $scope.report.project.clusters.length) {
+					$scope.report.title += $scope.report.project.clusters.map(x => x.cluster).join(' | ').toUpperCase() + ' | ';
+				}
 				// title
 				$scope.report.title += $scope.report.project.project_title;
 

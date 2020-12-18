@@ -244,6 +244,22 @@
 
 							</div> -->
 
+							<div class="row">
+								<div class="input-field col s12 m6 l6" style="padding-bottom:5px;">
+									<label>Select Other Cluster for this project?</label>
+									<div style="padding-bottom:50px;"></div>
+									<p ng-repeat="cluster in project.lists.clusters | filter: { cluster_id: '!' + project.definition.cluster_id }">
+										<label class="checkbox-label" for="multi-{{ cluster.cluster_id }}">
+											<input type="checkbox" class="filled-in" id="multi-{{ cluster.cluster_id }}"
+												ng-checked="project.checkProjectMultiCluster(cluster.cluster_id)"
+												ng-click="project.setProjectMultiCluster(cluster.cluster_id)"
+												ng-disabled="project.definition.project_status === 'complete' || !project.canEdit" />
+											<span style="left: .75rem;">{{ cluster.cluster }}</span>
+										</label>
+									</p>
+								</div>
+							</div>
+
 							<!-- Project Details -->
 							<div class="row" ng-if="project.lists.project_details.length">
 							
@@ -278,7 +294,7 @@
 									<label class="active">{{p.project_detail_name}}?</label>
 									<br>
 									<p>
-										<label class="checkbox-label" for="{{p.project_detail_id}}">
+										<label class="checkbox-label" for="{{cluster.cluster_id}}">
 											<input type="checkbox" class="filled-in" id="{{p.project_detail_id}}"
 												ng-checked="project.checkProjectDetail(p.project_detail_id)"
 												ng-click="project.updateProjectDetails(p.project_detail_id)"
@@ -370,7 +386,7 @@
 							<div ng-if="project.definition.admin0pcode !== 'CB' || ( project.definition.admin0pcode === 'CB' && project.definition.cluster_id !== 'health' )">
 
 								<!-- activities -->
-								<div class="row" id="ngm-activity_type_label">
+								<div class="row" id="ngm-multi-type_label">
 									<div class="activity-field col s12 m6 l6" style="padding-top:12px;padding-bottom:5px;">
 
 										<label class="label" id="ngm-activity_type" for="ngm-activity_type">{{'activity_type' | translate}} *</label>

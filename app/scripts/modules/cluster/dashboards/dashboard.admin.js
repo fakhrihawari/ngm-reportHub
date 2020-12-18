@@ -497,6 +497,38 @@ angular.module('ngmReportHub')
 						});
 					}
 
+					if (!userMenuItems.includes('cluster_id') && $scope.dashboard.user.clusters) {
+						var sectors = $scope.dashboard.user.clusters ? angular.copy($scope.dashboard.user.clusters):[];
+						sectors.unshift({
+							cluster_id: $scope.dashboard.user.cluster_id,
+							cluster: $scope.dashboard.user.cluster,
+						});
+						// add cluster
+						angular.forEach(sectors, function (d, i) {
+							// admin URL
+							var path = $scope.dashboard.getPath(d.cluster_id, 'all', $scope.dashboard.report_type, $scope.dashboard.organization_tag);
+
+							// menu rows
+							clusterRows.push({
+								'title': d.cluster,
+								'param': 'cluster_id',
+								'active': d.cluster_id,
+								'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+								'href': '/desk/#' + path
+							});
+
+						});
+
+						$scope.model.menu.push({
+							'search': false,
+							'id': 'search-cluster',
+							'icon': 'camera',
+							'title': $filter('translate')('sector_mayus'),
+							'class': 'teal lighten-1 white-text',
+							'rows': clusterRows
+						});
+					}
+
 					// sub-sector
 					$scope.dashboard.setActivityMenu();
 					// reports
@@ -1016,7 +1048,14 @@ angular.module('ngmReportHub')
 					// override route params to user permitted zone params if any
 					if ( $scope.dashboard.userRestrictedRouteParams ) {
 						for (const key of $scope.dashboard.userRestrictedRouteParams){
-							$scope.dashboard[key] = $scope.dashboard.user[key].toLowerCase()
+							// $scope.dashboard[key] = $scope.dashboard.user[key].toLowerCase()
+							if (!$scope.dashboard.user.clusters) {
+								$scope.dashboard[key] = $scope.dashboard.user[key].toLowerCase()
+							} else {
+								if (key !== 'clusters' && key !== 'cluster_id') {
+									$scope.dashboard[key] = $scope.dashboard.user[key].toLowerCase()
+								}
+							}
 						}
 					}
 

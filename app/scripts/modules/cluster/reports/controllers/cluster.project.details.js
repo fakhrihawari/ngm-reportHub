@@ -42,6 +42,9 @@ angular.module('ngmReportHub')
 				} else {
 					title += $scope.report.project.cluster_id.toUpperCase() + ' | ';
 				}
+				if ($scope.report.project.clusters && $scope.report.project.clusters.length){
+					title += $scope.report.project.clusters.map(x => x.cluster).join(' | ').toUpperCase() + ' | ';
+				}
 				// set model to null
 				if( $route.current.params.project === 'new' ){
 					title += $filter('translate')('new_project');

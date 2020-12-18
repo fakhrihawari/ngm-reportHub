@@ -716,7 +716,61 @@ angular.module('ngm.widget.form.authentication', ['ngm.provider'])
 							}
 
 						});
-				}
+				},
+				checkUsertMultiCluster: function (id) {
+					if (!$scope.panel.user.clusters) {
+						return false
+					} else {
+						// check if cluster_id in details is exist on the list
+						if ($scope.panel.user.clusters.length) {
+							var temp_list = $scope.panel.clusters.active;
+							var count_missing = 0;
+							angular.forEach($scope.panel.user.clusters, (e) => {
+								missing_index = temp_list.findIndex(value => value.cluster_id === e.cluster_id);
+								// if cluster_id is not in the temp list then push missing cluster_id to temp list
+								if (missing_index < 0) {
+									temp_list.push(e);
+									count_missing += 1;
+								}
+							});
+
+							if (count_missing > 0) {
+								// set panel.clusters.active same as temp list if some of cluster_id is missing
+								$scope.panel.clusters.active = temp_list;
+							}
+						};
+
+						index = $scope.panel.user.clusters.findIndex(value => value.cluster_id === id);
+						if (index > -1) {
+							return true
+						} else {
+							return false
+						}
+					}
+				},
+				setUsertMultiCluster: function (id) {
+					var id_name = 'user-multi-' + id;
+					var list_project = $scope.panel.clusters.active;
+
+					if (!$scope.panel.user.clusters) {
+						$scope.panel.user.clusters = [];
+					}
+					if (document.getElementById(id_name).checked) {
+						selected = $filter('filter')(list_project, { cluster_id: id }, true);
+						$scope.panel.user.clusters.push(selected[0]);
+					} else {
+						if ($scope.panel.user.clusters.length > 0) {
+							index = $scope.panel.user.clusters.findIndex(value => value.cluster_id === id);
+							if (index > -1) {
+								$scope.panel.user.clusters.splice(index, 1);
+							}
+						} else {
+							$scope.panel.user.clusters = [];
+
+						}
+					}
+				},
+
 
 			}
 

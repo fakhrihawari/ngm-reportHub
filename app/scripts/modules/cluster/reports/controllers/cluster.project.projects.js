@@ -206,7 +206,7 @@ angular.module( 'ngmReportHub' )
 
 
 					var urlOrganization = '/desk/#/cluster/projects/list/' + $route.current.params.adminRpcode + '/' + $route.current.params.admin0pcode + '/';
-					// org = org.filter((value, index, self) => self.map(x => x.organization_tag).indexOf(value.organization_tag) == index)
+					org = org.filter((value, index, self) => self.map(x => x.organization_tag).indexOf(value.organization_tag) == index)
 					listOrg = [{
 						'title': $filter('translate')('all_min1'),
 						'param': 'organization_tag',
@@ -294,6 +294,33 @@ angular.module( 'ngmReportHub' )
 						$scope.model.menu.push(cluster);
 					});
 			},
+			setClusterMenuForMultiClusterUser:function(){
+				sectorRows =[];
+				var sectors = angular.copy($scope.report.user.clusters)
+				sectors.unshift({
+					cluster_id: $scope.report.user.cluster_id,
+					cluster: $scope.report.user.cluster,
+				});
+				angular.forEach(sectors, function (d, i) {
+					sectorRows.push({
+						'title': (($scope.report.user.admin0pcode.toLowerCase() !== 'col' && d.cluster_id === 'health') ? 'Health' : d.cluster),
+						'param': 'cluster_id',
+						'active': d.cluster_id,
+						'class': 'grey-text text-darken-2 waves-effect waves-teal waves-teal-lighten-4',
+						'href': $scope.report.getMenuUrl(d.cluster_id)
+					});
+				});
+				var cluster = {
+					'search': false,
+					'id': 'search-sector',
+					'icon': 'camera',
+					'title': $filter('translate')('sector_mayus'),
+					'class': 'teal lighten-1 white-text',
+					'rows': sectorRows
+				}
+				$scope.model.menu.push(cluster);
+
+			},
 
 			// set menu
 			setMenu: function (userMenuItems){
@@ -325,6 +352,9 @@ angular.module( 'ngmReportHub' )
 				}
 				if (userMenuItems.includes('cluster_id')) {
 					$scope.report.setClusterMenu();
+				}
+				if (!userMenuItems.includes('cluster_id') && $scope.report.user.clusters) {
+					$scope.report.setClusterMenuForMultiClusterUser();
 				}
 
 				if (userMenuItems.includes('organization_tag')) {
@@ -438,8 +468,17 @@ angular.module( 'ngmReportHub' )
 				if ($scope.report.userRestricted.length){
 					out_zone =false
 					$scope.report.userRestricted.forEach(function (e) {
+						
 						if($route.current.params[e] !== $scope.report[e]){
 							out_zone = true
+						}
+						if (e === 'clusters') {
+							var list_clusters = $scope.report.user.clusters ? angular.copy($scope.report.user.clusters) :[];
+							list_clusters.push({cluster_id:$scope.report.user.cluster_id,cluster:$scope.report.user.cluster})
+							multi_cluster = list_clusters.map(x=>x.cluster_id);
+							if ($route.current.params['cluster_id'].indexOf(multi_cluster)){
+								out_zone = true
+							}
 						}
 					})
 					if(out_zone){
@@ -473,7 +512,13 @@ angular.module( 'ngmReportHub' )
 				// restricted zone
 				if ($scope.report.userRestricted.length) {
 					for (const key of $scope.report.userRestricted) {
-						$scope.report[key] = $scope.report.user[key].toLowerCase()
+						if(!$scope.report.user.clusters ){
+							$scope.report[key] = $scope.report.user[key].toLowerCase()
+						}else{
+							if(key !== 'clusters' && key !== 'cluster_id'){
+								$scope.report[key] = $scope.report.user[key].toLowerCase()
+							}
+						}
 					}
 				}
 				// console.log($)

@@ -532,7 +532,59 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 						}
 					}
 				},
+				checkProjectMultiCluster:function(id){
+					if (!$scope.project.definition.clusters) {
+						return false
+					} else {
+						// check if cluster_id in details is exist on the list
+						if ($scope.project.definition.clusters.length) {
+							var temp_list = $scope.project.lists.clusters;
+							var count_missing = 0;
+							angular.forEach($scope.project.definition.clusters, (e) => {
+								missing_index = temp_list.findIndex(value => value.cluster_id === e.cluster_id);
+								// if cluster_id is not in the temp list then push missing cluster_id to temp list
+								if (missing_index < 0) {
+									temp_list.push(e);
+									count_missing += 1;
+								}
+							});
 
+							if (count_missing > 0) {
+								// set project.lists.clusters same as temp list if some of cluster_id is missing
+								$scope.project.lists.clusters = temp_list;
+							}
+						};
+
+						index = $scope.project.definition.clusters.findIndex(value => value.cluster_id === id);
+						if (index > -1) {
+							return true
+						} else {
+							return false
+						}
+					}
+				},
+				setProjectMultiCluster:function(id){
+					var id_name = 'multi-'+id;
+					var list_project = $scope.project.lists.clusters;
+
+					if (!$scope.project.definition.clusters) {
+						$scope.project.definition.clusters = [];
+					}
+					if (document.getElementById(id_name).checked) {
+						selected = $filter('filter')(list_project, { cluster_id: id }, true);
+						$scope.project.definition.clusters.push(selected[0]);
+					} else {
+						if ($scope.project.definition.clusters.length > 0) {
+							index = $scope.project.definition.clusters.findIndex(value => value.cluster_id === id);
+							if (index > -1) {
+								$scope.project.definition.clusters.splice(index, 1);
+							}
+						} else {
+							$scope.project.definition.clusters = [];
+
+						}
+					}
+				},
 				// strategic objectives
 				setStrategicObjectives: function( cluster_id ) {
 					$scope.project.definition.strategic_objectives =

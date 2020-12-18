@@ -1833,7 +1833,7 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 						$(elements[0]).scrollHere();
 					};
 					
-				},
+				}, 
 				// save
 				save: function( complete, display_modal, email_alert ){
 					$scope.project.isSaving = true;
