@@ -8,17 +8,18 @@
 				{{ panel.message }}
 				<div ng-if="panel.minimize.toggle" class="right">
 					<button
-						class="btn-floating"
+						class="btn-floating tooltip"
+						title="{{ (panel.minimize.open?'Minimize':'Click to Expand')|translate }}"
 						ng-class="{'rotate': panel.minimize.open }"
 						ng-click="panel.minimize.openCloseCard( panel )"
 						ng-disabled="panel.minimize.disabled">
 						<i class="material-icons">keyboard_arrow_down</i>
-						<md-tooltip md-direction="right" ng-if="panel.minimize.open">
+						<!-- <md-tooltip md-direction="right" ng-if="panel.minimize.open">
 							{{ 'Minimize'|translate }}
 						</md-tooltip>
 						<md-tooltip md-direction="right" ng-if="!panel.minimize.open">
 							{{ 'Click to Expand'|translate }}
-						</md-tooltip>
+						</md-tooltip> -->
 					</button>
 				</div>
 		</h5>

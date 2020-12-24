@@ -159,18 +159,19 @@
 				</button>
 				<button
 						id="toggle"
-						class="btn-floating"
+						class="btn-floating tooltip"
+						title="{{ (detailBeneficiaries[$locationIndex][$beneficiaryIndex]?'Minimize':'Click to Expand')|translate }}"
 						ng-class="{'rotate': detailBeneficiaries[$locationIndex][$beneficiaryIndex]}"
 						ng-click="project.openCloseDetailBeneficiaries($locationIndex,$beneficiaryIndex)"
 						ng-disabled="false"
 					 >
 					<i class="material-icons">keyboard_arrow_down</i>
-					<md-tooltip md-direction="right" ng-if="detailBeneficiaries[$locationIndex][$beneficiaryIndex]">
+					<!-- <md-tooltip md-direction="right" ng-if="detailBeneficiaries[$locationIndex][$beneficiaryIndex]">
 						{{ 'Minimize'|translate }}
 					</md-tooltip>
 					<md-tooltip md-direction="right" ng-if="!detailBeneficiaries[$locationIndex][$beneficiaryIndex]">
 						{{ 'Click to Expand'|translate }}
-					</md-tooltip>
+					</md-tooltip> -->
 				</button>
 			</div>
 			</div>
