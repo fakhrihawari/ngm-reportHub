@@ -28,6 +28,7 @@ angular
 		'leaflet-directive',
 		'xeditable',
 		'infinite-scroll',
+		'ui.router',
 		// ngm
 		'ngm',
 		'ngm.widget.form.authentication',
@@ -65,7 +66,7 @@ angular
 		'ngm.materialize.select',
 		'ngm.materialize.datepicker',
 	])
-	.config([ '$routeProvider', '$locationProvider', '$compileProvider', '$translateProvider', function ( $routeProvider, $locationProvider, $compileProvider, $translateProvider ) {
+	.config(['$routeProvider', '$locationProvider', '$compileProvider', '$translateProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $locationProvider, $compileProvider, $translateProvider, $stateProvider, $urlRouterProvider ) {
 
 		// from http://mysite.com/#/notes/1 to http://mysite.com/notes/1
 		// $locationProvider.html5Mode(true);
@@ -171,6 +172,86 @@ angular
 			// .otherwise({
 			// 	redirectTo: '/cluster/projects'
 			// });
+
+		$stateProvider
+			//LOGIN
+			.state('login',{
+				url:'/login',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardLoginCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAnonymous();
+					}],
+				}
+			})
+			// FORBIDDEN
+			.state('forbidden',{
+				url: '/forbidden',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardForbiddenCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return !ngmAuth.isAuthenticated();
+					}],
+				}
+
+			})  
+			.state('team',{
+				url:'/team',
+				redirectTo: "/team/all/all/all/all"
+			})
+			.state('teamReal', {
+				url: '/team/:admin0pcode/:organization_tag/:project/:cluster_id',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardTeamCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			//PROFILE 
+			.state('profile', {
+				url: '/profile',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardProfileCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('profileWithUserName', {
+				url: '/profile/:username',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardProfileCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// ACHIEVMENT
+			.state('reporthubInit',{
+				url:'/reporthub',
+				redirectTo: '/reporthub/2016'
+			})
+			.state('reporthubLogin', {
+				url: '/reporthub/login',
+				redirectTo: '/reporthub/2016'
+			})
+			.state('reporthub', {
+				url: '/reporthub/:year',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardReportHubCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.grantPublicAccess();
+					}],
+				}
+			})
+
 	}])
 	.run([ '$rootScope', '$window', '$location', 'ngmAuth', 'ngmUser', function( $rootScope, $window, $location, ngmAuth, ngmUser ) {
 

@@ -7,8 +7,8 @@
  * Main module of the application.
  */
 angular
-	.module('ngmCluster',[])
-	.config([ '$routeProvider', '$compileProvider', function ( $routeProvider, $compileProvider) {
+	.module('ngmCluster', ['ui.router'])
+	.config(['$routeProvider', '$compileProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $compileProvider, $stateProvider, $urlRouterProvider) {
 
 		// https://medium.com/swlh/improving-angular-performance-with-1-line-of-code-a1fb814a6476#.ufea9sjt1
 		$compileProvider.debugInfoEnabled( false );
@@ -31,6 +31,15 @@ angular
 			}
 		});
 
+		var clusterUIRouteProvider = angular.extend({},$stateProvider,{
+			when: function (path, route) {
+				route.resolve = (route.resolve) ? route.resolve : {};
+				angular.extend(route.resolve, clusterResolves);
+				$routeProvider.when(path, route);
+				return this;
+			}
+		})
+
 		this.page = {
 			start_date: function() {
 				var date;
@@ -51,6 +60,463 @@ angular
 				return date;
 			},
 		}
+
+		clusterUIRouteProvider
+			// login
+			.state('clusterLogin',{
+				url: '/cluster/login',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardLoginCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAnonymous();
+					}],
+				}
+			})
+			// register
+			.state('clusterRegister',{
+				url:'/cluster/register',
+				controller: 'DashboardRegisterCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAnonymous();
+					}],
+				}
+			})
+			// reset token
+			.state('resetToken',{
+				url: '/cluster/find/:token',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardResetCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAnonymous();
+					}],
+				}
+			})
+			// Pending user
+			.state('clusterPendingUser',{
+				url:'/cluster/pending/',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardPendingUserCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.grantPublicAccess();
+					}],
+				}
+			})
+			// Forbidden
+			.state('clusterForbidden',{
+				url: '/cluster/forbidden',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardForbiddenCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return !ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// GUIDE
+			.state('clusterGuide',{
+				url: '/cluster/guides',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardGuidesMenuCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.grantPublicAccess();
+					}],
+				}
+			})
+			.state('clusterGuideFeedBack', {
+				url: '/cluster/guides/feedback',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardGuidesFeedbackCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.grantPublicAccess();
+					}],
+				}
+			})
+			.state('clusterGuideScreen', {
+				url: '/cluster/guides/screens',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'DashboardGuidesScreenCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.grantPublicAccess();
+					}],
+				}
+			})
+			// ORGANIZATION
+			.state('organization',{
+				url:'/cluster/organization',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterAppCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// project list by organization
+			.state('organizationList',{
+				url: '/cluster/organization/:organization_id',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterAppCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// STOCK
+			.state('stocks',{
+				url: '/cluster/stocks',
+				redirectTo: '/cluster/stocks/' + moment().format('YYYY')
+			})
+			.state('stocksYear',{
+				url: '/cluster/stocks/:year',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterOrganizationStocksListCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('stocksOrganizationYearInit',{
+				url:'/cluster/stocks/organization/:organization_id',
+				redirectTo: '/cluster/stocks/organization/:organization_id/' + moment().format('YYYY')
+
+			})
+			.state('stocksOrganizationYear',{
+				url: '/cluster/stocks/organization/:organization_id/:year',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterOrganizationStocksListCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('stockReport',{
+				url:'/cluster/stocks/report/:organization_id/:report_id',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterOrganizationStockReportCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+
+			})
+			// SYRIA Stock Demo
+			.state('stockSyriaDemo',{
+				url: '/cluster/syria/fsac',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterSyriaDashboard',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+
+			})
+			// ProjectS
+			.state('Projects', {
+				url: '/cluster/projects',
+				redirectTo: '/cluster/projects/list'
+			})
+			.state('ProjectListsInit', {
+				url: '/cluster/projects/list',
+				resolve: {
+					access: ['$location', 'ngmUser', 'ngmAuth', function ($location, ngmUser, ngmAuth) {
+
+						// redirect to user init route
+						const userInitRouteParams = ngmAuth.getRouteParams('PROJECT');
+						const user = ngmUser.get();
+						const adminRpcode = userInitRouteParams.includes('adminRpcode') && user && user.adminRpcode ? user.adminRpcode.toLowerCase() : 'all';
+						const admin0pcode = userInitRouteParams.includes('admin0pcode') && user && user.admin0pcode ? user.admin0pcode.toLowerCase() : 'all';
+						const cluster_id = userInitRouteParams.includes('cluster_id') && user && user.cluster_id ? user.cluster_id.toLowerCase() : 'all';
+						const organization_tag = userInitRouteParams.includes('organization_tag') && user && user.organization_tag ? user.organization_tag.toLowerCase() : 'all';
+						const year = moment().subtract(1, 'month').year();
+						const url = '/cluster/projects/list/' + adminRpcode + '/' + admin0pcode + '/' + organization_tag + '/' + cluster_id + '/' + year;
+						$location.path(url);
+					}]
+				},
+			})
+			.state('ProjectLists', {
+				url: '/cluster/projects/list/:adminRpcode/:admin0pcode/:organization_tag/:cluster_id/:year',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectProjectsCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ProjectSummary', {
+				url: '/cluster/projects/summary/:project',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectSummaryCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ProjectDetail', {
+				url: '/cluster/projects/details/:project/:copy_project_id?',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectDetailsCtrl',
+				resolve: {
+					lists: ['ngmClusterLists', function (ngmClusterLists) {
+						return ngmClusterLists.areListsFetched();
+					}],
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ReportLists',{
+				url: '/cluster/projects/report/:project',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectReportsListCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ProjectReport',{
+				url: '/cluster/projects/report/:project/:report',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectReportCtrl',
+				resolve: {
+					lists: ['ngmClusterLists', function (ngmClusterLists) {
+						return ngmClusterLists.areListsFetched();
+					}],
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ProjectReportWithLocation', {
+				url: '/cluster/projects/report/:project/:report/:location_group',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectReportCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ProjectWithGroup',{
+				url: '/cluster/projects/group/:project/:report',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectReportGroupCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ProjectFinancial', {
+				url: '/cluster/projects/financials/:project',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectFinancialsCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			.state('ProjectUploadDocument', {
+				url: '/cluster/projects/upload/:project',
+				templateUrl: '/views/app/dashboard.html',
+				controller: 'ClusterProjectDocumentCtrl',
+				resolve: {
+					access: ['ngmAuth', function (ngmAuth) {
+						return ngmAuth.isAuthenticated();
+					}],
+				}
+			})
+			// .state('clusterAdmin',{
+			// 	url:'/cluster/admin',
+			// 	redirectTo: '/cluster/admin/all/all/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// // HQ SUPERADMIN BY CLUSTER
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/:cluster_id',
+			// 	redirectTo: '/cluster/admin/all/all/all/:cluster_id/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/education',
+			// 	redirectTo: '/cluster/admin/all/all/all/education/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/esnfi',
+			// 	redirectTo: '/cluster/admin/all/all/all/esnfi/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/fsac',
+			// 	redirectTo: '/cluster/admin/all/all/all/fsac/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/health',
+			// 	redirectTo: '/cluster/admin/all/all/all/health/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/nutrition',
+			// 	redirectTo: '/cluster/admin/all/all/all/nutrition/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/cvwg',
+			// 	redirectTo: '/cluster/admin/all/all/all/cvwg/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/protection',
+			// 	redirectTo: '/cluster/admin/all/all/all/protection/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('clusterAdminByCluster',{
+			// 	url:'/cluster/admin/all/all/wash',
+			// 	redirectTo: '/cluster/admin/all/all/all/wash/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// AFRO
+			// .state('',{
+			// 	url:'/cluster/admin/afro',
+			// 	redirectTo: '/cluster/admin/afro/all/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/afro/cd',
+			// 	redirectTo: '/cluster/admin/afro/cd/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/afro/et',
+			// 	redirectTo: '/cluster/admin/afro/et/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/afro/ng',
+			// 	redirectTo: '/cluster/admin/afro/ng/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/afro/ss',
+			// 	redirectTo: '/cluster/admin/afro/ss/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// // EMRO
+			// .state('',{
+			// 	url:'/cluster/admin/emro',
+			// 	redirectTo: '/cluster/admin/emro/all/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/emro/af',
+			// 	redirectTo: '/cluster/admin/emro/af/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/emro/iq',
+			// 	redirectTo: '/cluster/admin/emro/iq/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/emro/so',
+			// 	redirectTo: '/cluster/admin/emro/so/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/emro/sy',
+			// 	redirectTo: '/cluster/admin/emro/sy/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/emro/ur',
+			// 	redirectTo: '/cluster/admin/emro/ur/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/emro/ye',
+			// 	redirectTo: '/cluster/admin/emro/ye/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// // EURO
+			// .state('',{
+			// 	url:'/cluster/admin/euro',
+			// 	redirectTo: '/cluster/admin/euro/all/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/euro/ua',
+			// 	redirectTo: '/cluster/admin/euro/ua/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// // SEARO
+			// .state('',{
+			// 	url:'/cluster/admin/searo',
+			// 	redirectTo: '/cluster/admin/searo/all/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/searo/bd',
+			// 	redirectTo: '/cluster/admin/searo/bd/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/searo/cb',
+			// 	redirectTo: '/cluster/admin/searo/cb/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/searo/cb/protection/cp',
+			// 	redirectTo: '/cluster/admin/searo/cb/protection/cp/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/searo/cb/protection/gbv',
+			// 	redirectTo: '/cluster/admin/searo/cb/protection/gbv/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/searo/cb/protection/protection',
+			// 	redirectTo: '/cluster/admin/searo/cb/protection/protection/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// //AMER
+			// .state('',{
+			// 	url:'/cluster/admin/amer/',
+			// 	redirectTo: '/cluster/admin/amer/all/all/all/all/activity' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/amer/col',
+			// 	redirectTo: '/cluster/admin/amer/col/all/all/all/activity' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// //AMER
+			// .state('',{
+			// 	url:'/cluster/admin/amer',
+			// 	redirectTo: '/cluster/admin/amer/all/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/amer/col',
+			// 	redirectTo: '/cluster/admin/amer/col/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// // WPRO
+			// .state('',{
+			// 	url:'/cluster/admin/wpro',
+			// 	redirectTo: '/cluster/admin/wpro/all/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/wpro/pg',
+			// 	redirectTo: '/cluster/admin/wpro/pg/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+			// .state('',{
+			// 	url:'/cluster/admin/wpro/phl',
+			// 	redirectTo: '/cluster/admin/wpro/phl/all/all/all/activity/' + this.page.start_date() + '/' + this.page.end_date()
+			// })
+
+			// // ADMIN
+			// .state('',{
+			// 	url:'/cluster/admin/:adminRpcode/:admin0pcode/:cluster_id/:activity_type_id/:organization_tag/:report_type/:start/:end',
+			// 	templateUrl: '/views/app/dashboard.html',
+			// 	controller: 'DashboardClusterAdminCtrl',
+			// 	resolve: {
+			// 		access: ['ngmAuth', function (ngmAuth) {
+			// 			return ngmAuth.isAuthenticated();
+			// 		}],
+			// 	}
+			// })
 
 		// app routes with access rights
 		clusterRouteProvider
