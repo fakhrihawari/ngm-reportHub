@@ -3143,6 +3143,48 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 			$scope.$on('refresh:listUpload', function () {
 				$scope.project.getDocument();
 			});
+			$scope.selectSearch = function(){
+				document.querySelectorAll('select[searchable]').forEach(elem => {
+						const select = elem.M_FormSelect;
+						const options = select.dropdownOptions.querySelectorAll('li');
+
+						// Add search box to dropdown
+						const placeholderText = select.el.getAttribute('searchable');
+						const searchBox = document.createElement('div');
+						searchBox.style.padding = '6px 10px 0 10px';
+						searchBox.innerHTML = `<input type="text" placeholder="${placeholderText}">
+												</input>`
+						select.dropdownOptions.prepend(searchBox);
+
+						// Function to filter dropdown options
+						function filterOptions(event) {
+							const searchText = event.target.value.toLowerCase();
+
+							options.forEach(option => {
+								const value = option.textContent.toLowerCase();
+								const display = value.indexOf(searchText) === -1 ? 'none' : 'block';
+								option.style.display = display;
+							});
+
+							select.dropdown.recalculateDimensions();
+						}
+
+						// Function to give keyboard focus to the search input field
+						function focusSearchBox() {
+							searchBox.firstElementChild.focus({
+								preventScroll: true
+							});
+						}
+
+						select.dropdown.options.autoFocus = false;
+
+						select.input.addEventListener('click', focusSearchBox);
+						options.forEach(option => {
+							option.addEventListener('click', focusSearchBox);
+						});
+						searchBox.addEventListener('keyup', filterOptions);
+				});
+			}
 			// for loading mask
 			$scope.loading = true;
 			$scope.$on('$includeContentLoaded', function (eve, htmlpath) {
@@ -3151,11 +3193,13 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				if ( $scope.project.definition.project_status === 'new' ) {
 					$timeout(function() {
 						$scope.loading = false;
+						$scope.selectSearch()
 					}, 100 );
 				} else if (htmlpath ==='/scripts/modules/cluster/views/forms/details/project-upload.html') {
 					// setTimeout(() => {
 					$timeout(function() {
 						$scope.loading = false;
+						$scope.selectSearch()
 					}, 100 );
 				}
 			});
