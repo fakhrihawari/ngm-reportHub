@@ -1125,6 +1125,10 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 				addLocation: function() {
 					$scope.inserted = ngmClusterLocations.addLocation( $scope.project.definition, $scope.project.definition.target_locations );
 					$scope.project.definition.target_locations.push( $scope.inserted );
+					// refresh new location
+					$timeout(function () {
+						$('select').formSelect();
+					}, 0)
 
 					// add location to paginated array
 					$scope.paginated_target_locations.push($scope.inserted);

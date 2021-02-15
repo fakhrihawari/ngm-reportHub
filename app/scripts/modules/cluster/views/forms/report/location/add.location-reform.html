@@ -273,7 +273,7 @@
                                 <!-- IMPLEMENTING PARTNERS Not angular material-->
                                 
                                     <div class="input-field col s12 l3 m6" ng-if="project.definition.implementing_partners_checked">
-                                        <select materialize-select ng-model="ngmClusterLocations.new_location.implementing_partners" multiple
+                                        <select ng-model="ngmClusterLocations.new_location.implementing_partners" multiple
                                             ng-options="item as item.organization for item in project.definition.implementing_partners track by item.organization_tag"></select>
                                         <label for="ngm-new_location-project-implementing_partners">Implementing
                                         Partners</label>
@@ -584,3 +584,8 @@
         </div>
     </div>
 </div>
+<script>
+    setTimeout(function () {
+            $('select').formSelect();
+        }, 100);
+</script>

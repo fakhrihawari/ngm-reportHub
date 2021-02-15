@@ -395,7 +395,7 @@
 					<!-- IMPLEMENTING PARTNERS Not angular material-->
 					<div class="row">
 						<div class="input-field col s12">
-							<select materialize-select ng-model="beneficiary.implementing_partners" multiple ng-options="item as item.organization for item in project.report.locations[ $locationIndex ].implementing_partners track by item.organization_tag"></select>
+							<select ng-model="beneficiary.implementing_partners" multiple ng-options="item as item.organization for item in project.report.locations[ $locationIndex ].implementing_partners track by item.organization_tag"></select>
 								<label>Implementing Partners</label>
 						</div>
 					</div>
@@ -2348,6 +2348,7 @@
 
 	<script>
 		setTimeout(function () {
+			$('select').formSelect();
 			M.updateTextFields();
 		}, 100)
 	</script>
