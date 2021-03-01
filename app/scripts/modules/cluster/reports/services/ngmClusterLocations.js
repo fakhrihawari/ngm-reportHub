@@ -26,8 +26,24 @@ angular.module( 'ngmReportHub' )
         });
         // trigger form update
         ngmClusterLocations.adminOnChange( project.lists, 'admin3pcode', locations.length-1, ngmClusterLocations.new_location.admin3pcode, ngmClusterLocations.new_location );
-        ngmClusterLocations.filterLocations(project, 0, ngmClusterLocations.new_location)
+        // ngmClusterLocations.filterLocations(project, 0, ngmClusterLocations.new_location)
         ngmClusterLocations.setSiteTypeAndImplementationSelect(project);
+        // check if this admin1pcode have adminsite or not
+        var selected_sites = $filter('filter')(project.lists.adminSites, { admin1pcode: ngmClusterLocations.new_location.admin1pcode }, true);
+        if(!selected_sites.length){
+          $http({
+            method: 'GET',
+            url: ngmAuth.LOCATION + '/api/list/getAdminSites?admin0pcode='
+              + project.definition.admin0pcode
+              + '&admin1pcode=' + ngmClusterLocations.new_location.admin1pcode
+          }).then(function (result) {
+              project.lists.adminSites = project.lists.adminSites.concat(result.data);
+              ngmClusterLocations.filterLocations(project, 0, ngmClusterLocations.new_location)
+  
+          });
+        }else{
+          ngmClusterLocations.filterLocations(project, 0, ngmClusterLocations.new_location)
+        }
         // lists, pcode, $index, $data, target_location
         ngmClusterLocations.openAddNewLocation = !ngmClusterLocations.openAddNewLocation;
       },
@@ -64,12 +80,12 @@ angular.module( 'ngmReportHub' )
           username: project.username
         }
 
-        // add site select if admin0pcode !== 'CB'
-        if ( project.admin0pcode !== 'CB' ) {
-          inserted.site_list_select_id = 'no';
-          inserted.site_list_select_yes = 'No';
-          inserted.site_list_select_disabled = true;
-        }
+        // // add site select if admin0pcode !== 'CB'
+        // if ( project.admin0pcode !== 'CB' ) {
+        //   inserted.site_list_select_id = 'no';
+        //   inserted.site_list_select_yes = 'No';
+        //   inserted.site_list_select_disabled = true;
+        // }
 
         // clone
         var length = locations.length;
@@ -93,11 +109,18 @@ angular.module( 'ngmReportHub' )
 					inserted.implementing_partners = angular.copy(project.implementing_partners)
 				}
 
+        // add site select if admin0pcode !== 'CB'
+        if (project.admin0pcode !== 'CB') {
+          inserted.site_list_select_id = 'no';
+          inserted.site_list_select_yes = 'No';
+          inserted.site_list_select_disabled = true;
+        }
+
         // set createdAt
         inserted.createdAt = new Date().toISOString();
 
         if (project.admin0pcode === 'ET') {
-          // inserted.site_name_checked = false;
+          inserted.site_name_checked = true;
           inserted.site_name = '';
         }
         // set targets
@@ -548,7 +571,7 @@ angular.module( 'ngmReportHub' )
               delete selected[0].id;
 
               console.log( selected[0].site_name )
-
+              
               angular.merge(location, selected[0]);
             }
           }
@@ -802,9 +825,27 @@ angular.module( 'ngmReportHub' )
         // set site_type && site_implementation
         ngmClusterLocations.setSiteTypeAndImplementationSelect(project);
         // filter list admin1,admin2,admin3,admin4,admin5
+        // angular.forEach(locations, function (location, $index) {
+        //   ngmClusterLocations.filterLocations(project, $index, location);
+        // });
+
+        var locationAdmin1pcodeTag = ''
         angular.forEach(locations, function (location, $index) {
-          ngmClusterLocations.filterLocations(project, $index, location);
+          $http({
+            method: 'GET',
+            url: ngmAuth.LOCATION + '/api/list/getAdminSites?admin0pcode='
+              + project.definition.admin0pcode
+              + '&admin1pcode=' + location.admin1pcode
+          }).then(function (result) {
+            if (locationAdmin1pcodeTag !== location.admin1pcode) {
+              project.lists.adminSites = project.lists.adminSites.concat(result.data);
+              locationAdmin1pcodeTag = location.admin1pcode
+            }
+            ngmClusterLocations.filterLocations(project, $index, location);
+
+          });
         });
+
       },
       // to set list of site_type && site_implementation
       setSiteTypeAndImplementationSelect: function (project) {
@@ -841,6 +882,17 @@ angular.module( 'ngmReportHub' )
 
           ngmClusterLocations.site_implementationFilter = ngmClusterLocations.site_implementationFilter.filter((item, index) => ngmClusterLocations.site_implementationFilter.indexOf(item) === index);
           ngmClusterLocations.site_typeFilter = ngmClusterLocations.site_typeFilter.filter((item, index) => ngmClusterLocations.site_typeFilter.indexOf(item) === index);
+        }
+      },
+      // site_namechecked field show
+      siteNameCheckedReset:function(location){
+        if (!location.site_name_checked){
+          location.site_name ='';
+          if (location.site_list_select_id){
+            location.site_list_select_id = 'no';
+            location.site_list_select_name = 'No';
+            location.site_list_select_disabled = true;
+          }
         }
       }
 
