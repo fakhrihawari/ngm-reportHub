@@ -120,7 +120,8 @@ angular.module( 'ngmReportHub' )
         inserted.createdAt = new Date().toISOString();
 
         if (project.admin0pcode === 'ET') {
-          inserted.site_name_checked = true;
+          // //hide feature
+          // inserted.site_name_checked = true;
           inserted.site_name = '';
         }
         // set targets
@@ -592,7 +593,11 @@ angular.module( 'ngmReportHub' )
             selected = $filter('filter')(lists.site_list_select, { site_list_select_id: location.site_list_select_id }, true);
             location.site_list_select_name = selected[0].site_list_select_name;
           }
-
+          
+          if (location.site_list_select_id && location.site_list_select_id === 'no'){
+            location.site_name = '';
+            location.site_id = '';
+          }
         }, 10)
       },
       // fail
