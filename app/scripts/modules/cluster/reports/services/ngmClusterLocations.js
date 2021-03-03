@@ -510,7 +510,29 @@ angular.module( 'ngmReportHub' )
         }, 10)
       },
       // to update site type
-      updateSiteType: function (lists, location) {
+      // updateSiteType: function (lists, location) {
+      //   $timeout(function () {
+      //     // attr
+      //     var selected = [];
+      //     // if not select all the  option on list
+      //     if (!location.site_type_id) {
+      //       delete location.site_type_id;
+      //       delete location.site_type_name
+      //     }
+      //     // filter by site_type
+      //     if (location.site_type_id) {
+
+      //       // select site type
+      //       selected = $filter('filter')(lists.site_type, { site_type_id: location.site_type_id }, true);
+      //       if (selected && selected.length) {
+      //         location.site_type_id = selected[0].site_type_id;
+      //         location.site_type_name = selected[0].site_type_name;
+      //       }
+      //     }
+      //   }, 10)
+      // },
+
+      updateSiteType: function (project, index, location) {
         $timeout(function () {
           // attr
           var selected = [];
@@ -523,10 +545,25 @@ angular.module( 'ngmReportHub' )
           if (location.site_type_id) {
 
             // select site type
-            selected = $filter('filter')(lists.site_type, { site_type_id: location.site_type_id }, true);
+            selected = $filter('filter')(project.lists.site_type, { site_type_id: location.site_type_id }, true);
             if (selected && selected.length) {
               location.site_type_id = selected[0].site_type_id;
               location.site_type_name = selected[0].site_type_name;
+              var selected_sites =[];
+              selected_sites = $filter('filter')(project.lists.adminSites, { admin1pcode: location.admin1pcode }, true);
+              if (!selected_sites.length) {
+                $http({
+                  method: 'GET',
+                  url: ngmAuth.LOCATION + '/api/list/getAdminSites?admin0pcode='
+                    + project.definition.admin0pcode
+                    + '&admin1pcode=' + location.admin1pcode
+                }).then(function (result) {
+                  if(result.data && !result.data.length){
+                    project.lists.adminSites = project.lists.adminSites.concat(result.data);
+                    ngmClusterLocations.filterLocations(project, index, location);
+                  }
+                });
+              };
             }
           }
         }, 10)
