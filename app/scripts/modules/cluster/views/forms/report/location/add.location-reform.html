@@ -117,7 +117,8 @@
                             <div class="row"
                                 ng-if="!project.lists.site_implementation.length && !project.definition.implementing_partners_checked">
                                 <!-- reporter -->
-                                <div class="input-field col s12 m6">
+                                <!-- <div class="input-field col s12 m6"> -->
+                                <div class="input-field col s12 m12">
                                     <select materialize-select watch id="ngm-new_location-username"
                                         name="ngm-new_location-username" class="validate" ng-model="ngmClusterLocations.new_location.username"
                                         ng-options="item.username as item.username for item in project.lists.users"
@@ -130,7 +131,7 @@
                                 </div>
 
                                 <!-- site type -->
-                                <div class="input-field col s12 m6">
+                                <!-- <div class="input-field col s12 m6">
                                     <select materialize-select watch id="ngm-new_location-site_type_id"
                                         name="ngm-new_location-site_type_id" class="validate"
                                         ng-model="ngmClusterLocations.new_location.site_type_id"
@@ -145,7 +146,7 @@
                                     <label ng-if="project.definition.admin0pcode === 'COL'"
                                         for="ngm-new_location-site_type_id" class="active"
                                         style="transform:translateY(-10%)">{{'site_type' | translate}}</label>
-                                </div>
+                                </div> -->
 
                             </div>
 
@@ -153,7 +154,8 @@
                             <div class="row"
                                 ng-if="project.lists.site_implementation.length && !project.definition.implementing_partners_checked">
                                 <!-- reporter -->
-                                <div class="input-field col s12 m4">
+                                <!-- <div class="input-field col s12 m4"> -->
+                                <div class="input-field col s12 m6">
                                     <select materialize-select watch id="ngm-new_location-username"
                                         name="ngm-new_location-username" class="validate" ng-model="ngmClusterLocations.new_location.username"
                                         ng-options="item.username as item.username for item in project.lists.users"
@@ -166,7 +168,7 @@
                                 </div>
 
                                 <!-- site type -->
-                                <div class="input-field col s12 m4">
+                                <!-- <div class="input-field col s12 m4">
                                     <select materialize-select watch id="ngm-new_location-site_type_id"
                                         name="ngm-new_location-site_type_id" class="validate"
                                         ng-model="ngmClusterLocations.new_location.site_type_id"
@@ -181,10 +183,11 @@
                                     <label ng-if="project.definition.admin0pcode === 'COL'"
                                         for="ngm-new_location-site_type_id" class="active"
                                         style="transform:translateY(-10%)">{{'site_type' | translate}}</label>
-                                </div>
+                                </div> -->
 
                                 <!-- implementation -->
-                                <div class="input-field col s12 m4">
+                                <!-- <div class="input-field col s12 m4"> -->
+                                <div class="input-field col s12 m6">
                                     <select materialize-select watch id="ngm-new_location-site-implementation"
                                         name="site_implementation" class="validate"
                                         ng-model="ngmClusterLocations.new_location.site_implementation_id"
@@ -206,7 +209,8 @@
                             <div class="row"
                                 ng-if="project.lists.site_implementation.length && project.definition.implementing_partners_checked">
                                 <!-- reporter -->
-                                <div class="input-field col s12 l3 m6">
+                                <!-- <div class="input-field col s12 l3 m6"> -->
+                                <div class="input-field col s12 l4 m6">
                                     <select materialize-select watch id="ngm-new_location-username"
                                         name="ngm-new_location-username" class="validate" ng-model="ngmClusterLocations.new_location.username"
                                         ng-options="item.username as item.username for item in project.lists.users"
@@ -219,7 +223,7 @@
                                 </div>
 
                                 <!-- site type -->
-                                <div class="input-field col s12 l3 m6">
+                                <!-- <div class="input-field col s12 l3 m6">
                                     <select materialize-select watch id="ngm-new_location-site_type_id"
                                         name="ngm-new_location-site_type_id" class="validate"
                                         ng-model="ngmClusterLocations.new_location.site_type_id"
@@ -234,10 +238,11 @@
                                     <label ng-if="project.definition.admin0pcode === 'COL'"
                                         for="ngm-new_location-site_type_id" class="active"
                                         style="transform:translateY(-10%)">{{'site_type' | translate}}</label>
-                                </div>
+                                </div> -->
 
                                 <!-- implementation -->
-                                <div class="input-field col s12 l3 m6">
+                                <!-- <div class="input-field col s12 l3 m6"> -->
+                                <div class="input-field col s12 l4 m6">
                                     <select materialize-select watch id="ngm-new_location-site-implementation"
                                         name="site_implementation" class="validate"
                                         ng-model="ngmClusterLocations.new_location.site_implementation_id"
@@ -272,7 +277,8 @@
 
                                 <!-- IMPLEMENTING PARTNERS Not angular material-->
                                 
-                                    <div class="input-field col s12 l3 m6" ng-if="project.definition.implementing_partners_checked">
+                                    <!-- <div class="input-field col s12 l3 m6" ng-if="project.definition.implementing_partners_checked"> -->
+                                    <div class="input-field col s12 l4 m6" ng-if="project.definition.implementing_partners_checked">
                                         <select materialize-select placeholder="{{'not_set'|translate}}" ng-model="ngmClusterLocations.new_location.implementing_partners" multiple
                                             ng-options="item as item.organization for item in project.definition.implementing_partners track by item.organization_tag"></select>
                                         <label for="ngm-new_location-project-implementing_partners">Implementing
@@ -511,6 +517,21 @@
                             <!-- site name -->
                             <div class="row" ng-if="ngmClusterLocations.adminSitesSelect[ 0 ].length > 0">
 
+                                <!-- site type -->
+                                <div class="input-field col s12 m4">
+                                    <select materialize-select watch id="ngm-new_location-site_type_id" name="ngm-new_location-site_type_id"
+                                        class="validate" ng-model="ngmClusterLocations.new_location.site_type_id"
+                                        ng-options="item.site_type_id as item.site_type_name for item in ngmClusterLocations.site_typeFilter"
+                                        ng-change="ngmClusterLocations.updateSiteType(project,0,location,ngmClusterLocations.new_location)"
+                                        ng-disabled="project.definition.project_status === 'complete'">
+                                        <option value="">-</option>
+                                    </select>
+                                    <label ng-if="project.definition.admin0pcode !== 'COL'" for="ngm-new_location-site_type_id" class="active"
+                                        style="transform:translateY(-10%)">{{'type' | translate}}</label>
+                                    <label ng-if="project.definition.admin0pcode === 'COL'" for="ngm-new_location-site_type_id" class="active"
+                                        style="transform:translateY(-10%)">{{'site_type' | translate}}</label>
+                                </div>
+
                                 <!-- select site list -->
                                 <div class="input-field col s12 m2">
                                     <select materialize-select id="ngm-new_location-site_list_select_id"
@@ -526,7 +547,8 @@
                                 </div>
 
                                 <!-- site name -->
-                                <div class="input-field col s12 m10" ng-if="ngmClusterLocations.new_location.site_list_select_id === 'yes'">
+                                <!-- <div class="input-field col s12 m10" ng-if="ngmClusterLocations.new_location.site_list_select_id === 'yes'"> -->
+                                <div class="input-field col s12 m8" ng-if="ngmClusterLocations.new_location.site_list_select_id === 'yes'">
                                     <select materialize-select watch id="ngm-new_location-site_name"
                                         name="ngm-new_location-site_name" class="validate" ng-model="ngmClusterLocations.new_location.site_id"
                                         ng-options="item.site_id as item.site_name 
@@ -542,7 +564,8 @@
                                         style="transform:translateY(-10%)">{{'site_name'|translate}}*</label>
                                 </div>
 
-                                <div class="input-field col s12 m10" ng-if="ngmClusterLocations.new_location.site_list_select_id === 'no'">
+                                <!-- <div class="input-field col s12 m10" ng-if="ngmClusterLocations.new_location.site_list_select_id === 'no'"> -->
+                                <div class="input-field col s12 m8" ng-if="ngmClusterLocations.new_location.site_list_select_id === 'no'">
                                     <input id="ngm-new_location-site_name" type="text" placeholder="Site Name"
                                         ng-model="ngmClusterLocations.new_location.site_name" class="validate"
                                         ng-change="ngmClusterBeneficiaries.inputChange( 'ngm-new_location-site_name' )"
@@ -550,7 +573,9 @@
                                     <label for="ngm-new_location-site_name" class="active"
                                         style="">{{'site_name'|translate}}*</label>
                                 </div>
-                                <div class="input-field col s12 m10"
+                                <!-- <div class="input-field col s12 m10"
+                                    ng-if="ngmClusterLocations.new_location.site_list_select_id !== 'no' && ngmClusterLocations.new_location.site_list_select_id !== 'yes'"> -->
+                                <div class="input-field col s12 m8"
                                     ng-if="ngmClusterLocations.new_location.site_list_select_id !== 'no' && ngmClusterLocations.new_location.site_list_select_id !== 'yes'">
                                     <input id="ngm-new_location-site_name" type="text" placeholder="Site Name"
                                         ng-model="ngmClusterLocations.new_location.site_name" class="validate"
@@ -563,7 +588,22 @@
 
                             <!-- site name -->
                             <div class="row" ng-if="ngmClusterLocations.adminSitesSelect[ 0 ].length < 1">
-                                <div class="input-field col s12 m12">
+                                <!-- site type -->
+                                <div class="input-field col s12 m4">
+                                    <select materialize-select watch id="ngm-new_location-site_type_id" name="ngm-new_location-site_type_id"
+                                        class="validate" ng-model="ngmClusterLocations.new_location.site_type_id"
+                                        ng-options="item.site_type_id as item.site_type_name for item in ngmClusterLocations.site_typeFilter"
+                                        ng-change="ngmClusterLocations.updateSiteType(project,0,location,ngmClusterLocations.new_location)"
+                                        ng-disabled="project.definition.project_status === 'complete'">
+                                        <option value="">-</option>
+                                    </select>
+                                    <label ng-if="project.definition.admin0pcode !== 'COL'" for="ngm-new_location-site_type_id" class="active"
+                                        style="transform:translateY(-10%)">{{'type' | translate}}</label>
+                                    <label ng-if="project.definition.admin0pcode === 'COL'" for="ngm-new_location-site_type_id" class="active"
+                                        style="transform:translateY(-10%)">{{'site_type' | translate}}</label>
+                                </div>
+                                <!-- <div class="input-field col s12 m12"> -->
+                                <div class="input-field col s12 m8">
                                     <input id="ngm-new_location-site_name" type="text" placeholder="Site Name"
                                         ng-model="ngmClusterLocations.new_location.site_name" class="validate"
                                         ng-change="ngmClusterBeneficiaries.inputChange( 'ngm-new_location-site_name' )"
