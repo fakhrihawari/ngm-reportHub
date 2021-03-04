@@ -781,7 +781,32 @@ angular.module('ngmReportHub')
 				var asAdmin = USER_PERMISSIONS.some(role => role.ADMIN);
 				return asAdmin
 
+			},
+			setlocationConfig: function (admin0pcode) {
+				var config = {
+					'AF': { site: true },
+					'BD': { site: true },
+					'COL': { site: true },
+					'CB': { site: true },
+					'CD': { site: true },
+					'ET': { site: false },
+					'IQ': { site: true },
+					'KE': { site: true },
+					'NG': { site: true },
+					'PG': { site: true },
+					'PHL': { site: true },
+					'SO': { site: true },
+					'SS': { site: true },
+					'SY': { site: true },
+					'UA': { site: true },
+					'UR': { site: true },
+					'YE': { site: true },
+				}
+
+				return config[admin0pcode];
+
 			}
+			
 		};
 
 		return ngmAuth;

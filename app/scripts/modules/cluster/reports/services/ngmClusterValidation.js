@@ -159,11 +159,17 @@ angular.module( 'ngmReportHub' )
 			// validate id ALL target locations valid
 			target_locations_valid: function( project ){
 				var rowComplete = 0;
+				var locationConfigValidate = ngmAuth.setlocationConfig(project.admin0pcode);
 				angular.forEach( project.target_locations, function( d, i ){
 						if ( d.admin1pcode && d.admin1name && d.admin2pcode && d.admin2name){
-							if (d.admin0pcode === 'ET') {
-								rowComplete++;
-							}else{
+							// if (d.admin0pcode === 'ET') {
+							// 	rowComplete++;
+							// }else{
+							// 	if (d.site_name) {
+							// 		rowComplete++;
+							// 	}
+							// }
+							if(locationConfigValidate.site){
 								if (d.site_name) {
 									rowComplete++;
 								}
@@ -193,6 +199,7 @@ angular.module( 'ngmReportHub' )
 				// new validation
 				var elements = [];
 				var notDetailOpen = [];
+				var locationConfigValidate = ngmAuth.setlocationConfig(project.admin0pcode);
 				locationRow = 0;
 				locationRowComplete = 0;
 				if (!project.target_locations.length){
@@ -202,7 +209,7 @@ angular.module( 'ngmReportHub' )
 				}
 				angular.forEach(project.target_locations, function (l, i) {
 					locationRow++;
-					result = ngmClusterValidation.targetLocationValidate(l,i,detail);
+					result = ngmClusterValidation.targetLocationValidate(l,i,detail,locationConfigValidate);
 					angular.merge(elements, result.divs);
 
 					if (!result.open && result.count === 0) {
@@ -245,7 +252,7 @@ angular.module( 'ngmReportHub' )
 			},
 			// just for AF now
 			// target_location validate
-			targetLocationValidate:function(l,i,detail){
+			targetLocationValidate:function(l,i,detail,config){
 
 				var id;
 				var complete = true;
@@ -268,7 +275,7 @@ angular.module( 'ngmReportHub' )
 				}
 				// console.log('targetlocation-complete02');
 				// console.log(complete);
-				if (l.admin0pcode !== 'ET'){
+				if (config.site){
 					if (!l.site_name) {
 						id = "label[for='" + 'ngm-site_name-' + i + "']";
 						$(id).addClass('error');
