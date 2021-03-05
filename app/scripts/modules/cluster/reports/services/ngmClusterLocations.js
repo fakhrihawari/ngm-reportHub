@@ -839,8 +839,25 @@ angular.module( 'ngmReportHub' )
         // set site_type && site_implementation
         ngmClusterLocations.setSiteTypeAndImplementationSelect(project);
         // filter list admin1,admin2,admin3,admin4,admin5
+        // angular.forEach(locations, function (location, $index) {
+        //   ngmClusterLocations.filterLocations(project, $index, location);
+        // });
+
+        var locationAdmin1pcodeTag = []
         angular.forEach(locations, function (location, $index) {
-          ngmClusterLocations.filterLocations(project, $index, location);
+          $http({
+            method: 'GET',
+            url: ngmAuth.LOCATION + '/api/list/getAdminSites?admin0pcode='
+              + project.definition.admin0pcode
+              + '&admin1pcode=' + location.admin1pcode
+          }).then(function (result) {
+            if (locationAdmin1pcodeTag.indexOf(location.admin1pcode)<0) {
+              project.lists.adminSites = project.lists.adminSites.concat(result.data);
+              locationAdmin1pcodeTag.push(location.admin1pcode)
+            }
+            ngmClusterLocations.filterLocations(project, $index, location);
+
+          });
         });
       },
       // to set list of site_type && site_implementation
