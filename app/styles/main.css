@@ -444,3 +444,11 @@ body.md-default-theme, body, html.md-default-theme, html {
     font-size: 9px;
 	}
 }
+
+/* truncatece ttile */
+.custom-truncate{
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 51em;
+}
