@@ -356,6 +356,7 @@ angular.module( 'ngmReportHub' )
 							&& project.definition.cluster_id === 'health' ) {
 					display = true;
 				}
+				
 				return display;
 			},
 

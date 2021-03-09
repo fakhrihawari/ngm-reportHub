@@ -377,6 +377,10 @@ angular.module( 'ngm.widget.project.details', [ 'ngm.provider' ])
 					}
 
 
+					// cxbHealth
+					$scope.isCxbHealth = ngmClusterBeneficiaries.cxbHealth($scope.project);
+
+
 				},
 				// Push objects, in chunk of 10s to the location array to make rendering easy
 				addMoreItems: function(){

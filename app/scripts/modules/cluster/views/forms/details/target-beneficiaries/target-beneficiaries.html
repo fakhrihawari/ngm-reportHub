@@ -1050,7 +1050,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiairesBreakdown( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-boys_0_5-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'boys_0_5' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-boys_0_5-{{ $index }}" class="active">{{ 'boys_0_5' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-boys_0_5-{{ $index }}" class="active">{{ 'boys_0_5' | translate }}</label>
 									</div>
 									<!-- boys_6_11 -->
 									<div class="input-field col s12 m6 l2">
@@ -1063,7 +1063,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiairesBreakdown( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-boys_6_11-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'boys_6_11' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-boys_6_11-{{ $index }}" class="active">{{ 'boys_6_11' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-boys_6_11-{{ $index }}" class="active">{{ 'boys_6_11' | translate }}</label>
 									</div>
 									<!-- boys_12_17 -->
 									<div class="input-field col s12 m6 l2">
@@ -1076,7 +1076,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiairesBreakdown( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-boys_12_17-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'boys_12_17' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-boys_12_17-{{ $index }}" class="active">{{ 'boys_12_17' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-boys_12_17-{{ $index }}" class="active">{{ 'boys_12_17' | translate }}</label>
 									</div>
 
 									<!-- men -->
@@ -1090,7 +1090,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-men-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'men' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-men-{{ $index }}" class="active">{{ 'male_18_59' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-men-{{ $index }}" class="active">{{ 'male_18_59' | translate }}</label>
 									</div>
 									<!-- elderly_men -->
 									<div class="input-field col s12 m6 l2">
@@ -1103,7 +1103,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-elderly_men-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'elderly_men' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-elderly_men-{{ $index }}" class="active">{{ 'male_60_plus' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-elderly_men-{{ $index }}" class="active">{{ 'male_60_plus' | translate }}</label>
 									</div>
 									<!-- total_male -->
 									<div class="input-field col s12 m6 l2">
@@ -1116,7 +1116,7 @@
 														ng-change="ngmClusterBeneficiaries.inputChange( 'ngm-total_male-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'total_male' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-total_male-{{ $index }}" class="active">{{ 'total_male' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-total_male-{{ $index }}" class="active">{{ 'total_male' | translate }}</label>
 									</div>
 
 								</div>
@@ -1141,7 +1141,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiairesBreakdown( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-girls_0_5-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'girls_0_5' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-girls_0_5-{{ $index }}" class="active">{{ 'girls_0_5' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-girls_0_5-{{ $index }}" class="active">{{ 'girls_0_5' | translate }}</label>
 									</div>
 									<!-- girls_6_11 -->
 									<div class="input-field col s12 m6 l2">
@@ -1154,7 +1154,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiairesBreakdown( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-girls_6_11-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'girls_6_11' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-girls_6_11-{{ $index }}" class="active">{{ 'girls_6_11' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-girls_6_11-{{ $index }}" class="active">{{ 'girls_6_11' | translate }}</label>
 									</div>
 									<!-- girls_12_17 -->
 									<div class="input-field col s12 m6 l2">
@@ -1167,7 +1167,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiairesBreakdown( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-girls_12_17-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'girls_12_17' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-girls_12_17-{{ $index }}" class="active">{{ 'girls_12_17' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-girls_12_17-{{ $index }}" class="active">{{ 'girls_12_17' | translate }}</label>
 									</div>
 
 									<!-- women -->
@@ -1181,7 +1181,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-women-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'women' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-women-{{ $index }}" class="active">{{ 'female_18_59' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-women-{{ $index }}" class="active">{{ 'female_18_59' | translate }}</label>
 									</div>
 									<!-- elderly_women -->
 									<div class="input-field col s12 m6 l2">
@@ -1194,7 +1194,7 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-elderly_women-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'elderly_women' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-elderly_women-{{ $index }}" class="active">{{ 'female_60_plus' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-elderly_women-{{ $index }}" class="active">{{ 'female_60_plus' | translate }}</label>
 									</div>
 									<!-- total_female -->
 									<div class="input-field col s12 m6 l2">
@@ -1207,7 +1207,7 @@
 														ng-change="ngmClusterBeneficiaries.inputChange( 'ngm-total_female-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'total_female' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-total_female-{{ $index }}" class="active">{{ 'total_female' | translate }}</label>
+										<label ng-if="!isCxbHealth" for="ngm-total_female-{{ $index }}" class="active">{{ 'total_female' | translate }}</label>
 									</div>
 
 								</div>
@@ -1241,8 +1241,8 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-boys-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'boys' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-boys-{{ $index }}" class="active">{{ 'boys' | translate }}</label>
-										<label ng-if="ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-boys-{{ $index }}" class="active">Under 5 Male</label>
+										<label ng-if="!isCxbHealth" for="ngm-boys-{{ $index }}" class="active">{{ 'boys' | translate }}</label>
+										<label ng-if="isCxbHealth" for="ngm-boys-{{ $index }}" class="active">Under 5 Male</label>
 									</div>
 									<!-- girls -->
 									<div class="input-field col s12 m3">
@@ -1255,8 +1255,8 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-girls-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'girls' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-girls-{{ $index }}" class="active">{{ 'girls' | translate }}</label>
-										<label ng-if="ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-girls-{{ $index }}" class="active">Under 5 Female</label>
+										<label ng-if="!isCxbHealth" for="ngm-girls-{{ $index }}" class="active">{{ 'girls' | translate }}</label>
+										<label ng-if="isCxbHealth" for="ngm-girls-{{ $index }}" class="active">Under 5 Female</label>
 									</div>
 									<!-- men -->
 									<div class="input-field col s12 m3">
@@ -1269,8 +1269,8 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-men-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'men' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-men-{{ $index }}" class="active">{{ 'men' | translate }}</label>
-										<label ng-if="ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-men-{{ $index }}" class="active">Over 5 Male</label>
+										<label ng-if="!isCxbHealth" for="ngm-men-{{ $index }}" class="active">{{ 'men' | translate }}</label>
+										<label ng-if="isCxbHealth" for="ngm-men-{{ $index }}" class="active">Over 5 Male</label>
 									</div>
 									<!-- women -->
 									<div class="input-field col s12 m3">
@@ -1283,8 +1283,8 @@
 														ng-change="ngmClusterBeneficiaries.updateBeneficiaires( beneficiary );ngmClusterBeneficiaries.inputChange( 'ngm-women-{{ $index }}' )"
 														ng-disabled="project.definition.project_status === 'complete' || !ngmClusterBeneficiaries.form[ 0 ][ $index ][ 'women' ]"
 														required />
-										<label ng-if="!ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-women-{{ $index }}" class="active">{{ 'women' | translate }}</label>
-										<label ng-if="ngmClusterBeneficiaries.cxbHealth( project )" for="ngm-women-{{ $index }}" class="active">Over 5 Female</label>
+										<label ng-if="!isCxbHealth" for="ngm-women-{{ $index }}" class="active">{{ 'women' | translate }}</label>
+										<label ng-if="isCxbHealth" for="ngm-women-{{ $index }}" class="active">Over 5 Female</label>
 									</div>
 
 								</div>

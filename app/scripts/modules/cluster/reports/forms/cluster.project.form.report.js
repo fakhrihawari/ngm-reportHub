@@ -196,6 +196,8 @@ angular.module( 'ngm.widget.project.report', [ 'ngm.provider' ])
 						// 	})
 						// }
 					})
+					// cxbHealth
+					$scope.isCxbHealth = ngmClusterBeneficiaries.cxbHealth($scope.project);
 				},
 
 				// sets title for each location / activity
